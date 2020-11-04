@@ -8,18 +8,32 @@ namespace dotNet5781_02_3747_8971
 {
     class BusStation
     {
-        private string  BusCode;
-        protected double Latitude, Longitude;
-
-        //public static  place(double latitude,double longitude)
-        //{
-        //    this.Latitude = latitude;
-        //    this.Longitude = longitude;
-        //}
-        public string BUSCODE
+        private string BusStationKey;
+        public struct location
         {
-            get { return BusCode; }
-            set { BusCode = value; }
+            public double Latitude;
+            public double Longitude;
+        };
+        private location Landmark;
+        
+        public location LANDMARCK
+        {
+            get { return Landmark; }
+            private set
+            {
+                Random r = new Random();
+                Landmark.Latitude = r.NextDouble() * (33.3 - 31) + 31;
+                Landmark.Longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;
+            }
+        }
+        public string BUS_STATION_KEY
+        {
+            get { return BusStationKey; }
+            set { BusStationKey = value; }
+        }
+        public override string ToString()
+        {
+            return $"Bus Station Code: {BusStationKey}, {Landmark.Latitude}°N {Landmark.Longitude}°E";
         }
     }
 }
