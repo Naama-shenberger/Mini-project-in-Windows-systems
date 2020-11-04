@@ -15,9 +15,9 @@ namespace dotNet5781_02_3747_8971
             b=this.Landmark.Longitude - previous.Landmark.Longitude;//קו אורך
             return Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
         }
-       public DateTime TravelTime(BusLineStation previous)
+       public double TravelTime(BusLineStation previous)
        {
-            double distance = DistanceBusLineStation(previous);
+            return (DistanceBusLineStation(previous)/60);//60k"h 
 
        }
     }

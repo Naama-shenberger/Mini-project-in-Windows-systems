@@ -29,7 +29,9 @@ namespace dotNet5781_02_3747_8971
         public string BUS_STATION_KEY
         {
             get { return BusStationKey; }
-            set { BusStationKey = value; }
+            set {///???????
+                if (value.Length > 6) Console.WriteLine("ERORR:bus station key can not have more then 6 digits ");
+                else BusStationKey = value; }
         }
         public override string ToString()
         {
