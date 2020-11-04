@@ -10,11 +10,14 @@ namespace dotNet5781_02_3747_8971
     {
        public double DistanceBusLineStation(BusLineStation previous)
        {
-            this.Latitude = previous.Latitude - this.Latitude; ///קו רוחב 
-            this.Longitude = previous.Longitude - this.Longitude;//קו אורך
-       }
+            double a, b;
+            a=this.Landmark.Latitude - previous.Landmark.Latitude;///קו רוחב
+            b=this.Landmark.Longitude - previous.Landmark.Longitude;//קו אורך
+            return Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+        }
        public DateTime TravelTime(BusLineStation previous)
        {
+            double distance = DistanceBusLineStation(previous);
 
        }
     }

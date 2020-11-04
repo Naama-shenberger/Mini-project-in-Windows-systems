@@ -14,7 +14,7 @@ namespace dotNet5781_02_3747_8971
             public double Latitude;
             public double Longitude;
         };
-        private location Landmark;
+        protected location Landmark;
         
         public location LANDMARCK
         {
