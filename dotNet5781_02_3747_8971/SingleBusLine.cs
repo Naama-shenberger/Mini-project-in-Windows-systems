@@ -55,7 +55,7 @@ namespace dotNet5781_02_3747_8971
         {
             foreach (BusLineStation item in Stations)
             {
-                if (item.BusStop.BUS_STATION_KEY == check)
+                if (item.BUS_STATION_KEY == check)
                     return false;
             }
             return true;
@@ -70,7 +70,7 @@ namespace dotNet5781_02_3747_8971
             string _code = Console.ReadLine();
             if (!UniqueTest(_code))
                 //    throw
-                stop.BusStop.BUS_STATION_KEY = _code;
+                stop.BUS_STATION_KEY = _code;
             Console.WriteLine($"Type a number between 0-{Stations.Count()} that you want to insert the station," +
                 $" if you want the stop to be the last in the list enter {Stations.Count() + 1} ");
             int index;
@@ -88,7 +88,7 @@ namespace dotNet5781_02_3747_8971
                 //    throw
                 for (int i = 0; i < Stations.Count; i++)
                 {
-                    if (Stations[i].BusStop.BUS_STATION_KEY == _code)
+                    if (Stations[i].BUS_STATION_KEY == _code)
                     {
                         Stations.Remove(Stations[i]);
                     }
@@ -117,14 +117,17 @@ namespace dotNet5781_02_3747_8971
                 //  throw;
             }
             BusLineStation stop = new BusLineStation();
-            stop.BusStop.BUS_STATION_KEY = _code;
+            stop.BUS_STATION_KEY = _code;
             return stop;
         }
         /// <summary>
         /// A function that returns a distance between two stations
         /// </summary>
         /// <returns></returns>
-        public decimal DistanceTwoStations()=>DistanceBetween(UserInput().BusStop.LANDMARCK.Latitude, UserInput().BusStop.LANDMARCK.Longitude, UserInput().BusStop.LANDMARCK.Latitude, UserInput().BusStop.LANDMARCK.Longitude);
+        public double DistanceTwoStations()
+        {
+            return UserInput().DistanceBusLineStation(UserInput());
+        }
         /// <summary>
         /// A function that returns travel time between 2 stations
         /// </summary>
@@ -141,7 +144,7 @@ namespace dotNet5781_02_3747_8971
         /// <returns></returns>
         public SingleBusLine SubRoute(BusLineStation stop1, BusLineStation stop2)
         {
-            if (!UniqueTest(stop1.BusStop.BUS_STATION_KEY) || !UniqueTest(stop2.BusStop.BUS_STATION_KEY))
+            if (!UniqueTest(stop1.BUS_STATION_KEY) || !UniqueTest(stop2.BUS_STATION_KEY))
             {
                 //  throw;
             }
