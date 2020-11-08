@@ -21,13 +21,7 @@ namespace dotNet5781_02_3747_8971
         /// </summary>
         /// <param name="previous"></param>
         /// <returns></returns>
-        //public double DistanceBusLineStation(BusLineStation previous)
-        //{
-        //    double a, b;
-        //    a= BusStop.Landmark.Latitude - previous.Landmark.Latitude;
-        //    b= BusStop.Landmark.Longitude - previous.Landmark.Longitude;
-        //    return Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
-        //}
+     
         static decimal DistanceBetween(double latA, double longA, double latB, double longB)
         {
             var RadianLatA = Math.PI * latA / 180;
