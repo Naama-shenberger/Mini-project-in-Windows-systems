@@ -38,7 +38,6 @@ namespace dotNet5781_02_3747_8971
         /// </summary>
         public string BUS_STATION_KEY
         {
-          
             get { return BusStationKey; }
             set
             {
