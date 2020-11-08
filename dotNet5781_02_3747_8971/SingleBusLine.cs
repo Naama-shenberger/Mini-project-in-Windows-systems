@@ -10,7 +10,7 @@ using System.Xml.Linq;
 namespace dotNet5781_02_3747_8971
 {
     enum Zones { Gush_Dan, Gush_Etzion, Galilee, Jerusalem_Corridor, plain, General }
-    class SingleBusLine : BusLineStation, ICloneable
+    class SingleBusLine : BusLineStation, IComparable
     {
         protected List<BusLineStation> Stations = new List<BusLineStation>();//Define a list of bus line stops
         int BusLine;//number line
@@ -19,7 +19,6 @@ namespace dotNet5781_02_3747_8971
         private Zones Area;
         public Zones AREA
         {
-           
             set { Random r = new Random();  Area=(Zones)r.Next(-1, 6); }
             get { return Area; }
         }
@@ -181,10 +180,6 @@ namespace dotNet5781_02_3747_8971
             }
             throw new Exception("error");
         }
-        public object Clone()
-        {
-            throw new NotImplementedException();
-        }
         /// <summary>
         /// Checking if one line has at least two stations
         /// </summary>
@@ -197,5 +192,6 @@ namespace dotNet5781_02_3747_8971
             return true;
 
         }
+       
     }
 }
