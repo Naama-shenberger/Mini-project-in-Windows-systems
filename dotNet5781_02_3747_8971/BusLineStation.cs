@@ -8,7 +8,7 @@ namespace dotNet5781_02_3747_8971
 {
     class BusLineStation
     {
-        public BusStation BusStop = new BusStation();
+        private BusStation BusStop = new BusStation();
         private TimeSpan time;
         public TimeSpan TIME
         {
@@ -21,7 +21,7 @@ namespace dotNet5781_02_3747_8971
         /// </summary>
         /// <param name="previous"></param>
         /// <returns></returns>
-        public static decimal DistanceBetween(double latA, double longA, double latB, double longB)
+        static decimal DistanceBetween(double latA, double longA, double latB, double longB)
         {
             var RadianLatA = Math.PI * latA / 180;
             var RadianLatb = Math.PI * latB / 180;
