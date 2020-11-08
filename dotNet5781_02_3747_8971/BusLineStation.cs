@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace dotNet5781_02_3747_8971
 {
     class BusLineStation
     {
-        private BusStation BusStop = new BusStation();
+        public BusStation BusStop = new BusStation();
         private TimeSpan time;
         public TimeSpan TIME
         {
@@ -21,7 +20,7 @@ namespace dotNet5781_02_3747_8971
         /// </summary>
         /// <param name="previous"></param>
         /// <returns></returns>
-        static decimal DistanceBetween(double latA, double longA, double latB, double longB)
+        public static decimal DistanceBetween(double latA, double longA, double latB, double longB)
         {
             var RadianLatA = Math.PI * latA / 180;
             var RadianLatb = Math.PI * latB / 180;
@@ -51,3 +50,6 @@ namespace dotNet5781_02_3747_8971
         }
     }
 }
+
+
+
