@@ -43,7 +43,6 @@ namespace dotNet5781_02_3747_8971
             get { return BusStationKey; }
             set
             {
-
                 try
                 {
                     if (value.Length > 6) throw new System.ArithmeticException();
