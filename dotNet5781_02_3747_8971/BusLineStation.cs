@@ -8,7 +8,8 @@ namespace dotNet5781_02_3747_8971
 {
     class BusLineStation
     {
-       private TimeSpan time;
+        private BusStation BusStop = new BusStation();
+        private TimeSpan time;
         public TimeSpan TIME
         {
             set { time = value; }
@@ -20,12 +21,21 @@ namespace dotNet5781_02_3747_8971
         /// </summary>
         /// <param name="previous"></param>
         /// <returns></returns>
-        public double DistanceBusLineStation(BusLineStation previous)
+
+        static decimal DistanceBetween(double latA, double longA, double latB, double longB)
         {
-            double a, b;
-            a=this.Landmark.Latitude - previous.Landmark.Latitude;
-            b=this.Landmark.Longitude - previous.Landmark.Longitude;
-            return Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+            var RadianLatA = Math.PI * latA / 180;
+            var RadianLatb = Math.PI * latB / 180;
+            var RadianLongA = Math.PI * longA / 180;
+            var RadianLongB = Math.PI * longB / 180;
+
+            double theDistance = (Math.Sin(RadianLatA)) *
+                    Math.Sin(RadianLatb) +
+                    Math.Cos(RadianLatA) *
+                    Math.Cos(RadianLatb) *
+                    Math.Cos(RadianLongA - RadianLongB);
+
+            return Convert.ToDecimal(((Math.Acos(theDistance) * (180.0 / Math.PI)))) * 69.09M * 1.6093M;
         }
         /// <summary>
         /// A function that returns travel time between 2 stations that are on the line
@@ -36,7 +46,7 @@ namespace dotNet5781_02_3747_8971
         /// <returns></returns>
         public TimeSpan TravelTime(BusLineStation previous)
         {
-            int time = (int)this.DistanceBusLineStation(previous) / 60;
+            int time = (int)DistanceBetween((BusStop.LANDMARCK.Latitude), (BusStop.LANDMARCK.Longitude), (previous.BusStop.LANDMARCK.Latitude), (previous.BusStop.LANDMARCK.Longitude)) / 60;
             TimeSpan interval = new TimeSpan(time);
             return interval;
         }
