@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace dotNet5781_02_3747_8971
 {
     using System;
@@ -28,7 +27,7 @@ namespace dotNet5781_02_3747_8971
             return line_of_buses.GetEnumerator();
         }
 
-        public void addBusLine(SingleBusLine busline) 
+        public void addBusLine(SingleBusLine busline)
         {
             int count = 0;
             foreach (SingleBusLine item in line_of_buses)
@@ -52,8 +51,8 @@ namespace dotNet5781_02_3747_8971
         public ListBusLines back()
         {
             foreach (SingleBusLine item in line_of_buses)
-                for(int i=1;i< line_of_buses)
-                SingleBusLine temp = item++;
+                for (int i = 1; i < line_of_buses)
+                    SingleBusLine temp = item++;
         }
         public SingleBusLine this[int index]
         {
@@ -67,6 +66,7 @@ namespace dotNet5781_02_3747_8971
         }
     }
 }
+
    
 
 
