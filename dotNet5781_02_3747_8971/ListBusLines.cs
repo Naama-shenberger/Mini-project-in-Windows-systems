@@ -15,7 +15,7 @@ namespace dotNet5781_02_3747_8971
 
     class ListBusLines : SingleBusLine, IEnumerable
     {
-        List<SingleBusLine> line_of_buses;
+        public List<SingleBusLine> line_of_buses;
 
         public int Count { get; private set; }
         int capacity = 2;
@@ -27,20 +27,30 @@ namespace dotNet5781_02_3747_8971
             return line_of_buses.GetEnumerator();
         }
 
-        public void addBusLine(SingleBusLine busline)
+        public void addBusLine(string id)
         {
+            SingleBusLine line = new SingleBusLine;
             int count = 0;
             foreach (SingleBusLine item in line_of_buses)
-                if (item == busline)
+            {
+                if (item.UniqueTest(id))
+                {
                     count++;
+                }
+            }
             if (count < 2)
-                line_of_buses.Add(busline);
+                line_of_buses.Add(line);
         }
-        public void deletBusLine(SingleBusLine busline)
+        public void deletBusLine(string id)
         {
             foreach (SingleBusLine item in line_of_buses)
-                if (item == busline)
+            {
+                if (item.UniqueTest(id))
+                {
                     line_of_buses.Remove(item);
+                    break;
+                }
+            }
         }
         public void finedID(string id)
         {
