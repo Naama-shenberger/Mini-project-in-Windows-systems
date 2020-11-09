@@ -28,11 +28,12 @@ namespace dotNet5781_02_3747_8971
         }
         static void Main(string[] args)
         {
-            ListBusLines myBusList;
-            SingleBusLine b;
+            ListBusLines myBusList = new ListBusLines();
             for (int i = 0; i < 10; i++)
             {
-                myBusList.addBusLine();
+                Console.WriteLine("enter bus line number: ");
+                string idel = Console.ReadLine();
+                myBusList.addBusLine(idel);
                 for (int j = 0; j < 4; j++)
                 { myBusList.AddStation(); }
             }
@@ -67,7 +68,7 @@ namespace dotNet5781_02_3747_8971
                        
                         break;
                     case Choices.Print_AllLines:
-                        
+                        myBusList.ToString();
                         break;
                     case Choices.Print_Stations:
                         break;
