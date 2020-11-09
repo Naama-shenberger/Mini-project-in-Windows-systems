@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_3747_8971
 {
+    /// <summary>
+    /// Bus station Class
+    /// </summary>
     class BusStation
     {
         private string BusStationKey;
@@ -61,4 +64,5 @@ namespace dotNet5781_02_3747_8971
         }
 
     }
+}
 

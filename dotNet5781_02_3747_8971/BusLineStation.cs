@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 namespace dotNet5781_02_3747_8971
 {
+    /// <summary>
+    ///BusLineStation class that Containing the class Bus statio
+    /// </summary>
     class BusLineStation
     {
         public BusStation BusStop = new BusStation();
