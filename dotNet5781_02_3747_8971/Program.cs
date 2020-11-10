@@ -71,6 +71,8 @@ namespace dotNet5781_02_3747_8971
                         myBusList.ToString();
                         break;
                     case Choices.Print_Stations:
+                        myBusList.BusStop.ToString();
+
                         break;
                     case Choices.Exit:
                     default:
