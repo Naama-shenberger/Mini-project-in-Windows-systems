@@ -105,6 +105,10 @@ using System.Xml.Linq;
                 int.TryParse(Console.ReadLine(), out index);
                 if (index > Stations.Count || index < 0)
                     throw new ArgumentOutOfRangeException("index should more then -1 and", "index should be less then or equal to" + Stations.Count);
+                if (index == 0)
+                    this.FIRSTSTATION.BusStop.BUS_STATION_KEY = _code;
+                if(index== Stations.Count() + 1)
+                    this.LASTSTATION.BusStop.BUS_STATION_KEY = _code;
                 Stations.Insert(index, stop);
             }
             catch (ArgumentOutOfRangeException e)
@@ -252,6 +256,18 @@ using System.Xml.Linq;
                 return false;
             return true;
 
+        }
+        /// <summary>
+        /// A function that checks two lines with the same bus number,if they have the same stations only in reverse order
+        /// </summary>
+        /// <param name="one"></param>
+        /// <param name="two"></param>
+        /// <returns></returns>
+        public bool SameBusLine(SingleBusLine one, SingleBusLine two)
+        {
+            if (one.LASTSTATION == two.FIRSTSTATION && one.FIRSTSTATION == two.LASTSTATION)
+                return true;
+            return false;
         }
     }
  }
