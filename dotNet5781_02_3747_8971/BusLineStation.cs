@@ -5,23 +5,44 @@ using System.Text;
 using System.Threading.Tasks;
 namespace dotNet5781_02_3747_8971
 {
+   
     /// <summary>
-    ///BusLineStation class that Containing the class Bus statio
+    /// BusLineStation class that Containing the class Bus statio
     /// </summary>
     class BusLineStation
     {
-        public BusStation BusStop = new BusStation();
-        private TimeSpan time;
-        public TimeSpan TIME
+        /// <summary>
+        /// A field that saves its time from a previous station
+        /// </summary>
+        TimeSpan TimebeforeStation;
+        /// <summary>
+        /// The class contains an object from a class BusLineStation
+        /// </summary>
+        public BusStation BusStationObject = new BusStation();
+        /// <summary>
+        /// A constructor that initializes the object BusStationObject
+        ///The constructor Receiving a station code and entering the appropriate field BUS_STATION_KEY 
+        /// </summary>
+        /// <param name="key"></param>
+        public BusLineStation(string key)
         {
-            set { time = value; }
-            get { return time; }
+            BusStationObject.BUS_STATION_KEY = key;
+        }
+        /// <summary>
+        /// set and get for the field TimebeforeStation
+        /// </summary>
+        public TimeSpan TIMEBEFORESTATIOS
+        {
+            get { return TimebeforeStation; }
+            set { TimebeforeStation = value; }
         }
         /// <summary>
         /// A function that returns the distance between 2 stations that are on the line
-        /// Using the Pythagorean formula
         /// </summary>
-        /// <param name="previous"></param>
+        /// <param name="latA"></param>
+        /// <param name="longA"></param>
+        /// <param name="latB"></param>
+        /// <param name="longB"></param>
         /// <returns></returns>
         public static decimal DistanceBetween(double latA, double longA, double latB, double longB)
         {
@@ -41,16 +62,16 @@ namespace dotNet5781_02_3747_8971
         /// <summary>
         /// A function that returns travel time between 2 stations that are on the line
         /// Use of structure TimeSpan
-        /// Calculation of travel time depending on the distance between them
+        /// Fixed time between two stations 2 minutes and 30 seconds
         /// </summary>
-        /// <param name="previous"></param>
         /// <returns></returns>
-        public TimeSpan TravelTime(BusLineStation previous)
+        public static TimeSpan TravelTime()
         {
-            int time = (int)DistanceBetween((BusStop.LANDMARCK.Latitude), (BusStop.LANDMARCK.Longitude), (previous.BusStop.LANDMARCK.Latitude), (previous.BusStop.LANDMARCK.Longitude)) / 60;
-            TimeSpan interval = new TimeSpan(time);
+            TimeSpan interval = new TimeSpan(0,2,30);
             return interval;
         }
+       
+
     }
 }
 

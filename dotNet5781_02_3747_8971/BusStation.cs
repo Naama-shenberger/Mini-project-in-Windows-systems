@@ -11,28 +11,47 @@ namespace dotNet5781_02_3747_8971
     /// </summary>
     class BusStation
     {
+        /// <summary>
+        /// variable
+        ///Random class
+        /// </summary>
+        public static Random r = new Random();
+        /// <summary>
+        /// code Station
+        /// </summary>
         private string BusStationKey;
+        /// <summary>
+        /// Station Address;
+        /// </summary>
+        private string StationAddress;
+        /// <summary>
+        /// location field
+        /// </summary>
+        protected Location Landmark;
         /// <summary>
         ///structure location
         ///Fields: longitude and latitude
         /// </summary>
-        public struct location
+        public struct Location
         {
             public double Latitude;
             public double Longitude;
         };
-        protected location Landmark;
+        public string STATIONADDRESS
+        {
+            get { return StationAddress; }
+            set { StationAddress = ""; }
+
+        }
         /// <summary>
         /// Lottery of values for longitude and latitude (within Israel)
         /// </summary>
-        public location LANDMARCK
+        public Location LANDMARCK
         {
             get { return Landmark; }
             private set
             {
-                Random r = new Random();
-                Landmark.Latitude = r.NextDouble() * (33.3 - 31) + 31;
-                Landmark.Longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;
+                Landmark = value;
             }
         }
         /// <summary>
@@ -44,13 +63,7 @@ namespace dotNet5781_02_3747_8971
             get { return BusStationKey; }
             set
             {
-                try
-                {
-                    if (value.Length > 6) throw new System.ArithmeticException();
-                    else BusStationKey = value;
-                }
-                catch (System.ArithmeticException e)
-                { e.ToString(); }
+                BusStationKey = value;
             }
         }
         /// <summary>
@@ -60,8 +73,19 @@ namespace dotNet5781_02_3747_8971
         /// <returns></returns>
         public override string ToString()
         {
-            return $"Bus Station Code: {BusStationKey}, {Landmark.Latitude}°N {Landmark.Longitude}°E";
+            return $"\nBus Station Code: {BUS_STATION_KEY}\n" + $"Landmarck: {Landmark.Latitude}°N " + $"{Landmark.Longitude}°E";
         }
+        /// <summary>
+        /// A constructor that initializes the object with a longitude and latitude
+        /// </summary>
+        public BusStation()
+        {
+            Landmark.Latitude = r.NextDouble() * (33.3 - 31) + 31;
+            Landmark.Longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;
+        }
+       
+
+
 
     }
 }
