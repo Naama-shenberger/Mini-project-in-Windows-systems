@@ -1,0 +1,28 @@
+﻿<Window x:Class="dotNet5781_03B_3747_8971.SecondWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dotNet5781_03B_3747_8971"
+        mc:Ignorable="d"
+        Title="Adding a bus" Height="450" Width="800">
+
+    <Grid Margin="10,10,0,-1" HorizontalAlignment="Left" Width="780" >
+
+        <TextBox x:Name="tb_license_number" Height="40" HorizontalAlignment="Left" Margin="267,89,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
+        <Label Content="Enter license number" Height="36" HorizontalAlignment="Left" Margin="45,93,0,0"  VerticalAlignment="Top" Width="185" Background="AliceBlue"/>
+        <Label Content="Ender Date of ascent to the road" Height="40" HorizontalAlignment="Left" Margin="45,30,0,0"  VerticalAlignment="Top" Width="185" Background="AliceBlue"/>
+        <TextBox x:Name="tb_DateActivityBus" Height="40" HorizontalAlignment="Left" Margin="267,30,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
+        <TextBox x:Name="tb_Totalkilometers" Height="39" HorizontalAlignment="Left" Margin="267,153,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
+        <Label Content="Enter Total kilometers " Height="39" HorizontalAlignment="Left" Margin="45,153,0,0"  VerticalAlignment="Top" Width="185" Background="AliceBlue"/>
+        <Label Content="Ender Date of last Treatment " Height="40" HorizontalAlignment="Left" Margin="45,219,0,0"  VerticalAlignment="Top" Width="185" Background="AliceBlue"/>
+        <TextBox x:Name="tb_DateTreatment" Height="40" HorizontalAlignment="Left" Margin="267,219,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
+        <Label Content="Ender kilometers from last Treatment" Height="39" HorizontalAlignment="Left" Margin="45,286,0,0"  VerticalAlignment="Top" Width="208" Background="AliceBlue"/>
+        <TextBox x:Name="tb_kilometersTreatment" Height="39" HorizontalAlignment="Left" Margin="267,286,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
+        <Button Click="AddBus_Click" Name="buAddBus" Content="Add Bus" HorizontalAlignment="Left" Margin="514,345,0,0" VerticalAlignment="Top" Width="150" Height="42"/>
+        <Label Content="Ender kilometers form last refull" HorizontalAlignment="Left" Margin="45,345,0,0" VerticalAlignment="Top" Width="208" Background="AliceBlue"/>
+        <TextBox Name="tb_kilometersGas" HorizontalAlignment="Left" Height="27" Margin="267,345,0,0" TextWrapping="Wrap" Background="Beige" VerticalAlignment="Top" Width="160"/>
+
+
+    </Grid>
+</Window>
