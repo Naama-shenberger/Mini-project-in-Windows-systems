@@ -22,6 +22,8 @@ namespace dotNet5781_01_3747_8971
         private float k_kilometersTreatment;
         private float k_kilometersGas;
         private float t_totalkilometers;
+        private Situation status;
+        public enum Situation { Ready_to_go, In_the_middle_of_A_ride, refueling, In_treatment }
         public Bus(string _licensePlate, DateTime _dateActivity, DateTime _dateTreatment,
             float _kilometersTreatment, float _kilometersGas, float _totalkilometers)
         {
@@ -36,6 +38,11 @@ namespace dotNet5781_01_3747_8971
         /// <summary>
         /// set and get functions for private fields
         /// </summary>
+        public Situation STATUS
+        {
+            get { return status; }
+            set { status = value; }
+        }
         public float KILOMETERSGAS
         {
             get { return k_kilometersGas; }
@@ -46,7 +53,7 @@ namespace dotNet5781_01_3747_8971
             get { return d_dateTreatment; }
             set
             {
-                if ((value.Day > 0 && value.Day < 32) && (value.Month > 0 && value.Month < 13) && (value.Year > 1895 && value.Year < 2021))
+                if ((value.Day > 0 && value.Day < 32) && (value.Month > 0 && value.Month < 13) && (value.Year > 1895))
                     d_dateTreatment = value;
                 else
                     throw new InvalidOperationException("Wrong date Treatment");
@@ -152,6 +159,7 @@ namespace dotNet5781_01_3747_8971
             KILOMETERSGAS += kilometers;
             kILOMETERS_TREATMENT += kilometers;
             Mileage(kilometers);
+
         }
 
     }

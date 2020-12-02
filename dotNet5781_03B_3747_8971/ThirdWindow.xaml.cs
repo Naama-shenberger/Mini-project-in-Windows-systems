@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using dotNet5781_01_3747_8971;
+using static dotNet5781_01_3747_8971.Bus;
 
 namespace dotNet5781_03B_3747_8971
 {
@@ -24,21 +25,31 @@ namespace dotNet5781_03B_3747_8971
         {
             InitializeComponent();
         }
-        private Bus currentDisplayBusLine = new Bus();
+        public object listboxTextBlockNameValue
+        {
+            get
+            {
+                return currentDisplayBusLine;
+            }
+            set
+            {
+                if (value is Bus)
+                   currentDisplayBusLine =(Bus)value;
+            }
+        }
+        private Bus currentDisplayBusLine;
         private void TakeATrip_Click(object sender, RoutedEventArgs e)
         {
-           MainWindow Main = Application.Current.MainWindow as MainWindow;
             try
             {
-                //currentDisplayBusLine =
-                if (Main != null)
-                {
-                    if (Main.TravelTest(currentDisplayBusLine))
-                        currentDisplayBusLine.BusTravel((float)Convert.ToDouble(tbDistanceDrive.Text));
-                }
-                else new NullReferenceException("The object is Null");
+                currentDisplayBusLine = (Bus)listboxTextBlockNameValue;
+               
+                
+                currentDisplayBusLine.BusTravel((float)Convert.ToDouble(tbDistanceDrive.Text));
+                currentDisplayBusLine.STATUS = (Situation)1;
+                this.Close();
             }
-            catch(NullReferenceException Null)
+            catch (NullReferenceException Null)
             {
                 MessageBox.Show($"{Null.Message}", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
             }

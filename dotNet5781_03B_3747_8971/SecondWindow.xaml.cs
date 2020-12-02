@@ -25,15 +25,31 @@ namespace dotNet5781_03B_3747_8971
         {
             InitializeComponent();
         }
+        private Bus currentDisplayBusLine;
+        public object CurrentDisplayBusLine
+        {
+            get
+            {
+                return (Bus)currentDisplayBusLine;
+            }
+            set
+            {
+                if (value is Bus)
+                    currentDisplayBusLine = (Bus)value;
+            }
+        }
         public void AddBus_Click(object sender, RoutedEventArgs e)
         {
             try
             { 
-                MainWindow Main = Application.Current.MainWindow as MainWindow;
+                //MainWindow Main = Application.Current.MainWindow as MainWindow;
                 DateTime DateActivityText = DateTime.Parse(tb_DateActivityBus.Text);
                 DateTime DateTreatmetText = DateTime.Parse(tb_DateTreatment.Text);
-                Bus NewBus = new Bus(tb_license_number.Text.ToString(), DateActivityText, DateTreatmetText,(float)Convert.ToDouble(tb_kilometersTreatment.Text), (float)Convert.ToDouble(tb_kilometersGas.Text), (float)Convert.ToDouble(tb_Totalkilometers.Text));
-                Main.AddBus(NewBus);
+                currentDisplayBusLine = new Bus(tb_license_number.Text.ToString(), DateActivityText, DateTreatmetText,(float)Convert.ToDouble(tb_kilometersTreatment.Text), (float)Convert.ToDouble(tb_kilometersGas.Text), (float)Convert.ToDouble(tb_Totalkilometers.Text));
+                // Main.AddBus(NewBus);
+                if (!currentDisplayBusLine.FuelCondition()&&!currentDisplayBusLine.TreatmentIsNeeded())
+                    currentDisplayBusLine.STATUS = (Bus.Situation)(0);
+                
                 this.Close();
             }
             catch (InvalidOperationException message)
