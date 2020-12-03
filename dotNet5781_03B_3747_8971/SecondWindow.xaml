@@ -22,12 +22,12 @@
         <Button Click="AddBus_Click" Name="buAddBus" Content="Add Bus" HorizontalAlignment="Left" Margin="514,345,0,0" VerticalAlignment="Top" Width="150" Height="42"/>
         <Label Content="Ender kilometers form last refull" HorizontalAlignment="Left" Margin="45,345,0,0" VerticalAlignment="Top" Width="208" Background="AliceBlue"/>
         <TextBox Name="tb_kilometersGas" HorizontalAlignment="Left" Height="27" Margin="267,345,0,0" TextWrapping="Wrap" Background="Beige" VerticalAlignment="Top" Width="160"/>
-        <DatePicker DisplayDateStart="01.01.2011"
+        <!--<DatePicker DisplayDateStart="01.01.2011"
                  DisplayDateEnd="01.20.2011">
-        <DatePicker.BlackoutDates>
-                <CalendarDateRange Start="01.15.2011" End="01.16.2011" />
+        <DatePicker.BlackoutDates>-->
+                <!--<CalendarDateRange Start="01.15.2011" End="01.16.2011" />
         </DatePicker.BlackoutDates>
-        </DatePicker>
+        </DatePicker>-->
 
 
 

@@ -23,7 +23,8 @@ namespace dotNet5781_01_3747_8971
         private float k_kilometersGas;
         private float t_totalkilometers;
         private Situation status;
-        public enum Situation { Ready_to_go, In_the_middle_of_A_ride, refueling, In_treatment }
+        private float timeTravel;
+        public enum Situation { Ready_to_go, In_the_middle_of_A_ride, refueling, In_treatment, Dangerous }
         public Bus(string _licensePlate, DateTime _dateActivity, DateTime _dateTreatment,
             float _kilometersTreatment, float _kilometersGas, float _totalkilometers)
         {
@@ -42,6 +43,11 @@ namespace dotNet5781_01_3747_8971
         {
             get { return status; }
             set { status = value; }
+        }
+        public float TimeTravel
+        {
+            get { return timeTravel; }
+            set { timeTravel = value; }
         }
         public float KILOMETERSGAS
         {

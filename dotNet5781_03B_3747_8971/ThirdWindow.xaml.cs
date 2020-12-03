@@ -43,10 +43,9 @@ namespace dotNet5781_03B_3747_8971
             try
             {
                 currentDisplayBusLine = (Bus)listboxTextBlockNameValue;
-               
-                
                 currentDisplayBusLine.BusTravel((float)Convert.ToDouble(tbDistanceDrive.Text));
-                currentDisplayBusLine.STATUS = (Situation)1;
+                float Average_speed = Bus.r.Next(20, 51);
+                currentDisplayBusLine.TimeTravel = (float)Convert.ToDouble(tbDistanceDrive.Text) / Average_speed;
                 this.Close();
             }
             catch (NullReferenceException Null)

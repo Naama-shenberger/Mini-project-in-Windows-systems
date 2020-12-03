@@ -29,24 +29,28 @@ namespace dotNet5781_03B_3747_8971
     /// </summary>
     public partial class MainWindow : Window
     {
+        public bool EnabledT = true;
+        public bool EnabledR = true;
+        public bool EnabledTreatment = true;
         BackgroundWorker worker;
-
         public MainWindow()
         {
             InitializeComponent();
             InitilizeBusList();
             lbBuses.ItemsSource = BusList;
-
-            // lbBuses.DrawItem = DrawMode.OwnerDrawFixed;
-            // lbBuses.DrawItem += new DrawItemEventHandler(ListBox1_DrawItem);
-            // Controls.Add(ListBox1);
-            worker = new BackgroundWorker();
+           // TreatmentButton = "EnabledTreatment";
+           // lbBuses.DrawItem = DrawMode.OwnerDrawFixed;
+           // lbBuses.DrawItem += new DrawItemEventHandler(ListBox1_DrawItem);
+           // Controls.Add(ListBox1);
+           worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+
+
         }
-        public event System.Windows.Forms.DrawItemEventHandler DrawItem;
         private void ListBoxItem_DrawItem(object sender, System.Windows.Forms.DrawItemEventArgs e)
         {
 
@@ -105,40 +109,45 @@ namespace dotNet5781_03B_3747_8971
         {
             try
             {
-                DateTime date_Activity = new DateTime(Bus.r.Next(1895, 2021), Bus.r.Next(1, 13), Bus.r.Next(1, 32));
+                DateTime date_Activity = new DateTime(Bus.r.Next(1895, 2021), Bus.r.Next(1, 13), Bus.r.Next(1, 29));
+                DateTime date_Treatment = new DateTime(Bus.r.Next(2022, 2024), Bus.r.Next(1, 13), Bus.r.Next(1, 29));
                 int Min = date_Activity.Year < 2018 ? 1000000 : 10000000;
                 int Max = Min.ToString().Length < 8 ? 10000000 : 100000000;
                 BusList.Add(new Bus(Bus.r.Next(Min, Max).ToString(),
-                    date_Activity,
-                    new DateTime(Bus.r.Next(2022, 2024), Bus.r.Next(1, 13), Bus.r.Next(1, 32)), (float)(Bus.r.NextDouble() * (19999 - 1) + 1),
+                    date_Activity, date_Treatment
+                   , (float)(Bus.r.NextDouble() * (19999 - 1) + 1),
                     (float)(Bus.r.NextDouble() * (1199 - 1) + 1),
                     (float)(Bus.r.NextDouble() * (500000 - 1) + 1)));
-                date_Activity = new DateTime(Bus.r.Next(1895, 2021), Bus.r.Next(1, 13), Bus.r.Next(1, 32));
+                date_Activity = new DateTime(Bus.r.Next(1895, 2021), Bus.r.Next(1, 13), Bus.r.Next(1, 29));
+                date_Treatment = new DateTime(Bus.r.Next(date_Activity.Year, 2021), Bus.r.Next(1, 12), Bus.r.Next(1, 29));
                 Min = date_Activity.Year < 2018 ? 1000000 : 10000000;
                 Max = Min.ToString().Length < 8 ? 10000000 : 100000000;
                 BusList.Add(new Bus(Bus.r.Next(Min, Max).ToString(),
-                     date_Activity,
-                     new DateTime(Bus.r.Next(date_Activity.Year,2021), Bus.r.Next(1, 12), Bus.r.Next(1, 32)), (float)(Bus.r.NextDouble() * (19999.9 - 19999) + 19999),
+                     date_Activity, date_Treatment
+           , (float)(Bus.r.NextDouble() * (19999.9 - 19999) + 19999),
                      (float)(Bus.r.NextDouble() * (1199 - 1) + 1),
                     (float)(Bus.r.NextDouble() * (500000 - 1) + 1)));
-                date_Activity = new DateTime(Bus.r.Next(1895, 2021), Bus.r.Next(1, 13), Bus.r.Next(1, 32));
-                Min = date_Activity.Year < 2018 ? 1000000 : 10000000;
+                date_Activity = new DateTime(Bus.r.Next(1895, 2021), Bus.r.Next(1, 13), Bus.r.Next(1, 29));
+                date_Treatment = new DateTime(Bus.r.Next(date_Activity.Year, 2021), Bus.r.Next(1, 12), Bus.r.Next(1, 29));
+               Min = date_Activity.Year < 2018 ? 1000000 : 10000000;
                 Max = Min.ToString().Length < 8 ? 10000000 : 100000000;
                 BusList.Add(new Bus(Bus.r.Next(Min, Max).ToString(), date_Activity,
-                          new DateTime(Bus.r.Next(date_Activity.Year, 2021), Bus.r.Next(1, 12), Bus.r.Next(1, 32)), (float)(Bus.r.NextDouble() * (19999 - 1) + 1),
+                        date_Treatment, (float)(Bus.r.NextDouble() * (19999 - 1) + 1),
                          (float)(Bus.r.NextDouble() * (1199.9 - 1198) + 1198),
                         (float)(Bus.r.NextDouble() * (500000 - 1) + 1)
                         ));
+               
                 for (int i = 0; i < 7; i++)
                 {
                     //date activ
-                    date_Activity = new DateTime(Bus.r.Next(1895, 2021), Bus.r.Next(1, 13), Bus.r.Next(1, 32));
-                    Min = date_Activity.Year.CompareTo(2018) < 0 ? 1000000 : 10000000;
+                    date_Activity = new DateTime(Bus.r.Next(1895, 2021), Bus.r.Next(1, 13), Bus.r.Next(1, 29));
+                    date_Treatment = new DateTime(Bus.r.Next(date_Activity.Year, 2021), Bus.r.Next(1, 12), Bus.r.Next(1, 29));
+                   Min = date_Activity.Year < 2018 ? 1000000 : 10000000;
                     Max = Min.ToString().Length < 8 ? 10000000 : 100000000;
                    // double k = Bus.r.NextDouble() * (33.3 - 31) + 31;
                     BusList.Add(new Bus(Bus.r.Next(Min, Max).ToString(),
-                        date_Activity,
-                          new DateTime(Bus.r.Next(date_Activity.Year, 2021), Bus.r.Next(1, 12), Bus.r.Next(1, 32)),
+                         date_Activity, date_Treatment
+                        ,
                         (float)(Bus.r.NextDouble() * (19999 - 1) + 1),
                         (float)(Bus.r.NextDouble() * (1199 - 1) + 1),
                         (float)(Bus.r.NextDouble() * (500000 - 1) + 1)
@@ -146,21 +155,18 @@ namespace dotNet5781_03B_3747_8971
                 }
                 for (int i = 0; i < 10; i++)
                 {
-                    if (!BusList[i].FuelCondition() &&!BusList[i].TreatmentIsNeeded())
-                        BusList[i].STATUS = (Situation)(0); 
-                    //else
-                    //{
-                    //    if (BusList[i].TreatmentIsNeeded())
-                    //        BusList[i].STATUS = (Situation)3;
-                    //    else
-                    //        BusList[i].STATUS = (Situation)(0);
-                    //}
+                    if (!BusList[i].FuelCondition() && !BusList[i].TreatmentIsNeeded())
+                        BusList[i].STATUS = (Situation)(0);
+                    else
+                        BusList[i].STATUS = (Situation)4;
+
                 }
             }
             catch (InvalidOperationException message)
             {
                 System.Windows.MessageBox.Show($"{message.Message}", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
             }
+            
 
 
         }
@@ -174,6 +180,17 @@ namespace dotNet5781_03B_3747_8971
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        //private void Treatment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    var bus = lbBuses.SelectedItem as Bus;
+        //    if (bus != null)
+        //    {
+        //        currentDisplayBusLine = (Bus)lbBuses.SelectedItem;
+        //        currentDisplayBusLine.EnabledTreatment = false;
+
+        //    }
+
+        //}
         private void Travel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -181,14 +198,27 @@ namespace dotNet5781_03B_3747_8971
                 ThirdWindow thirdWindow = new ThirdWindow();
                 System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
                 currentDisplayBusLine = (Bus)GetItem(button.DataContext.ToString());
+                if (currentDisplayBusLine.STATUS == Situation.Dangerous|| currentDisplayBusLine.STATUS == Situation.In_treatment || currentDisplayBusLine.STATUS == Situation.refueling || currentDisplayBusLine.STATUS == Situation.In_the_middle_of_A_ride)
+                    throw new InvalidOperationException($"The bus cannot travel because of he is {currentDisplayBusLine.STATUS}");
                 if (currentDisplayBusLine.FuelCondition())
                     throw new InvalidOperationException("The bus needs a refueling");
                 if (currentDisplayBusLine.TreatmentIsNeeded())
                     throw new InvalidOperationException("The bus needs a Treatment");
-                if (currentDisplayBusLine.STATUS == Situation.In_treatment || currentDisplayBusLine.STATUS == Situation.refueling)
-                     throw new InvalidOperationException($"A bus cannot travel because of he is {currentDisplayBusLine.STATUS}");
+                
                 thirdWindow.listboxTextBlockNameValue = currentDisplayBusLine;
                 thirdWindow.ShowDialog();
+                if (worker.IsBusy != true)
+                {
+                 
+                    TreatmentButton.IsEnabled = false;
+                   // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(EnabledTreatment.ToString()));
+                   // EnabledR = false;
+                   // EnabledTreatment = false;
+                   currentDisplayBusLine.STATUS = Situation.In_the_middle_of_A_ride;
+                    System.Windows.MessageBox.Show("ff", "bus start Travel ", MessageBoxButton.OKCancel);
+                    worker.RunWorkerAsync(currentDisplayBusLine.TimeTravel);
+                }
+
             }
             catch (InvalidOperationException message)
             {
@@ -207,47 +237,59 @@ namespace dotNet5781_03B_3747_8971
         {
             try
             {
-                //תהליך
+                if (currentDisplayBusLine.STATUS == Situation.Dangerous||currentDisplayBusLine.STATUS == Situation.In_treatment || currentDisplayBusLine.STATUS == Situation.refueling || currentDisplayBusLine.STATUS == Situation.In_the_middle_of_A_ride)
+                    throw new InvalidOperationException($"The bus cannot travel because of he is {currentDisplayBusLine.STATUS}");
                 System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
                 currentDisplayBusLine = (Bus)GetItem(button.DataContext.ToString());
-                currentDisplayBusLine.kILOMETERS_TREATMENT = 0;
-                currentDisplayBusLine.KILOMETERSGAS = 0;
-                currentDisplayBusLine.DATETREATMET = DateTime.Now;
-                currentDisplayBusLine.STATUS = (Situation)3;
+             
                 if (worker.IsBusy != true)
-                    worker.RunWorkerAsync(24);
+                {
+                    currentDisplayBusLine.STATUS = Situation.In_treatment;
+                    System.Windows.MessageBox.Show("ff", "bus start treatment", MessageBoxButton.OKCancel);
+                    worker.RunWorkerAsync(144);
+                    currentDisplayBusLine.kILOMETERS_TREATMENT = 0;
+                    currentDisplayBusLine.KILOMETERSGAS = 0;
+                    currentDisplayBusLine.DATETREATMET = DateTime.Now;
+                   // currentDisplayBusLine.STATUS = (Situation)3;
+
+                }
             }
             catch (InvalidOperationException message)
             {
-                System.Windows.MessageBox.Show($"{message.Message}", "bus finished treatment", MessageBoxButton.OKCancel);
+                System.Windows.MessageBox.Show($"{ message.Message}", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             }
         }
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
             ///תהליך
-            System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
-            currentDisplayBusLine = (Bus)GetItem(button.DataContext.ToString());
-            if (currentDisplayBusLine.KILOMETERSGAS == 0)
-            {
-                System.Windows.MessageBox.Show("The bus is already refueled", "refuel_info", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-                return;
-            }
-            currentDisplayBusLine.KILOMETERSGAS = 0;
-            currentDisplayBusLine.STATUS = (Situation)2;
-            System.Windows.MessageBox.Show("The bus successfully refueled", "refuel_info", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             try
             {
+                if (currentDisplayBusLine.STATUS == Situation.Dangerous||currentDisplayBusLine.STATUS == Situation.In_treatment || currentDisplayBusLine.STATUS == Situation.refueling || currentDisplayBusLine.STATUS == Situation.In_the_middle_of_A_ride)
+                    throw new InvalidOperationException($"The bus cannot travel because of he is {currentDisplayBusLine.STATUS}");
+                System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
+                currentDisplayBusLine = (Bus)GetItem(button.DataContext.ToString());
+                if (currentDisplayBusLine.KILOMETERSGAS == 0)
+                {
+                    throw new IndexOutOfRangeException("The bus is already refueled");
+                   
+                }
                 if (worker.IsBusy != true)
                 {
-                    worker.RunWorkerAsync(2);
+                    currentDisplayBusLine.STATUS = Situation.refueling;
+                    System.Windows.MessageBox.Show("ff", "bus start refuel");
+                    worker.RunWorkerAsync(12);
+                    currentDisplayBusLine.KILOMETERSGAS = 0;
+
                 }
             }
             catch (InvalidOperationException message)
             {
-                System.Windows.MessageBox.Show($"{message.Message}", "bus refuled", MessageBoxButton.OKCancel);
+                System.Windows.MessageBox.Show($"{ message.Message}", "Error", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             }
-
-
+            catch(System.Windows.Markup.XamlParseException)
+            {
+                System.Windows.MessageBox.Show("Error");
+            }
         }
         //public bool TravelTest(object obj)
         //{
@@ -302,7 +344,7 @@ namespace dotNet5781_03B_3747_8971
                 else
                 {
                     // Perform a time consuming operation and report progress.
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(1000);
                     worker.ReportProgress(i * 100 / length);
                 }
             }
@@ -310,31 +352,45 @@ namespace dotNet5781_03B_3747_8971
             e.Result = stopwatch.ElapsedMilliseconds;
 
         }
+        /// <summary>
+        /// 50,77
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
-            this.currentDisplayBusLine.STATUS = (Situation)e.ProgressPercentage;
+            //int progress = e.ProgressPercentage;
+            ////resultLabel.Content = (progress + "%");
+            ////resultProgressBar.Value = progress;
+            //System.Windows.MessageBox.Show((progress + "%"));
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled == true)
             {
-                // e.Result throw System.InvalidOperationException
+                 //e.Result throw new System.InvalidOperationException
 
 
             }
             else if (e.Error != null)
             {
                 // e.Result throw System.Reflection.TargetInvocationException
-                resultLabel.Content = "Error: " + e.Error.Message; //Exception Message
+               // resultLabel.Content = "Error: " + e.Error.Message; //Exception Message
             }
             else
             {
                 long result = (long)e.Result;
-                if (result ==20000)
-                    .Content = "Done after " + result + " ms.";
-                else
-                    resultLabel.Content = "Done after " + result / 1000 + " sec.";
+                if (currentDisplayBusLine.STATUS == Situation.In_treatment)
+                   System.Windows.MessageBox.Show("ff", "bus finished treatment", MessageBoxButton.OKCancel);
+                if (currentDisplayBusLine.STATUS == Situation.refueling)
+                    System.Windows.MessageBox.Show("ff", "bus finished refueling", MessageBoxButton.OKCancel);
+                if (currentDisplayBusLine.STATUS == Situation.In_the_middle_of_A_ride)
+                    System.Windows.MessageBox.Show("ff", "bus finished ", MessageBoxButton.OKCancel);
+                currentDisplayBusLine.STATUS = Situation.Ready_to_go;
+                //if (result ==20000)
+                // .Content = "Done after " + result + " ms.";
+
+                // resultLabel.Content = "Done after " + result / 1000 + " sec.";
             }
 
         }

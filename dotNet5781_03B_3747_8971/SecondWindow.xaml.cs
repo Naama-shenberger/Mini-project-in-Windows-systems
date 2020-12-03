@@ -48,8 +48,10 @@ namespace dotNet5781_03B_3747_8971
                 currentDisplayBusLine = new Bus(tb_license_number.Text.ToString(), DateActivityText, DateTreatmetText,(float)Convert.ToDouble(tb_kilometersTreatment.Text), (float)Convert.ToDouble(tb_kilometersGas.Text), (float)Convert.ToDouble(tb_Totalkilometers.Text));
                 // Main.AddBus(NewBus);
                 if (!currentDisplayBusLine.FuelCondition()&&!currentDisplayBusLine.TreatmentIsNeeded())
-                    currentDisplayBusLine.STATUS = (Bus.Situation)(0);
-                
+                       currentDisplayBusLine.STATUS = (Bus.Situation)(0);
+                else
+                    currentDisplayBusLine.STATUS = (Bus.Situation)(4);
+
                 this.Close();
             }
             catch (InvalidOperationException message)
@@ -60,7 +62,7 @@ namespace dotNet5781_03B_3747_8971
             {
                 MessageBox.Show($"{F.Message}","ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
             }
-            
+
         }
     }
 }
