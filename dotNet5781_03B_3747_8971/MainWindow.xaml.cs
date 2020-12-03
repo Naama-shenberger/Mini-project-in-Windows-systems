@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
+using System.Threading;
+using System.ComponentModel;
 using dotNet5781_01_3747_8971;
 using static dotNet5781_01_3747_8971.Bus;
 
@@ -26,15 +29,22 @@ namespace dotNet5781_03B_3747_8971
     /// </summary>
     public partial class MainWindow : Window
     {
+        BackgroundWorker worker;
+
         public MainWindow()
         {
             InitializeComponent();
             InitilizeBusList();
             lbBuses.ItemsSource = BusList;
 
-           // lbBuses.DrawItem = DrawMode.OwnerDrawFixed;
-           // lbBuses.DrawItem += new DrawItemEventHandler(ListBox1_DrawItem);
-           // Controls.Add(ListBox1);
+            // lbBuses.DrawItem = DrawMode.OwnerDrawFixed;
+            // lbBuses.DrawItem += new DrawItemEventHandler(ListBox1_DrawItem);
+            // Controls.Add(ListBox1);
+            worker = new BackgroundWorker();
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            worker.WorkerReportsProgress = true;
         }
         public event System.Windows.Forms.DrawItemEventHandler DrawItem;
         private void ListBoxItem_DrawItem(object sender, System.Windows.Forms.DrawItemEventArgs e)
@@ -195,13 +205,22 @@ namespace dotNet5781_03B_3747_8971
         }
         private void Treatment_Click(object sender, RoutedEventArgs e)
         {
-            //תהליך
-            System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
-            currentDisplayBusLine = (Bus)GetItem(button.DataContext.ToString());
-            currentDisplayBusLine.kILOMETERS_TREATMENT = 0;
-            currentDisplayBusLine.KILOMETERSGAS = 0;
-            currentDisplayBusLine.DATETREATMET = DateTime.Now;
-            currentDisplayBusLine.STATUS = (Situation)3;
+            try
+            {
+                //תהליך
+                System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
+                currentDisplayBusLine = (Bus)GetItem(button.DataContext.ToString());
+                currentDisplayBusLine.kILOMETERS_TREATMENT = 0;
+                currentDisplayBusLine.KILOMETERSGAS = 0;
+                currentDisplayBusLine.DATETREATMET = DateTime.Now;
+                currentDisplayBusLine.STATUS = (Situation)3;
+                if (worker.IsBusy != true)
+                    worker.RunWorkerAsync(24);
+            }
+            catch (InvalidOperationException message)
+            {
+                System.Windows.MessageBox.Show($"{message.Message}", "bus finished treatment", MessageBoxButton.OKCancel);
+            }
         }
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
@@ -216,6 +235,18 @@ namespace dotNet5781_03B_3747_8971
             currentDisplayBusLine.KILOMETERSGAS = 0;
             currentDisplayBusLine.STATUS = (Situation)2;
             System.Windows.MessageBox.Show("The bus successfully refueled", "refuel_info", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            try
+            {
+                if (worker.IsBusy != true)
+                {
+                    worker.RunWorkerAsync(2);
+                }
+            }
+            catch (InvalidOperationException message)
+            {
+                System.Windows.MessageBox.Show($"{message.Message}", "bus refuled", MessageBoxButton.OKCancel);
+            }
+
 
         }
         //public bool TravelTest(object obj)
@@ -253,5 +284,61 @@ namespace dotNet5781_03B_3747_8971
         //    currentDisplayBusLine= (Bus)lbBuses.SelectedItem;
 
         //}
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            // BackgroundWorker worker = sender as BackgroundWorker;
+            int length = (int)e.Argument;
+
+            for (int i = 1; i <= length; i++)
+            {
+                if (worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    e.Result = stopwatch.ElapsedMilliseconds; // Unnecessary
+                    break;
+                }
+                else
+                {
+                    // Perform a time consuming operation and report progress.
+                    System.Threading.Thread.Sleep(500);
+                    worker.ReportProgress(i * 100 / length);
+                }
+            }
+
+            e.Result = stopwatch.ElapsedMilliseconds;
+
+        }
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+            this.currentDisplayBusLine.STATUS = (Situation)e.ProgressPercentage;
+        }
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //if (e.Cancelled == true)
+            //{
+            //    // e.Result throw System.InvalidOperationException
+
+
+            //}
+            //else if (e.Error != null)
+            //{
+            //    // e.Result throw System.Reflection.TargetInvocationException
+            //    resultLabel.Content = "Error: " + e.Error.Message; //Exception Message
+            //}
+            //else
+            //{
+            //    long result = (long)e.Result;
+            //    if (result ==20000)
+            //        .Content = "Done after " + result + " ms.";
+            //    else
+            //        resultLabel.Content = "Done after " + result / 1000 + " sec.";
+            //}
+
+        }
+
+
     }
 }
