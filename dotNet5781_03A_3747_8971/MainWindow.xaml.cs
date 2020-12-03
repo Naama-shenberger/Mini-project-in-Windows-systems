@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using dotNet5781_02_3747_8971;
 /// <summary>
 /// Exercise 3A - Mini project in c#
@@ -32,6 +33,7 @@ namespace dotNet5781_03A_3747_8971
         /// Object from class List of bus lines
         /// </summary>
         private ListBusLines MyBusList = new ListBusLines();
+        BackgroundWorker worker;
         public MainWindow()
         {
             InitializeComponent();
