@@ -38,15 +38,32 @@ namespace dotNet5781_03B_3747_8971
                     currentDisplayBusLine = (Bus)value;
             }
         }
+        private void calendarActivity_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Calendar calendarActivity = sender as Calendar;
+            if (calendarActivity.SelectedDate != null)
+                tb_DateActivityBus.Text = ((DateTime)calendarActivity.SelectedDate).ToString("dd/MM/yyyy");
+            else
+                MessageBox.Show("Not Selected, please Selecte again", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+        }
+        private void calendarTreatment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Calendar calendarTreatment = sender as Calendar;
+            if(calendarTreatment.SelectedDate!=null)
+              tb_DateTreatment.Text = ((DateTime)calendarTreatment.SelectedDate).ToString("dd/MM/yyyy");
+            else
+                MessageBox.Show("Not Selected, please Selecte again", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+
+        }
         public void AddBus_Click(object sender, RoutedEventArgs e)
         {
             try
-            { 
-                //MainWindow Main = Application.Current.MainWindow as MainWindow;
-                DateTime DateActivityText = DateTime.Parse(tb_DateActivityBus.Text);
+            {
+              //  CalendarDateActivity.
+                 DateTime DateActivityText = DateTime.Parse(tb_DateActivityBus.Text);
                 DateTime DateTreatmetText = DateTime.Parse(tb_DateTreatment.Text);
                 currentDisplayBusLine = new Bus(tb_license_number.Text.ToString(), DateActivityText, DateTreatmetText,(float)Convert.ToDouble(tb_kilometersTreatment.Text), (float)Convert.ToDouble(tb_kilometersGas.Text), (float)Convert.ToDouble(tb_Totalkilometers.Text));
-                // Main.AddBus(NewBus);
+              
                 if (!currentDisplayBusLine.FuelCondition()&&!currentDisplayBusLine.TreatmentIsNeeded())
                        currentDisplayBusLine.STATUS = (Bus.Situation)(0);
                 else
@@ -63,6 +80,11 @@ namespace dotNet5781_03B_3747_8971
                 MessageBox.Show($"{F.Message}","ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

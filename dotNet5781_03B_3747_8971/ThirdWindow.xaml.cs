@@ -25,27 +25,27 @@ namespace dotNet5781_03B_3747_8971
         {
             InitializeComponent();
         }
-        public object listboxTextBlockNameValue
+        private Bus currentDisplayBus;
+        public object TransferObjectBus
         {
             get
             {
-                return currentDisplayBusLine;
+                return currentDisplayBus;
             }
             set
             {
                 if (value is Bus)
-                   currentDisplayBusLine =(Bus)value;
+                   currentDisplayBus =(Bus)value;
             }
         }
-        private Bus currentDisplayBusLine;
         private void TakeATrip_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                currentDisplayBusLine = (Bus)listboxTextBlockNameValue;
-                currentDisplayBusLine.BusTravel((float)Convert.ToDouble(tbDistanceDrive.Text));
+                currentDisplayBus = (Bus)TransferObjectBus;
+                currentDisplayBus.BusTravel((float)Convert.ToDouble(tbDistanceDrive.Text));
                 float Average_speed = Bus.r.Next(20, 51);
-                currentDisplayBusLine.TimeTravel = (float)Convert.ToDouble(tbDistanceDrive.Text) / Average_speed;
+                currentDisplayBus.TimeTravel = (float)Convert.ToDouble(tbDistanceDrive.Text) / Average_speed;
                 this.Close();
             }
             catch (NullReferenceException Null)

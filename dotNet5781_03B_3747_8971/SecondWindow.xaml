@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03B_3747_8971"
         mc:Ignorable="d"
-        Title="Adding a bus" Height="450" Width="800">
+        Title="Adding a bus" Height="550" Width="800">
 
     <Grid Margin="10,10,0,-1" HorizontalAlignment="Left" Width="780" >
 
@@ -19,15 +19,14 @@
         <TextBox x:Name="tb_DateTreatment" Height="40" HorizontalAlignment="Left" Margin="267,219,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
         <Label Content="Ender kilometers from last Treatment" Height="39" HorizontalAlignment="Left" Margin="45,286,0,0"  VerticalAlignment="Top" Width="208" Background="AliceBlue"/>
         <TextBox x:Name="tb_kilometersTreatment" Height="39" HorizontalAlignment="Left" Margin="267,286,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
-        <Button Click="AddBus_Click" Name="buAddBus" Content="Add Bus" HorizontalAlignment="Left" Margin="514,345,0,0" VerticalAlignment="Top" Width="150" Height="42"/>
+        <Button Click="AddBus_Click" Name="buAddBus" Content="Add Bus" HorizontalAlignment="Left" Margin="592,443,0,0" VerticalAlignment="Top" Width="150" Height="42"/>
         <Label Content="Ender kilometers form last refull" HorizontalAlignment="Left" Margin="45,345,0,0" VerticalAlignment="Top" Width="208" Background="AliceBlue"/>
         <TextBox Name="tb_kilometersGas" HorizontalAlignment="Left" Height="27" Margin="267,345,0,0" TextWrapping="Wrap" Background="Beige" VerticalAlignment="Top" Width="160"/>
-        <!--<DatePicker DisplayDateStart="01.01.2011"
-                 DisplayDateEnd="01.20.2011">
-        <DatePicker.BlackoutDates>-->
-                <!--<CalendarDateRange Start="01.15.2011" End="01.16.2011" />
-        </DatePicker.BlackoutDates>
-        </DatePicker>-->
+        <Calendar x:Name="CalendarDateActivity"  MouseDoubleClick="calendarActivity_MouseDoubleClick" SelectionMode="MultipleRange" HorizontalAlignment="Left" Margin="522,49,0,0" VerticalAlignment="Top" Height="161" Width="178"/>
+        <Calendar x:Name="CalendarTreatment"  MouseDoubleClick="calendarTreatment_MouseDoubleClick" Background="AliceBlue" SelectionMode="MultipleRange" HorizontalAlignment="Left" Margin="511,265,0,0" VerticalAlignment="Top" Width="207" Height="168"/>
+        <TextBlock HorizontalAlignment="Left" Margin="538,10,0,0" TextWrapping="Wrap" Text="Select a date for Date Activity bus:" VerticalAlignment="Top" Width="146" Height="46"/>
+        <TextBlock HorizontalAlignment="Left" Margin="538,228,0,0" TextWrapping="Wrap" Text="Select a date for last Date Treatment bus:" VerticalAlignment="Top" Height="32" Width="146"/>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="445,453,0,0" VerticalAlignment="Top" Width="111" Height="32" Click="Button_Click"/>
 
 
 
