@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:dotNet5781_03B_3747_8971"
         mc:Ignorable="d"
         Title="Adding a bus" Height="550" Width="800">
-
     <Grid Margin="10,10,0,-1" HorizontalAlignment="Left" Width="780" >
 
         <TextBox x:Name="tb_license_number" Height="40" HorizontalAlignment="Left" Margin="267,89,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
