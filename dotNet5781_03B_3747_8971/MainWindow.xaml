@@ -9,15 +9,16 @@
     <Window.Resources>
         <local:Bus x:Key="ConverterEnumToBrushes"/>
     </Window.Resources>
-    
+
     <Grid Name="MainGrid">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="391*"/>
-            <ColumnDefinition Width="6*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Name ="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto" Margin="0,0,-0.4,0" Grid.ColumnSpan="2">
-            <Button Name="buAddABus" Content="Add a Bus" HorizontalAlignment="Left" Margin="623,24,0,0" VerticalAlignment="Top" Width="134" Height="38" Click="AddABus_Click" Background="#FFDDDDDD"/>
-            <ListBox x:Name="lbBuses" x:FieldModifier="public"   SelectedItem="{Binding SelectedItem}"   ItemsSource="{Binding BusList}" HorizontalAlignment="Left" Height="388" VerticalAlignment="Top" Width="597" SelectionChanged="lbBuses_SelectionChanged" Background="#FFD0D7E0" >
+
+        <Grid Name ="UpGrid" Background="#FFD7F0EB" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto" Margin="0,0,-0.4,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="213*"/>
+                <ColumnDefinition Width="179*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="buAddABus" Content="Add a Bus" HorizontalAlignment="Left" Margin="200.8,28,0,0" VerticalAlignment="Top" Width="134" Height="38" Click="AddABus_Click" Background="#FFE2CBBC" Grid.Column="1"/>
+            <ListBox x:Name="lbBuses" x:FieldModifier="public"   SelectedItem="{Binding SelectedItem}"   ItemsSource="{Binding BusList}" HorizontalAlignment="Left" Height="282" VerticalAlignment="Top" Width="613" SelectionChanged="lbBuses_SelectionChanged" Background="White" Grid.ColumnSpan="2" >
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                         <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
@@ -30,11 +31,11 @@
                         <StackPanel>
 
                             <TextBlock Name="resultLabel" Grid.Column="20" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="420,7,0,0" Width="134" Text="{Binding TimeLeft}" />
-                            <ProgressBar Name="resultProgressBar" Height="10" Grid.Column="20" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="420,4,0,-17" Width="134"  Minimum="0" Maximum="100" Value="{Binding Progress}" Tag="{Binding _name}" />
+                            <ProgressBar Name="resultProgressBar" Height="10" Grid.Column="20" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="430,6,0,-17" Width="134"  Minimum="0" Maximum="100" Value="{Binding Progress}" Tag="{Binding _name}" />
                             <TextBlock x:Name="tbLicenseplate" Text="{Binding Path=LICENSEPLATE}" />
-                            <Button Name="TravelButton"  DataContext="{Binding Path=LICENSEPLATE}"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="Travel_Click" Margin="200,-15,0,0" Width="80"  CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}">Make a trip</Button>
-                            <Button Name="refuelButton"  DataContext="{Binding Path=LICENSEPLATE}"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="Refuel_Click" Margin="20,-20,0,0" Width="80"  CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}">refuel</Button>
-                            <Button x:Name="Stopprocess"  VerticalAlignment="Top"  DataContext="{Binding Path=LICENSEPLATE}" Content="Stop process" HorizontalAlignment="Center" Click="StopProcess_Click" Margin="400,10,0,0" Width="80" CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}"/>
+                            <Button Name="TravelButton" Background="#FFD7F0EB" DataContext="{Binding Path=LICENSEPLATE}"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="Travel_Click" Margin="200,-15,0,0" Width="80"  CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}">Make a trip</Button>
+                            <Button Name="refuelButton" Background="#FFD7F0EB" DataContext="{Binding Path=LICENSEPLATE}"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="Refuel_Click" Margin="20,-20,0,0" Width="80"  CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}">refuel</Button>
+                            <Button x:Name="Stopprocess" Background="#FFD7F0EB" VerticalAlignment="Top"  DataContext="{Binding Path=LICENSEPLATE}" Content="Stop process" HorizontalAlignment="Center" Click="StopProcess_Click" Margin="420,1,0,0" Width="80" CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}"/>
 
                         </StackPanel>
                     </DataTemplate>

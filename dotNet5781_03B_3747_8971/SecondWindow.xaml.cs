@@ -59,15 +59,21 @@ namespace dotNet5781_03B_3747_8971
         {
             try
             {
-              //  CalendarDateActivity.
+              
                  DateTime DateActivityText = DateTime.Parse(tb_DateActivityBus.Text);
                 DateTime DateTreatmetText = DateTime.Parse(tb_DateTreatment.Text);
                 currentDisplayBusLine = new Bus(tb_license_number.Text.ToString(), DateActivityText, DateTreatmetText,(float)Convert.ToDouble(tb_kilometersTreatment.Text), (float)Convert.ToDouble(tb_kilometersGas.Text), (float)Convert.ToDouble(tb_Totalkilometers.Text));
-              
-                if (!currentDisplayBusLine.FuelCondition()&&!currentDisplayBusLine.TreatmentIsNeeded())
-                       currentDisplayBusLine.STATUS = (Bus.Situation)(0);
+
+                if (!currentDisplayBusLine.FuelCondition() && !currentDisplayBusLine.TreatmentIsNeeded())
+                {
+                    currentDisplayBusLine.STATUS = (Bus.Situation)(0);
+                    currentDisplayBusLine.Color = "#FFA3F4B0";
+                }
                 else
+                {
                     currentDisplayBusLine.STATUS = (Bus.Situation)(4);
+                    currentDisplayBusLine.Color = "#FFBD5850";
+                }
 
                 this.Close();
             }

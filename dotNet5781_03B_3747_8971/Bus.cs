@@ -283,12 +283,12 @@ namespace dotNet5781_01_3747_8971
             if (!FuelCondition() && !TreatmentIsNeeded())
             {
                 STATUS = (Situation)(0);
-                Color = "#FF68C76D";
+                Color = "#FFA3F4B0";
             }
             else
             {
                 STATUS = (Situation)4;
-                Color= "#FFC83A29";
+                Color= "#FFBD5850";
             }
             Progress = 0;
             TimeLeft = "";

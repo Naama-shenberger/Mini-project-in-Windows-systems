@@ -128,12 +128,12 @@ namespace dotNet5781_03B_3747_8971
                     if (!BusList[i].FuelCondition() && !BusList[i].TreatmentIsNeeded())
                     {
                         BusList[i].STATUS = (Situation)(0);
-                        BusList[i].Color = "#FF68C76D";
+                        BusList[i].Color = "#FFA3F4B0";
                     }
                     else
                     {
                         BusList[i].STATUS = (Situation)4;
-                        BusList[i].Color = "#FFC83A29";
+                        BusList[i].Color = "#FFBD5850";
                     }
                     }
                 
