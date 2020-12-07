@@ -25,7 +25,13 @@ namespace dotNet5781_03B_3747_8971
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Create an object from a class Bus,That we can access the methods and public fields of the class 
+        /// </summary>
         private Bus currentDisplayBusLine;
+        /// <summary>
+        /// A property of the bus object, used to move objects between windows
+        /// </summary>
         public object CurrentDisplayBusLine
         {
             get
@@ -38,6 +44,14 @@ namespace dotNet5781_03B_3747_8971
                     currentDisplayBusLine = (Bus)value;
             }
         }
+        /// <summary>
+        /// Event calendar Activity Date Bus MouseDoubleClick
+        /// Convenient for the user to add a date
+        /// Linked to the feature
+        ///In case of Exceptionד will appear MessageBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calendarActivity_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Calendar calendarActivity = sender as Calendar;
@@ -46,6 +60,14 @@ namespace dotNet5781_03B_3747_8971
             else
                 MessageBox.Show("Not Selected, please Selecte again", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
         }
+        /// <summary>
+        /// Event calendar Treatment Date Bus MouseDoubleClick
+        /// Convenient for the user to add a date
+        /// Linked to the feature
+        /// In case of Exceptionד will appear MessageBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calendarTreatment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Calendar calendarTreatment = sender as Calendar;
@@ -55,6 +77,16 @@ namespace dotNet5781_03B_3747_8971
                 MessageBox.Show("Not Selected, please Selecte again", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
 
         }
+        /// <summary>
+        /// Click event
+        /// Add a bus to the list
+        /// Request the user to type in all the bus details(logically a bus can be added to the system if its data is known)
+        /// The function updates the status of the bus that enters 
+        ///The function updates Bus color
+        ///In case of Exceptionד will appear MessageBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void AddBus_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -63,16 +95,15 @@ namespace dotNet5781_03B_3747_8971
                  DateTime DateActivityText = DateTime.Parse(tb_DateActivityBus.Text);
                 DateTime DateTreatmetText = DateTime.Parse(tb_DateTreatment.Text);
                 currentDisplayBusLine = new Bus(tb_license_number.Text.ToString(), DateActivityText, DateTreatmetText,(float)Convert.ToDouble(tb_kilometersTreatment.Text), (float)Convert.ToDouble(tb_kilometersGas.Text), (float)Convert.ToDouble(tb_Totalkilometers.Text));
-
                 if (!currentDisplayBusLine.FuelCondition() && !currentDisplayBusLine.TreatmentIsNeeded())
                 {
                     currentDisplayBusLine.STATUS = (Bus.Situation)(0);
-                    currentDisplayBusLine.Color = "#FFA3F4B0";
+                    currentDisplayBusLine.Color = "#FFB3F6BE";
                 }
                 else
                 {
                     currentDisplayBusLine.STATUS = (Bus.Situation)(4);
-                    currentDisplayBusLine.Color = "#FFBD5850";
+                    currentDisplayBusLine.Color = "#FFF49494";
                 }
 
                 this.Close();
@@ -87,7 +118,11 @@ namespace dotNet5781_03B_3747_8971
             }
 
         }
-
+        /// <summary>
+        ///  A click event that closes the class window, the button actually displays the previous page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

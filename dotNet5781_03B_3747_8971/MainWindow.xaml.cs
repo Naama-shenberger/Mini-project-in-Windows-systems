@@ -21,8 +21,13 @@ using System.ComponentModel;
 using dotNet5781_01_3747_8971;
 using System.Globalization;
 using static dotNet5781_01_3747_8971.Bus;
-
-
+/// <summary>
+/// Exercise 3B - Mini project in c#
+/// Name:Naama Shenberger 
+/// Id:211983747
+/// Name:Ella Hanzin
+/// Id:212028971
+/// <summary>
 namespace dotNet5781_03B_3747_8971
 {
     /// <summary>
@@ -30,6 +35,10 @@ namespace dotNet5781_03B_3747_8971
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Using the ObservableCollection that we can see changes in runTime
+        /// the ObservableCollection implementaion the interface INotifyPropertyChanged
+        /// </summary>
         private ObservableCollection<Bus> BusList = new ObservableCollection<Bus>();
         private Bus currentDisplayBus;
         public MainWindow()
@@ -37,16 +46,25 @@ namespace dotNet5781_03B_3747_8971
             InitializeComponent();
             InitilizeBusList();
             lbBuses.ItemsSource = BusList;
-           
-
         }
-        
+        /// <summary>
+        /// Add A Bus Click event
+        /// sign up for an event AddBusWindow_Closed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddABus_Click(object sender, RoutedEventArgs e)
         {
             SecondWindow secondWindow = new SecondWindow();
             secondWindow.Closed += AddBusWindow_Closed;
             secondWindow.ShowDialog();
         }
+        /// <summary>
+        /// The event gets the object that we  want to add to the list
+        /// If the bus is already found will throw an exception
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddBusWindow_Closed(object sender, EventArgs e)
         {
             try
@@ -62,7 +80,6 @@ namespace dotNet5781_03B_3747_8971
                     throw new InvalidOperationException("Lack of typing details");
 
                 BusList.Add(resultBus);
-               
                 System.Windows.MessageBox.Show($"Bus: {resultBus.LICENSEPLATE} is Added", "Added Bus", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (InvalidOperationException  message)
@@ -70,6 +87,11 @@ namespace dotNet5781_03B_3747_8971
                 System.Windows.MessageBox.Show($"{message.Message}", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// Function that receives a string (license number) and returns the object
+        /// </summary>
+        /// <param name="BusLicenseNumber"></param>
+        /// <returns></returns>
         public object GetItem(string BusLicenseNumber)
         {
             foreach (var Bus in BusList)
@@ -77,6 +99,13 @@ namespace dotNet5781_03B_3747_8971
                     return Bus;
             throw new InvalidOperationException("The License Number does not exist");
         }
+        /// <summary>
+        /// Initialized list function
+        /// One bus will be after the next treatment date
+        /// One bus will be close to the next treatment passenger
+        ///  One bus will be with little fuel
+        /// And adds statuses and colors to buses
+        /// </summary>
         private void InitilizeBusList()
         {
             try
@@ -128,12 +157,12 @@ namespace dotNet5781_03B_3747_8971
                     if (!BusList[i].FuelCondition() && !BusList[i].TreatmentIsNeeded())
                     {
                         BusList[i].STATUS = (Situation)(0);
-                        BusList[i].Color = "#FFA3F4B0";
+                        BusList[i].Color = "#FFB3F6BE";
                     }
                     else
                     {
                         BusList[i].STATUS = (Situation)4;
-                        BusList[i].Color = "#FFBD5850";
+                        BusList[i].Color = "#FFF49494";
                     }
                     }
                 
@@ -143,6 +172,18 @@ namespace dotNet5781_03B_3747_8971
                 System.Windows.MessageBox.Show($"{message.Message}", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// Travel Click Event
+        /// The event opens a window for adding a number (driving distance)
+        /// The function is registered for events BackgroundWorker 
+        /// function updates the status of the bus and its color
+        /// The function throws an exception in case it is in another process
+        /// (Logically it is not possible to refuel during treatment
+        /// And it is not possible to travel during treatment or refueling, etc.)
+        /// The function checks that the bus is fit for travel if not  there will be a throw Exception
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Travel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -150,10 +191,6 @@ namespace dotNet5781_03B_3747_8971
                 ThirdWindow thirdWindow = new ThirdWindow();
                 System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
                 currentDisplayBus = (Bus)GetItem(button.DataContext.ToString());
-                if (currentDisplayBus.FuelCondition())
-                    throw new InvalidOperationException("The bus needs a refueling");
-                if (currentDisplayBus.TreatmentIsNeeded())
-                    throw new InvalidOperationException("The bus needs a Treatment");
                 currentDisplayBus.worker.DoWork += currentDisplayBus.Worker_DoWork;
                 currentDisplayBus.worker.ProgressChanged += currentDisplayBus.Worker_ProgressChanged;
                 currentDisplayBus.worker.RunWorkerCompleted += currentDisplayBus.Worker_RunWorkerCompleted;
@@ -161,16 +198,19 @@ namespace dotNet5781_03B_3747_8971
                 currentDisplayBus.worker.WorkerSupportsCancellation = true;
                 if (currentDisplayBus.worker.IsBusy != true)
                 {
+                    if (currentDisplayBus.FuelCondition())
+                        throw new InvalidOperationException("The bus needs a refueling");
+                    if (currentDisplayBus.TreatmentIsNeeded())
+                        throw new InvalidOperationException("The bus needs a Treatment");
                     thirdWindow.TransferObjectBus = currentDisplayBus;
                     thirdWindow.ShowDialog();
-                    currentDisplayBus.Color = "#FF0F4EB9";
+                    if (currentDisplayBus.TimeTravel == 0)
+                        throw new InvalidOperationException("You did not enter details");
+                    currentDisplayBus.Color = "#FFE8BDE7";
                     currentDisplayBus.STATUS = Situation.In_the_middle_of_A_ride;
                   
                     System.Windows.MessageBox.Show("bus starting to Travel", "Bus information Situation", MessageBoxButton.OK);
                     currentDisplayBus.worker.RunWorkerAsync((int)currentDisplayBus.TimeTravel);
-                   
-
-
                 }
                 else
                     throw new InvalidOperationException($"The bus cannot travel because he is { currentDisplayBus.STATUS}");
@@ -180,6 +220,12 @@ namespace dotNet5781_03B_3747_8971
                 System.Windows.MessageBox.Show($"{message.Message}", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// MouseDoubleClick event for item list
+        /// The event opens a window with the bus details
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListBoxItem_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
             var btn = sender as ListBoxItem;
@@ -187,13 +233,25 @@ namespace dotNet5781_03B_3747_8971
             ShowInfoBus a = new ShowInfoBus(lineData);
             a.ShowDialog();
         }
+        /// <summary>
+        /// Refuel Click Event
+        /// the event  Sends the selected object to the refuel function in the window ShowInfoBus 
+        /// (save code, and its more accurately that the MainWindow will use a Another window (programmable),Than the opposite
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
             currentDisplayBus = (Bus)GetItem(button.DataContext.ToString());
             ShowInfoBus a = new ShowInfoBus(currentDisplayBus);
             a.refuel_Click(sender, e);
-        }          
+        }
+        /// <summary>
+        /// SelectionChanged buslist event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbBuses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
@@ -203,6 +261,13 @@ namespace dotNet5781_03B_3747_8971
                 currentDisplayBus = (Bus)lbBuses.SelectedItem;
             }
         }
+        /// <summary>
+        /// StopProcess Click event
+        /// The event checks that indeed the selected object is in some process and it stops it
+        /// if The bus is not in process A message will be sent to the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StopProcess_Click(object sender, RoutedEventArgs e)
         {
 

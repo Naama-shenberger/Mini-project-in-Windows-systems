@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03B_3747_8971"
         mc:Ignorable="d"
-        Title="ThirdWindow" Height="450" Width="800">
-    <Grid>
-        <Label Content="Enter Driving distance" HorizontalAlignment="Left" Margin="31,63,0,0" VerticalAlignment="Top" Height="52" Width="197" Background="AliceBlue" FontSize="18"/>
-        <TextBox x:Name="tbDistanceDrive" HorizontalAlignment="Left" Height="52" Margin="258,63,0,0" TextWrapping="Wrap" Background="Beige" VerticalAlignment="Top" Width="201"/>
-        <Button x:Name="buTakeTrip" Click="TakeATrip_Click" Content="Take a trip" HorizontalAlignment="Left" Margin="393,181,0,0" VerticalAlignment="Top" Width="166" Height="51"/>
+        Icon="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\dotNet5781_03B_3747_8971\iconBus.jpg"
+        Title=" Start a travel" Height="250" Width="400">
 
+    <Grid Background="#FFBDE0DB" Margin="0,0,-6.4,-1.6">
+        <Label Content="Enter Driving distance" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Height="38" Width="205" Background="#FFBDE0DB" FontSize="14" FontFamily="Sitka Text"/>
+        <TextBox x:Name="tbDistanceDrive" HorizontalAlignment="Left" Height="23" Margin="199,41,0,0" TextWrapping="Wrap" Background="#FFE0D0DE" VerticalAlignment="Top" Width="134" KeyDown="OnKeyDownHandler" SelectedText=" " PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown"/>
+        <Button Content="Back" FontFamily="Sitka Text" HorizontalAlignment="Left" Margin="263,159,0,0" VerticalAlignment="Top" Width="107" Height="38" Background="#FF3E61C5" Click="Close_Click"/>
+        <Label Content="Enter to confirm" HorizontalAlignment="Left" Margin="199,81,0,0" VerticalAlignment="Top" Height="38" Width="141" FontFamily="Sitka Text" FontSize="16"/>
     </Grid>
 </Window>

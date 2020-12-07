@@ -24,7 +24,16 @@ namespace dotNet5781_03B_3747_8971
     /// </summary>
     public partial class ShowInfoBus : Window
     {
+        /// <summary>
+        /// Create an object from a class Bus,That we can access the methods and public fields of the class 
+        /// </summary>
         private Bus currentDisplayBus;
+        /// <summary>
+        /// The constructor of the class (of this window) receives an object-type parameter 
+        /// so that we can transfer an object between the windows
+        /// the constructor checks that the objecct is from Bus type
+        /// </summary>
+        /// <param name="currentBus"></param>
         public ShowInfoBus(object currentBus)
         {
             InitializeComponent();
@@ -39,9 +48,19 @@ namespace dotNet5781_03B_3747_8971
                 tbTotal_Kilometers.Text = currentDisplayBus.TOTALKILOMETERS.ToString();
             }
             else
-                throw new NullReferenceException("The object is not type Bus");
+                throw new NullReferenceException("The object is not Bus type");
           
         }
+        /// <summary>
+        /// Click refuel event 
+        /// The function is registered for events BackgroundWorker 
+        /// function updates the status of the bus and its color
+        /// The function throws an exception in case it is in another process
+        /// (Logically it is not possible to refuel during treatment
+        /// And it is not possible to travel during treatment or refueling, etc.)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void refuel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -57,7 +76,7 @@ namespace dotNet5781_03B_3747_8971
                         throw new InvalidOperationException("The bus is already refueled");
                     System.Windows.MessageBox.Show("bus starting to refuel", "Bus information Situation", MessageBoxButton.OK);
                     currentDisplayBus.STATUS = Situation.refueling;
-                    currentDisplayBus.Color = "#FFE7A956";
+                    currentDisplayBus.Color = "#FFF0E3C2";
                     currentDisplayBus.worker.RunWorkerAsync(12);
                     this.Close();
                 }
@@ -71,6 +90,16 @@ namespace dotNet5781_03B_3747_8971
                 this.Close();
             }
         }
+        /// <summary>
+        /// Click Treatment event 
+        /// The function is registered for events BackgroundWorker 
+        /// function updates the status of the bus and its color
+        /// The function throws an exception in case it is in another process
+        // (Logically it is not possible to refuel during treatment
+        // And it is not possible to travel during treatment or refueling, etc.)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Treatment_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -84,7 +113,7 @@ namespace dotNet5781_03B_3747_8971
                 {
                     System.Windows.MessageBox.Show("bus starting treatment", "Bus information Situation", MessageBoxButton.OK);
                     currentDisplayBus.STATUS = Situation.In_treatment;
-                    currentDisplayBus.Color = "#FF1853A8";
+                    currentDisplayBus.Color = "#FF4E80C8";
                     currentDisplayBus.worker.RunWorkerAsync(144);
                 }
                 else
@@ -98,7 +127,11 @@ namespace dotNet5781_03B_3747_8971
             }
 
         }
-
+        /// <summary>
+        /// A click event that closes the class window, the button actually displays the previous page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

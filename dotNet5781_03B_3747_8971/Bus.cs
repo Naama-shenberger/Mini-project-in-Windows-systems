@@ -19,8 +19,9 @@ namespace dotNet5781_01_3747_8971
     /// <summary>
     /// Bus class, which allows access to the fields by methods 'set' and 'get'
     /// Functions that check the integrity and update of buses
+    /// The class implements the interface INotifyPropertyChanged
     /// </summary>
-    class Bus: INotifyPropertyChanged
+    class Bus : INotifyPropertyChanged
     {
         
         public static Random r = new Random();
@@ -30,8 +31,25 @@ namespace dotNet5781_01_3747_8971
         private float k_kilometersTreatment;
         private float k_kilometersGas;
         private float t_totalkilometers;
-       private Situation status;
-        private float timeTravel;
+        private Situation status;
+        /// We saw the need to add fields to the bus class:
+        private string color;//Bus color
+        private float timeTravel;//Bus ride time
+        private string _timeLeft;//Time left for travel
+        private int _progress;//progress bar
+        int Workerlength;//Process length
+        /// <summary>
+        /// Using of BackgroundWorker
+        /// The class provides the option for a background process that is not the main process 
+        /// to make changes to the graphical interface safely.
+        /// </summary>
+        public BackgroundWorker worker = new BackgroundWorker();
+        private Stopwatch stopwatch = new Stopwatch();
+        /// <summary>
+        /// Variable type enum
+        /// The bus can be in one of the situations
+        ///  In case the bus is not in treatment/ refueled or if he is not Ready to go,it will receive the status 'Dangerous'
+        /// </summary>
         public enum Situation { Ready_to_go, In_the_middle_of_A_ride, refueling, In_treatment, Dangerous }
         public Bus(string _licensePlate, DateTime _dateActivity, DateTime _dateTreatment,
             float _kilometersTreatment, float _kilometersGas, float _totalkilometers)
@@ -45,8 +63,38 @@ namespace dotNet5781_01_3747_8971
         }
         public Bus() { }
         /// <summary>
+        /// Realization of the interface NotifyPropertyChanged
+        /// that we can see the product on to the graphical interface In a dynamic way
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string propertyName = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+        /// <summary>
         /// set and get functions for private fields
         /// </summary>
+        public string TimeLeft
+        {
+            get { return _timeLeft; }
+            set { _timeLeft = value; NotifyPropertyChanged("TimeLeft"); }
+        }
+        public int Progress
+        {
+            get { return _progress; }
+            set { _progress = value; NotifyPropertyChanged("Progress"); }
+        }
+        public int WorkerLength
+        {
+            get { return Workerlength; }
+        }
+        public string Color
+        {
+            get { return color; }
+            set { color = value; NotifyPropertyChanged("Color"); }
+
+        }
         public Situation STATUS
         {
             get { return status;  }
@@ -163,11 +211,20 @@ namespace dotNet5781_01_3747_8971
                 return true;
             return false;
         }
+        /// <summary>
+        /// Override of function ToString
+        /// Returns bus details
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return string.Format("License number: {0} , Date Activity: {1} ,Date Areatmet: {2} ,Kilometers since last treatment: {3} ,Kilometers since last refueling: {4} ,Total Kilometers: {5}",
                LICENSEPLATE, DATEACTIVITY.ToString("dd/MM/yyyy"), DATETREATMET.ToString("dd/MM/yyyy"), kILOMETERS_TREATMENT, KILOMETERSGAS, TOTALKILOMETERS);
         }
+        /// <summary>
+        /// A function for performing travel that updates the kilometers
+        /// </summary>
+        /// <param name="kilometers"></param>
         public void BusTravel(float kilometers)
         {
             KILOMETERSGAS += kilometers;
@@ -175,48 +232,30 @@ namespace dotNet5781_01_3747_8971
             Mileage(kilometers);
 
         }
+        /// <summary>
+        /// Refueling function
+        /// </summary>
         public void refueling()
         {
             KILOMETERSGAS = 0;
         }
+        /// <summary>
+        /// Treatment function
+        /// The function calls a Refueling function because every bus that goes to treatment also comes out refueled
+        /// </summary>
         public void Treatment()
         { 
             kILOMETERS_TREATMENT = 0;
             refueling();
             DATETREATMET = DateTime.Now;
         }
-        private string color;
-        public string Color
-        {
-            get { return color; }
-            set { color = value; NotifyPropertyChanged("Color"); }
-
-        }
-        private string _timeLeft;
-        public string TimeLeft
-        {
-            get { return _timeLeft; }
-            set { _timeLeft = value; NotifyPropertyChanged("TimeLeft"); }
-        }
-        private int _progress;
-        public int Progress
-        {
-            get { return _progress; }
-            set { _progress = value; NotifyPropertyChanged("Progress"); }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public BackgroundWorker worker = new BackgroundWorker();
-        Stopwatch stopwatch = new Stopwatch();
-        int Workerlength;
-        public int WorkerLength
-        {
-            get { return Workerlength; }
-        }
+        /// <summary>
+        /// function DoWork
+        /// Performs the procession
+        //  The function is sent to Worker_ProgressChanged function to update the process
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             
@@ -230,7 +269,7 @@ namespace dotNet5781_01_3747_8971
                     if (worker.CancellationPending == true)
                     {
                         e.Cancel = true;
-                        e.Result = stopwatch.ElapsedMilliseconds; // Unnecessary
+                        e.Result = stopwatch.ElapsedMilliseconds; 
                         break;
                     }
                     else
@@ -242,13 +281,25 @@ namespace dotNet5781_01_3747_8971
                 }
             }
         }
-     
+        /// <summary>
+        /// ProgressChanged function
+        /// Updates the remaining time and fills the   Progress bar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             Progress = e.ProgressPercentage;
             int timerText=(int)stopwatch.Elapsed.TotalSeconds;
             TimeLeft = ((WorkerLength - timerText).ToString() + " Seconds left");
         }
+        /// <summary>
+        /// RunWorkerCompleted function
+        /// Updating the status of the bus and color
+        /// Issues an appropriate notice to the user regarding the bus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled == true)
@@ -259,7 +310,7 @@ namespace dotNet5781_01_3747_8971
             }
             else if (e.Error != null)
             {
-                TimeLeft = "Error: " + e.Error.Message; //Exception Message
+                TimeLeft = "Error: " + e.Error.Message; 
                 System.Windows.MessageBox.Show($"Error", "bus process was Stop", MessageBoxButton.OK);
 
             }
@@ -267,28 +318,28 @@ namespace dotNet5781_01_3747_8971
             {
                 if (STATUS == Situation.refueling)
                 {
-                    System.Windows.MessageBox.Show($"{LICENSEPLATE}", "bus finished refueling", MessageBoxButton.OK);
+                    System.Windows.MessageBox.Show($"Bus {LICENSEPLATE}", "finished refueling", MessageBoxButton.OK);
                     this.refueling();
                 }
                 if (STATUS == Situation.In_the_middle_of_A_ride)
                 {
-                    System.Windows.MessageBox.Show($"{LICENSEPLATE}", "bus finished travel ", MessageBoxButton.OK);
+                    System.Windows.MessageBox.Show($" Bus {LICENSEPLATE}", "finished travel ", MessageBoxButton.OK);
                 }
                 if (STATUS == Situation.In_treatment)
                 {
-                    System.Windows.MessageBox.Show($"{LICENSEPLATE}", "bus finished the treatment ", MessageBoxButton.OK);
+                    System.Windows.MessageBox.Show($" Bus {LICENSEPLATE}", "finished the treatment ", MessageBoxButton.OK);
                     this.Treatment();
                 }
             }
             if (!FuelCondition() && !TreatmentIsNeeded())
             {
                 STATUS = (Situation)(0);
-                Color = "#FFA3F4B0";
+                Color = "#FFB3F6BE";
             }
             else
             {
                 STATUS = (Situation)4;
-                Color= "#FFBD5850";
+                Color= "#FFF49494";
             }
             Progress = 0;
             TimeLeft = "";

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03A_3747_8971"
-        Icon="C:\Users\naamo\Downloads\bus icon.jpg"
+        
         mc:Ignorable="d"
         Title="Bus lines system"  Height="640" Width="800" >
     <Window.Resources>
@@ -24,8 +24,8 @@
         <ListBox Name="lbBusLineStations"  HorizontalAlignment="Left" Height="542" VerticalAlignment="Top" Width="794" Grid.ColumnSpan="4" Grid.Row="1"  Background="LightGreen" Foreground="#FF490665" Margin="0,0,-0.4,0" OpacityMask="Black" ItemsSource="{Binding}" >
 
         </ListBox>
-        <Image Source="C:\Users\naamo\Downloads\bus.jpg.png" Margin="-63,400,140.8,-17.6" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Image Source="C:\Users\naamo\Downloads\bus-png-30689.png" Margin="198,439,198.2,0.4" Grid.Row="1" OpacityMask="Black" Grid.ColumnSpan="3"/>
+     
+        
         <ListBoxItem Foreground="#FF490665" Content="Thank you for using our line system" Margin="178.2,489,-0.4,10.4" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2"></ListBoxItem>
         <ListBoxItem Foreground="#FF490665" Content="Naama and Ella" Margin="89.8,506,9.6,10.4" Grid.Row="1" Grid.Column="3"/>
         <Button Height="23" Margin="121.2,5,0,0" Name="button1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="102" Click="button1_Click" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF490665" Background="#FFACD4A6">Add a station</Button>
