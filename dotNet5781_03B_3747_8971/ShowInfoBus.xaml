@@ -6,20 +6,20 @@
         xmlns:local="clr-namespace:dotNet5781_03B_3747_8971"
         mc:Ignorable="d"
         Title="ShowInfoBus" Height="450" Width="800">
-    <Grid>
-        <TextBlock x:Name="tbDate_Activiy" Text="{Binding Path=DATEACTIVITY}" HorizontalAlignment="Left" Margin="389,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="120"/>
-        <Label Content="Date Activiy" HorizontalAlignment="Left" Margin="29,30,0,0" VerticalAlignment="Top" Height="32" Width="134"/>
-        <TextBlock  x:Name="tbDate_Treatmet" Text="{Binding Path=DATETREATMET}" HorizontalAlignment="Left" Height="37" Margin="310,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Date Treatmet" HorizontalAlignment="Left" Margin="29,87,0,0" VerticalAlignment="Top" Height="37" Width="134"/>
-        <Label Content="Kilometers since last treatment" HorizontalAlignment="Left" Margin="29,144,0,0" VerticalAlignment="Top" Height="36" Width="185"/>
-        <TextBlock x:Name="tbKilometers_Treatmet" Text="{Binding Path=kILOMETERS_TREATMENT}" HorizontalAlignment="Left" Height="36" Margin="389,144,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <Label Content="Kilometers since last refueling" HorizontalAlignment="Left" Margin="29,201,0,0" VerticalAlignment="Top" Width="185" Height="31"/>
-        <TextBlock x:Name="tbKilometers_refueling" Text="{Binding Path= KILOMETERSGAS}" HorizontalAlignment="Left" Height="31" Margin="389,201,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <Label Content="Total Kilometers" HorizontalAlignment="Left" Margin="29,260,0,0" VerticalAlignment="Top" Height="32" Width="149"/>
-        <TextBlock  x:Name="tbTotal_Kilometers" HorizontalAlignment="Left" Height="32" Margin="310,260,0,0" TextWrapping="Wrap" Text="{Binding Path= TOTALKILOMETERS}" VerticalAlignment="Top" Width="120"/>
-        <TextBlock x:Name="tbstatus" HorizontalAlignment="Left" Height="36" Margin="310,319,0,0" TextWrapping="Wrap" Text="{Binding Path=STATUS}" VerticalAlignment="Top" Width="199"/>
-        <Button Name="TreatmentButton"  Content="Treatment" Click="Treatment_Click" HorizontalAlignment="Left" Margin="581,129,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Name="refuelButton" Click="refuel_Click" Content="refuel" HorizontalAlignment="Left" Margin="581,186,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="581,245,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+    <Grid Background="#FFE7F2F3">
+        <TextBlock x:Name="tbDate_Activiy" Text="{Binding Path=DATEACTIVITY}" HorizontalAlignment="Left" Margin="289,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="120" Background="#FFEEDBDB" TextAlignment="Center"/>
+        <Label Content="Date Activiy" HorizontalAlignment="Left" Margin="29,30,0,0" VerticalAlignment="Top" Height="32" Width="134" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold"/>
+        <TextBlock  x:Name="tbDate_Treatmet" Text="{Binding Path=DATETREATMET}" HorizontalAlignment="Left" Height="37" Margin="289,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FFEEDBDB" FontFamily="Sitka Text" TextAlignment="Center"/>
+        <Label Content="Date Treatmet" HorizontalAlignment="Left" Margin="29,87,0,0" VerticalAlignment="Top" Height="37" Width="134" FontFamily="SeSitka Textgoe UI" FontSize="11" FontWeight="Bold"/>
+        <Label Content="Kilometers since last treatment" HorizontalAlignment="Left" Margin="29,144,0,0" VerticalAlignment="Top" Height="36" Width="185" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold"/>
+        <TextBlock x:Name="tbKilometers_Treatmet" Text="{Binding Path=kILOMETERS_TREATMENT}" HorizontalAlignment="Left" Height="36" Margin="289,144,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Background="#FFEEDBDB" FontFamily="Sitka Text" TextAlignment="Center"/>
+        <Label Content="Kilometers since last refueling" HorizontalAlignment="Left" Margin="29,201,0,0" VerticalAlignment="Top" Width="185" Height="31" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold"/>
+        <TextBlock x:Name="tbKilometers_refueling" Text="{Binding Path= KILOMETERSGAS}" HorizontalAlignment="Left" Height="31" Margin="289,201,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Background="#FFEEDBDB" FontFamily="Sitka Text" TextAlignment="Center"/>
+        <Label Content="Total Kilometers" HorizontalAlignment="Left" Margin="29,260,0,0" VerticalAlignment="Top" Height="32" Width="149" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold"/>
+        <TextBlock  x:Name="tbTotal_Kilometers" HorizontalAlignment="Left" Height="32" Margin="289,260,0,0" TextWrapping="Wrap" Text="{Binding Path= TOTALKILOMETERS}" VerticalAlignment="Top" Width="120" Background="#FFEEDBDB" TextAlignment="Center" FontFamily="Sitka Text"/>
+        <TextBlock x:Name="tbstatus" HorizontalAlignment="Left" Height="36" Margin="29,318,0,0" TextWrapping="Wrap" Text="{Binding Path=STATUS}" VerticalAlignment="Top" Width="199"/>
+        <Button Name="TreatmentButton"  Content="Treatment" Click="Treatment_Click" HorizontalAlignment="Left" Margin="254,339,0,0" VerticalAlignment="Top" Width="109" Height="47" FontFamily="Sitka Text" FontStyle="Italic" Background="#FF97CDEA"/>
+        <Button Name="refuelButton" Click="refuel_Click" Content="refuel" HorizontalAlignment="Left" Margin="426,339,0,0" VerticalAlignment="Top" Width="109" Height="47" FontFamily="Sitka Text" FontStyle="Italic" Background="#FF97CDEA"/>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="606,339,0,0" VerticalAlignment="Top" Width="109" Click="Button_Click" Height="47" FontFamily="Sitka Text" FontStyle="Italic" Background="#FF97CDEA"/>
     </Grid>
 </Window>
