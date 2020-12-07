@@ -6,26 +6,52 @@
         xmlns:local="clr-namespace:dotNet5781_03B_3747_8971"
         mc:Ignorable="d"
         Title="Adding a bus" Height="550" Width="800">
-    <Grid Margin="10,10,0,-1" HorizontalAlignment="Left" Width="780" >
+    <Grid Margin="0,0,0,-1.2" HorizontalAlignment="Left" Width="790" Background="#FFE7F6F5" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="125*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="11*"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="tb_license_number" Height="40" HorizontalAlignment="Left" Margin="267,89,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
-        <Label Content="Enter license number" Height="36" HorizontalAlignment="Left" Margin="45,93,0,0"  VerticalAlignment="Top" Width="185" Background="AliceBlue"/>
-        <Label Content="Ender Date of ascent to the road" Height="40" HorizontalAlignment="Left" Margin="45,30,0,0"  VerticalAlignment="Top" Width="185" Background="AliceBlue"/>
-        <TextBox x:Name="tb_DateActivityBus" Height="40" HorizontalAlignment="Left" Margin="267,30,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
-        <TextBox x:Name="tb_Totalkilometers" Height="39" HorizontalAlignment="Left" Margin="267,153,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
-        <Label Content="Enter Total kilometers " Height="39" HorizontalAlignment="Left" Margin="45,153,0,0"  VerticalAlignment="Top" Width="185" Background="AliceBlue"/>
-        <Label Content="Ender Date of last Treatment " Height="40" HorizontalAlignment="Left" Margin="45,219,0,0"  VerticalAlignment="Top" Width="185" Background="AliceBlue"/>
-        <TextBox x:Name="tb_DateTreatment" Height="40" HorizontalAlignment="Left" Margin="267,219,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
-        <Label Content="Ender kilometers from last Treatment" Height="39" HorizontalAlignment="Left" Margin="45,286,0,0"  VerticalAlignment="Top" Width="208" Background="AliceBlue"/>
-        <TextBox x:Name="tb_kilometersTreatment" Height="39" HorizontalAlignment="Left" Margin="267,286,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="Beige" />
-        <Button Click="AddBus_Click" Name="buAddBus" Content="Add Bus" HorizontalAlignment="Left" Margin="592,443,0,0" VerticalAlignment="Top" Width="150" Height="42"/>
-        <Label Content="Ender kilometers form last refull" HorizontalAlignment="Left" Margin="45,345,0,0" VerticalAlignment="Top" Width="208" Background="AliceBlue"/>
-        <TextBox Name="tb_kilometersGas" HorizontalAlignment="Left" Height="27" Margin="267,345,0,0" TextWrapping="Wrap" Background="Beige" VerticalAlignment="Top" Width="160"/>
-        <Calendar x:Name="CalendarDateActivity"  MouseDoubleClick="calendarActivity_MouseDoubleClick" SelectionMode="MultipleRange" HorizontalAlignment="Left" Margin="522,49,0,0" VerticalAlignment="Top" Height="161" Width="178"/>
-        <Calendar x:Name="CalendarTreatment"  MouseDoubleClick="calendarTreatment_MouseDoubleClick" Background="AliceBlue" SelectionMode="MultipleRange" HorizontalAlignment="Left" Margin="511,265,0,0" VerticalAlignment="Top" Width="207" Height="168"/>
-        <TextBlock HorizontalAlignment="Left" Margin="538,10,0,0" TextWrapping="Wrap" Text="Select a date for Date Activity bus:" VerticalAlignment="Top" Width="146" Height="46"/>
-        <TextBlock HorizontalAlignment="Left" Margin="538,228,0,0" TextWrapping="Wrap" Text="Select a date for last Date Treatment bus:" VerticalAlignment="Top" Height="32" Width="146"/>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="445,453,0,0" VerticalAlignment="Top" Width="111" Height="32" Click="Button_Click"/>
+        <TextBox x:Name="tb_license_number" Height="39" HorizontalAlignment="Left" Margin="202.2,77.4,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="#FFEEDBDB" TextAlignment="Center" Grid.Column="1" Grid.Row="1" />
+        <Label Content="Enter license number" Height="39" HorizontalAlignment="Left" Margin="45,81.4,0,0"  VerticalAlignment="Top" Width="160" Background="#FFE7F6F5" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <Label Content="Ender Date of ascent to the road" Height="40" HorizontalAlignment="Left" Margin="45,18.4,0,0"  VerticalAlignment="Top" Width="160" Background="#FFE7F6F5" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <TextBox x:Name="tb_DateActivityBus" Height="39" HorizontalAlignment="Left" Margin="202.2,18.4,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="#FFEEDBDB" FontFamily="Sitka Text" TextAlignment="Center" Grid.Column="1" Grid.Row="1" />
+        <TextBox x:Name="tb_Totalkilometers" Height="39" HorizontalAlignment="Left" Margin="202.2,141.4,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="#FFEEDBDB" FontFamily="Sitka Text" TextAlignment="Center" Grid.Column="1" Grid.Row="1" />
+        <Label Content="Enter Total kilometers " Height="39" HorizontalAlignment="Left" Margin="45,141.4,0,0"  VerticalAlignment="Top" Width="160" Background="#FFE7F6F5" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <Label Content="Ender Date of last Treatment " Height="39" HorizontalAlignment="Left" Margin="45,207.4,0,0"  VerticalAlignment="Top" Width="160" Background="#FFE7F6F5" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <TextBox x:Name="tb_DateTreatment" Height="39" HorizontalAlignment="Left" Margin="202.2,207.4,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="#FFEEDBDB" TextAlignment="Center" Grid.Column="1" Grid.Row="1" />
+        <Label Content="Ender kilometers from last Treatment" Height="39" HorizontalAlignment="Left" Margin="45,274.4,0,0"  VerticalAlignment="Top" Width="160" Background="#FFE7F6F5" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <TextBox x:Name="tb_kilometersTreatment" Height="39" HorizontalAlignment="Left" Margin="202.2,274.4,0,0"  VerticalAlignment="Top" Width="160" Foreground="#FF490665" Background="#FFEEDBDB" FontFamily="Sitka Text" TextAlignment="Center" Grid.Column="1" Grid.Row="1" />
+        <Button Click="AddBus_Click" Name="buAddBus" Content="Add Bus" HorizontalAlignment="Left" Margin="344.2,447.4,0,0" VerticalAlignment="Top" Width="150" Height="42" Background="#FF7CA1E0" FontFamily="Sitka Text" FontStyle="Italic" Grid.Column="1" Grid.Row="1"/>
+        <Label Content="Ender kilometers form last refull" HorizontalAlignment="Left" Margin="45,333.4,0,0" VerticalAlignment="Top" Width="208" Background="#FFE7F6F5" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <TextBox Name="tb_kilometersGas" HorizontalAlignment="Left" Height="39" Margin="202.2,333.4,0,0" TextWrapping="Wrap" Background="#FFEEDBDB" VerticalAlignment="Top" Width="160" TextAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+        <Calendar x:Name="CalendarDateActivity"  MouseDoubleClick="calendarActivity_MouseDoubleClick" SelectionMode="MultipleRange" HorizontalAlignment="Left" Margin="423.2,28.4,0,0" VerticalAlignment="Top" Height="161" Width="178" Grid.Column="1" Grid.Row="1">
+            <Calendar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE4EAF0" Offset="0"/>
+                    <GradientStop Color="#FFECF0F4" Offset="0.16"/>
+                    <GradientStop Color="#FFFCFCFD" Offset="1"/>
+                    <GradientStop Color="#FFE7F6F5" Offset="0.424"/>
+                </LinearGradientBrush>
+            </Calendar.Background>
+        </Calendar>
+        <Calendar x:Name="CalendarTreatment"  MouseDoubleClick="calendarTreatment_MouseDoubleClick" SelectionMode="MultipleRange" HorizontalAlignment="Left" Margin="423.2,225.4,0,0" VerticalAlignment="Top" Height="161" Width="178" Grid.Column="1" Grid.Row="1">
+            <Calendar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE4EAF0" Offset="0"/>
+                    <GradientStop Color="#FFFCFCFD" Offset="1"/>
+                    <GradientStop Color="#FFECF0F4" Offset="0.219"/>
+                    <GradientStop Color="#FFE7F6F5" Offset="0.486"/>
+                </LinearGradientBrush>
+            </Calendar.Background>
+        </Calendar>
+        <TextBlock HorizontalAlignment="Left" Margin="423.2,5.4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" Height="34" FontWeight="Bold" Grid.Column="1" Grid.Row="1"><Run Text="Select a date for Date "/><Run FontSize="11" FontFamily="Sitka Text" Text="Activity "/><Run Text="bus:"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="423.2,207.4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="256" FontWeight="Bold" Grid.Column="1" Grid.Row="1"><Run Text="Select a date for "/><Run FontSize="11" FontFamily="Sitka Text" Text="last "/><Run Text="Date Treatment bus:"/></TextBlock>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="555.2,447.4,0,0" VerticalAlignment="Top" Width="150" Height="42" Click="Button_Click" Background="#FF7CA1E0" FontFamily="Sitka Text" FontStyle="Italic" Grid.Column="1" Grid.Row="1"/>
 
 
 
