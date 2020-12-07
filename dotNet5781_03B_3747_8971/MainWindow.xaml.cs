@@ -213,7 +213,7 @@ namespace dotNet5781_03B_3747_8971
                     currentDisplayBus.worker.RunWorkerAsync((int)currentDisplayBus.TimeTravel);
                 }
                 else
-                    throw new InvalidOperationException($"The bus cannot travel because he is { currentDisplayBus.STATUS}");
+                    throw new InvalidOperationException($"The process can not happen because he is { currentDisplayBus.STATUS}");
             }
             catch (InvalidOperationException message)
             {

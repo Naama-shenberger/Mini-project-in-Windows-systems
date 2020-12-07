@@ -81,7 +81,7 @@ namespace dotNet5781_03B_3747_8971
                     this.Close();
                 }
                 else
-                    throw new InvalidOperationException($"The bus cannot travel because he is { currentDisplayBus.STATUS}");
+                    throw new InvalidOperationException($"The process can not happen because he is { currentDisplayBus.STATUS}");
 
             }
             catch (InvalidOperationException message)
@@ -117,7 +117,7 @@ namespace dotNet5781_03B_3747_8971
                     currentDisplayBus.worker.RunWorkerAsync(144);
                 }
                 else
-                    throw new InvalidOperationException($"The bus cannot travel because he is {currentDisplayBus.STATUS}");
+                    throw new InvalidOperationException($"The process can not happen because he is { currentDisplayBus.STATUS}");
                 this.Close();
 
             }
