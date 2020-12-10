@@ -39,13 +39,48 @@ namespace dotNet5781_03B_3747_8971
         /// Using the ObservableCollection that we can see changes in runTime
         /// the ObservableCollection implementaion the interface INotifyPropertyChanged
         /// </summary>
-        private ObservableCollection<Bus> BusList = new ObservableCollection<Bus>();
+        private ObservableCollection<Bus> BusList = new ObservableCollection<Bus>();//Bus List 
+        /// <summary>
+        /// The List will have all bus drivers who have driven buses
+        /// </summary>
+        private ObservableCollection<BusDriver> BusDriverList = new ObservableCollection<BusDriver>();//Drivers list
+        private BusDriver currentDisplaybusDriver;
         private Bus currentDisplayBus;
         public MainWindow()
         {
             InitializeComponent();
             InitilizeBusList();
             lbBuses.ItemsSource = BusList;
+            
+        }
+        /// <summary>
+        /// A function that receives travel time and builds an Bus Driver object and returns the Bus Driver object
+        /// Object travel time is what we got in the function The other fields are Lotteries
+        /// there is a check whether the driver is male or female
+        /// </summary>
+        /// <param name="timeDrive"></param>
+        /// <returns></returns>
+        private BusDriver InitilizeBusDriver(float timeDrive)
+        {
+            TimeSpan dateTime = new TimeSpan(0,0, (int)timeDrive);
+            string[] gerndes = { "Male", "Female" };
+            string[] names = { "Naama", "Ella",  "Emma", "Tali", "mlia", "Rick", "Dan" ,"jim", "jeff", "Ron" };
+            string _name;
+            string gender;
+            int save = r.Next(0, 10);
+           if (save<= 4)
+           {
+              _name= names[save];
+                gender = gerndes[1];
+           }
+           else
+           {
+                _name = names[save];
+                gender = gerndes[0];
+           }  
+            string[] lastNames = { "Johnson", "Williams", "Jones", "Davis", "Brown", "Miller", "Wilson", "Afify", "Banasiewicz", "Shenberger" }; ;
+            BusDriver driver = new BusDriver(r.Next(1000000, 10000000).ToString(),_name , lastNames[r.Next(0, 10)], gender, dateTime,true);
+            return driver;
         }
         /// <summary>
         /// Add A Bus Click event
@@ -181,6 +216,7 @@ namespace dotNet5781_03B_3747_8971
         /// (Logically it is not possible to refuel during treatment
         /// And it is not possible to travel during treatment or refueling, etc.)
         /// The function checks that the bus is fit for travel if not  there will be a throw Exception
+        /// The function adds a driver who will ride the bus
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -208,17 +244,24 @@ namespace dotNet5781_03B_3747_8971
                         throw new InvalidOperationException("You did not enter details");
                     currentDisplayBus.Color = "#FFE8BDE7";
                     currentDisplayBus.STATUS = Situation.In_the_middle_of_A_ride;
-                  
+                    currentDisplayBus.Visibility = "Visible";
                     System.Windows.MessageBox.Show("bus starting to Travel", "Bus information Situation", MessageBoxButton.OK);
                     currentDisplayBus.worker.RunWorkerAsync((int)currentDisplayBus.TimeTravel);
+                    currentDisplaybusDriver = InitilizeBusDriver(currentDisplayBus.TimeTravel);
+                    BusDriverList.Add(currentDisplaybusDriver);
+                    
                 }
                 else
                     throw new InvalidOperationException($"The process can not happen because he is { currentDisplayBus.STATUS}");
+               
             }
             catch (InvalidOperationException message)
             {
                 System.Windows.MessageBox.Show($"{message.Message}", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
             }
+           
+            
+           
         }
         /// <summary>
         /// MouseDoubleClick event for item list
@@ -265,6 +308,7 @@ namespace dotNet5781_03B_3747_8971
         /// StopProcess Click event
         /// The event checks that indeed the selected object is in some process and it stops it
         /// if The bus is not in process A message will be sent to the user
+        /// time driveing will be 0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -272,11 +316,13 @@ namespace dotNet5781_03B_3747_8971
         {
 
             try {
-                System.Windows.Controls.Button button = sender as System.Windows.Controls.Button;
-                currentDisplayBus = (Bus)GetItem(button.DataContext.ToString());
+                var currentDisplayBus = ((sender as System.Windows.Controls.Button).DataContext as Bus);
                 if (currentDisplayBus.worker.WorkerSupportsCancellation == true && currentDisplayBus.worker.IsBusy == true)
-                    // Cancel the asynchronous operation.
+                // Cancel the asynchronous operation.
+                {
                     currentDisplayBus.worker.CancelAsync();
+                    currentDisplaybusDriver.TimeDriveing = new TimeSpan(0);
+                }
                 else
                     throw new InvalidOperationException();
 
@@ -288,7 +334,17 @@ namespace dotNet5781_03B_3747_8971
 
 
         }
-
+        /// <summary>
+        /// Event Click
+        /// the event opens a window with the list of drivers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DriversInAction_click(object sender, RoutedEventArgs e)
+        {
+            BusDriverWindow busDriver = new BusDriverWindow(BusDriverList);
+            busDriver.ShowDialog();
+        }
        
     }
 }

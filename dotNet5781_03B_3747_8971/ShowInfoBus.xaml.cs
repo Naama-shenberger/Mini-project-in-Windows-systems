@@ -77,6 +77,7 @@ namespace dotNet5781_03B_3747_8971
                     System.Windows.MessageBox.Show("bus starting to refuel", "Bus information Situation", MessageBoxButton.OK);
                     currentDisplayBus.STATUS = Situation.refueling;
                     currentDisplayBus.Color = "#FFF0E3C2";
+                    currentDisplayBus.Visibility = "Visible";
                     currentDisplayBus.worker.RunWorkerAsync(12);
                     this.Close();
                 }
@@ -114,6 +115,7 @@ namespace dotNet5781_03B_3747_8971
                     System.Windows.MessageBox.Show("bus starting treatment", "Bus information Situation", MessageBoxButton.OK);
                     currentDisplayBus.STATUS = Situation.In_treatment;
                     currentDisplayBus.Color = "#FF4E80C8";
+                    currentDisplayBus.Visibility = "Visible";
                     currentDisplayBus.worker.RunWorkerAsync(144);
                 }
                 else

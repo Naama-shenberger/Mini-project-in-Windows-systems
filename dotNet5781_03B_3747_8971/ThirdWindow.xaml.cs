@@ -26,6 +26,15 @@ namespace dotNet5781_03B_3747_8971
             InitializeComponent();
         }
         /// <summary>
+        /// A parameter that Saves the distance that user typed
+        /// Static so we can use it in bus class
+        /// </summary>
+        static string saveText;
+        public static string SaveText
+        {
+            get { return saveText; }
+        }
+        /// <summary>
         /// Create an object from a class Bus,That we can access the methods and public fields of the class 
         /// </summary>
         private Bus currentDisplayBus;
@@ -59,7 +68,7 @@ namespace dotNet5781_03B_3747_8971
                 return;
             //allow list of system keys
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.CapsLock || e.Key == Key.LeftShift
-                || e.Key == Key.Home || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right||e.Key==Key.Decimal)
+                || e.Key == Key.Home || e.Key == Key.End ||e.Key==Key.OemPeriod || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right||e.Key==Key.Decimal)
                 return;
             char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
             //allow control system keys
@@ -87,11 +96,10 @@ namespace dotNet5781_03B_3747_8971
                 try
                 {
                     currentDisplayBus = (Bus)TransferObjectBus;
-                    currentDisplayBus.BusTravel((float)Convert.ToDouble(tbDistanceDrive.Text));
+                     saveText = tbDistanceDrive.Text.ToString();
                     float Average_speed = Bus.r.Next(20, 51);
                     currentDisplayBus.TimeTravel = (float)Convert.ToDouble(tbDistanceDrive.Text) / Average_speed;
                     this.Close();
-
                 }
                 catch (NullReferenceException Null)
                 {

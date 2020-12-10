@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Globalization;
 using System.Windows.Media;
+using dotNet5781_03B_3747_8971;
 
 namespace dotNet5781_01_3747_8971
 {
@@ -38,6 +39,7 @@ namespace dotNet5781_01_3747_8971
         private string _timeLeft;//Time left for travel
         private int _progress;//progress bar
         int Workerlength;//Process length
+        string visibility = "Hidden";//Visibility of the ProgressBar and the Button "Stopprocess"
         /// <summary>
         /// Using of BackgroundWorker
         /// The class provides the option for a background process that is not the main process 
@@ -75,6 +77,11 @@ namespace dotNet5781_01_3747_8971
         /// <summary>
         /// set and get functions for private fields
         /// </summary>
+        public string Visibility
+        {
+            get { return visibility; }
+            set { visibility = value; NotifyPropertyChanged("Visibility"); }
+        }
         public string TimeLeft
         {
             get { return _timeLeft; }
@@ -230,7 +237,6 @@ namespace dotNet5781_01_3747_8971
             KILOMETERSGAS += kilometers;
             kILOMETERS_TREATMENT += kilometers;
             Mileage(kilometers);
-
         }
         /// <summary>
         /// Refueling function
@@ -304,7 +310,7 @@ namespace dotNet5781_01_3747_8971
         {
             if (e.Cancelled == true)
             {
-                // e.Result throw System.InvalidOperationException
+               
                 TimeLeft = "Canceled!";
                 System.Windows.MessageBox.Show($"Canceled!", "bus process was Stop", MessageBoxButton.OK);
             }
@@ -324,6 +330,7 @@ namespace dotNet5781_01_3747_8971
                 if (STATUS == Situation.In_the_middle_of_A_ride)
                 {
                     System.Windows.MessageBox.Show($" Bus {LICENSEPLATE}", "finished travel ", MessageBoxButton.OK);
+                    this.BusTravel((float)Convert.ToDouble(ThirdWindow.SaveText));
                 }
                 if (STATUS == Situation.In_treatment)
                 {
@@ -343,6 +350,8 @@ namespace dotNet5781_01_3747_8971
             }
             Progress = 0;
             TimeLeft = "";
+            Visibility = "Hidden";
+            
         }
 
         

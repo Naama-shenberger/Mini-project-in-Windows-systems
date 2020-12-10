@@ -128,9 +128,6 @@ namespace dotNet5781_03B_3747_8971
             this.Close();
         }
 
-        private void tb_DateActivityBus_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+        
     }
 }

@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03B_3747_8971"
+        Icon="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\dotNet5781_03B_3747_8971\iconShowinfoBus.png"
         mc:Ignorable="d"
-        Title="ShowInfoBus" Height="450" Width="800">
+        Title="information Bus" Height="450" Width="600">
     <Grid Background="#FFE7F2F3">
+        <Image Source="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\dotNet5781_03B_3747_8971\showinfoBuspic.png" Margin="459,83,-41.4,295" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.188"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
         <TextBlock x:Name="tbDate_Activiy" Text="{Binding Path=DATEACTIVITY}" HorizontalAlignment="Left" Margin="289,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="120" Background="#FFEEDBDB" TextAlignment="Center"/>
         <Label Content="Date Activiy" HorizontalAlignment="Left" Margin="29,30,0,0" VerticalAlignment="Top" Height="32" Width="134" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold"/>
         <TextBlock  x:Name="tbDate_Treatmet" Text="{Binding Path=DATETREATMET}" HorizontalAlignment="Left" Height="37" Margin="289,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FFEEDBDB" FontFamily="Sitka Text" TextAlignment="Center"/>
@@ -18,8 +29,9 @@
         <Label Content="Total Kilometers" HorizontalAlignment="Left" Margin="29,260,0,0" VerticalAlignment="Top" Height="32" Width="149" FontFamily="Sitka Text" FontSize="11" FontWeight="Bold"/>
         <TextBlock  x:Name="tbTotal_Kilometers" HorizontalAlignment="Left" Height="32" Margin="289,260,0,0" TextWrapping="Wrap" Text="{Binding Path= TOTALKILOMETERS}" VerticalAlignment="Top" Width="120" Background="#FFEEDBDB" TextAlignment="Center" FontFamily="Sitka Text"/>
         <TextBlock x:Name="tbstatus" HorizontalAlignment="Left" Height="36" Margin="29,318,0,0" TextWrapping="Wrap" Text="{Binding Path=STATUS}" VerticalAlignment="Top" Width="199"/>
-        <Button Name="TreatmentButton"  Content="Treatment" Click="Treatment_Click" HorizontalAlignment="Left" Margin="254,339,0,0" VerticalAlignment="Top" Width="109" Height="47" FontFamily="Sitka Text" FontStyle="Italic" Background="#FF97CDEA"/>
-        <Button Name="refuelButton" Click="refuel_Click" Content="refuel" HorizontalAlignment="Left" Margin="426,339,0,0" VerticalAlignment="Top" Width="109" Height="47" FontFamily="Sitka Text" FontStyle="Italic" Background="#FF97CDEA"/>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="606,339,0,0" VerticalAlignment="Top" Width="109" Click="Button_Click" Height="47" FontFamily="Sitka Text" FontStyle="Italic" Background="#FF97CDEA"/>
+        <Button Name="TreatmentButton" IsEnabled="{Binding Isenabled}"  Content="Treatment" Click="Treatment_Click" HorizontalAlignment="Left" Margin="69,339,0,0" VerticalAlignment="Top" Width="109" Height="47" FontFamily="Sitka Text" FontStyle="Italic" Background="#FF97CDEA"/>
+        <Button Name="refuelButton" IsEnabled="{Binding Isenabled}" Click="refuel_Click" Content="refuel" HorizontalAlignment="Left" Margin="266,339,0,0" VerticalAlignment="Top" Width="109" Height="47" FontFamily="Sitka Text" FontStyle="Italic" Background="#FF97CDEA"/>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="451,339,0,0" VerticalAlignment="Top" Width="109" Click="Button_Click" Height="47" FontFamily="Sitka Text" FontStyle="Italic" Background="#FF97CDEA"/>
+        <Label Content="Your  Bus information" HorizontalAlignment="Left" Margin="433,44,0,0" VerticalAlignment="Top" Height="35" Width="151"/>
     </Grid>
 </Window>

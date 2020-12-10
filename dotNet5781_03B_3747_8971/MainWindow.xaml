@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_01_3747_8971"
         mc:Ignorable="d"
+        Icon="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\dotNet5781_03B_3747_8971\MainiconBus.png"
         Title="Bus system" Height="450" Width="800">
     <Window.Resources>
         <local:Bus x:Key="ConverterEnumToBrushes"/>
     </Window.Resources>
-
     <Grid Name="MainGrid">
 
         <Grid Name ="UpGrid" Background="#FFD7F0EB" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto" Margin="0,0,-0.4,0" >
@@ -17,29 +17,33 @@
                 <ColumnDefinition Width="213*"/>
                 <ColumnDefinition Width="179*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="buAddABus" Content="Add a Bus" HorizontalAlignment="Left" Margin="200.8,28,0,0" VerticalAlignment="Top" Width="134" Height="38" Click="AddABus_Click" Grid.Column="1" FontFamily="Sitka Text" Background="#FFE0CCE2"/>
-            <ListBox x:Name="lbBuses" x:FieldModifier="public"   SelectedItem="{Binding SelectedItem}"   ItemsSource="{Binding BusList}" HorizontalAlignment="Left" Height="282" VerticalAlignment="Top" Width="613" SelectionChanged="lbBuses_SelectionChanged" Background="White" Grid.ColumnSpan="2" Margin="19,28,0,0" >
+            <Button Name="buAddABus" Content="Add a Bus" HorizontalAlignment="Left" Margin="209.8,28,0,0" VerticalAlignment="Top" Width="134" Height="32" Click="AddABus_Click" Grid.Column="1" FontFamily="Sitka Text" Background="#FFE0CCE2"/>
+            <ListView x:Name="lbBuses" x:FieldModifier="public"   SelectedItem="{Binding SelectedItem}"   ItemsSource="{Binding BusList}" HorizontalAlignment="Left" Height="282" VerticalAlignment="Top" Width="613" SelectionChanged="lbBuses_SelectionChanged" Background="White" Grid.ColumnSpan="2" Margin="19,28,0,0" >
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                         <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
                         <Setter Property="Background" Value="{Binding Color}"/>
                     </Style>
-
                 </ListBox.ItemContainerStyle >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <TextBlock Name="resultLabel" FontFamily="Sitka Text" Grid.Column="20" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="420,7,0,0" Width="134" Text="{Binding TimeLeft}" />
-                            <ProgressBar Name="resultProgressBar" Height="10" Grid.Column="20" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="430,6,0,-17" Width="134"  Minimum="0" Maximum="100" Value="{Binding Progress}" Tag="{Binding _name}" />
+                            <ProgressBar Name="resultProgressBar" Visibility="{Binding Visibility}" Height="10" Grid.Column="20" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="430,6,0,-17" Width="134"  Minimum="0" Maximum="100" Value="{Binding Progress}" Tag="{Binding _name}" />
                             <TextBlock x:Name="tbLicenseplate" Text="{Binding Path=LICENSEPLATE}" />
-                            <Button Name="TravelButton" FontFamily="Sitka Text" Background="#FFD7F0EB" DataContext="{Binding Path=LICENSEPLATE}"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="Travel_Click" Margin="200,-15,0,0" Width="80"  CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}">Make a trip</Button>
-                            <Button Name="refuelButton" FontFamily="Sitka Text" Background="#FFD7F0EB" DataContext="{Binding Path=LICENSEPLATE}"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="Refuel_Click" Margin="20,-20,0,0" Width="80"  CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}">refuel</Button>
-                            <Button x:Name="Stopprocess" FontFamily="Sitka Text" Background="#FFD7F0EB" VerticalAlignment="Top"  DataContext="{Binding Path=LICENSEPLATE}" Content="Stop process" HorizontalAlignment="Center" Click="StopProcess_Click" Margin="420,1,0,0" Width="80" CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}"/>
-
+                            <Button Name="TravelButton"  FontFamily="Sitka Text" Background="#FFD7F0EB" DataContext="{Binding Path=LICENSEPLATE}"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="Travel_Click" Margin="200,-15,0,0" Width="80"  CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}">Make a trip</Button>
+                            <Button Name="refuelButton"  FontFamily="Sitka Text" Background="#FFD7F0EB" DataContext="{Binding Path=LICENSEPLATE}"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="Refuel_Click" Margin="20,-20,0,0" Width="80"  CommandParameter="{Binding Path=tbLicenseplate}" Command="{Binding Path=tbLicenseplate,ElementName=lbBuses}">refuel</Button>
+                            <Button x:Name="Stopprocess"   Visibility="{Binding Visibility}" FontFamily="Sitka Text" Background="#FFD7F0EB" VerticalAlignment="Top"  Content="Stop process" HorizontalAlignment="Center" Click="StopProcess_Click" Margin="420,1,0,0" Width="80"  />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="License number"  Width="120" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="304.8,352,0,0" TextWrapping="Wrap" Background="#FFF49494" VerticalAlignment="Top" Height="50" Width="30"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="286.8,315,0,0" TextWrapping="Wrap" Text=" Dangerous " VerticalAlignment="Top" Width="65" Height="22" FontFamily="Sitka Text"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="245.8,352,0,0" TextWrapping="Wrap" Background="#FFB3F6BE" VerticalAlignment="Top" Height="50" Width="36"/>
@@ -50,7 +54,7 @@
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="95.8,315,0,0" TextWrapping="Wrap" Text="In treatment" VerticalAlignment="Top" Height="19" FontFamily="Sitka Text"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="40.8,352,0,0" TextWrapping="Wrap" Background="#FFE8BDE7" VerticalAlignment="Top" Height="50" Width="40"/>
             <TextBlock HorizontalAlignment="Left" Margin="431,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="88" FontFamily="Sitka Text" Grid.ColumnSpan="2"><Run Text=" "/><Run FlowDirection="RightToLeft" Text="  "/><Run Text="In the middle"/><LineBreak/><Span FlowDirection="RightToLeft"><Run Text=" "/><Run Text="  "/><Run Text="    "/></Span><Run Text=" of A ride"/></TextBlock>
-            <Image Source="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\dotNet5781_03B_3747_8971\BusPic.jpg" Margin="0,327,314.2,18">
+            <Image Source="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\dotNet5781_03B_3747_8971\bus (1).png" Margin="19,327,295.2,18">
                 <Image.OpacityMask>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>
@@ -58,6 +62,7 @@
                     </LinearGradientBrush>
                 </Image.OpacityMask>
             </Image>
+            <Button Content="Drivers" Click="DriversInAction_click" Grid.Column="1" HorizontalAlignment="Left" Margin="209.8,80,0,0" VerticalAlignment="Top" Width="134" Height="34" FontFamily="Sitka Text" Background="#FFE0CCE2"/>
         </Grid>
     </Grid>
 </Window>
