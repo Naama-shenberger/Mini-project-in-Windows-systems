@@ -24,7 +24,7 @@ namespace DO
             frequencyOfExit = _frequencyOfExit;
             active = _active;
         }
-        private string identificationNumber;//Identification number
+        private static string identificationNumber;//Identification number
         private TimeSpan travelStartTime;//Travel start time of the bus 
         private TimeSpan travelEndTime;//Travel end time
         static int frequencyOfExit;//Frequency of exit for the line 

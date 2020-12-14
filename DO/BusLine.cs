@@ -33,7 +33,7 @@ namespace DO
         /// default constructor
         /// </summary>
         public BusLine() { }
-        private string identificationNumber;//Identification number
+        private static string identificationNumber;//Identification number
         private int busLineNumber;//Bus line number 
         private string firstStopNumber;//First stop number
         private string lastStopNumber;//Last stop number

@@ -22,7 +22,7 @@ namespace DO
             numberStationInLine = _numberStationInLine;
             active = _active;
         }
-        private string identificationNumber;//Identification number
+        private static string identificationNumber;//Identification number
         private string codeStation;// bus station code
         private int numberStationInLine;//The station number on the line
         private bool active;//A field that brings me the status of a bus line whether it is active or not
