@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DO
+{
+    /// <summary>
+    /// A class that has information on consecutive stations
+    /// </summary>
+    public class ConsecutiveStations
+    {
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="_stationCodeOne"></param>
+        /// <param name="_stationCodeTwo"></param>
+        /// <param name="_distance"></param>
+        /// <param name="_averageTravelTime"></param>
+        /// <param name="_flage"></param>
+        ConsecutiveStations(string _stationCodeOne,string _stationCodeTwo,float _distance,float _averageTravelTime,bool _flage)
+        {
+            stationCodeOne = _stationCodeOne;
+            stationCodeTwo = _stationCodeTwo;
+            distance = _distance;
+            averageTravelTime = _averageTravelTime;
+        }
+        private string stationCodeOne;//Code station one
+        private string stationCodeTwo;//Code station Two
+        private float distance;//Distance between stations
+        private float averageTravelTime;//Average travel time between stations
+        private bool flage;//for Deletion
+        /// <summary>
+        /// sets and gets Functions
+        /// </summary>
+        public bool Flage
+        {
+            set { flage = value; }
+            get { return flage; }
+        }
+        public string StationCodeOne
+        {
+            get { return stationCodeOne; }
+            set { stationCodeOne = value; }
+        }
+        public string StationCodeTwo
+        {
+            get { return stationCodeTwo; }
+            set { stationCodeTwo = value; }
+        }
+        public float Distance
+        {
+            get { return distance; }
+            set { distance = value; }
+        }
+        public float AverageTravelTime
+        {
+            get { return averageTravelTime; }
+            set { averageTravelTime = value; }
+        }
+    }
+}
