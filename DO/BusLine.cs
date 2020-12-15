@@ -11,28 +11,6 @@ namespace DO
         /// enum of Zones\\????
         /// </summary>
         public enum Zones { Itamar,Zeev_hill, Alon_Shvut, Gush_Dan, Gush_Etzion, Galilee, Jerusalem_Corridor, Beer_Sheva, General, Zefat,Ramat_Gan }//?
-        /// <summary>
-        /// constructor
-        /// </summary>
-        /// <param name="_identificationNumber"></param>
-        /// <param name="_busLineNumber"></param>
-        /// <param name="_firstStopNumber"></param>
-        /// <param name="_lastStopNumber"></param>
-        /// <param name="_area"></param>
-        /// <param name="_active"></param>
-        public BusLine(string _identificationNumber,int _busLineNumber,string _firstStopNumber,string _lastStopNumber,int _area,bool _active)
-        {
-            identificationNumber = _identificationNumber;
-            busLineNumber = _busLineNumber;
-            firstStopNumber = _firstStopNumber;
-            lastStopNumber = _lastStopNumber;
-            area = _area;
-            active = _active;
-        }
-        /// <summary>
-        /// default constructor
-        /// </summary>
-        public BusLine() { }
         private static string identificationNumber;//Identification number
         private int busLineNumber;//Bus line number 
         private string firstStopNumber;//First stop number

@@ -8,22 +8,7 @@ namespace DO
     /// </summary>
     public class LineWayOut
     {
-        /// <summary>
-        /// constructor
-        /// </summary>
-        /// <param name="_identificationNumber"></param>
-        /// <param name="_TravelStartTime"></param>
-        /// <param name="_TravelEndTime"></param>
-        /// <param name="_frequencyOfExit"></param>
-        /// <param name="_active"></param>
-        public LineWayOut(string _identificationNumber, TimeSpan _TravelStartTime, TimeSpan _TravelEndTime,int _frequencyOfExit,bool _active) 
-        {
-            identificationNumber =_identificationNumber;
-            travelStartTime = _TravelStartTime;
-            travelEndTime = _TravelEndTime;
-            frequencyOfExit = _frequencyOfExit;
-            active = _active;
-        }
+       
         private static string identificationNumber;//Identification number
         private TimeSpan travelStartTime;//Travel start time of the bus 
         private TimeSpan travelEndTime;//Travel end time

@@ -9,21 +9,6 @@ namespace DO
     /// </summary>
     public class ConsecutiveStations
     {
-        /// <summary>
-        /// constructor
-        /// </summary>
-        /// <param name="_stationCodeOne"></param>
-        /// <param name="_stationCodeTwo"></param>
-        /// <param name="_distance"></param>
-        /// <param name="_averageTravelTime"></param>
-        /// <param name="_flage"></param>
-        ConsecutiveStations(string _stationCodeOne,string _stationCodeTwo,float _distance,float _averageTravelTime,bool _flage)
-        {
-            stationCodeOne = _stationCodeOne;
-            stationCodeTwo = _stationCodeTwo;
-            distance = _distance;
-            averageTravelTime = _averageTravelTime;
-        }
         private string stationCodeOne;//Code station one
         private string stationCodeTwo;//Code station Two
         private float distance;//Distance between stations

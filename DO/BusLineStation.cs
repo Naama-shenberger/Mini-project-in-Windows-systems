@@ -8,20 +8,6 @@ namespace DO
     /// </summary>
     public class BusLineStation
     {
-        /// <summary>
-        /// constructor
-        /// </summary>
-        /// <param name="_identificationNumber"></param>
-        /// <param name="_codeStation"></param>
-        /// <param name="_numberStationInLine"></param>
-        /// <param name="_active"></param>
-        public BusLineStation(string _identificationNumber,string _codeStation,int _numberStationInLine,bool _active)
-        {
-            identificationNumber = _identificationNumber;
-            codeStation = _codeStation;
-            numberStationInLine = _numberStationInLine;
-            active = _active;
-        }
         private static string identificationNumber;//Identification number
         private string codeStation;// bus station code
         private int numberStationInLine;//The station number on the line
