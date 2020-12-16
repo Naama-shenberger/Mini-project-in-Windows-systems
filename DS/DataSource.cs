@@ -41,6 +41,10 @@ namespace DS
             };
             BusLineStations = new List<BusLineStation>
             {
+                new BusLineStation{Active=true,CodeStation="1758493",NumberStationInLine=1},
+                new BusLineStation{Active=true,CodeStation="1758493",NumberStationInLine=2},
+                new BusLineStation{Active=true,CodeStation="1758493",NumberStationInLine=3},
+                new BusLineStation{Active=true,CodeStation="989890",NumberStationInLine=4},
 
             };
 
@@ -49,17 +53,7 @@ namespace DS
            
 
         }
-        /// <summary>
-        /// initialization function fo bus line Consecutive Stations
-        /// </summary>
-        public void AddConsecutiveStations()
-        {
-            for (int i = 0; i < 20; i++)
-            {
-                ConsecutiveStations newConsecutiveStations = new ConsecutiveStations();
-                ListConsecutiveStations.Add(newConsecutiveStations);
-            }
-        }
+       
     }
    
   
