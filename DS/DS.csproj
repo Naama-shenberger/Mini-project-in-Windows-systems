@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DO\DO.csproj" />
+    <ProjectReference Include="..\DLAPI\DLAPI.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DALApi;
+using DalApi;
 using DO;
 using DS;
 
-namespace DAL
+namespace DL
 {
     internal sealed class DalObject : IDal
     {
@@ -39,13 +39,11 @@ namespace DAL
         /// <returns></returns>
         public BusLine getBusLine(int id)
         {
-            foreach(BusLine item in DataSource.BusLines)
-            {
-                if (item.IdentificationNumber == id.ToString())
-                    return item;
-            }
-            throw new ArgumentException("The bus line does not exist");
-           
+            if (BusLine.IdentificationNumber >= id)
+                for (int i = 0; i < DataSource.BusLines.Count; i++)
+                    if (i == id && DataSource.BusLines[i].Active == true)
+                        return DataSource.BusLines[i];
+            throw new ArgumentException("The bus line does not exist or he is not Active");
         }
         /// <summary>
         /// A function that returns a list of bus lines that are active
@@ -58,24 +56,32 @@ namespace DAL
                 foreach (BusLine item in DataSource.BusLines)
                     if (item.Active == true)
                         temp.Add(item);
-                if (temp != null)
-                   return temp;
+            if (temp != null)
+                return temp;
             throw new NullReferenceException("There is no Bus lines");
         }
         /// <summary>
         /// A function that receives an bus line object and adds it to the list 
+        /// There is a comparison between unique parameters of the bus to see if the bus line exists
+        /// If the bus has the same line number and the first code stop and last stop code it is the same line,
+        /// because if it was the Reverse  line the stop codes would be reversed
         /// In case the bus is inactive we will make it active
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="b"></param>
         public void addBusLine(BusLine b)
         {
-            foreach (BusLine item in DataSource.BusLines)
-                if (item.IdentificationNumber == b.IdentificationNumber)
-                    if (item.Active == false)
-                        item.Active = true;
+            for (int i = 0; i < DataSource.BusLines.Count; i++)
+                if (DataSource.BusLines[i].FirstStopNumber == b.FirstStopNumber && DataSource.BusLines[i].LastStopNumber == b.LastStopNumber && DataSource.BusLines[i].BusLineNumber == b.BusLineNumber)
+                    if (DataSource.BusLines[i].Active == false)
+                    {
+                        DataSource.BusLines[i].Active = true;
+                        return;
+                    }
                     else
                         throw new ArgumentException("The bus line already exist");
+
+            BusLine.IdentificationNumber += 1;
             DataSource.BusLines.Add(b);
         }
         /// <summary>
@@ -84,9 +90,9 @@ namespace DAL
         /// <param name="b"></param>
         public void updateBusLine(BusLine b)
         {
-            for (int i=0;i<DataSource.BusLines.Count;i++)
+            for (int i = 0; i < DataSource.BusLines.Count; i++)
             {
-                if (DataSource.BusLines[i].IdentificationNumber == b.IdentificationNumber)
+                if (DataSource.BusLines[i].FirstStopNumber == b.FirstStopNumber && DataSource.BusLines[i].LastStopNumber == b.LastStopNumber && DataSource.BusLines[i].BusLineNumber == b.BusLineNumber)
                     DataSource.BusLines[i] = b;
             }
             throw new ArgumentException("The bus line does not exist");
@@ -99,13 +105,17 @@ namespace DAL
         /// <param name="b"></param>
         public void deleteBusLine(BusLine b)
         {
-            foreach (BusLine item in DataSource.BusLines)
+            for (int i = 0; i < DataSource.BusLines.Count; i++)
             {
-                if (item.IdentificationNumber == b.IdentificationNumber)
-                    if (item.Active == true)
-                        item.Active = false;
+                if (DataSource.BusLines[i].FirstStopNumber == b.FirstStopNumber && DataSource.BusLines[i].LastStopNumber == b.LastStopNumber && DataSource.BusLines[i].BusLineNumber == b.BusLineNumber)
+                    if (DataSource.BusLines[i].Active == true)
+                    {
+                        DataSource.BusLines[i].Active = false;
+                        BusLine.IdentificationNumber -= 1;
+                        return;
+                    }
                     else
-                        throw new ArithmeticException("The bus is already not active");
+                        throw new ArithmeticException("The bus is already not deleted");
             }
             throw new ArgumentException("The bus line does not exist");
         }
@@ -118,11 +128,11 @@ namespace DAL
         /// <returns></returns>
         public BusLineStation getBusLineStation(int id)
         {
-            foreach (BusLineStation item in DataSource.BusLineStations)
-            {
-                if (item.IdentificationNumber == id.ToString())
-                    return item;
-            }
+
+            if (BusLineStation.IdentificationNumber >= id)
+                for (int i = 0; i < DataSource.BusLineStations.Count; i++)
+                    if (i == id && DataSource.BusLineStations[i].Active == true)
+                        return DataSource.BusLineStations[i];
             throw new ArgumentException("The bus line station does not exist");
 
         }
@@ -137,7 +147,7 @@ namespace DAL
                 foreach (BusLineStation item in DataSource.BusLineStations)
                     if (item.Active == true)
                         temp.Add(item);
-                if (temp != null)
+            if (temp != null)
                 return temp;
             throw new NullReferenceException("There is no Bus lines");
         }
@@ -149,12 +159,17 @@ namespace DAL
         /// <param name="s"></param>
         public void addBusLineStation(BusLineStation s)
         {
-            foreach (BusLineStation item in DataSource.BusLineStations)
-                if (item.IdentificationNumber == s.IdentificationNumber)
-                    if (item.Active == false)
-                        item.Active = true;
+            for (int i = 0; i < DataSource.BusLineStations.Count; i++)
+                if (DataSource.BusLineStations[i].CodeStation == s.CodeStation)
+                    if (DataSource.BusLineStations[i].Active == false)
+                    {
+                        DataSource.BusLineStations[i].Active = true;
+                        return;
+                    }
                     else
                         throw new ArgumentException("The bus line already exist");
+
+            BusLineStation.IdentificationNumber += 1;
             DataSource.BusLineStations.Add(s);
         }
         /// <summary>
@@ -165,8 +180,11 @@ namespace DAL
         {
             for (int i = 0; i < DataSource.BusLineStations.Count; i++)
             {
-                if (DataSource.BusLineStations[i].IdentificationNumber == s.IdentificationNumber)
+                if (DataSource.BusLineStations[i].CodeStation == s.CodeStation)
+                {
                     DataSource.BusLineStations[i] = s;
+                    return;
+                }
             }
             throw new ArgumentException("The bus line does not exist");
         }
@@ -178,11 +196,15 @@ namespace DAL
         /// <param name="s"></param>
         public void deleteBusLineStation(BusLineStation s)
         {
-            foreach (BusLineStation item in DataSource.BusLineStations)
+            for (int i = 0; i < DataSource.BusLineStations.Count; i++)
             {
-                if (item.IdentificationNumber == s.IdentificationNumber)
-                    if (item.Active == true)
-                        item.Active = false;
+                if (DataSource.BusLineStations[i].CodeStation == s.CodeStation)
+                    if (DataSource.BusLineStations[i].Active == true)
+                    {
+                        DataSource.BusLineStations[i].Active = false;
+                        BusLineStation.IdentificationNumber -= 1;
+                        return;
+                    }
                     else
                         throw new ArithmeticException("The bus is already not active");
             }
@@ -195,28 +217,27 @@ namespace DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public LineWayOut getLineWayOut(int id)
+        public LineOutForARide getLineWayOut(int id)
         {
-            foreach (LineWayOut item in DataSource.LinesWayOut)
-            {
-                if (item.IdentificationNumber == id.ToString())
-                    return item;
-            }
+            if (LineOutForARide.IdentificationNumber >= id)
+                for (int i = 0; i < DataSource.LinesOutForARide.Count; i++)
+                    if (i == id && DataSource.LinesOutForARide[i].Active == true)
+                        return DataSource.LinesOutForARide[i];
             throw new ArgumentException("The  line does not exist");
         }
         /// <summary>
         /// A function that returns a list of bus line  on their way out to a ride that are active
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<LineWayOut> LinesWayOut()
+        public IEnumerable<LineOutForARide> LinesWayOut()
         {
-            List<LineWayOut> temp = new List<LineWayOut>();
-            if (DataSource.LinesWayOut != null)
-                foreach (LineWayOut item in DataSource.LinesWayOut)
+            List<LineOutForARide> temp = new List<LineOutForARide>();
+            if (DataSource.LinesOutForARide != null)
+                foreach (LineOutForARide item in DataSource.LinesOutForARide)
                     if (item.Active == true)
                         temp.Add(item);
-                if (temp != null)
-                     return temp;
+            if (temp != null)
+                return temp;
             throw new NullReferenceException("There is no Bus lines");
         }
         /// <summary>
@@ -225,26 +246,33 @@ namespace DAL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="o"></param>
-        public void addLineWayOut(LineWayOut o)
+        public void addLineWayOut(LineOutForARide o)
         {
-            foreach (LineWayOut item in DataSource.LinesWayOut)
-                if (item.IdentificationNumber == o.IdentificationNumber)
-                    if (item.Active == false)
-                        item.Active = true;
+            for (int i = 0; i < DataSource.LinesOutForARide.Count; i++)
+                if (DataSource.LinesOutForARide[i].BusDepartureNumber == o.BusDepartureNumber)
+                    if (DataSource.LinesOutForARide[i].Active == false)
+                    {
+                        DataSource.LinesOutForARide[i].Active = true;
+                        return;
+                    }
                     else
                         throw new ArgumentException("The line already exist");
-            DataSource.LinesWayOut.Add(o);
+            LineOutForARide.IdentificationNumber += 1;
+            DataSource.LinesOutForARide.Add(o);
         }
         /// <summary>
         /// A function that receives a bus line on his way out and updates its details
         /// </summary>
         /// <param name="o"></param>
-        public void updateLineWayOut(LineWayOut o)
+        public void updateLineWayOut(LineOutForARide o)
         {
-            for (int i = 0; i < DataSource.LinesWayOut.Count; i++)
+            for (int i = 0; i < DataSource.LinesOutForARide.Count; i++)
             {
-                if (DataSource.LinesWayOut[i].IdentificationNumber == o.IdentificationNumber)
-                    DataSource.LinesWayOut[i] = o;
+                if (DataSource.LinesOutForARide[i].BusDepartureNumber == o.BusDepartureNumber)
+                {
+                    DataSource.LinesOutForARide[i] = o;
+                    return;
+                }
             }
             throw new ArgumentException("The  line does not exist");
         }
@@ -254,13 +282,17 @@ namespace DAL
         /// In case that the bus is already not active we will throw a message
         /// </summary>
         /// <param name="o"></param>
-        public void deleteLineWayOut(LineWayOut o)
+        public void deleteLineWayOut(LineOutForARide o)
         {
-            foreach (LineWayOut item in DataSource.LinesWayOut)
+            for (int i = 0; i < DataSource.LinesOutForARide.Count; i++)
             {
-                if (item.IdentificationNumber == o.IdentificationNumber)
-                    if (item.Active == true)
-                        item.Active = false;
+                if (DataSource.LinesOutForARide[i].BusDepartureNumber == o.BusDepartureNumber)
+                    if (DataSource.LinesOutForARide[i].Active == true)
+                    {
+                        LineOutForARide.IdentificationNumber -= 1;
+                        DataSource.LinesOutForARide[i].Active = false;
+                        return;
+                    }
                     else
                         throw new ArithmeticException("The line is already not active");
             }
@@ -272,7 +304,7 @@ namespace DAL
         /// </summary>
         /// <param name="o"></param>
         /// <returns></returns>
-        public TimeSpan TravelTime(LineWayOut o)
+        public TimeSpan TravelTime(LineOutForARide o)
         {
             return o.TravelStartTime - o.TravelEndTime;
         }
@@ -283,7 +315,7 @@ namespace DAL
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public ConsecutiveStations getConsecutiveStations(string id1,string id2)
+        public ConsecutiveStations getConsecutiveStations(string id1, string id2)
         {
             foreach (ConsecutiveStations item in DataSource.ListConsecutiveStations)
                 if (item.StationCodeOne == id1 && item.StationCodeTwo == id2)
@@ -297,12 +329,12 @@ namespace DAL
         public IEnumerable<ConsecutiveStations> ConsecutivesStations()
         {
             List<ConsecutiveStations> temp = new List<ConsecutiveStations>();
-               if(DataSource.ListConsecutiveStations != null)
-                 foreach (ConsecutiveStations item in DataSource.ListConsecutiveStations)
+            if (DataSource.ListConsecutiveStations != null)
+                foreach (ConsecutiveStations item in DataSource.ListConsecutiveStations)
                     if (item.Flage == true)
                         temp.Add(item);
-                 if(temp!=null)
-                  return temp;
+            if (temp != null)
+                return temp;
             throw new NullReferenceException("There is Consecutives Stations");
         }
         /// <summary>
@@ -315,7 +347,10 @@ namespace DAL
             foreach (ConsecutiveStations item in DataSource.ListConsecutiveStations)
                 if (item == c)
                     if (item.Flage == false)
+                    {
                         item.Flage = true;
+                        return;
+                    }
                     else
                         throw new ArgumentException("The Consecutives Stations already exist");
             DataSource.ListConsecutiveStations.Add(c);
@@ -343,15 +378,18 @@ namespace DAL
         {
             foreach (ConsecutiveStations item in DataSource.ListConsecutiveStations)
             {
-                if (item== c)
+                if (item == c)
                     if (item.Flage == true)
+                    {
                         item.Flage = false;
+                        return;
+                    }
                     else
                         throw new ArithmeticException("The Consecutive Stationsis already not active");
             }
             throw new ArgumentException("The Consecutive Stations does not exist");
         }
-        #endregion
 
     }
+    #endregion
 }

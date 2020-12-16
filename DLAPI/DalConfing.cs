@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace DALApi
+namespace DalApi
 {
     /// <summary>
     /// Class for processing config.xml file and getting from there

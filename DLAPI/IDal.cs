@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DO;
 
-namespace DALApi
+namespace DalApi
 {
     /// <summary>
     /// Statement of functions for all class in DO
@@ -18,7 +18,7 @@ namespace DALApi
         void updateBusLine(BusLine b);
         void deleteBusLine(BusLine b);
         #endregion
-        #region  BusLineStation
+        #region BusLineStation
         BusLineStation getBusLineStation(int id);
         IEnumerable<BusLineStation> BusLineStations();
         void addBusLineStation(BusLineStation s);
@@ -26,12 +26,12 @@ namespace DALApi
         void deleteBusLineStation(BusLineStation s);
         #endregion
         #region LineWayOut
-        LineWayOut getLineWayOut(int id);
-        IEnumerable<LineWayOut> LinesWayOut();
-        void addLineWayOut(LineWayOut o);
-        void updateLineWayOut(LineWayOut o);
-        void deleteLineWayOut(LineWayOut o);
-        TimeSpan TravelTime(LineWayOut o);
+        LineOutForARide getLineWayOut(int id);
+        IEnumerable<LineOutForARide> LinesWayOut();
+        void addLineWayOut(LineOutForARide o);
+        void updateLineWayOut(LineOutForARide o);
+        void deleteLineWayOut(LineOutForARide o);
+        TimeSpan TravelTime(LineOutForARide o);
         #endregion
         #region ConsecutiveStations
         ConsecutiveStations getConsecutiveStations(string id1, string id2);

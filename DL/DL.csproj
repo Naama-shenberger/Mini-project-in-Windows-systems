@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DO\DO.csproj" />
+    <ProjectReference Include="..\DLAPI\DLAPI.csproj" />
     <ProjectReference Include="..\DS\DS.csproj" />
   </ItemGroup>
 
