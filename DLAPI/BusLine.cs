@@ -11,7 +11,6 @@ namespace DO
         /// sets and gets 
         /// </summary> 
         public bool Active { get; set; }//status of a bus line whether it is active or not
-        public static int IdentificationNumber{ set; get; }//Identification number
         public int BusLineNumber{ set; get; }//Bus line number 
         public string FirstStopNumber {set; get; }//First stop number
         public string LastStopNumber { set; get; }//Last stop number
