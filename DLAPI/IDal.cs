@@ -21,12 +21,12 @@ namespace DalApi
         bool TreatmentIsNeeded(Bus b);
         bool dateCheck(Bus b);
         #endregion
-        //#region BusDrive
-        //BusDrive getBusDrive(int id);
-        //int lastBusStation();
-        //TimeSpan TimeDrive();
+        #region BusDrive
+        BusDrive getBusDrive(int id);
+        int lastBusStation();
+        TimeSpan TimeDrive();
 
-        //#endregion
+        #endregion
         #region BusStation
         BusStation getBusStation(int n);
         void addBusStation(BusStation b);
