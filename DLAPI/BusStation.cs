@@ -4,50 +4,21 @@ using System.Text;
 
 namespace DO
 {
-    class BusStation
+    /// <summary>
+    /// bus station class
+    /// </summary>
+    public class BusStation
     {
-        private string BusStationKey;//code Station
-        private string StationAddress;//Station Address;
-        private string stationName;
-        private double latitude;
-        private double longitude;
-
-        public string STATIONADDRESS
-        {
-            get { return StationAddress; }
-            set { StationAddress = ""; }
-
-        }
         /// <summary>
-        /// Lottery of values for longitude and latitude (within Israel)
+        /// get and set
         /// </summary>
-        public double LATITUDE
-        {
-            get { return latitude; }
-            private set
-            {
-                latitude = value;
-            }
-        }
-        public double LONGITUDE
-        {
-            get { return longitude; }
-            private set
-            {
-                longitude = value;
-            }
-        }
-        /// <summary>
-        /// set and get for station code
-        /// Check station code number not bigger than 6
-        /// </summary>
-        public string BUS_STATION_KEY
-        {
-            get { return BusStationKey; }
-            set
-            {
-                BusStationKey = value;
-            }
-        }
+        public bool Active { get; set; }//status of a bus line whether it is active or not
+        public static int IdentificationNumber { set; get; }//Identification number
+        public string BusStationKey { get; set; }//code Station
+        public string StationAddress { get; set; }//Station Address;
+        public string StationName { get; set; }//
+        public double Latitude { get; set; }//
+        public double Longitude { get; set; }//
+
     }
 }
