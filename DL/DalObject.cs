@@ -262,20 +262,17 @@ namespace DL
         /// <returns></returns>
         public BusLine getBusLine(int id)
         {
-            BusLine busLine=DataSource.BusLines.Find(Configuration.IdentificationNumberBusDrive==id)
+          //  BusLine busLine = DataSource.BusLines.Find(Configuration.IdentificationNumberBusDrive == id);
             if (Configuration.IdentificationNumberBusLine >= id)
                 for (int i = 0; i < DataSource.BusLines.Count; i++)
                     if (i == id && DataSource.BusLines[i].Active == true)
                         return DataSource.BusLines[i];
             throw new ArgumentException("The bus line does not exist or he is not Active");
-            Person per = DataSource.ListPersons.Find(p => p.ID == id);
+            //Person per = DataSource.ListPersons.Find(p => p.ID == id);
 
-            if (per != null)
-                return per.Clone();
-            else
-                throw new DO.BadPersonIdException(id, $"bad person id: {id}");
+           
         }
-    }
+    
         /// <summary>
         /// A function that returns a list of bus lines that are active
         /// </summary>
@@ -541,7 +538,7 @@ namespace DL
         /// <returns></returns>
         public TimeSpan TravelTime(LineOutForARide o)
         {
-            return ExitStart - o.TravelEndTime;
+            return /*ExitStart -*/ o.TravelEndTime;
         }
         #endregion
         #region ConsecutiveStations
