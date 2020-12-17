@@ -8,6 +8,8 @@ namespace DS
 {
     public class DataSource
     {
+        public static List<Bus> Buses;
+        public static List<BusStation> Station;
         public static List<BusLine> BusLines;
         public static List<BusLineStation> BusLineStations;
         public static List<LineOutForARide> LinesOutForARide; 

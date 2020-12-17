@@ -31,6 +31,228 @@ namespace DL
         /// </summary>
         private DalObject() { }
         #endregion
+        #region Bus Function
+        /// <summary>
+        /// A function that receives an ID number and returns the corresponding Bus object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Bus getBus(int id)
+        {
+            if (Bus.IdentificationNumber >= id)
+                for (int i = 0; i < DataSource.Buses.Count; i++)
+                    if (i == id && DataSource.Buses[i].Active == true)
+                        return DataSource.Buses[i];
+            throw new ArgumentException("The bus line does not exist or he is not Active");
+        }
+        /// <summary>
+        /// A function that receives an bus  object and adds it to the list
+        /// There is a comparison between unique parameters of the bus to see if the bus exists
+        /// If the bus has the same bus id code is the same bus,
+        /// In case the bus is inactive we will make it active
+        /// In case it is active and exists in the system an exception will be thrown
+        /// </summary>
+        /// <param name="b"></param>
+        public void addBusLine(Bus b)
+        {
+            for (int i = 0; i < DataSource.Buses.Count; i++)
+                if (DataSource.Buses[i].LicensePlate == b.LicensePlate)
+                    if (DataSource.Buses[i].Active == false)
+                    {
+                        DataSource.Buses[i].Active = true;
+                        return;
+                    }
+                    else
+                        throw new ArgumentException("The bus already exist");
+
+            Bus.IdentificationNumber += 1;
+            DataSource.Buses.Add(b);
+        }
+        /// <summary>
+        /// A function that receives a bus and updates its details
+        /// </summary>
+        /// <param name="b"></param>
+        public void updateBus(Bus b)
+        {
+            for (int i = 0; i < DataSource.Buses.Count; i++)
+            {
+                if (DataSource.Buses[i].LicensePlate == b.LicensePlate)
+                    DataSource.Buses[i] = b;
+            }
+            throw new ArgumentException("The bus line does not exist");
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b"></param>
+        public void deleteBus(Bus b)
+        {
+            for (int i = 0; i < DataSource.Buses.Count; i++)
+            {
+                if (DataSource.Buses[i].LicensePlate == b.LicensePlate)
+                    if (DataSource.Buses[i].Active == true)
+                    {
+                        DataSource.Buses[i].Active = false;
+                        Bus.IdentificationNumber -= 1;
+                        return;
+                    }
+                    else
+                        throw new ArithmeticException("The bus is already not deleted");
+            }
+            throw new ArgumentException("The bus does not exist");
+        }
+        /// <summary>
+        /// A function that checks if the vehicle needs to be refueled
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public bool FuelCondition(Bus b)
+        {
+            for (int i = 0; i < DataSource.Buses.Count; i++)
+            {
+                if (DataSource.Buses[i].LicensePlate == b.LicensePlate)
+                {
+                    if (DataSource.Buses[i].KilometersGas > 1200)
+                        return true;
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// Function that checks if the bus needs treatment - 
+        /// treatment bus defined if the bus has traveled more than 20,000 kilometers or a year has passed since the last treatment
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public bool TreatmentIsNeeded(Bus b)
+        {
+            for (int i = 0; i < DataSource.Buses.Count; i++)
+            {
+                if (DataSource.Buses[i].LicensePlate == b.LicensePlate)
+                { if (!(DataSource.Buses[i].KilometersTreatment < 2000 && !dateCheck(b)))
+                        return true;
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// A function that checks if a year has passed since the last treatment
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public bool dateCheck(Bus b)
+        {
+            for (int i = 0; i < DataSource.Buses.Count; i++)
+            {
+                if (DataSource.Buses[i].LicensePlate == b.LicensePlate)
+                {
+
+                    int day;
+                    int month;
+                    int year;
+                    int.TryParse(DataSource.Buses[i].DateTreatment.Day.ToString(), out day);
+                    int.TryParse(DataSource.Buses[i].DateTreatment.Month.ToString(), out month);
+                    int.TryParse(DataSource.Buses[i].DateTreatment.Year.ToString(), out year);
+                    DateTime currentDate = DateTime.Now;
+                    if (int.Parse(currentDate.Day.ToString()) == day && int.Parse(currentDate.Month.ToString()) == month && int.Parse(currentDate.Year.ToString()) < year || int.Parse(currentDate.Year.ToString()) < year)
+                        return true;
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// A function that checks how many numbers the user needs to type for the number plate
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public int NumberOflicensePlate(Bus b)
+        {
+            for (int i = 0; i < DataSource.Buses.Count; i++)
+            {
+                if (DataSource.Buses[i].LicensePlate == b.LicensePlate)
+                {
+                    int year;
+                    int.TryParse(DataSource.Buses[i].DateActivity.Year.ToString(), out year);
+                    return year < 2018 ? 7 : 8;
+                }
+            }
+            return 0;
+        }
+        #endregion
+        #region BusDrive Function
+
+        #endregion
+        #region BusStation Function
+        /// <summary>
+        /// A function that receives an ID number and returns the corresponding Bus station object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BusStation getBusStation(int id)
+        {
+            if (Bus.IdentificationNumber >= id)
+                for (int i = 0; i < DataSource.Station.Count; i++)
+                    if (i == id && DataSource.Station[i].Active == true)
+                        return DataSource.Station[i];
+            throw new ArgumentException("The bus line does not exist or he is not Active");
+        }
+        /// <summary>
+        /// A function that receives an bus station object and adds it to the list 
+        /// There is a comparison between unique parameters of the bus to see if the bus station exists
+        /// If the bus has the same bus station number and the same name and address it is the same line,
+        /// because if it was the Reverse  line the stop codes would be reversed
+        /// In case the bus is inactive we will make it active
+        /// In case it is active and exists in the system an exception will be thrown
+        /// </summary>
+        /// <param name="b"></param>
+        public void addBusStation(BusStation b)
+        {
+            for (int i = 0; i < DataSource.Station.Count; i++)
+                if (DataSource.Station[i].BusStationKey == b.BusStationKey && DataSource.Station[i].StationAddress == b.StationAddress && DataSource.Station[i].StationName == b.StationName)
+                    if (DataSource.Station[i].Active == false)
+                    {
+                        DataSource.Station[i].Active = true;
+                        return;
+                    }
+                    else
+                        throw new ArgumentException("The bus line already exist");
+
+            BusLine.IdentificationNumber += 1;
+            DataSource.Station.Add(b);
+        }
+        public void updateBusStation(BusStation b)
+        {
+            for (int i = 0; i < DataSource.Station.Count; i++)
+            {
+                if (DataSource.Station[i].BusStationKey == b.BusStationKey && DataSource.Station[i].StationAddress == b.StationAddress && DataSource.Station[i].StationName == b.StationName)
+                    DataSource.Station[i] = b;
+            }
+            throw new ArgumentException("The bus line does not exist");
+        }
+        /// <summary>
+        /// The function gets an object to delete
+        /// If the bus has the same bus station number and the same name and address it is the same line,
+        /// in case we found the The object in the list will make its active field inactive
+        /// In case that the  bus station  is already not active we will throw a message
+        /// </summary>
+        /// <param name="b"></param>
+        public void deleteBusStation(BusStation b)
+        {
+            for (int i = 0; i < DataSource.Station.Count; i++)
+            {
+                if (DataSource.Station[i].BusStationKey == b.BusStationKey && DataSource.Station[i].StationAddress == b.StationAddress && DataSource.Station[i].StationName == b.StationName)
+                    if (DataSource.Station[i].Active == true)
+                    {
+                        DataSource.Station[i].Active = false;
+                        BusLine.IdentificationNumber -= 1;
+                        return;
+                    }
+                    else
+                        throw new ArithmeticException("The bus is already not deleted");
+            }
+            throw new ArgumentException("The bus line does not exist");
+        }
+        #endregion
         #region BusLine Functions
         /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus line object

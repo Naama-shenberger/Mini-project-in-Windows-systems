@@ -11,6 +11,29 @@ namespace DalApi
     /// </summary>
     public interface IDal
     {
+        #region Bus
+        Bus getBus(int id);
+        void addBus(Bus b);
+        void updateBus(Bus b);
+        void deleteBus(Bus b);
+        bool FuelCondition(Bus b);
+        int NumberOflicensePlate(Bus b);
+        bool TreatmentIsNeeded(Bus b);
+        bool dateCheck(Bus b);
+        #endregion
+        #region BusDrive
+        BusDrive getBusDrive(int id);
+        int lastBusStation();
+        TimeSpan TimeDrive();
+
+        #endregion
+        #region BusStation
+        BusStation getBusStation(int n);
+        void addBusStation(BusStation b);
+        void updateBusStation(BusStation b);
+        void deleteBusStation(BusStation b);
+
+        #endregion
         #region BusLine
         BusLine getBusLine(int id);
         IEnumerable<BusLine> BusLines();
@@ -40,5 +63,6 @@ namespace DalApi
         void updateConsecutiveStations(ConsecutiveStations c);
         void deleteConsecutiveStations(ConsecutiveStations c);
         #endregion
+        
     }
 }
