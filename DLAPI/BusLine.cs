@@ -15,5 +15,7 @@ namespace DO
         public string FirstStopNumber {set; get; }//First stop number
         public string LastStopNumber { set; get; }//Last stop number
         public int Area{set;  get;}//Area of the bus line
+        public int ID { get; set; }//id of a bus line
+       
     }
 }

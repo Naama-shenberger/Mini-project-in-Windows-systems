@@ -10,6 +10,7 @@ namespace DL
 {
     internal sealed class DalObject : IDal
     {
+
         //בגרסה הסופית אין להשתמש בלולאת foreach במקום שניתן להשתמש ב-LINQ ---נשתמש עכשיו בפור ואז נשנה 
         #region singelton
         //create instance
@@ -262,23 +263,20 @@ namespace DL
         /// <returns></returns>
         public BusLine getBusLine(int id)
         {
-          //  BusLine busLine = DataSource.BusLines.Find(Configuration.IdentificationNumberBusDrive == id);
-            if (Configuration.IdentificationNumberBusLine >= id)
-                for (int i = 0; i < DataSource.BusLines.Count; i++)
-                    if (i == id && DataSource.BusLines[i].Active == true)
-                        return DataSource.BusLines[i];
-            throw new ArgumentException("The bus line does not exist or he is not Active");
-            //Person per = DataSource.ListPersons.Find(p => p.ID == id);
-
-           
+            BusLine busLine = DataSource.BusLines.Find(b => b.ID == id);
+            if (busLine != null)
+                if(busLine.Active==true)
+                    return busLine/*.Clone()*/;
+            throw new IdAlreadyExistsException(id, $"No bus line have the id:{id}");
         }
-    
         /// <summary>
         /// A function that returns a list of bus lines that are active
         /// </summary>
         /// <returns></returns>
         public IEnumerable<BusLine> BusLines()
         {
+            //return from busLine in DataSource.BusLines;
+            //       select busLine/*.Clone()*/;
             IEnumerable<BusLine> temp = DataSource.BusLines;
             foreach (BusLine item in DataSource.BusLines)
                 if (item.Active != true)
@@ -300,32 +298,39 @@ namespace DL
         /// <param name="b"></param>
         public void addBusLine(BusLine bus)
         {
-            if (DataSource.BusLines.FirstOrDefault(b => b.FirstStopNumber==bus.FirstStopNumber && b.LastStopNumber==bus.LastStopNumber && b.BusLineNumber==bus.BusLineNumber) != null)
-                if(DataSource.BusLines[DataSource.BusLines.IndexOf(bus)].Active==false)
+            
+
+            Configuration.IdentificationNumberBusLine += 1;
+            bus.ID = Configuration.IdentificationNumberBusLine;
+            if(DataSource.BusLines==null)
+            {
+                DataSource.createLists();
+            }
+            BusLine newBus = DataSource.BusLines.FirstOrDefault(b => b.ID == bus.ID);
+            if (newBus != null)
+                if (newBus.Active == false)
                 {
-                    DataSource.BusLines[DataSource.BusLines.IndexOf(bus)].Active = true;
+                    newBus.Active = true;
                     return;
                 }
                else
-                  throw new DO.IdAlreadyExistsException(bus.BusLineNumber, "The bus line already exist");
-            DataSource.BusLines.Add(bus/*.Clone()*/);//נצטרך לממש בDl
+                throw new DO.IdAlreadyExistsException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} already exist");
+           DataSource.BusLines.Add(bus/*.Clone()*/);//נצטרך לממש בDl
         }
         /// <summary>
         /// A function that receives a bus line and updates its details
         /// </summary>
         /// <param name="b"></param>
-        public void updateBusLine(BusLine b)
+        public void updateBusLine(BusLine bus)
         {
-            for (int i = 0; i < DataSource.BusLines.Count; i++)
-            {
-                if (DataSource.BusLines[i].FirstStopNumber == b.FirstStopNumber && DataSource.BusLines[i].LastStopNumber==b.LastStopNumber && DataSource.BusLines[i].BusLineNumber==b.BusLineNumber)
-                {
-                    DataSource.BusLines[i] = b;
-                    return;
-                }
-            }
-            throw new ArgumentException("The bus line does not exist");
-      
+            var toUpdate = DataSource.BusLines.SingleOrDefault(x => x.ID == bus.ID);
+            if (toUpdate != null)
+                if(toUpdate.Active==true)
+                     toUpdate = bus;
+                else
+                    throw new IdAlreadyExistsException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} does not exist");
+            else
+                throw new IdAlreadyExistsException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -335,20 +340,14 @@ namespace DL
         /// <param name="b"></param>
         public void deleteBusLine(BusLine b)
         {
-            for (int i = 0; i < DataSource.BusLines.Count; i++)
-            {
-                if (DataSource.BusLines[i].FirstStopNumber == b.FirstStopNumber && DataSource.BusLines[i].LastStopNumber == b.LastStopNumber && DataSource.BusLines[i].BusLineNumber == b.BusLineNumber)
-                {
-                    if (DataSource.BusLines[i].Active == true)
-                    {
-                        DataSource.BusLines[i].Active = false;
-                        return;
-                    }
-                    else
-                        throw new ArithmeticException("The bus is already not deleted");
-                }
-            }
-            throw new ArgumentException("The bus line does not exist");
+            var toDelete = DataSource.BusLines.SingleOrDefault(x => x.ID == b.ID);
+            if (toDelete != null)
+                if (toDelete.Active == true)
+                    toDelete.Active = false;
+                else
+                    throw new IdAlreadyExistsException(b.BusLineNumber, $"The bus line {b.BusLineNumber} is already deleted");
+            else
+                throw new IdAlreadyExistsException(b.BusLineNumber, $"The bus line {b.BusLineNumber} does not exist");
         }
         #endregion 
         #region BusLineStation Functions
@@ -359,12 +358,11 @@ namespace DL
         /// <returns></returns>
         public BusLineStation getBusLineStation(int id)
         {
-            if (BusLineStation.IdentificationNumber >= id)
-                for (int i = 0; i < DataSource.BusLineStations.Count; i++)
-                    if (i == id && DataSource.BusLineStations[i].Active == true)
-                        return DataSource.BusLineStations[i];
-            throw new ArgumentException("The bus line station does not exist");
-
+            BusLineStation busLineStation = DataSource.BusLineStations.Find(b => b.CodeStation == id.ToString());
+            if (busLineStation != null)
+                if(busLineStation.Active==true)
+                    return busLineStation /*.Clone()*/;
+            throw new IdAlreadyExistsException(id, $"No bus line Station have the Code:{id}");
         }
         /// <summary>
         ///  A function that returns a list of bus line stations that are active
@@ -389,20 +387,16 @@ namespace DL
         /// <param name="s"></param>
         public void addBusLineStation(BusLineStation s)
         {
-            BusLineStation busStation = DataSource.BusLineStations.Find(b => b.CodeStation == s.CodeStation);
-            if (busStation != null)
-            {
-                if (busStation.Active == false)
+            BusLineStation newBusStation = DataSource.BusLineStations.FirstOrDefault(b => b.CodeStation == s.CodeStation);
+            if (newBusStation != null)
+                if (newBusStation.Active == false)
                 {
-                    busStation.Active = true;
+                    newBusStation.Active = true;
                     return;
-
                 }
                 else
-                    throw new ArgumentException("The bus line already exist");
-            }
-            BusLineStation.IdentificationNumber += 1;
-            DataSource.BusLineStations.Add(s);
+                    throw new DO.IdAlreadyExistsException(s.CodeStation, $"The bus line station {s.CodeStation} already exist");
+            DataSource.BusLineStations.Add(newBusStation/*.Clone()*/);//נצטרך לממש בDl
         }
         /// <summary>
         /// A function that receives a bus line Station and updates its details
@@ -410,15 +404,16 @@ namespace DL
         /// <param name="s"></param>
         public void updateBusLineStation(BusLineStation s)
         {
-            for (int i = 0; i < DataSource.BusLineStations.Count; i++)
+            var toUpdate = DataSource.BusLineStations.SingleOrDefault(x => x.CodeStation == s.CodeStation);
+            if (toUpdate != null)
             {
-                if (DataSource.BusLineStations[i].CodeStation == s.CodeStation)
-                {
-                    DataSource.BusLineStations[i] = s;
-                    return;
-                }
+                if(toUpdate.Active==true)
+                      toUpdate = s;
+                else
+                    throw new IdAlreadyExistsException(s.CodeStation, $"The bus line Station {s.CodeStation} does not exist");
             }
-            throw new ArgumentException("The bus line station does not exist");
+            else
+                throw new IdAlreadyExistsException(s.CodeStation, $"The bus line Station {s.CodeStation} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -428,19 +423,14 @@ namespace DL
         /// <param name="s"></param>
         public void deleteBusLineStation(BusLineStation s)
         {
-            for (int i = 0; i < DataSource.BusLineStations.Count; i++)
-            {
-                if (DataSource.BusLineStations[i].CodeStation == s.CodeStation)
-                    if (DataSource.BusLineStations[i].Active == true)
-                    {
-                        DataSource.BusLineStations[i].Active = false;
-                        BusLineStation.IdentificationNumber -= 1;
-                        return;
-                    }
-                    else
-                        throw new ArithmeticException("The bus is already not active");
-            }
-            throw new ArgumentException("The bus line does not exist");
+            var toDelete = DataSource.BusLineStations.SingleOrDefault(x => x.CodeStation == s.CodeStation);
+            if (toDelete != null)
+                if (toDelete.Active == true)
+                    toDelete.Active = false;
+                else
+                    throw new IdAlreadyExistsException(s.CodeStation, $"The bus line Station {s.CodeStation} is already deleted");
+            else
+                throw new IdAlreadyExistsException(s.CodeStation, $"The bus line Station {s.CodeStation} does not exist");
         }
         #endregion
         #region LineOutForARide
@@ -451,11 +441,11 @@ namespace DL
         /// <returns></returns>
         public LineOutForARide getLineWayOut(int id)
         {
-            if (Configuration.IdentificationNumberBusLine >= id)
-                for (int i = 0; i < DataSource.LinesOutForARide.Count; i++)
-                    if (i == id && DataSource.LinesOutForARide[i].Active == true)
-                        return DataSource.LinesOutForARide[i];
-            throw new ArgumentException("The  line does not exist");
+            LineOutForARide busLine = DataSource.LinesOutForARide.Find(b => b.ID == id);
+            if (busLine != null)
+                if (busLine.Active == true)
+                    return busLine/*.Clone()*/;
+            throw new IdAlreadyExistsException(id, $"No bus line have the id:{id}");
         }
         /// <summary>
         /// A function that returns a list of bus line  on their way out to a ride that are active
@@ -480,17 +470,18 @@ namespace DL
         /// <param name="o"></param>
         public void addLineWayOut(LineOutForARide o)
         {
-            for (int i = 0; i < DataSource.LinesOutForARide.Count; i++)
-                if (DataSource.LinesOutForARide[i].BusDepartureNumber == o.BusDepartureNumber)
-                    if (DataSource.LinesOutForARide[i].Active == false)
-                    {
-                        DataSource.LinesOutForARide[i].Active = true;
-                        return;
-                    }
-                    else
-                        throw new ArgumentException("The line already exist");
             Configuration.IdentificationNumberBusLine += 1;
-            DataSource.LinesOutForARide.Add(o);
+            o.ID = Configuration.IdentificationNumberBusLine;
+            LineOutForARide newBusWayOut = DataSource.LinesOutForARide.FirstOrDefault(b => b.ID == o.ID);
+            if (newBusWayOut != null)
+                if (newBusWayOut.Active == false)
+                {
+                    newBusWayOut.Active = true;
+                    return;
+                }
+                else
+                    throw new DO.IdAlreadyExistsException(o.ID, $"The bus line {o.ID} already exist");
+            DataSource.LinesOutForARide.Add(newBusWayOut/*.Clone()*/);//נצטרך לממש בDl
         }
         /// <summary>
         /// A function that receives a bus line on his way out and updates its details
@@ -498,15 +489,14 @@ namespace DL
         /// <param name="o"></param>
         public void updateLineWayOut(LineOutForARide o)
         {
-            for (int i = 0; i < DataSource.LinesOutForARide.Count; i++)
-            {
-                if (DataSource.LinesOutForARide[i].BusDepartureNumber == o.BusDepartureNumber)
-                {
-                    DataSource.LinesOutForARide[i] = o;
-                    return;
-                }
-            }
-            throw new ArgumentException("The  line does not exist");
+            var toUpdate = DataSource.LinesOutForARide.SingleOrDefault(x => x.ID == o.ID);
+            if (toUpdate != null)
+                if (toUpdate.Active == true)
+                    toUpdate = o;
+                else
+                    throw new IdAlreadyExistsException(o.ID, $"The bus line {o.ID} does not exist");
+            else
+                throw new IdAlreadyExistsException(o.ID, $"The bus line {o.ID} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -516,19 +506,14 @@ namespace DL
         /// <param name="o"></param>
         public void deleteLineWayOut(LineOutForARide o)
         {
-            for (int i = 0; i < DataSource.LinesOutForARide.Count; i++)
-            {
-                if (DataSource.LinesOutForARide[i].BusDepartureNumber == o.BusDepartureNumber)
-                    if (DataSource.LinesOutForARide[i].Active == true)
-                    {
-                        Configuration.IdentificationNumberBusLine -= 1;
-                        DataSource.LinesOutForARide[i].Active = false;
-                        return;
-                    }
-                    else
-                        throw new ArithmeticException("The line is already not active");
-            }
-            throw new ArgumentException("The line does not exist");
+            var toDelete = DataSource.LinesOutForARide.SingleOrDefault(x => x.ID == o.ID);
+            if (toDelete != null)
+                if (toDelete.Active == true)
+                    toDelete.Active = false;
+                else
+                    throw new IdAlreadyExistsException(o.ID, $"The bus line {o.ID} is already deleted");
+            else
+                throw new IdAlreadyExistsException(o.ID, $"The bus line {o.ID} does not exist");
         }
         /// <summary>
         /// function that Receive An exit object for travel
@@ -549,10 +534,11 @@ namespace DL
         /// <returns></returns>
         public ConsecutiveStations getConsecutiveStations(string id1, string id2)
         {
-            foreach (ConsecutiveStations item in DataSource.ListConsecutiveStations)
-                if (item.StationCodeOne == id1 && item.StationCodeTwo == id2)
-                    return item;
-            throw new ArgumentException("There is no Consecutive Stations in the list");
+            var consecutiveStations = DataSource.ListConsecutiveStations.Find(b => b.StationCodeOne == id1 && b.StationCodeTwo==id2);
+            if (consecutiveStations != null)
+                if (consecutiveStations.Flage == true)
+                    return consecutiveStations/*.Clone()*/;
+            throw new IdAlreadyExistsException($"No consecutive Stations have the id`s:{id1} {id2}");
         }
         /// <summary>
         /// A function that returns a list of two nearby stations
@@ -574,18 +560,18 @@ namespace DL
         //  Provided he does not exist in the list
         /// </summary>
         /// <param name="c"></param>
-        public void addConsecutiveStations(ConsecutiveStations c)
+        public void addConsecutiveStations(ConsecutiveStations s)
         {
-            foreach (ConsecutiveStations item in DataSource.ListConsecutiveStations)
-                if (item == c)
-                    if (item.Flage == false)
-                    {
-                        item.Flage = true;
-                        return;
-                    }
-                    else
-                        throw new ArgumentException("The Consecutives Stations already exist");
-            DataSource.ListConsecutiveStations.Add(c);
+            var consecutiveStations = DataSource.ListConsecutiveStations.FirstOrDefault(b=>b.StationCodeOne == s.StationCodeOne && b.StationCodeTwo==s.StationCodeTwo);
+            if (consecutiveStations != null)
+                if (consecutiveStations.Flage== false)
+                {
+                    consecutiveStations.Flage= true;
+                    return;
+                }
+                else
+                    throw new DO.IdAlreadyExistsException($"The Consecutives Stations {s.StationCodeOne} {s.StationCodeTwo} already exist");
+            DataSource.ListConsecutiveStations.Add(consecutiveStations /*.Clone()*/);//נצטרך לממש בDl
         }
         /// <summary>
         ///  A function that receives a ConsecutiveStations object updates its details
@@ -593,12 +579,14 @@ namespace DL
         /// <param name="c"></param>
         public void updateConsecutiveStations(ConsecutiveStations c)
         {
-            for (int i = 0; i < DataSource.ListConsecutiveStations.Count; i++)
-            {
-                if (DataSource.ListConsecutiveStations[i] == c)
-                    DataSource.ListConsecutiveStations[i] = c;
-            }
-            throw new ArgumentException("The Consecutives Stations does not exist");
+            var toUpdate = DataSource.ListConsecutiveStations.SingleOrDefault(x => x.StationCodeOne == c.StationCodeOne && x.StationCodeTwo==c.StationCodeTwo);
+            if (toUpdate != null)
+                if (toUpdate.Flage == true)
+                    toUpdate = c;
+                else
+                    throw new DO.IdAlreadyExistsException($"The Consecutives Stations {c.StationCodeOne} {c.StationCodeTwo} doesn't exist");
+            else
+                throw new DO.IdAlreadyExistsException($"The Consecutives Stations {c.StationCodeOne} {c.StationCodeTwo} doesn't exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -608,20 +596,35 @@ namespace DL
         /// <param name="c"></param>
         public void deleteConsecutiveStations(ConsecutiveStations c)
         {
-            foreach (ConsecutiveStations item in DataSource.ListConsecutiveStations)
-            {
-                if (item == c)
-                    if (item.Flage == true)
-                    {
-                        item.Flage = false;
-                        return;
-                    }
-                    else
-                        throw new ArithmeticException("The Consecutive Stationsis already not active");
-            }
-            throw new ArgumentException("The Consecutive Stations does not exist");
+            var toDelete = DataSource.ListConsecutiveStations.SingleOrDefault(x => x.StationCodeOne==c.StationCodeOne && x.StationCodeTwo==c.StationCodeTwo);
+            if (toDelete != null)
+                if (toDelete.Flage == true)
+                    toDelete.Flage = false;
+                else
+                    throw new DO.IdAlreadyExistsException($"The Consecutives Stations {c.StationCodeOne} {c.StationCodeTwo} doesn't exist");
+            else
+                throw new DO.IdAlreadyExistsException($"The Consecutives Stations {c.StationCodeOne} {c.StationCodeTwo} doesn't exist");
         }
 
+        public void addBus(Bus b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BusDrive getBusDrive(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int lastBusStation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TimeSpan TimeDrive()
+        {
+            throw new NotImplementedException();
+        }
     }
     #endregion
 }

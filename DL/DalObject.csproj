@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="confing.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DLAPI\DLAPI.csproj" />
     <ProjectReference Include="..\DS\DS.csproj" />
   </ItemGroup>

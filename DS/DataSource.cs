@@ -6,7 +6,7 @@ using static DO.Enums;
 
 namespace DS
 {
-    public class DataSource
+    public static class DataSource
     {
         public static List<Bus> Buses;
         public static List<BusStation> Station;
@@ -17,7 +17,7 @@ namespace DS
         /// <summary>
         /// initialization function fo bus lines
         /// </summary>
-        public void createLists()
+        public static void createLists()
         {
             BusLines = new List<BusLine>
             {  new BusLine{Active=true,BusLineNumber = 134,FirstStopNumber = "123456",LastStopNumber="987463",Area=(int)Zones.General},
