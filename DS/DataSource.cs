@@ -9,8 +9,9 @@ namespace DS
     public static class DataSource
     {
         public static List<Bus> Buses;
-        public static List<BusStation> Station;
+        public static List<BusStation> Stations;
         public static List<BusLine> BusLines;
+        public static List<BusDrive> BusDrives;
         public static List<BusLineStation> BusLineStations;
         public static List<LineOutForARide> LinesOutForARide; 
         public static List<ConsecutiveStations> ListConsecutiveStations;

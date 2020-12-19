@@ -23,6 +23,9 @@ namespace DalApi
         #endregion
         #region BusDrive
         BusDrive getBusDrive(int id);
+        void addBusDrive(BusDrive b);
+        void updateBusDrive(BusDrive b);
+        void deleteBusDrive(BusDrive b);
         int lastBusStation();
         TimeSpan TimeDrive();
 
