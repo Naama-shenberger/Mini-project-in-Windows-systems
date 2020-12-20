@@ -53,14 +53,9 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<Bus> Bus()
         {
-            List<Bus> temp = new List<Bus>();
-            if (DataSource.Buses != null)
-                foreach (Bus item in DataSource.Buses)
-                    if (item.Active == true)
-                        temp.Add(item);
-            if (temp != null)
-                return temp;
-            throw new NullReferenceException("There is no Bus");
+            return from Bus in DataSource.Buses
+                   where Bus.Active == true
+                   select Bus.Clone();
         }
         /// <summary>
         /// A function that receives an bus  object and adds it to the list
@@ -72,18 +67,16 @@ namespace DL
         /// <param name="b"></param>
         public void addBus(Bus b)
         {
-            Bus newBus = DataSource.Buses.FirstOrDefault(x => x.LicensePlate == b.LicensePlate);
-            if (newBus != null)
-            {
+            Bus newBus = DataSource.Buses.SingleOrDefault(s => s.LicensePlate== b.LicensePlate);
+            if (newBus!= null)
                 if (newBus.Active == false)
                 {
                     newBus.Active = true;
                     return;
                 }
                 else
-                    throw new DO.IdAlreadyExistsException(b.LicensePlate, $"The bus line station {b.LicensePlate} already exist");
-            }
-            DataSource.Buses.Add(newBus/*.Clone()*/);//נצטרך לממש בDl
+                    throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} already exist");
+            DataSource.Buses.Add(newBus.Clone());
         }
         /// <summary>
         /// A function that receives a bus and updates its details
@@ -91,16 +84,15 @@ namespace DL
         /// <param name="b"></param>
         public void updateBus(Bus b)
         {
-            var toUpdate = DataSource.Buses.SingleOrDefault(x => x.LicensePlate == b.LicensePlate);
-            if (toUpdate != null)
-            {
-                if (toUpdate.Active == true)
-                    toUpdate = b;
+            var toUpdateIndex = DataSource.Buses.FindIndex(s => s.LicensePlate == b.LicensePlate);
+            if (toUpdateIndex != -1)
+                if (b.Active == true)
+                    DataSource.Buses[toUpdateIndex] = b.Clone();
                 else
                     throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
-            }
             else
                 throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
+
         }
         /// <summary>
         /// 
@@ -108,73 +100,17 @@ namespace DL
         /// <param name="b"></param>
         public void deleteBus(Bus b)
         {
-            var toDelete = DataSource.Buses.SingleOrDefault(x => x.LicensePlate == b.LicensePlate);
-            if (toDelete != null)
-            {
-                if (toDelete.Active == true)
-                    toDelete.Active = false;
+            var toDeleteIndex = DataSource.Buses.FindIndex(s => s.LicensePlate == b.LicensePlate);
+            if (toDeleteIndex != -1)
+                if (b.Active == true)
+                    DataSource.Buses[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(b.LicensePlate, $"The bus in drive {b.LicensePlate} is already deleted");
-            }
+                    throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} is already deleted");
             else
-                throw new IdAlreadyExistsException(b.LicensePlate, $"The bus in drive {b.LicensePlate} does not exist");
+                throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
+            
         }
-        /// <summary>
-        /// A function that checks if the vehicle needs to be refueled
-        /// </summary>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        public bool FuelCondition(Bus b)
-        {
-            Bus find = DataSource.Buses.FirstOrDefault(x => x.LicensePlate == b.LicensePlate);
-            if (find.KilometersGas > 1200)
-                return true;
-            return false;
-        }
-        /// <summary>
-        /// Function that checks if the bus needs treatment - 
-        /// treatment bus defined if the bus has traveled more than 20,000 kilometers or a year has passed since the last treatment
-        /// </summary>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        public bool TreatmentIsNeeded(Bus b)
-        {
-            Bus find = DataSource.Buses.FirstOrDefault(x => x.LicensePlate == b.LicensePlate);
-            if (!(find.KilometersTreatment < 2000 && !dateCheck(b)))
-                return true;
-            return false;
-        }
-        /// <summary>
-        /// A function that checks if a year has passed since the last treatment
-        /// </summary>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        public bool dateCheck(Bus b)
-        {
-            Bus find = DataSource.Buses.FirstOrDefault(x => x.LicensePlate == b.LicensePlate);
-            int day;
-            int month;
-            int year;
-            int.TryParse(find.DateTreatment.Day.ToString(), out day);
-            int.TryParse(find.DateTreatment.Month.ToString(), out month);
-            int.TryParse(find.DateTreatment.Year.ToString(), out year);
-            DateTime currentDate = DateTime.Now;
-            if (int.Parse(currentDate.Day.ToString()) == day && int.Parse(currentDate.Month.ToString()) == month && int.Parse(currentDate.Year.ToString()) < year || int.Parse(currentDate.Year.ToString()) < year)
-                return true;
-            return false;
-        }
-        /// <summary>
-        /// A function that checks how many numbers the user needs to type for the number plate
-        /// </summary>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        public int NumberOflicensePlate(Bus b)
-        {
-            Bus find = DataSource.Buses.FirstOrDefault(x => x.LicensePlate == b.LicensePlate);
-            int year;
-            int.TryParse(find.DateActivity.Year.ToString(), out year);
-            return year < 2018 ? 7 : 8;
-        }
+       
         #endregion
         #region BusDrive Function
         /// <summary>
@@ -184,13 +120,11 @@ namespace DL
         /// <returns></returns>
         public BusDrive getBusDrive(int id)
         {
-            BusDrive busDrive = DataSource.BusDrives.Find(b => b.BusIdOnTheGo == id);
+            BusDrive busDrive = DataSource.BusDrives.Find(b => b.ID == id);
             if (busDrive != null)
-            {
                 if (busDrive.Active == true)
-                    return busDrive  /*.Clone()*/;
-            }
-            throw new IdAlreadyExistsException(id, $"No bus in drive have the Code:{id}");
+                    return busDrive.Clone();
+            throw new IdAlreadyExistsException(id, $"No bus in drive have the id: {id}");
         }
         /// <summary>
         ///  A function that returns a list of bus drive that are active
@@ -198,59 +132,44 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<BusDrive> BusDrives()
         {
-            List<BusDrive> temp = new List<BusDrive>();
-            if (DataSource.BusDrives != null)
-                foreach (BusDrive item in DataSource.BusDrives)
-                    if (item.Active == true)
-                        temp.Add(item);
-            if (temp != null)
-                return temp;
-            throw new NullReferenceException("There is no Bus in drive");
+            return from BusDrive in DataSource.BusDrives
+                   where BusDrive.Active == true
+                   select BusDrive.Clone();
         }
         /// <summary>
         /// A function that receives an bus drive object and adds it to the list
         /// In case the bus drive is inactive we will make it active
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
-        /// <param name="s"></param>
-        public void addBusDrive(BusDrive s)
+        /// <param name="bus"></param>
+        public void addBusDrive(BusDrive bus)
         {
-
-            Configuration.IdentificationNumberBusDrive += 1;
-            s.BusIdOnTheGo = Configuration.IdentificationNumberBusDrive;
-            if (DataSource.BusLines == null)
-            {
-                DataSource.createLists();
-            }
-            BusDrive newBusDrive = DataSource.BusDrives.FirstOrDefault(b => b.BusIdOnTheGo == s.BusIdOnTheGo);
+           bus.ID = Configuration.IdentificationNumberBusDrive++;
+            BusDrive newBusDrive = DataSource.BusDrives.FirstOrDefault(b => b.ID == bus.ID);
             if (newBusDrive != null)
-            {
                 if (newBusDrive.Active == false)
                 {
                     newBusDrive.Active = true;
                     return;
                 }
                 else
-                    throw new DO.IdAlreadyExistsException(s.LicensePlate, $"The bus line {s.LicensePlate} already exist");
-            }
-            DataSource.BusDrives.Add(s/*.Clone()*/);//נצטרך לממש בDl
+                    throw new DO.IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} already exist");
+            DataSource.BusDrives.Add(bus.Clone());
         }
         /// <summary>
         /// A function that receives a bus drive and updates its details
         /// </summary>
-        /// <param name="s"></param>
-        public void updateBusDrive(BusDrive s)
+        /// <param name="bus"></param>
+        public void updateBusDrive(BusDrive bus)
         {
-            var toUpdate = DataSource.BusDrives.SingleOrDefault(x => x.BusIdOnTheGo == s.BusIdOnTheGo);
-            if (toUpdate != null)
-            {
-                if (toUpdate.Active == true)
-                    toUpdate = s;
+            var toUpdateIndex = DataSource.BusDrives.FindIndex(b => b.ID == bus.ID);
+            if (toUpdateIndex != -1)
+                if (bus.Active == true)
+                    DataSource.BusDrives[toUpdateIndex] = bus.Clone();
                 else
-                    throw new IdAlreadyExistsException(s.BusIdOnTheGo, $"The bus in drive{s.BusIdOnTheGo} does not exist");
-            }
+                    throw new IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
             else
-                throw new IdAlreadyExistsException(s.BusIdOnTheGo, $"The bus in drive {s.BusIdOnTheGo} does not exist");
+                throw new IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -258,16 +177,16 @@ namespace DL
         /// In case that the bus drive is already not active we will throw a message
         /// </summary>
         /// <param name="s"></param>
-        public void deleteBusDrive(BusDrive s)
+        public void deleteBusDrive(BusDrive bus)
         {
-            var toDelete = DataSource.BusDrives.SingleOrDefault(x => x.BusIdOnTheGo == s.BusIdOnTheGo);
-            if (toDelete != null)
-                if (toDelete.Active == true)
-                    toDelete.Active = false;
+            var toDeleteIndex = DataSource.BusDrives.FindIndex(b => b.ID == bus.ID);
+            if (toDeleteIndex != -1)
+                if (bus.Active == true)
+                    DataSource.BusLines[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(s.BusIdOnTheGo, $"The bus in drive {s.BusIdOnTheGo} is already deleted");
+                    throw new IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} is already deleted");
             else
-                throw new IdAlreadyExistsException(s.BusIdOnTheGo, $"The bus in drive {s.BusIdOnTheGo} does not exist");
+                throw new IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
         }
 
         #endregion
@@ -279,11 +198,11 @@ namespace DL
         /// <returns></returns>
         public BusStation getBusStation(int id)
         {
-            BusStation busStation = DataSource.Stations.Find(b => b.BusStationKey == id.ToString());
+            BusStation busStation = DataSource.Stations.Find(s => s.BusStationKey == id.ToString());
             if (busStation != null)
                 if (busStation.Active == true)
-                    return busStation  /*.Clone()*/;
-            throw new IdAlreadyExistsException(id, $"No bus station have the key:{id}");
+                    return busStation.Clone();
+            throw new IdAlreadyExistsException(id, $"No bus Station have the Code: {id}");
         }
         /// <summary>
         ///  A function that returns a list of bus stations that are active
@@ -291,14 +210,9 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<BusStation> BusStations()
         {
-            List<BusStation> temp = new List<BusStation>();
-            if (DataSource.Stations != null)
-                foreach (BusStation item in DataSource.Stations)
-                    if (item.Active == true)
-                        temp.Add(item);
-            if (temp != null)
-                return temp;
-            throw new NullReferenceException("There is no Bus station");
+            return from BusStation in DataSource.Stations
+                   where BusStation.Active == true
+                   select BusStation.Clone();
         }
         /// <summary>
         /// A function that receives an bus station object and adds it to the list 
@@ -309,9 +223,9 @@ namespace DL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="b"></param>
-        public void addBusStation(BusStation b)
+        public void addBusStation(BusStation station)
         {
-            BusStation newBusStation = DataSource.Stations.FirstOrDefault(x => x.BusStationKey == b.BusStationKey);
+            BusStation newBusStation = DataSource.Stations.SingleOrDefault(s => s.BusStationKey == station.BusStationKey);
             if (newBusStation != null)
                 if (newBusStation.Active == false)
                 {
@@ -319,21 +233,25 @@ namespace DL
                     return;
                 }
                 else
-                    throw new DO.IdAlreadyExistsException(b.BusStationKey, $"The bus station {b.BusStationKey} already exist");
-            DataSource.Stations.Add(newBusStation/*.Clone()*/);//נצטרך לממש בDl
+                    throw new IdAlreadyExistsException(station.BusStationKey, $"The bus station {station.BusStationKey} already exist");
+            DataSource.Stations.Add(newBusStation.Clone());
+
         }
-        public void updateBusStation(BusStation b)
+        /// <summary>
+        /// A function that receives a bus Station and updates its details
+        /// </summary>
+        /// <param name="station"></param>
+        public void updateBusStation(BusStation station)
         {
-            var toUpdate = DataSource.Stations.SingleOrDefault(x => x.BusStationKey == b.BusStationKey);
-            if (toUpdate != null)
-            {
-                if (toUpdate.Active == true)
-                    toUpdate = b;
+            var toUpdateIndex = DataSource.Stations.FindIndex(s => s.BusStationKey == station.BusStationKey);
+            if (toUpdateIndex != -1)
+                if (station.Active == true)
+                    DataSource.Stations[toUpdateIndex] = station.Clone();
                 else
-                    throw new IdAlreadyExistsException(b.BusStationKey, $"The bus station{b.BusStationKey} does not exist");
-            }
+                    throw new IdAlreadyExistsException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
             else
-                throw new IdAlreadyExistsException(b.BusStationKey, $"The bus station {b.BusStationKey} does not exist");
+                throw new IdAlreadyExistsException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
+
         }
         /// <summary>
         /// The function gets an object to delete
@@ -342,16 +260,17 @@ namespace DL
         /// In case that the  bus station  is already not active we will throw a message
         /// </summary>
         /// <param name="b"></param>
-        public void deleteBusStation(BusStation b)
+        public void deleteBusStation(BusStation station)
         {
-            var toDelete = DataSource.Stations.SingleOrDefault(x => x.BusStationKey == b.BusStationKey);
-            if (toDelete != null)
-                if (toDelete.Active == true)
-                    toDelete.Active = false;
+            var toDeleteIndex = DataSource.Stations.FindIndex(s => s.BusStationKey == station.BusStationKey);
+            if (toDeleteIndex != -1)
+                if (station.Active == true)
+                    DataSource.BusLineStations[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(b.BusStationKey, $"The bus station {b.BusStationKey} is already deleted");
+                    throw new IdAlreadyExistsException(station.BusStationKey, $"The bus Station {station.BusStationKey} is already deleted");
             else
-                throw new IdAlreadyExistsException(b.BusStationKey, $"The bus station {b.BusStationKey} does not exist");
+                throw new IdAlreadyExistsException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
+
         }
         #endregion
         #region BusLine Functions

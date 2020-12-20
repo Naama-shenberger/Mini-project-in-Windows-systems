@@ -16,9 +16,9 @@ namespace DO
         public static int IdentificationNumber { set; get; }//Identification number
         public string BusStationKey { get; set; }//code Station
         public string StationAddress { get; set; }//Station Address;
-        public string StationName { get; set; }//
-        public double Latitude { get; set; }//
-        public double Longitude { get; set; }//
+        public string StationName { get; set; }//Station Name
+        public double Latitude { get; set; }//Latitude 
+        public double Longitude { get; set; }//Longitude 
 
     }
 }

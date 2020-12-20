@@ -17,10 +17,6 @@ namespace DalApi
         void addBus(Bus b);
         void updateBus(Bus b);
         void deleteBus(Bus b);
-        bool FuelCondition(Bus b);
-        int NumberOflicensePlate(Bus b);
-        bool TreatmentIsNeeded(Bus b);
-        bool dateCheck(Bus b);
         #endregion
         #region BusDrive
         BusDrive getBusDrive(int id);
@@ -28,8 +24,6 @@ namespace DalApi
         void addBusDrive(BusDrive b);
         void updateBusDrive(BusDrive b);
         void deleteBusDrive(BusDrive b);
-        int lastBusStation();
-        TimeSpan TimeDrive();
 
         #endregion
         #region BusStation

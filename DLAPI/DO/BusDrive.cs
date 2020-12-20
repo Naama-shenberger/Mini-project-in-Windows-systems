@@ -17,7 +17,7 @@ namespace DO
         /// get and set
         /// </summary>
         public bool Active { get; set; }//status of a bus whether it is active or not
-        public int BusIdOnTheGo { get; set; }//License Number (Entity Identifying Feature, Unique)
+        public int ID { get; set; }//License Number (Entity Identifying Feature, Unique)
         public string LicensePlate { get; set; }//the license plate
         public TimeSpan ExitStart { get; set; }//Actual departure time
         public int LastStasion { get; set; }//Last stop number on the line that the bus passed
