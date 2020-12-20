@@ -386,7 +386,7 @@ namespace DL
         /// In case the bus is inactive we will make it active
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
-        /// <param name="b"></param>
+        /// <param name="bus"></param>
         public void addBusLine(BusLine bus)
         {
             Configuration.IdentificationNumberBusLine += 1;
@@ -405,7 +405,7 @@ namespace DL
         /// <summary>
         /// A function that receives a bus line and updates its details
         /// </summary>
-        /// <param name="b"></param>
+        /// <param name="bus"></param>
         public void updateBusLine(BusLine bus)
         {
             var toUpdateIndex = DataSource.BusLines.FindIndex(b => b.ID == bus.ID);
@@ -422,7 +422,7 @@ namespace DL
         /// in case we found the The object in the list will make its active field inactive
         /// In case that the bus line is already not active we will throw a message
         /// </summary>
-        /// <param name="b"></param>
+        /// <param name="bus"></param>
         public void deleteBusLine(BusLine bus)
         {
             var toDeleteIndex = DataSource.BusLines.FindIndex(b => b.ID == bus.ID);
@@ -498,7 +498,7 @@ namespace DL
         /// in case we found the The object in the list will make its active field inactive
         /// In case that the bus line station is already not active we will throw a message
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="station"></param>
         public void deleteBusLineStation(BusLineStation station)
         {
             var toDeleteIndex = DataSource.BusLineStations.FindIndex(s => s.CodeStation == station.CodeStation);
@@ -592,18 +592,19 @@ namespace DL
         /// function that Receive An exit object for travel
         /// the function returns the total travel time of this port
         /// </summary>
-        /// <param name="toDeleteIndex"></param>
+        /// <param name="OutLine"></param>
         /// <returns></returns>
-        public TimeSpan TravelTime(LineOutForARide toDeleteIndex)
+        public TimeSpan TravelTime(LineOutForARide OutLine)
         {
-            return toDeleteIndex.ExitStart - toDeleteIndex.TravelEndTime;
+            return OutLine.ExitStart - OutLine.TravelEndTime;
         }
         #endregion
         #region ConsecutiveStations
         /// <summary>
         /// Receives station codes and returns the appropriate object
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
         /// <returns></returns>
         public ConsecutiveStations getConsecutiveStations(string id1, string id2)
         {
