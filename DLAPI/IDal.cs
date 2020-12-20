@@ -13,6 +13,7 @@ namespace DalApi
     {
         #region Bus
         Bus getBus(int id);
+        IEnumerable<Bus> Bus();
         void addBus(Bus b);
         void updateBus(Bus b);
         void deleteBus(Bus b);
@@ -23,6 +24,7 @@ namespace DalApi
         #endregion
         #region BusDrive
         BusDrive getBusDrive(int id);
+        IEnumerable<BusDrive> BusDrives();
         void addBusDrive(BusDrive b);
         void updateBusDrive(BusDrive b);
         void deleteBusDrive(BusDrive b);
@@ -32,6 +34,7 @@ namespace DalApi
         #endregion
         #region BusStation
         BusStation getBusStation(int n);
+        IEnumerable<BusStation> BusStations();
         void addBusStation(BusStation b);
         void updateBusStation(BusStation b);
         void deleteBusStation(BusStation b);
@@ -66,6 +69,5 @@ namespace DalApi
         void updateConsecutiveStations(ConsecutiveStations c);
         void deleteConsecutiveStations(ConsecutiveStations c);
         #endregion
-        
     }
 }
