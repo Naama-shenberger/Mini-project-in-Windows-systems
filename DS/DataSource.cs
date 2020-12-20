@@ -62,7 +62,7 @@ namespace DS
             };
 
             BusLines = new List<BusLine>
-            {  new BusLine{Active=true,BusLineNumber = 134,FirstStopNumber = "123456",LastStopNumber="987463",Area=(int)Zones.General},
+            {  new BusLine{Active=false,BusLineNumber = 134,FirstStopNumber = "123456",LastStopNumber="987463",Area=(int)Zones.General},
                new BusLine{Active=true,BusLineNumber = 14,FirstStopNumber = "128256",LastStopNumber="917453",Area=(int)Zones.Zefat},
                new BusLine{Active=true,BusLineNumber = 112,FirstStopNumber = "120486",LastStopNumber="680463",Area=(int)Zones.Alon_Shvut},
                new BusLine{Active=true,BusLineNumber = 9,FirstStopNumber = "188456",LastStopNumber="907453",Area=(int)Zones.Beer_Sheva},

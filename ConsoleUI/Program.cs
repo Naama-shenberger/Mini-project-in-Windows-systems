@@ -15,8 +15,8 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             IDal mydal = DalFactory.GetDal();
-        
-            mydal.addBusLine(new BusLine { Active = true, BusLineNumber = 134, FirstStopNumber = "123456", LastStopNumber = "987463", Area = (int)Zones.General }) ;
+
+            mydal.addBusLine(new BusLine { Active = true, BusLineNumber = 134, FirstStopNumber = "123456", LastStopNumber = "987463", Area = (int)Zones.General });
             mydal.addBusLine(new BusLine { Active = true, BusLineNumber = 14, FirstStopNumber = "128256", LastStopNumber = "917453", Area = (int)Zones.Zefat });
             mydal.addBusLine(new BusLine { Active = true, BusLineNumber = 112, FirstStopNumber = "120486", LastStopNumber = "680463", Area = (int)Zones.Alon_Shvut });
             mydal.addBus(new Bus { Active = true, LicensePlate = "12345677", DateActivity = new DateTime(2018, 12, 3), DateTreatment = new DateTime(2019, 10, 3), Totalkilometers = 111, KilometersGas = 338, KilometersTreatment = 1211, AirTire = 15, OilCondition = true });
@@ -32,6 +32,8 @@ namespace ConsoleUI
             mydal.addBusStation(new BusStation { Active = true, BusStationKey = "06143", StationAddress = "אליהו הנביא 2", StationName = "אליהו", Latitude = 2 * (33.3 - 31) + 31, Longitude = 2 * (35.5 - 34.3) + 34.3 });
             mydal.addBusStation(new BusStation { Active = true, BusStationKey = "06153", StationAddress = "עמק האלה 23", StationName = "אלה", Latitude = 3 * (33.3 - 31) + 31, Longitude = 3 * (35.5 - 34.3) + 34.3 });
             Console.WriteLine(mydal.getBusStation(1).ToString());
+            foreach (var item in mydal.BusLines())
+                Console.WriteLine(item.ToString());
             Console.ReadKey();
               
         }
