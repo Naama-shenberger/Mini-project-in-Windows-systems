@@ -26,7 +26,14 @@ namespace DO
         public string BusDriverFirstName { get; set; }
         public string BusDriverLastName { get; set; }
         public string BusDriverId { get; set; }
-        //tostring ציך
+        /// <summary>
+        /// override of ToString
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return string.Format("\nLicensePlate: {0}\nExit Start: {1}\nLastStasion: {2}\nTime Drive: {3}\nTime to Next Stop:{4}\n bus driver info:\nID number-{5}\tfull name-{7} {6}\n", LicensePlate, ExitStart, LastStasion, TimeDrive, TimeNextStop, BusDriverId, BusDriverLastName, BusDriverFirstName);
+        }
     }
 
 }

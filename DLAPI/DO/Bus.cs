@@ -25,6 +25,14 @@ namespace DO
         public float Totalkilometers { get; set; }//the bus total kilometers
         public  float AirTire { get; set; }// Percentage of tire air
         public  bool OilCondition { get; set; }//Says if you need to fill the oil tank
-                                               //tostring ציך
+                                              
+        /// <summary>
+        /// override of ToString
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return string.Format("\nLicense Plate: {0}\nDate Activity: {1}\nDate Treatment {2}\nTotalkilometers: {3}\nKilometers Treatment:{4}\nKilometers Gas:{5}\nbus condition:AirTire-{6}\tOil is needed?{7}\n", LicensePlate, DateActivity, DateTreatment, Totalkilometers, KilometersTreatment, KilometersGas, AirTire, OilCondition);
+        }
     }
 }

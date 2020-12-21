@@ -19,7 +19,14 @@ namespace DO
         public string StationName { get; set; }//Station Name
         public double Latitude { get; set; }//Latitude 
         public double Longitude { get; set; }//Longitude 
-                                             //tostring ציך
+        /// <summary>
+        /// override of ToString
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return string.Format("Bus Station Key :{0}\nStation Address: {1} \nStation Name: {2}\nstaion landmark: ({3},{4})", BusStationKey, StationAddress, StationName, Latitude, Longitude );
+        }
 
     }
 }
