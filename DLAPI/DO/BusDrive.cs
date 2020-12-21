@@ -26,6 +26,7 @@ namespace DO
         public string BusDriverFirstName { get; set; }
         public string BusDriverLastName { get; set; }
         public string BusDriverId { get; set; }
+        //tostring ציך
     }
 
 }

@@ -16,7 +16,7 @@ namespace DO
         public string StationCodeOne { set; get; }//Code station one
         public string StationCodeTwo { set; get; }//Code station Two
         public float Distance { set; get; }//Distance between stations
-        public float AverageTravelTime { set; get; }//Average travel time between stations
+        public TimeSpan AverageTravelTime { set; get; }//Average travel time between stations
         /// <summary>
         /// override of ToString
         /// </summary>

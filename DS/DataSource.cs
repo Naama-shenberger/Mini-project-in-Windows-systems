@@ -15,10 +15,14 @@ namespace DS
         public static List<BusLineStation> BusLineStations;
         public static List<LineOutForARide> LinesOutForARide; 
         public static List<ConsecutiveStations> ListConsecutiveStations;
+        static DataSource()
+        {
+            InitAllLists();
+        }
         /// <summary>
         /// initialization function fo bus lines
         /// </summary>
-        public static void createLists()
+        public static void InitAllLists()
         {
             Buses = new List<Bus> 
             { 
@@ -27,15 +31,13 @@ namespace DS
                 new Bus{Active=true,LicensePlate="32345678",DateActivity=new DateTime(2018,10,3),DateTreatment=new DateTime(2019,10,3),Totalkilometers=1113,KilometersGas=303,KilometersTreatment=1141,AirTire=165,OilCondition=true},
                 new Bus{Active=true,LicensePlate="42345678",DateActivity=new DateTime(2018,9,3),DateTreatment=new DateTime(2018,2,3),Totalkilometers=114,KilometersGas=3333,KilometersTreatment=1115,AirTire=157,OilCondition=true},
                 new Bus{Active=true,LicensePlate="52345678",DateActivity=new DateTime(2018,1,3),DateTreatment=new DateTime(2019,2,23),Totalkilometers=115,KilometersGas=3343,KilometersTreatment=1116,AirTire=150,OilCondition=true},
-                new Bus{Active=true,LicensePlate="62345678",DateActivity=new DateTime(2017,6,3),DateTreatment=new DateTime(2017,12,23),Totalkilometers=116,KilometersGas=3336,KilometersTreatment=1116,AirTire=15,OilCondition=true},
-                new Bus{Active=true,LicensePlate="72345678",DateActivity=new DateTime(2015,7,3),DateTreatment=new DateTime(2019,12,29),Totalkilometers=117,KilometersGas=3383,KilometersTreatment=1171,AirTire=145,OilCondition=true},
-                new Bus{Active=true,LicensePlate="82345678",DateActivity=new DateTime(2016,3,3),DateTreatment=new DateTime(2018,12,22),Totalkilometers=118,KilometersGas=3339,KilometersTreatment=1118,AirTire=154,OilCondition=true},
-                new Bus{Active=true,LicensePlate="92345678",DateActivity=new DateTime(2011,1,3),DateTreatment=new DateTime(2019,12,14),Totalkilometers=119,KilometersGas=3330,KilometersTreatment=1191,AirTire=15,OilCondition=true},
-                new Bus{Active=true,LicensePlate="02345678",DateActivity=new DateTime(2012,2,3),DateTreatment=new DateTime(2020,12,15),Totalkilometers=110,KilometersGas=3363,KilometersTreatment=1112,AirTire=20,OilCondition=true},
-
-
-
+                new Bus{Active=true,LicensePlate="6234678",DateActivity=new DateTime(2017,6,3),DateTreatment=new DateTime(2017,12,23),Totalkilometers=116,KilometersGas=3336,KilometersTreatment=1116,AirTire=15,OilCondition=true},
+                new Bus{Active=true,LicensePlate="7245678",DateActivity=new DateTime(2015,7,3),DateTreatment=new DateTime(2019,12,29),Totalkilometers=117,KilometersGas=3383,KilometersTreatment=1171,AirTire=145,OilCondition=true},
+                new Bus{Active=true,LicensePlate="8235678",DateActivity=new DateTime(2016,3,3),DateTreatment=new DateTime(2018,12,22),Totalkilometers=118,KilometersGas=3339,KilometersTreatment=1118,AirTire=154,OilCondition=true},
+                new Bus{Active=true,LicensePlate="9234678",DateActivity=new DateTime(2011,1,3),DateTreatment=new DateTime(2019,12,14),Totalkilometers=119,KilometersGas=3330,KilometersTreatment=1191,AirTire=15,OilCondition=true},
+                new Bus{Active=true,LicensePlate="0234567",DateActivity=new DateTime(2012,2,3),DateTreatment=new DateTime(2020,12,15),Totalkilometers=110,KilometersGas=3363,KilometersTreatment=1112,AirTire=20,OilCondition=true},
             };
+            //50 תחנות
             Stations = new List<BusStation> 
             { 
                 new BusStation{Active=true,BusStationKey="06311",StationAddress="עמק בית שאן 2",StationName="בית שאן",Latitude=1* (33.3 - 31) + 31,Longitude = 1 * (35.5 - 34.3) + 34.3},
@@ -85,11 +87,29 @@ namespace DS
             };
             BusLineStations = new List<BusLineStation>
             {
-                new BusLineStation{Active=true,CodeStation="1758493",NumberStationInLine=1},
-                new BusLineStation{Active=true,CodeStation="1758493",NumberStationInLine=2},
-                new BusLineStation{Active=true,CodeStation="1758493",NumberStationInLine=3},
-                new BusLineStation{Active=true,CodeStation="989890",NumberStationInLine=4},
+                new BusLineStation{Active=true,CodeStation="178530",NumberStationInLine=1},
+                new BusLineStation{Active=true,CodeStation="178531",NumberStationInLine=2},
+                new BusLineStation{Active=true,CodeStation="178532",NumberStationInLine=3},
+                new BusLineStation{Active=true,CodeStation="178533",NumberStationInLine=4},
+                new BusLineStation{Active=true,CodeStation="178534",NumberStationInLine=5},
+                new BusLineStation{Active=true,CodeStation="178535",NumberStationInLine=6},
+                new BusLineStation{Active=true,CodeStation="178536",NumberStationInLine=7},
+                new BusLineStation{Active=true,CodeStation="178537",NumberStationInLine=8},
+                new BusLineStation{Active=true,CodeStation="178538",NumberStationInLine=9},
+                new BusLineStation{Active=true,CodeStation="178539",NumberStationInLine=10},
 
+            };
+            ListConsecutiveStations = new List<ConsecutiveStations>
+            {
+                new ConsecutiveStations{StationCodeOne="178530",StationCodeTwo="178531",Distance=(float)1.12,AverageTravelTime=new TimeSpan(00,02,30)},
+                new ConsecutiveStations{StationCodeOne="178531",StationCodeTwo="178532",Distance=(float)3,AverageTravelTime=new TimeSpan(00,04,30)},
+                new ConsecutiveStations{StationCodeOne="178532",StationCodeTwo="178533",Distance=(float)1,AverageTravelTime=new TimeSpan(00,02,00)},
+                new ConsecutiveStations{StationCodeOne="178533",StationCodeTwo="178534",Distance=(float)7,AverageTravelTime=new TimeSpan(00,05,00)},
+                new ConsecutiveStations{StationCodeOne="178534",StationCodeTwo="178535",Distance=(float)2,AverageTravelTime=new TimeSpan(00,02,50)},
+                new ConsecutiveStations{StationCodeOne="178535",StationCodeTwo="178536",Distance=(float)4.67,AverageTravelTime=new TimeSpan(00,04,45)},
+                new ConsecutiveStations{StationCodeOne="178536",StationCodeTwo="178537",Distance=(float)5.3,AverageTravelTime=new TimeSpan(00,04,30)},
+                new ConsecutiveStations{StationCodeOne="178537",StationCodeTwo="178538",Distance=(float)6.98,AverageTravelTime=new TimeSpan(00,04,50)},
+                new ConsecutiveStations{StationCodeOne="178538",StationCodeTwo="178539",Distance=(float)2.4,AverageTravelTime=new TimeSpan(00,03,00)},
             };
 
             

@@ -19,6 +19,7 @@ namespace DO
         public string StationName { get; set; }//Station Name
         public double Latitude { get; set; }//Latitude 
         public double Longitude { get; set; }//Longitude 
+                                             //tostring ציך
 
     }
 }
