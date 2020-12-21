@@ -25,7 +25,7 @@ namespace DO
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("Bus Station Key :{0}\nStation Address: {1} \nStation Name: {2}\nstaion landmark: ({3},{4})", BusStationKey, StationAddress, StationName, Latitude, Longitude );
+            return string.Format("\nBus Station Key :{0}\nStation Address: {1} \nStation Name: {2}\nstaion landmark: ({3},{4})", BusStationKey, StationAddress, StationName, Latitude, Longitude );
         }
 
     }

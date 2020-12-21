@@ -32,7 +32,7 @@ namespace DO
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("\nLicensePlate: {0}\nExit Start: {1}\nLastStasion: {2}\nTime Drive: {3}\nTime to Next Stop:{4}\n bus driver info:\nID number-{5}\tfull name-{7} {6}\n", LicensePlate, ExitStart, LastStasion, TimeDrive, TimeNextStop, BusDriverId, BusDriverLastName, BusDriverFirstName);
+            return string.Format("\nLicensePlate: {0}\nExit Start: {1}\nLastStasion: {2}\nTime Drive: {3}\nTime to Next Stop:{4}\n bus driver info:\nID number-{5}\nfull name-{7} {6}\n", LicensePlate, ExitStart, LastStasion, TimeDrive, TimeNextStop, BusDriverId, BusDriverLastName, BusDriverFirstName);
         }
     }
 

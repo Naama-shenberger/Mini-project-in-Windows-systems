@@ -43,7 +43,7 @@ namespace DL
             if (bus != null)
             {
                 if (bus.Active == true)
-                    return bus  /*.Clone()*/;
+                    return bus.Clone();
             }
             throw new IdAlreadyExistsException(id, $"No bus line Station have the Code:{id}");
         }
@@ -76,7 +76,7 @@ namespace DL
                 }
                 else
                     throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} already exist");
-            DataSource.Buses.Add(newBus.Clone());
+            DataSource.Buses.Add(b.Clone());
         }
         /// <summary>
         /// A function that receives a bus and updates its details
@@ -124,7 +124,7 @@ namespace DL
             if (busDrive != null)
                 if (busDrive.Active == true)
                     return busDrive.Clone();
-            throw new IdAlreadyExistsException(id, $"No bus in drive have the id: {id}");
+            throw new IdAlreadyExistsException(id, $"No bus have the id: {id}");
         }
         /// <summary>
         ///  A function that returns a list of bus drive that are active
@@ -144,8 +144,10 @@ namespace DL
         /// <param name="bus"></param>
         public void addBusDrive(BusDrive bus)
         {
-           bus.ID = Configuration.IdentificationNumberBusDrive++;
-            BusDrive newBusDrive = DataSource.BusDrives.FirstOrDefault(b => b.ID == bus.ID);
+            
+            Configuration.IdentificationNumberBusDrive += 1;
+           bus.ID = Configuration.IdentificationNumberBusDrive;
+            BusDrive newBusDrive = DataSource.BusDrives.FirstOrDefault(b => b.ID== bus.ID);
             if (newBusDrive != null)
                 if (newBusDrive.Active == false)
                 {
@@ -234,7 +236,7 @@ namespace DL
                 }
                 else
                     throw new IdAlreadyExistsException(station.BusStationKey, $"The bus station {station.BusStationKey} already exist");
-            DataSource.Stations.Add(newBusStation.Clone());
+            DataSource.Stations.Add(station.Clone());
 
         }
         /// <summary>
@@ -395,7 +397,7 @@ namespace DL
                 }
                 else
                     throw new IdAlreadyExistsException(station.CodeStation, $"The bus line station {station.CodeStation} already exist");
-            DataSource.BusLineStations.Add(newBusStation.Clone());
+            DataSource.BusLineStations.Add(station.Clone());
         }
         /// <summary>
         /// A function that receives a bus line Station and updates its details
