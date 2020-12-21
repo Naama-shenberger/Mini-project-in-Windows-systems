@@ -37,7 +37,7 @@ namespace DL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Bus getBus(int id)
+        public Bus GetBus(int id)
         {
             Bus bus = DataSource.Buses.Find(b => b.LicensePlate == id.ToString());
             if (bus != null)
@@ -51,7 +51,7 @@ namespace DL
         ///  A function that returns a list of bus that are active
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Bus> Bus()
+        public IEnumerable<Bus> Buss()
         {
             return from Bus in DataSource.Buses
                    where Bus.Active == true
@@ -65,7 +65,7 @@ namespace DL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="b"></param>
-        public void addBus(Bus b)
+        public void AddBus(Bus b)
         {
             Bus newBus = DataSource.Buses.SingleOrDefault(s => s.LicensePlate== b.LicensePlate);
             if (newBus!= null)
@@ -82,7 +82,7 @@ namespace DL
         /// A function that receives a bus and updates its details
         /// </summary>
         /// <param name="b"></param>
-        public void updateBus(Bus b)
+        public void UpdateBus(Bus b)
         {
             var toUpdateIndex = DataSource.Buses.FindIndex(s => s.LicensePlate == b.LicensePlate);
             if (toUpdateIndex != -1)
@@ -98,7 +98,7 @@ namespace DL
         /// 
         /// </summary>
         /// <param name="b"></param>
-        public void deleteBus(Bus b)
+        public void DeleteBus(Bus b)
         {
             var toDeleteIndex = DataSource.Buses.FindIndex(s => s.LicensePlate == b.LicensePlate);
             if (toDeleteIndex != -1)
@@ -118,7 +118,7 @@ namespace DL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BusDrive getBusDrive(int id)
+        public BusDrive GetBusDrive(int id)
         {
             BusDrive busDrive = DataSource.BusDrives.Find(b => b.ID == id);
             if (busDrive != null)
@@ -130,7 +130,7 @@ namespace DL
         ///  A function that returns a list of bus drive that are active
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<BusDrive> BusDrives()
+        public IEnumerable<BusDrive> BussDrive()
         {
             return from BusDrive in DataSource.BusDrives
                    where BusDrive.Active == true
@@ -142,7 +142,7 @@ namespace DL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="bus"></param>
-        public void addBusDrive(BusDrive bus)
+        public void AddBusDrive(BusDrive bus)
         {
             
             Configuration.IdentificationNumberBusDrive += 1;
@@ -162,7 +162,7 @@ namespace DL
         /// A function that receives a bus drive and updates its details
         /// </summary>
         /// <param name="bus"></param>
-        public void updateBusDrive(BusDrive bus)
+        public void UpdateBusDrive(BusDrive bus)
         {
             var toUpdateIndex = DataSource.BusDrives.FindIndex(b => b.ID == bus.ID);
             if (toUpdateIndex != -1)
@@ -179,7 +179,7 @@ namespace DL
         /// In case that the bus drive is already not active we will throw a message
         /// </summary>
         /// <param name="s"></param>
-        public void deleteBusDrive(BusDrive bus)
+        public void DeleteBusDrive(BusDrive bus)
         {
             var toDeleteIndex = DataSource.BusDrives.FindIndex(b => b.ID == bus.ID);
             if (toDeleteIndex != -1)
@@ -198,9 +198,9 @@ namespace DL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BusStation getBusStation(int id)
+        public BusStation GetBusStation(string id)
         {
-            BusStation busStation = DataSource.Stations.Find(s => s.BusStationKey == id.ToString());
+            BusStation busStation = DataSource.Stations.Find(s => s.BusStationKey == id);
             if (busStation != null)
                 if (busStation.Active == true)
                     return busStation.Clone();
@@ -225,7 +225,7 @@ namespace DL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="b"></param>
-        public void addBusStation(BusStation station)
+        public void AddBusStation(BusStation station)
         {
             BusStation newBusStation = DataSource.Stations.SingleOrDefault(s => s.BusStationKey == station.BusStationKey);
             if (newBusStation != null)
@@ -243,7 +243,7 @@ namespace DL
         /// A function that receives a bus Station and updates its details
         /// </summary>
         /// <param name="station"></param>
-        public void updateBusStation(BusStation station)
+        public void UpdateBusStation(BusStation station)
         {
             var toUpdateIndex = DataSource.Stations.FindIndex(s => s.BusStationKey == station.BusStationKey);
             if (toUpdateIndex != -1)
@@ -262,7 +262,7 @@ namespace DL
         /// In case that the  bus station  is already not active we will throw a message
         /// </summary>
         /// <param name="b"></param>
-        public void deleteBusStation(BusStation station)
+        public void DeleteBusStation(BusStation station)
         {
             var toDeleteIndex = DataSource.Stations.FindIndex(s => s.BusStationKey == station.BusStationKey);
             if (toDeleteIndex != -1)
@@ -277,11 +277,36 @@ namespace DL
         #endregion
         #region BusLine Functions
         /// <summary>
+        /// A function that uses Encapsulates a method 
+        /// accepts an integer and a string and returns an object
+        /// integer-bus line number
+        /// string-License Plate
+        /// </summary>
+        /// <param name="generate"></param>
+        /// <returns></returns>
+        public IEnumerable<object> GetBusLineNumbers(Func<int, string, object> generate)
+        {
+            return from BusLine in DataSource.BusLines
+                   select generate(BusLine.BusLineNumber, GetBus(BusLine.ID).LicensePlate);
+        }
+        /// <summary>
+        /// A function that uses Encapsulates a method 
+        /// accepts an integer and returns an object
+        /// integer-bus line number
+        /// </summary>
+        /// <param name="generate"></param>
+        /// <returns></returns>
+        public IEnumerable<object> GetBusLineNumbers(Func<int, object> generate)
+        {
+            return from BusLine in DataSource.BusLines
+                   select generate(BusLine.BusLineNumber);
+        }
+        /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus line object
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BusLine getBusLine(int id)
+        public BusLine GetBusLine(int id)
         {
             BusLine busLine = DataSource.BusLines.Find(b => b.ID == id);
             if (busLine != null)
@@ -308,7 +333,7 @@ namespace DL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="bus"></param>
-        public void addBusLine(BusLine bus)
+        public void AddBusLine(BusLine bus)
         {
             Configuration.IdentificationNumberBusLine += 1;
             bus.ID = Configuration.IdentificationNumberBusLine;
@@ -327,7 +352,7 @@ namespace DL
         /// A function that receives a bus line and updates its details
         /// </summary>
         /// <param name="bus"></param>
-        public void updateBusLine(BusLine bus)
+        public void UpdateBusLine(BusLine bus)
         {
             var toUpdateIndex = DataSource.BusLines.FindIndex(b => b.ID == bus.ID);
             if (toUpdateIndex != -1)
@@ -344,7 +369,7 @@ namespace DL
         /// In case that the bus line is already not active we will throw a message
         /// </summary>
         /// <param name="bus"></param>
-        public void deleteBusLine(BusLine bus)
+        public void DeleteBusLine(BusLine bus)
         {
             var toDeleteIndex = DataSource.BusLines.FindIndex(b => b.ID == bus.ID);
             if (toDeleteIndex != -1)
@@ -362,7 +387,7 @@ namespace DL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BusLineStation getBusLineStation(int id)
+        public BusLineStation GetBusLineStation(int id)
         {
             BusLineStation busLineStation = DataSource.BusLineStations.Find(s => s.CodeStation == id.ToString());
             if (busLineStation != null)
@@ -386,7 +411,7 @@ namespace DL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="station"></param>
-        public void addBusLineStation(BusLineStation station)
+        public void AddBusLineStation(BusLineStation station)
         {
             BusLineStation newBusStation = DataSource.BusLineStations.SingleOrDefault(s => s.CodeStation == station.CodeStation);
             if (newBusStation != null)
@@ -403,7 +428,7 @@ namespace DL
         /// A function that receives a bus line Station and updates its details
         /// </summary>
         /// <param name="station"></param>
-        public void updateBusLineStation(BusLineStation station)
+        public void UpdateBusLineStation(BusLineStation station)
         {
             var toUpdateIndex = DataSource.BusLineStations.FindIndex(s => s.CodeStation == station.CodeStation);
             if (toUpdateIndex != -1)
@@ -420,7 +445,7 @@ namespace DL
         /// In case that the bus line station is already not active we will throw a message
         /// </summary>
         /// <param name="station"></param>
-        public void deleteBusLineStation(BusLineStation station)
+        public void DeleteBusLineStation(BusLineStation station)
         {
             var toDeleteIndex = DataSource.BusLineStations.FindIndex(s => s.CodeStation == station.CodeStation);
             if (toDeleteIndex != -1)
@@ -438,7 +463,7 @@ namespace DL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public LineOutForARide getLineWayOut(int id)
+        public LineOutForARide GetLineWayOut(int id)
         {
             LineOutForARide busLine = DataSource.LinesOutForARide.Find(b => b.ID == id);
             if (busLine != null)
@@ -462,7 +487,7 @@ namespace DL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="o"></param>
-        public void addLineWayOut(LineOutForARide o)
+        public void AddLineWayOut(LineOutForARide o)
         {
             Configuration.IdentificationNumberBusLine += 1;
             o.ID = Configuration.IdentificationNumberBusLine;
@@ -481,7 +506,7 @@ namespace DL
         /// A function that receives a bus line on his way out and updates its details
         /// </summary>
         /// <param name="outLine"></param>
-        public void updateLineWayOut(LineOutForARide outLine)
+        public void UpdateLineWayOut(LineOutForARide outLine)
         {
             var toUpdateIndex = DataSource.LinesOutForARide.FindIndex(o => o.ID == outLine.ID);
             if (toUpdateIndex != -1)
@@ -498,7 +523,7 @@ namespace DL
         /// In case that the bus is already not active we will throw a message
         /// </summary>
         /// <param name="toDeleteIndex"></param>
-        public void deleteLineWayOut(LineOutForARide outLine)
+        public void DeleteLineWayOut(LineOutForARide outLine)
         {
             var toDeleteIndex = DataSource.LinesOutForARide.FindIndex(o => o.ID == outLine.ID);
             if (toDeleteIndex != -1)
@@ -509,16 +534,6 @@ namespace DL
             else
                 throw new IdAlreadyExistsException(outLine.ID, $"The bus line {outLine.ID} does not exist");
         }
-        /// <summary>
-        /// function that Receive An exit object for travel
-        /// the function returns the total travel time of this port
-        /// </summary>
-        /// <param name="OutLine"></param>
-        /// <returns></returns>
-        public TimeSpan TravelTime(LineOutForARide OutLine)
-        {
-            return OutLine.ExitStart - OutLine.TravelEndTime;
-        }
         #endregion
         #region ConsecutiveStations
         /// <summary>
@@ -527,7 +542,7 @@ namespace DL
         /// <param name="id1"></param>
         /// <param name="id2"></param>
         /// <returns></returns>
-        public ConsecutiveStations getConsecutiveStations(string id1, string id2)
+        public ConsecutiveStations GetConsecutiveStations(string id1, string id2)
         {
             var consecutiveStations = DataSource.ListConsecutiveStations.Find(b => b.StationCodeOne == id1 && b.StationCodeTwo == id2);
             if (consecutiveStations != null)
@@ -550,7 +565,7 @@ namespace DL
         //  Provided he does not exist in the list
         /// </summary>
         /// <param name="stations"></param>
-        public void addConsecutiveStations(ConsecutiveStations stations)
+        public void AddConsecutiveStations(ConsecutiveStations stations)
         {
             var consecutiveStations = DataSource.ListConsecutiveStations.FirstOrDefault(s => s.StationCodeOne == stations.StationCodeOne && s.StationCodeTwo == stations.StationCodeTwo);
             if (consecutiveStations != null)
@@ -567,7 +582,7 @@ namespace DL
         ///  A function that receives a ConsecutiveStations object updates its details
         /// </summary>
         /// <param name="stations"></param>
-        public void updateConsecutiveStations(ConsecutiveStations stations)
+        public void UpdateConsecutiveStations(ConsecutiveStations stations)
         {
             var toUpdateIndex = DataSource.ListConsecutiveStations.FindIndex(s => s.StationCodeOne == stations.StationCodeOne && s.StationCodeTwo == stations.StationCodeTwo);
             if (toUpdateIndex != -1)
@@ -584,7 +599,7 @@ namespace DL
         /// In case that the bus is already not active we will throw a message
         /// </summary>
         /// <param name="stations"></param>
-        public void deleteConsecutiveStations(ConsecutiveStations stations)
+        public void DeleteConsecutiveStations(ConsecutiveStations stations)
         {
             var toDeleteIndex = DataSource.ListConsecutiveStations.FindIndex(s => s.StationCodeOne == stations.StationCodeOne && s.StationCodeTwo == stations.StationCodeTwo);
             if (toDeleteIndex != -1)

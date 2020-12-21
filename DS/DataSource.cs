@@ -42,7 +42,7 @@ namespace DS
             Stations = new List<BusStation>()
             {
 
- new BusStation { Active = true, BusStationKey = " 183933", StationAddress = "ישראלי 5", StationName = "תחנה מרכזית ירושלים", Latitude = 3 * (33.3 - 31) + 31, Longitude = 1 * (35.5 - 34.3) + 34.3 },
+ new BusStation { Active = true, BusStationKey = "183933", StationAddress = "ישראלי 5", StationName = "תחנה מרכזית ירושלים", Latitude = 3 * (33.3 - 31) + 31, Longitude = 1 * (35.5 - 34.3) + 34.3 },
  new BusStation { Active = true, BusStationKey = "63816" ,StationAddress = "נרקיס 4", StationName = "אלה/בן מימון", Latitude = 6* (33.3 - 31) + 31, Longitude =1* (35.5 - 34.3) + 34.3},
  new BusStation { Active = true, BusStationKey = "263460" ,StationAddress = "נשיא השישי 2", StationName = "שדרות גולדה", Latitude = 18* (33.3 - 31) + 31, Longitude =2* (35.5 - 34.3) + 34.3},
  new BusStation { Active = true, BusStationKey = "190883" ,StationAddress = "הרצוג 5", StationName = "בן סימון", Latitude = 1* (33.3 - 31) + 31, Longitude =16* (35.5 - 34.3) + 34.3},

@@ -23,8 +23,8 @@ namespace DO
         public float KilometersTreatment { get; set; }// the buss kilometer to treatment
         public float KilometersGas { get; set; }//the bus gas kilmeters
         public float Totalkilometers { get; set; }//the bus total kilometers
-        public  float AirTire { get; set; }// Percentage of tire air
-        public  bool OilCondition { get; set; }//Says if you need to fill the oil tank
+        public float AirTire { get; set; }// Percentage of tire air
+        public bool OilCondition { get; set; }//Says if you need to fill the oil tank
                                               
         /// <summary>
         /// override of ToString

@@ -12,56 +12,55 @@ namespace DalApi
     public interface IDal
     {
         #region Bus
-        Bus getBus(int id);
-        IEnumerable<Bus> Bus();
-        void addBus(Bus b);
-        void updateBus(Bus b);
-        void deleteBus(Bus b);
+        Bus GetBus(int id);
+        IEnumerable<Bus> Buss();
+        void AddBus(Bus b);
+        void UpdateBus(Bus b);
+        void DeleteBus(Bus b);
         #endregion
         #region BusDrive
-        BusDrive getBusDrive(int id);
-        IEnumerable<BusDrive> BusDrives();
-        void addBusDrive(BusDrive b);
-        void updateBusDrive(BusDrive b);
-        void deleteBusDrive(BusDrive b);
-
+        BusDrive GetBusDrive(int id);
+        IEnumerable<BusDrive> BussDrive();
+        void AddBusDrive(BusDrive b);
+        void UpdateBusDrive(BusDrive b);
+        void DeleteBusDrive(BusDrive b);
         #endregion
         #region BusStation
-        BusStation getBusStation(int n);
+        BusStation GetBusStation(string code);
         IEnumerable<BusStation> BusStations();
-        void addBusStation(BusStation b);
-        void updateBusStation(BusStation b);
-        void deleteBusStation(BusStation b);
-
+        void AddBusStation(BusStation b);
+        void UpdateBusStation(BusStation b);
+        void DeleteBusStation(BusStation b);
         #endregion
         #region BusLine
-        BusLine getBusLine(int id);
+        BusLine GetBusLine(int id);
         IEnumerable<BusLine> BusLines();
-        void addBusLine(BusLine b);
-        void updateBusLine(BusLine b);
-        void deleteBusLine(BusLine b);
+        void AddBusLine(BusLine b);
+        void UpdateBusLine(BusLine b);
+        void DeleteBusLine(BusLine b);
+        IEnumerable<object> GetBusLineNumbers(Func<int, string, object> generate);
+        IEnumerable<object> GetBusLineNumbers(Func<int, object> generate);
         #endregion
         #region BusLineStation
-        BusLineStation getBusLineStation(int id);
+        BusLineStation GetBusLineStation(int id);
         IEnumerable<BusLineStation> BusLineStations();
-        void addBusLineStation(BusLineStation s);
-        void updateBusLineStation(BusLineStation s);
-        void deleteBusLineStation(BusLineStation s);
+        void AddBusLineStation(BusLineStation s);
+        void UpdateBusLineStation(BusLineStation s);
+        void DeleteBusLineStation(BusLineStation s);
         #endregion
         #region LineWayOut
-        LineOutForARide getLineWayOut(int id);
+        LineOutForARide GetLineWayOut(int id);
         IEnumerable<LineOutForARide> LinesWayOut();
-        void addLineWayOut(LineOutForARide o);
-        void updateLineWayOut(LineOutForARide o);
-        void deleteLineWayOut(LineOutForARide o);
-        TimeSpan TravelTime(LineOutForARide o);
+        void AddLineWayOut(LineOutForARide o);
+        void UpdateLineWayOut(LineOutForARide o);
+        void DeleteLineWayOut(LineOutForARide o);
         #endregion
         #region ConsecutiveStations
-        ConsecutiveStations getConsecutiveStations(string id1, string id2);
+        ConsecutiveStations GetConsecutiveStations(string id1, string id2);
         IEnumerable<ConsecutiveStations> ConsecutivesStations();
-        void addConsecutiveStations(ConsecutiveStations s);
-        void updateConsecutiveStations(ConsecutiveStations c);
-        void deleteConsecutiveStations(ConsecutiveStations c);
+        void AddConsecutiveStations(ConsecutiveStations s);
+        void UpdateConsecutiveStations(ConsecutiveStations c);
+        void DeleteConsecutiveStations(ConsecutiveStations c);
         #endregion
     }
 }
