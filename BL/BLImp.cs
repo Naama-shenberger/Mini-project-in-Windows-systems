@@ -28,7 +28,7 @@ namespace BL
         /// </summary>
         /// <param name="AddToLine"></param>
         /// <param name="busLineStation"></param>
-        public void AddBusStation(BusLine AddToLine, BusLineStation busLineStation)
+        public void AddBusStationToLine(BusLine AddToLine, BusLineStation busLineStation)
         {
             AddToLine.LineStations.ToList().Add(busLineStation);
         }
@@ -38,7 +38,7 @@ namespace BL
         /// <param name="busLine"></param>
         public void DeleteBusLine(BusLine busLine)
         { 
-            dl.DeleteBusLine(dl.GetBusLine(busLine.ID));
+            dl.DeleteBusLine(dl.GetBusLine(busLine.ID).C);
         }
         /// <summary>
         /// The function gets a bus line and the bus stop for deletion
@@ -46,7 +46,7 @@ namespace BL
         /// </summary>
         /// <param name="DeleteFromLine"></param>
         /// <param name="busLineStation"></param>
-        public void DeleteBusLineStation(BusLine DeleteFromLine,BusLineStation busLineStation)
+        public void DeleteBusLineStationFromeLine(BusLine DeleteFromLine,BusLineStation busLineStation)
         {
 
             DeleteFromLine.LineStations= (IEnumerable<BusLineStation>)DeleteFromLine.LineStations.Where(p => p.CodeStation == busLineStation.CodeStation).Select(a => a.Active = false);

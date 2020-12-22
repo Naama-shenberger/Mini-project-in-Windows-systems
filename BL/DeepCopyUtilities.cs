@@ -24,16 +24,15 @@ namespace BL
         }
         public static object CopyPropertiesToNew<S>(this S from, Type type)
         {
+            ///Activator
+            ///Creates an instance of the specified type using the constructor that best matches the specified parameters.
+            ///Contains methods to create types of objects locally or remotely
+            ///or obtain references to existing remote objects. This class cannot be inherited.
             object to = Activator.CreateInstance(type); // new object of Type
             from.CopyPropertiesTo(to);
             return to;
         }
-        //public static object CopyPropertiesToNew<S>(this S from, Type type)
-        //{
-        //    object to = Activator.CreateInstance(type); // new object of Type
-        //    from.CopyPropertiesTo(to);
-        //    return to;
-        //}
+       
 
     }
 }
