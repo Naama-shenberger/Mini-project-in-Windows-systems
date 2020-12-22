@@ -5,13 +5,52 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static DO.Enums;
 
 namespace BL
 {
-    internal class BLImp:IBL
+    internal class BLImp : IBL
     {
         IDal dl = DalFactory.GetDal();
         #region Bus Line
+        /// <summary>
+        /// Add a line to the list of bus lines
+        //The function gets a bus line to add
+        /// </summary>
+        /// <param name="busLine"></param>
+        public void AddABusLine(BusLine busLine)
+        {
+            dl.AddBusLine(dl.GetBusLine(busLine.ID));
+        }
+        /// <summary>
+        /// The function gets a bus line and a stop station
+        /// The function adds the station to the bus line
+        /// </summary>
+        /// <param name="AddToLine"></param>
+        /// <param name="busLineStation"></param>
+        public void AddBusStation(BusLine AddToLine, BusLineStation busLineStation)
+        {
+            AddToLine.LineStations.ToList().Add(busLineStation);
+        }
+        /// <summary>
+        /// The function receives a bus line for deletion
+        /// </summary>
+        /// <param name="busLine"></param>
+        public void DeleteBusLine(BusLine busLine)
+        { 
+            dl.DeleteBusLine(dl.GetBusLine(busLine.ID));
+        }
+        /// <summary>
+        /// The function gets a bus line and the bus stop for deletion
+        /// The function deletes the station from the received line
+        /// </summary>
+        /// <param name="DeleteFromLine"></param>
+        /// <param name="busLineStation"></param>
+        public void DeleteBusLineStation(BusLine DeleteFromLine,BusLineStation busLineStation)
+        {
+
+            DeleteFromLine.LineStations= (IEnumerable<BusLineStation>)DeleteFromLine.LineStations.Where(p => p.CodeStation == busLineStation.CodeStation).Select(a => a.Active = false);
+        }
         /// <summary>
         /// A function that returns all bus lines
         /// </summary>
@@ -20,6 +59,17 @@ namespace BL
         {
             return (IEnumerable<BusLine>)(from item in dl.BusLines()select item);
         }
+        /// <summary>
+        ///A function that returns all bus lines in groups according to their areas 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea()
+        {
+            return from BusLine in GetAllBusLines()
+                   group BusLine by ((Zones)BusLine.Area).ToString() into groups
+                   select groups;
+        }
+
         /// <summary>
         /// A function that returns all bus lines
         /// Are appointed according to their stations
@@ -86,6 +136,6 @@ namespace BL
 //בשאילתות LINQ חובה להשתמש לפחות פעם אחת
 //ב-let ------we used
 //ב-select new
-//בקיבוץ(grouping)
-//במיון
+//בקיבוץ(grouping)----יש
+//במיון----יש
 
