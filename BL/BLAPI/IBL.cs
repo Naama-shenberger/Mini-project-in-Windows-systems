@@ -7,6 +7,36 @@ namespace BLAPI
 {
     public interface IBL
     {
+        #region BUS
+        Bus GetBus(int id);
+        IEnumerable<Bus> GetAllBus();
+        IEnumerable<Bus> GetAllBusNeedTreatment();
+        IEnumerable<IGrouping<string,Bus>> GetAllBusslicensePlate();
+        IEnumerable<int> GetNumberbuss();
+        IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate);
+        void AddABus(Bus bus);
+        void DeleteBus(Bus bus);
+        bool TreatmentIsNeeded(int id);
+        void BusInTreatment(Bus b);
+        bool FuelCondition(Bus b);
+        void refillingBus(Bus bus);
+        int NumberOflicensePlate(Bus b);
+        bool dateCheck(Bus b);
+        bool BusCondition(Bus bus);
+        #endregion
+        #region Bus Drive
+        BusDrive GetBusDrive(int id);
+        IEnumerable<BusDrive> GetAllBusInDrive();
+        void AddBusDrive(BusDrive busDrive);
+        void DeleteBusDrive(BusDrive busDrive);
+        #endregion
+        #region Bus Station
+        BusStation GetBusStation(string id);
+        IEnumerable<int> GetNumberStation();
+        void AddBusStation(BusStation station);
+        void DeleteBusStation(BusStation station);
+
+        #endregion
         #region Bus Line 
         BusLine GetBusLine(int id);
         IEnumerable<BusLine> GetAllBusLines();
