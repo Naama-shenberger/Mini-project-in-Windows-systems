@@ -389,7 +389,7 @@ namespace DL
         /// <returns></returns>
         public BusLineStation GetBusLineStation(int id)
         {
-            BusLineStation busLineStation = DataSource.BusLineStations.Find(s => s.CodeStation == id.ToString());
+            BusLineStation busLineStation = DataSource.BusLineStations.Find(s => s.CodeStation == id);
             if (busLineStation != null)
                 if (busLineStation.Active == true)
                     return busLineStation.Clone();
@@ -455,6 +455,18 @@ namespace DL
                     throw new IdAlreadyExistsException(station.CodeStation, $"The bus line Station {station.CodeStation} is already deleted");
             else
                 throw new IdAlreadyExistsException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
+        }
+        /// <summary>
+        /// A function that uses Encapsulates a method 
+        /// accepts an integer and returns an object
+        /// integer-bus line Code Station
+        /// </summary>
+        /// <param name="generate"></param>
+        /// <returns></returns>
+        public IEnumerable<object> GetBusLineStationCode(Func<int, object> generate)
+        {
+            return from BusLineStation in DataSource.BusLineStations
+                   select generate(BusLineStation.CodeStation);
         }
         #endregion
         #region LineOutForARide
@@ -542,7 +554,7 @@ namespace DL
         /// <param name="id1"></param>
         /// <param name="id2"></param>
         /// <returns></returns>
-        public ConsecutiveStations GetConsecutiveStations(string id1, string id2)
+        public ConsecutiveStations GetConsecutiveStations(int id1, int id2)
         {
             var consecutiveStations = DataSource.ListConsecutiveStations.Find(b => b.StationCodeOne == id1 && b.StationCodeTwo == id2);
             if (consecutiveStations != null)
@@ -609,6 +621,108 @@ namespace DL
                     throw new DO.IdAlreadyExistsException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
             else
                 throw new DO.IdAlreadyExistsException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
+        }
+        #endregion
+        #region User
+        public User GetUser(string id)
+        {
+            var user = DataSource.Users.Find(u=>u.UserName == id);
+            if (user != null)
+                if (user.FlageActive == true)
+                    return user.Clone();
+            throw new IdAlreadyExistsException($"No user have the name {id}");
+        }
+        public IEnumerable<User> GetUsers()
+        {
+            return from User in DataSource.Users
+                   where User.FlageActive == true
+                   select User;
+        }
+        public void AddUser(User user)
+        {
+            var userIndex = DataSource.Users.FindIndex(u => u.UserName== user.UserName);
+            if (userIndex != -1)
+                if (DataSource.Users[userIndex].FlageActive == false)
+                {
+                    DataSource.Users[userIndex].FlageActive= true;
+                    return;
+                }
+                else
+                    throw new DO.IdAlreadyExistsException(user.UserName, $"The User Name {user.UserName} already exist");
+            DataSource.Users.Add(user.Clone());
+        }
+        public void UpdatUser(User user)
+        {
+            var toUpdateIndex = DataSource.Users.FindIndex(u => u.UserName== user.UserName);
+            if (toUpdateIndex != -1)
+                if (DataSource.Users[toUpdateIndex].FlageActive == true)
+                    DataSource.Users[toUpdateIndex] = user.Clone();
+                else
+                    throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} does not exist");
+            else
+                throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} does not exist");
+        }
+        public void DeleteUser(User user)
+        {
+            var toDeleteIndex = DataSource.Users.FindIndex(u=>u.UserName==user.UserName);
+            if (toDeleteIndex != -1)
+                if (DataSource.Users[toDeleteIndex].FlageActive == true)
+                    DataSource.Users[toDeleteIndex].FlageActive = false;
+                else
+                    throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} is already deleted");
+            else
+                throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} is already deleted");
+        }
+        #endregion
+        #region UserJourney
+        public UserJourney GetUserJourney(string id)
+        {
+            var userJourney = DataSource.UsersJourney.Find(u => u.UserName == id);
+            if (userJourney != null)
+                if (userJourney.FlageActive == true)
+                    return userJourney.Clone();
+            throw new IdAlreadyExistsException($"No user Journey have the name {id}");
+        }
+        public IEnumerable<UserJourney> GetUsersJourney()
+        {
+            return from UserJourney in DataSource.UsersJourney
+                   where UserJourney.FlageActive == true
+                   select UserJourney;
+        }
+        public void AddUser(UserJourney userJourney)
+        {
+            var userJourneyIndex = DataSource.UsersJourney.FindIndex(u => u.UserName == userJourney.UserName);
+            if (userJourneyIndex != -1)
+                if (DataSource.UsersJourney[userJourneyIndex].FlageActive == false)
+                {
+                    DataSource.UsersJourney[userJourneyIndex].FlageActive = true;
+                    return;
+                }
+                else
+                    throw new DO.IdAlreadyExistsException(userJourney.UserName, $"The User Name {userJourney.UserName} already exist");
+            DataSource.UsersJourney.Add(userJourney.Clone());
+        }
+        public void UpdatUserJourney(UserJourney userJourney)
+        {
+            var toUpdateIndex = DataSource.UsersJourney.FindIndex(u => u.UserName == userJourney.UserName);
+            if (toUpdateIndex != -1)
+                if (DataSource.UsersJourney[toUpdateIndex].FlageActive == true)
+                    DataSource.UsersJourney[toUpdateIndex] = userJourney.Clone();
+                else
+                    throw new IdAlreadyExistsException(userJourney.UserName, $"The user name {userJourney.UserName} does not exist");
+            else
+                throw new IdAlreadyExistsException(userJourney.UserName, $"The user name {userJourney.UserName} does not exist");
+        }
+        public void DeleteUserJourney(UserJourney userJourney)
+        {
+            var toDeleteIndex = DataSource.UsersJourney.FindIndex(u => u.UserName == userJourney.UserName);
+            if (toDeleteIndex != -1)
+                if (DataSource.UsersJourney[toDeleteIndex].FlageActive == true)
+                    DataSource.UsersJourney[toDeleteIndex].FlageActive = false;
+                else
+                    throw new IdAlreadyExistsException(userJourney.UserName, $"The user name {userJourney.UserName} is already deleted");
+            else
+                throw new IdAlreadyExistsException(userJourney.UserName, $"The user name {userJourney.UserName} is already deleted");
         }
         #endregion
     }

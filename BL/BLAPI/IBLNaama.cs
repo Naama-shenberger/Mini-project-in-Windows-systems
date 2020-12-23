@@ -35,17 +35,17 @@ namespace BL.BLAPI
         LineOutForARide GetLineOutForARide(int id);
         #endregion
         #region ConsecutiveStations
-        void AddConsecutiveStations(ConsecutiveStations one, ConsecutiveStations two);
-        void DeleteConsecutiveStations(ConsecutiveStations one, ConsecutiveStations two);
+        void AddConsecutiveStations(ConsecutiveStations consecutiveStations);
+        void DeleteConsecutiveStations(ConsecutiveStations consecutiveStations);
         IEnumerable<ConsecutiveStations> GetConsecutiveStations();
         IEnumerable<ConsecutiveStations> GetConsecutiveStationsBy(Predicate<ConsecutiveStations> predicate);
-        ConsecutiveStations GetConsecutiveStations(string id1, string id2);
+        ConsecutiveStations GetConsecutiveStations(int id1, int id2);
         #endregion
         #region User
         void AddUser(User user);
         void DeleteUser(User user);
         IEnumerable<User> GetUsers();
-        User GetUser(int id);
+        User GetUser(string id);
         IEnumerable<IGrouping<bool, User>> GetUsersGroupByAllowingAccess();
         IEnumerable<User> GetUsersBy(Predicate<User> predicate);
         IEnumerable<string> GetUsersNames();

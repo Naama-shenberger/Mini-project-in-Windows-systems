@@ -16,7 +16,7 @@ namespace BL
         #region Bus Line
         /// <summary>
         /// Add a line to the list of bus lines
-        //The function gets a bus line to add
+        //  The function gets a bus line to add
         /// </summary>
         /// <param name="busLine"></param>
         public void AddABusLine(BusLine busLine)
@@ -307,14 +307,139 @@ namespace BL
         {
             return (IEnumerable<LineOutForARide>)dl.LinesWayOut();
         }
+        /// <summary>
+        /// A function that returns a collection of all bus lines to the exit by condition-Predicate
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<LineOutForARide> GetLineOutForARidesBy(Predicate<LineOutForARide> predicate)
         {
-            from sic in dl.GetBusLineNumbers((id) => { return GetLineOutForARide(id); })
-                     let busLine = sic as BO.BusLine
-                     where predicate(busLine)
-                     select busLine;
+           return from sic in dl.GetBusLineNumbers((id) => { return GetLineOutForARide(id);})
+                     let LineOutForARide = sic as BO.LineOutForARide
+            where predicate(LineOutForARide)
+                     select LineOutForARide;
         }
+        /// <summary>
+        /// The function receives an ID number and returns the corresponding object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public LineOutForARide GetLineOutForARide(int id)
+        {
+            BO.LineOutForARide LineOutForARideBO = new BO.LineOutForARide();
+            DO.Bus BusDO;
+            try
+            {
+                BusDO = dl.GetBus(id);
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException("Bus line Station ID is illegal", ex);
+            }
+            BusDO.CopyPropertiesTo(LineOutForARideBO);
+            DO.BusLine BusLineDO = dl.GetBusLine(id);
+            BusLineDO.CopyPropertiesTo(LineOutForARideBO);
+            return LineOutForARideBO;
+        }
+        #endregion
+        #region ConsecutiveStations
+        /// <summary>
+        /// A function that accepts an object of the Consecutive stations type and adds it to the list
+        /// </summary>
+        /// <param name="consecutiveStations"></param>
+        public void AddConsecutiveStations(ConsecutiveStations consecutiveStations)
+        {
+            try
+            {
+                dl.GetConsecutiveStations(consecutiveStations.StationCodeOne, consecutiveStations.StationCodeTwo);
+            }
+            catch(DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
+            DO.ConsecutiveStations consecutiveStationsDO = null;
+            consecutiveStationsDO.CopyPropertiesTo(consecutiveStations);
+            dl.AddConsecutiveStations(consecutiveStationsDO);
+        }
+        /// <summary>
+        /// A function that accepts Consecutive stations to deletion
+        /// </summary>
+        /// <param name="consecutiveStations"></param>
+        public void DeleteConsecutiveStations(ConsecutiveStations consecutiveStations)
+        {
+            try
+            {
+                dl.DeleteConsecutiveStations(dl.GetConsecutiveStations(consecutiveStations.StationCodeOne, consecutiveStations.StationCodeTwo));
+            }
+            catch(DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
+        }
+        /// <summary>
+        /// The function returns a collection of Consecutive Stations
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ConsecutiveStations> GetConsecutiveStations()
+        {
+            return (IEnumerable<ConsecutiveStations>)dl.LinesWayOut();
+        }
+        /// <summary>
+        /// The Function 
+        /// Accepts predicate-Which checks a condition and returns the Consecutive Stations that Sustainers the condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<ConsecutiveStations> GetConsecutiveStationsBy(Predicate<ConsecutiveStations> predicate)
+        {
+            return from sic in dl.GetBusLineStationCode((id) => { return GetBusLine(id); })
+                   let ConsecutiveStations = sic as BO.ConsecutiveStations
+                   where predicate(ConsecutiveStations)
+                   select ConsecutiveStations;
+        }
+        /// <summary>
+        /// The function receives two ID numbers and returns the corresponding object
+        /// two ID- code Consecutive Stations
+        /// </summary>
+        /// <param name="id1"></param>
+        /// <param name="id2"></param>
+        /// <returns></returns>
+        public ConsecutiveStations GetConsecutiveStations(int id1, int id2)
+        {
+            BO.ConsecutiveStations consecutiveStations = new ConsecutiveStations();
+            dl.GetConsecutiveStations(id1, id2).CopyPropertiesTo(consecutiveStations);
+            return consecutiveStations;
+        }
+        #endregion
+        #region  User
+        public void AddUser(User user)
+        {
+            //try
+            //{
+            //    dl.AddUser(user)
+            //}
+        }
+        public void DeleteUser(User user)
+        {
+            dl.DeleteUser(dl.GetUser(user.UserName));
+        }
+        public IEnumerable<User> GetUsers()
+        {
+            return (IEnumerable<User>)dl.GetUsers();
+        }
+        public User GetUser(string id)
+        {
+
+        }
+        public  IEnumerable<IGrouping<bool, User>> GetUsersGroupByAllowingAccess()
+        {
+
+        }
+        public  IEnumerable<User> GetUsersBy(Predicate<User> predicate)
+        {
+
+        }
+        public  IEnumerable<string> GetUsersNames()
         {
 
         }

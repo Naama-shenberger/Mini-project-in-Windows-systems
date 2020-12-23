@@ -42,6 +42,7 @@ namespace DalApi
         IEnumerable<object> GetBusLineNumbers(Func<int, object> generate);
         #endregion
         #region BusLineStation
+        IEnumerable<object> GetBusLineStationCode(Func<int, object> generate);
         BusLineStation GetBusLineStation(int id);
         IEnumerable<BusLineStation> BusLineStations();
         void AddBusLineStation(BusLineStation s);
@@ -56,11 +57,25 @@ namespace DalApi
         void DeleteLineWayOut(LineOutForARide o);
         #endregion
         #region ConsecutiveStations
-        ConsecutiveStations GetConsecutiveStations(string id1, string id2);
+        ConsecutiveStations GetConsecutiveStations(int id1, int id2);
         IEnumerable<ConsecutiveStations> ConsecutivesStations();
         void AddConsecutiveStations(ConsecutiveStations s);
         void UpdateConsecutiveStations(ConsecutiveStations c);
         void DeleteConsecutiveStations(ConsecutiveStations c);
+        #endregion
+        #region User
+        User GetUser(string id);
+        IEnumerable<User> GetUsers();
+        void AddUser(User user);
+        void UpdatUser(User user);
+        void DeleteUser(User user);
+        #endregion
+        #region UserJourney
+        User GetUserJourney(string id);
+        IEnumerable<UserJourney> GetUsersJourney();
+        void AddUserJourney(UserJourney user);
+        void UpdatUser(UserJourney user);
+        void DeleteUserJourney(UserJourney user);
         #endregion
     }
 }

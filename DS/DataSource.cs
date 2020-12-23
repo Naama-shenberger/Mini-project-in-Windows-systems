@@ -15,6 +15,9 @@ namespace DS
         public static List<BusLineStation> BusLineStations;
         public static List<LineOutForARide> LinesOutForARide; 
         public static List<ConsecutiveStations> ListConsecutiveStations;
+        public static List<User> Users;
+        public static List<UserJourney> UsersJourney;
+
         static DataSource()
         {
             InitAllLists();
@@ -134,29 +137,29 @@ namespace DS
             };
             BusLineStations = new List<BusLineStation>
             {
-                new BusLineStation{Active=true,CodeStation="178530",NumberStationInLine=1},
-                new BusLineStation{Active=true,CodeStation="178531",NumberStationInLine=2},
-                new BusLineStation{Active=true,CodeStation="178532",NumberStationInLine=3},
-                new BusLineStation{Active=true,CodeStation="178533",NumberStationInLine=4},
-                new BusLineStation{Active=true,CodeStation="178534",NumberStationInLine=5},
-                new BusLineStation{Active=true,CodeStation="178535",NumberStationInLine=6},
-                new BusLineStation{Active=true,CodeStation="178536",NumberStationInLine=7},
-                new BusLineStation{Active=true,CodeStation="178537",NumberStationInLine=8},
-                new BusLineStation{Active=true,CodeStation="178538",NumberStationInLine=9},
-                new BusLineStation{Active=true,CodeStation="178539",NumberStationInLine=10},
+                new BusLineStation{Active=true,CodeStation=178530,NumberStationInLine=1},
+                new BusLineStation{Active=true,CodeStation=178531,NumberStationInLine=2},
+                new BusLineStation{Active=true,CodeStation=178532,NumberStationInLine=3},
+                new BusLineStation{Active=true,CodeStation=178533,NumberStationInLine=4},
+                new BusLineStation{Active=true,CodeStation=178534,NumberStationInLine=5},
+                new BusLineStation{Active=true,CodeStation=178535,NumberStationInLine=6},
+                new BusLineStation{Active=true,CodeStation=178536,NumberStationInLine=7},
+                new BusLineStation{Active=true,CodeStation=178537,NumberStationInLine=8},
+                new BusLineStation{Active=true,CodeStation=178538,NumberStationInLine=9},
+                new BusLineStation{Active=true,CodeStation=178539,NumberStationInLine=10},
 
             };
             ListConsecutiveStations = new List<ConsecutiveStations>
             {
-                new ConsecutiveStations{StationCodeOne="178530",StationCodeTwo="178531",Distance=(float)1.12,AverageTravelTime=new TimeSpan(00,02,30)},
-                new ConsecutiveStations{StationCodeOne="178531",StationCodeTwo="178532",Distance=(float)3,AverageTravelTime=new TimeSpan(00,04,30)},
-                new ConsecutiveStations{StationCodeOne="178532",StationCodeTwo="178533",Distance=(float)1,AverageTravelTime=new TimeSpan(00,02,00)},
-                new ConsecutiveStations{StationCodeOne="178533",StationCodeTwo="178534",Distance=(float)7,AverageTravelTime=new TimeSpan(00,05,00)},
-                new ConsecutiveStations{StationCodeOne="178534",StationCodeTwo="178535",Distance=(float)2,AverageTravelTime=new TimeSpan(00,02,50)},
-                new ConsecutiveStations{StationCodeOne="178535",StationCodeTwo="178536",Distance=(float)4.67,AverageTravelTime=new TimeSpan(00,04,45)},
-                new ConsecutiveStations{StationCodeOne="178536",StationCodeTwo="178537",Distance=(float)5.3,AverageTravelTime=new TimeSpan(00,04,30)},
-                new ConsecutiveStations{StationCodeOne="178537",StationCodeTwo="178538",Distance=(float)6.98,AverageTravelTime=new TimeSpan(00,04,50)},
-                new ConsecutiveStations{StationCodeOne="178538",StationCodeTwo="178539",Distance=(float)2.4,AverageTravelTime=new TimeSpan(00,03,00)},
+                new ConsecutiveStations{StationCodeOne=178530,StationCodeTwo=178531,Distance=(float)1.12,AverageTravelTime=new TimeSpan(00,02,30)},
+                new ConsecutiveStations{StationCodeOne=178531,StationCodeTwo=178532,Distance=(float)3,AverageTravelTime=new TimeSpan(00,04,30)},
+                new ConsecutiveStations{StationCodeOne=178532,StationCodeTwo=178533,Distance=(float)1,AverageTravelTime=new TimeSpan(00,02,00)},
+                new ConsecutiveStations{StationCodeOne=178533,StationCodeTwo=178534,Distance=(float)7,AverageTravelTime=new TimeSpan(00,05,00)},
+                new ConsecutiveStations{StationCodeOne=178534,StationCodeTwo=178535,Distance=(float)2,AverageTravelTime=new TimeSpan(00,02,50)},
+                new ConsecutiveStations{StationCodeOne=178535,StationCodeTwo=178536,Distance=(float)4.67,AverageTravelTime=new TimeSpan(00,04,45)},
+                new ConsecutiveStations{StationCodeOne=178536,StationCodeTwo=178537,Distance=(float)5.3,AverageTravelTime=new TimeSpan(00,04,30)},
+                new ConsecutiveStations{StationCodeOne=178537,StationCodeTwo=178538,Distance=(float)6.98,AverageTravelTime=new TimeSpan(00,04,50)},
+                new ConsecutiveStations{StationCodeOne=178538,StationCodeTwo=178539,Distance=(float)2.4,AverageTravelTime=new TimeSpan(00,03,00)},
             };
 
         }

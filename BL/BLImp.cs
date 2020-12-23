@@ -343,7 +343,7 @@ namespace BL
         /// <param name="busLine"></param>
         public void DeleteBusLine(BusLine busLine)
         { 
-            dl.DeleteBusLine(dl.GetBusLine(busLine.ID).C);
+            dl.DeleteBusLine(dl.GetBusLine(busLine.ID));
         }
         /// <summary>
         /// The function gets a bus line and the bus stop for deletion

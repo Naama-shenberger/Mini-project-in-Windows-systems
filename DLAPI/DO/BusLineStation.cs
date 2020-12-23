@@ -12,7 +12,7 @@ namespace DO
         /// sets and gets
         /// </summary>
         public bool Active { get; set; }// status of a bus line whether it is active or not
-        public string CodeStation { get; set; }// bus station code
+        public int CodeStation { get; set; }// bus station code
         public int NumberStationInLine { get; set; }//The station number in the line
         /// <summary>
         /// override of ToString
