@@ -18,7 +18,9 @@ namespace BO
         /// </summary>
         /// <returns></returns>
         public override string ToString() => this.ToStringProperty();
+        public IEnumerable<ConsecutiveStations> ConsecutiveStations { set; get; }
         public  IEnumerable<BusLineStation> LineStations {set; get; }//Collection of bus line stations
+        public static IEnumerable<ConsecutiveStations> busLineTwoStations { set; get;}
 
     }
 }

@@ -7,6 +7,9 @@ namespace BL.BLAPI
 {
     interface IBLNaama
     {
+        #region Bus Station
+
+        #endregion
         #region Bus Line 
         BusLine GetBusLine(int id);
         IEnumerable<BusLine> GetAllBusLines();
@@ -14,10 +17,12 @@ namespace BL.BLAPI
         IEnumerable<int> GetNumberLines();
         IEnumerable<BusLine> GetBusLineBy(Predicate<BusLine> predicate);
         void AddABusLine(BusLine busLine);
-        void AddBusStationToLine(BusLine AddToLine, BusLineStation busLineStation);
+        void AddBusStationToLine(BusLine AddToLine, BusLineStation busLineStation,float _Distance, TimeSpan _AverageTravelTime);
         void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, BusLineStation busLineStation);
         void DeleteBusLine(BusLine busLine);
         IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea();
+        void Addatleasttwostations(ConsecutiveStations stations);
+        IEnumerable<ConsecutiveStations> ConsecutiveStationsOrderByDistance(IEnumerable<ConsecutiveStations> busLineStations);
         #endregion
         #region BusLineStation
         void AddBusLineStation(BusLineStation busLineStation);
@@ -59,6 +64,9 @@ namespace BL.BLAPI
         IEnumerable<User> GetUsersJourneyBy(Predicate<UserJourney> predicate);
         IEnumerable<IGrouping<int, UserJourney>> GetUsersJourneyGroupByBusLineJourney();
         #endregion
+//        נסיעת משתמש  - מישהו נמצא בתחנה מסוימת הוא יודע שם אילו אוטובוסים עוברים, מחפש ביניהם רק את האוטובוסים שיש לו את התחנת ירידה איפה שהוא רוצה ויבדוק מה הכי מהר.זו שאילתא שמבוצעת בBL על סמך כל הנתונים
+
+//אם רוצים ישות משתמש אז שומרים את היסטוריית כל הבקשות שלו
     }
 }
 

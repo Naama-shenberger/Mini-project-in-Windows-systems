@@ -628,23 +628,23 @@ namespace DL
         {
             var user = DataSource.Users.Find(u=>u.UserName == id);
             if (user != null)
-                if (user.FlageActive == true)
+                if (user.DelUser == true)
                     return user.Clone();
             throw new IdAlreadyExistsException($"No user have the name {id}");
         }
         public IEnumerable<User> GetUsers()
         {
             return from User in DataSource.Users
-                   where User.FlageActive == true
+                   where User.DelUser == true
                    select User;
         }
         public void AddUser(User user)
         {
             var userIndex = DataSource.Users.FindIndex(u => u.UserName== user.UserName);
             if (userIndex != -1)
-                if (DataSource.Users[userIndex].FlageActive == false)
+                if (DataSource.Users[userIndex].DelUser == false)
                 {
-                    DataSource.Users[userIndex].FlageActive= true;
+                    DataSource.Users[userIndex].DelUser = true;
                     return;
                 }
                 else
@@ -655,7 +655,7 @@ namespace DL
         {
             var toUpdateIndex = DataSource.Users.FindIndex(u => u.UserName== user.UserName);
             if (toUpdateIndex != -1)
-                if (DataSource.Users[toUpdateIndex].FlageActive == true)
+                if (DataSource.Users[toUpdateIndex].DelUser == true)
                     DataSource.Users[toUpdateIndex] = user.Clone();
                 else
                     throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} does not exist");
@@ -666,8 +666,8 @@ namespace DL
         {
             var toDeleteIndex = DataSource.Users.FindIndex(u=>u.UserName==user.UserName);
             if (toDeleteIndex != -1)
-                if (DataSource.Users[toDeleteIndex].FlageActive == true)
-                    DataSource.Users[toDeleteIndex].FlageActive = false;
+                if (DataSource.Users[toDeleteIndex].DelUser == true)
+                    DataSource.Users[toDeleteIndex].DelUser = false;
                 else
                     throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} is already deleted");
             else
@@ -689,7 +689,7 @@ namespace DL
                    where UserJourney.FlageActive == true
                    select UserJourney;
         }
-        public void AddUser(UserJourney userJourney)
+        public void AddUserJourney(UserJourney userJourney)
         {
             var userJourneyIndex = DataSource.UsersJourney.FindIndex(u => u.UserName == userJourney.UserName);
             if (userJourneyIndex != -1)

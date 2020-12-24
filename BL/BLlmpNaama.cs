@@ -14,6 +14,22 @@ namespace BL
     {
         IDal dl = DalFactory.GetDal();
         #region Bus Line
+        public void Addatleasttwostations(ConsecutiveStations stations)
+        {
+            try
+            {
+                if (stations.StationCodeOne.ToString().Length < 6 || stations.StationCodeTwo.ToString().Length < 6)
+                    throw new IdAlreadyExistsException("Code Station number Must have at least 6 numbers");
+                DO.ConsecutiveStations ConsecutiveStationsDO = new DO.ConsecutiveStations();
+                stations.CopyPropertiesTo(ConsecutiveStationsDO);
+                BusLine.busLineTwoStations.ToList().Add(stations);
+                BusLine.busLineTwoStations=ConsecutiveStationsOrderByDistance(BusLine.busLineTwoStations);
+            }
+            catch(IdAlreadyExistsException ex)
+            {
+                throw new IdAlreadyExistsException(ex.ToString());
+            }
+        }
         /// <summary>
         /// Add a line to the list of bus lines
         //  The function gets a bus line to add
@@ -24,8 +40,16 @@ namespace BL
             try
             {
                 dl.GetBusLine(busLine.ID);
+                if(BusLine.busLineTwoStations.ToList().Count==0)
+                    throw new BO.IdAlreadyExistsException("You must add at least two stations to the line");
+                busLine.LineStations.ToList().Add(BusLine.busLineTwoStations.ToList()[0]);
+                BusLine.busLineTwoStations.ToList().Clear();
             }
             catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException("Bus line ID is illegal", ex);
+            }
+            catch (BO.IdAlreadyExistsException ex)
             {
                 throw new BO.IdAlreadyExistsException("Bus line ID is illegal", ex);
             }
@@ -40,12 +64,12 @@ namespace BL
         /// </summary>
         /// <param name="AddToLine"></param>
         /// <param name="busLineStation"></param>
-        public void AddBusStationToLine(BusLine AddToLine, BusLineStation busLineStation)
+        public void AddBusStationToLine(BusLine AddToLine, BusLineStation busLineStation,float _Distance,TimeSpan _AverageTravelTime)
         {
             try
             {
                 if (busLineStation.CodeStation.ToString().Length < 6)
-                    throw new IdAlreadyExistsException(busLineStation.CodeStation.ToString());
+                    throw new IdAlreadyExistsException("Code Station number Must have at least 6 numbers");
                 dl.GetBusLineStation(busLineStation.CodeStation);
             }
             catch(DO.IdAlreadyExistsException ex)
@@ -55,7 +79,19 @@ namespace BL
             DO.BusLineStation busLineStationDO = null;
             busLineStation.CopyPropertiesTo(busLineStationDO);
             dl.AddBusLineStation(busLineStationDO);
+            BO.ConsecutiveStations stations = new ConsecutiveStations();
+            stations.StationCodeOne = AddToLine.ConsecutiveStations.ToList()[AddToLine.ConsecutiveStations.ToList().Count - 1].StationCodeTwo;
+            stations.StationCodeTwo = busLineStation.CodeStation;
+            stations.Flage = true;
+            stations.Distance = _Distance;
+            stations.AverageTravelTime = _AverageTravelTime;
+            AddToLine.ConsecutiveStations.ToList().Add(stations);
+            AddToLine.ConsecutiveStations= ConsecutiveStationsOrderByDistance(AddToLine.ConsecutiveStations);
             AddToLine.LineStations.ToList().Add(busLineStation);
+        }
+        public IEnumerable<BusLineStation> busLineStationsStationsOrderByDistance(IEnumerable<ConsecutiveStations> consecutiveStations, IEnumerable<BusLineStation> busLineStations)
+        {
+            return busLineStations.OrderBy(consecutiveStations.)
         }
         /// <summary>
         /// The function receives a bus line for deletion
@@ -85,7 +121,10 @@ namespace BL
                 DO.BusLineStation busLineStationDO = null;
                 busLineStationDO.CopyPropertiesTo(busLineStation);
                 dl.DeleteBusLineStation(busLineStationDO);
+                DeleteFromLine.ConsecutiveStations.Where(p => p.CodeStation == busLineStation.CodeStation).Select(a => a.Active = false);
+                DeleteFromLine.ConsecutiveStations = ConsecutiveStationsOrderByDistance(DeleteFromLine.ConsecutiveStations);
                 DeleteFromLine.LineStations = (IEnumerable<BusLineStation>)DeleteFromLine.LineStations.Where(p => p.CodeStation == busLineStation.CodeStation).Select(a => a.Active = false);
+                
             }
             catch(DO.IdAlreadyExistsException ex)
             {
@@ -409,6 +448,12 @@ namespace BL
             BO.ConsecutiveStations consecutiveStations = new ConsecutiveStations();
             dl.GetConsecutiveStations(id1, id2).CopyPropertiesTo(consecutiveStations);
             return consecutiveStations;
+        }
+        public IEnumerable<ConsecutiveStations> ConsecutiveStationsOrderByDistance(IEnumerable<ConsecutiveStations> busLineStations)
+        {
+            return from ConsecutiveStations in busLineStations
+                   orderby ConsecutiveStations.Distance
+                   select ConsecutiveStations;
         }
         #endregion
         #region  User

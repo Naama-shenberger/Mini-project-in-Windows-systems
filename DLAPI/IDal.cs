@@ -71,10 +71,10 @@ namespace DalApi
         void DeleteUser(User user);
         #endregion
         #region UserJourney
-        User GetUserJourney(string id);
+        UserJourney GetUserJourney(string id);
         IEnumerable<UserJourney> GetUsersJourney();
         void AddUserJourney(UserJourney user);
-        void UpdatUser(UserJourney user);
+        void UpdatUserJourney(UserJourney user);
         void DeleteUserJourney(UserJourney user);
         #endregion
     }
