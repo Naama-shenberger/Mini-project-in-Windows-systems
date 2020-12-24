@@ -17,6 +17,8 @@ namespace DalApi
         void AddBus(Bus b);
         void UpdateBus(Bus b);
         void DeleteBus(Bus b);
+        IEnumerable<object> GetBusNum(Func<int, object> generate);
+
         #endregion
         #region BusDrive
         BusDrive GetBusDrive(int id);
@@ -28,6 +30,7 @@ namespace DalApi
         #region BusStation
         BusStation GetBusStation(string code);
         IEnumerable<BusStation> BusStations();
+        IEnumerable<object> GetBusStationNumbers(Func<int, object> generate);
         void AddBusStation(BusStation b);
         void UpdateBusStation(BusStation b);
         void DeleteBusStation(BusStation b);

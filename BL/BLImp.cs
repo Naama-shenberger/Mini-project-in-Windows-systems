@@ -17,7 +17,7 @@ namespace BL
         /// Refueling function
         /// </summary>
         /// <param name="bus"></param>
-        private void refillingBus(Bus bus)
+        public void RefillingBus(Bus bus)
         {
             bus.KilometersGas = 0;
         }
@@ -26,10 +26,10 @@ namespace BL
         /// The function calls a Refueling function because every bus that goes to treatment also comes out refueled 
         /// </summary>
         /// <param name="b"></param>
-        private void BusInTreatment(Bus b)
+        public void BusInTreatment(Bus b)
         {
             b.KilometersTreatment = 0;
-            refillingBus(b);
+            RefillingBus(b);
             b.DateTreatment = DateTime.Now;
         }
         /// <summary>
@@ -37,7 +37,7 @@ namespace BL
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
-        private int NumberOflicensePlate(Bus b)
+        public int NumberOflicensePlate(Bus b)
         {
             int year;
             int.TryParse(b.DateActivity.Year.ToString(), out year);
@@ -49,7 +49,7 @@ namespace BL
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
-        private bool dateCheck(Bus b)
+        public bool DateCheck(Bus b)
         {
             int day;
             int month;
@@ -140,13 +140,47 @@ namespace BL
         {
             return (IEnumerable<Bus>)(from item in dl.Buss() select item);
         }
-        public IEnumerable<IGrouping<string, Bus>> GetAllBusslicensePlate()
+        /// <summary>
+        /// A function that returns 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<IGrouping<bool, Bus>> GetAllBusslicensePlate()
         {
+            return from Bus in GetAllBusLines()
+                   group Bus by (TreatmentIsNeeded(int.Parse(Bus.LicensePlate))) into groups
+                   select groups;
         }
+        /// <summary>
+        /// a function that returns all License Plate
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<int> GetNumberbuss()
         {
+            return from item in dl.GetBusNum((id) => { return GetBus(id); })
+                   let bus = item as BO.Bus
+                   orderby bus.LicensePlate
+                   select int.Parse(bus.LicensePlate);
         }
-        public IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate) { }
+        /// <summary>
+        /// A function that returns all buss thet need treatment
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<IGrouping<bool, Bus>> GetAllBusNeedTreatment()
+        {
+            return from Bus in GetAllBusLines()
+                   group Bus by ((NumberOflicensePlate(Bus) == Bus.LicensePlate.Length)) into groups
+                   select groups;
+        }
+        /// <summary>
+        /// lamda Function 
+        /// Accepts predicate-Which checks a condition and returns the buses that Sustainers the condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate) => from sic in dl.GetBusNum((id) => { return GetBus(id); })
+                                                                      let bus = sic as BO.Bus
+                                                                      where predicate(bus)
+                                                                      select bus;
         /// <summary>
         /// A function that checks if a year has passed since the last treatment
         /// </summary>
@@ -165,7 +199,7 @@ namespace BL
             }
             BO.Bus busBO = null;
             b_find.CopyPropertiesTo(busBO);
-            if (!(b_find.KilometersTreatment < 2000 && !dateCheck(busBO)))
+            if (!(b_find.KilometersTreatment < 2000 && !DateCheck(busBO)))
                 return true;
             return false;
 
@@ -197,7 +231,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        BusDrive GetBusDrive(int id)
+        public BusDrive GetBusDrive(int id)
         {
             DO.BusDrive driveDO;
             try
@@ -212,17 +246,20 @@ namespace BL
             driveDO.CopyPropertiesTo(DriveBO);
             return DriveBO;
         }
-        IEnumerable<BusDrive> GetAllBusInDrive()
+        /// <summary>
+        ///  A function that returns all bus in drive
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<BusDrive> GetAllBusInDrive()
         {
-
-
+            return (IEnumerable<BusDrive>)(from item in dl.BussDrive() select item);
         }
         /// <summary>
         /// Add a bus drive to the list of buss
         /// The function gets a bus drive to add 
         /// </summary>
         /// <param name="DriveBO"></param>
-        void AddBusDrive(BusDrive DriveBO)
+        public void AddBusDrive(BusDrive DriveBO)
         {
             DO.BusDrive DriveDO = null;
             DriveBO.CopyPropertiesTo(DriveDO);
@@ -242,7 +279,7 @@ namespace BL
         /// A function that deletes a bus drive from the list of buss that are in drives
         /// </summary>
         /// <param name="busDrive"></param>
-        void DeleteBusDrive(BusDrive busDrive)
+        public void DeleteBusDrive(BusDrive busDrive)
         {
             DO.BusDrive busDrive_find;
             try
@@ -263,7 +300,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        BusStation GetBusStation(string id)
+        public BusStation GetBusStation(string id)
         {
             DO.BusStation stationDO;
             try
@@ -278,15 +315,32 @@ namespace BL
             stationDO.CopyPropertiesTo(stationBO);
             return stationBO;
         }
-        IEnumerable<int> GetNumberStation()
-        { 
+        /// <summary>
+        ///  A function that returns all bus stations
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<BusStation> GetAllBusStation()
+        {
+            return (IEnumerable<BusStation>)(from item in dl.BusStations() select item);
+        }
+        /// <summary>
+        ///  A function that returns all bus station numbers
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<int> GetNumberStation()
+        {
+            return from item in dl.GetBusStationNumbers((id) => { return GetBusLine(id); })
+                   let busStation = item as BO.BusStation
+                   orderby busStation.BusStationKey
+                   select int.Parse(busStation.BusStationKey);
+
         }
         /// <summary>
         /// Add a bus station to the list of bus stations
         /// The function gets a bus station to add  
         /// </summary>
         /// <param name="station"></param>
-        void AddBusStation(BusStation station)
+        public void AddBusStation(BusStation station)
         {
             try
             {
@@ -303,7 +357,7 @@ namespace BL
         /// the function resives the bis station to delete
         /// </summary>
         /// <param name="station"></param>
-        void DeleteBusStation(BusStation station)
+        public void DeleteBusStation(BusStation station)
         {
             DO.BusStation stationDO;
             try
@@ -315,6 +369,14 @@ namespace BL
                 throw new BO.IdAlreadyExistsException("Bus station dose not exists", ex);
             }
             dl.DeleteBusStation(stationDO);
+        }
+        /// <summary>
+        /// a function that returns all bus lines thet passing through the station
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<BusLine> GetAllBusLineInStation()
+        {
+
         }
         #endregion
         #region Bus Line

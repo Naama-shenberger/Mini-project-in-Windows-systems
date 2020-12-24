@@ -33,6 +33,18 @@ namespace DL
         #endregion
         #region Bus Function
         /// <summary>
+        /// A function that uses Encapsulates a method 
+        /// accepts an integer and returns an object
+        /// integer-bus License Plate
+        /// </summary>
+        /// <param name="generate"></param>
+        /// <returns></returns>
+        public IEnumerable<object> GetBusNum(Func<int, object> generate)
+        {
+            return from Bus in DataSource.Buses
+                   select generate(int.Parse(Bus.LicensePlate));
+        }
+        /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus object
         /// </summary>
         /// <param name="id"></param>
@@ -273,6 +285,18 @@ namespace DL
             else
                 throw new IdAlreadyExistsException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
 
+        }
+        /// <summary>
+        /// A function that uses Encapsulates a method 
+        /// accepts an integer and returns an object
+        /// integer-bus station number
+        /// </summary>
+        /// <param name="generate"></param>
+        /// <returns></returns>
+        public IEnumerable<object> GetBusStatinNumbers(Func<int, object> generate)
+        {
+            return from BusS in DataSource.Stations
+                   select generate(int.Parse(BusS.BusStationKey));
         }
         #endregion
         #region BusLine Functions

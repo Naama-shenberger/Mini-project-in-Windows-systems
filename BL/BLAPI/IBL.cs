@@ -10,8 +10,8 @@ namespace BLAPI
         #region BUS
         Bus GetBus(int id);
         IEnumerable<Bus> GetAllBus();
-        IEnumerable<Bus> GetAllBusNeedTreatment();
-        IEnumerable<IGrouping<string,Bus>> GetAllBusslicensePlate();
+        IEnumerable<IGrouping<bool,Bus>> GetAllBusNeedTreatment();
+        IEnumerable<IGrouping<bool,Bus>> GetAllBusslicensePlate();
         IEnumerable<int> GetNumberbuss();
         IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate);
         void AddABus(Bus bus);
@@ -19,9 +19,9 @@ namespace BLAPI
         bool TreatmentIsNeeded(int id);
         void BusInTreatment(Bus b);
         bool FuelCondition(Bus b);
-        void refillingBus(Bus bus);
+        void RefillingBus(Bus bus);
         int NumberOflicensePlate(Bus b);
-        bool dateCheck(Bus b);
+        bool DateCheck(Bus b);
         bool BusCondition(Bus bus);
         #endregion
         #region Bus Drive
@@ -32,7 +32,9 @@ namespace BLAPI
         #endregion
         #region Bus Station
         BusStation GetBusStation(string id);
+        IEnumerable<BusStation> GetAllBusStation();
         IEnumerable<int> GetNumberStation();
+        IEnumerable<BusLine> GetAllBusLineInStation();//A bus line passing through the station
         void AddBusStation(BusStation station);
         void DeleteBusStation(BusStation station);
 
