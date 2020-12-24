@@ -21,11 +21,11 @@ namespace DO
         public string LicensePlate { get; set; }//the license plate
         public TimeSpan ExitStart { get; set; }//Actual departure time
         public int LastStasion { get; set; }//Last stop number on the line that the bus passed
-        public TimeSpan TimeDrive { get; set; }//Transit time at the last stop mentioned above//????
-        public TimeSpan TimeNextStop { get; set; }
-        public string BusDriverFirstName { get; set; }
-        public string BusDriverLastName { get; set; }
-        public string BusDriverId { get; set; }
+        public TimeSpan TimeDrive { get; set; }//Actual time at the last stop mentioned above//????
+        public TimeSpan TimeNextStop { get; set; }//time to next stop
+        public string BusDriverFirstName { get; set; }//Bus Driver First Name
+        public string BusDriverLastName { get; set; }//Bus Driver Last Name
+        public string BusDriverId { get; set; }// Bus Driver ID
         /// <summary>
         /// override of ToString
         /// </summary>

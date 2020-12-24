@@ -12,11 +12,13 @@ namespace BL
     internal class BLImp : IBL
     {
         IDal dl = DalFactory.GetDal();
+        BO.BusStation busStationDOBOAdapter(DO.BusStation stationDO)
+        {
+            BO.BusStation stationBO = new BO.BusStation();
+            stationDO.CopyPropertiesTo(stationBO);
+        
+        }
         #region Bus
-        /// <summary>
-        /// Refueling function
-        /// </summary>
-        /// <param name="bus"></param>
         public void RefillingBus(Bus bus)
         {
             bus.KilometersGas = 0;
@@ -138,7 +140,9 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<Bus> GetAllBus()
         {
-            return (IEnumerable<Bus>)(from item in dl.Buss() select item);
+            return from item in dl.GetAllBuss()
+                   select 
+            //return (IEnumerable<Bus>)(from item in dl.() select item);
         }
         /// <summary>
         /// A function that returns 
