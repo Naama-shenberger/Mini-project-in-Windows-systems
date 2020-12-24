@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using DO;
 using static DO.Enums;
 
@@ -28,7 +27,7 @@ namespace DS
         public static void InitAllLists()
         {
             List<string> adaress = new List<string> {"דרך הגפן 24", "" };
-            Buses = new List<Bus> 
+            ListBuses = new List<Bus> 
             { 
                 new Bus{Active=true,LicensePlate="12345678",DateActivity=new DateTime(2018,12,3),DateTreatment=new DateTime(2019,10,3),Totalkilometers=111,KilometersGas=338,KilometersTreatment=1211,AirTire=15,OilCondition=true},
                 new Bus{Active=true,LicensePlate="22345678",DateActivity=new DateTime(2018,11,3),DateTreatment=new DateTime(2019,11,3),Totalkilometers=112,KilometersGas=339,KilometersTreatment=1131,AirTire=75,OilCondition=true},
@@ -42,63 +41,70 @@ namespace DS
                 new Bus{Active=true,LicensePlate="0234567",DateActivity=new DateTime(2012,2,3),DateTreatment=new DateTime(2020,12,15),Totalkilometers=110,KilometersGas=3363,KilometersTreatment=1112,AirTire=20,OilCondition=true},
             };
             //50 תחנות
-            Stations = new List<BusStation>()
+            ListStations = new List<BusStation>()
             {
-
- new BusStation { Active = true, BusStationKey = "183933", StationAddress = "ישראלי 5", StationName = "תחנה מרכזית ירושלים", Latitude = 3 * (33.3 - 31) + 31, Longitude = 1 * (35.5 - 34.3) + 34.3 },
- new BusStation { Active = true, BusStationKey = "63816" ,StationAddress = "נרקיס 4", StationName = "אלה/בן מימון", Latitude = 6* (33.3 - 31) + 31, Longitude =1* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "263460" ,StationAddress = "נשיא השישי 2", StationName = "שדרות גולדה", Latitude = 18* (33.3 - 31) + 31, Longitude =2* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "190883" ,StationAddress = "הרצוג 5", StationName = "בן סימון", Latitude = 1* (33.3 - 31) + 31, Longitude =16* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "156777" ,StationAddress = "שלום עליכם 8", StationName = "נעמה/שיינברגר", Latitude = 6* (33.3 - 31) + 31, Longitude =2* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "114742" ,StationAddress = "אריה לוי 7", StationName = "נחל חבר/צדוק", Latitude = 2* (33.3 - 31) + 31, Longitude =16* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "291754" ,StationAddress = "נמרוד 6", StationName = "דוד המלך/קקל", Latitude = 2* (33.3 - 31) + 31, Longitude =39* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "268033",StationAddress = "ניקולאי 60", StationName = "האגסי/מנחם", Latitude = 8* (33.3 - 31) + 31, Longitude =48* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "243303",StationAddress = "שבע שבתות תמימות 7", StationName = "ירמיהו/ישעיהו", Latitude = 6* (33.3 - 31) + 31, Longitude =2* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "57589",StationAddress = " רבקה אימנו 55", StationName = "צומאת פת", Latitude = 5* (33.3 - 31) + 31, Longitude =48* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "279745",StationAddress = "בנט 12", StationName = "תחנה מרכזית בית שמש", Latitude = 5* (33.3 - 31) + 31, Longitude =6* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "231591",StationAddress = "שזר 12", StationName = "תחנה מרכזית תל אביב", Latitude = 9* (33.3 - 31) + 31, Longitude =45* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "167697",StationAddress = "שש בש 4", StationName = "תחנת אוניברסיטה העברית", Latitude = 3* (33.3 - 31) + 31, Longitude =39* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "99723",StationAddress = "גולדה מאיר 5", StationName = "מנחם בגין", Latitude = 9* (33.3 - 31) + 31, Longitude =45* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "5970",StationAddress = "מארי קירי 101", StationName = "הרצל/בן גוריון", Latitude = 9* (33.3 - 31) + 31, Longitude =48* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "30760",StationAddress = "שרה אהרונסון 2", StationName = "שדרות רוטשילד", Latitude = 5* (33.3 - 31) + 31, Longitude =2* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "119335",StationAddress = "שזר 12", StationName = "בית לחם/רחל אימינו", Latitude = 8* (33.3 - 31) + 31, Longitude =48* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "48897",StationAddress = "סידני 67", StationName = "יוני נתניהו", Latitude = 3* (33.3 - 31) + 31, Longitude =39* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "54926",StationAddress = "קורונה 19", StationName = "מרכז האקדמי לב", Latitude = 4* (33.3 - 31) + 31, Longitude =27* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "321780",StationAddress = "דובאי 7", StationName = "בן יהודה/שטראוס", Latitude = 9* (33.3 - 31) + 31, Longitude =45* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey =" 145689",StationAddress = "דוב 7", StationName = "גרשון אגרון/קינג גורג", Latitude = 6* (33.3 - 31) + 31, Longitude =27* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "39739",StationAddress = "דנמרק 9", StationName = "מקסיקו/צילה", Latitude = 8* (33.3 - 31) + 31, Longitude =45* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey =" 2624",StationAddress = "המהרל 4", StationName = "כט בנובמבר/שיירת ל ה", Latitude = 7* (33.3 - 31) + 31, Longitude =6* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "4000",StationAddress = "יהודה 4", StationName = "שי אגנון/רחל המשוררת", Latitude = 8* (33.3 - 31) + 31, Longitude =16* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "123691",StationAddress = "אסירי ציון 2", StationName = "החלוץ/אסירי ציון", Latitude = 8* (33.3 - 31) + 31, Longitude =6* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "173577",StationAddress = "מרדכי אנילוויץ 4", StationName = "אנה פראנק/מרדכי אנילוויץ", Latitude = 9* (33.3 - 31) + 31, Longitude =39* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "186398",StationAddress = "ההגנה 50", StationName = "ההגנה/האצלה", Latitude = 4* (33.3 - 31) + 31, Longitude =27* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true,BusStationKey = " 196318",StationAddress = "חבד 770", StationName = "חבד/חיים סבאתו", Latitude = 2* (33.3 - 31) + 31, Longitude =24* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "198070",StationAddress = "חנקין 5", StationName = "אחד העם/חנקין", Latitude = 5* (33.3 - 31) + 31,Longitude =27* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "55035",StationAddress = "קנפה נשרים 44", StationName = "קנפה נשרים/אנגל", Latitude = 3* (33.3 - 31) + 31, Longitude =16* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "216197",StationAddress = "רפפורט 3", StationName = "אהבת ישראל/רפפורט", Latitude = 4*(33.3 - 31) + 31,Longitude =6* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "147342",StationAddress = "מעלות 1", StationName = "שמואל הנגיד/מעלות", Latitude = 9* (33.3 - 31) + 31, Longitude =39* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "115336",StationAddress = "אוסישקין 32", StationName = "בצלאל/אוסישקין", Latitude = 2* (33.3 - 31) + 31, Longitude =39* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = " 19613",StationAddress = "5 הדבידקה", StationName = "הדקל/הדבידקה", Latitude =1* (33.3 - 31) + 31, Longitude =27* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true,BusStationKey = " 198238",StationAddress = "יפו", StationName = "יפו מרכז", Latitude =8* (33.3 - 31) + 31,Longitude =24* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "255213",StationAddress = "הזז 2", StationName = "שדרות בן צבי/הזז", Latitude =3* (33.3 - 31) + 31, Longitude =24* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "261470",StationAddress = "ארתור 77", StationName = "יאנוש קורצק/ארתור", Latitude =1* (33.3 - 31) + 31, Longitude =12* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = " 1697565",StationAddress = "הרב קוק 12", StationName = "רבי יוסי.הרב קוק", Latitude =22* (33.3 - 31) + 31, Longitude =16* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true,BusStationKey = " 99060",StationAddress = "טבריה 6", StationName = "הרצוג/טבריה", Latitude =6* (33.3 - 31) + 31, Longitude =12* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "285269",StationAddress = "בן גוריון 2", StationName = "בן גוריון/זאב זבוטינסקי", Latitude =7* (33.3 - 31) + 31, Longitude =24* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "236838",StationAddress = "הירקון 9", StationName = "אבא הלל/הירקון", Latitude =9* (33.3 - 31) + 31, Longitude =12* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "311197",StationAddress = "מנורה 6", StationName = "מנורה/חיל האוויר", Latitude =8* (33.3 - 31) + 31, Longitude =45* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey =" 301406",StationAddress = "פורים 77", StationName = "חנוכה/פורים", Latitude =7* (33.3 - 31) + 31, Longitude =12* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "176072",StationAddress = "גדעון 11", StationName = "איילון/גדעון", Latitude =7* (33.3 - 31) + 31, Longitude =12* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "47283",StationAddress = "אמיר 44", StationName = "שיקמה/אמיר", Latitude =6* (33.3 - 31) + 31, Longitude =12* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "151005",StationAddress = "שכם 12", StationName = "קקל", Latitude =9* (33.3 - 31) + 31, Longitude =12* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "77448",StationAddress = "טיימ סקוואר 3", StationName = "טיימ סקוואר", Latitude =9* (33.3 - 31) + 31, Longitude =6* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "280814",StationAddress = "גורג 3 ", StationName = "קניג גורג", Latitude =7* (33.3 - 31) + 31, Longitude =6* (35.5 - 34.3) + 34.3},
- new BusStation { Active = true, BusStationKey = "69103",StationAddress = "רייגן 78", StationName = "וויסטן צורצל/רייגין", Latitude =2* (33.3 - 31) + 31, Longitude =24* (35.5 - 34.3) + 34.3},
-
-
-
+                new BusStation{ BusStationKey  = 38831, StationName  = "בי''סברלב/בןיהודה", StationAddress = "רחוב:בןיהודה76עיר:כפרסבארציף:קומה:",  Latitude = 32.183921,   Longitude = 34.917806   },
+                new BusStation{ BusStationKey  = 8573, StationName  = "אלמדינה אלמנורה/זעקוקה", StationAddress = " רחוב:אל מדינה אל מונאוורה  עיר: ירושלים רציף:   קומה:  ",  Latitude = 31.737062, Longitude = 35.23667},
+                new BusStation{  BusStationKey  = 8730, StationName  = "הפסגה/הרשד''ם",StationAddress = " רחוב:הפסגה 13 עיר: ירושלים רציף:   קומה:  ",  Latitude = 31.769614, Longitude = 35.182558 },
+                new BusStation{ BusStationKey  = 8731,StationName  = " הרוזמרין/כביש ", StationAddress = " המנהרות רחוב:הרוזמרין 57 עיר: ירושלים רציף:   קומה:  ", Latitude = 31.732231,Longitude = 35.202069 },
+                new BusStation{ BusStationKey  = 8732, StationName  = " דב יוסף/יערי ", StationAddress = " רחוב:דב יוסף  עיר: ירושלים רציף:   קומה:  ", Latitude = 31.734036, Longitude = 35.194675 },
+                new BusStation{ BusStationKey  = 8733,  StationName  = "",  StationAddress = "אצטדיון טדי/א''ס ביתר רחוב:דרך אגודת ספורט בית''ר  עיר: ירושלים רציף:   קומה:  ", Latitude = 31.751193,   Longitude = 35.18933    },
+    new BusStation{ BusStationKey  = 8734,  StationName  = "חניון הלאום",  StationAddress = " רחוב:שדרות הנשיא השישי 2 עיר: ירושלים רציף:   קומה:  ",   Latitude = 31.783061,   Longitude = 35.203237   },
+    new BusStation{ BusStationKey  = 8737,  StationName  = " שכונת בזבז",   StationAddress = " רחוב:דרך בית לחם הישנה  עיר: ירושלים רציף:   קומה:",   Latitude =   31.770693,   Longitude = 35.243402   },
+    new BusStation{ BusStationKey  = 8740,  StationName  = "שמואל הנביא/תדהר",  StationAddress = "רחוב:שמואל הנביא 71 עיר: ירושלים רציף:   קומה: ",   Latitude =   31.793299,   Longitude = 35.222176   },
+    new BusStation{ BusStationKey  = 8741,  StationName  = "שמואל הנביא/יקים",  StationAddress = " רחוב:שמואל הנביא 47 עיר: ירושלים רציף:   קומה: ",   Latitude =  31.791394,   Longitude = 35.22416    },
+    new BusStation{ BusStationKey  = 8743,  StationName  = "זקס",   StationAddress = " רחוב:משה זקס 5 עיר: ירושלים רציף:   קומה:  ",    Latitude = 31.789828,   Longitude = 35.225822   },
+    new BusStation{ BusStationKey  = 8744,  StationName  = "שמואל הנביא/יקים",  StationAddress = "רחוב:שמואל הנביא 48 עיר: ירושלים רציף:   קומה:  ",   Latitude =  31.791505,   Longitude = 35.224204   },
+    new BusStation{ BusStationKey  = 8745,  StationName  = "שמואל הנביא/תדהר",  StationAddress = "רחוב:שמואל הנביא 70 עיר: ירושלים רציף:   קומה: ",   Latitude =   31.792975,   Longitude = 35.222797   },
+    new BusStation{ BusStationKey  = 8748,  StationName  = "ירמיהו/אלקנה",  StationAddress = " רחוב:ירמיהו  עיר: ירושלים רציף:   קומה:  ",  Latitude = 31.792925,   Longitude = 35.213412   },
+    new BusStation{ BusStationKey  = 8749,  StationName  = "משרד החוץ/שד' רבין",    StationAddress = " רחוב:שדרות יצחק רבין  עיר: ירושלים רציף:   קומה:",   Latitude =   31.782889, Longitude = 35.202207   },
+    new BusStation{ BusStationKey  = 8750,  StationName  = "אצטדיון טדי/א''ס ביתר", StationAddress = " רחוב:דרך אגודת ספורט בית''ר  עיר: ירושלים רציף:   קומה:  ",  Latitude = 31.751345,   Longitude = 35.188474   },
+    new BusStation{ BusStationKey  = 8755,  StationName  = "אנג'ל/כנפי נשרים",  StationAddress = " רחוב:כנפי נשרים 6 עיר: ירושלים רציף:   קומה:  ", Latitude = 31.787712,   Longitude = 35.192306   },
+    new BusStation{ BusStationKey  = 8756,  StationName  = "מרכז שטנר/כנפי נשרים",  StationAddress = " רחוב:כנפי נשרים 20 עיר: ירושלים רציף:   קומה:  ",    Latitude = 31.787703,   Longitude = 35.188761   },
+    new BusStation{ BusStationKey  = 8757,  StationName  = "בית ענבר/כנפי נשרים",   StationAddress = " רחוב:כנפי נשרים  עיר: ירושלים רציף:   קומה:  ",  Latitude = 31.787728,   Longitude = 35.185498    },
+    new BusStation{ BusStationKey  = 8758,  StationName  = "רוזנטל/כנפי נשרים", StationAddress = " רחוב:הרב אברהם דוד רוזנטל  עיר: ירושלים רציף:   קומה:  ",    Latitude = 31.787754,   Longitude = 35.179644   },
+    new BusStation{ BusStationKey  = 8760,  StationName  = "קצנלבוגן/מעלות בוסטון", StationAddress = " רחוב:הרב רפאל קצנלבוגן 16 עיר: ירושלים רציף:   קומה:  ", Latitude = 31.788077,   Longitude = 35.173651   },
+    new BusStation{ BusStationKey  = 8762,  StationName  = "דבר ירושלים/קצנלבוגן",  StationAddress = " רחוב:הרב רפאל קצנלבוגן 58 עיר: ירושלים רציף:   קומה:  ", Latitude = 31.783625,   Longitude = 35.174993   },
+    new BusStation{ BusStationKey  = 8763,  StationName  = "ישיבת ויזניץ/קצנלבוגן", StationAddress = " רחוב:הרב רפאל קצנלבוגן 74 עיר: ירושלים רציף:   קומה:  ", Latitude = 31.782684,   Longitude = 35.177453   },
+    new BusStation{ BusStationKey  = 8764,  StationName  = "קצנלבוגן/הפלאה",    StationAddress = " רחוב:הרב רפאל קצנלבוגן 88 עיר: ירושלים רציף:   קומה:  ", Latitude = 31.784417,   Longitude = 35.177826   },
+    new BusStation{ BusStationKey  = 8765,  StationName  = "כפר שאול/קצנלבוגן", StationAddress = " רחוב:הרב רפאל קצנלבוגן 94 עיר: ירושלים רציף:   קומה:  ", Latitude = 31.785614,   Longitude = 35.178884   },
+    new BusStation{ BusStationKey  = 8786,  StationName  = "דרך שכם/טובלר", StationAddress = " רחוב:דרך שכם 45 עיר: ירושלים רציף:   קומה:",    Latitude =   31.792394,  Longitude = 35.22901    },
+    new BusStation{ BusStationKey  = 8787,  StationName  = "דרך שכם/טובלר", StationAddress = " רחוב:דרך שכם 45 עיר: ירושלים רציף:   קומה:  ",   Latitude = 31.792304,   Longitude = 35.229086   },
+    new BusStation{ BusStationKey  = 8788,  StationName  = "בית ספר א סכאכיני", StationAddress = " רחוב:דרך שכם 17 עיר: ירושלים רציף:   קומה:  ",   Latitude = 31.793122,   Longitude = 35.230291   },
+    new BusStation{ BusStationKey  = 8792,  StationName  = "שאולזון/רוזנטל",    StationAddress = "רחוב:הרב ש. שאולזון 3 עיר: ירושלים רציף:   קומה:  ",  Latitude = 31.790632,   Longitude = 35.17594    },
+    new BusStation{ BusStationKey  = 8793,  StationName  = "בית ענבר/כנפי נשרים",  StationAddress = "רחוב:כנפי נשרים 21 עיר: ירושלים רציף:   קומה:  ",   Latitude = 31.787528,   Longitude = 35.184601   },
+    new BusStation{ BusStationKey  = 8794,  StationName  = "מרכז שטנר/כנפי נשרים",  StationAddress = " רחוב:כנפי נשרים 11 עיר: ירושלים רציף:   קומה:  ",    Latitude = 31.78751,    Longitude = 35.188178   },
+    new BusStation{ BusStationKey  = 8795,  StationName  = "אנג'ל/כנפי נשרים",  StationAddress = " רחוב:כנפי נשרים  עיר: ירושלים רציף:   קומה:  ",  Latitude = 31.787504,   Longitude = 35.192121   },
+    new BusStation{ BusStationKey  = 38833, StationName  = "הנחשול/הדייגים",    StationAddress = " :רחוב:הנחשול30עיר:ראשוןלציוןרציף:קומה ",  Latitude =31.984553 ,   Longitude = 34.782828   },
+    new BusStation{ BusStationKey  = 38834, StationName  = "פריד/ששתהימים", StationAddress = "רחוב:משה פריד 9  עיר: רחוב ותרציף :קומה:",   Latitude = 31.88855,    Longitude = 34.790904   },
+    new BusStation{ BusStationKey  = 38837, StationName  = "חנהאברך/וולקני",    StationAddress = " רחוב:חנהאברך9עיר:רחובותרציף:קומה:",  Latitude = 31.892166,   Longitude = 34.796071   },
+    new BusStation{ BusStationKey  = 38839, StationName  = "הבנים/אליכהן",  StationAddress = "רחוב:הבנים4עיר:קריתעקרוןרציף:קומה:",  Latitude = 31.862305,   Longitude = 34.821857   },
+    new BusStation{ BusStationKey  = 38840, StationName  = "ויצמן/הבנים",   StationAddress = "רחוב:וייצמן11עיר:קריתעקרוןרציף:קומה:",    Latitude = 31.865085,   Longitude = 34.822237   },
+    new BusStation{ BusStationKey  = 38841, StationName  = "האירוס/הכלנית", StationAddress = " רחוב:האירוס13עיר:קריתעקרוןרציף:קומה:",   Latitude = 31.865222,   Longitude = 34.818957   },
+    new BusStation{ BusStationKey  = 38844, StationName  = "אליכהן/לוחמיהגטאות",    StationAddress = " רחוב:אליכהן62עיר:קריתעקרוןרציף:קומה:",   Latitude = 31.86244,    Longitude = 34.827023   },
+    new BusStation{ BusStationKey  = 38845, StationName  = "שבזי/שבת אחים", StationAddress = " רחוב:שבזי51עיר:קריתעקרוןרציף:קומה:", Latitude = 31.863501,   Longitude = 34.828702   },
+    new BusStation{ BusStationKey  = 38847, StationName  = "חייםברלב/שדרותיצחקרבין",    StationAddress = " רחוב:חייםברלבעיר:ראשוןלציוןרציף:קומה:",  Latitude = 31.977409,   Longitude = 34.763896   },
+    new BusStation{ BusStationKey  = 38848, StationName  = " מרכז לבריאות הנפש לב השרון ",  StationAddress = " רחוב:עיר:צורמשהרציף:קומה:",  Latitude = 32.300345,   Longitude = 34.912708   },
+    new BusStation{ BusStationKey  = 38849, StationName  = "מרכז לבריאות הנפש לב השרון",    StationAddress = " רחוב:עיר:צורמשהרציף:קומה:",  Latitude = 32.301347,   Longitude = 34.912602   },
+    new BusStation{ BusStationKey  = 38852, StationName  = "הולצמן/המדע",   StationAddress = " רחוב:חייםהולצמן2עיר:רחובותרציף:קומה: ",  Latitude =31.914255,    Longitude = 34.807944   },
+    new BusStation{ BusStationKey  = 38856, StationName  = "הרותם/הדגניות", StationAddress = " רחוב:הרותם3עיר:רחובותרציף:קומה:",    Latitude = 31.874963,   Longitude = 34.81249    },
+    new BusStation{ BusStationKey  = 38860, StationName  = "מבואהגפן/מורדהתאנה",    StationAddress = " רחוב:מבואהגפןעיר:ינוברציף:קומה ",    Latitude =32.305234,   Longitude = 34.948647   },
+    new BusStation{ BusStationKey  = 38861, StationName  = "מבואהגפן/ההרחבה",   StationAddress = " רחוב:מבואהגפןעיר:ינוברציף:קומה:",    Latitude = 32.304022,   Longitude = 34.943393   },
+    new BusStation{ BusStationKey  = 38862, StationName  = "ההרחבהא",   StationAddress = "רחוב:ההרחבהעיר:גאוליםרציף:קומה:", Latitude = 32.302957,   Longitude = 34.940529   },
+    new BusStation{ BusStationKey  = 38863, StationName  = "ההרחבהב",   StationAddress = " רחוב:ההרחבהעיר:גאוליםרציף:קומה:",    Latitude = 32.300264,   Longitude = 34.939512   },
+    new BusStation{ BusStationKey  = 38864, StationName  = "ההרחבה/הותיקים",    StationAddress = "רחוב:ההרחבהעיר:גאוליםרציף:קומה:", Latitude = 32.298171,   Longitude = 34.938705   },
+    new BusStation{ BusStationKey  = 38870, StationName  = " הראשונים/כביש5700",    StationAddress = " רחוב:המגדל13עיר:כפרחייםרציף:קומה:",  Latitude = 32.352953,   Longitude = 34.899465   },
+    new BusStation{ BusStationKey  = 38872, StationName  = "הגאוןבןאישחי/צאלון",    StationAddress = " רחוב:עיר:רחובותרציף:קומה:",  Latitude = 31.897286,   Longitude = 34.775083   },
+    new BusStation{ BusStationKey  = 38873, StationName  = "עוקשי/לויאשכול",    StationAddress = " רחוב:ישראלעוקשי4עיר:רחובותרציף:קומה:",   Latitude = 31.883941,   Longitude = 34.807039   },
+    new BusStation{ BusStationKey  = 38876, StationName  = "גורודסקי/יחיאלפלדי",    StationAddress = " רחוב:יהודהגורודיסקי35עיר:רחובותרציף:קומה:",  Latitude = 31.898463,   Longitude = 34.823461   },
+    new BusStation{ BusStationKey  = 38877, StationName  = "דרךמנחםבגין/יעקבחזן",   StationAddress = "רחוב:דרךמנחםבגין30עיר:פתחתקווהרציף:קומה:",    Latitude = 32.076535,   Longitude = 34.904907   },
+    new BusStation{ BusStationKey  = 38879, StationName  = " התאנה/הגפן",   StationAddress = " רחוב:התאנהעיר:יציץרציף:קומה:",   Latitude = 31.865457,   Longitude = 34.859437   },
+    new BusStation{ BusStationKey  = 38880, StationName  = "התאנה/האלון",   StationAddress = "רחוב:התאנהעיר:יציץרציף:קומה:",    Latitude = 31.866772,   Longitude = 34.864555   },
+    new BusStation{ BusStationKey  = 38881, StationName  = "דרךהפרחים/יסמין",   StationAddress = " רחוב:דרךהפרחים46עיר:גדרהרציף:קומה:", Latitude = 31.809325,   Longitude = 34.784347   },
+    new BusStation{ BusStationKey  = 38884, StationName  = "מנחםבגין/יצחקרבין", StationAddress = "רחוב:שדרותמנחםבגין4עיר:גדרהרציף:קומה:",   Latitude = 31.799224,   Longitude = 34.782985   },
+    new BusStation{ BusStationKey  = 38885, StationName  = "חייםהרצוג/דולב",    StationAddress = " רחוב:חייםהרצוג12עיר:גדרהרציף:קומה:", Latitude = 31.800334,   Longitude = 34.785069   },
             };
-            BusDrives = new List<BusDrive>
+            ListBusDrives = new List<BusDrive>
             {
                 new BusDrive{Active=true,LicensePlate="12345611",ExitStart=new TimeSpan(11,23,4),TimeDrive=new TimeSpan(1,662,33),TimeNextStop=new TimeSpan(12,2,3),LastStasion=06101,BusDriverFirstName="mark",BusDriverLastName="smith",BusDriverId="017909168"},
                 new BusDrive{Active=true,LicensePlate="12345612",ExitStart=new TimeSpan(06,11,2),TimeDrive=new TimeSpan(1,23,3),TimeNextStop=new TimeSpan(1,2,33),LastStasion=06101,BusDriverFirstName="james",BusDriverLastName="lay",BusDriverId="017909168"},
@@ -111,6 +117,8 @@ namespace DS
                 new BusDrive{Active=true,LicensePlate="12345618",ExitStart=new TimeSpan(11,2,4),TimeDrive=new TimeSpan(2,3,45),TimeNextStop=new TimeSpan(1,2,23),LastStasion=057101,BusDriverFirstName="harry",BusDriverLastName="potter",BusDriverId="066609168"},
                 new BusDrive{Active=true,LicensePlate="12345619",ExitStart=new TimeSpan(13,2,2),TimeDrive=new TimeSpan(10,02,9),TimeNextStop=new TimeSpan(1,2,63),LastStasion=821101,BusDriverFirstName="ron",BusDriverLastName="wez",BusDriverId="017999998"},
                 new BusDrive{Active=true,LicensePlate="12345610",ExitStart=new TimeSpan(33,4,5),TimeDrive=new TimeSpan(11,0,21),TimeNextStop=new TimeSpan(1,2,36),LastStasion=901101,BusDriverFirstName="america",BusDriverLastName="singer",BusDriverId="04449168"},
+                
+
             };
 
             BusLines = new List<BusLine>
