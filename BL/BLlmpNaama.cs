@@ -84,21 +84,21 @@ namespace BL
         {
             try
             {
-                dl.GetBusLine(busLine.ID);
-                if(BusLine.busLineTwoStations.ToList().Count==0)
+                if (BusLine.busLineTwoStations.ToList().Count == 0)
                     throw new BO.IdAlreadyExistsException("You must add at least two stations to the line");
                 busLine.LineStations.ToList().Add(BusLine.busLineTwoStations.ToList()[0]);
                 BusLine.busLineTwoStations.ToList().Clear();
+                dl.GetBusLine(busLine.ID);
             }
             catch (DO.IdAlreadyExistsException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus line ID is illegal", ex);
+                dl.AddBusLine(BusLineBoDoAdapter(busLine));
             }
             catch (BO.IdAlreadyExistsException ex)
             {
                 throw new BO.IdAlreadyExistsException("Bus line ID is illegal", ex);
             }
-            dl.AddBusLine(BusLineBoDoAdapter(busLine));
+            
           
         }
         /// <summary>
@@ -115,21 +115,24 @@ namespace BL
                     throw new IdAlreadyExistsException("Code Station number Must have at least 6 numbers");
                 dl.GetBusLineStation(busLineStation.CodeStation);
             }
-            catch(DO.IdAlreadyExistsException ex)
+            catch(DO.IdAlreadyExistsException)
+            {
+                dl.AddBusLineStation(BusLineStationBoDoAdapter(busLineStation));
+                BO.ConsecutiveStations stations = new ConsecutiveStations();
+                stations.StationCodeOne = AddToLine.ConsecutiveStations.ToList()[AddToLine.ConsecutiveStations.ToList().Count - 1].StationCodeTwo;
+                stations.StationCodeTwo = busLineStation.CodeStation;
+                stations.Flage = true;
+                stations.Distance = _Distance;
+                stations.AverageTravelTime = _AverageTravelTime;
+                AddToLine.ConsecutiveStations.ToList().Add(stations);
+                AddToLine.ConsecutiveStations = ConsecutiveStationsOrderByDistance(AddToLine.ConsecutiveStations);
+                AddToLine.LineStations.ToList().Add(busLineStation);
+                AddToLine.LineStations = busLineStationsStationsOrderByDistance(AddToLine.ConsecutiveStations, AddToLine.LineStations);
+            }
+            catch (BO.IdAlreadyExistsException ex)
             {
                 throw new BO.IdAlreadyExistsException("ERROR", ex);
             }
-            dl.AddBusLineStation(BusLineStationBoDoAdapter(busLineStation));
-            BO.ConsecutiveStations stations = new ConsecutiveStations();
-            stations.StationCodeOne = AddToLine.ConsecutiveStations.ToList()[AddToLine.ConsecutiveStations.ToList().Count - 1].StationCodeTwo;
-            stations.StationCodeTwo = busLineStation.CodeStation;
-            stations.Flage = true;
-            stations.Distance = _Distance;
-            stations.AverageTravelTime = _AverageTravelTime;
-            AddToLine.ConsecutiveStations.ToList().Add(stations);
-            AddToLine.ConsecutiveStations= ConsecutiveStationsOrderByDistance(AddToLine.ConsecutiveStations);
-            AddToLine.LineStations.ToList().Add(busLineStation);
-            AddToLine.LineStations = busLineStationsStationsOrderByDistance(AddToLine.ConsecutiveStations,AddToLine.LineStations);
         }
         /// <summary>
         /// Function that receives a collection of successive stations and stations of lines 
@@ -222,7 +225,14 @@ namespace BL
         /// <returns></returns>
         public BusLine GetBusLine(int id)
         {
-          return BusLineDoBoAdapter(dl.GetBusLine(id));
+            try
+            {
+                return BusLineDoBoAdapter(dl.GetBusLine(id));
+            }
+            catch(DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
         }
         /// <summary>
         /// lamda Function 
@@ -299,14 +309,14 @@ namespace BL
                     throw new IdAlreadyExistsException(busLineStation.CodeStation.ToString());
                 dl.GetBusLineStation(busLineStation.CodeStation);
             }
-            catch(IdAlreadyExistsException ex)
+            catch(DO.IdAlreadyExistsException ex)
+            {
+                dl.AddBusLineStation(BusLineStationBoDoAdapter(busLineStation));
+            }
+            catch (BO.IdAlreadyExistsException ex)
             {
                 throw new BO.IdAlreadyExistsException("Bus line Station ID is illegal", ex);
             }
-            DO.BusLineStation busLineStationDO = null;
-            busLineStation.CopyPropertiesTo(busLineStationDO);
-            dl.AddBusLineStation(busLineStationDO);
-
         }
         /// <summary>
         /// A function that receives a bus line station for deletion
@@ -343,23 +353,58 @@ namespace BL
         /// <returns></returns>
         public BusLineStation GetBusLineStation(int id)
         {
-            BO.BusLineStation BusLineStationBO = new BO.BusLineStation();
-            DO.BusStation BusStationDO;
+            
             try
             {
-                BusStationDO = dl.GetBusStation(id.ToString());
+                return BusLineStationDoBoAdapter(dl.GetBusLineStation(id));
             }
             catch (DO.IdAlreadyExistsException ex)
             {
                 throw new BO.IdAlreadyExistsException("Bus line Station ID is illegal", ex);
             }
-            BusStationDO.CopyPropertiesTo(BusLineStationBO);
-            DO.BusLine BusLineDO = dl.GetBusLine(id);
-            BusLineDO.CopyPropertiesTo(BusLineStationBO);
-            return BusLineStationBO;
+            
         }
         #endregion
         #region LineOutForARide
+        /// <summary>
+        /// A function that receives a DO type bus line object and returns a BO type bus line
+        /// </summary>
+        /// <param name="LineOutForARideDO"></param>
+        /// <returns></returns>
+        public BO.LineOutForARide LineOutForARideDoBoAdapter(DO.LineOutForARide LineOutForARideDO)
+        {
+            BO.LineOutForARide LineOutForARideBO = new BO.LineOutForARide();
+            DO.BusLine busLineDO;
+            int id = LineOutForARideDO.ID;
+            try
+            {
+                busLineDO = dl.GetBusLine(id);
+            }
+            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            busLineDO.CopyPropertiesTo(busLineDO);
+            LineOutForARideDO.CopyPropertiesTo(LineOutForARideBO);
+            return LineOutForARideBO;
+        }
+        /// <summary>
+        /// A function that receives a BO type bus line object and returns a DO type bus line
+        /// </summary>
+        /// <param name="LineOutForARideBO"></param>
+        /// <returns></returns>
+        public DO.LineOutForARide LineOutForARideBoDoAdapter(BO.LineOutForARide LineOutForARideBO)
+        {
+
+            DO.LineOutForARide LineOutForARideDO = new DO.LineOutForARide();
+            BO.BusLine busLineBO;
+            int id = LineOutForARideBO.ID;
+            try
+            {
+                busLineBO = GetBusLine(id);
+            }
+            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            busLineBO.CopyPropertiesTo(LineOutForARideDO);
+            LineOutForARideBO.CopyPropertiesTo(LineOutForARideDO);
+            return LineOutForARideDO;
+        }
         /// <summary>
         /// A function that receives a bus to the exit and adds it to the collection
         /// Provided it does not exist
@@ -371,13 +416,11 @@ namespace BL
             {
                 dl.GetLineWayOut(lineOutForARide.ID);
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdAlreadyExistsException)
             {
-                throw new BO.IdAlreadyExistsException("line Out For A Ride ID is illegal", ex);
+                dl.AddLineWayOut(LineOutForARideBoDoAdapter(lineOutForARide));
             }
-            DO.LineOutForARide LineOutForARideDO = null;
-            lineOutForARide.CopyPropertiesTo(LineOutForARideDO);
-            dl.AddLineWayOut(LineOutForARideDO);
+           
         }
         /// <summary>
         /// The function receives a bus to exit for deletion
@@ -387,9 +430,7 @@ namespace BL
         {
             try 
             {
-                DO.LineOutForARide lineOutForARideDO = null;
-                lineOutForARide.CopyPropertiesTo(lineOutForARideDO);
-                dl.DeleteLineWayOut(lineOutForARideDO);
+                dl.DeleteLineWayOut(LineOutForARideBoDoAdapter(lineOutForARide));
             }
             catch(DO.IdAlreadyExistsException ex)
             {
@@ -423,7 +464,8 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<LineOutForARide> GetLineOutForARides()
         {
-            return (IEnumerable<LineOutForARide>)dl.LinesWayOut();
+            return from LineOutForARide in dl.LinesWayOut()
+                   select  LineOutForARideDoBoAdapter(LineOutForARide);
         }
         /// <summary>
         /// A function that returns a collection of all bus lines to the exit by condition-Predicate

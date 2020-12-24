@@ -35,6 +35,8 @@ namespace BL.BLAPI
         BusLineStation GetBusLineStation(int id);
         #endregion
         #region LineOutForARide
+        BO.LineOutForARide LineOutForARideDoBoAdapter(DO.LineOutForARide LineOutForARideDO);
+        DO.LineOutForARide LineOutForARideBoDoAdapter(BO.LineOutForARide LineOutForARideBO);
         void AddLineOutForARide(LineOutForARide lineOutForARide);
         void DeleteLineOutForARide(LineOutForARide lineOutForARide);
         IEnumerable<IGrouping<TimeSpan, LineOutForARide>> GetAllBusLinesGroupByExitStartTime();
