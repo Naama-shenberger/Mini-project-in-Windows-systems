@@ -12,6 +12,7 @@ namespace BL.BLAPI
         #endregion
         #region Bus Line 
         BO.BusLine BusLineDoBoAdapter(DO.BusLine busLineDO);
+        DO.BusLine BusLineBoDoAdapter(BO.BusLine busLineBO);
         BusLine GetBusLine(int id);
         IEnumerable<BusLine> GetAllBusLines();
         IEnumerable<BusLine> GetAllBusLinesSortByNumberOfStations();
@@ -26,6 +27,8 @@ namespace BL.BLAPI
         IEnumerable<ConsecutiveStations> ConsecutiveStationsOrderByDistance(IEnumerable<ConsecutiveStations> busLineStations);
         #endregion
         #region BusLineStation
+        BO.BusLineStation BusLineStationDoBoAdapter(DO.BusLineStation busLineStationDO);
+        DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO);
         void AddBusLineStation(BusLineStation busLineStation);
         void DeleteBusLineStation(BusLineStation busLineStation);
         IEnumerable<BusLineStation> GetAllBusLineStations(Func<BusLineStation, bool> predicat = null);

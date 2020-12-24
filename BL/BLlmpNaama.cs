@@ -14,6 +14,30 @@ namespace BL
     {
         IDal dl = DalFactory.GetDal();
         #region Bus Line
+        /// <summary>
+        /// A function that receives a BO type bus line object and returns a DO type bus line
+        /// </summary>
+        /// <param name="busLineBO"></param>
+        /// <returns></returns>
+        public DO.BusLine BusLineBoDoAdapter(BO.BusLine busLineBO)
+        {
+            DO.BusLine busLineDO = new DO.BusLine();
+            BO.Bus busBO;
+            int id = busLineBO.ID;
+            try
+            {
+                busBO = GetBus(id);//פונקציה שאצל אלה
+            }
+            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            busBO.CopyPropertiesTo(busLineDO);
+            busLineBO.CopyPropertiesTo(busLineDO);
+            return busLineDO;
+        }
+        /// <summary>
+        /// A function that receives a DO type bus line object and returns a BO type bus line
+        /// </summary>
+        /// <param name="busLineDO"></param>
+        /// <returns></returns>
         public BO.BusLine BusLineDoBoAdapter(DO.BusLine busLineDO)
         {
             BO.BusLine busLineBO = new BO.BusLine();
@@ -26,10 +50,10 @@ namespace BL
             catch(DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
             busDO.CopyPropertiesTo(busLineDO);
             busLineDO.CopyPropertiesTo(busLineBO);
-            busLineBO.LineStations = from sin in dl.BusLineStations()
+            busLineBO.LineStations = from sin in dl.GetBusLineStations(sin => sin.CodeStation == id)
                                      let BusLineStation = dl.GetBusLineStation(sin.CodeStation)
-                                     select BusLineStation.CopyPropertiesTo(sin);
-
+                                     select BusLineStation.CopyTobusLineStation(sin);
+            return busLineBO;
         }
         /// <summary>
         /// The function gets an object to add nearby stations
@@ -74,9 +98,7 @@ namespace BL
             {
                 throw new BO.IdAlreadyExistsException("Bus line ID is illegal", ex);
             }
-            DO.BusLine busLineDO=null;
-            busLine.CopyPropertiesTo(busLineDO);
-            dl.AddBusLine(busLineDO);
+            dl.AddBusLine(BusLineBoDoAdapter(busLine));
           
         }
         /// <summary>
@@ -97,9 +119,7 @@ namespace BL
             {
                 throw new BO.IdAlreadyExistsException("ERROR", ex);
             }
-            DO.BusLineStation busLineStationDO = null;
-            busLineStation.CopyPropertiesTo(busLineStationDO);
-            dl.AddBusLineStation(busLineStationDO);
+            dl.AddBusLineStation(BusLineStationBoDoAdapter(busLineStation));
             BO.ConsecutiveStations stations = new ConsecutiveStations();
             stations.StationCodeOne = AddToLine.ConsecutiveStations.ToList()[AddToLine.ConsecutiveStations.ToList().Count - 1].StationCodeTwo;
             stations.StationCodeTwo = busLineStation.CodeStation;
@@ -170,7 +190,7 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<BusLine> GetAllBusLines()
         {
-            return (IEnumerable<BusLine>)(from item in dl.BusLines() select item);
+            return from item in dl.BusLines() select BusLineDoBoAdapter(item);
         }
         /// <summary>
         ///A function that returns all bus lines in groups according to their areas 
@@ -202,20 +222,7 @@ namespace BL
         /// <returns></returns>
         public BusLine GetBusLine(int id)
         {
-            BO.BusLine BusLineBO = new BO.BusLine();
-            DO.Bus BusDO;
-            try
-            {
-                BusDO = dl.GetBus(id);
-            }
-            catch (DO.IdAlreadyExistsException ex)
-            {
-                throw new BO.IdAlreadyExistsException("Bus line ID is illegal", ex);
-            }
-            BusDO.CopyPropertiesTo(BusLineBO);
-            DO.BusLine BusLineDO = dl.GetBusLine(id);
-            BusLineDO.CopyPropertiesTo(BusLineBO);
-            return BusLineBO;
+          return BusLineDoBoAdapter(dl.GetBusLine(id));
         }
         /// <summary>
         /// lamda Function 
@@ -240,6 +247,45 @@ namespace BL
         }
         #endregion
         #region BusLineStation
+        /// <summary>
+        ///  A function that receives a DO type bus line object and returns a BO type bus line
+        /// </summary>
+        /// <param name="busLineStationDO"></param>
+        /// <returns></returns>
+        public BO.BusLineStation BusLineStationDoBoAdapter(DO.BusLineStation busLineStationDO)
+        {
+            BO.BusLineStation busLineStationBO = new BO.BusLineStation();
+            DO.BusStation busStationDO;
+            int id = busLineStationDO.CodeStation;
+            try
+            {
+                busStationDO = dl.GetBusStation(id);//של אלה להחליף הכל לint 
+            }
+            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            busStationDO.CopyPropertiesTo(busLineStationDO);
+            busLineStationDO.CopyPropertiesTo(busLineStationBO);
+            return busLineStationBO;
+        }
+        /// <summary>
+        ///  A function that receives a BO type bus line object and returns a DO type bus line
+        /// </summary>
+        /// <param name="busLineStationBO"></param>
+        /// <returns></returns>
+        public DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO)
+        {
+            DO.BusLineStation busLineStationDO = new DO.BusLineStation();
+            BO.BusStation busStationBO;
+            int id = busLineStationBO.CodeStation;
+            try
+            {
+                busStationBO = GetBusStation(id);//פונקציה שאצל אלה
+            }
+            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            busStationBO.CopyPropertiesTo(busLineStationDO);
+            busLineStationBO.CopyPropertiesTo(busLineStationDO);
+            return busLineStationDO;
+            
+        }
         /// <summary>
         /// A function that receives a bus line station and adds it to the collection
         /// Provided it does not exist
@@ -490,6 +536,7 @@ namespace BL
         }
         #endregion
         #region  User
+
         public void AddUser(User user)
         {
             try
@@ -525,16 +572,69 @@ namespace BL
         }
         public  IEnumerable<User> GetUsersBy(Predicate<User> predicate)
         {
-            return from sic in dl.GetUsers((id) => { return GetUser(id); })
-                   let User = sic as BO.User
+            return from User in GetUsers()  
                    where predicate(User)
                    select User;
-
         }
         public IEnumerable<string> GetUsersNames()
         {
             return from User in GetUsers()
                    select User.UserName;
+        }
+        #endregion
+        #region UserJourney
+        public void AddUserJourney(UserJourney userJourney)
+        {
+            try
+            {
+                DO.UserJourney userJourneydDO = dl.GetUserJourney(userJourney.UserName);
+                dl.AddUserJourney(userJourneydDO);
+            }
+            catch(BO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
+        }
+        public void DeleteUserJourney(UserJourney userJourney)
+        {
+            try
+            {
+                dl.DeleteUserJourney(dl.GetUserJourney(userJourney.UserName));
+            }
+            catch(DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
+        }
+        public IEnumerable<UserJourney> GetUsersJourney()
+        {
+            return (IEnumerable<UserJourney>)dl.GetUsersJourney();
+        }
+        public UserJourney GetUserJourney(string id)
+        {
+            DO.UserJourney userJourneyDO= dl.GetUserJourney(id);
+            BO.UserJourney userJourneyBO=null;
+            userJourneyDO.CopyPropertiesTo(userJourneyBO);
+            return userJourneyBO;
+        }
+        public IEnumerable<IGrouping<string, UserJourney>> GetUsersJourneyGroupByBoardingStation()
+        {
+            return from UserJourney in GetUsersJourney()
+                   group UserJourney by UserJourney.BoardingStation into groups
+                   select groups;
+
+        }
+        public IEnumerable<User> GetUsersJourneyBy(Predicate<UserJourney> predicate)
+        {
+            return from User in GetUsersJourney()
+                   where predicate(User)
+                   select User;
+        }
+        public IEnumerable<IGrouping<int, UserJourney>> GetUsersJourneyGroupByBusLineJourney()
+        {
+            return from UserJourney in GetUsersJourney()
+                   group UserJourney by UserJourney.BusLineJourney into groups
+                   select groups;
         }
         #endregion
     }
