@@ -20,6 +20,5 @@ namespace BO
         /// <returns></returns>
         public override string ToString() => this.ToStringProperty();
 
-        //רגיל כמו DO
     }
 }

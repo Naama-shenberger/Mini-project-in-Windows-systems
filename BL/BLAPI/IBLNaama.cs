@@ -7,9 +7,6 @@ namespace BL.BLAPI
 {
     interface IBLNaama
     {
-        #region Bus Station
-
-        #endregion
         #region Bus Line 
         BO.BusLine BusLineDoBoAdapter(DO.BusLine busLineDO);
         DO.BusLine BusLineBoDoAdapter(BO.BusLine busLineBO);
@@ -19,38 +16,10 @@ namespace BL.BLAPI
         IEnumerable<int> GetNumberLines();
         IEnumerable<BusLine> GetBusLineBy(Predicate<BusLine> predicate);
         void AddABusLine(BusLine busLine);
-        void AddBusStationToLine(BusLine AddToLine, BusLineStation busLineStation,float _Distance, TimeSpan _AverageTravelTime);
-        void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, BusLineStation busLineStation);
+        void AddBusStationToLine(BusLine AddToLine, BusStation busLineStation,float _Distance, TimeSpan _AverageTravelTime);
+        void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, BusStation busLineStation);
         void DeleteBusLine(BusLine busLine);
         IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea();
-        void Addatleasttwostations(ConsecutiveStations stations);
-        IEnumerable<ConsecutiveStations> ConsecutiveStationsOrderByDistance(IEnumerable<ConsecutiveStations> busLineStations);
-        #endregion
-        #region BusLineStation
-        BO.BusLineStation BusLineStationDoBoAdapter(DO.BusLineStation busLineStationDO);
-        DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO);
-        void AddBusLineStation(BusLineStation busLineStation);
-        void DeleteBusLineStation(BusLineStation busLineStation);
-        IEnumerable<BusLineStation> GetAllBusLineStations(Func<BusLineStation, bool> predicat = null);
-        BusLineStation GetBusLineStation(int id);
-        #endregion
-        #region LineOutForARide
-        BO.LineOutForARide LineOutForARideDoBoAdapter(DO.LineOutForARide LineOutForARideDO);
-        DO.LineOutForARide LineOutForARideBoDoAdapter(BO.LineOutForARide LineOutForARideBO);
-        void AddLineOutForARide(LineOutForARide lineOutForARide);
-        void DeleteLineOutForARide(LineOutForARide lineOutForARide);
-        IEnumerable<IGrouping<TimeSpan, LineOutForARide>> GetAllBusLinesGroupByExitStartTime();
-        IEnumerable<IGrouping<TimeSpan, LineOutForARide>> GetAllBusLinesGroupByTravelEndTime();
-        IEnumerable<LineOutForARide> GetLineOutForARides();
-        IEnumerable<LineOutForARide> GetLineOutForARidesBy(Predicate<LineOutForARide> predicate);
-        LineOutForARide GetLineOutForARide(int id);
-        #endregion
-        #region ConsecutiveStations
-        void AddConsecutiveStations(ConsecutiveStations consecutiveStations);
-        void DeleteConsecutiveStations(ConsecutiveStations consecutiveStations);
-        IEnumerable<ConsecutiveStations> GetConsecutiveStations();
-        IEnumerable<ConsecutiveStations> GetConsecutiveStationsBy(Predicate<ConsecutiveStations> predicate);
-        ConsecutiveStations GetConsecutiveStations(int id1, int id2);
         #endregion
         #region User
         void AddUser(User user);
