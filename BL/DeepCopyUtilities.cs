@@ -10,6 +10,16 @@ namespace BL
 {
     public static class DeepCopyUtilities
     {
+        /// <summary>
+        /// Deep copying
+        /// The function contains a loop that passes over all the Properties in variable S and copies the Properties to T
+        /// In case T does not have the Propertie it continues in a loop
+        /// in case it does have it it copies the Properties by setValue
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="S"></typeparam>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         public static void CopyPropertiesTo<T, S>(this S from, T to)
         {
             foreach (PropertyInfo propTo in to.GetType().GetProperties())

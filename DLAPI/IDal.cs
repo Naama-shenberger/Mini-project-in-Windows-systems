@@ -51,6 +51,7 @@ namespace DalApi
         void AddBusLineStation(BusLineStation s);
         void UpdateBusLineStation(BusLineStation s);
         void DeleteBusLineStation(BusLineStation s);
+        IEnumerable<BusLineStation> GetBusLineStations(Predicate<BusLineStation> predicate);
         #endregion
         #region LineWayOut
         LineOutForARide GetLineWayOut(int id);

@@ -404,8 +404,20 @@ namespace DL
             else
                 throw new IdAlreadyExistsException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} does not exist");
         }
-        #endregion 
+        #endregion
         #region BusLineStation Functions
+        /// <summary>
+        ///  A function that returns a collection of bus line stations 
+        ///  the function uses predicate
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<BusLineStation> GetBusLineStations(Predicate<BusLineStation> predicate)
+        {
+            return from sin in DataSource.BusLineStations
+                   where predicate(sin)
+                   select sin.Clone();   
+        }
         /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus line station object
         /// </summary>
@@ -490,7 +502,7 @@ namespace DL
         public IEnumerable<object> GetBusLineStationCode(Func<int, object> generate)
         {
             return from BusLineStation in DataSource.BusLineStations
-                   select generate(BusLineStation.CodeStation);
+                   select generate(BusLineStation.CodeStation).Clone();
         }
         #endregion
         #region LineOutForARide
@@ -660,7 +672,7 @@ namespace DL
         {
             return from User in DataSource.Users
                    where User.DelUser == true
-                   select User;
+                   select User.Clone();
         }
         public void AddUser(User user)
         {
@@ -711,7 +723,7 @@ namespace DL
         {
             return from UserJourney in DataSource.UsersJourney
                    where UserJourney.FlageActive == true
-                   select UserJourney;
+                   select UserJourney.Clone();
         }
         public void AddUserJourney(UserJourney userJourney)
         {

@@ -11,6 +11,7 @@ namespace BL.BLAPI
 
         #endregion
         #region Bus Line 
+        BO.BusLine BusLineDoBoAdapter(DO.BusLine busLineDO);
         BusLine GetBusLine(int id);
         IEnumerable<BusLine> GetAllBusLines();
         IEnumerable<BusLine> GetAllBusLinesSortByNumberOfStations();

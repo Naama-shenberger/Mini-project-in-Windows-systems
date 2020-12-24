@@ -14,6 +14,27 @@ namespace BL
     {
         IDal dl = DalFactory.GetDal();
         #region Bus Line
+        public BO.BusLine BusLineDoBoAdapter(DO.BusLine busLineDO)
+        {
+            BO.BusLine busLineBO = new BO.BusLine();
+            DO.Bus busDO;
+            int id = busLineDO.ID;
+            try
+            {
+                busDO = dl.GetBus(id);
+            }
+            catch(DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            busDO.CopyPropertiesTo(busLineDO);
+            busLineDO.CopyPropertiesTo(busLineBO);
+            busLineBO.LineStations = from sin in dl.BusLineStations()
+                                     let BusLineStation = dl.GetBusLineStation(sin.CodeStation)
+                                     select BusLineStation.CopyPropertiesTo(sin);
+
+        }
+        /// <summary>
+        /// The function gets an object to add nearby stations
+        /// </summary>
+        /// <param name="stations"></param>
         public void Addatleasttwostations(ConsecutiveStations stations)
         {
             try
@@ -88,10 +109,22 @@ namespace BL
             AddToLine.ConsecutiveStations.ToList().Add(stations);
             AddToLine.ConsecutiveStations= ConsecutiveStationsOrderByDistance(AddToLine.ConsecutiveStations);
             AddToLine.LineStations.ToList().Add(busLineStation);
+            AddToLine.LineStations = busLineStationsStationsOrderByDistance(AddToLine.ConsecutiveStations,AddToLine.LineStations);
         }
+        /// <summary>
+        /// Function that receives a collection of successive stations and stations of lines 
+        /// and sorted the collection stations of lines in the order of the collection of successive stations
+        /// </summary>
+        /// <param name="consecutiveStations"></param>
+        /// <param name="busLineStations"></param>
+        /// <returns></returns>
         public IEnumerable<BusLineStation> busLineStationsStationsOrderByDistance(IEnumerable<ConsecutiveStations> consecutiveStations, IEnumerable<BusLineStation> busLineStations)
         {
-            return busLineStations.OrderBy(consecutiveStations.)
+            return from ConsecutiveStations in consecutiveStations
+                   join BusLineStation in busLineStations
+                   on ConsecutiveStations.StationCodeOne equals BusLineStation.CodeStation
+                   orderby ConsecutiveStations.CodeStation
+                   select BusLineStation;
         }
         /// <summary>
         /// The function receives a bus line for deletion
@@ -459,10 +492,15 @@ namespace BL
         #region  User
         public void AddUser(User user)
         {
-            //try
-            //{
-            //    dl.AddUser(user)
-            //}
+            try
+            {
+               DO.User userdDO =dl.GetUser(user.UserName);
+               dl.AddUser(userdDO);
+            }
+            catch(BO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
         }
         public void DeleteUser(User user)
         {
@@ -474,19 +512,29 @@ namespace BL
         }
         public User GetUser(string id)
         {
-
+            BO.User user = null;
+            dl.GetUser(id).CopyPropertiesTo(user);
+            return user;
         }
         public  IEnumerable<IGrouping<bool, User>> GetUsersGroupByAllowingAccess()
         {
+            return from User in GetUsers()
+                   group User by User.AllowingAccess into groups
+                   select groups;
 
         }
         public  IEnumerable<User> GetUsersBy(Predicate<User> predicate)
         {
+            return from sic in dl.GetUsers((id) => { return GetUser(id); })
+                   let User = sic as BO.User
+                   where predicate(User)
+                   select User;
 
         }
-        public  IEnumerable<string> GetUsersNames()
+        public IEnumerable<string> GetUsersNames()
         {
-
+            return from User in GetUsers()
+                   select User.UserName;
         }
         #endregion
     }
