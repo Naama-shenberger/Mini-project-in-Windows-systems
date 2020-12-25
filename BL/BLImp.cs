@@ -203,7 +203,7 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<Bus> GetAllBus()
         {
-            return from bus in dl.Buses() 
+            return from bus in dl.GetAllBuss()
                    select BusDoBoAdapter(bus);
         }
         /// <summary>

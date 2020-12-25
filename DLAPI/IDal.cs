@@ -21,13 +21,12 @@ namespace DalApi
 
         #endregion
         #region Bus
-        IEnumerable<Bus> Buses();
+        IEnumerable<Bus> GetAllBuss();
         Bus GetBus(int id);
         void AddBus(Bus bus);
         void UpdateBus(Bus bus);
         void DeleteBus(Bus bus);
         IEnumerable<object> GetBusNum(Func<int, object> generate);
-
         #endregion
         #region BusDrive
         BusDrive GetBusDrive(int id);

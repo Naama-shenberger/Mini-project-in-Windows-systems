@@ -80,11 +80,11 @@ namespace DL
         /// <param name="b"></param>
         public void AddBus(Bus b)
         {
-            Bus newBus = DataSource.ListBuses.SingleOrDefault(s => s.LicensePlate == b.LicensePlate);
-            if (newBus != null)
-                if (newBus.Active == false)
+            var busIndex = DataSource.ListBuses.FindIndex(s => s.LicensePlate == b.LicensePlate);
+            if (busIndex != -1)
+                if (DataSource.ListBuses[busIndex].Active == false)
                 {
-                    newBus.Active = true;
+                    DataSource.ListBuses[busIndex].Active = true;
                     return;
                 }
                 else
@@ -127,7 +127,7 @@ namespace DL
         /// A function that returns a list of bus that are active
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Bus> Buses()
+        public IEnumerable<Bus> GetAllBuss()
         {
             return from Bus in DataSource.ListBuses
                    where Bus.Active == true
@@ -177,11 +177,11 @@ namespace DL
 
             Configuration.IdentificationNumberBusDrive += 1;
             bus.ID = Configuration.IdentificationNumberBusDrive;
-            BusDrive newBusDrive = DataSource.ListBusDrives.FirstOrDefault(b => b.ID == bus.ID);
-            if (newBusDrive != null)
-                if (newBusDrive.Active == false)
+            var busIndex = DataSource.ListBusDrives.FindIndex(b => b.ID == bus.ID);
+            if (busIndex != -1)
+                if (DataSource.ListBusDrives[busIndex].Active == false)
                 {
-                    newBusDrive.Active = true;
+                    DataSource.ListBusDrives[busIndex].Active = true;
                     return;
                 }
                 else
@@ -257,17 +257,15 @@ namespace DL
         /// <param name="b"></param>
         public void AddBusStation(BusStation station)
         {
-            BusStation newBusStation = DataSource.ListStations.SingleOrDefault(s => s.BusStationKey == station.BusStationKey);
-            if (newBusStation != null)
-                if (newBusStation.Active == false)
+            var IndexStation = DataSource.ListStations.FindIndex(s => s.BusStationKey == station.BusStationKey);
+            if (IndexStation != -1)
+                if (DataSource.ListStations[IndexStation].Active == false)
                 {
-                    newBusStation.Active = true;
+                    DataSource.ListStations[IndexStation].Active = true;
                     return;
                 }
                 else
                     throw new IdAlreadyExistsException(station.BusStationKey, $"The bus station {station.BusStationKey} already exist");
-            DataSource.ListStations.Add(station.Clone());
-
         }
         /// <summary>
         /// A function that receives a bus Station and updates its details
@@ -379,11 +377,11 @@ namespace DL
         {
             Configuration.IdentificationNumberBusLine += 1;
             bus.ID = Configuration.IdentificationNumberBusLine;
-            BusLine newBus = DataSource.BusLines.FirstOrDefault(b => b.ID == bus.ID);
-            if (newBus != null)
-                if (newBus.Active == false)
+            var busIndex = DataSource.BusLines.FindIndex(b => b.ID == bus.ID);
+            if (busIndex != -1)
+                if (DataSource.BusLines[busIndex].Active == false)
                 {
-                    newBus.Active = true;
+                    DataSource.BusLines[busIndex].Active = true;
                     return;
                 }
                 else
@@ -467,16 +465,17 @@ namespace DL
         /// <param name="station"></param>
         public void AddBusLineStation(BusLineStation station)
         {
-            BusLineStation newBusStation = DataSource.BusLineStations.SingleOrDefault(s => s.CodeStation == station.CodeStation);
-            if (newBusStation != null)
-                if (newBusStation.Active == false)
+            var stationIndex = DataSource.BusLineStations.FindIndex(s => s.CodeStation == station.CodeStation);
+            if (stationIndex!=-1)
+                if (DataSource.BusLineStations[stationIndex].Active == false)
                 {
-                    newBusStation.Active = true;
+                    DataSource.BusLineStations[stationIndex].Active = true;
                     return;
                 }
                 else
                     throw new IdAlreadyExistsException(station.CodeStation, $"The bus line station {station.CodeStation} already exist");
             DataSource.BusLineStations.Add(station.Clone());
+            
         }
         /// <summary>
         /// A function that receives a bus line Station and updates its details
@@ -557,16 +556,16 @@ namespace DL
         {
             Configuration.IdentificationNumberBusLine += 1;
             o.ID = Configuration.IdentificationNumberBusLine;
-            LineOutForARide newBusWayOut = DataSource.LinesOutForARide.SingleOrDefault(b => b.ID == o.ID);
-            if (newBusWayOut != null)
-                if (newBusWayOut.Active == false)
+            var lineIndex = DataSource.LinesOutForARide.FindIndex(b => b.ID == o.ID);
+            if (lineIndex != -1)
+                if (DataSource.LinesOutForARide[lineIndex].Active == false)
                 {
-                    newBusWayOut.Active = true;
+                    DataSource.ListLineInStations[lineIndex].Active = true;
                     return;
                 }
                 else
                     throw new DO.IdAlreadyExistsException(o.ID, $"The bus line {o.ID} already exist");
-            DataSource.LinesOutForARide.Add(newBusWayOut.Clone());
+            DataSource.LinesOutForARide.Add(o.Clone());
         }
         /// <summary>
         /// A function that receives a bus line on his way out and updates its details
@@ -609,7 +608,7 @@ namespace DL
         /// <returns></returns>
         public BusLineInStation GetBusLineInStation(int id)
         {
-            BusLineInStation busLine = DataSource.ListLineInStations.Find(b => b.BusLineNumber== id);
+            BusLineInStation busLine = DataSource.ListLineInStations.Find(b => b.BusLineNumber == id);
             if (busLine != null)
                 if (busLine.Active == true)
                     return busLine.Clone();
@@ -625,15 +624,15 @@ namespace DL
         /// <param name="lineInStation"></param>
         public void AddBusLineInStation(BusLineInStation lineInStation)
         {
-            BusLineInStation newBusLine = DataSource.ListLineInStations.SingleOrDefault(s => s.BusLineNumber == lineInStation.BusLineNumber);
-            if (newBusLine != null)
-                if (newBusLine.Active == false)
+            var lineInStationIndex = DataSource.ListLineInStations.FindIndex((s => s.BusLineNumber == lineInStation.BusLineNumber));
+            if (lineInStationIndex != -1)
+                if (DataSource.ListLineInStations[lineInStationIndex].Active == false)
                 {
-                    newBusLine.Active = true;
+                    DataSource.ListLineInStations[lineInStationIndex].Active = true;
                     return;
                 }
                 else
-                    throw new IdAlreadyExistsException(lineInStation.BusLineNumber ,$"The bus line {lineInStation.BusLineNumber} already exist");
+                    throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line {lineInStation.BusLineNumber} already exist");
             DataSource.ListLineInStations.Add(lineInStation.Clone());
         }
         /// <summary>
@@ -725,16 +724,16 @@ namespace DL
         /// <param name="stations"></param>
         public void AddConsecutiveStations(ConsecutiveStations stations)
         {
-            var consecutiveStations = DataSource.ListConsecutiveStations.FirstOrDefault(s => s.StationCodeOne == stations.StationCodeOne && s.StationCodeTwo == stations.StationCodeTwo);
-            if (consecutiveStations != null)
-                if (consecutiveStations.Flage == false)
+            var stationsIndex = DataSource.ListConsecutiveStations.FindIndex(s => s.StationCodeOne == stations.StationCodeOne && s.StationCodeTwo == stations.StationCodeTwo);
+            if (stationsIndex != -1)
+                if (DataSource.ListConsecutiveStations[stationsIndex].Flage == false)
                 {
-                    consecutiveStations.Flage = true;
+                    DataSource.ListConsecutiveStations[stationsIndex].Flage = true;
                     return;
                 }
                 else
                     throw new IdAlreadyExistsException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} already exist");
-            DataSource.ListConsecutiveStations.Add(consecutiveStations.Clone());
+            DataSource.ListConsecutiveStations.Add(stations.Clone());    
         }
         /// <summary>
         ///  A function that receives a ConsecutiveStations object updates its details
@@ -882,11 +881,11 @@ namespace DL
         }
         public void AddStationInLine(StationInLine stationInLine)
         {
-            var userIndex = DataSource.StationsInLine.FindIndex(s => s.BusStationKey == stationInLine.BusStationKey);
-            if (userIndex != -1)
-                if (DataSource.StationsInLine[userIndex].FlageActive == false)
+            var stationInLineIndex = DataSource.StationsInLine.FindIndex(s => s.BusStationKey == stationInLine.BusStationKey);
+            if (stationInLineIndex != -1)
+                if (DataSource.StationsInLine[stationInLineIndex].FlageActive == false)
                 {
-                    DataSource.StationsInLine[userIndex].FlageActive = true;
+                    DataSource.StationsInLine[stationInLineIndex].FlageActive = true;
                     return;
                 }
                 else
