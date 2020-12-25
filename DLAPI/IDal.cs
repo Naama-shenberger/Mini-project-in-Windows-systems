@@ -21,7 +21,7 @@ namespace DalApi
 
         #endregion
         #region Bus
-        IEnumerable<Bus> GetAllBuss();
+        IEnumerable<Bus> Buses();
         Bus GetBus(int id);
         void AddBus(Bus bus);
         void UpdateBus(Bus bus);
@@ -89,12 +89,12 @@ namespace DalApi
         void UpdatUserJourney(UserJourney user);
         void DeleteUserJourney(UserJourney user);
         #endregion
-        #region StationInLine
+        #region StationInLine 
         StationInLine GetStationInLine(int id);
         void AddStationInLine(StationInLine stationInLine);
         void DeleteStationInLine(StationInLine stationInLine);
         void UpdateStationInLine(StationInLine stationInLine);
         IEnumerable<StationInLine> GetStationInLines();
-        #region
+        #endregion
     }
 }

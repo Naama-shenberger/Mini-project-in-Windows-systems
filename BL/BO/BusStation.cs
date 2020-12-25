@@ -14,7 +14,7 @@ namespace BO
         public int BusStationKey { get; set; }//code Station
         public string StationAddress { get; set; }//Station Address;
         public string StationName { get; set; }//Station Name
-        public IEnumerable<BusLine> BusLinesInStation { set; get; }//Collection of lines in bus stations
+        public IEnumerable<BusLineInStation> ListBusLinesInStation { set; get; }//Collection of lines in bus stations
         /// <summary>
         /// override of ToString
         /// </summary>

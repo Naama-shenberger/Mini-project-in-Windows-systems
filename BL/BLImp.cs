@@ -14,12 +14,88 @@ namespace BL
         IDal dl = DalFactory.GetDal();
 
         #region Bus
-        BO.BusStation busStationDOBOAdapter(DO.BusStation stationDO)
+        /// <summary>
+        /// A function that receives a DO type bus object and returns a BO type bus
+        /// </summary>
+        /// <param name="busDO"></param>
+        /// <returns></returns>
+        public BO.Bus BusDoBoAdapter(DO.Bus busDO)
         {
-            BO.BusStation stationBO = new BO.BusStation();
-            stationDO.CopyPropertiesTo(stationBO);
+            BO.Bus busBO = null;
+            busDO.CopyPropertiesTo(busBO);
+            return busBO;
 
         }
+        /// <summary>
+        /// A function that receives a BO type bus object and returns a DO type bus 
+        /// </summary>
+        /// <param name="busBO"></param>
+        /// <returns></returns>
+        public DO.Bus BusBoDoAdapter(BO.Bus busBO)
+        {
+            DO.Bus busDO = null;
+            busBO.CopyPropertiesTo(busDO);
+            return busDO;
+        }
+        /// <summary>
+        /// A function that receives an ID number and returns the corresponding bus 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Bus GetBus(int id)
+        {
+            DO.Bus busDO;
+            try
+            {
+                busDO = dl.GetBus(id);
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+            }
+            return BusDoBoAdapter(busDO);
+        }
+        /// <summary>
+        /// Add a bus to the list of buss
+        /// The function gets a bus to add 
+        /// </summary>
+        /// <param name="bus"></param>
+        public void AddABus(Bus bus)
+        {
+            try
+            {
+                if (NumberOflicensePlate(bus) == bus.LicensePlate.Length)
+                    dl.AddBus(dl.GetBus(int.Parse(bus.LicensePlate)));
+                else
+                    throw new InvalidOperationException("Invalid license number input");
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+            }
+        }
+        /// <summary>
+        ///  A function that deletes a bus from the list of buss
+        /// </summary>
+        /// <param name="bus"></param>
+        public void DeleteBus(Bus bus)
+        {
+            DO.Bus b_find;
+            try
+            {
+                b_find = dl.GetBus(int.Parse(bus.LicensePlate));
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+            }
+            dl.DeleteBus(b_find);
+
+        }
+        /// <summary>
+        /// refilling gas in bus
+        /// </summary>
+        /// <param name="bus"></param>
         public void RefillingBus(Bus bus)
         {
             bus.KilometersGas = 0;
@@ -67,45 +143,6 @@ namespace BL
 
         }
         /// <summary>
-        /// A function that receives an ID number and returns the corresponding bus 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Bus GetBus(int id)
-        {
-            DO.Bus busDO;
-            try
-            {
-                busDO = dl.GetBus(id);
-            }
-            catch(DO.IdAlreadyExistsException ex)
-            {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
-            }
-            BO.Bus busBO = null;
-            busDO.CopyPropertiesTo(busBO);
-            return busBO;
-        }
-        /// <summary>
-        /// Add a bus to the list of buss
-        /// The function gets a bus to add 
-        /// </summary>
-        /// <param name="bus"></param>
-        public void AddABus(Bus bus)
-        {
-            try
-            {
-                if (NumberOflicensePlate(bus)==bus.LicensePlate.Length)
-                    dl.AddBus(dl.GetBus(int.Parse(bus.LicensePlate)));
-                else
-                    throw new InvalidOperationException("Invalid license number input");
-            }
-            catch (DO.IdAlreadyExistsException ex)
-            {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
-            }
-        }
-        /// <summary>
         ///  A function that checks if the vehicle needs to be refueled
         /// </summary>
         /// <param name="b"></param>
@@ -117,75 +154,6 @@ namespace BL
                 return true;
             return false;
         }
-        /// <summary>
-        ///  A function that deletes a bus from the list of buss
-        /// </summary>
-        /// <param name="bus"></param>
-        public void DeleteBus(Bus bus)
-        {
-            DO.Bus b_find;
-            try
-            {
-                b_find = dl.GetBus(int.Parse(bus.LicensePlate));
-            }
-            catch (DO.IdAlreadyExistsException ex)
-            {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
-            }
-            dl.DeleteBus(b_find);
-
-        }
-        /// <summary>
-        /// A function that returns all bus
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Bus> GetAllBus()
-        {
-            return from item in dl.GetAllBuss()
-                   select; 
-            //return (IEnumerable<Bus>)(from item in dl.() select item);
-        }
-        /// <summary>
-        /// A function that returns 
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<IGrouping<bool, Bus>> GetAllBusslicensePlate()
-        {
-            return from Bus in GetAllBusLines()
-                   group Bus by (TreatmentIsNeeded(int.Parse(Bus.LicensePlate))) into groups
-                   select groups;
-        }
-        /// <summary>
-        /// a function that returns all License Plate
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<int> GetNumberbuss()
-        {
-            return from item in dl.GetBusNum((id) => { return GetBus(id); })
-                   let bus = item as BO.Bus
-                   orderby bus.LicensePlate
-                   select int.Parse(bus.LicensePlate);
-        }
-        /// <summary>
-        /// A function that returns all buss thet need treatment
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<IGrouping<bool, Bus>> GetAllBusNeedTreatment()
-        {
-            return from Bus in GetAllBusLines()
-                   group Bus by ((NumberOflicensePlate(Bus) == Bus.LicensePlate.Length)) into groups
-                   select groups;
-        }
-        /// <summary>
-        /// lamda Function 
-        /// Accepts predicate-Which checks a condition and returns the buses that Sustainers the condition
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate) => from sic in dl.GetBusNum((id) => { return GetBus(id); })
-                                                                      let bus = sic as BO.Bus
-                                                                      where predicate(bus)
-                                                                      select bus;
         /// <summary>
         /// A function that checks if a year has passed since the last treatment
         /// </summary>
@@ -225,12 +193,88 @@ namespace BL
             {
                 throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
             }
-            if (b_find.OilCondition||b_find.AirTire>75)
+            if (b_find.OilCondition || b_find.AirTire > 75)
                 return true;
             return false;
         }
+        /// <summary>
+        /// A function that returns all bus
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Bus> GetAllBus()
+        {
+            return from bus in dl.Buses() 
+                   select BusDoBoAdapter(bus);
+        }
+        /// <summary>
+        /// A function that returns 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<IGrouping<bool, Bus>> GetAllBusslicensePlate()
+        {
+            return from Bus in GetAllBus()
+                   group Bus by (TreatmentIsNeeded(int.Parse(Bus.LicensePlate))) into groups
+                   select groups;
+        }
+        /// <summary>
+        /// a function that returns all License Plate
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<int> GetNumberbuss()
+        {
+            return from item in dl.GetBusNum((id) => { return GetBus(id); })
+                   let bus = item as BO.Bus
+                   orderby bus.LicensePlate
+                   select int.Parse(bus.LicensePlate);
+        }
+        /// <summary>
+        /// A function that returns all buss thet need treatment
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<IGrouping<bool, Bus>> GetAllBusNeedTreatment()
+        {
+            return from Bus in GetAllBus()
+                   group Bus by ((NumberOflicensePlate(Bus) == Bus.LicensePlate.Length)) into groups
+                   select groups;
+        }
+        /// <summary>
+        /// lamda Function 
+        /// Accepts predicate-Which checks a condition and returns the buses that Sustainers the condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate) => from sic in dl.GetBusNum((id) => { return GetBus(id); })
+                                                                      let bus = sic as BO.Bus
+                                                                      where predicate(bus)
+                                                                      select bus;
+
         #endregion
         #region Bus Station
+        /// <summary>
+        /// A function that receives a DO type bus station object and returns a BO type bus station
+        /// </summary>
+        /// <param name="stationDO"></param>
+        /// <returns></returns>
+        public BO.BusStation BusStationDoBoAdapter(DO.BusStation stationDO)
+        {
+            BO.BusStation stationBO = new BusStation();
+            stationDO.CopyPropertiesTo(stationBO);
+            stationBO.ListBusLinesInStation=from sic in dl.GetBusLineInStations()
+                                            let line=dl.GetBusLine(sic.BusLineNumber)
+                                            select line.CopyToLineInStation(sic);
+            return stationBO;
+        }
+        /// <summary>
+        /// A function that receives a BO type bus station object and returns a DO type bus station
+        /// </summary>
+        /// <param name="busStationBO"></param>
+        /// <returns></returns>
+        public DO.BusStation BusStationBoDoAdapter(BO.BusStation busStationBO)
+        {
+            DO.BusStation busStationDO = new DO.BusStation();
+            busStationBO.CopyPropertiesTo(busStationDO);
+            return busStationDO;
+        }
         /// <summary>
         /// A function that receives an ID number of a station and returns the corresponding station
         /// </summary>
@@ -250,26 +294,6 @@ namespace BL
             BO.BusStation stationBO = null;
             stationDO.CopyPropertiesTo(stationBO);
             return stationBO;
-        }
-        /// <summary>
-        ///  A function that returns all bus stations
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<BusStation> GetAllBusStation()
-        {
-            return (IEnumerable<BusStation>)(from item in dl.BusStations() select item);
-        }
-        /// <summary>
-        ///  A function that returns all bus station numbers
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<int> GetNumberStation()
-        {
-            return from item in dl.GetBusStationNumbers((id) => { return GetBusLine(id); })
-                   let busStation = item as BO.BusStation
-                   orderby busStation.BusStationKey
-                   select busStation.BusStationKey;
-
         }
         /// <summary>
         /// Add a bus station to the list of bus stations
@@ -307,15 +331,102 @@ namespace BL
             dl.DeleteBusStation(stationDO);
         }
         /// <summary>
+        ///  A function that returns all bus stations
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<BusStation> GetAllBusStation()
+        {
+            return (IEnumerable<BusStation>)(from item in dl.BusStations() select item);
+        }
+
+        /// <summary>
         /// a function that returns all bus lines thet passing through the station
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<BusLine> GetAllBusLineInStation()
+        public IEnumerable<BusLineInStation> GetAllBusLineInStation()
         {
-
+            return from sic in dl.GetBusLineInStations()
+                   let line = dl.GetBusLine(sic.BusLineNumber)
+                   select line.CopyToLineInStation(sic);
         }
         #endregion
-        
+        #region Bus Line In Station
+        /// <summary>
+        /// A function that receives a DO type bus line in statin object and returns a BO type bus bus line in statin
+        /// </summary>
+        /// <param name="lineDO"></param>
+        /// <returns></returns>
+        public BO.BusLineInStation LineStationDoBoAdapter(DO.BusLineInStation lineDO)
+        {
+            BO.BusLineInStation lineBO = null;
+            lineDO.CopyPropertiesTo(lineBO);
+            return lineBO;
+
+        }
+        /// <summary>
+        /// A function that receives a BO type bus line in statin object and returns a DO type bus bus line in statin
+        /// </summary>
+        /// <param name="lineBO"></param>
+        /// <returns></returns>
+        public DO.BusLineInStation LineStationBoDoAdapter(BO.BusLineInStation lineBO)
+        {
+            DO.BusLineInStation lineDO = null;
+            lineBO.CopyPropertiesTo(lineDO);
+            return lineDO;
+        }
+        /// <summary>
+        /// A function that receives an ID number and returns the corresponding bus line in station 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BusLineInStation GetLineInStation(int id)
+        {
+            DO.BusLineInStation lineInStationDO;
+            try
+            {
+                lineInStationDO = dl.GetBusLineInStation(id);
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+            }
+            return LineStationDoBoAdapter(lineInStationDO);
+        }
+        /// <summary>
+        /// Add a bus line in station to the list of lines in station
+        /// The function gets a bus line in station  to add 
+        /// </summary>
+        /// <param name="lineInStation"></param>
+        public void AddBusLineInStation(BusLineInStation lineInStation) 
+        {
+            try
+            {
+               dl.AddBus(dl.GetBus(lineInStation.BusLineNumber));
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+            }
+        }
+        /// <summary>
+        ///  A function that deletes a bus line in station from the list of lines in station
+        /// </summary>
+        /// <param name="lineInStation"></param>
+        public void DeleteBusLineInStation(BusLineInStation lineInStation)
+        {
+            DO.Bus lineDO;
+            try
+            {
+                lineDO = dl.GetBus(lineInStation.BusLineNumber);
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+            }
+            dl.DeleteBus(lineDO);
+        }
+        #endregion
+
     }
 }
 //יכולים לכלול אוספים גנריים (<>IEnumerable)
