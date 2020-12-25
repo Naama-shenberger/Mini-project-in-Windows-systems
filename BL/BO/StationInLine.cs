@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BO
 {
-    public class StationInLine
+    public class StationInLine:BusStation
     {
         public int NumberLine { get; set; }
         public int BusStationKey { get; set; }//code Station

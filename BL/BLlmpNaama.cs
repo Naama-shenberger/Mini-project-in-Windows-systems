@@ -75,6 +75,11 @@ namespace BL
                 DO.ConsecutiveStations stations = new DO.ConsecutiveStations { StationCodeOne = stationInLineOne.BusStationKey, StationCodeTwo = stationInLineTwo.BusStationKey
                 , Distance = (float)(random.NextDouble() * 1850 + 150), Flage = true,
                 AverageTravelTime = new TimeSpan(random.Next(0, 4), random.Next(0, 60), random.Next(0, 60))};
+                BusLineInStation busLineInStation = new BusLineInStation();
+                busLine.CopyPropertiesTo(busLineInStation);
+                stationInLineOne.BusLinesInStation.ToList().Add(busLineInStation);
+                stationInLineTwo.BusLinesInStation.ToList().Add(busLineInStation);
+
                 dl.AddConsecutiveStations(stations);
                 dl.GetBusLine(busLine.ID);
             }
@@ -106,7 +111,11 @@ namespace BL
                     Flage = true,
                     AverageTravelTime = new TimeSpan(random.Next(0, 4), random.Next(0, 60), random.Next(0, 60))
                 };
+                DO.StationInLine stationInLineDO = new DO.StationInLine();
+                busLineStation.CopyPropertiesTo(stationInLineDO);
                 dl.AddConsecutiveStations(stations);
+                dl.AddStationInLine(stationInLineDO);
+                
             }
             catch (DO.IdAlreadyExistsException ex)
             {
@@ -138,7 +147,15 @@ namespace BL
         {
             try
             {
-                
+                dl.DeleteStationInLine(dl.GetStationInLine(busLineStation.BusStationKey));
+                var IndexToDelete = DeleteFromLine.StationsInLine.ToList().FindIndex(d => d.BusStationKey == busLineStation.BusStationKey);
+                DO.ConsecutiveStations stations = new DO.ConsecutiveStations
+                {
+                    StationCodeOne = DeleteFromLine.StationsInLine.ToList()[IndexToDelete- 1].BusStationKey,
+                    StationCodeTwo = busLineStation.BusStationKey
+                };
+                DeleteFromLine.StationsInLine.ToList().RemoveAt(IndexToDelete);
+                dl.DeleteConsecutiveStations(stations);
             }
             catch(DO.IdAlreadyExistsException ex)
             {
@@ -173,7 +190,7 @@ namespace BL
         {
             return from item in dl.GetBusLineNumbers((id) => { return GetBusLine(id); })
                    let busLine = item as BO.BusLine
-                   orderby busLine.LineStations
+                   orderby busLine.StationsInLine.Count()
                    select busLine;
         }
         /// <summary>
@@ -215,46 +232,97 @@ namespace BL
         }
         #endregion
         #region  User
-
+        /// <summary>
+        /// A function that receives a DO type bus line object and returns a BO type bus line
+        /// </summary>
+        /// <param name="UserDO"></param>
+        /// <returns></returns>
+        public BO.User UserDoBoAdapter(DO.User UserDO)
+        {
+            BO.User UserBO = GetUser(UserDO.UserName);
+            UserDO.CopyPropertiesTo(UserBO);
+            return UserBO;
+        }
+        /// <summary>
+        /// A function that receives a BO type bus line object and returns a DO type bus line
+        /// </summary>
+        /// <param name="UserBO"></param>
+        /// <returns></returns>
+        public DO.User UserBoDoAdapter(BO.User UserBO)
+        {
+            DO.User UserDO = dl.GetUser(UserBO.UserName);
+            UserBO.CopyPropertiesTo(UserDO);
+            return UserDO;
+        }
+        /// <summary>
+        /// The function Receives an object user and enters the database
+        /// </summary>
+        /// <param name="user"></param>
         public void AddUser(User user)
         {
             try
             {
-               DO.User userdDO =dl.GetUser(user.UserName);
-               dl.AddUser(userdDO);
+               dl.GetUser(user.UserName);
+               
             }
-            catch(BO.IdAlreadyExistsException ex)
+            catch(BO.IdAlreadyExistsException)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                dl.AddUser(UserBoDoAdapter(user));
             }
         }
+        /// <summary>
+        /// The function Receives an object user to Deletion
+        /// </summary>
+        /// <param name="user"></param>
         public void DeleteUser(User user)
         {
             dl.DeleteUser(dl.GetUser(user.UserName));
         }
+        /// <summary>
+        /// The function returns all user
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<User> GetUsers()
         {
-            return (IEnumerable<User>)dl.GetUsers();
+            return from User in dl.GetUsers()
+                   select UserDoBoAdapter(User);
         }
+        /// <summary>
+        /// The function receives an ID number and returns the corresponding object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public User GetUser(string id)
         {
-            BO.User user = null;
-            dl.GetUser(id).CopyPropertiesTo(user);
-            return user;
+            return UserDoBoAdapter(dl.GetUser(id));
         }
-        public  IEnumerable<IGrouping<bool, User>> GetUsersGroupByAllowingAccess()
+        /// <summary>
+        /// The function returns a collection that is divided into two user groups with access and those that do not
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<IGrouping<bool, User>> GetUsersGroupByAllowingAccess()
         {
             return from User in GetUsers()
                    group User by User.AllowingAccess into groups
                    select groups;
 
         }
-        public  IEnumerable<User> GetUsersBy(Predicate<User> predicate)
+        /// <summary>
+        /// lamda Function 
+        /// Accepts predicate-Which checks a condition and returns the users that Sustainers the condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<User> GetUsersBy(Predicate<User> predicate)
         {
             return from User in GetUsers()  
                    where predicate(User)
                    select User;
         }
+        /// <summary>
+        /// A function that returns a collection of usernames
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<string> GetUsersNames()
         {
             return from User in GetUsers()
@@ -262,18 +330,63 @@ namespace BL
         }
         #endregion
         #region UserJourney
+        /// <summary>
+        /// A function that receives a DO type bus line object and returns a BO type bus line
+        /// </summary>
+        /// <param name="UserJourneyDO"></param>
+        /// <returns></returns>
+        public BO.UserJourney UserJourneyDoBoAdapter(DO.UserJourney UserJourneyDO)
+        {
+            BO.UserJourney UserJourneyBO = new BO.UserJourney();
+            DO.User UserDO;
+            string id = UserJourneyDO.UserName;
+            try
+            {
+                UserDO = dl.GetUser(id);
+            }
+            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("User Journey ID is illegal", ex); }
+            UserDO.CopyPropertiesTo(UserJourneyDO);
+            UserJourneyDO.CopyPropertiesTo(UserJourneyBO);
+            return UserJourneyBO;
+        }
+        /// <summary>
+        /// A function that receives a BO type bus line object and returns a DO type bus line
+        /// </summary>
+        /// <param name="userJourneyBO"></param>
+        /// <returns></returns>
+        public DO.UserJourney UserJourneyBoDoAdapter(BO.UserJourney userJourneyBO)
+        {
+            DO.UserJourney userJourneyDO = new DO.UserJourney();
+            BO.User UserBO;
+            string id = userJourneyBO.UserName;
+            try
+            {
+                UserBO = GetUser(id);//פונקציה שאצל אלה
+            }
+            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            UserBO.CopyPropertiesTo(userJourneyDO);
+            userJourneyBO.CopyPropertiesTo(userJourneyDO);
+            return userJourneyDO;
+        }
+        /// <summary>
+        /// The function Receives an object user Journey and enters the database
+        /// </summary>
+        /// <param name="userJourney"></param>
         public void AddUserJourney(UserJourney userJourney)
         {
             try
             {
-                DO.UserJourney userJourneydDO = dl.GetUserJourney(userJourney.UserName);
-                dl.AddUserJourney(userJourneydDO);
+                dl.AddUserJourney(UserJourneyBoDoAdapter(userJourney));
             }
             catch(BO.IdAlreadyExistsException ex)
             {
                 throw new BO.IdAlreadyExistsException(ex.ToString());
             }
         }
+        /// <summary>
+        /// The function Receives an object user Journey to Deletion
+        /// </summary>
+        /// <param name="userJourney"></param>
         public void DeleteUserJourney(UserJourney userJourney)
         {
             try
@@ -285,17 +398,30 @@ namespace BL
                 throw new BO.IdAlreadyExistsException(ex.ToString());
             }
         }
+        /// <summary>
+        /// The function returns all users Journey
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<UserJourney> GetUsersJourney()
         {
-            return (IEnumerable<UserJourney>)dl.GetUsersJourney();
+            return from UserJourney in dl.GetUsersJourney()
+                select UserJourneyDoBoAdapter(UserJourney);
+
         }
+        /// <summary>
+        /// The function receives an ID number and returns the corresponding object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public UserJourney GetUserJourney(string id)
         {
-            DO.UserJourney userJourneyDO= dl.GetUserJourney(id);
-            BO.UserJourney userJourneyBO=null;
-            userJourneyDO.CopyPropertiesTo(userJourneyBO);
-            return userJourneyBO;
+
+            return UserJourneyDoBoAdapter(dl.GetUserJourney(id));
         }
+        /// <summary>
+        /// The function returns a collection that is divided into groups by Boarding Station
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<IGrouping<string, UserJourney>> GetUsersJourneyGroupByBoardingStation()
         {
             return from UserJourney in GetUsersJourney()
@@ -303,17 +429,58 @@ namespace BL
                    select groups;
 
         }
+        /// <summary>
+        /// lamda Function 
+        /// Accepts predicate-Which checks a condition and returns the users Journey that Sustainers the condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<User> GetUsersJourneyBy(Predicate<UserJourney> predicate)
         {
             return from User in GetUsersJourney()
                    where predicate(User)
                    select User;
         }
+        /// <summary>
+        ///  The function returns a collection that is divided into groups by bus line number
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<IGrouping<int, UserJourney>> GetUsersJourneyGroupByBusLineJourney()
         {
             return from UserJourney in GetUsersJourney()
                    group UserJourney by UserJourney.BusLineJourney into groups
                    select groups;
+        }
+        /// <summary>
+        /// The function retuns the Travel History of user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IEnumerable<object> TravelHistory(string id)
+        {
+            return from sin in GetUserJourney(id).Drives
+                   select sin;
+        }
+        public BusLine LineToGo(BusStation busStationCurrent, BusStation busStationtarget)
+        {
+            //var buses = from BusLineInStation in busStationCurrent.BusLinesInStation
+            //            let bus = GetBusLine(BusLineInStation.BusLineNumber)
+            //            where bus.StationsInLine.ToList().FindIndex(p => p.BusStationKey == busStationtarget.BusStationKey) != -1
+            //            where bus.StationsInLine.ToList().FindIndex(p => p.BusStationKey == busStationCurrent.BusStationKey) != -1
+            //            where bus.StationsInLine.ToList().FindIndex(p => p.BusStationKey == busStationtarget.BusStationKey) < bus.StationsInLine.ToList().FindIndex(p => p.BusStationKey == busStationCurrent.BusStationKey)
+            //            select new
+            //            {
+            //                busNumber = bus,
+            //                Current = bus.StationsInLine.ToList().Find(p => p.BusStationKey == busStationtarget.BusStationKey),
+            //                Target = bus.StationsInLine.ToList().Find(p => p.BusStationKey == busStationCurrent.BusStationKey),
+
+            //            };
+            //var busesOder = from BusLine in buses
+            //                from  v in dl.ConsecutivesStations()
+            //                where  v.StationCodeOne==BusLine.Current.BusStationKey
+            //                where  BusLine.Target.BusStationKey==v.StationCodeTwo
+            throw new NullReferenceException();
+
         }
         #endregion
     }
