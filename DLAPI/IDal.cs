@@ -33,7 +33,7 @@ namespace DalApi
         #region BusStation
         BusStation GetBusStation(int code);
         IEnumerable<BusStation> BusStations();
-        IEnumerable<object> GetBusStationNumbers(Func<string, object> generate);
+        IEnumerable<object> GetBusStationNumbers(Func<int, object> generate);
         void AddBusStation(BusStation b);
         void UpdateBusStation(BusStation b);
         void UpdateBusStation(string id, Action<Bus> update);//method that knows to update a specific object
@@ -85,5 +85,12 @@ namespace DalApi
         void UpdatUserJourney(UserJourney user);
         void DeleteUserJourney(UserJourney user);
         #endregion
+        #region StationInLine
+        StationInLine GetStationInLine(int id);
+        void AddStationInLine(StationInLine stationInLine);
+        void DeleteStationInLine(StationInLine stationInLine);
+        void UpdateStationInLine(StationInLine stationInLine);
+        IEnumerable<StationInLine> GetStationInLines();
+        #region
     }
 }

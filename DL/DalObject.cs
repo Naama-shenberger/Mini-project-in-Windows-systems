@@ -79,8 +79,8 @@ namespace DL
         /// <param name="b"></param>
         public void AddBus(Bus b)
         {
-            Bus newBus = DataSource.ListBuses.SingleOrDefault(s => s.LicensePlate== b.LicensePlate);
-            if (newBus!= null)
+            Bus newBus = DataSource.ListBuses.SingleOrDefault(s => s.LicensePlate == b.LicensePlate);
+            if (newBus != null)
                 if (newBus.Active == false)
                 {
                     newBus.Active = true;
@@ -120,9 +120,9 @@ namespace DL
                     throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} is already deleted");
             else
                 throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
-            
+
         }
-       
+
         #endregion
         #region BusDrive Function
         /// <summary>
@@ -156,10 +156,10 @@ namespace DL
         /// <param name="bus"></param>
         public void AddBusDrive(BusDrive bus)
         {
-            
+
             Configuration.IdentificationNumberBusDrive += 1;
-           bus.ID = Configuration.IdentificationNumberBusDrive;
-            BusDrive newBusDrive = DataSource.ListBusDrives.FirstOrDefault(b => b.ID== bus.ID);
+            bus.ID = Configuration.IdentificationNumberBusDrive;
+            BusDrive newBusDrive = DataSource.ListBusDrives.FirstOrDefault(b => b.ID == bus.ID);
             if (newBusDrive != null)
                 if (newBusDrive.Active == false)
                 {
@@ -416,7 +416,7 @@ namespace DL
         {
             return from sin in DataSource.BusLineStations
                    where predicate(sin)
-                   select sin.Clone();   
+                   select sin.Clone();
         }
         /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus line station object
@@ -662,7 +662,7 @@ namespace DL
         #region User
         public User GetUser(string id)
         {
-            var user = DataSource.Users.Find(u=>u.UserName == id);
+            var user = DataSource.Users.Find(u => u.UserName == id);
             if (user != null)
                 if (user.DelUser == true)
                     return user.Clone();
@@ -676,7 +676,7 @@ namespace DL
         }
         public void AddUser(User user)
         {
-            var userIndex = DataSource.Users.FindIndex(u => u.UserName== user.UserName);
+            var userIndex = DataSource.Users.FindIndex(u => u.UserName == user.UserName);
             if (userIndex != -1)
                 if (DataSource.Users[userIndex].DelUser == false)
                 {
@@ -689,7 +689,7 @@ namespace DL
         }
         public void UpdatUser(User user)
         {
-            var toUpdateIndex = DataSource.Users.FindIndex(u => u.UserName== user.UserName);
+            var toUpdateIndex = DataSource.Users.FindIndex(u => u.UserName == user.UserName);
             if (toUpdateIndex != -1)
                 if (DataSource.Users[toUpdateIndex].DelUser == true)
                     DataSource.Users[toUpdateIndex] = user.Clone();
@@ -700,7 +700,7 @@ namespace DL
         }
         public void DeleteUser(User user)
         {
-            var toDeleteIndex = DataSource.Users.FindIndex(u=>u.UserName==user.UserName);
+            var toDeleteIndex = DataSource.Users.FindIndex(u => u.UserName == user.UserName);
             if (toDeleteIndex != -1)
                 if (DataSource.Users[toDeleteIndex].DelUser == true)
                     DataSource.Users[toDeleteIndex].DelUser = false;
@@ -761,5 +761,58 @@ namespace DL
                 throw new IdAlreadyExistsException(userJourney.UserName, $"The user name {userJourney.UserName} is already deleted");
         }
         #endregion
+        #region StationInLine
+        public StationInLine GetStationInLine(int id)
+        {
+            var stationInLine = DataSource.StationsInLine.Find(s => s.BusStationKey == id);
+            if (stationInLine != null)
+                if (stationInLine.FlageActive == true)
+                    return stationInLine.Clone();
+            throw new IdAlreadyExistsException($"No Station In Line have the name {id}");
+        }
+        public void AddStationInLine(StationInLine stationInLine)
+        {
+            var userIndex = DataSource.StationsInLine.FindIndex(s => s.BusStationKey == stationInLine.BusStationKey);
+            if (userIndex != -1)
+                if (DataSource.StationsInLine[userIndex].FlageActive == false)
+                {
+                    DataSource.StationsInLine[userIndex].FlageActive = true;
+                    return;
+                }
+                else
+                    throw new DO.IdAlreadyExistsException(stationInLine.BusStationKey, $"The station In Line {stationInLine.BusStationKey} already exist");
+            DataSource.StationsInLine.Add(stationInLine.Clone());
+        }
+        public void DeleteStationInLine(StationInLine stationInLine)
+        {
+            var toDeleteIndex = DataSource.StationsInLine.FindIndex(s => s.BusStationKey == stationInLine.BusStationKey);
+            if (toDeleteIndex != -1)
+                if (DataSource.StationsInLine[toDeleteIndex].FlageActive == true)
+                    DataSource.StationsInLine[toDeleteIndex].FlageActive = false;
+                else
+                    throw new IdAlreadyExistsException(stationInLine.BusStationKey, $"The station In Line {stationInLine.BusStationKey} is already deleted");
+            else
+                throw new IdAlreadyExistsException(stationInLine.BusStationKey, $"The station In Line {stationInLine.BusStationKey} is already deleted");
+        }
+        public void UpdateStationInLine(StationInLine stationInLine)
+        {
+            var toUpdateIndex = DataSource.StationsInLine.FindIndex(s => s.BusStationKey == stationInLine.BusStationKey);
+            if (toUpdateIndex != -1)
+                if (DataSource.StationsInLine[toUpdateIndex].FlageActive == true)
+                    DataSource.StationsInLine[toUpdateIndex] = stationInLine.Clone();
+                else
+                    throw new IdAlreadyExistsException(stationInLine.BusStationKey, $"The  station In Line { stationInLine.BusStationKey} does not exist");
+            else
+                throw new IdAlreadyExistsException(stationInLine.BusStationKey, $"The  station In Line { stationInLine.BusStationKey} does not exist");
+        }
+        public IEnumerable<StationInLine> GetStationInLines()
+        {
+            return from StationInLine in DataSource.StationsInLine
+                   where StationInLine.FlageActive == true
+                   select StationInLine.Clone();
+        }
+        #endregion
     }
+
 }
+

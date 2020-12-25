@@ -16,6 +16,7 @@ namespace DS
         public static List<ConsecutiveStations> ListConsecutiveStations;
         public static List<User> Users;
         public static List<UserJourney> UsersJourney;
+        public static List<StationInLine> StationsInLine;
 
         static DataSource()
         {

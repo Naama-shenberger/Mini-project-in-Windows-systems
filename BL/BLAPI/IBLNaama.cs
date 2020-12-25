@@ -15,9 +15,9 @@ namespace BL.BLAPI
         IEnumerable<BusLine> GetAllBusLinesSortByNumberOfStations();
         IEnumerable<int> GetNumberLines();
         IEnumerable<BusLine> GetBusLineBy(Predicate<BusLine> predicate);
-        void AddABusLine(BusLine busLine);
-        void AddBusStationToLine(BusLine AddToLine, BusStation busLineStation,float _Distance, TimeSpan _AverageTravelTime);
-        void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, BusStation busLineStation);
+        void AddBusLine(BusLine busLine, StationInLine stationInLineOne=null, StationInLine stationInLineTwo =null);
+        void AddBusStationToLine(BusLine AddToLine, StationInLine busLineStation);
+        void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, StationInLine busLineStation);
         void DeleteBusLine(BusLine busLine);
         IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea();
         #endregion
