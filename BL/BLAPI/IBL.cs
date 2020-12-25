@@ -27,13 +27,18 @@ namespace BLAPI
         #region Bus Station
         BusStation GetBusStation(int id);
         IEnumerable<BusStation> GetAllBusStation();
-        IEnumerable<int> GetNumberStation();
-        IEnumerable<BusLine> GetAllBusLineInStation();//A bus line passing through the station
+        IEnumerable<BusLineInStation> GetAllBusLineInStation();//A bus line passing through the station
         void AddBusStation(BusStation station);
         void DeleteBusStation(BusStation station);
 
         #endregion
-      
-        
+        #region Bus Line In Station
+        BusLineInStation GetLineInStation(int id);
+        void AddBusLineInStation(BusLineInStation lineInStation);
+        void DeleteBusLineInStation(BusLineInStation lineInStation);
+
+        #endregion
+
+
     }
 }

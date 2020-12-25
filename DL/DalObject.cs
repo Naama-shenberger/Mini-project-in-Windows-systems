@@ -127,7 +127,7 @@ namespace DL
         /// A function that returns a list of bus that are active
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Bus> GetAllBuss()
+        public IEnumerable<Bus> Buses()
         {
             return from Bus in DataSource.ListBuses
                    where Bus.Active == true
@@ -609,7 +609,7 @@ namespace DL
         /// <returns></returns>
         public BusLineInStation GetBusLineInStation(int id)
         {
-            BusLineInStation busLine = DataSource.ListLineInStations.Find(b => b.ID == id);
+            BusLineInStation busLine = DataSource.ListLineInStations.Find(b => b.BusLineNumber== id);
             if (busLine != null)
                 if (busLine.Active == true)
                     return busLine.Clone();
