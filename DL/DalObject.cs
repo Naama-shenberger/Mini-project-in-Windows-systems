@@ -10,6 +10,7 @@ namespace DL
 {
     internal sealed class DalObject : IDal
     {
+       
         #region singelton
         //create instance
         static DalObject instance;
@@ -122,9 +123,26 @@ namespace DL
                 throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
 
         }
+        /// <summary>
+        /// A function that returns a list of bus that are active
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Bus> GetAllBuss()
+        {
+            return from Bus in DataSource.ListBuses
+                   where Bus.Active == true
+                   select Bus.Clone();
+        }
 
         #endregion
         #region BusDrive Function
+
+        public IEnumerable<BusDrive> GetAllBusDrive()
+        {
+            return from busDrive in DataSource.ListBusDrives
+                   where busDrive.Active == true
+                   select busDrive.Clone();
+        }
         /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus drive object
         /// </summary>
@@ -583,6 +601,98 @@ namespace DL
                 throw new IdAlreadyExistsException(outLine.ID, $"The bus line {outLine.ID} does not exist");
         }
         #endregion
+        #region BusLineInStation Function 
+        /// <summary>
+        /// A function that receives an ID number and returns the corresponding Bus line object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BusLineInStation GetBusLineInStation(int id)
+        {
+            BusLineInStation busLine = DataSource.ListLineInStations.Find(b => b.ID == id);
+            if (busLine != null)
+                if (busLine.Active == true)
+                    return busLine.Clone();
+            throw new IdAlreadyExistsException(id, $"No bus line have the id: {id}");
+        }
+        /// <summary>
+        /// A function that receives a bus drive and updates its details
+        /// </summary>
+        /// <param name="bus"></param>
+        /// <summary>
+        /// A function that receives a bus line in station and adds it to the line in station list
+        /// </summary>
+        /// <param name="lineInStation"></param>
+        public void AddBusLineInStation(BusLineInStation lineInStation)
+        {
+            BusLineInStation newBusLine = DataSource.ListLineInStations.SingleOrDefault(s => s.BusLineNumber == lineInStation.BusLineNumber);
+            if (newBusLine != null)
+                if (newBusLine.Active == false)
+                {
+                    newBusLine.Active = true;
+                    return;
+                }
+                else
+                    throw new IdAlreadyExistsException(lineInStation.BusLineNumber ,$"The bus line {lineInStation.BusLineNumber} already exist");
+            DataSource.ListLineInStations.Add(lineInStation.Clone());
+        }
+        /// <summary>
+        /// A function that receives a bus line in station to delete it from the list
+        /// </summary>
+        /// <param name="lineInStation"></param>
+        public void DeleteBusLineInStation(BusLineInStation lineInStation)
+        {
+            var toDeleteIndex = DataSource.ListLineInStations.FindIndex(b => b.BusLineNumber == lineInStation.BusLineNumber);
+            if (toDeleteIndex != -1)
+                if (lineInStation.Active == true)
+                    DataSource.ListLineInStations[toDeleteIndex].Active = false;
+                else
+                    throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line { lineInStation.BusLineNumber} is already deleted");
+            else
+                throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line { lineInStation.BusLineNumber} does not exist");
+
+        }
+        /// <summary>
+        /// A function that receives a bus line in station and updates its details
+        /// </summary>
+        /// <param name="lineInStation"></param>
+        public void UpdateBusLineInStation(BusLineInStation lineInStation)
+        {
+            var toUpdateIndex = DataSource.ListLineInStations.FindIndex(s => s.BusLineNumber == lineInStation.BusLineNumber);
+            if (toUpdateIndex != -1)
+                if (lineInStation.Active == true)
+                    DataSource.ListLineInStations[toUpdateIndex] = lineInStation.Clone();
+                else
+                    throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line {lineInStation.BusLineNumber} does not exist");
+            else
+                throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line {lineInStation.BusLineNumber} does not exist");
+
+
+        }
+        /// <summary>
+        /// A function that returns a list of bus lines that are active
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<BusLineInStation> GetBusLineInStations()
+        {
+            return from BusLine in DataSource.ListLineInStations
+                   where BusLine.Active == true
+                   select BusLine.Clone();
+        }
+        
+        /// <summary>
+        /// A function that uses Encapsulates a method 
+        /// accepts an integer and returns an object
+        /// integer-bus line number
+        /// </summary>
+        /// <param name="generate"></param>
+        /// <returns></returns>
+        public IEnumerable<object> GetBusLineInStationsNumbers(Func<int, object> generate)
+        {
+            return from BusLine in DataSource.ListLineInStations
+                   select generate(BusLine.BusLineNumber);
+        }
+        #endregion
         #region ConsecutiveStations
         /// <summary>
         /// Receives station codes and returns the appropriate object
@@ -811,6 +921,8 @@ namespace DL
                    where StationInLine.FlageActive == true
                    select StationInLine.Clone();
         }
+
+       
         #endregion
     }
 

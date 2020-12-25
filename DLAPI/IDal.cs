@@ -11,32 +11,36 @@ namespace DalApi
     /// </summary>
     public interface IDal
     {
+        #region BusLineInStation
+        BusLineInStation GetBusLineInStation(int id);
+        void AddBusLineInStation(BusLineInStation lineInStation);
+        void DeleteBusLineInStation(BusLineInStation lineInStation);
+        void UpdateBusLineInStation(BusLineInStation lineInStation);
+        IEnumerable<BusLineInStation> GetBusLineInStations();
+        IEnumerable<object> GetBusLineInStationsNumbers(Func<int, object> generate);
+
+        #endregion
         #region Bus
         IEnumerable<Bus> GetAllBuss();
-        IEnumerable<Bus> GetAllBuses(Predicate<Bus> predicate);
         Bus GetBus(int id);
         void AddBus(Bus bus);
         void UpdateBus(Bus bus);
-        void UpdateBus(int id, Action<Bus> update);//method that knows to update a specific object
         void DeleteBus(Bus bus);
         IEnumerable<object> GetBusNum(Func<int, object> generate);
 
         #endregion
         #region BusDrive
         BusDrive GetBusDrive(int id);
-        IEnumerable<DO.BusDrive> GetAllBusDrive();
+        IEnumerable<BusDrive> GetAllBusDrive();
         void AddBusDrive(BusDrive bus);
         void UpdateBusDrive(BusDrive bus);
-        void UpdateBusDrive(int id, Action<Bus> update);//method that knows to update a specific object
         void DeleteBusDrive(BusDrive bus);
         #endregion
         #region BusStation
         BusStation GetBusStation(int code);
         IEnumerable<BusStation> BusStations();
-        IEnumerable<object> GetBusStationNumbers(Func<int, object> generate);
         void AddBusStation(BusStation b);
         void UpdateBusStation(BusStation b);
-        void UpdateBusStation(string id, Action<Bus> update);//method that knows to update a specific object
         void DeleteBusStation(BusStation b);
         #endregion
         #region BusLine
