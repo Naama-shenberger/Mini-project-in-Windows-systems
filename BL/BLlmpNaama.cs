@@ -16,6 +16,57 @@ namespace BL
         Random random = new Random();
         #region Bus Line
         /// <summary>
+        /// A function that receives tracking stations and updates the distance between them
+        /// </summary>
+        /// <param name="stations"></param>
+        /// <param name="_distance"></param>
+        public void UpdateDistanceBetweenstations(DO.ConsecutiveStations stations, float _distance)
+        {
+            try
+            {
+                DO.ConsecutiveStations consecutiveStations = dl.GetConsecutiveStations(stations.StationCodeOne, stations.StationCodeTwo);
+                consecutiveStations.Distance = _distance;
+                dl.UpdateConsecutiveStations(consecutiveStations);
+            }
+            catch(DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
+        }
+        /// <summary>
+        ///  A function that receives tracking stations and updates the Travel Time between them
+        /// </summary>
+        /// <param name="stations"></param>
+        /// <param name="time"></param>
+        public void UpdateTravelTimeBetweenstations(DO.ConsecutiveStations stations, TimeSpan time)
+        {
+            try
+            {
+                DO.ConsecutiveStations consecutiveStations = dl.GetConsecutiveStations(stations.StationCodeOne, stations.StationCodeTwo);
+                consecutiveStations.AverageTravelTime = time;
+                dl.UpdateConsecutiveStations(consecutiveStations);
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
+        }
+        /// <summary>
+        /// The function receives a bus line for updating
+        /// </summary>
+        /// <param name="busLine"></param>
+        public void UpdateBusLine(BusLine busLine)
+        {
+            try
+            {
+                dl.UpdateBusLine(BusLineBoDoAdapter(GetBusLine(busLine.ID)));
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
+        }
+        /// <summary>
         /// A function that receives a BO type bus line object and returns a DO type bus line
         /// </summary>
         /// <param name="busLineBO"></param>
@@ -23,11 +74,11 @@ namespace BL
         public DO.BusLine BusLineBoDoAdapter(BO.BusLine busLineBO)
         {
             DO.BusLine busLineDO = new DO.BusLine();
-            BO.Bus busBO;
+            DO.Bus busBO;
             int id = busLineBO.ID;
             try
             {
-              busBO = GetBus(id);//פונקציה שאצל אלה
+                busBO = dl.GetBus(id.ToString());//פונקציה שאצל אלה
             }
             catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
             busBO.CopyPropertiesTo(busLineDO);
@@ -46,7 +97,7 @@ namespace BL
             int id = busLineDO.ID;
             try
             {
-                busDO = dl.GetBus(id);
+                busDO = dl.GetBus(id.ToString());
             }
             catch(DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
             busDO.CopyPropertiesTo(busLineDO);
@@ -63,7 +114,7 @@ namespace BL
         //  The function gets a bus line to add
         /// </summary>
         /// <param name="busLine"></param>
-        public void AddBusLine(BusLine busLine,StationInLine stationInLineOne=null,StationInLine stationInLineTwo=null)
+        public void AddBusLine(BusLine busLine,BusLineStation stationInLineOne=null,BusLineStation stationInLineTwo=null)
         {
            
             try
@@ -77,8 +128,8 @@ namespace BL
                 AverageTravelTime = new TimeSpan(random.Next(0, 4), random.Next(0, 60), random.Next(0, 60))};
                 BusLineInStation busLineInStation = new BusLineInStation();
                 busLine.CopyPropertiesTo(busLineInStation);
-                stationInLineOne.BusLinesInStation.ToList().Add(busLineInStation);
-                stationInLineTwo.BusLinesInStation.ToList().Add(busLineInStation);
+                stationInLineOne.ListBusLinesInStation.ToList().Add(busLineInStation);
+                stationInLineTwo.ListBusLinesInStation.ToList().Add(busLineInStation);
 
                 dl.AddConsecutiveStations(stations);
                 dl.GetBusLine(busLine.ID);
@@ -98,7 +149,7 @@ namespace BL
         /// </summary>
         /// <param name="AddToLine"></param>
         /// <param name="busLineStation"></param>
-        public void AddBusStationToLine(BusLine AddToLine, StationInLine busLineStation)
+        public void AddBusStationToLine(BusLine AddToLine, BusLineStation busLineStation)
         {
             try
             {
@@ -143,7 +194,7 @@ namespace BL
         /// </summary>
         /// <param name="DeleteFromLine"></param>
         /// <param name="busLineStation"></param>
-        public void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, StationInLine busLineStation)
+        public void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, BusLineStation busLineStation)
         {
             try
             {
@@ -233,6 +284,21 @@ namespace BL
         #endregion
         #region  User
         /// <summary>
+        /// The function receives a User for updating
+        /// </summary>
+        /// <param name="busLine"></param>
+        public void UpdateUser(User user)
+        {
+            try
+            {
+                dl.UpdatUser(UserBoDoAdapter(GetUser(user.UserName)));
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
+        }
+        /// <summary>
         /// A function that receives a DO type bus line object and returns a BO type bus line
         /// </summary>
         /// <param name="UserDO"></param>
@@ -265,7 +331,7 @@ namespace BL
                dl.GetUser(user.UserName);
                
             }
-            catch(BO.IdAlreadyExistsException)
+            catch(DO.IdAlreadyExistsException)
             {
                 dl.AddUser(UserBoDoAdapter(user));
             }
@@ -276,7 +342,14 @@ namespace BL
         /// <param name="user"></param>
         public void DeleteUser(User user)
         {
-            dl.DeleteUser(dl.GetUser(user.UserName));
+            try
+            {
+                dl.DeleteUser(dl.GetUser(user.UserName));
+            }
+            catch(BO.IdAlreadyExistsException ex)
+            {
+                throw new IdAlreadyExistsException(ex.ToString());
+            }
         }
         /// <summary>
         /// The function returns all user
@@ -294,7 +367,14 @@ namespace BL
         /// <returns></returns>
         public User GetUser(string id)
         {
-            return UserDoBoAdapter(dl.GetUser(id));
+            try
+            {
+                return UserDoBoAdapter(dl.GetUser(id));
+            }
+            catch(DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
         }
         /// <summary>
         /// The function returns a collection that is divided into two user groups with access and those that do not
@@ -330,6 +410,21 @@ namespace BL
         }
         #endregion
         #region UserJourney
+        /// <summary>
+        /// The function receives a User for updating
+        /// </summary>
+        /// <param name="busLine"></param>
+        public void UpdateUserJourney(UserJourney userJourney)
+        {
+            try
+            {
+                dl.UpdatUserJourney(UserJourneyBoDoAdapter(GetUserJourney(userJourney.UserName)));
+            }
+            catch (DO.IdAlreadyExistsException ex)
+            {
+                throw new BO.IdAlreadyExistsException(ex.ToString());
+            }
+        }
         /// <summary>
         /// A function that receives a DO type bus line object and returns a BO type bus line
         /// </summary>

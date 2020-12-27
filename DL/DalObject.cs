@@ -40,19 +40,19 @@ namespace DL
         /// </summary>
         /// <param name="generate"></param>
         /// <returns></returns>
-        public IEnumerable<object> GetBusNum(Func<int, object> generate)
+        public IEnumerable<object> GetBussLicenseNumber(Func<string, object> generate)
         {
             return from Bus in DataSource.ListBuses
-                   select generate(int.Parse(Bus.LicensePlate));
+                   select generate (Bus.LicensePlate);
         }
         /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus object
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public DO.Bus GetBus(int id)
+        public DO.Bus GetBus(string id)
         {
-            DO.Bus bus = DataSource.ListBuses.Find(b => b.LicensePlate == id.ToString());
+            DO.Bus bus = DataSource.ListBuses.Find(b => b.LicensePlate == id);
             if (bus != null)
             {
                 if (bus.Active == true)
@@ -316,19 +316,6 @@ namespace DL
         }
         #endregion
         #region BusLine Functions
-        /// <summary>
-        /// A function that uses Encapsulates a method 
-        /// accepts an integer and a string and returns an object
-        /// integer-bus line number
-        /// string-License Plate
-        /// </summary>
-        /// <param name="generate"></param>
-        /// <returns></returns>
-        public IEnumerable<object> GetBusLineNumbers(Func<int, string, object> generate)
-        {
-            return from BusLine in DataSource.BusLines
-                   select generate(BusLine.BusLineNumber, GetBus(BusLine.ID).LicensePlate);
-        }
         /// <summary>
         /// A function that uses Encapsulates a method 
         /// accepts an integer and returns an object

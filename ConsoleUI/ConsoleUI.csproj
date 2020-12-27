@@ -53,13 +53,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DLAPI\DLAPI.csproj">
-      <Project>{005e5ecf-90a4-48ba-bde7-b83ef26f80f8}</Project>
-      <Name>DLAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DL\DalObject.csproj">
-      <Project>{b15dfed7-b439-4062-8499-e52a67aafaf3}</Project>
-      <Name>DalObject</Name>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{19e1c692-cced-41fe-8e48-49f0a7b952de}</Project>
+      <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

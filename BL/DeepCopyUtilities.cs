@@ -42,16 +42,16 @@ namespace BL
             from.CopyPropertiesTo(to);
             return to;
         }
-        public static BO.StationInLine CopyToStationInLine(this DO.StationInLine busStation, DO.StationInLine sic)
+        public static BO.BusLineStation CopyToStationInLine(this DO.StationInLine busStation, DO.StationInLine sic)
         {
-            BO.StationInLine result = (BO.StationInLine)busStation.CopyPropertiesToNew(typeof(BO.StationInLine));
+            BO.BusLineStation result = (BO.BusLineStation)busStation.CopyPropertiesToNew(typeof(BO.BusLineStation));
            
             return result;
         }
         public static BO.BusLineInStation CopyToLineInStation(this DO.BusLine busLine, DO.BusLineInStation sic)
         {
             BO.BusLineInStation result = (BO.BusLineInStation)busLine.CopyPropertiesToNew(typeof(BO.BusLineInStation));
-            return 
+            return result; 
         }
 
     }
