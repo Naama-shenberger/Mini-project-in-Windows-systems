@@ -10,7 +10,7 @@ namespace BLAPI
         #region Bus
         Bus GetBus(string id);
         IEnumerable<Bus> GetAllBus();
-        IEnumerable<IGrouping<bool,Bus>> GetAllBussGroupByTreatmentIsNeeded();
+        IEnumerable<IGrouping<bool, Bus>> GetAllBussGroupByTreatmentIsNeeded();
         IEnumerable<string> GetLicensePlateBuss();
         IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate);
         void AddABus(Bus bus);

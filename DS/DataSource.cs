@@ -12,11 +12,10 @@ namespace DS
         public static List<BusLine> BusLines;
         public static List<BusDrive> ListBusDrives;
         public static List<BusLineStation> BusLineStations;
-        public static List<LineOutForARide> LinesOutForARide; 
+        public static List<LineOutForARide> LinesOutForARide;
         public static List<ConsecutiveStations> ListConsecutiveStations;
         public static List<User> Users;
         public static List<UserJourney> UsersJourney;
-        public static List<StationInLine> StationsInLine;
         public static List<BusLineInStation> ListLineInStations;
 
         static DataSource()
@@ -28,8 +27,8 @@ namespace DS
         /// </summary>
         public static void InitAllLists()
         {
-            ListBuses = new List<Bus> 
-            { 
+            ListBuses = new List<Bus>
+            {
                 new Bus{Active=true,LicensePlate="12345678",DateActivity=new DateTime(2018,12,3),DateTreatment=new DateTime(2019,10,3),Totalkilometers=111,KilometersGas=338,KilometersTreatment=1211,AirTire=15,OilCondition=true},
                 new Bus{Active=true,LicensePlate="22345678",DateActivity=new DateTime(2018,11,3),DateTreatment=new DateTime(2019,11,3),Totalkilometers=112,KilometersGas=339,KilometersTreatment=1131,AirTire=75,OilCondition=true},
                 new Bus{Active=true,LicensePlate="32345678",DateActivity=new DateTime(2018,10,3),DateTreatment=new DateTime(2019,10,3),Totalkilometers=1113,KilometersGas=303,KilometersTreatment=1141,AirTire=165,OilCondition=true},
@@ -118,7 +117,7 @@ namespace DS
                 new BusDrive{Active=true,LicensePlate="12345618",ExitStart=new TimeSpan(11,2,4),TimeDrive=new TimeSpan(2,3,45),TimeNextStop=new TimeSpan(1,2,23),LastStasion=057101,BusDriverFirstName="harry",BusDriverLastName="potter",BusDriverId="066609168"},
                 new BusDrive{Active=true,LicensePlate="12345619",ExitStart=new TimeSpan(13,2,2),TimeDrive=new TimeSpan(10,02,9),TimeNextStop=new TimeSpan(1,2,63),LastStasion=821101,BusDriverFirstName="ron",BusDriverLastName="wez",BusDriverId="017999998"},
                 new BusDrive{Active=true,LicensePlate="12345610",ExitStart=new TimeSpan(33,4,5),TimeDrive=new TimeSpan(11,0,21),TimeNextStop=new TimeSpan(1,2,36),LastStasion=901101,BusDriverFirstName="america",BusDriverLastName="singer",BusDriverId="04449168"},
-                
+
 
             };
 
@@ -172,8 +171,9 @@ namespace DS
             };
 
         }
-       
+
     }
-   
-  
 }
+
+
+

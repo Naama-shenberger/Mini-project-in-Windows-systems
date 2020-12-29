@@ -19,7 +19,7 @@ namespace BO
         /// </summary>
         /// <returns></returns>
         public override string ToString() => this.ToStringProperty();
-        
+
 
     }
 }

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace DO
 {
+   
     /// <summary>
     /// bus station class
     /// </summary>
@@ -13,6 +14,7 @@ namespace DO
         /// get and set
         /// </summary>
         public bool Active { get; set; }//status of a bus line whether it is active or not
+        public static int IdentificationNumber { set; get; }//Identification number
         public int BusStationKey { get; set; }//code Station
         public string StationAddress { get; set; }//Station Address;
         public string StationName { get; set; }//Station Name
@@ -24,8 +26,9 @@ namespace DO
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("\nBus Station Key :{0}\nStation Address: {1} \nStation Name: {2}\nstaion landmark: ({3},{4})", BusStationKey, StationAddress, StationName, Latitude, Longitude );
+            return string.Format("\nBus Station Key :{0}\nStation Address: {1} \nStation Name: {2}\nstaion landmark: ({3},{4})", BusStationKey, StationAddress, StationName, Latitude, Longitude);
         }
 
     }
 }
+

@@ -1,0 +1,16 @@
+﻿<Window 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.WPF"
+        xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PL.WPF.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="Bus display" HorizontalAlignment="Left" Margin="83,63,0,0" VerticalAlignment="Top" Width="140" Height="41" Click="BusDisplay_Click"/>
+        <Button Content="Bus line display" HorizontalAlignment="Left" Margin="83,163,0,0" VerticalAlignment="Top" Width="140" Height="43" Click="BusLinesDisplay_Click"/>
+        <Button Content="Station display" HorizontalAlignment="Left" Margin="83,265,0,0" VerticalAlignment="Top" Width="140" Height="41"  Click="StationsDisplay_Click"/>
+
+    </Grid>
+</Window>

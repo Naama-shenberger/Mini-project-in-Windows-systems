@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace DalApi
+namespace DLAPI
 {
     /// <summary>
     /// Class for processing config.xml file and getting from there
@@ -28,9 +28,9 @@ namespace DalApi
         /// </summary>
         static DalConfing()
         {
-            XElement dlConfig = XElement.Load(@"confing.xml");
-            DLName = dlConfig.Element("dl").Value;
-            DLPackages = (from pkg in dlConfig.Element("dl-packages").Elements()
+            XElement dlConfing = XElement.Load(@"confing.xml");
+            DLName = dlConfing.Element("dal").Value;
+            DLPackages = (from pkg in dlConfing.Element("dal-packages").Elements()
                           let tmp1 = pkg.Attribute("namespace")
                           let nameSpace = tmp1 == null ? "DL" : tmp1.Value
                           let tmp2 = pkg.Attribute("class")

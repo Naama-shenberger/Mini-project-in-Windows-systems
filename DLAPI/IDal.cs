@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DO;
 
-namespace DalApi
+namespace DLAPI
 {
     /// <summary>
     /// Statement of functions for all class in DO
@@ -17,7 +17,7 @@ namespace DalApi
         void DeleteBusLineInStation(BusLineInStation lineInStation);
         void UpdateBusLineInStation(BusLineInStation lineInStation);
         IEnumerable<BusLineInStation> GetBusLineInStations();
-        IEnumerable<object> GetBusLineInStationsNumbers(Func<int, object> generate);
+
 
         #endregion
         #region Bus
@@ -26,7 +26,7 @@ namespace DalApi
         void AddBus(Bus bus);
         void UpdateBus(Bus bus);
         void DeleteBus(Bus bus);
-        IEnumerable<object> GetBussLicenseNumber(Func<string, object> generate);
+        IEnumerable<string> GetBussLicenseNumber();
         #endregion
         #region BusDrive
         BusDrive GetBusDrive(int id);
@@ -48,7 +48,7 @@ namespace DalApi
         void AddBusLine(BusLine b);
         void UpdateBusLine(BusLine b);
         void DeleteBusLine(BusLine b);
-        IEnumerable<object> GetBusLineNumbers(Func<int, object> generate);
+        IEnumerable<int> GetBusLineNumbers();
         #endregion
         #region BusLineStation
         IEnumerable<object> GetBusLineStationCode(Func<int, object> generate);
@@ -87,12 +87,6 @@ namespace DalApi
         void UpdatUserJourney(UserJourney user);
         void DeleteUserJourney(UserJourney user);
         #endregion
-        #region StationInLine 
-        StationInLine GetStationInLine(int id);
-        void AddStationInLine(StationInLine stationInLine);
-        void DeleteStationInLine(StationInLine stationInLine);
-        void UpdateStationInLine(StationInLine stationInLine);
-        IEnumerable<StationInLine> GetStationInLines();
-        #endregion
+
     }
 }

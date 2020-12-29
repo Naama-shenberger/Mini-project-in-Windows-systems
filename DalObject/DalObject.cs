@@ -1,8 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DalApi;
+using DLAPI;
 using DO;
 using DS;
 
@@ -10,7 +11,7 @@ namespace DL
 {
     internal sealed class DalObject : IDal
     {
-       
+
         #region singelton
         //create instance
         static DalObject instance;
@@ -40,10 +41,10 @@ namespace DL
         /// </summary>
         /// <param name="generate"></param>
         /// <returns></returns>
-        public IEnumerable<object> GetBussLicenseNumber(Func<string, object> generate)
+        public IEnumerable<string> GetBussLicenseNumber()
         {
             return from Bus in DataSource.ListBuses
-                   select generate (Bus.LicensePlate);
+                   select Bus.LicensePlate;
         }
         /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus object
@@ -58,7 +59,7 @@ namespace DL
                 if (bus.Active == true)
                     return bus.Clone();
             }
-            throw new DO.IdAlreadyExistsException(id, $"No bus have the license plate:{id}");
+            throw new DO.IdException(id, $"No bus have the license plate:{id}");
         }
         /// <summary>
         ///  A function that returns a list of bus that are active
@@ -88,7 +89,7 @@ namespace DL
                     return;
                 }
                 else
-                    throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} already exist");
+                    throw new IdException(b.LicensePlate, $"The bus {b.LicensePlate} already exist");
             DataSource.ListBuses.Add(b.Clone());
         }
         /// <summary>
@@ -102,9 +103,9 @@ namespace DL
                 if (b.Active == true)
                     DataSource.ListBuses[toUpdateIndex] = b.Clone();
                 else
-                    throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
+                    throw new IdException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
             else
-                throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
+                throw new IdException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
 
         }
         /// <summary>
@@ -118,9 +119,9 @@ namespace DL
                 if (b.Active == true)
                     DataSource.ListBuses[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} is already deleted");
+                    throw new IdException(b.LicensePlate, $"The bus {b.LicensePlate} is already deleted");
             else
-                throw new IdAlreadyExistsException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
+                throw new IdException(b.LicensePlate, $"The bus {b.LicensePlate} does not exist");
 
         }
         /// <summary>
@@ -154,7 +155,7 @@ namespace DL
             if (busDrive != null)
                 if (busDrive.Active == true)
                     return busDrive.Clone();
-            throw new IdAlreadyExistsException(id, $"No bus have the id: {id}");
+            throw new IdException(id, $"No bus have the id: {id}");
         }
         /// <summary>
         ///  A function that returns a list of bus drive that are active
@@ -185,7 +186,7 @@ namespace DL
                     return;
                 }
                 else
-                    throw new DO.IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} already exist");
+                    throw new DO.IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} already exist");
             DataSource.ListBusDrives.Add(bus.Clone());
         }
         /// <summary>
@@ -199,9 +200,9 @@ namespace DL
                 if (bus.Active == true)
                     DataSource.ListBusDrives[toUpdateIndex] = bus.Clone();
                 else
-                    throw new IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
+                    throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
             else
-                throw new IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
+                throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -216,9 +217,9 @@ namespace DL
                 if (bus.Active == true)
                     DataSource.BusLines[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} is already deleted");
+                    throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} is already deleted");
             else
-                throw new IdAlreadyExistsException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
+                throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
         }
 
         #endregion
@@ -234,7 +235,7 @@ namespace DL
             if (busStation != null)
                 if (busStation.Active == true)
                     return busStation.Clone();
-            throw new IdAlreadyExistsException(id, $"No bus Station have the Code: {id}");
+            throw new IdException(id, $"No bus Station have the Code: {id}");
         }
         /// <summary>
         ///  A function that returns a list of bus stations that are active
@@ -265,7 +266,7 @@ namespace DL
                     return;
                 }
                 else
-                    throw new IdAlreadyExistsException(station.BusStationKey, $"The bus station {station.BusStationKey} already exist");
+                    throw new IdException(station.BusStationKey, $"The bus station {station.BusStationKey} already exist");
         }
         /// <summary>
         /// A function that receives a bus Station and updates its details
@@ -278,9 +279,9 @@ namespace DL
                 if (station.Active == true)
                     DataSource.ListStations[toUpdateIndex] = station.Clone();
                 else
-                    throw new IdAlreadyExistsException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
+                    throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
             else
-                throw new IdAlreadyExistsException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
+                throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
 
         }
         /// <summary>
@@ -297,9 +298,9 @@ namespace DL
                 if (station.Active == true)
                     DataSource.BusLineStations[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(station.BusStationKey, $"The bus Station {station.BusStationKey} is already deleted");
+                    throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} is already deleted");
             else
-                throw new IdAlreadyExistsException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
+                throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
 
         }
         /// <summary>
@@ -323,10 +324,10 @@ namespace DL
         /// </summary>
         /// <param name="generate"></param>
         /// <returns></returns>
-        public IEnumerable<object> GetBusLineNumbers(Func<int, object> generate)
+        public IEnumerable<int> GetBusLineNumbers()
         {
             return from BusLine in DataSource.BusLines
-                   select generate(BusLine.BusLineNumber);
+                   select BusLine.BusLineNumber;
         }
         /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus line object
@@ -339,7 +340,7 @@ namespace DL
             if (busLine != null)
                 if (busLine.Active == true)
                     return busLine.Clone();
-            throw new IdAlreadyExistsException(id, $"No bus line have the id: {id}");
+            throw new IdException(id, $"No bus line have the id: {id}");
         }
         /// <summary>
         /// A function that returns a list of bus lines that are active
@@ -362,8 +363,8 @@ namespace DL
         /// <param name="bus"></param>
         public void AddBusLine(BusLine bus)
         {
-            Configuration.IdentificationNumberBusLine += 1;
-            bus.ID = Configuration.IdentificationNumberBusLine;
+
+            Configuration.UniquenessTest(bus);
             var busIndex = DataSource.BusLines.FindIndex(b => b.ID == bus.ID);
             if (busIndex != -1)
                 if (DataSource.BusLines[busIndex].Active == false)
@@ -372,7 +373,7 @@ namespace DL
                     return;
                 }
                 else
-                    throw new DO.IdAlreadyExistsException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} already exist");
+                    throw new DO.IdException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} already exist");
             DataSource.BusLines.Add(bus.Clone());
         }
         /// <summary>
@@ -386,9 +387,9 @@ namespace DL
                 if (bus.Active == true)
                     DataSource.BusLines[toUpdateIndex] = bus.Clone();
                 else
-                    throw new IdAlreadyExistsException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} does not exist");
+                    throw new IdException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} does not exist");
             else
-                throw new IdAlreadyExistsException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} does not exist");
+                throw new IdException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -403,9 +404,9 @@ namespace DL
                 if (bus.Active == true)
                     DataSource.BusLines[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} is already deleted");
+                    throw new IdException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} is already deleted");
             else
-                throw new IdAlreadyExistsException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} does not exist");
+                throw new IdException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} does not exist");
         }
         #endregion
         #region BusLineStation Functions
@@ -432,7 +433,7 @@ namespace DL
             if (busLineStation != null)
                 if (busLineStation.Active == true)
                     return busLineStation.Clone();
-            throw new IdAlreadyExistsException(id, $"No bus line Station have the Code: {id}");
+            throw new IdException(id, $"No bus line Station have the Code: {id}");
         }
         /// <summary>
         ///  A function that returns a list of bus line stations that are active
@@ -453,16 +454,16 @@ namespace DL
         public void AddBusLineStation(BusLineStation station)
         {
             var stationIndex = DataSource.BusLineStations.FindIndex(s => s.CodeStation == station.CodeStation);
-            if (stationIndex!=-1)
+            if (stationIndex != -1)
                 if (DataSource.BusLineStations[stationIndex].Active == false)
                 {
                     DataSource.BusLineStations[stationIndex].Active = true;
                     return;
                 }
                 else
-                    throw new IdAlreadyExistsException(station.CodeStation, $"The bus line station {station.CodeStation} already exist");
+                    throw new IdException(station.CodeStation, $"The bus line station {station.CodeStation} already exist");
             DataSource.BusLineStations.Add(station.Clone());
-            
+
         }
         /// <summary>
         /// A function that receives a bus line Station and updates its details
@@ -475,9 +476,9 @@ namespace DL
                 if (station.Active == true)
                     DataSource.BusLineStations[toUpdateIndex] = station.Clone();
                 else
-                    throw new IdAlreadyExistsException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
+                    throw new IdException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
             else
-                throw new IdAlreadyExistsException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
+                throw new IdException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -492,9 +493,9 @@ namespace DL
                 if (station.Active == true)
                     DataSource.BusLineStations[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(station.CodeStation, $"The bus line Station {station.CodeStation} is already deleted");
+                    throw new IdException(station.CodeStation, $"The bus line Station {station.CodeStation} is already deleted");
             else
-                throw new IdAlreadyExistsException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
+                throw new IdException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
         }
         /// <summary>
         /// A function that uses Encapsulates a method 
@@ -521,7 +522,7 @@ namespace DL
             if (busLine != null)
                 if (busLine.Active == true)
                     return busLine.Clone();
-            throw new IdAlreadyExistsException(id, $"No bus line have the id:{id}");
+            throw new IdException(id, $"No bus line have the id:{id}");
         }
         /// <summary>
         /// A function that returns a list of bus line  on their way out to a ride that are active
@@ -551,7 +552,7 @@ namespace DL
                     return;
                 }
                 else
-                    throw new DO.IdAlreadyExistsException(o.ID, $"The bus line {o.ID} already exist");
+                    throw new DO.IdException(o.ID, $"The bus line {o.ID} already exist");
             DataSource.LinesOutForARide.Add(o.Clone());
         }
         /// <summary>
@@ -565,9 +566,9 @@ namespace DL
                 if (outLine.Active == true)
                     DataSource.LinesOutForARide[toUpdateIndex] = outLine.Clone();
                 else
-                    throw new IdAlreadyExistsException(outLine.ID, $"The bus line {outLine.ID} does not exist");
+                    throw new IdException(outLine.ID, $"The bus line {outLine.ID} does not exist");
             else
-                throw new IdAlreadyExistsException(outLine.ID, $"The bus line {outLine.ID} does not exist");
+                throw new IdException(outLine.ID, $"The bus line {outLine.ID} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -582,9 +583,9 @@ namespace DL
                 if (outLine.Active == true)
                     DataSource.LinesOutForARide[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(outLine.ID, $"The bus line {outLine.ID} is already deleted");
+                    throw new IdException(outLine.ID, $"The bus line {outLine.ID} is already deleted");
             else
-                throw new IdAlreadyExistsException(outLine.ID, $"The bus line {outLine.ID} does not exist");
+                throw new IdException(outLine.ID, $"The bus line {outLine.ID} does not exist");
         }
         #endregion
         #region BusLineInStation Function 
@@ -599,7 +600,7 @@ namespace DL
             if (busLine != null)
                 if (busLine.Active == true)
                     return busLine.Clone();
-            throw new IdAlreadyExistsException(id, $"No bus line have the id: {id}");
+            throw new IdException(id, $"No bus line have the id: {id}");
         }
         /// <summary>
         /// A function that receives a bus drive and updates its details
@@ -619,7 +620,7 @@ namespace DL
                     return;
                 }
                 else
-                    throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line {lineInStation.BusLineNumber} already exist");
+                    throw new IdException(lineInStation.BusLineNumber, $"The bus line {lineInStation.BusLineNumber} already exist");
             DataSource.ListLineInStations.Add(lineInStation.Clone());
         }
         /// <summary>
@@ -633,9 +634,9 @@ namespace DL
                 if (lineInStation.Active == true)
                     DataSource.ListLineInStations[toDeleteIndex].Active = false;
                 else
-                    throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line { lineInStation.BusLineNumber} is already deleted");
+                    throw new IdException(lineInStation.BusLineNumber, $"The bus line { lineInStation.BusLineNumber} is already deleted");
             else
-                throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line { lineInStation.BusLineNumber} does not exist");
+                throw new IdException(lineInStation.BusLineNumber, $"The bus line { lineInStation.BusLineNumber} does not exist");
 
         }
         /// <summary>
@@ -649,9 +650,9 @@ namespace DL
                 if (lineInStation.Active == true)
                     DataSource.ListLineInStations[toUpdateIndex] = lineInStation.Clone();
                 else
-                    throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line {lineInStation.BusLineNumber} does not exist");
+                    throw new IdException(lineInStation.BusLineNumber, $"The bus line {lineInStation.BusLineNumber} does not exist");
             else
-                throw new IdAlreadyExistsException(lineInStation.BusLineNumber, $"The bus line {lineInStation.BusLineNumber} does not exist");
+                throw new IdException(lineInStation.BusLineNumber, $"The bus line {lineInStation.BusLineNumber} does not exist");
 
 
         }
@@ -665,7 +666,7 @@ namespace DL
                    where BusLine.Active == true
                    select BusLine.Clone();
         }
-        
+
         /// <summary>
         /// A function that uses Encapsulates a method 
         /// accepts an integer and returns an object
@@ -692,7 +693,7 @@ namespace DL
             if (consecutiveStations != null)
                 if (consecutiveStations.Flage == true)
                     return consecutiveStations.Clone();
-            throw new IdAlreadyExistsException($"No consecutive Stations have the id`s:{id1} {id2}");
+            throw new IdException($"No consecutive Stations have the id`s:{id1} {id2}");
         }
         /// <summary>
         /// A function that returns a list of two nearby stations
@@ -719,8 +720,8 @@ namespace DL
                     return;
                 }
                 else
-                    throw new IdAlreadyExistsException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} already exist");
-            DataSource.ListConsecutiveStations.Add(stations.Clone());    
+                    throw new IdException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} already exist");
+            DataSource.ListConsecutiveStations.Add(stations.Clone());
         }
         /// <summary>
         ///  A function that receives a ConsecutiveStations object updates its details
@@ -733,9 +734,9 @@ namespace DL
                 if (stations.Flage == true)
                     DataSource.ListConsecutiveStations[toUpdateIndex] = stations.Clone();
                 else
-                    throw new DO.IdAlreadyExistsException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
+                    throw new DO.IdException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
             else
-                throw new DO.IdAlreadyExistsException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
+                throw new DO.IdException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -750,9 +751,9 @@ namespace DL
                 if (stations.Flage == true)
                     DataSource.ListConsecutiveStations[toDeleteIndex].Flage = false;
                 else
-                    throw new DO.IdAlreadyExistsException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
+                    throw new DO.IdException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
             else
-                throw new DO.IdAlreadyExistsException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
+                throw new DO.IdException($"The Consecutives Stations {stations.StationCodeOne} {stations.StationCodeTwo} doesn't exist");
         }
         #endregion
         #region User
@@ -762,7 +763,7 @@ namespace DL
             if (user != null)
                 if (user.DelUser == true)
                     return user.Clone();
-            throw new IdAlreadyExistsException($"No user have the name {id}");
+            throw new IdException($"No user have the name {id}");
         }
         public IEnumerable<User> GetUsers()
         {
@@ -780,7 +781,7 @@ namespace DL
                     return;
                 }
                 else
-                    throw new DO.IdAlreadyExistsException(user.UserName, $"The User Name {user.UserName} already exist");
+                    throw new DO.IdException(user.UserName, $"The User Name {user.UserName} already exist");
             DataSource.Users.Add(user.Clone());
         }
         public void UpdatUser(User user)
@@ -790,9 +791,9 @@ namespace DL
                 if (DataSource.Users[toUpdateIndex].DelUser == true)
                     DataSource.Users[toUpdateIndex] = user.Clone();
                 else
-                    throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} does not exist");
+                    throw new IdException(user.UserName, $"The user name {user.UserName} does not exist");
             else
-                throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} does not exist");
+                throw new IdException(user.UserName, $"The user name {user.UserName} does not exist");
         }
         public void DeleteUser(User user)
         {
@@ -801,9 +802,9 @@ namespace DL
                 if (DataSource.Users[toDeleteIndex].DelUser == true)
                     DataSource.Users[toDeleteIndex].DelUser = false;
                 else
-                    throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} is already deleted");
+                    throw new IdException(user.UserName, $"The user name {user.UserName} is already deleted");
             else
-                throw new IdAlreadyExistsException(user.UserName, $"The user name {user.UserName} is already deleted");
+                throw new IdException(user.UserName, $"The user name {user.UserName} is already deleted");
         }
         #endregion
         #region UserJourney
@@ -813,7 +814,7 @@ namespace DL
             if (userJourney != null)
                 if (userJourney.FlageActive == true)
                     return userJourney.Clone();
-            throw new IdAlreadyExistsException($"No user Journey have the name {id}");
+            throw new IdException($"No user Journey have the name {id}");
         }
         public IEnumerable<UserJourney> GetUsersJourney()
         {
@@ -831,7 +832,7 @@ namespace DL
                     return;
                 }
                 else
-                    throw new DO.IdAlreadyExistsException(userJourney.UserName, $"The User Name {userJourney.UserName} already exist");
+                    throw new DO.IdException(userJourney.UserName, $"The User Name {userJourney.UserName} already exist");
             DataSource.UsersJourney.Add(userJourney.Clone());
         }
         public void UpdatUserJourney(UserJourney userJourney)
@@ -841,9 +842,9 @@ namespace DL
                 if (DataSource.UsersJourney[toUpdateIndex].FlageActive == true)
                     DataSource.UsersJourney[toUpdateIndex] = userJourney.Clone();
                 else
-                    throw new IdAlreadyExistsException(userJourney.UserName, $"The user name {userJourney.UserName} does not exist");
+                    throw new IdException(userJourney.UserName, $"The user name {userJourney.UserName} does not exist");
             else
-                throw new IdAlreadyExistsException(userJourney.UserName, $"The user name {userJourney.UserName} does not exist");
+                throw new IdException(userJourney.UserName, $"The user name {userJourney.UserName} does not exist");
         }
         public void DeleteUserJourney(UserJourney userJourney)
         {
@@ -852,65 +853,12 @@ namespace DL
                 if (DataSource.UsersJourney[toDeleteIndex].FlageActive == true)
                     DataSource.UsersJourney[toDeleteIndex].FlageActive = false;
                 else
-                    throw new IdAlreadyExistsException(userJourney.UserName, $"The user name {userJourney.UserName} is already deleted");
+                    throw new IdException(userJourney.UserName, $"The user name {userJourney.UserName} is already deleted");
             else
-                throw new IdAlreadyExistsException(userJourney.UserName, $"The user name {userJourney.UserName} is already deleted");
+                throw new IdException(userJourney.UserName, $"The user name {userJourney.UserName} is already deleted");
         }
         #endregion
-        #region StationInLine
-        public StationInLine GetStationInLine(int id)
-        {
-            var stationInLine = DataSource.StationsInLine.Find(s => s.BusStationKey == id);
-            if (stationInLine != null)
-                if (stationInLine.FlageActive == true)
-                    return stationInLine.Clone();
-            throw new IdAlreadyExistsException($"No Station In Line have the name {id}");
-        }
-        public void AddStationInLine(StationInLine stationInLine)
-        {
-            var stationInLineIndex = DataSource.StationsInLine.FindIndex(s => s.BusStationKey == stationInLine.BusStationKey);
-            if (stationInLineIndex != -1)
-                if (DataSource.StationsInLine[stationInLineIndex].FlageActive == false)
-                {
-                    DataSource.StationsInLine[stationInLineIndex].FlageActive = true;
-                    return;
-                }
-                else
-                    throw new DO.IdAlreadyExistsException(stationInLine.BusStationKey, $"The station In Line {stationInLine.BusStationKey} already exist");
-            DataSource.StationsInLine.Add(stationInLine.Clone());
-        }
-        public void DeleteStationInLine(StationInLine stationInLine)
-        {
-            var toDeleteIndex = DataSource.StationsInLine.FindIndex(s => s.BusStationKey == stationInLine.BusStationKey);
-            if (toDeleteIndex != -1)
-                if (DataSource.StationsInLine[toDeleteIndex].FlageActive == true)
-                    DataSource.StationsInLine[toDeleteIndex].FlageActive = false;
-                else
-                    throw new IdAlreadyExistsException(stationInLine.BusStationKey, $"The station In Line {stationInLine.BusStationKey} is already deleted");
-            else
-                throw new IdAlreadyExistsException(stationInLine.BusStationKey, $"The station In Line {stationInLine.BusStationKey} is already deleted");
-        }
-        public void UpdateStationInLine(StationInLine stationInLine)
-        {
-            var toUpdateIndex = DataSource.StationsInLine.FindIndex(s => s.BusStationKey == stationInLine.BusStationKey);
-            if (toUpdateIndex != -1)
-                if (DataSource.StationsInLine[toUpdateIndex].FlageActive == true)
-                    DataSource.StationsInLine[toUpdateIndex] = stationInLine.Clone();
-                else
-                    throw new IdAlreadyExistsException(stationInLine.BusStationKey, $"The  station In Line { stationInLine.BusStationKey} does not exist");
-            else
-                throw new IdAlreadyExistsException(stationInLine.BusStationKey, $"The  station In Line { stationInLine.BusStationKey} does not exist");
-        }
-        public IEnumerable<StationInLine> GetStationInLines()
-        {
-            return from StationInLine in DataSource.StationsInLine
-                   where StationInLine.FlageActive == true
-                   select StationInLine.Clone();
-        }
 
-       
-        #endregion
     }
 
 }
-

@@ -6,6 +6,7 @@ using System.Text;
 
 namespace BLAPI
 {
+
     public static class BLFactory
     {
         public static IBL GetBL(string type)
@@ -21,4 +22,6 @@ namespace BLAPI
             }
         }
     }
+
 }
+

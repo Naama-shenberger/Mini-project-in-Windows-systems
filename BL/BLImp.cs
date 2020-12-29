@@ -1,12 +1,11 @@
 ﻿using BLAPI;
 using BO;
-using DalApi;
+using DLAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using static DO.Enums;
-
 namespace BL
 {
     internal class BLImp : IBL
@@ -22,11 +21,11 @@ namespace BL
         {
             try
             {
-               dl.UpdateBus(BusBoDoAdapter(GetBus(bus.LicensePlate)));
+                dl.UpdateBus(BusBoDoAdapter(GetBus(bus.LicensePlate)));
             }
-            catch(DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -36,7 +35,7 @@ namespace BL
         /// <returns></returns>
         public BO.Bus BusDoBoAdapter(DO.Bus busDO)
         {
-            BO.Bus busBO = null;
+            BO.Bus busBO = new BO.Bus();
             busDO.CopyPropertiesTo(busBO);
             return busBO;
 
@@ -48,7 +47,7 @@ namespace BL
         /// <returns></returns>
         public DO.Bus BusBoDoAdapter(BO.Bus busBO)
         {
-            DO.Bus busDO = null;
+            DO.Bus busDO = dl.GetBus(busBO.LicensePlate);
             busBO.CopyPropertiesTo(busDO);
             return busDO;
         }
@@ -63,11 +62,11 @@ namespace BL
             {
                 return BusDoBoAdapter(dl.GetBus(id));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+                throw new BO.IdException("Bus ID is illegal", ex);
             }
-           
+
         }
         /// <summary>
         /// Add a bus to the list of buss
@@ -79,18 +78,18 @@ namespace BL
             try
             {
                 if (NumberOflicensePlate(bus) == bus.LicensePlate.Length)
-                      if(dl.GetBus(bus.LicensePlate)!=null)
-                        throw new BO.IdAlreadyExistsException("Bus already Exists");
-               else
-                    throw new BO.IdAlreadyExistsException("Invalid license number input");
+                    if (dl.GetBus(bus.LicensePlate) != null)
+                        throw new BO.IdException("Bus already Exists");
+                    else
+                        throw new BO.IdException("Invalid license number input");
             }
-            catch (DO.IdAlreadyExistsException)
+            catch (DO.IdException)
             {
                 dl.AddBus(BusBoDoAdapter(bus));
             }
-            catch (BO.IdAlreadyExistsException ex)
+            catch (BO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+                throw new BO.IdException("Bus ID is illegal", ex);
             }
         }
         /// <summary>
@@ -99,14 +98,14 @@ namespace BL
         /// <param name="bus"></param>
         public void DeleteBus(Bus bus)
         {
-           
+
             try
             {
                 dl.DeleteBus(dl.GetBus(bus.LicensePlate));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+                throw new BO.IdException("Bus ID is illegal", ex);
             }
         }
         /// <summary>
@@ -183,9 +182,9 @@ namespace BL
             {
                 b_find = dl.GetBus(id);
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+                throw new BO.IdException("Bus ID is illegal", ex);
             }
             if (!(b_find.KilometersTreatment < 2000 && !DateCheck(BusDoBoAdapter(b_find))))
                 return true;
@@ -204,9 +203,9 @@ namespace BL
             {
                 b_find = dl.GetBus(bus.LicensePlate);
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+                throw new BO.IdException("Bus ID is illegal", ex);
             }
             if (b_find.OilCondition || b_find.AirTire > 75)
                 return true;
@@ -237,8 +236,8 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<string> GetLicensePlateBuss()
         {
-            return from item in dl.GetBussLicenseNumber((id) => { return GetBus(id); })
-                   let bus = item as BO.Bus
+            return from item in dl.GetAllBuss()
+                   let bus = BusDoBoAdapter(item) as BO.Bus
                    orderby bus.LicensePlate
                    select bus.LicensePlate;
         }
@@ -248,8 +247,8 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate) => from sic in dl.GetBussLicenseNumber((id) => { return GetBus(id); })
-                                                                      let bus = sic as BO.Bus
+        public IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate) => from sic in dl.GetAllBuss()
+                                                                      let bus = BusDoBoAdapter(sic) as BO.Bus
                                                                       where predicate(bus)
                                                                       select bus;
 
@@ -265,9 +264,9 @@ namespace BL
             {
                 dl.UpdateBusStation(BusStationBoDoAdapter(GetBusStation(busStation.BusStationKey)));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -279,9 +278,9 @@ namespace BL
         {
             BO.BusStation stationBO = new BusStation();
             stationDO.CopyPropertiesTo(stationBO);
-            stationBO.ListBusLinesInStation=from sic in dl.GetBusLineInStations()
-                                            let line=dl.GetBusLine(sic.BusLineNumber)
-                                            select line.CopyToLineInStation(sic);
+            stationBO.ListBusLinesInStation = from sic in dl.GetBusLineInStations()
+                                              let line = dl.GetBusLine(sic.BusLineNumber)
+                                              select line.CopyToLineInStation(sic);
             return stationBO;
         }
         /// <summary>
@@ -307,11 +306,11 @@ namespace BL
             {
                 stationDO = dl.GetBusStation(id);
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+                throw new BO.IdException("Bus ID is illegal", ex);
             }
-           
+
             return BusStationDoBoAdapter(stationDO);
         }
         /// <summary>
@@ -325,11 +324,11 @@ namespace BL
             {
                 dl.GetBusStation(station.BusStationKey);
             }
-            catch (DO.IdAlreadyExistsException)
+            catch (DO.IdException)
             {
                 dl.AddBusStation(dl.GetBusStation(station.BusStationKey));
             }
-         
+
         }
         /// <summary>
         /// A function that deletes a bus station from the list of buss that are in drives
@@ -343,9 +342,9 @@ namespace BL
             {
                 stationDO = dl.GetBusStation(station.BusStationKey);
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus station dose not exists", ex);
+                throw new BO.IdException("Bus station dose not exists", ex);
             }
             dl.DeleteBusStation(stationDO);
         }
@@ -383,9 +382,9 @@ namespace BL
                 consecutiveStations.Distance = _distance;
                 dl.UpdateConsecutiveStations(consecutiveStations);
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -401,9 +400,9 @@ namespace BL
                 consecutiveStations.AverageTravelTime = time;
                 dl.UpdateConsecutiveStations(consecutiveStations);
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -416,9 +415,9 @@ namespace BL
             {
                 dl.UpdateBusLine(BusLineBoDoAdapter(GetBusLine(busLine.ID)));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -435,7 +434,7 @@ namespace BL
             {
                 busBO = GetBus(id.ToString());
             }
-            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            catch (DO.IdException ex) { throw new BO.IdException("Bus Line ID is illegal", ex); }
             busBO.CopyPropertiesTo(busLineDO);
             busLineBO.CopyPropertiesTo(busLineDO);
             return busLineDO;
@@ -454,12 +453,12 @@ namespace BL
             {
                 busDO = dl.GetBus(id.ToString());
             }
-            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            catch (DO.IdException ex) { throw new BO.IdException("Bus Line ID is illegal", ex); }
             busDO.CopyPropertiesTo(busLineDO);
             busLineDO.CopyPropertiesTo(busLineBO);
-            busLineBO.StationsInLine = from sin in dl.GetStationInLines()
-                                       where (sin.IDBusLine == id)
-                                       let StationsInLine = dl.GetStationInLine(sin.BusStationKey)
+            busLineBO.StationsInLine = from sin in dl.BusLines()
+                                       where (sin.ID == id)
+                                       let StationsInLine = dl.GetBusLineStation(sin.ID)
                                        select StationsInLine.CopyToStationInLine(sin);
             return busLineBO;
         }
@@ -475,7 +474,7 @@ namespace BL
             try
             {
                 if (stationInLineOne == null && stationInLineTwo == null)
-                    throw new BO.IdAlreadyExistsException("You must add at least two stations to the line");
+                    throw new BO.IdException("You must add at least two stations to the line");
                 busLine.StationsInLine.ToList().Add(stationInLineOne);
                 busLine.StationsInLine.ToList().Add(stationInLineTwo);
                 DO.ConsecutiveStations stations = new DO.ConsecutiveStations
@@ -495,13 +494,13 @@ namespace BL
                 dl.AddConsecutiveStations(stations);
                 dl.GetBusLine(busLine.ID);
             }
-            catch (DO.IdAlreadyExistsException)
+            catch (DO.IdException)
             {
                 dl.AddBusLine(BusLineBoDoAdapter(busLine));
             }
-            catch (BO.IdAlreadyExistsException ex)
+            catch (BO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus line ID is illegal", ex);
+                throw new BO.IdException("Bus line ID is illegal", ex);
             }
         }
         /// <summary>
@@ -523,15 +522,15 @@ namespace BL
                     Flage = true,
                     AverageTravelTime = new TimeSpan(random.Next(0, 4), random.Next(0, 60), random.Next(0, 60))
                 };
-                DO.StationInLine stationInLineDO = new DO.StationInLine();
+                DO.BusLineStation stationInLineDO = new DO.BusLineStation();
                 busLineStation.CopyPropertiesTo(stationInLineDO);
                 dl.AddConsecutiveStations(stations);
-                dl.AddStationInLine(stationInLineDO);
+                dl.AddBusLineStation(stationInLineDO);
 
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -544,9 +543,9 @@ namespace BL
             {
                 dl.DeleteBusLine(dl.GetBusLine(busLine.ID));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("ERROR", ex);
+                throw new BO.IdException("ERROR", ex);
             }
         }
         /// <summary>
@@ -559,7 +558,7 @@ namespace BL
         {
             try
             {
-                dl.DeleteStationInLine(dl.GetStationInLine(busLineStation.BusStationKey));
+                dl.DeleteBusLineStation(dl.GetBusLineStation(busLineStation.BusStationKey));
                 var IndexToDelete = DeleteFromLine.StationsInLine.ToList().FindIndex(d => d.BusStationKey == busLineStation.BusStationKey);
                 DO.ConsecutiveStations stations = new DO.ConsecutiveStations
                 {
@@ -569,9 +568,9 @@ namespace BL
                 DeleteFromLine.StationsInLine.ToList().RemoveAt(IndexToDelete);
                 dl.DeleteConsecutiveStations(stations);
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -600,8 +599,8 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<BusLine> GetAllBusLinesSortByNumberOfStations()
         {
-            return from item in dl.GetBusLineNumbers((id) => { return GetBusLine(id); })
-                   let busLine = item as BO.BusLine
+            return from item in dl.BusLines()
+                   let busLine = BusLineDoBoAdapter(item) as BO.BusLine
                    orderby busLine.StationsInLine.Count()
                    select busLine;
         }
@@ -616,9 +615,9 @@ namespace BL
             {
                 return BusLineDoBoAdapter(dl.GetBusLine(id));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -627,8 +626,8 @@ namespace BL
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public IEnumerable<BusLine> GetBusLineBy(Predicate<BusLine> predicate) => from sic in dl.GetBusLineNumbers((id) => { return GetBusLine(id); })
-                                                                                  let busLine = sic as BO.BusLine
+        public IEnumerable<BusLine> GetBusLineBy(Predicate<BusLine> predicate) => from sic in dl.BusLines()
+                                                                                  let busLine = BusLineDoBoAdapter(sic) as BO.BusLine
                                                                                   where predicate(busLine)
                                                                                   select busLine;
         /// <summary>
@@ -637,8 +636,8 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<int> GetNumberLines()
         {
-            return from item in dl.GetBusLineNumbers((id) => { return GetBusLine(id); })
-                   let busLine = item as BO.BusLine
+            return from item in dl.BusLines()
+                   let busLine = BusLineDoBoAdapter(item) as BO.BusLine
                    orderby busLine.BusLineNumber
                    select busLine.BusLineNumber;
         }
@@ -679,9 +678,9 @@ namespace BL
             {
                 lineInStationDO = dl.GetBusLineInStation(id);
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+                throw new BO.IdException("Bus ID is illegal", ex);
             }
             return LineStationDoBoAdapter(lineInStationDO);
         }
@@ -690,17 +689,17 @@ namespace BL
         /// The function gets a bus line in station  to add 
         /// </summary>
         /// <param name="lineInStation"></param>
-        public void AddBusLineInStation(BusLineInStation lineInStation) 
+        public void AddBusLineInStation(BusLineInStation lineInStation)
         {
             try
             {
                 dl.GetBusLineStation(lineInStation.BusLineNumber);
             }
-            catch (DO.IdAlreadyExistsException)
+            catch (DO.IdException)
             {
                 dl.AddBusLineStation(dl.GetBusLineStation(lineInStation.BusLineNumber));
             }
-          
+
         }
         /// <summary>
         ///  A function that deletes a bus line in station from the list of lines in station
@@ -712,11 +711,11 @@ namespace BL
             {
                 dl.DeleteBusLineStation(dl.GetBusLineStation(lineInStation.BusLineNumber));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException("Bus ID is illegal", ex);
+                throw new BO.IdException("Bus ID is illegal", ex);
             }
-         
+
         }
         /// <summary>
         /// The function receives a bus Station for updating
@@ -728,9 +727,9 @@ namespace BL
             {
                 dl.UpdateBusLineInStation(LineStationBoDoAdapter(GetLineInStation(busStation.BusLineNumber)));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         #endregion
@@ -745,9 +744,9 @@ namespace BL
             {
                 dl.UpdatUser(UserBoDoAdapter(GetUser(user.UserName)));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -783,7 +782,7 @@ namespace BL
                 dl.GetUser(user.UserName);
 
             }
-            catch (DO.IdAlreadyExistsException)
+            catch (DO.IdException)
             {
                 dl.AddUser(UserBoDoAdapter(user));
             }
@@ -798,9 +797,9 @@ namespace BL
             {
                 dl.DeleteUser(dl.GetUser(user.UserName));
             }
-            catch (BO.IdAlreadyExistsException ex)
+            catch (BO.IdException ex)
             {
-                throw new IdAlreadyExistsException(ex.ToString());
+                throw new IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -823,9 +822,9 @@ namespace BL
             {
                 return UserDoBoAdapter(dl.GetUser(id));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -872,9 +871,9 @@ namespace BL
             {
                 dl.UpdatUserJourney(UserJourneyBoDoAdapter(GetUserJourney(userJourney.UserName)));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -891,7 +890,7 @@ namespace BL
             {
                 UserDO = dl.GetUser(id);
             }
-            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("User Journey ID is illegal", ex); }
+            catch (DO.IdException ex) { throw new BO.IdException("User Journey ID is illegal", ex); }
             UserDO.CopyPropertiesTo(UserJourneyDO);
             UserJourneyDO.CopyPropertiesTo(UserJourneyBO);
             return UserJourneyBO;
@@ -910,7 +909,7 @@ namespace BL
             {
                 UserBO = GetUser(id);//פונקציה שאצל אלה
             }
-            catch (DO.IdAlreadyExistsException ex) { throw new BO.IdAlreadyExistsException("Bus Line ID is illegal", ex); }
+            catch (DO.IdException ex) { throw new BO.IdException("Bus Line ID is illegal", ex); }
             UserBO.CopyPropertiesTo(userJourneyDO);
             userJourneyBO.CopyPropertiesTo(userJourneyDO);
             return userJourneyDO;
@@ -925,9 +924,9 @@ namespace BL
             {
                 dl.AddUserJourney(UserJourneyBoDoAdapter(userJourney));
             }
-            catch (BO.IdAlreadyExistsException ex)
+            catch (BO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -940,9 +939,9 @@ namespace BL
             {
                 dl.DeleteUserJourney(dl.GetUserJourney(userJourney.UserName));
             }
-            catch (DO.IdAlreadyExistsException ex)
+            catch (DO.IdException ex)
             {
-                throw new BO.IdAlreadyExistsException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>

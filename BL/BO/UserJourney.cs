@@ -5,7 +5,7 @@ using DO;
 namespace BO
 {
     public class UserJourney : User
-    { 
+    {
         /// <summary>
         /// sets and gets
         /// </summary>
