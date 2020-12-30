@@ -447,14 +447,14 @@ namespace BL
         public BO.BusLine BusLineDoBoAdapter(DO.BusLine busLineDO)
         {
             BO.BusLine busLineBO = new BO.BusLine();
-            DO.Bus busDO;
+            //DO.Bus busDO;
             int id = busLineDO.ID;
-            try
-            {
-                busDO = dl.GetBus(id.ToString());
-            }
-            catch (DO.IdException ex) { throw new BO.IdException("Bus Line ID is illegal", ex); }
-            busDO.CopyPropertiesTo(busLineDO);
+            //try
+            //{
+            //    busDO = dl.GetBus(id.ToString());
+            //}
+            //catch (DO.IdException ex) { throw new BO.IdException("Bus Line ID is illegal", ex); }
+            //busDO.CopyPropertiesTo(busLineDO);
             busLineDO.CopyPropertiesTo(busLineBO);
             busLineBO.StationsInLine = from sin in dl.BusLines()
                                        where (sin.ID == id)

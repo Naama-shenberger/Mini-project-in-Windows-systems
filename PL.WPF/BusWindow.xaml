@@ -8,26 +8,28 @@
         mc:Ignorable="d"
         Title="BusWindow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="lvBuses"  HorizontalAlignment="Left" Height="271" Margin="271,32,0,0" VerticalAlignment="Top" Width="452">
+        <ListView x:Name="lvBuses" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding BusList}"  HorizontalAlignment="Left" Height="271" Margin="271,32,0,0" VerticalAlignment="Top" Width="452">
             <ListView.View>
                 <GridView >
-                    <GridViewColumn Header="License number" Width="120" />
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Click="ViewDetailsClick" Content="View Details" Margin="150,1,0,0" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                      
-                    </GridViewColumn>
-                    
+                    <GridView.Columns>
+                        <GridViewColumn DisplayMemberBinding="{Binding LicensePlate}" Header="License number" Width="120" />
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Button Click="ViewDetailsClick" Content="View Details" Margin="150,9,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
                 </GridView>
             </ListView.View>
         </ListView>
 
-        <Button Content="Button" HorizontalAlignment="Left" Margin="38,32,0,0" VerticalAlignment="Top" Width="109" Height="23"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="38,85,0,0" VerticalAlignment="Top" Width="109" Height="24"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="38,137,0,0" VerticalAlignment="Top" Width="109" Height="25"/>
+        <Button Content="Update Bus" Click="UpdateBus_Click" HorizontalAlignment="Left" Margin="38,32,0,0" VerticalAlignment="Top" Width="109" Height="23"/>
+        <Button Content="Add Bus"  Click="AddBus_Click" HorizontalAlignment="Left" Margin="38,85,0,0" VerticalAlignment="Top" Width="109" Height="24"/>
+        <Button Content="Delete Bus" Click="DeleteBus_Click" HorizontalAlignment="Left" Margin="38,137,0,0" VerticalAlignment="Top" Width="109" Height="25"/>
 
 
     </Grid>

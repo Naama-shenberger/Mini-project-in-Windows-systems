@@ -20,12 +20,13 @@ namespace PL.WPF
     /// Interaction logic for BusWindow.xaml
     /// </summary>
     public partial class BusWindow : Window
-    { 
-        IBL bl = BLFactory.GetBL("1");
+    {
+        IBL bl;
         private ObservableCollection<BO.Bus> BusList = new ObservableCollection<BO.Bus>();//Bus List 
-        public BusWindow()
+        public BusWindow(IBL _bl)
         {
             InitializeComponent();
+            bl = _bl;
             BusList=Convert<BO.Bus>(bl.GetAllBus());
             lvBuses.ItemsSource = BusList;
         }
@@ -34,7 +35,7 @@ namespace PL.WPF
             return new ObservableCollection<T>(original);
         }
         /// <summary>
-        /// MouseDoubleClick event for item list
+        /// 
         /// The event opens a window with the bus details
         /// </summary>
         /// <param name="sender"></param>
@@ -42,12 +43,28 @@ namespace PL.WPF
         private void ViewDetailsClick(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
-            BO.Bus Data =bl.GetBus(btn.DataContext.ToString());
+            BO.Bus Data = btn.DataContext as BO.Bus;
             BusInformationWindow busInformationWindow = new BusInformationWindow(Data);
             busInformationWindow.ShowDialog();
         }
+        private void UpdateBus_Click(object sender, RoutedEventArgs e)
+        {
+            BO.Bus Data= lvBuses.SelectedItem as BO.Bus;
+           
+        }
+        private void AddBus_Click(object sender, RoutedEventArgs e)
+        {
+            AddBusWindow addBusWindow = new AddBusWindow(bl);
+            addBusWindow.ShowDialog();
 
 
-
+        }
+        private void DeleteBus_Click(object sender, RoutedEventArgs e)
+        {
+            BO.Bus Data = lvBuses.SelectedItem as BO.Bus;
+            bl.DeleteBus(Data);
+            BusList.Remove(Data);
+            lvBuses.Items.Refresh();
+        }
     }
 }

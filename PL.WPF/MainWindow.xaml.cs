@@ -21,8 +21,8 @@ namespace PL.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        
 
+        IBL bl = BLFactory.GetBL("1");
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void BusDisplay_Click(object sender, RoutedEventArgs e)
         {
-            new BusWindow().Show();
+            new BusWindow(bl).Show();
             Close();
         }
         /// <summary>
@@ -45,7 +45,7 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void BusLinesDisplay_Click(object sender, RoutedEventArgs e)
         {
-            new BusLineWindow().Show();
+            new BusLineWindow(bl).Show();
             Close();
         }
         /// <summary>
@@ -57,6 +57,15 @@ namespace PL.WPF
         {
             new StationWindow().Show();
             Close();
+        }
+
+        private void btnGO_Click(object sender, RoutedEventArgs e)
+        {
+            if (rbBus.IsChecked == true)
+            {
+                new BusWindow(bl).Show();
+                Close();
+            }
         }
     }
 }

@@ -8,9 +8,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Bus display" HorizontalAlignment="Left" Margin="83,63,0,0" VerticalAlignment="Top" Width="140" Height="41" Click="BusDisplay_Click"/>
-        <Button Content="Bus line display" HorizontalAlignment="Left" Margin="83,163,0,0" VerticalAlignment="Top" Width="140" Height="43" Click="BusLinesDisplay_Click"/>
-        <Button Content="Station display" HorizontalAlignment="Left" Margin="83,265,0,0" VerticalAlignment="Top" Width="140" Height="41"  Click="StationsDisplay_Click"/>
-
+        <Label Content="Welcome to our Perfect University! " HorizontalAlignment="Left" Margin="176,54,0,0" VerticalAlignment="Top" Height="41" Width="348" FontWeight="Bold" FontStyle="Italic" FontSize="20" Foreground="#FF1DBCD4"/>
+        <GroupBox Header="Choose Option:" HorizontalAlignment="Left" Height="186" Margin="176,121,0,0" VerticalAlignment="Top" Width="333" FontSize="16" FontStyle="Italic" FontWeight="SemiBold">
+            <StackPanel Margin="21,20,29,24">
+                <RadioButton x:Name="rbBusLine" Content="Bus line display" HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Width="140" Height="43" Click="BusLinesDisplay_Click"/>
+                <RadioButton x:Name="rbBus" Content="Bus display" HorizontalAlignment="Left" Margin="13,-13,0,0" VerticalAlignment="Top" Width="140" Height="36"/>
+                <RadioButton x:Name="rbStation" Content="Station display" HorizontalAlignment="Left" Margin="13,-10,0,0" VerticalAlignment="Top" Width="140" Height="41"  Click="StationsDisplay_Click"/>
+            </StackPanel>
+        </GroupBox>
+        <Button x:Name="btnGO" Content="GO" HorizontalAlignment="Left" Height="42" Margin="288,342,0,0" VerticalAlignment="Top" Width="105" Background="#FF4496CF" FontSize="16" FontFamily="Kristen ITC" FontWeight="Bold" Click="btnGO_Click"/>
     </Grid>
 </Window>

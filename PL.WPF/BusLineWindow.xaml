@@ -8,6 +8,23 @@
         mc:Ignorable="d"
         Title="BusLineWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListView x:Name="lvBuseLines" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding BusLineList}"  HorizontalAlignment="Left" Height="271" Margin="271,32,0,0" VerticalAlignment="Top" Width="452">
+            <ListView.View>
+                <GridView >
+                    <GridView.Columns>
+                        <GridViewColumn DisplayMemberBinding="{Binding BusLineNumber}" Header="Bus Line Number" Width="120" />
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Button Click="ViewDetailsClick" Content="View Details" Margin="150,9,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
