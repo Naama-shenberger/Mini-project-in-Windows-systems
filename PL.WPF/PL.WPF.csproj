@@ -58,17 +58,10 @@
     <Compile Include="AddBusWindow.xaml.cs">
       <DependentUpon>AddBusWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BusInformationWindow.xaml.cs">
-      <DependentUpon>BusInformationWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="StationWindow.xaml.cs">
       <DependentUpon>StationWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AddBusWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="BusInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

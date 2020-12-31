@@ -20,7 +20,7 @@ namespace PL.WPF
     /// </summary>
     public partial class AddBusWindow : Window
     {
-        BO.Bus Bus = new BO.Bus();
+        public static BO.Bus NewBus { get; set; }
         IBL bl;
         public AddBusWindow(IBL _bl)
         {

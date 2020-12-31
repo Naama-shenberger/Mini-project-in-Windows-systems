@@ -14,6 +14,7 @@ namespace BO
         public float Totalkilometers { get; set; }//the bus total kilometers
         public float AirTire { get; set; }// Percentage of tire air
         public bool OilCondition { get; set; }//Says if you need to fill the oil tank
+        public bool Active { get; set; }
         /// <summary>
         /// override of ToString
         /// </summary>

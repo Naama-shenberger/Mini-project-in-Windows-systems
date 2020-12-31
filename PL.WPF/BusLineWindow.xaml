@@ -8,23 +8,35 @@
         mc:Ignorable="d"
         Title="BusLineWindow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="lvBuseLines" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding BusLineList}"  HorizontalAlignment="Left" Height="271" Margin="271,32,0,0" VerticalAlignment="Top" Width="452">
-            <ListView.View>
-                <GridView >
-                    <GridView.Columns>
-                        <GridViewColumn DisplayMemberBinding="{Binding BusLineNumber}" Header="Bus Line Number" Width="120" />
-                        <GridViewColumn>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <Button Click="ViewDetailsClick" Content="View Details" Margin="150,9,0,0" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <ComboBox Name="ComboBoxBusLineNumber" ItemsSource="{Binding}" Margin="47,52,627.6,339" />
+        <Button Content="update" HorizontalAlignment="Left" Margin="662,129,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Add Bus Line" HorizontalAlignment="Left" Margin="635,360,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="662,188,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid x:Name="gridOneBus"  HorizontalAlignment="Left" Margin="40,76,0,0" VerticalAlignment="Top" Height="110" Width="277">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Visibility="Hidden" Content="Bus Line Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="4,3,0,3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox Visibility="Hidden" x:Name="BusLineNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3" Grid.Row="1" Text="{Binding BusLineNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120"/>
+            <Label Content="Area:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <ComboBox x:Name="AreaTextBox"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" SelectedItem="{Binding Area}"  VerticalAlignment="Center" Width="120"/>
+
+        </Grid>
+        <DataGrid HorizontalAlignment="Left" Height="153" Margin="22,239,0,0" VerticalAlignment="Top" Width="240"/>
+        <DataGrid HorizontalAlignment="Left" Height="153" Margin="309,239,0,0" VerticalAlignment="Top" Width="248"/>
+
     </Grid>
 </Window>

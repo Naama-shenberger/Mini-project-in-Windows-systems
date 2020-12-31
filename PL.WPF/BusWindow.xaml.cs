@@ -22,49 +22,140 @@ namespace PL.WPF
     public partial class BusWindow : Window
     {
         IBL bl;
+        BO.Bus CurBus = new BO.Bus();
         private ObservableCollection<BO.Bus> BusList = new ObservableCollection<BO.Bus>();//Bus List 
         public BusWindow(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
-            BusList=Convert<BO.Bus>(bl.GetAllBus());
-            lvBuses.ItemsSource = BusList;
+            cbBusLicensePlate.DisplayMemberPath = "LicensePlate";
+            cbBusLicensePlate.SelectedIndex = 0;
+            RefreshAllBusesComboBox();
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
-        /// <summary>
-        /// 
-        /// The event opens a window with the bus details
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ViewDetailsClick(object sender, RoutedEventArgs e)
+
+        void RefreshAllBusesComboBox()
         {
-            var btn = sender as Button;
-            BO.Bus Data = btn.DataContext as BO.Bus;
-            BusInformationWindow busInformationWindow = new BusInformationWindow(Data);
-            busInformationWindow.ShowDialog();
+           
+            cbBusLicensePlate.DataContext = Convert<BO.Bus>(bl.GetAllBus()); //ObserListOfStudents;
         }
+      
+        private void cbBusLicensePlate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurBus = (cbBusLicensePlate.SelectedItem as BO.Bus);
+            gridOneBus.DataContext = CurBus;
+        }
+
+        private void Treatment_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (CurBus != null)
+                    bl.BusInTreatment(CurBus);
+                KmTreatmentTextBox.Text = "0";
+                KmGasTextBox.Text = "0";
+                DateTreatmentDatePicker.Text= DateTime.Now.ToString();
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void refuel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (CurBus != null)
+                    bl.RefillingBus(CurBus);
+               
+                KmGasTextBox.Text = "0";
+
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+          
+        }
+
         private void UpdateBus_Click(object sender, RoutedEventArgs e)
         {
-            BO.Bus Data= lvBuses.SelectedItem as BO.Bus;
+            try
+            {
+                if (CurBus != null)
+                    bl.UpdateBus(CurBus);
+
+               
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteBus_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult res = MessageBox.Show("Delete selected student?", "Verification", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (res == MessageBoxResult.No)
+                return;
+
+            try
+            {
+                if (CurBus != null)
+                {
+                    bl.DeleteBus(CurBus);
+                    BO.Bus BusToDel = CurBus;
+                    RefreshAllBusesComboBox();
+                }
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
            
         }
         private void AddBus_Click(object sender, RoutedEventArgs e)
         {
-            AddBusWindow addBusWindow = new AddBusWindow(bl);
-            addBusWindow.ShowDialog();
-
-
+            RefreshAllBusesComboBox();
+            LabelLicensePlate.Visibility = Visibility.Visible;
+            LicensePlateTextBox.Visibility = Visibility.Visible;
         }
-        private void DeleteBus_Click(object sender, RoutedEventArgs e)
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
-            BO.Bus Data = lvBuses.SelectedItem as BO.Bus;
-            bl.DeleteBus(Data);
-            BusList.Remove(Data);
-            lvBuses.Items.Refresh();
+            try
+            {
+                if (e.Key == Key.Return)
+                {
+                    CurBus = new BO.Bus
+                    {
+                        LicensePlate = LicensePlateTextBox.Text,
+                        DateActivity = (DateTime)DateActivityDatePicker.SelectedDate,
+                        DateTreatment = (DateTime)DateTreatmentDatePicker.SelectedDate,
+                        KilometersTreatment = float.Parse(KmTreatmentTextBox.Text),
+                        KilometersGas = float.Parse(KmGasTextBox.Text),
+                        Totalkilometers = float.Parse(TotalkmTextBox.Text),
+                        AirTire = float.Parse(AirTireTextBox.Text),
+                        OilCondition = bool.Parse(OilConditionTextBox.Text),Active=true
+                        
+                    };
+
+                    if (CurBus != null)
+                        bl.AddABus(CurBus);
+                    LabelLicensePlate.Visibility = Visibility.Hidden;
+                    LicensePlateTextBox.Visibility = Visibility.Hidden;
+                    RefreshAllBusesComboBox();
+                    MessageBox.Show("The bus was successfully added", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    cbBusLicensePlate.SelectedIndex = 0;
+                }
+            }
+            catch(BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                cbBusLicensePlate.SelectedIndex = 0;
+            }
         }
     }
 }

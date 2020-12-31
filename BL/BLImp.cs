@@ -47,7 +47,7 @@ namespace BL
         /// <returns></returns>
         public DO.Bus BusBoDoAdapter(BO.Bus busBO)
         {
-            DO.Bus busDO = dl.GetBus(busBO.LicensePlate);
+            DO.Bus busDO = new DO.Bus();
             busBO.CopyPropertiesTo(busDO);
             return busDO;
         }
@@ -82,14 +82,16 @@ namespace BL
                         throw new BO.IdException("Bus already Exists");
                     else
                         throw new BO.IdException("Invalid license number input");
+                else
+                    throw new BO.IdException("Invalid license number input");
             }
             catch (DO.IdException)
             {
                 dl.AddBus(BusBoDoAdapter(bus));
             }
-            catch (BO.IdException ex)
+            catch (BO.IdException)
             {
-                throw new BO.IdException("Bus ID is illegal", ex);
+                throw new BO.IdException("Bus ID is illegal");
             }
         }
         /// <summary>
@@ -115,6 +117,8 @@ namespace BL
         public void RefillingBus(Bus bus)
         {
             bus.KilometersGas = 0;
+            dl.UpdateBus(BusBoDoAdapter(bus));
+            
         }
         /// <summary>
         /// Treatment function
@@ -126,6 +130,7 @@ namespace BL
             b.KilometersTreatment = 0;
             RefillingBus(b);
             b.DateTreatment = DateTime.Now;
+            dl.UpdateBus(BusBoDoAdapter(b));
         }
         /// <summary>
         /// A function that checks how many numbers the user needs to type for the number plate
@@ -428,14 +433,6 @@ namespace BL
         public DO.BusLine BusLineBoDoAdapter(BO.BusLine busLineBO)
         {
             DO.BusLine busLineDO = new DO.BusLine();
-            BO.Bus busBO;
-            int id = busLineBO.ID;
-            try
-            {
-                busBO = GetBus(id.ToString());
-            }
-            catch (DO.IdException ex) { throw new BO.IdException("Bus Line ID is illegal", ex); }
-            busBO.CopyPropertiesTo(busLineDO);
             busLineBO.CopyPropertiesTo(busLineDO);
             return busLineDO;
         }
@@ -447,19 +444,11 @@ namespace BL
         public BO.BusLine BusLineDoBoAdapter(DO.BusLine busLineDO)
         {
             BO.BusLine busLineBO = new BO.BusLine();
-            //DO.Bus busDO;
-            int id = busLineDO.ID;
-            //try
-            //{
-            //    busDO = dl.GetBus(id.ToString());
-            //}
-            //catch (DO.IdException ex) { throw new BO.IdException("Bus Line ID is illegal", ex); }
-            //busDO.CopyPropertiesTo(busLineDO);
             busLineDO.CopyPropertiesTo(busLineBO);
             busLineBO.StationsInLine = from sin in dl.BusLines()
-                                       where (sin.ID == id)
-                                       let StationsInLine = dl.GetBusLineStation(sin.ID)
-                                       select StationsInLine.CopyToStationInLine(sin);
+                                       where sin.ID == busLineDO.ID
+                                       let LineStation = dl.GetBusLineStation(sin.FirstStopNumber)
+                                       select LineStation.CopyToStationInLine(sin);
             return busLineBO;
         }
 
@@ -579,7 +568,8 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<BusLine> GetAllBusLines()
         {
-            return from item in dl.BusLines() select BusLineDoBoAdapter(item);
+            return from BusLine in dl.BusLines() 
+                   select BusLineDoBoAdapter(BusLine);
         }
         /// <summary>
         ///A function that returns all bus lines in groups according to their areas 

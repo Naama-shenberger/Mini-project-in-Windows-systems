@@ -28,42 +28,21 @@ namespace PL.WPF
             InitializeComponent();
           
         }
-        /// <summary>
-        /// A button event that opens a new window to represent buses
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BusDisplay_Click(object sender, RoutedEventArgs e)
-        {
-            new BusWindow(bl).Show();
-            Close();
-        }
-        /// <summary>
-        /// A button event that opens a new window to represent bus lines
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BusLinesDisplay_Click(object sender, RoutedEventArgs e)
-        {
-            new BusLineWindow(bl).Show();
-            Close();
-        }
-        /// <summary>
-        /// A button event that opens a new window to represent stations
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StationsDisplay_Click(object sender, RoutedEventArgs e)
-        {
-            new StationWindow().Show();
-            Close();
-        }
-
         private void btnGO_Click(object sender, RoutedEventArgs e)
         {
             if (rbBus.IsChecked == true)
             {
                 new BusWindow(bl).Show();
+                Close();
+            }
+            else if(rbBusLine.IsChecked==true)
+            {
+                new BusLineWindow(bl).Show();
+                Close();
+            }
+            else
+            {
+                new StationWindow().Show();
                 Close();
             }
         }
