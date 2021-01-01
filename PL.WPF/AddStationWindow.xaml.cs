@@ -38,13 +38,15 @@ namespace PL.WPF
             {
                 if (e.Key == Key.Return)
                 {
-                    BO.BusLineStation curBusLineStation = new BO.BusLineStation
+                    BO.BusLineStation Add = new BO.BusLineStation
                     {
                         BusStationKey = int.Parse(stationTextBox.Text),
                         StationAddress = stationAddressTextBox.Text,
                         StationName = StationNameTextBox.Text,
                         NumberStationInLine = int.Parse(NumberStationInLineTextBox.Text)
                     };
+                    curBusLineStation = Add;
+                    this.Close();
                 }
               
             }
@@ -52,6 +54,7 @@ namespace PL.WPF
             {
 
             }
+            
         }
     }
 }

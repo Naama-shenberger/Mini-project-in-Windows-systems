@@ -111,8 +111,8 @@ namespace PL.WPF
                     AddStationWindow addStationWindow =new AddStationWindow(bl);
                     addStationWindow.ShowDialog();
                     BO.BusLineStation lineStationOne = addStationWindow.CurBusLineStation;
-                    //AddStationWindow addStationWindow1 = new AddStationWindow(bl);
-                    //addStationWindow1.Show();
+                    AddStationWindow addStationWindow1 = new AddStationWindow(bl);
+                    addStationWindow1.ShowDialog();
                     BO.BusLineStation lineStationTwo = addStationWindow.CurBusLineStation;
                     bl.AddBusLine(busLine,lineStationOne,lineStationTwo);
                     BusLineNumberTextBox.Visibility = Visibility.Hidden;

@@ -2,6 +2,7 @@
 using BO;
 using DLAPI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -454,7 +455,7 @@ namespace BL
                                        select LineStation.CopyToStationInLine(sin);
             return busLineBO;
         }
-
+       
         /// <summary>
         /// Add a line to the list of bus lines
         //  The function gets a bus line to add
@@ -467,21 +468,23 @@ namespace BL
             {
                 if (stationInLineOne == null && stationInLineTwo == null)
                     throw new BO.IdException("You must add at least two stations to the line");
-                busLine.StationsInLine.ToList().Add(stationInLineOne);
-                busLine.StationsInLine.ToList().Add(stationInLineTwo);
+                busLine.StationsInLine= busLine.StationsInLine.Append(stationInLineOne);
+                busLine.StationsInLine= busLine.StationsInLine.Append(stationInLineTwo);
                 DO.ConsecutiveStations stations = new DO.ConsecutiveStations
                 {
                     StationCodeOne = stationInLineOne.BusStationKey,
-                    StationCodeTwo = stationInLineTwo.BusStationKey
-                ,
+                    StationCodeTwo = stationInLineTwo.BusStationKey,
                     Distance = (float)(random.NextDouble() * 1850 + 150),
                     Flage = true,
                     AverageTravelTime = new TimeSpan(random.Next(0, 4), random.Next(0, 60), random.Next(0, 60))
                 };
-                BusLineInStation busLineInStation = new BusLineInStation();
-                busLine.CopyPropertiesTo(busLineInStation);
-                //stationInLineOne.ListBusLinesInStation.ToList().Add(busLineInStation);
-                //stationInLineTwo.ListBusLinesInStation.ToList().Add(busLineInStation);
+                BusStation busLineInStation = new BusStation();
+                stationInLineOne.CopyPropertiesTo(busLineInStation);
+                BusLineInStation lineInStation = new BusLineInStation();
+                busLine.CopyPropertiesTo(lineInStation);
+                busLineInStation.ListBusLinesInStation.Append(lineInStation);
+                stationInLineTwo.CopyPropertiesTo(busLineInStation);
+                busLineInStation.ListBusLinesInStation.Append(lineInStation);
 
                 dl.AddConsecutiveStations(stations);
                 dl.GetBusLine(busLine.ID);
