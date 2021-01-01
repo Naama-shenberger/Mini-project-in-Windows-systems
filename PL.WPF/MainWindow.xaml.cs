@@ -42,7 +42,7 @@ namespace PL.WPF
             }
             else
             {
-                new StationWindow().Show();
+                new StationWindow(bl).Show();
                 Close();
             }
         }
