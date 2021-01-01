@@ -363,7 +363,8 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<BusStation> GetAllBusStation()
         {
-            return from item in dl.BusStations() select BusStationDoBoAdapter(item);
+            return from item in dl.BusStations() 
+               select BusStationDoBoAdapter(item);
         }
 
         /// <summary>

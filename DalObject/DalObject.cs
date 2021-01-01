@@ -663,9 +663,9 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<BusLineInStation> GetBusLineInStations()
         {
-            return from BusLine in DataSource.ListLineInStations
-                   where BusLine.Active == true
-                   select BusLine.Clone();
+            return from BusLineInStation in DataSource.ListLineInStations
+                   where BusLineInStation.Active == true
+                   select BusLineInStation.Clone();
         }
 
         /// <summary>

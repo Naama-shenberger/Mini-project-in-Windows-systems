@@ -11,7 +11,7 @@ namespace DO
         /// </summary> 
         public bool Active { get; set; }//status of a bus line whether it is active or not
         public int BusLineNumber { set; get; }//Bus line number 
-        public int Area { set; get; }//Area of the bus line
+        public Zones Area { set; get; }//Area of the bus line
 
         /// <summary>
         /// override of ToString
