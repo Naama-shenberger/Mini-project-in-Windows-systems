@@ -41,12 +41,14 @@ namespace PL.WPF
         {
            
             cbBusLicensePlate.DataContext = Convert<BO.Bus>(bl.GetAllBus()); //ObserListOfStudents;
+            
         }
       
         private void cbBusLicensePlate_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CurBus = (cbBusLicensePlate.SelectedItem as BO.Bus);
             gridOneBus.DataContext = CurBus;
+            StatusLabel.Visibility = Visibility.Visible;
         }
 
         private void Treatment_Click(object sender, RoutedEventArgs e)
@@ -58,6 +60,7 @@ namespace PL.WPF
                 KmTreatmentTextBox.Text = "0";
                 KmGasTextBox.Text = "0";
                 DateTreatmentDatePicker.Text= DateTime.Now.ToString();
+               
             }
             catch (BO.IdException ex)
             {
@@ -122,6 +125,7 @@ namespace PL.WPF
             RefreshAllBusesComboBox();
             LabelLicensePlate.Visibility = Visibility.Visible;
             LicensePlateTextBox.Visibility = Visibility.Visible;
+            StatusLabel.Visibility = Visibility.Hidden;
         }
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {

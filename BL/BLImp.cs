@@ -87,6 +87,16 @@ namespace BL
             }
             catch (DO.IdException)
             {
+                if (TreatmentIsNeeded(bus) || FuelCondition(bus))
+                {
+                    bus.Status = Enums.Status.Dangerous;
+                    bus.Active = false;
+                }
+                else
+                {
+                    bus.Status = Enums.Status.Ready_to_go;
+                    bus.Active = true;
+                }
                 dl.AddBus(BusBoDoAdapter(bus));
             }
             catch (BO.IdException)
@@ -117,6 +127,8 @@ namespace BL
         public void RefillingBus(Bus bus)
         {
             bus.KilometersGas = 0;
+            if(TreatmentIsNeeded(bus))
+                bus.Status = Enums.Status.Ready_to_go;
             dl.UpdateBus(BusBoDoAdapter(bus));
             
         }
@@ -130,6 +142,7 @@ namespace BL
             b.KilometersTreatment = 0;
             RefillingBus(b);
             b.DateTreatment = DateTime.Now;
+            b.Status = Enums.Status.Ready_to_go;
             dl.UpdateBus(BusBoDoAdapter(b));
         }
         /// <summary>
@@ -168,10 +181,9 @@ namespace BL
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
-        public bool FuelCondition(Bus b)
+        public bool FuelCondition(Bus bus)
         {
-            DO.Bus b_find = dl.GetBus(b.LicensePlate);
-            if (b_find.KilometersGas > 1200)
+            if (bus.KilometersGas > 1200)
                 return true;
             return false;
         }
@@ -180,18 +192,9 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool TreatmentIsNeeded(string id)
+        public bool TreatmentIsNeeded(Bus bus)
         {
-            DO.Bus b_find;
-            try
-            {
-                b_find = dl.GetBus(id);
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException("Bus ID is illegal", ex);
-            }
-            if (!(b_find.KilometersTreatment < 2000 && !DateCheck(BusDoBoAdapter(b_find))))
+            if (!(bus.KilometersTreatment < 2000 && !DateCheck(bus)))
                 return true;
             return false;
 
@@ -232,7 +235,7 @@ namespace BL
         public IEnumerable<IGrouping<bool, Bus>> GetAllBussGroupByTreatmentIsNeeded()
         {
             return from Bus in GetAllBus()
-                   group Bus by (TreatmentIsNeeded(Bus.LicensePlate)) into groups
+                   group Bus by (TreatmentIsNeeded(Bus)) into groups
                    select groups;
         }
         /// <summary>
@@ -477,8 +480,8 @@ namespace BL
                 };
                 BusLineInStation busLineInStation = new BusLineInStation();
                 busLine.CopyPropertiesTo(busLineInStation);
-                stationInLineOne.ListBusLinesInStation.ToList().Add(busLineInStation);
-                stationInLineTwo.ListBusLinesInStation.ToList().Add(busLineInStation);
+                //stationInLineOne.ListBusLinesInStation.ToList().Add(busLineInStation);
+                //stationInLineTwo.ListBusLinesInStation.ToList().Add(busLineInStation);
 
                 dl.AddConsecutiveStations(stations);
                 dl.GetBusLine(busLine.ID);
@@ -487,9 +490,9 @@ namespace BL
             {
                 dl.AddBusLine(BusLineBoDoAdapter(busLine));
             }
-            catch (BO.IdException ex)
+            catch (BO.IdException)
             {
-                throw new BO.IdException("Bus line ID is illegal", ex);
+                throw new BO.IdException("Bus line ID is illegal");
             }
         }
         /// <summary>

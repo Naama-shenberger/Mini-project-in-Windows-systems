@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static BO.Enums;
 
 namespace BO
 {
@@ -15,6 +16,7 @@ namespace BO
         public float AirTire { get; set; }// Percentage of tire air
         public bool OilCondition { get; set; }//Says if you need to fill the oil tank
         public bool Active { get; set; }
+        public Status Status { get; set; }
         /// <summary>
         /// override of ToString
         /// </summary>

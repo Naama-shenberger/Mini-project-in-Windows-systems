@@ -16,7 +16,7 @@ namespace BLAPI
         void AddABus(Bus bus);
         void DeleteBus(Bus bus);
         void UpdateBus(Bus bus);
-        bool TreatmentIsNeeded(string id);
+        bool TreatmentIsNeeded(Bus bus);
         void BusInTreatment(Bus b);
         bool FuelCondition(Bus b);
         void RefillingBus(Bus bus);

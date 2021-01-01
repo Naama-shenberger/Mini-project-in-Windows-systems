@@ -29,36 +29,17 @@ namespace DS
         {
             ListBuses = new List<Bus>
             {
-               //new Bus{Active=false,BusLineNumber = 134,FirstStopNumber = "123456",LastStopNumber="987463",Area=(int)Zones.General},
-               //new Bus{Active=true,BusLineNumber = 14,FirstStopNumber = "128256",LastStopNumber="917453",Area=(int)Zones.Zefat},
-               //new Bus{Active=true,BusLineNumber = 112,FirstStopNumber = "120486",LastStopNumber="680463",Area=(int)Zones.Alon_Shvut},
-               //new Bus{Active=true,BusLineNumber = 9,FirstStopNumber = "188456",LastStopNumber="907453",Area=(int)Zones.Beer_Sheva},
-               //new Bus{Active=true,BusLineNumber = 22,FirstStopNumber = "120457",LastStopNumber="917563",Area=(int)Zones.Zeev_hill},
-               //new Bus{Active=true,BusLineNumber = 19,FirstStopNumber = "193406",LastStopNumber="967061",Area=(int)Zones.Alon_Shvut},
-               //new Bus{Active=true,BusLineNumber = 10,FirstStopNumber = "103456",LastStopNumber="937163",Area=(int)Zones.Itamar},
-               //new Bus{Active=true,BusLineNumber = 233,FirstStopNumber = "123497",LastStopNumber="387563",Area=(int)Zones.Gush_Dan},
-               //new Bus{Active=true,BusLineNumber = 7,FirstStopNumber = "120896",LastStopNumber="989453",Area=(int)Zones.Jerusalem_Corridor},
-               //new Bus{Active=true,BusLineNumber = 80,FirstStopNumber = "684729",LastStopNumber="573625",Area=(int)Zones.General},
-               //new Bus{Active=true,BusLineNumber =4,FirstStopNumber = "137563",LastStopNumber="958473",Area=(int)Zones.Ramat_Gan},
-               //new Bus{Active=true,BusLineNumber = 119,FirstStopNumber = "198574",LastStopNumber="564738",Area=(int)Zones.Beer_Sheva},
-               //new Bus{Active=true,BusLineNumber = 68,FirstStopNumber = "124209",LastStopNumber="980973",Area=(int)Zones.Gush_Etzion},
-               //new Bus{Active=true,BusLineNumber = 89,FirstStopNumber = "249583",LastStopNumber="867490",Area=(int)Zones.Alon_Shvut},
-               //new Bus{Active=true,BusLineNumber = 1,FirstStopNumber = "984763",LastStopNumber="123432",Area=(int)Zones.Jerusalem_Corridor},
-               //new Bus{Active=true,BusLineNumber = 5,FirstStopNumber = "098453",LastStopNumber="109089",Area=(int)Zones.General},
-               //new Bus{Active=true,BusLineNumber = 65,FirstStopNumber = "158749",LastStopNumber="198674",Area=(int)Zones.Itamar},
-               //new Bus{Active=true,BusLineNumber = 55,FirstStopNumber = "678594",LastStopNumber="123543",Area=(int)Zones.Ramat_Gan},
-               //new Bus{Active=true,BusLineNumber = 117,FirstStopNumber = "234564",LastStopNumber="689043",Area=(int)Zones.Zeev_hill},
-               //new Bus{Active=true, LicensePlate= "09853212",}
-                new Bus{Active=true,LicensePlate="12345678",DateActivity=new DateTime(2018,12,3),DateTreatment=new DateTime(2019,10,3),Totalkilometers=111,KilometersGas=338,KilometersTreatment=1211,AirTire=15,OilCondition=true},
-                new Bus{Active=true,LicensePlate="22345678",DateActivity=new DateTime(2018,11,3),DateTreatment=new DateTime(2019,11,3),Totalkilometers=112,KilometersGas=339,KilometersTreatment=1131,AirTire=75,OilCondition=true},
-                new Bus{Active=true,LicensePlate="32345678",DateActivity=new DateTime(2018,10,3),DateTreatment=new DateTime(2019,10,3),Totalkilometers=1113,KilometersGas=303,KilometersTreatment=1141,AirTire=165,OilCondition=false},
-                new Bus{Active=true,LicensePlate="42345678",DateActivity=new DateTime(2018,9,3),DateTreatment=new DateTime(2018,2,3),Totalkilometers=114,KilometersGas=3333,KilometersTreatment=1115,AirTire=157,OilCondition=true},
-                new Bus{Active=true,LicensePlate="52345678",DateActivity=new DateTime(2018,1,3),DateTreatment=new DateTime(2019,2,23),Totalkilometers=115,KilometersGas=3343,KilometersTreatment=1116,AirTire=150,OilCondition=true},
-                new Bus{Active=true,LicensePlate="6234678",DateActivity=new DateTime(2017,6,3),DateTreatment=new DateTime(2017,12,23),Totalkilometers=116,KilometersGas=3336,KilometersTreatment=1116,AirTire=15,OilCondition=false},
-                new Bus{Active=true,LicensePlate="7245678",DateActivity=new DateTime(2015,7,3),DateTreatment=new DateTime(2019,12,29),Totalkilometers=117,KilometersGas=3383,KilometersTreatment=1171,AirTire=145,OilCondition=true},
-                new Bus{Active=true,LicensePlate="8235678",DateActivity=new DateTime(2016,3,3),DateTreatment=new DateTime(2018,12,22),Totalkilometers=118,KilometersGas=3339,KilometersTreatment=1118,AirTire=154,OilCondition=true},
-                new Bus{Active=true,LicensePlate="9234678",DateActivity=new DateTime(2011,1,3),DateTreatment=new DateTime(2019,12,14),Totalkilometers=119,KilometersGas=3330,KilometersTreatment=1191,AirTire=15,OilCondition=true},
-                new Bus{Active=true,LicensePlate="0234567",DateActivity=new DateTime(2012,2,3),DateTreatment=new DateTime(2020,12,15),Totalkilometers=110,KilometersGas=3363,KilometersTreatment=1112,AirTire=20,OilCondition=false},
+               
+                new Bus{Active=true,LicensePlate="12345678",DateActivity=new DateTime(2018,12,3),DateTreatment=new DateTime(2019,10,3),Totalkilometers=111,KilometersGas=338,KilometersTreatment=1211,AirTire=15,OilCondition=true,Status=Status.Ready_to_go},
+                new Bus{Active=true,LicensePlate="22345678",DateActivity=new DateTime(2018,11,3),DateTreatment=new DateTime(2019,11,3),Totalkilometers=112,KilometersGas=339,KilometersTreatment=1131,AirTire=75,OilCondition=true,Status=Status.Ready_to_go},
+                new Bus{Active=true,LicensePlate="32345678",DateActivity=new DateTime(2018,10,3),DateTreatment=new DateTime(2019,10,3),Totalkilometers=1113,KilometersGas=303,KilometersTreatment=1141,AirTire=165,OilCondition=false,Status=Status.Ready_to_go},
+                new Bus{Active=true,LicensePlate="42345678",DateActivity=new DateTime(2018,9,3),DateTreatment=new DateTime(2018,2,3),Totalkilometers=114,KilometersGas=3333,KilometersTreatment=1115,AirTire=157,OilCondition=true,Status=Status.Dangerous},
+                new Bus{Active=true,LicensePlate="52345678",DateActivity=new DateTime(2018,1,3),DateTreatment=new DateTime(2019,2,23),Totalkilometers=115,KilometersGas=3343,KilometersTreatment=1116,AirTire=150,OilCondition=true,Status=Status.Dangerous},
+                new Bus{Active=true,LicensePlate="6234678",DateActivity=new DateTime(2017,6,3),DateTreatment=new DateTime(2017,12,23),Totalkilometers=116,KilometersGas=3336,KilometersTreatment=1116,AirTire=15,OilCondition=false,Status=Status.Dangerous},
+                new Bus{Active=true,LicensePlate="7245678",DateActivity=new DateTime(2015,7,3),DateTreatment=new DateTime(2019,12,29),Totalkilometers=117,KilometersGas=3383,KilometersTreatment=1171,AirTire=145,OilCondition=true,Status=Status.Dangerous},
+                new Bus{Active=true,LicensePlate="8235678",DateActivity=new DateTime(2016,3,3),DateTreatment=new DateTime(2018,12,22),Totalkilometers=118,KilometersGas=339,KilometersTreatment=1118,AirTire=154,OilCondition=true,Status=Status.Ready_to_go},
+                new Bus{Active=true,LicensePlate="9234678",DateActivity=new DateTime(2011,1,3),DateTreatment=new DateTime(2019,12,14),Totalkilometers=119,KilometersGas=3330,KilometersTreatment=1191,AirTire=15,OilCondition=true,Status=Status.Dangerous},
+                new Bus{Active=true,LicensePlate="0234567",DateActivity=new DateTime(2012,2,3),DateTreatment=new DateTime(2020,12,15),Totalkilometers=110,KilometersGas=363,KilometersTreatment=1112,AirTire=20,OilCondition=false,Status=Status.Ready_to_go}
             };
             ListStations = new List<BusStation>()
             {
@@ -140,42 +121,55 @@ namespace DS
 
             };
 
-            //BusLines = new List<BusLine>
-            ////{  new BusLine{Active=false,BusLineNumber = 134,FirstStopNumber = "123456",LastStopNumber="987463",Area=(int)Zones.General},
-            ////   new BusLine{Active=true,BusLineNumber = 14,FirstStopNumber = "128256",LastStopNumber="917453",Area=(int)Zones.Zefat},
-            ////   new BusLine{Active=true,BusLineNumber = 112,FirstStopNumber = "120486",LastStopNumber="680463",Area=(int)Zones.Alon_Shvut},
-            ////   new BusLine{Active=true,BusLineNumber = 9,FirstStopNumber = "188456",LastStopNumber="907453",Area=(int)Zones.Beer_Sheva},
-            ////   new BusLine{Active=true,BusLineNumber = 22,FirstStopNumber = "120457",LastStopNumber="917563",Area=(int)Zones.Zeev_hill},
-            ////   new BusLine{Active=true,BusLineNumber = 19,FirstStopNumber = "193406",LastStopNumber="967061",Area=(int)Zones.Alon_Shvut},
-            ////   new BusLine{Active=true,BusLineNumber = 10,FirstStopNumber = "103456",LastStopNumber="937163",Area=(int)Zones.Itamar},
-            ////   new BusLine{Active=true,BusLineNumber = 233,FirstStopNumber = "123497",LastStopNumber="387563",Area=(int)Zones.Gush_Dan},
-            ////   new BusLine{Active=true,BusLineNumber = 7,FirstStopNumber = "120896",LastStopNumber="989453",Area=(int)Zones.Jerusalem_Corridor},
-            ////   new BusLine{Active=true,BusLineNumber = 80,FirstStopNumber = "684729",LastStopNumber="573625",Area=(int)Zones.General},
-            ////   new BusLine{Active=true,BusLineNumber =4,FirstStopNumber = "137563",LastStopNumber="958473",Area=(int)Zones.Ramat_Gan},
-            ////   new BusLine{Active=true,BusLineNumber = 119,FirstStopNumber = "198574",LastStopNumber="564738",Area=(int)Zones.Beer_Sheva},
-            ////   new BusLine{Active=true,BusLineNumber = 68,FirstStopNumber = "124209",LastStopNumber="980973",Area=(int)Zones.Gush_Etzion},
-            ////   new BusLine{Active=true,BusLineNumber = 89,FirstStopNumber = "249583",LastStopNumber="867490",Area=(int)Zones.Alon_Shvut},
-            ////   new BusLine{Active=true,BusLineNumber = 1,FirstStopNumber = "984763",LastStopNumber="123432",Area=(int)Zones.Jerusalem_Corridor},
-            ////   new BusLine{Active=true,BusLineNumber = 5,FirstStopNumber = "098453",LastStopNumber="109089",Area=(int)Zones.General},
-            ////   new BusLine{Active=true,BusLineNumber = 65,FirstStopNumber = "158749",LastStopNumber="198674",Area=(int)Zones.Itamar},
-            ////   new BusLine{Active=true,BusLineNumber = 55,FirstStopNumber = "678594",LastStopNumber="123543",Area=(int)Zones.Ramat_Gan},
-            ////   new BusLine{Active=true,BusLineNumber = 117,FirstStopNumber = "234564",LastStopNumber="689043",Area=(int)Zones.Zeev_hill},
-            ////   new BusLine{Active=true,BusLineNumber = 115,FirstStopNumber = "098532",LastStopNumber="574839",Area=(int)Zones.Galilee}
-            //};
-            BusLineStations = new List<BusLineStation>
-            {
-                new BusLineStation{Active=true,CodeStation=388734,NumberStationInLine=1},
-                new BusLineStation{Active=true,CodeStation=388311,NumberStationInLine=2},
-                new BusLineStation{Active=true,CodeStation=388634,NumberStationInLine=3},
-                new BusLineStation{Active=true,CodeStation=388604,NumberStationInLine=4},
-                new BusLineStation{Active=true,CodeStation=388614,NumberStationInLine=5},
-                new BusLineStation{Active=true,CodeStation=388624,NumberStationInLine=6},
-                new BusLineStation{Active=true,CodeStation=388644,NumberStationInLine=7},
-                new BusLineStation{Active=true,CodeStation=388704,NumberStationInLine=8},
-                new BusLineStation{Active=true,CodeStation=388724,NumberStationInLine=9},
-                new BusLineStation{Active=true,CodeStation=388734,NumberStationInLine=10},
-
+            BusLines = new List<BusLine>
+            {  new BusLine{ID=0,Active=false,BusLineNumber = 134,FirstStopNumber = 123456,LastStopNumber=987463,Area=Zones.General},
+               new BusLine{ID=1,Active=true,BusLineNumber = 14,FirstStopNumber = 128256,LastStopNumber=917453,Area=Zones.Zefat},
+               new BusLine{ID=2,Active=true,BusLineNumber = 112,FirstStopNumber = 120486,LastStopNumber=680463,Area=Zones.Alon_Shvut},
+               new BusLine{ID=3,Active=true,BusLineNumber = 9,FirstStopNumber = 188456,LastStopNumber=907453,Area=Zones.Beer_Sheva},
+               new BusLine{ID=4,Active=true,BusLineNumber = 22,FirstStopNumber = 120457,LastStopNumber=917563,Area=Zones.Zeev_hill},
+               new BusLine{ID=5,Active=true,BusLineNumber = 19,FirstStopNumber = 193406,LastStopNumber=967061,Area=Zones.Alon_Shvut},
+               new BusLine{ID=6,Active=true,BusLineNumber = 10,FirstStopNumber = 103456,LastStopNumber=937163,Area=Zones.Itamar},
+               new BusLine{ID=7,Active=true,BusLineNumber = 233,FirstStopNumber = 123497,LastStopNumber=387563,Area=Zones.Gush_Dan},
+               new BusLine{ID=8,Active=true,BusLineNumber = 7,FirstStopNumber = 120896,LastStopNumber=989453,Area=Zones.Jerusalem_Corridor},
+               new BusLine{ID=9,Active=true,BusLineNumber = 80,FirstStopNumber = 684729,LastStopNumber=573625,Area=Zones.General},
+               new BusLine{ID=10,Active=true,BusLineNumber =4,FirstStopNumber = 137563,LastStopNumber=958473,Area=Zones.Ramat_Gan},
+               new BusLine{ID=11,Active=true,BusLineNumber = 119,FirstStopNumber = 198574,LastStopNumber=564738,Area=Zones.Beer_Sheva},
+               new BusLine{ID=12,Active=true,BusLineNumber = 68,FirstStopNumber = 124209,LastStopNumber=980973,Area=Zones.Gush_Etzion},
+               new BusLine{ID=13,Active=true,BusLineNumber = 89,FirstStopNumber = 249583,LastStopNumber=867490,Area=Zones.Alon_Shvut},
+               new BusLine{ID=14,Active=true,BusLineNumber = 1,FirstStopNumber = 984763,LastStopNumber=123432,Area=Zones.Jerusalem_Corridor},
+               new BusLine{ID=15,Active=true,BusLineNumber = 5,FirstStopNumber = 098453,LastStopNumber=109089,Area=Zones.General},
+               new BusLine{ID=16,Active=true,BusLineNumber = 65,FirstStopNumber = 158749,LastStopNumber=198674,Area=Zones.Itamar},
+               new BusLine{ID=17,Active=true,BusLineNumber = 55,FirstStopNumber = 678594,LastStopNumber=123543,Area=Zones.Ramat_Gan},
+               new BusLine{ID=18,Active=true,BusLineNumber = 117,FirstStopNumber = 234564,LastStopNumber=689043,Area=Zones.Zeev_hill},
+               new BusLine{ID=19,Active=true,BusLineNumber = 115,FirstStopNumber = 098532,LastStopNumber=574839,Area=Zones.Galilee}
             };
+        BusLineStations = new List<BusLineStation>
+            {
+                new BusLineStation{Active=true,CodeStation=123456,NumberStationInLine=1},
+                new BusLineStation{Active=true,CodeStation=128256,NumberStationInLine=2},
+                new BusLineStation{Active=true,CodeStation=120486,NumberStationInLine=3},
+                new BusLineStation{Active=true,CodeStation=188456,NumberStationInLine=4},
+                new BusLineStation{Active=true,CodeStation=120457,NumberStationInLine=5},
+                new BusLineStation{Active=true,CodeStation=193406,NumberStationInLine=6},
+                new BusLineStation{Active=true,CodeStation=103456,NumberStationInLine=7},
+                new BusLineStation{Active=true,CodeStation=123497,NumberStationInLine=8},
+                new BusLineStation{Active=true,CodeStation=120896,NumberStationInLine=9},
+                new BusLineStation{Active=true,CodeStation=684729,NumberStationInLine=10},
+                new BusLineStation{Active=true,CodeStation=137563,NumberStationInLine=11},
+                new BusLineStation{Active=true,CodeStation=198574,NumberStationInLine=12},
+                new BusLineStation{Active=true,CodeStation=124209,NumberStationInLine=13},
+                new BusLineStation{Active=true,CodeStation=249583,NumberStationInLine=14},
+                new BusLineStation{Active=true,CodeStation=984763,NumberStationInLine=15},
+                new BusLineStation{Active=true,CodeStation=098453,NumberStationInLine=16},
+                new BusLineStation{Active=true,CodeStation=158749,NumberStationInLine=17},
+                new BusLineStation{Active=true,CodeStation=678594,NumberStationInLine=18},
+                new BusLineStation{Active=true,CodeStation=234564,NumberStationInLine=19},
+                new BusLineStation{Active=true,CodeStation=098532,NumberStationInLine=20},
+               
+              
+               
+
+               };
             ListConsecutiveStations = new List<ConsecutiveStations>
             {
                 new ConsecutiveStations{StationCodeOne=178530,StationCodeTwo=178531,Distance=(float)1.12,AverageTravelTime=new TimeSpan(00,02,30)},

@@ -364,7 +364,8 @@ namespace DL
         public void AddBusLine(BusLine bus)
         {
 
-            Configuration.UniquenessTest(bus);
+            Configuration.IdentificationNumberBusLine++;
+            bus.ID = Configuration.IdentificationNumberBusLine;
             var busIndex = DataSource.BusLines.FindIndex(b => b.ID == bus.ID);
             if (busIndex != -1)
                 if (DataSource.BusLines[busIndex].Active == false)

@@ -4,6 +4,8 @@ using System.Dynamic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using static DO.Enums;
+
 namespace DO
 {
     public  class Bus
@@ -17,6 +19,7 @@ namespace DO
         public float AirTire { get; set; }// Percentage of tire air
         public bool OilCondition { get; set; }//Says if you need to fill the oil tank
         public bool Active { set; get; }
+        public Status Status { get; set; }
         /// <summary>
         /// override of ToString
         /// </summary>
