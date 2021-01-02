@@ -60,11 +60,11 @@ namespace DLAPI
         IEnumerable<BusLineStation> GetBusLineStations(Predicate<BusLineStation> predicate);
         #endregion
         #region LineWayOut
-        LineOutForARide GetLineWayOut(int id);
-        IEnumerable<LineOutForARide> LinesWayOut();
-        void AddLineWayOut(LineOutForARide o);
-        void UpdateLineWayOut(LineOutForARide o);
-        void DeleteLineWayOut(LineOutForARide o);
+        LineRide GetLineWayOut(int id);
+        IEnumerable<LineRide> LinesWayOut();
+        void AddLineWayOut(LineRide o);
+        void UpdateLineWayOut(LineRide o);
+        void DeleteLineWayOut(LineRide o);
         #endregion
         #region ConsecutiveStations
         ConsecutiveStations GetConsecutiveStations(int id1, int id2);

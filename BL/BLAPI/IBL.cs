@@ -48,6 +48,7 @@ namespace BLAPI
         void UpdateBusLine(BusLine busLine);
         void UpdateDistanceBetweenstations(DO.ConsecutiveStations stations, float _distance);
         void UpdateTravelTimeBetweenstations(DO.ConsecutiveStations stations, TimeSpan time);
+        decimal DistanceBetween(double latA, double longA, double latB, double longB);
         #endregion
         #region Bus Line In Station
         BusLineInStation GetLineInStation(int id);
@@ -80,6 +81,11 @@ namespace BLAPI
         IEnumerable<User> GetUsersJourneyBy(Predicate<UserJourney> predicate);
         IEnumerable<IGrouping<int, UserJourney>> GetUsersJourneyGroupByBusLineJourney();
         BusLine LineToGo(BusStation busStationCurrent, BusStation busStationtarget);
+        #endregion
+        #region Bus Line Station
+        IEnumerable<BusLineStation> GetAllBusLineStations();
+        BO.BusLineStation BusLineStationDoBoAdapter(DO.BusLineStation busLineStation);
+        IEnumerable<object> StationDetails(IEnumerable<BusLineStation> busLineStations);
         #endregion
 
 

@@ -1,6 +1,7 @@
 ﻿using BLAPI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,23 @@ namespace PL.WPF
     public partial class AddStationWindow : Window
     {
         IBL bL;
+        BO.BusStation curBusStation;
         BO.BusLineStation curBusLineStation;
         public AddStationWindow(IBL _bL)
         {
             InitializeComponent();
             bL = _bL;
+            ComboBoxAllStations.DisplayMemberPath = " BusStationKey";
+            ComboBoxAllStations.SelectedIndex = 0;
+            RefreshAllStationsComboBox();
+        }
+        void RefreshAllStationsComboBox()
+        {
+             ComboBoxAllStations.DataContext = Convert<BO.BusStation>(bL.GetAllBusStation());
+        }
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
+        {
+            return new ObservableCollection<T>(original);
         }
         public BO.BusLineStation CurBusLineStation
         {
@@ -40,12 +53,12 @@ namespace PL.WPF
                 {
                     BO.BusLineStation Add = new BO.BusLineStation
                     {
-                        BusStationKey = int.Parse(stationTextBox.Text),
-                        StationAddress = stationAddressTextBox.Text,
-                        StationName = StationNameTextBox.Text,
-                        NumberStationInLine = int.Parse(NumberStationInLineTextBox.Text)
+                        BusStationKey = int.Parse(stationTextBlock.Text),
+                        NumberStationInLine = int.Parse(NumberStationInLineTextBox.Text),
+                        Active=true
+                        
                     };
-                    curBusLineStation = Add;
+                    CurBusLineStation = Add;
                     this.Close();
                 }
               
@@ -55,6 +68,11 @@ namespace PL.WPF
 
             }
             
+        }
+        private void AllStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            curBusStation = (ComboBoxAllStations.SelectedItem as BO.BusStation);
+            GridStation.DataContext = curBusStation;
         }
     }
 }

@@ -499,6 +499,21 @@ namespace BL
                 throw new BO.IdException("Bus line ID is illegal");
             }
         }
+        public decimal DistanceBetween(double latA, double longA, double latB, double longB)
+        {
+            var RadianLatA = Math.PI * latA / 180;
+            var RadianLatb = Math.PI * latB / 180;
+            var RadianLongA = Math.PI * longA / 180;
+            var RadianLongB = Math.PI * longB / 180;
+
+            double theDistance = (Math.Sin(RadianLatA)) *
+                    Math.Sin(RadianLatb) +
+                    Math.Cos(RadianLatA) *
+                    Math.Cos(RadianLatb) *
+                    Math.Cos(RadianLongA - RadianLongB);
+
+            return Convert.ToDecimal(((Math.Acos(theDistance) * (180.0 / Math.PI)))) * 69.09M * 1.6093M;
+        }
         /// <summary>
         /// The function gets a bus line and a stop station
         /// The function adds the station to the bus line
@@ -509,24 +524,33 @@ namespace BL
         {
             try
             {
-                AddToLine.StationsInLine.ToList().Add(busLineStation);
+                DO.BusLineStation stationInLineDO = new DO.BusLineStation();
+                busLineStation.CopyPropertiesTo(stationInLineDO);
+                dl.AddBusLineStation(stationInLineDO);
+                AddToLine.StationsInLine.ToList().Insert(busLineStation.NumberStationInLine, busLineStation);
+                var s=AddToLine.StationsInLine.ToList()[0];
+                if (AddToLine.StationsInLine.Cast<BusLineStation>().ToList().Count != 1)
+                {
+                    dl.GetConsecutiveStations(busLineStation.BusStationKey, AddToLine.StationsInLine.ToList()[busLineStation.NumberStationInLine + 1].BusStationKey);
+                    dl.GetConsecutiveStations(AddToLine.StationsInLine.ToList()[busLineStation.NumberStationInLine - 1].BusStationKey, busLineStation.BusStationKey);
+                }
+
+
+            }
+            catch (DO.IdException)
+            {
+                float Average_speed = random.Next(20, 51);
                 DO.ConsecutiveStations stations = new DO.ConsecutiveStations
                 {
                     StationCodeOne = busLineStation.BusStationKey,
-                    StationCodeTwo = AddToLine.StationsInLine.ToList()[AddToLine.StationsInLine.ToList().Count - 1].BusStationKey,
-                    Distance = (float)(random.NextDouble() * 1850 + 150),
+                    StationCodeTwo = AddToLine.StationsInLine.ToList()[busLineStation.NumberStationInLine - 1].BusStationKey,
+                    Distance = (float)DistanceBetween(dl.GetBusStation(AddToLine.StationsInLine.ToList()[busLineStation.NumberStationInLine - 1].BusStationKey).Latitude,
+                    dl.GetBusStation(AddToLine.StationsInLine.ToList()[busLineStation.NumberStationInLine - 1].BusStationKey).Longitude, dl.GetBusStation(busLineStation.BusStationKey).Latitude, dl.GetBusStation(busLineStation.BusStationKey).Longitude),
                     Flage = true,
-                    AverageTravelTime = new TimeSpan(random.Next(0, 4), random.Next(0, 60), random.Next(0, 60))
+                    AverageTravelTime = new TimeSpan((int)((Average_speed) / (float)DistanceBetween(dl.GetBusStation(AddToLine.StationsInLine.ToList()[busLineStation.NumberStationInLine - 1].BusStationKey).Latitude,
+                    dl.GetBusStation(AddToLine.StationsInLine.ToList()[busLineStation.NumberStationInLine - 1].BusStationKey).Longitude, dl.GetBusStation(busLineStation.BusStationKey).Latitude, dl.GetBusStation(busLineStation.BusStationKey).Longitude)))
                 };
-                DO.BusLineStation stationInLineDO = new DO.BusLineStation();
-                busLineStation.CopyPropertiesTo(stationInLineDO);
                 dl.AddConsecutiveStations(stations);
-                dl.AddBusLineStation(stationInLineDO);
-
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -1024,6 +1048,36 @@ namespace BL
             //                where  BusLine.Target.BusStationKey==v.StationCodeTwo
             throw new NullReferenceException();
 
+        }
+        #endregion
+        #region Bus Line Station
+        public BO.BusLineStation BusLineStationDoBoAdapter(DO.BusLineStation busLineStation)
+        {
+            BO.BusLineStation busLineStationBO = new BusLineStation();
+            busLineStation.CopyPropertiesTo(busLineStationBO);
+            return busLineStationBO;
+        }
+        public IEnumerable<BusLineStation> GetAllBusLineStations()
+        {
+            return from BusLineStation in dl.BusLineStations()
+                   select BusLineStationDoBoAdapter(BusLineStation);
+        }
+        public IEnumerable<object> StationDetails(IEnumerable<BusLineStation> busLineStations)
+        {
+            
+                 return  from BusStation in dl.BusStations()
+                         from BusLineStation in busLineStations
+                         where BusStation.BusStationKey == BusLineStation.BusStationKey
+                         select new
+                         {
+                             BusStationKey = BusLineStation.BusStationKey,
+                             NumberStationInLine = BusLineStation.NumberStationInLine,
+                             Active = BusLineStation.Active,
+                             StationName = BusStation.StationName,
+                             StationAddress = BusStation.StationAddress,
+                             Latitude=  BusStation.Latitude,
+                             Longitude= BusStation.Longitude,
+                         }; 
         }
         #endregion
 

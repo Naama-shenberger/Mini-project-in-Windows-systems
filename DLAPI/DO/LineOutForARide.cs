@@ -6,7 +6,7 @@ namespace DO
     /// <summary>
     /// Line OutFor A Ride class-Departure for a trip
     /// </summary>
-    public class LineOutForARide
+    public class LineRide
     {
         /// <summary>
         /// sets and gets

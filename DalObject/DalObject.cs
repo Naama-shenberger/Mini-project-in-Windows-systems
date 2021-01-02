@@ -430,7 +430,7 @@ namespace DL
         /// <returns></returns>
         public BusLineStation GetBusLineStation(int id)
         {
-            BusLineStation busLineStation = DataSource.BusLineStations.Find(s => s.CodeStation == id);
+            BusLineStation busLineStation = DataSource.BusLineStations.Find(s => s.BusStationKey == id);
             if (busLineStation != null)
                 if (busLineStation.Active == true)
                     return busLineStation.Clone();
@@ -454,7 +454,7 @@ namespace DL
         /// <param name="station"></param>
         public void AddBusLineStation(BusLineStation station)
         {
-            var stationIndex = DataSource.BusLineStations.FindIndex(s => s.CodeStation == station.CodeStation);
+            var stationIndex = DataSource.BusLineStations.FindIndex(s => s.BusStationKey == station.BusStationKey);
             if (stationIndex != -1)
                 if (DataSource.BusLineStations[stationIndex].Active == false)
                 {
@@ -462,7 +462,7 @@ namespace DL
                     return;
                 }
                 else
-                    throw new IdException(station.CodeStation, $"The bus line station {station.CodeStation} already exist");
+                    throw new IdException(station.BusStationKey, $"The bus line station {station.BusStationKey} already exist");
             DataSource.BusLineStations.Add(station.Clone());
 
         }
@@ -472,14 +472,14 @@ namespace DL
         /// <param name="station"></param>
         public void UpdateBusLineStation(BusLineStation station)
         {
-            var toUpdateIndex = DataSource.BusLineStations.FindIndex(s => s.CodeStation == station.CodeStation);
+            var toUpdateIndex = DataSource.BusLineStations.FindIndex(s => s.BusStationKey == station.BusStationKey);
             if (toUpdateIndex != -1)
                 if (station.Active == true)
                     DataSource.BusLineStations[toUpdateIndex] = station.Clone();
                 else
-                    throw new IdException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
+                    throw new IdException(station.BusStationKey, $"The bus line Station {station.BusStationKey} does not exist");
             else
-                throw new IdException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
+                throw new IdException(station.BusStationKey, $"The bus line Station {station.BusStationKey} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -489,14 +489,14 @@ namespace DL
         /// <param name="station"></param>
         public void DeleteBusLineStation(BusLineStation station)
         {
-            var toDeleteIndex = DataSource.BusLineStations.FindIndex(s => s.CodeStation == station.CodeStation);
+            var toDeleteIndex = DataSource.BusLineStations.FindIndex(s => s.BusStationKey == station.BusStationKey);
             if (toDeleteIndex != -1)
                 if (station.Active == true)
                     DataSource.BusLineStations[toDeleteIndex].Active = false;
                 else
-                    throw new IdException(station.CodeStation, $"The bus line Station {station.CodeStation} is already deleted");
+                    throw new IdException(station.BusStationKey, $"The bus line Station {station.BusStationKey} is already deleted");
             else
-                throw new IdException(station.CodeStation, $"The bus line Station {station.CodeStation} does not exist");
+                throw new IdException(station.BusStationKey, $"The bus line Station {station.BusStationKey} does not exist");
         }
         /// <summary>
         /// A function that uses Encapsulates a method 
@@ -508,7 +508,7 @@ namespace DL
         public IEnumerable<object> GetBusLineStationCode(Func<int, object> generate)
         {
             return from BusLineStation in DataSource.BusLineStations
-                   select generate(BusLineStation.CodeStation).Clone();
+                   select generate(BusLineStation.BusStationKey).Clone();
         }
         #endregion
         #region LineOutForARide
@@ -517,9 +517,9 @@ namespace DL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public LineOutForARide GetLineWayOut(int id)
+        public LineRide GetLineWayOut(int id)
         {
-            LineOutForARide busLine = DataSource.LinesOutForARide.Find(b => b.ID == id);
+            LineRide busLine = DataSource.LinesOutForARide.Find(b => b.ID == id);
             if (busLine != null)
                 if (busLine.Active == true)
                     return busLine.Clone();
@@ -529,7 +529,7 @@ namespace DL
         /// A function that returns a list of bus line  on their way out to a ride that are active
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<LineOutForARide> LinesWayOut()
+        public IEnumerable<LineRide> LinesWayOut()
         {
             return from LinesOutForARide in DataSource.LinesOutForARide
                    where LinesOutForARide.Active == true
@@ -541,7 +541,7 @@ namespace DL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="o"></param>
-        public void AddLineWayOut(LineOutForARide o)
+        public void AddLineWayOut(LineRide o)
         {
             Configuration.IdentificationNumberBusLine += 1;
             o.ID = Configuration.IdentificationNumberBusLine;
@@ -560,7 +560,7 @@ namespace DL
         /// A function that receives a bus line on his way out and updates its details
         /// </summary>
         /// <param name="outLine"></param>
-        public void UpdateLineWayOut(LineOutForARide outLine)
+        public void UpdateLineWayOut(LineRide outLine)
         {
             var toUpdateIndex = DataSource.LinesOutForARide.FindIndex(o => o.ID == outLine.ID);
             if (toUpdateIndex != -1)
@@ -577,7 +577,7 @@ namespace DL
         /// In case that the bus is already not active we will throw a message
         /// </summary>
         /// <param name="toDeleteIndex"></param>
-        public void DeleteLineWayOut(LineOutForARide outLine)
+        public void DeleteLineWayOut(LineRide outLine)
         {
             var toDeleteIndex = DataSource.LinesOutForARide.FindIndex(o => o.ID == outLine.ID);
             if (toDeleteIndex != -1)
@@ -663,9 +663,9 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<BusLineInStation> GetBusLineInStations()
         {
-            return from BusLineInStation in DataSource.ListLineInStations
-                   where BusLineInStation.Active == true
-                   select BusLineInStation.Clone();
+            return from BusLine in DataSource.ListLineInStations
+                   where BusLine.Active == true
+                   select BusLine.Clone();
         }
 
         /// <summary>

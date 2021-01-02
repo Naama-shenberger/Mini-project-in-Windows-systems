@@ -5,32 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.WPF"
         mc:Ignorable="d"
-        Title="AddStationWindow" Height="250" Width="300" KeyDown="OnKeyDownHandler">
+        Title="AddStationWindow" Height="350" Width="500" KeyDown="OnKeyDownHandler">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Label Name="stationNameLabel" Content="Station Code" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left" Margin="4,3.6,0,4" VerticalAlignment="Center" Width="101"/>
-        <TextBox  x:Name="stationTextBox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="3.8,9.6,0,6.2" VerticalAlignment="Center" Width="119" Height="21"/>
-        <Label  Content="Station Address" Name="stationAddressLabel" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="4,10,0,1.4" VerticalAlignment="Center" Width="110" Height="27"/>
-        <TextBox  Name="stationAddressTextBox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="3.8,9.6,0,6.2" VerticalAlignment="Center" Width="119" Height="21"/>
-        <Label  Name="StationNameLabel" Grid.Column="0" Grid.Row="3" Content="Name Station" HorizontalAlignment="Left" Margin="4,9.8,0,1.8" VerticalAlignment="Center" Width="119" Height="26"/>
-        <TextBox  Name="StationNameTextBox" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="3.8,9.6,0,6.2" VerticalAlignment="Center" Width="119" Height="21"/>
-        <TextBox  Grid.Row="4" Grid.Column="1" Name="NumberStationInLineTextBox" HorizontalAlignment="Left" Margin="4,6.2,0,9.6" VerticalAlignment="Center" Width="119" Height="21" ToolTip="Please type the station number in the route of the line" />
-        <Label  Grid.Row="4" Grid.Column="0" Name="NumberStationInLineLabel" Content="Number Station"  HorizontalAlignment="Left" Height="30" Margin="3,6.8,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="3"/>
-        <Label Content="Enter to confirm" HorizontalAlignment="Left" Margin="26,15.2,0,-34.8" Grid.Row="9" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="186"/>
+        <Grid x:Name="GridStation">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Name="stationNameLabel" Content="Station Code" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left" Margin="4,3.6,0,4" VerticalAlignment="Center" Width="101"/>
+            <TextBlock x:Name="stationTextBlock" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="3.8,9.6,0,6.2" Text="{Binding BusStationKey}" VerticalAlignment="Center" Width="119" Height="21"/>
+            <Label  Content="Station Address" Name="stationAddressLabel" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="4,10,0,1.4" VerticalAlignment="Center" Width="110" Height="27"/>
+            <TextBlock Text="{Binding StationAddress}"  Name="stationAddressTextBlock" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="3.8,9.6,0,6.2" VerticalAlignment="Center" Width="119" Height="21"/>
+            <Label  Name="StationNameLabel" Grid.Column="0" Grid.Row="3" Content="Name Station" HorizontalAlignment="Left" Margin="4,9.8,0,1.8" VerticalAlignment="Center" Width="119" Height="26"/>
+            <TextBlock  Text="{Binding StationName}" Name="StationNameTextBlock" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="3.8,9.6,0,6.2" VerticalAlignment="Center" Width="119" Height="21"/>
+            <TextBox  Grid.Row="4" Grid.Column="1" Name="NumberStationInLineTextBox" HorizontalAlignment="Left" Margin="4,6.2,0,9.6" VerticalAlignment="Center" Width="119" Height="21" ToolTip="Please type the station number in the route of the line" />
+            <Label  Grid.Row="4" Grid.Column="0" Name="NumberStationInLineLabel" Content="Number Station"  HorizontalAlignment="Left" Height="30" Margin="3,6.8,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="3"/>
+            <Label Content="Enter to confirm" HorizontalAlignment="Left" Margin="26,61.6,0,-79.4" Grid.Row="9" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="186"/>
+            <Label Content="Latitude" Grid.Row="5" Grid.Column="0"   HorizontalAlignment="Left" Height="30" Margin="3,6.8,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="3"/>
+            <TextBlock  Grid.Row="5" Grid.Column="1" Text="{Binding Latitude }" Name="LatitudeTextBlock" HorizontalAlignment="Left" Margin="4,6.2,0,9.6" VerticalAlignment="Center" Width="119" Height="21" />
+            <Label Content="Longitude" Grid.Row="9" Grid.Column="0"   HorizontalAlignment="Left" Height="30" Margin="3,6.8,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="3"/>
+            <TextBlock Text="{Binding Longitude}" Grid.Column="1" Grid.Row="9" Name="LongitudeTextBlock"  HorizontalAlignment="Left" Height="30" Margin="3,6.4,0,0" VerticalAlignment="Top" Width="121"/>
+        </Grid>
+        <ComboBox Name="ComboBoxAllStations" HorizontalAlignment="Left" Margin="337,37,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding}" SelectionChanged="AllStations_SelectionChanged"/>
     </Grid>
 </Window>
