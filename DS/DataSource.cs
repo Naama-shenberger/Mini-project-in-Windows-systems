@@ -47,13 +47,13 @@ namespace DS
             };
             ListStations = new List<BusStation>()
             {
-                new BusStation{Active=true, BusStationKey  = 388311, StationName  = "בי'סברלב/בןיהודה", StationAddress = "רחוב:בןיהודה76עיר:כפרסבארציף:קומה:",  Latitude = 32.183921,   Longitude = 34.917806   },
-                new BusStation{Active=true, BusStationKey  = 857321, StationName  = "אלמדינה אלמנורה/זעקוקה", StationAddress = " רחוב:אל מדינה אל מונאוורה  עיר: ירושלים רציף:   קומה:  ",  Latitude = 31.737062, Longitude = 35.23667},
-                new BusStation{Active=true, BusStationKey  = 873031, StationName  = "הפסגה/הרשד''ם",StationAddress = " רחוב:הפסגה 13 עיר: ירושלים רציף:   קומה:  ",  Latitude = 31.769614, Longitude = 35.182558 },
-                new BusStation{Active=true, BusStationKey  = 873141,StationName  = " הרוזמרין/כביש ", StationAddress = " המנהרות רחוב:הרוזמרין 57 עיר: ירושלים רציף:   קומה:  ", Latitude = 31.732231,Longitude = 35.202069 },
-                new BusStation{Active=true, BusStationKey  = 873261, StationName  = " דב יוסף/יערי ", StationAddress = " רחוב:דב יוסף  עיר: ירושלים רציף:   קומה:  ", Latitude = 31.734036, Longitude = 35.194675 },
-                new BusStation{Active=true, BusStationKey  = 873371,  StationName  = "ביתר מתנ''ס",  StationAddress = "אצטדיון טדי/א''ס ביתר רחוב:דרך אגודת ספורט בית''ר  עיר: ירושלים רציף:   קומה:  ", Latitude = 31.751193,   Longitude = 35.18933    },
-                new BusStation{Active=true, BusStationKey  = 873401,  StationName  = "חניון הלאום",  StationAddress = " רחוב:שדרות הנשיא השישי 2 עיר: ירושלים רציף:   קומה:  ",   Latitude = 31.783061,   Longitude = 35.203237   },
+                new BusStation{Active=true, BusStationKey  = 388311, StationName  = "בי'סברלב/בןיהודה", StationAddress = "בןיהודה76",  Latitude = 32.183921,   Longitude = 34.917806   },
+                new BusStation{Active=true, BusStationKey  = 857321, StationName  = "אלמדינה אלמנורה/זעקוקה", StationAddress = " אל מדינה אל מונאוורה",  Latitude = 31.737062, Longitude = 35.23667},
+                new BusStation{Active=true, BusStationKey  = 873031, StationName  = "הפסגה/הרשד''ם",StationAddress = " הפסגה 13",  Latitude = 31.769614, Longitude = 35.182558 },
+                new BusStation{Active=true, BusStationKey  = 873141,StationName  = " הרוזמרין/כביש ", StationAddress = " המנהרות רחוב:הרוזמרין 57", Latitude = 31.732231,Longitude = 35.202069 },
+                new BusStation{Active=true, BusStationKey  = 873261, StationName  = " דב יוסף/יערי ", StationAddress = " רחוב:דב יוסף ", Latitude = 31.734036, Longitude = 35.194675 },
+                new BusStation{Active=true, BusStationKey  = 873371,  StationName  = "אצטדיון טדי/א''ס ביתר",  StationAddress = " דרך אגודת ספורט בית''ר", Latitude = 31.751193,   Longitude = 35.18933    },
+                new BusStation{Active=true, BusStationKey  = 873401,  StationName  = "חניון הלאום",  StationAddress = " רחוב:שדרות הנשיא השישי 2",   Latitude = 31.783061,   Longitude = 35.203237   },
                 new BusStation{Active=true, BusStationKey  = 873702,  StationName  = " שכונת בזבז",   StationAddress = " רחוב:דרך בית לחם הישנה  עיר: ירושלים רציף:   קומה:",   Latitude =   31.770693,   Longitude = 35.243402   },
                 new BusStation{Active=true, BusStationKey  = 874003,  StationName  = "שמואל הנביא/תדהר",  StationAddress = "רחוב:שמואל הנביא 71 עיר: ירושלים רציף:   קומה: ",   Latitude =   31.793299,   Longitude = 35.222176   },
                 new BusStation{Active=true, BusStationKey  = 874104,  StationName  = "שמואל הנביא/יקים",  StationAddress = " רחוב:שמואל הנביא 47 עיר: ירושלים רציף:   קומה: ",   Latitude =  31.791394,   Longitude = 35.22416    },

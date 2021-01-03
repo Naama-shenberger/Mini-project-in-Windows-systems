@@ -661,7 +661,7 @@ namespace DL
         /// A function that returns a list of bus lines that are active
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<BusLineInStation> GetBusLineInStations()
+        public IEnumerable<BusLineInStation> BusLineInStations()
         {
             return from BusLine in DataSource.ListLineInStations
                    where BusLine.Active == true
@@ -675,10 +675,16 @@ namespace DL
         /// </summary>
         /// <param name="generate"></param>
         /// <returns></returns>
-        public IEnumerable<object> GetBusLineInStationsNumbers(Func<int, object> generate)
+        public IEnumerable<object> GetBusLineInStationNumber(Func<int, object> generate)
         {
             return from BusLine in DataSource.ListLineInStations
                    select generate(BusLine.BusLineNumber);
+        }
+       public IEnumerable<BusLineInStation> GetBusLineInStations(Predicate<BusLineInStation> predicate)
+        {
+            return from sin in DataSource.ListLineInStations
+                   where predicate(sin)
+                   select sin.Clone();
         }
         #endregion
         #region ConsecutiveStations

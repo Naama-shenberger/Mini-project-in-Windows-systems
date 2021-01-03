@@ -31,9 +31,11 @@ namespace PL.WPF
             ComboBoxBusStationKey.DisplayMemberPath = "BusStationKey";
             ComboBoxBusStationKey.SelectedIndex = 0;
             RefreshAllStationsComboBox();
+            RefreshAllRegisteredBusLineInStaionGrid();
+            RefreshAllNotRegisteredBusLinesGrid();
         }
         void RefreshAllStationsComboBox()
-        {//Convert<BO.BusLine>(bl.GetAllBusLines());
+        {
             ComboBoxBusStationKey.DataContext = Convert<BO.BusStation>( bl.GetAllBusStation()); //ObserListOfStations;
         }
         private void ComboBoxBusStationKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -41,11 +43,66 @@ namespace PL.WPF
             CurBusStation = (ComboBoxBusStationKey.SelectedItem as BO.BusStation);
             gridOneBusStation.DataContext = CurBusStation;
         }
+        void RefreshAllRegisteredBusLineInStaionGrid()
+        {
+            DataGridBusLinesInStation.DataContext = Convert<object>(bl.BusLineDetails(bl.GetAllBusLineInStation()));
+        }
+        //void RefreshDataGrirdAllStationslines()
+        //{
+        //    DataGrirdAllStationslines.DataContext = Convert<object>(bl.StationDetails(bl.GetAllBusLineStations()));
+        //}
+        void RefreshAllNotRegisteredBusLinesGrid()
+        {
+            List<BO.BusLine> listOfUnRegisteredCourses = bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.ID != c1.ID)).ToList();
+            DataGridBusLines.DataContext = Convert < BO.BusLine >( listOfUnRegisteredCourses);
+        }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
-        private void Update_Click(object sender, RoutedEventArgs e)
+        private void btUpdateTimeBetweenStations_Click(object sender, RoutedEventArgs e)
+        {
+            //BO. scBO = ((sender as Button).DataContext as BO.StudentCourse);
+            //GradeWindow win = new GradeWindow(scBO);
+            //win.Closing += WinUpdateGrade_Closing;
+            //win.ShowDialog();
+        }
+        private void btAddBusLineFromList_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurBusStation == null)
+            {
+                MessageBox.Show("You must select a station first", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            try
+            {
+                BO.BusLineInStation scBO = ((sender as Button).DataContext as BO.BusLineInStation);
+                bl.AddBusLineInStation(scBO);
+                RefreshAllRegisteredBusLineInStaionGrid();
+                RefreshAllNotRegisteredBusLinesGrid();
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btRemoverBusLineFronStation_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BO.BusLineInStation scBO = ((sender as Button).DataContext as BO.BusLineInStation);
+                bl.DeleteBusLineInStation((scBO));
+                RefreshAllRegisteredBusLineInStaionGrid();
+                RefreshAllNotRegisteredBusLinesGrid();
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void UpdateButten_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -60,7 +117,19 @@ namespace PL.WPF
             }
         }
 
-        private void DeleteCurStation_Click(object sender, RoutedEventArgs e)
+        private void AddStationButten_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshAllStationsComboBox();
+            ComboBoxBusStationKey.Visibility = Visibility.Visible;
+            LabelStationName.Visibility = Visibility.Visible;
+            NameComboBox.Visibility = Visibility.Visible;
+            AddressLabel.Visibility = Visibility.Hidden;
+            TextBoxAddress.Visibility = Visibility.Hidden;
+            BusStationLabel.Visibility = Visibility.Hidden;
+            BusStationKeyTextBox.Visibility = Visibility.Hidden;
+        }
+
+        private void DeleteCurStationButten_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult res = MessageBox.Show("Delete selected Station?", "Verification", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (res == MessageBoxResult.No)
@@ -81,11 +150,7 @@ namespace PL.WPF
             }
         }
 
-        private void AddStation_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void BackButten_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

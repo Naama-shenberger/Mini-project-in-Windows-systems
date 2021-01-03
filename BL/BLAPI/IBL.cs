@@ -52,9 +52,10 @@ namespace BLAPI
         #endregion
         #region Bus Line In Station
         BusLineInStation GetLineInStation(int id);
-        void AddBusLineInStation(BusLineInStation lineInStation);
-        void DeleteBusLineInStation(BusLineInStation lineInStation);
+        void AddBusLineInStation(BusLineInStation busStation);
+        void DeleteBusLineInStation(BusLineInStation busStation);
         void UpdateBusLineInStation(BusLineInStation busStation);
+        IEnumerable<object> BusLineDetails(IEnumerable<BusLineInStation> busLineInStations);
         #endregion
         #region User
         BO.User UserDoBoAdapter(DO.User UserDO);
