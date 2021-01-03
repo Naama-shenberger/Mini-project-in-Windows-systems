@@ -23,6 +23,7 @@ namespace PL.WPF
     {
         IBL bl;
         BO.BusLine CurBusLine = new BO.BusLine();
+        ObservableCollection<BO.BusLineStation> CurBusLineStation=new ObservableCollection<BO.BusLineStation>();
         private ObservableCollection<BO.BusLine> BusLineList = new ObservableCollection<BO.BusLine>();
         public BusLineWindow(IBL _bl)
         {
@@ -33,7 +34,9 @@ namespace PL.WPF
             ComboBoxBusLineNumber.SelectedIndex = 0;
             RefreshAllBusLinesComboBox();
             RefreshDataGrirdAllStationslines();
-           // RefreshDataGrirdStationsline();
+            RefreshDataGrirdStationsline();
+
+
         }
         void RefreshDataGrirdAllStationslines()
         {
@@ -42,6 +45,7 @@ namespace PL.WPF
         void RefreshAllBusLinesComboBox()
         {
             ComboBoxBusLineNumber.DataContext = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
+            CurBusLine = Convert<BO.BusLine>(bl.GetAllBusLines()).ToList()[0];
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
@@ -51,8 +55,14 @@ namespace PL.WPF
         {
             CurBusLine = (ComboBoxBusLineNumber.SelectedItem as BO.BusLine);
             gridOneBusLine.DataContext = CurBusLine;
+            if(CurBusLine==null)
+                CurBusLine = Convert<BO.BusLine>(bl.GetAllBusLines()).ToList()[0];
+            RefreshDataGrirdStationsline();
         }
+        private void RemoveStation_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
         private void AddBusLineButton_Click(object sender, RoutedEventArgs e)
         {
             RefreshAllBusLinesComboBox();
@@ -64,6 +74,7 @@ namespace PL.WPF
             FriststopLabel.Visibility = Visibility.Hidden;
             LastStopLabel.Visibility = Visibility.Hidden;
             LastStopTextBox.Visibility = Visibility.Hidden;
+
         }
 
         private void DeleteButon_Click(object sender, RoutedEventArgs e)
@@ -101,6 +112,10 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void BusLineStaation_Checked(object sender, RoutedEventArgs e)
+        {
+            CurBusLineStation.Add(((sender as CheckBox).DataContext as BO.BusLineStation));
+        }
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             try
@@ -114,13 +129,7 @@ namespace PL.WPF
                         Active = true
 
                     };
-                    AddStationWindow addStationWindow =new AddStationWindow(bl);
-                    //addStationWindow.ShowDialog();
-                    //BO.BusLineStation lineStationOne = addStationWindow.CurBusLineStation;
-                    //AddStationWindow addStationWindow1 = new AddStationWindow(bl);
-                    //addStationWindow1.ShowDialog();
-                    //BO.BusLineStation lineStationTwo = addStationWindow.CurBusLineStation;
-                  //  bl.AddBusLine(busLine,lineStationOne,lineStationTwo);
+                    bl.AddBusLine(busLine, CurBusLineStation);
                     BusLineNumberTextBox.Visibility = Visibility.Hidden;
                     BusLineLabel.Visibility = Visibility.Hidden;
                     RefreshAllBusLinesComboBox();
@@ -134,21 +143,41 @@ namespace PL.WPF
                 ComboBoxBusLineNumber.SelectedIndex = 0;
             }
         }
+
         void RefreshDataGrirdStationsline()
         {
-          
+           
+           
             DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine));
-            //var s = CurBusLine.StationsInLine.ToList()[0];
-            //MessageBox.Show($"{CurBusLine}");
+            
         }
+        
         private void AddBusLineStatoin_Click(object sender, RoutedEventArgs e)
         {
-            AddStationWindow addStationWindow = new AddStationWindow(bl);
-            addStationWindow.ShowDialog();
-            bl.AddBusStationToLine(CurBusLine,addStationWindow.CurBusLineStation);
-            RefreshDataGrirdAllStationslines();
-            RefreshDataGrirdStationsline();
+            try
+            {
+                AddStationWindow addStationWindow = new AddStationWindow(bl,CurBusLine);
+                addStationWindow.ShowDialog();
+                bl.AddBusStationToLine(CurBusLine, addStationWindow.BusLineStations);
+                RefreshDataGrirdAllStationslines();
+                RefreshDataGrirdStationsline();
+            }
+            
+            catch (ArgumentOutOfRangeException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message,"Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
+
+        
     }
 }

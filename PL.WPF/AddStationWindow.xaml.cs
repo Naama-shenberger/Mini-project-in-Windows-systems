@@ -23,56 +23,74 @@ namespace PL.WPF
     {
         IBL bL;
         BO.BusStation curBusStation;
-        BO.BusLineStation curBusLineStation;
-        public AddStationWindow(IBL _bL)
+        BO.BusLine CurBusLine;
+        BO.BusLineStation CurBusLineStation;
+        static int Index;
+        ObservableCollection<BO.BusLineStation> curBusLineStations=new ObservableCollection<BO.BusLineStation>();
+        public ObservableCollection<BO.BusLineStation> BusLineStations
+        {
+            get { return curBusLineStations; }
+        }
+        public AddStationWindow(IBL _bL,BO.BusLine busLine)
         {
             InitializeComponent();
             bL = _bL;
-            ComboBoxAllStations.DisplayMemberPath = " BusStationKey";
-            ComboBoxAllStations.SelectedIndex = 0;
+            CurBusLine = busLine;
+            BusLineTextBlock.Text = CurBusLine.BusLineNumber.ToString();
+            Index = CurBusLine.StationsInLine.Count();
             RefreshAllStationsComboBox();
         }
+       
         void RefreshAllStationsComboBox()
         {
-             ComboBoxAllStations.DataContext = Convert<BO.BusStation>(bL.GetAllBusStation());
+            lvBusStations.DataContext = Convert<BO.BusStation>(bL.GetAllBusStation());
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
-        public BO.BusLineStation CurBusLineStation
+        private void AddBusLinesStations(BO.BusStation busStation)
         {
-            get { return curBusLineStation; }
-            set { curBusLineStation = value; }
+            BO.BusLineStation busLineStation = new BO.BusLineStation
+            {
+                BusStationKey = busStation.BusStationKey,
+                Active = busStation.Active,
+               NumberStationInLine = ++Index,
+            };
+            curBusLineStations.Add(busLineStation);
+            lvBusLineStation.DataContext = Convert<object>(bL.StationDetails(curBusLineStations));
         }
-        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        private void DeleteBusLinesStation(int BusStationKey)
         {
-            try
-            {
-                if (e.Key == Key.Return)
-                {
-                    BO.BusLineStation Add = new BO.BusLineStation
-                    {
-                        BusStationKey = int.Parse(stationTextBlock.Text),
-                        NumberStationInLine = int.Parse(NumberStationInLineTextBox.Text),
-                        Active=true
-                        
-                    };
-                    CurBusLineStation = Add;
-                    this.Close();
-                }
-              
-            }
-            catch(BO.IdException)
-            {
+            if(curBusLineStations.Count==1)
+                Index= CurBusLine.StationsInLine.Count();
+            else
+                Index = curBusLineStations.FirstOrDefault(s => s.BusStationKey == BusStationKey).NumberStationInLine-1;
+            curBusLineStations.Remove(curBusLineStations.FirstOrDefault(s=>s.BusStationKey==BusStationKey));
+            lvBusLineStation.DataContext = Convert<object>(bL.StationDetails(curBusLineStations));
+        }
+        private void lvBusStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listViewItem  = sender as ListView;
+            curBusStation = listViewItem.DataContext as BO.BusStation;
 
-            }
+        }
+        private void listViewAllItem_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var senderList = sender as ListViewItem;
+            curBusStation = senderList.DataContext as BO.BusStation;
+            AddBusLinesStations(curBusStation);
+        }
+        private void listViewItemAdded_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var senderList = sender as ListViewItem;
+            var Object = senderList.DataContext as object;
+            DeleteBusLinesStation(int.Parse(Object.ToString().Substring(18, 6)));
             
         }
-        private void AllStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void FinishAddingBtn_Click(object sender, RoutedEventArgs e)
         {
-            curBusStation = (ComboBoxAllStations.SelectedItem as BO.BusStation);
-            GridStation.DataContext = curBusStation;
+            this.Close();
         }
     }
 }

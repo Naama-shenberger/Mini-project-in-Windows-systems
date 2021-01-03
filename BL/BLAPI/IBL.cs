@@ -33,6 +33,7 @@ namespace BLAPI
         void UpdateBusStation(BusStation busStation);
         #endregion
         #region Bus Line 
+        DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO);
         BO.BusLine BusLineDoBoAdapter(DO.BusLine busLineDO);
         DO.BusLine BusLineBoDoAdapter(BO.BusLine busLineBO);
         BusLine GetBusLine(int id);
@@ -40,15 +41,15 @@ namespace BLAPI
         IEnumerable<BusLine> GetAllBusLinesSortByNumberOfStations();
         IEnumerable<int> GetNumberLines();
         IEnumerable<BusLine> GetBusLineBy(Predicate<BusLine> predicate);
-        void AddBusLine(BusLine busLine, BusLineStation stationInLineOne = null, BusLineStation stationInLineTwo = null);
-        void AddBusStationToLine(BusLine AddToLine, BusLineStation busLineStation);
+        void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation);
+        void AddBusStationToLine(BusLine AddToLine,IEnumerable<BusLineStation> busLineStation);
         void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, BusLineStation busLineStation);
         void DeleteBusLine(BusLine busLine);
         IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea();
         void UpdateBusLine(BusLine busLine);
         void UpdateDistanceBetweenstations(DO.ConsecutiveStations stations, float _distance);
         void UpdateTravelTimeBetweenstations(DO.ConsecutiveStations stations, TimeSpan time);
-        decimal DistanceBetween(double latA, double longA, double latB, double longB);
+       
         #endregion
         #region Bus Line In Station
         BusLineInStation GetLineInStation(int id);
