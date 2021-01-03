@@ -31,8 +31,8 @@ namespace PL.WPF
             ComboBoxBusStationKey.DisplayMemberPath = "BusStationKey";
             ComboBoxBusStationKey.SelectedIndex = 0;
             RefreshAllStationsComboBox();
-            RefreshAllRegisteredBusLineInStaionGrid();
-            RefreshAllNotRegisteredBusLinesGrid();
+            //RefreshAllRegisteredBusLineInStaionGrid();
+           // RefreshAllNotRegisteredBusLinesGrid();
         }
         void RefreshAllStationsComboBox()
         {
@@ -42,19 +42,25 @@ namespace PL.WPF
         {
             CurBusStation = (ComboBoxBusStationKey.SelectedItem as BO.BusStation);
             gridOneBusStation.DataContext = CurBusStation;
+            if (CurBusStation != null)
+            {
+                //list of courses of selected student
+                RefreshAllRegisteredBusLineInStaionGrid();
+                //list of all courses (that selected student is not registered to it)
+                RefreshAllNotRegisteredBusLinesGrid();
+            }
+
         }
         void RefreshAllRegisteredBusLineInStaionGrid()
         {
             DataGridBusLinesInStation.DataContext = Convert<object>(bl.BusLineDetails(bl.GetAllBusLineInStation()));
         }
-        //void RefreshDataGrirdAllStationslines()
-        //{
-        //    DataGrirdAllStationslines.DataContext = Convert<object>(bl.StationDetails(bl.GetAllBusLineStations()));
-        //}
         void RefreshAllNotRegisteredBusLinesGrid()
         {
-            List<BO.BusLine> listOfUnRegisteredCourses = bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.ID != c1.ID)).ToList();
-            DataGridBusLines.DataContext = Convert < BO.BusLine >( listOfUnRegisteredCourses);
+            //List<BO.BusLine> listOfUnRegisteredlines= bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.BusLineNumber != c1.BusLineNumber)).ToList();
+           // DataGridBusLines.DataContext = Convert<object>(bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.BusLineNumber != c1.BusLineNumber)));
+            //DataGridBusLines.DataContext = Convert<object>(bl.GetAllBusLines());//.Where(c1=>CurBusStation.ListBusLinesInStation.All(c2=>c2.BusLineNumber!=c1.BusLineNumber)));
+            //DataGridBusLines.DataContext= Convert<object>(bl.BusLineDetails(bl.));
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
