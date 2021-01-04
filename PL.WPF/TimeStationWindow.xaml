@@ -10,7 +10,7 @@
         <Label Content="Updated time between the stations:" HorizontalAlignment="Left" Height="23" Margin="10,37,0,0" VerticalAlignment="Top" Width="233"/>
         <!--<TextBox x:Name="TextBoxTime" HorizontalAlignment="Left" Margin="61,60,0,85.4" Text="{Binding Time}"  VerticalAlignment="Center" Height="25" Width="78"/>-->
         <ComboBox x:Name="cbGrade" Text="{Binding Time}" HorizontalAlignment="Left" Margin="90,65,0,0" VerticalAlignment="Top" Width="50" Height="23"/>
-        <Button x:Name="btUpdateTime" Content="Update" HorizontalAlignment="Left" Margin="61,113,0,0" VerticalAlignment="Top" Width="101" Height="26" Click="btUpdateTimeButton_Click"/>
+        <Button x:Name="btUpdateTime" Content="Update" HorizontalAlignment="Left" Margin="61,113,0,0" VerticalAlignment="Top" Width="101" Height="26" />
 
     </Grid>
 </Window>

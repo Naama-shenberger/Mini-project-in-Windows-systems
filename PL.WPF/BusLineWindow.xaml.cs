@@ -35,6 +35,7 @@ namespace PL.WPF
             RefreshAllBusLinesComboBox();
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
+            CurBusLineStation = Convert<BO.BusLineStation>(CurBusLine.StationsInLine);
 
 
         }
@@ -58,6 +59,7 @@ namespace PL.WPF
             if(CurBusLine==null)
                 CurBusLine = Convert<BO.BusLine>(bl.GetAllBusLines()).ToList()[0];
             RefreshDataGrirdStationsline();
+           
         }
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
@@ -112,9 +114,29 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void BusLineStaation_Checked(object sender, RoutedEventArgs e)
+        private void BusLineStation_Checked(object sender, RoutedEventArgs e)
         {
-            CurBusLineStation.Add(((sender as CheckBox).DataContext as BO.BusLineStation));
+            try
+            {
+                BO.BusLineStation busLineStation = new BO.BusLineStation
+                {
+                    BusStationKey = int.Parse((sender as CheckBox).DataContext.ToString().Substring(18, 6)),
+                    NumberStationInLine = int.Parse((sender as CheckBox).DataContext.ToString().Substring(48, 1)),
+                    Active = true
+                };
+                if (CurBusLineStation.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey) == null)
+                    CurBusLineStation.Add(busLineStation);
+                else
+                    throw new ArgumentException("The line station is already on the line route");
+                //(sender as CheckBox)
+                RefreshDataGrirdStationsline();
+
+            }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                (sender as CheckBox).IsChecked = false;
+            }
         }
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
@@ -146,21 +168,23 @@ namespace PL.WPF
 
         void RefreshDataGrirdStationsline()
         {
-           
-           
-            DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine));
-            
+
+
+            DataGrirdStationslines.DataContext =bl.StationDetails(CurBusLineStation);
+
+
         }
         
         private void AddBusLineStatoin_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                AddStationWindow addStationWindow = new AddStationWindow(bl,CurBusLine);
+                AddStationWindow addStationWindow = new AddStationWindow(bl);
                 addStationWindow.ShowDialog();
-                bl.AddBusStationToLine(CurBusLine, addStationWindow.BusLineStations);
+                bl.AddBusLinesStation(addStationWindow.BusLineStations);
                 RefreshDataGrirdAllStationslines();
-                RefreshDataGrirdStationsline();
+               
+              //  RefreshDataGrirdStationsline();
             }
             
             catch (ArgumentOutOfRangeException ex)

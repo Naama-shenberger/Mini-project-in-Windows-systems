@@ -23,7 +23,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        
+
         <ListView x:Name="lvBusLineStation" ItemsSource="{Binding}" Background="AliceBlue" Margin="0,191,182.6,40.4">
             <ListView.View>
                 <GridView>
@@ -31,7 +31,7 @@
                     <GridViewColumn Header="Station Address" DisplayMemberBinding="{Binding StationAddress}"/>
                     <GridViewColumn Header="Name Station" DisplayMemberBinding="{Binding StationName}"/>
                     <GridViewColumn Header="Number Station In line" DisplayMemberBinding="{Binding NumberStationInLine}"/>
-                   
+
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
@@ -40,8 +40,6 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <Label Content="Bus Line" HorizontalAlignment="Left" Margin="375,25,0,0" VerticalAlignment="Top" Width="82" Height="23"/>
-        <TextBlock HorizontalAlignment="Left" Margin="470,32,0,0" TextWrapping="Wrap" x:Name="BusLineTextBlock" VerticalAlignment="Top"/>
         <Button Content="Finish adding" Name="FinishAddingBtn" HorizontalAlignment="Left" Margin="491,323,0,0" VerticalAlignment="Top" Width="75" Click="FinishAddingBtn_Click"/>
     </Grid>
 </Window>

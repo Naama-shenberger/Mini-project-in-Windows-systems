@@ -429,7 +429,19 @@ namespace BL
         }
 
         #endregion
+
         #region Bus Line
+        public void AddBusLinesStation(IEnumerable<BusLineStation> busLineStations)
+        {
+            try
+            {
+                busLineStations.ToList().ForEach(item => dl.AddBusLineStation(BusLineStationBoDoAdapter(item)));
+            }
+            catch(DO.IdException ex)
+            {
+                throw new BO.IdException(ex.Message);
+            }
+        }
         /// <summary>
         /// A function that receives tracking stations and updates the distance between them
         /// </summary>

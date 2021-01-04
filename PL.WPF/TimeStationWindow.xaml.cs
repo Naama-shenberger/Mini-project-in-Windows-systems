@@ -26,21 +26,19 @@ namespace PL.WPF
         BO.BusStation curBusStation2;
         TimeSpan timeBeforeUpdate;
         ObservableCollection<BO.BusLineStation> curBusLineStations = new ObservableCollection<BO.BusLineStation>();
-        public TimeStations(IBL _bL, BO. busStation1,BO.BusStation busStation2)
+        public TimeStations(IBL _bL, BO.BusStation busStation, BO.BusStation busStation2)
         {
-            InitializeComponent();
-            InitializeComponent();
+            //InitializeComponent();
+            //InitializeComponent();
             bL = _bL;
-            curBusStation1 = busStation1;
-            curBusStation2 = busStation2;
-            BusLineTextBlock.Text = CurBusLine.BusLineNumber.ToString();
-            Index = CurBusLine.StationsInLine.Count();
-            RefreshAllStationsComboBox();
+            //curBusStation1 = busStation1;
+            //curBusStation2 = busStation2;
+            //BusLineTextBlock.Text = CurBusLine.BusLineNumber.ToString();
+            //Index = CurBusLine.StationsInLine.Count();
+            //RefreshAllStationsComboBox();
         }
-
-        private void btUpdateTimeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }
+
+   

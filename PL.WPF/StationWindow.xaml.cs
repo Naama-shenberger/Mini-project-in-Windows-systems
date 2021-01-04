@@ -162,10 +162,10 @@ namespace PL.WPF
 
         private void btUpdateTimeBetweenStationsButten_Click(object sender, RoutedEventArgs e)
         {
-            BO.BusStation scBO = ((sender as Button).DataContext as BO.BusStation);
-            TimeStationWindow win = new TimeStationWindow(CurBusStation, scBO);
-            win.Closing += WinUpdateGrade_Closing;
-            win.ShowDialog();
+            //BO.BusStation scBO = ((sender as Button).DataContext as BO.BusStation);
+            //TimeStationWindow win = new TimeStationWindow(CurBusStation, scBO);
+            //win.Closing += WinUpdateGrade_Closing;
+            //win.ShowDialog();
            
 
         }
