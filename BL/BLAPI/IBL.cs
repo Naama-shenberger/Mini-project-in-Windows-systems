@@ -25,12 +25,18 @@ namespace BLAPI
         bool BusCondition(Bus bus);
         #endregion
         #region Bus Station
+        BO.BusStation BusStationDoBoAdapter(DO.BusStation stationDO);
+        DO.BusStation BusStationBoDoAdapter(BO.BusStation busStationBO);
+        DO.BusLineInStation BusLineInStationBoDoAdapter(BO.BusLineInStation busLineInStation);
         BusStation GetBusStation(int id);
         IEnumerable<BusStation> GetAllBusStation();
         IEnumerable<BusLineInStation> GetAllBusLineInStation();//A bus line passing through the station
         void AddBusStation(BusStation station);
+        void AddBusLineToStation(BusStation AddToStation, BusLineInStation busLineInStation);
+        void DeleteBusLineInStation(BusStation DeleteFromStation, BusLineInStation busLineInStation);
         void DeleteBusStation(BusStation station);
         void UpdateBusStation(BusStation busStation);
+       
         #endregion
         #region Bus Line 
         DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO);
@@ -53,10 +59,9 @@ namespace BLAPI
         #endregion
         #region Bus Line In Station
         BusLineInStation GetLineInStation(int id);
-        void AddBusLineInStation(BusLineInStation busStation);
-        void DeleteBusLineInStation(BusLineInStation busStation);
-        void UpdateBusLineInStation(BusLineInStation busStation);
+        BO.BusLineInStation LineInStationDoBoAdapter(DO.BusLineInStation lineDO);
         IEnumerable<object> BusLineDetails(IEnumerable<BusLineInStation> busLineInStations);
+        IEnumerable<BusLineInStation> GetAllBusLineInStations();
         #endregion
         #region User
         BO.User UserDoBoAdapter(DO.User UserDO);

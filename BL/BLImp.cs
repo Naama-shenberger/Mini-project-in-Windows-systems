@@ -263,21 +263,6 @@ namespace BL
 
         #endregion
         #region Bus Station
-        /// <summary>
-        /// The function receives a bus Station for updating
-        /// </summary>
-        /// <param name="busStation"></param>
-        public void UpdateBusStation(BusStation busStation)
-        {
-            try
-            {
-                dl.UpdateBusStation(BusStationBoDoAdapter(GetBusStation(busStation.BusStationKey)));
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.ToString());
-            }
-        }
 
         /// <summary>
         /// A function that receives a DO type bus station object and returns a BO type bus station
@@ -303,6 +288,54 @@ namespace BL
             DO.BusStation busStationDO = new DO.BusStation();
             busStationBO.CopyPropertiesTo(busStationDO);
             return busStationDO;
+        }
+        /// <summary>
+        /// A function that receives a BO type bus line in station object and returns a DO type bus line in station
+        /// </summary>
+        /// <param name="busLineInStationBO"></param>
+        /// <returns></returns>
+        public DO.BusLineInStation BusLineInStationBoDoAdapter(BO.BusLineInStation busLineInStationBO)
+        {
+            DO.BusLineInStation busLineInStationDO = new DO.BusLineInStation();
+            busLineInStationBO.CopyPropertiesTo(busLineInStationDO);
+
+            return busLineInStationDO;
+        }
+        /// <summary>
+        /// adds a line to stations line list
+        /// </summary>
+        /// <param name="AddToStation"></param>
+        /// <param name="busLineInStation"></param>
+        public void AddBusLineToStation(BusStation AddToStation, BusLineInStation busLineInStation)
+        {
+            try
+            {
+
+                AddToStation.ListBusLinesInStation.ToList().Add(busLineInStation);
+                ///?  busLineStation.ToList().ForEach(i => AddToLine.StationsInLine.Append(i));
+                //number in line need to f
+            }
+            catch (DO.IdException ex)
+            {
+                throw new BO.IdException(ex.Message);
+            }
+        }
+        /// <summary>
+        /// deletes a bus line from stations list
+        /// </summary>
+        /// <param name="DeleteFromStation"></param>
+        /// <param name="busLineInStation"></param>
+        public void DeleteBusLineInStation(BusStation DeleteFromStation, BusLineInStation busLineInStation)
+        {
+            try
+            {
+                var IndexToDelete = DeleteFromStation.ListBusLinesInStation.ToList().FindIndex(d => d.BusLineNumber == busLineInStation.BusLineNumber);
+                DeleteFromStation.ListBusLinesInStation.ToList().RemoveAt(IndexToDelete);
+            }
+            catch (DO.IdException ex)
+            {
+                throw new BO.IdException(ex.ToString());
+            }
         }
         /// <summary>
         /// A function that receives an ID number of a station and returns the corresponding station
@@ -357,6 +390,7 @@ namespace BL
                 throw new BO.IdException("Bus station dose not exists", ex);
             }
             dl.DeleteBusStation(stationDO);
+            dl.DeleteBusLineStation(new DO.BusLineStation() { BusStationKey = stationDO.BusStationKey, Active = true });
         }
         /// <summary>
         ///  A function that returns all bus stations
@@ -378,6 +412,22 @@ namespace BL
                    let line = dl.GetBusLine(sic.BusLineNumber)
                    select line.CopyToLineInStation(sic);
         }
+        /// <summary>
+        /// The function receives a bus Station for updating
+        /// </summary>
+        /// <param name="busStation"></param>
+        public void UpdateBusStation(BusStation busStation)
+        {
+            try
+            {
+                dl.UpdateBusStation(BusStationBoDoAdapter(GetBusStation(busStation.BusStationKey)));
+            }
+            catch (DO.IdException ex)
+            {
+                throw new BO.IdException(ex.ToString());
+            }
+        }
+
         #endregion
         #region Bus Line
         /// <summary>
@@ -646,7 +696,7 @@ namespace BL
         /// </summary>
         /// <param name="lineDO"></param>
         /// <returns></returns>
-        public BO.BusLineInStation LineStationDoBoAdapter(DO.BusLineInStation lineDO)
+        public BO.BusLineInStation LineInStationDoBoAdapter(DO.BusLineInStation lineDO)
         {
             BO.BusLineInStation lineBO = null;
             lineDO.CopyPropertiesTo(lineBO);
@@ -680,61 +730,22 @@ namespace BL
             {
                 throw new BO.IdException("Bus ID is illegal", ex);
             }
-            return LineStationDoBoAdapter(lineInStationDO);
+            return LineInStationDoBoAdapter(lineInStationDO);
         }
         /// <summary>
-        /// The function receives a bus Station for updating
+        /// 
         /// </summary>
-        /// <param name="busStation"></param>
-        public void UpdateBusLineInStation(BusLineInStation busStation)
-        {
-            try
-            {
-                dl.UpdateBusLineInStation(LineStationBoDoAdapter(GetLineInStation(busStation.BusLineNumber)));
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.ToString());
-            }
-        }
-        /// <summary>
-        /// Add a bus line in station to the list of lines in station
-        /// The function gets a bus line in station  to add u 
-        /// </summary>
-        /// <param name="stationKey"></param>
-        /// <param name="courseID"></param>
-        public void AddBusLineInStation(BusLineInStation busStation)
-        {
-            try
-            {
-                dl.AddBusLineInStation(LineStationBoDoAdapter(busStation));
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException("station key and bus line number dose not Not exist", ex);
-            }
-        }
-        /// <summary>
-        ///  A function that deletes a bus line in station from the list of lines in station
-        /// </summary>
-        /// <param name="stationKey"></param>
-        /// <param name="busLineNum"></param>
-        public void DeleteBusLineInStation(BusLineInStation busStation)
-        {
-            try
-            {
-                dl.DeleteBusLineInStation(LineStationBoDoAdapter(busStation));
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException("Student ID and Course ID is Not exist", ex);
-            }
-        }
+        /// <returns></returns>
         public IEnumerable<BusLineInStation> GetAllBusLineInStations()
         {
             return from BusLineInStation in dl.BusLineInStations()
-                   select LineStationDoBoAdapter(BusLineInStation);
+                   select LineInStationDoBoAdapter(BusLineInStation);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="busLineInStations"></param>
+        /// <returns></returns>
         public IEnumerable<object> BusLineDetails(IEnumerable<BusLineInStation> busLineInStations)
         {
             return from BusLine in dl.BusLines()

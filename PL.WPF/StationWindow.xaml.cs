@@ -28,13 +28,14 @@ namespace PL.WPF
         {
             InitializeComponent();
             bl = _bl;
-            ComboBoxBusStationKey.DisplayMemberPath = "BusStationKey";
+            ComboBoxBusStationKey.DisplayMemberPath = "StationName";
+            ComboBoxBusStationKey.SelectedValuePath= "BusStationKey";
             ComboBoxBusStationKey.SelectedIndex = 0;
             RefreshAllStationsComboBox();
-            //RefreshAllRegisteredBusLineInStaionGrid();
-           // RefreshAllNotRegisteredBusLinesGrid();
+            DataGridBusLinesInStation.IsReadOnly = true;
+            busLinesDataGrid.IsReadOnly = true;
         }
-        void RefreshAllStationsComboBox()
+        private void RefreshAllStationsComboBox()
         {
             ComboBoxBusStationKey.DataContext = Convert<BO.BusStation>( bl.GetAllBusStation()); //ObserListOfStations;
         }
@@ -44,23 +45,21 @@ namespace PL.WPF
             gridOneBusStation.DataContext = CurBusStation;
             if (CurBusStation != null)
             {
-                //list of courses of selected student
+                //list of courses of selected lines
                 RefreshAllRegisteredBusLineInStaionGrid();
-                //list of all courses (that selected student is not registered to it)
+                //list of all lines(that selected station is not it)
                 RefreshAllNotRegisteredBusLinesGrid();
             }
 
         }
-        void RefreshAllRegisteredBusLineInStaionGrid()
+        private void RefreshAllRegisteredBusLineInStaionGrid()
         {
-            DataGridBusLinesInStation.DataContext = Convert<object>(bl.BusLineDetails(bl.GetAllBusLineInStation()));
+            DataGridBusLinesInStation.DataContext = bl.BusLineDetails(CurBusStation.ListBusLinesInStation);
         }
-        void RefreshAllNotRegisteredBusLinesGrid()
+        private void RefreshAllNotRegisteredBusLinesGrid()
         {
-            //List<BO.BusLine> listOfUnRegisteredlines= bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.BusLineNumber != c1.BusLineNumber)).ToList();
-           // DataGridBusLines.DataContext = Convert<object>(bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.BusLineNumber != c1.BusLineNumber)));
-            //DataGridBusLines.DataContext = Convert<object>(bl.GetAllBusLines());//.Where(c1=>CurBusStation.ListBusLinesInStation.All(c2=>c2.BusLineNumber!=c1.BusLineNumber)));
-            //DataGridBusLines.DataContext= Convert<object>(bl.BusLineDetails(bl.));
+            List<BO.BusLine> listOfUnRegisteredCourses = bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.ID != c1.ID)).ToList();
+            busLinesDataGrid.DataContext = listOfUnRegisteredCourses;
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
@@ -82,8 +81,8 @@ namespace PL.WPF
             }
             try
             {
-                BO.BusLineInStation scBO = ((sender as Button).DataContext as BO.BusLineInStation);
-                bl.AddBusLineInStation(scBO);
+                BO.BusLineInStation cBO = ((sender as Button).DataContext as BO.BusLineInStation);
+                bl.AddBusLineToStation(CurBusStation,cBO);
                 RefreshAllRegisteredBusLineInStaionGrid();
                 RefreshAllNotRegisteredBusLinesGrid();
             }
@@ -98,7 +97,7 @@ namespace PL.WPF
             try
             {
                 BO.BusLineInStation scBO = ((sender as Button).DataContext as BO.BusLineInStation);
-                bl.DeleteBusLineInStation((scBO));
+                bl.DeleteBusLineInStation(CurBusStation,scBO);
                 RefreshAllRegisteredBusLineInStaionGrid();
                 RefreshAllNotRegisteredBusLinesGrid();
             }
@@ -159,6 +158,16 @@ namespace PL.WPF
         private void BackButten_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btUpdateTimeBetweenStationsButten_Click(object sender, RoutedEventArgs e)
+        {
+            BO.BusStation scBO = ((sender as Button).DataContext as BO.BusStation);
+            TimeStationWindow win = new TimeStationWindow(CurBusStation, scBO);
+            win.Closing += WinUpdateGrade_Closing;
+            win.ShowDialog();
+           
+
         }
     }
 }
