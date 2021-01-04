@@ -79,7 +79,7 @@
                     <DataTemplate>
                             <StackPanel>
                                
-                                <CheckBox x:Name="CheckBoxBusLineStaation" Checked="BusLineStation_Checked" Content="Checke To Add" Margin="12,6,2,2" />
+                                <CheckBox x:Name="CheckBoxBusLineStaation" Checked="BusLineStaation_Checked" Content="Checke To Add" Margin="12,6,2,2" />
                             </StackPanel>
                         </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>

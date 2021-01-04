@@ -429,19 +429,7 @@ namespace BL
         }
 
         #endregion
-
         #region Bus Line
-        public void AddBusLinesStation(IEnumerable<BusLineStation> busLineStations)
-        {
-            try
-            {
-                busLineStations.ToList().ForEach(item => dl.AddBusLineStation(BusLineStationBoDoAdapter(item)));
-            }
-            catch(DO.IdException ex)
-            {
-                throw new BO.IdException(ex.Message);
-            }
-        }
         /// <summary>
         /// A function that receives tracking stations and updates the distance between them
         /// </summary>
@@ -465,11 +453,12 @@ namespace BL
         /// </summary>
         /// <param name="stations"></param>
         /// <param name="time"></param>
-        public void UpdateTravelTimeBetweenstations(DO.ConsecutiveStations stations, TimeSpan time)
+        public void UpdateTravelTimeBetweenstations(BO.BusStation station1,BO.BusStation station2, TimeSpan time)
         {
+            
             try
             {
-                DO.ConsecutiveStations consecutiveStations = dl.GetConsecutiveStations(stations.StationCodeOne, stations.StationCodeTwo);
+                DO.ConsecutiveStations consecutiveStations = dl.GetConsecutiveStations(station1.BusStationKey, station2.BusStationKey);
                 consecutiveStations.AverageTravelTime = time;
                 dl.UpdateConsecutiveStations(consecutiveStations);
             }

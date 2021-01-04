@@ -162,10 +162,34 @@ namespace PL.WPF
 
         private void btUpdateTimeBetweenStationsButten_Click(object sender, RoutedEventArgs e)
         {
-            //BO.BusStation scBO = ((sender as Button).DataContext as BO.BusStation);
-            //TimeStationWindow win = new TimeStationWindow(CurBusStation, scBO);
-            //win.Closing += WinUpdateGrade_Closing;
-            //win.ShowDialog();
+            TimeSpan tBO = (sender as TimeWindow).timeBeforeUpdate;
+
+            MessageBoxResult res = MessageBox.Show("Update grade for selected student?", "Verification", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            if (res == MessageBoxResult.No)
+            {
+                (sender as TimeWindow).cbGrade.Text = (sender as TimeWindow).gradeBeforeUpdate.ToString();
+            }
+            else if (res == MessageBoxResult.Cancel)
+            {
+                (sender as TimeWindow).cbGrade.Text = (sender as TimeWindow).gradeBeforeUpdate.ToString();
+                e.Cancel = true; //window stayed open. cancel closing event.
+            }
+            else
+            {
+                try
+                {
+                    bl.UpdateTravelTimeBetweenstations( CurBusStation,tBO)
+                    bl.UpdateStudentGradeInCourse(curStu.ID, scBO.ID, (float)scBO.Grade);
+                }
+                catch (BO.BadStudentIdCourseIDException ex)
+                {
+                    MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            BO.BusStation scBO = ((sender as Button).DataContext as BO.BusStation);
+            TimeStationWindow win = new TimeStationWindow(CurBusStation, scBO);
+            win.Closing += TimeStationWindow_Closing;
+            win.ShowDialog();
            
 
         }

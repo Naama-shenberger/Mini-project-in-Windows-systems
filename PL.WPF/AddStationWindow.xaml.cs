@@ -23,30 +23,27 @@ namespace PL.WPF
     {
         IBL bL;
         BO.BusStation curBusStation;
+        BO.BusLine CurBusLine;
         BO.BusLineStation CurBusLineStation;
         static int Index;
         ObservableCollection<BO.BusLineStation> curBusLineStations=new ObservableCollection<BO.BusLineStation>();
-        ObservableCollection<BO.BusLineStation> curAllBusLineStations = new ObservableCollection<BO.BusLineStation>();
         public ObservableCollection<BO.BusLineStation> BusLineStations
         {
             get { return curBusLineStations; }
         }
-        public AddStationWindow(IBL _bL)
+        public AddStationWindow(IBL _bL,BO.BusLine busLine)
         {
             InitializeComponent();
             bL = _bL;
-            //CurBusLine = busLine;
-            //BusLineTextBlock.Text = CurBusLine.BusLineNumber.ToString();
-            curAllBusLineStations= Convert <BO.BusLineStation>(bL.GetAllBusLineStations());
-            Index = curAllBusLineStations.Count();
+            CurBusLine = busLine;
+            BusLineTextBlock.Text = CurBusLine.BusLineNumber.ToString();
+            Index = CurBusLine.StationsInLine.Count();
             RefreshAllStationsComboBox();
         }
        
         void RefreshAllStationsComboBox()
         {
-            
             lvBusStations.DataContext = Convert<BO.BusStation>(bL.GetAllBusStation());
-
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
@@ -54,41 +51,22 @@ namespace PL.WPF
         }
         private void AddBusLinesStations(BO.BusStation busStation)
         {
-            try
+            BO.BusLineStation busLineStation = new BO.BusLineStation
             {
-                
-                if (curBusLineStations.FirstOrDefault(a => a.BusStationKey == busStation.BusStationKey) != null)
-                           throw new ArgumentException("You have already selected the station");
-                BO.BusLineStation busLineStation = new BO.BusLineStation
-                {
-                    BusStationKey = busStation.BusStationKey,
-                    Active = busStation.Active,
-                    NumberStationInLine = ++Index,
-                };
-               if(curAllBusLineStations.FirstOrDefault(a=>a.BusStationKey==busLineStation.BusStationKey)!=null)
-                    throw new ArgumentException("the line already have that station");
-                curBusLineStations.Add(busLineStation);
-                lvBusLineStation.DataContext = Convert<object>(bL.StationDetails(curBusLineStations));
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-                Index = --Index;
-            }
+                BusStationKey = busStation.BusStationKey,
+                Active = busStation.Active,
+               NumberStationInLine = ++Index,
+            };
+            curBusLineStations.Add(busLineStation);
+            lvBusLineStation.DataContext = Convert<object>(bL.StationDetails(curBusLineStations));
         }
         private void DeleteBusLinesStation(int BusStationKey)
         {
-            var save = curBusLineStations.FirstOrDefault(s => s.BusStationKey == BusStationKey).NumberStationInLine;
-            if (curBusLineStations.Count == 1)
-                Index = curAllBusLineStations.Count();
+            if(curBusLineStations.Count==1)
+                Index= CurBusLine.StationsInLine.Count();
             else
-                if (save > curAllBusLineStations.Count())
-                           Index = Index-1;
-                else
-                         Index = save-1;
-           
+                Index = curBusLineStations.FirstOrDefault(s => s.BusStationKey == BusStationKey).NumberStationInLine-1;
             curBusLineStations.Remove(curBusLineStations.FirstOrDefault(s=>s.BusStationKey==BusStationKey));
-            curBusLineStations.AsParallel().ForAll(a =>{if (a.NumberStationInLine>save)  { a.NumberStationInLine = a.NumberStationInLine - 1; } }) ;
             lvBusLineStation.DataContext = Convert<object>(bL.StationDetails(curBusLineStations));
         }
         private void lvBusStations_SelectionChanged(object sender, SelectionChangedEventArgs e)

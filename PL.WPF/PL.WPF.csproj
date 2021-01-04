@@ -64,8 +64,8 @@
     <Compile Include="StationWindow.xaml.cs">
       <DependentUpon>StationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TimeStationWindow.xaml.cs">
-      <DependentUpon>TimeStationWindow.xaml</DependentUpon>
+    <Compile Include="TimeWindow.xaml.cs">
+      <DependentUpon>TimeWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AddBusWindow.xaml">
       <SubType>Designer</SubType>
@@ -105,7 +105,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TimeStationWindow.xaml">
+    <Page Include="TimeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
