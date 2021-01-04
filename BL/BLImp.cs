@@ -527,10 +527,9 @@ namespace BL
         {
             BO.BusLine busLineBO = new BO.BusLine();
             busLineDO.CopyPropertiesTo(busLineBO);
+
             busLineBO.StationsInLine = from sin in dl.BusLineStations()
                                        select (BO.BusLineStation)sin.CopyPropertiesToNew(typeof(BO.BusLineStation));
-
-                                           
             return busLineBO;
         }
        
@@ -594,12 +593,14 @@ namespace BL
             try
             {
 
-                AddToLine.StationsInLine.ToList().AddRange(busLineStation);
+                AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
+
+
                 ///?  busLineStation.ToList().ForEach(i => AddToLine.StationsInLine.Append(i));
-                busLineStation.ToList().ForEach(i => dl.AddBusLineStation(BusLineStationBoDoAdapter(i)));
+                //busLineStation.ToList().ForEach(i => dl.AddBusLineStation(BusLineStationBoDoAdapter(i)));
                 //בדיקה אם יש תחנות עוקבות
                 //number in line need to fix 
-                
+
             }
             catch(DO.IdException ex)
             {
@@ -631,8 +632,12 @@ namespace BL
         {
             try
             {
-                dl.DeleteBusLineStation(dl.GetBusLineStation(busLineStation.BusStationKey));
+                DeleteFromLine.StationsInLine = from sin in DeleteFromLine.StationsInLine
+                                                where sin.BusStationKey != busLineStation.BusStationKey
+                                                select sin;
                 var IndexToDelete = DeleteFromLine.StationsInLine.ToList().FindIndex(d => d.BusStationKey == busLineStation.BusStationKey);
+                dl.GetConsecutiveStations(busLineStation.BusStationKey, DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey);
+                dl.GetConsecutiveStations(DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey, busLineStation.BusStationKey);
                 DO.ConsecutiveStations stations = new DO.ConsecutiveStations
                 {
                     StationCodeOne = DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey,
@@ -1083,6 +1088,17 @@ namespace BL
         }
         #endregion
         #region Bus Line Station
+        public void AddBusLinesStation(IEnumerable<BusLineStation> busLineStations)
+        {
+            try
+            {
+                busLineStations.ToList().ForEach(item => dl.AddBusLineStation(BusLineStationBoDoAdapter(item)));
+            }
+            catch (DO.IdException ex)
+            {
+                throw new BO.IdException(ex.Message);
+            }
+        }
         public BO.BusLineStation BusLineStationDoBoAdapter(DO.BusLineStation busLineStation)
         {
             BO.BusLineStation busLineStationBO = new BusLineStation();

@@ -22,6 +22,7 @@ namespace PL.WPF
     public partial class BusLineWindow : Window
     {
         IBL bl;
+        static int Index = 0;
         BO.BusLine CurBusLine = new BO.BusLine();
         ObservableCollection<BO.BusLineStation> CurBusLineStation=new ObservableCollection<BO.BusLineStation>();
         private ObservableCollection<BO.BusLine> BusLineList = new ObservableCollection<BO.BusLine>();
@@ -35,8 +36,8 @@ namespace PL.WPF
             RefreshAllBusLinesComboBox();
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
-
-
+            CurBusLineStation =Convert<BO.BusLineStation>(CurBusLine.StationsInLine);
+            Index = CurBusLine.StationsInLine.Count();
         }
         void RefreshDataGrirdAllStationslines()
         {
@@ -55,13 +56,23 @@ namespace PL.WPF
         {
             CurBusLine = (ComboBoxBusLineNumber.SelectedItem as BO.BusLine);
             gridOneBusLine.DataContext = CurBusLine;
-            if(CurBusLine==null)
-                CurBusLine = Convert<BO.BusLine>(bl.GetAllBusLines()).ToList()[0];
-            RefreshDataGrirdStationsline();
+            if (CurBusLine.StationsInLine != null)
+                DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
+            else
+                DataGrirdStationslines.DataContext = "";
         }
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
-
+            var btn= sender as Button;
+            BO.BusLineStation busLineStation = new BO.BusLineStation
+            {
+                BusStationKey = int.Parse((btn).DataContext.ToString().Substring(18, 6)),
+                NumberStationInLine = ++Index,
+                Active = true
+            };
+            CurBusLineStation.Remove(busLineStation);
+            bl.DeleteBusLineStationFromeLine(CurBusLine,busLineStation);
+            RefreshDataGrirdStationsline();
         }
         private void AddBusLineButton_Click(object sender, RoutedEventArgs e)
         {
@@ -74,7 +85,7 @@ namespace PL.WPF
             FriststopLabel.Visibility = Visibility.Hidden;
             LastStopLabel.Visibility = Visibility.Hidden;
             LastStopTextBox.Visibility = Visibility.Hidden;
-
+            RefreshDataGrirdStationsline();
         }
 
         private void DeleteButon_Click(object sender, RoutedEventArgs e)
@@ -112,9 +123,32 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void BusLineStaation_Checked(object sender, RoutedEventArgs e)
+        private void BusLineStation_Checked(object sender, RoutedEventArgs e)
         {
-            CurBusLineStation.Add(((sender as CheckBox).DataContext as BO.BusLineStation));
+            try
+            {
+                BO.BusLineStation busLineStation = new BO.BusLineStation
+                {
+                    BusStationKey = int.Parse((sender as CheckBox).DataContext.ToString().Substring(18, 6)),
+                    NumberStationInLine =++Index,
+                    Active = true
+                };
+                if (CurBusLineStation.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey) == null)
+                {
+                    CurBusLineStation.Add(busLineStation);
+                    bl.AddBusStationToLine(CurBusLine, CurBusLineStation);
+                }
+                else
+                    throw new ArgumentException("The line station is already on the line route");
+                RefreshDataGrirdStationsline();
+                MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                (sender as CheckBox).Visibility = Visibility.Hidden;
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                (sender as CheckBox).IsChecked = false;
+            }
         }
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
@@ -146,23 +180,19 @@ namespace PL.WPF
 
         void RefreshDataGrirdStationsline()
         {
-           
-           
-            DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine));
-            
+            DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLineStation));
         }
-        
+
         private void AddBusLineStatoin_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                AddStationWindow addStationWindow = new AddStationWindow(bl,CurBusLine);
+                AddStationWindow addStationWindow = new AddStationWindow(bl);
                 addStationWindow.ShowDialog();
-                bl.AddBusStationToLine(CurBusLine, addStationWindow.BusLineStations);
+                bl.AddBusLinesStation(addStationWindow.BusLineStations);
                 RefreshDataGrirdAllStationslines();
-                RefreshDataGrirdStationsline();
+                MessageBox.Show("The Station/s successfully added", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            
             catch (ArgumentOutOfRangeException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -177,7 +207,6 @@ namespace PL.WPF
             }
 
         }
-
         
     }
 }

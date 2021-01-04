@@ -38,7 +38,7 @@
             <Label Name="LastStopLabel" Content="Last stop:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Height="30" Margin="3,6.8,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="3"/>
             <TextBox KeyDown="OnKeyDownHandler" x:Name="LastStopTextBox" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3"  Text="{Binding LastStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120"/>
         </Grid>
-        <DataGrid x:Name="DataGrirdStationslines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="471,216,18.6,78.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5">
+        <DataGrid x:Name="DataGrirdStationslines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="382,280,12.6,14.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5">
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -65,7 +65,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid x:Name="DataGrirdAllStationslines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="372,22,20.6,324.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5">
+        <DataGrid x:Name="DataGrirdAllStationslines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="383,10,9.6,336.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="AllCodeStationColumn" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="AllnuerInLineColumn" Binding="{Binding NumberStationInLine}" Header="Number Station In Line" Width="SizeToHeader"/>
@@ -78,8 +78,7 @@
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                             <StackPanel>
-                               
-                                <CheckBox x:Name="CheckBoxBusLineStaation" Checked="BusLineStaation_Checked" Content="Checke To Add" Margin="12,6,2,2" />
+                                <CheckBox  x:Name="CheckBoxBusLineStaation" IsChecked="{Binding Selected}" Checked="BusLineStation_Checked" Content="Checke To Add" Margin="12,6,2,2" />
                             </StackPanel>
                         </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
@@ -87,6 +86,6 @@
             </DataGrid.Columns>
         </DataGrid>
        
-        <Button x:Name="AddBusLineStatoin" Content="Add Bus Line Station" HorizontalAlignment="Left" Margin="751,478,0,0" VerticalAlignment="Top" Width="122" Click="AddBusLineStatoin_Click" />
+        <Button x:Name="AddBusLineStatoin" Content="Add Bus Line Station" HorizontalAlignment="Left" Margin="747,200,0,0" VerticalAlignment="Top" Width="122" Click="AddBusLineStatoin_Click" />
     </Grid>
 </Window>

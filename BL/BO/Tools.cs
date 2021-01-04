@@ -37,5 +37,6 @@ namespace BO
 
             return Convert.ToDecimal(((Math.Acos(theDistance) * (180.0 / Math.PI)))) * 69.09M * 1.6093M;
         }
+       
     }
 }

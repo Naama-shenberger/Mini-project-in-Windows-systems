@@ -95,6 +95,7 @@ namespace BLAPI
         IEnumerable<BusLineStation> GetAllBusLineStations();
         BO.BusLineStation BusLineStationDoBoAdapter(DO.BusLineStation busLineStation);
         IEnumerable<object> StationDetails(IEnumerable<BusLineStation> busLineStations);
+        void AddBusLinesStation(IEnumerable<BusLineStation> busLineStations);
         #endregion
 
 
