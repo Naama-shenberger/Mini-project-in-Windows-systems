@@ -263,6 +263,22 @@ namespace BL
 
         #endregion
         #region Bus Station
+        public IEnumerable<object> BusStationDetails(IEnumerable<BusStation> busStations)
+        {
+            return from BusStation in dl.ConsecutivesStations()
+                   from BusStations in busStations
+                   where BusStation.StationCodeOne == BusStations.BusStationKey || BusStation.StationCodeTwo== BusStations.BusStationKey
+                   select new
+                   {
+                       BusStationKey= BusStations.BusStationKey,
+                       StationAddress= BusStations.StationAddress,
+                       StationName=BusStations.StationName,
+                       Longitude=BusStations.Longitude,
+                       Latitude = BusStations.Latitude,
+                       Time=BusStation.AverageTravelTime,
+
+                   };
+        }
         public void addTimeBetStation(BusStation s1, BusStation s2)
         {
             try
@@ -337,7 +353,7 @@ namespace BL
             {
 
                 AddToStation.ListBusLinesInStation.ToList().Add(busLineInStation);
-                ///?  busLineStation.ToList().ForEach(i => AddToLine.StationsInLine.Append(i));
+                AddToStation.ListBusLinesInStation.ToList().ForEach(i => AddToStation.ListBusLinesInStation.Append(i));
                 //number in line need to f
             }
             catch (DO.IdException ex)

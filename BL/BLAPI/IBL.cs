@@ -57,7 +57,7 @@ namespace BLAPI
         void UpdateBusLine(BusLine busLine);
         void UpdateDistanceBetweenstations(DO.ConsecutiveStations stations, float _distance);
         void UpdateTravelTimeBetweenstations(BO.BusStation stations1, BO.BusStation stations2, TimeSpan time);
-       
+        IEnumerable<object> BusStationDetails(IEnumerable<BusStation> busStations);
         #endregion
         #region Bus Line In Station
         BusLineInStation GetLineInStation(int id);

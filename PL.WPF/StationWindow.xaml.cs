@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading;
 using BLAPI;
 
 namespace PL.WPF
@@ -23,21 +24,24 @@ namespace PL.WPF
     {
         IBL bl;
         BO.BusStation CurBusStation = new BO.BusStation();
-        private ObservableCollection<BO.BusStation> StationList = new ObservableCollection<BO.BusStation>();//Bus List 
+        private ObservableCollection<BO.BusStation> StationList = new ObservableCollection<BO.BusStation>();//station List 
+        //private BO.BusStation currentDisplayStation;
         public StationWindow(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
             ComboBoxBusStationKey.DisplayMemberPath = "StationName";
-            ComboBoxBusStationKey.SelectedValuePath= "BusStationKey";
+            ComboBoxBusStationKey.SelectedValuePath = "BusStationKey";
             ComboBoxBusStationKey.SelectedIndex = 0;
+            //lStationKey.ItemsSource = StationList;
             RefreshAllStationsComboBox();
             DataGridBusLinesInStation.IsReadOnly = true;
             busLinesDataGrid.IsReadOnly = true;
+            DatatGridAllStations.IsReadOnly = true;
         }
         private void RefreshAllStationsComboBox()
         {
-            ComboBoxBusStationKey.DataContext = Convert<BO.BusStation>( bl.GetAllBusStation()); //ObserListOfStations;
+            ComboBoxBusStationKey.DataContext = Convert<BO.BusStation>(bl.GetAllBusStation()); //ObserListOfStations;
         }
         private void ComboBoxBusStationKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -49,34 +53,26 @@ namespace PL.WPF
                 RefreshAllRegisteredBusLineInStaionGrid();
                 //list of all lines(that selected station is not it)
                 RefreshAllNotRegisteredBusLinesGrid();
+                //RefreshTimeStatins();
             }
 
         }
         private void RefreshAllRegisteredBusLineInStaionGrid()
         {
-            DataGridBusLinesInStation.DataContext = bl.BusLineDetails(CurBusStation.ListBusLinesInStation);
+            DataGridBusLinesInStation.DataContext = Convert<object>(bl.BusLineDetails(CurBusStation.ListBusLinesInStation));
         }
         private void RefreshAllNotRegisteredBusLinesGrid()
         {
             List<BO.BusLine> listOfUnRegisteredCourses = bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.ID != c1.ID)).ToList();
-            busLinesDataGrid.DataContext = listOfUnRegisteredCourses;
+            busLinesDataGrid.DataContext = Convert<object>(listOfUnRegisteredCourses);
         }
         private void RefreshTimeStatins()
         {
-
-            //List<BO.BusStation> listOfStations = bl.GetAllBusStation().Where(bl.GetBusStation(b1 => b1 != CurBusStation.BusStationKey));
-            DatatGridAllStations.DataContext =  bl.GetAllBusStation();
+            DatatGridAllStations.DataContext = Convert<object>(bl.BusStationDetails(bl.GetAllBusStation()));
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
-        }
-        private void btUpdateTimeBetweenStations_Click(object sender, RoutedEventArgs e)
-        {
-            //BO. scBO = ((sender as Button).DataContext as BO.StudentCourse);
-            //GradeWindow win = new GradeWindow(scBO);
-            //win.Closing += WinUpdateGrade_Closing;
-            //win.ShowDialog();
         }
         private void btAddBusLineFromList_Click(object sender, RoutedEventArgs e)
         {
@@ -88,9 +84,10 @@ namespace PL.WPF
             try
             {
                 BO.BusLineInStation cBO = ((sender as Button).DataContext as BO.BusLineInStation);
-                bl.AddBusLineToStation(CurBusStation,cBO);
+                bl.AddBusLineToStation(CurBusStation, cBO);
                 RefreshAllRegisteredBusLineInStaionGrid();
                 RefreshAllNotRegisteredBusLinesGrid();
+                //RefreshTimeStatins();
             }
             catch (BO.IdException ex)
             {
@@ -103,9 +100,10 @@ namespace PL.WPF
             try
             {
                 BO.BusLineInStation scBO = ((sender as Button).DataContext as BO.BusLineInStation);
-                bl.DeleteBusLineInStation(CurBusStation,scBO);
+                bl.DeleteBusLineInStation(CurBusStation, scBO);
                 RefreshAllRegisteredBusLineInStaionGrid();
                 RefreshAllNotRegisteredBusLinesGrid();
+                //RefreshTimeStatins();
             }
             catch (BO.IdException ex)
             {
@@ -170,7 +168,7 @@ namespace PL.WPF
         {
             BO.BusStation scBO = ((sender as Button).DataContext as BO.BusStation);
             TimeSpan temp = bl.getTimeBetStation(CurBusStation, scBO);
-            TimeWindow win = new TimeWindow(CurBusStation,scBO ,temp);
+            TimeWindow win = new TimeWindow(CurBusStation, scBO, temp);
             win.Closing += TimeStationWindow_Closing;
             win.ShowDialog();
         }
@@ -206,5 +204,14 @@ namespace PL.WPF
 
         }
 
+        //    private void lStationKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //    {
+        //        var station = lStationKey.SelectedItem as BO.BusStation;
+        //        if (station != null)
+        //        {
+        //            CurBusStation = ( BO.BusStation ) lStationKey.SelectedItem;
+        //        }
+        //    }
+        //}
     }
 }

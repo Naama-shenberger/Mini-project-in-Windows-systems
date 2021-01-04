@@ -680,11 +680,6 @@ namespace DL
             return from BusLine in DataSource.ListLineInStations
                    select generate(BusLine.BusLineNumber);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
        public IEnumerable<BusLineInStation> GetBusLineInStations(Predicate<BusLineInStation> predicate)
         {
             return from sin in DataSource.ListLineInStations
