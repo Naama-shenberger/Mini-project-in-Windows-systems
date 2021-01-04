@@ -36,7 +36,9 @@ namespace BLAPI
         void DeleteBusLineInStation(BusStation DeleteFromStation, BusLineInStation busLineInStation);
         void DeleteBusStation(BusStation station);
         void UpdateBusStation(BusStation busStation);
-       
+        TimeSpan getTimeBetStation(BusStation s1, BusStation s2);
+        void addTimeBetStation(BusStation s1, BusStation s2);
+
         #endregion
         #region Bus Line 
         DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO);
@@ -54,7 +56,7 @@ namespace BLAPI
         IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea();
         void UpdateBusLine(BusLine busLine);
         void UpdateDistanceBetweenstations(DO.ConsecutiveStations stations, float _distance);
-        void UpdateTravelTimeBetweenstations(DO.ConsecutiveStations stations, TimeSpan time);
+        void UpdateTravelTimeBetweenstations(BO.BusStation stations1, BO.BusStation stations2, TimeSpan time);
        
         #endregion
         #region Bus Line In Station

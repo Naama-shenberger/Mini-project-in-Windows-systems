@@ -20,24 +20,22 @@ namespace PL.WPF
     /// </summary>
     public partial class TimeWindow : Window
     {
-        BO.BusStation curBusStation1;
-        BO.BusStation curBusStation2;
+        BO.BusStation curstation;
+        public BO.BusStation timeStation;
         public TimeSpan timeBeforeUpdate;
-        public TimeWindow(IBL bl,BO.BusStation s1,BO.BusStation s2, TimeSpan t)
+        public TimeWindow( BO.BusStation s1, BO.BusStation s2,TimeSpan t)
         {
-            IBL bL = bl;
+            curstation = s1;
+            timeStation = s2;
+            timeBeforeUpdate = t;
             InitializeComponent();
-            curBusStation1 = s1;
-            curBusStation2 = s2;
 
-            timeBeforeUpdate; = t;
-
-            for (int i = 0; i <= 100; i++)
+            for (int i = 0; i <= 60; i++)
             {
-                cbGrade.Items.Add(i);
+                cbTime.Items.Add(i);
             }
 
-            DataContext = curScBO;
+            DataContext = timeBeforeUpdate;
         }
 
         private void btUpdateTimeButton_Click(object sender, RoutedEventArgs e)

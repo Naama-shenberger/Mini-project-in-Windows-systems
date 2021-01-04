@@ -51,22 +51,23 @@
             <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="5"  HorizontalAlignment="Left" Height="30" Margin="3,4.6,0,32.6" VerticalAlignment="Center" Width="94" Grid.RowSpan="2"/>
             <TextBox x:Name="TextBoxLongitude" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="3,4,0,3"  Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="25" Width="150"/>
         </Grid>
-        <Label Content="List of All following stations:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,88" Height="26" Width="220"/>
-        <DataGrid x:Name="DatatGridAllStations" HorizontalAlignment="Left" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" VerticalAlignment="Bottom" Height="73"  Width="376" Margin="0,0,0,10" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5">
+        <Label Content="List of All following stations:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,102" Height="26" Width="220"/>
+        <DataGrid x:Name="DatatGridAllStations" HorizontalAlignment="Left" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Height="87" VerticalAlignment="Top" Margin="10,299,0,0" Width="354"  >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="AllCodeStationColumn" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="AllStationAddressColumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="AllnameStationColumn" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader"/>
-                <!--<DataGridTextColumn x:Name="TimeDriveStations" Binding="{AverageTravelTime}" Header="Average Travel Time" Width="SizeToHeader"/>-->
+                <!--<DataGridTextColumn x:Name="AllTimeStationColumn" Binding="{Binding Time}" Header="Time" Width="SizeToHeader"/>-->
             </DataGrid.Columns>
             <DataGridTemplateColumn>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button x:Name="btUpdateTimeBetweenStations" Content="Update Time Between Stations" Click="btUpdateTimeBetweenStationsButten_Click" ToolTip="Update time drive between station , for selected station"/>
+                        <Button x:Name="btUpdateTimeBetweenStations" Content="Update Time" Click="btUpdateTimeBetweenStationsButten_Click" ToolTip="Update time drive between station , for selected station"/>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
         </DataGrid>
+
         <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,22,0,0" Height="26" Width="195" Grid.Column="1"/>
 
         <DataGrid x:Name="DataGridBusLinesInStation" HorizontalAlignment="Left" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Height="144" VerticalAlignment="Top" Width="376" Margin="13.6,63,0,0" Grid.Column="1" >
@@ -117,5 +118,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
     </Grid>
 </Window>

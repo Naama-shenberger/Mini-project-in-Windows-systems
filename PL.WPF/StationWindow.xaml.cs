@@ -61,6 +61,12 @@ namespace PL.WPF
             List<BO.BusLine> listOfUnRegisteredCourses = bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.ID != c1.ID)).ToList();
             busLinesDataGrid.DataContext = listOfUnRegisteredCourses;
         }
+        private void RefreshTimeStatins()
+        {
+
+            //List<BO.BusStation> listOfStations = bl.GetAllBusStation().Where(bl.GetBusStation(b1 => b1 != CurBusStation.BusStationKey));
+            DatatGridAllStations.DataContext =  bl.GetAllBusStation();
+        }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
@@ -162,36 +168,43 @@ namespace PL.WPF
 
         private void btUpdateTimeBetweenStationsButten_Click(object sender, RoutedEventArgs e)
         {
-            TimeSpan tBO = (sender as TimeWindow).timeBeforeUpdate;
+            BO.BusStation scBO = ((sender as Button).DataContext as BO.BusStation);
+            TimeSpan temp = bl.getTimeBetStation(CurBusStation, scBO);
+            TimeWindow win = new TimeWindow(CurBusStation,scBO ,temp);
+            win.Closing += TimeStationWindow_Closing;
+            win.ShowDialog();
+        }
+        private void TimeStationWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
 
+            TimeSpan tBO = (sender as TimeWindow).timeBeforeUpdate;
+            BO.BusStation toStation = (sender as TimeWindow).timeStation;
             MessageBoxResult res = MessageBox.Show("Update grade for selected student?", "Verification", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             if (res == MessageBoxResult.No)
             {
-                (sender as TimeWindow).cbGrade.Text = (sender as TimeWindow).gradeBeforeUpdate.ToString();
+                (sender as TimeWindow).cbTime.Text = (sender as TimeWindow).timeBeforeUpdate.ToString();
             }
             else if (res == MessageBoxResult.Cancel)
             {
-                (sender as TimeWindow).cbGrade.Text = (sender as TimeWindow).gradeBeforeUpdate.ToString();
+                (sender as TimeWindow).cbTime.Text = (sender as TimeWindow).timeBeforeUpdate.ToString();
                 e.Cancel = true; //window stayed open. cancel closing event.
             }
             else
             {
                 try
                 {
-                    bl.UpdateTravelTimeBetweenstations( CurBusStation,tBO)
-                    bl.UpdateStudentGradeInCourse(curStu.ID, scBO.ID, (float)scBO.Grade);
+                    bl.UpdateTravelTimeBetweenstations(CurBusStation, toStation, tBO);
                 }
-                catch (BO.BadStudentIdCourseIDException ex)
+                catch (BO.IdException ex)
                 {
                     MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            BO.BusStation scBO = ((sender as Button).DataContext as BO.BusStation);
-            TimeStationWindow win = new TimeStationWindow(CurBusStation, scBO);
-            win.Closing += TimeStationWindow_Closing;
-            win.ShowDialog();
-           
+
+
+
 
         }
+
     }
 }

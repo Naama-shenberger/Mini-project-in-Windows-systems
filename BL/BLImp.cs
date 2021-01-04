@@ -263,7 +263,32 @@ namespace BL
 
         #endregion
         #region Bus Station
+        public void addTimeBetStation(BusStation s1, BusStation s2)
+        {
+            try
+            {
+                DO.ConsecutiveStations s = new DO.ConsecutiveStations() { StationCodeOne = s1.BusStationKey, StationCodeTwo = s2.BusStationKey };
+                dl.AddConsecutiveStations(s);
+            }
+            catch (DO.IdException ex)
+            {
+                throw new BO.IdException(ex.ToString());
+            }
 
+        }
+        public TimeSpan getTimeBetStation(BusStation s1, BusStation s2)
+        {
+            DO.ConsecutiveStations s;
+            try
+            {
+                s = dl.GetConsecutiveStations(s1.BusStationKey, s2.BusStationKey);
+            }
+            catch (DO.IdException ex)
+            {
+                throw new BO.IdException(ex.ToString());
+            }
+            return s.AverageTravelTime;
+        }
         /// <summary>
         /// A function that receives a DO type bus station object and returns a BO type bus station
         /// </summary>
