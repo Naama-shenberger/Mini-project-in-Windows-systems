@@ -361,7 +361,7 @@ namespace DL
         /// In case it is active and exists in the system an exception will be thrown
         /// </summary>
         /// <param name="bus"></param>
-        public void AddBusLine(BusLine bus)
+        public int AddBusLine(BusLine bus)
         {
 
             Configuration.IdentificationNumberBusLine++;
@@ -371,11 +371,12 @@ namespace DL
                 if (DataSource.BusLines[busIndex].Active == false)
                 {
                     DataSource.BusLines[busIndex].Active = true;
-                    return;
+                    return DataSource.BusLines[busIndex].ID;
                 }
                 else
                     throw new DO.IdException(bus.BusLineNumber, $"The bus line {bus.BusLineNumber} already exist");
             DataSource.BusLines.Add(bus.Clone());
+            return bus.ID;
         }
         /// <summary>
         /// A function that receives a bus line and updates its details
@@ -428,13 +429,15 @@ namespace DL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BusLineStation GetBusLineStation(int id)
+        public BusLineStation GetBusLineStation(int codeStation)
         {
-            BusLineStation busLineStation = DataSource.BusLineStations.Find(s => s.BusStationKey == id);
+            BusLineStation busLineStation = DataSource.BusLineStations.Find(s => s.BusStationKey == codeStation);
             if (busLineStation != null)
                 if (busLineStation.Active == true)
+                { 
                     return busLineStation.Clone();
-            throw new IdException(id, $"No bus line Station have the Code: {id}");
+                }
+            throw new IdException(codeStation, $"No bus line Station have the Code: {codeStation}");
         }
         /// <summary>
         ///  A function that returns a list of bus line stations that are active
@@ -680,6 +683,11 @@ namespace DL
             return from BusLine in DataSource.ListLineInStations
                    select generate(BusLine.BusLineNumber);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
        public IEnumerable<BusLineInStation> GetBusLineInStations(Predicate<BusLineInStation> predicate)
         {
             return from sin in DataSource.ListLineInStations

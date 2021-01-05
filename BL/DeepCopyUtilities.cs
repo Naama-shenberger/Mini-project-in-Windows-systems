@@ -42,7 +42,7 @@ namespace BL
             from.CopyPropertiesTo(to);
             return to;
         }
-        public static BO.BusLineStation CopyToStationInLine(this DO.BusLineStation busStation, DO.BusLine sic)
+        public static BO.BusLineStation CopyToStationInLine(DO.BusLineStation busStation)
         {
             BO.BusLineStation result = (BO.BusLineStation)busStation.CopyPropertiesToNew(typeof(BO.BusLineStation));
 

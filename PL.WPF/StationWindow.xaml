@@ -58,7 +58,6 @@
                 <DataGridTextColumn x:Name="AllStationAddressColumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="AllnameStationColumn" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader"/>
                 <!--<DataGridTextColumn x:Name="AllTimeStationColumn" Binding="{Binding Time}" Header="Time" Width="SizeToHeader"/>-->
-        
             </DataGrid.Columns>
             <DataGridTemplateColumn>
                 <DataGridTemplateColumn.CellTemplate>
@@ -68,32 +67,6 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
         </DataGrid>
-        <!--<ListView x:Name="lStationKey" x:FieldModifier="public"   SelectedItem="{Binding SelectedItem}"   ItemsSource="{Binding StationList}" HorizontalAlignment="Left" Height="83" VerticalAlignment="Top" Width="424" SelectionChanged="lStationKey_SelectionChanged" Background="White" Margin="10,301,0,0" >
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                    --><!--<EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>--><!--
-                    <Setter Property="Background" Value="{Binding Color}"/>
-                </Style>
-            </ListBox.ItemContainerStyle >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Name="resultLabel" FontFamily="Sitka Text" Grid.Column="20" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="420,7,0,0" Width="134" Text="{Binding TimeLeft}" />
-                        <ProgressBar Name="resultProgressBar" Visibility="{Binding Visibility}" Height="10" Grid.Column="20" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="430,6,0,-17" Width="134"  Minimum="0" Maximum="100" Value="{Binding Progress}" Tag="{Binding _name}" />
-                        <TextBlock x:Name="tbLicenseplate" Text="{Binding Path=BusStationKey}" />
-                        <Button x:Name="btUpdateTimeBetweenStations" Content="Update Time" Click="btUpdateTimeBetweenStationsButten_Click" ToolTip="Update time drive between station , for selected station"/>
-                        --><!--<Button x:Name="Stopprocess"   Visibility="{Binding Visibility}" FontFamily="Sitka Text" Background="#FFD7F0EB" VerticalAlignment="Top"  Content="Stop process" HorizontalAlignment="Center" Click="StopProcess_Click" Margin="420,1,0,0" Width="80"  />--><!--
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn x:Name="AllCodeStationColumn"  Header="Code Station" Width="120" />
-                    <GridViewColumn x:Name="AllnameStationColumn"  Header="Station Name" Width="120"/>
-                    <GridViewColumn  x:Name="AllStationAddressColumn"  Header="Station Address" Width="120"/>
-                </GridView>
-            </ListView.View>
-        </ListView>-->
 
         <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,22,0,0" Height="26" Width="195" Grid.Column="1"/>
 

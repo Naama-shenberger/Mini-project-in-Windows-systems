@@ -14,5 +14,6 @@ namespace DO
         public bool Active { get; set; }// status of a bus line whether it is active or not
         public int BusStationKey { get; set; }// bus station code
         public int NumberStationInLine { get; set; }//The station number in the line
+        public int ID { get; set; }
     }
 }
