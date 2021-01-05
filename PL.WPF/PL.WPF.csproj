@@ -58,6 +58,9 @@
     <Compile Include="AddBusWindow.xaml.cs">
       <DependentUpon>AddBusWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddNewStationWindow.xaml.cs">
+      <DependentUpon>AddNewStationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddStationWindow.xaml.cs">
       <DependentUpon>AddStationWindow.xaml</DependentUpon>
     </Compile>
@@ -70,6 +73,10 @@
     <Page Include="AddBusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddNewStationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="AddStationWindow.xaml">
       <SubType>Designer</SubType>

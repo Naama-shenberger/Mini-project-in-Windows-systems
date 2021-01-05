@@ -6,16 +6,14 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PL.WPF.StationWindow"
         mc:Ignorable="d"
-        Title="StationWindow" Height="488.489" Width="1287.15" >
+        Title="StationWindow" Height="488.489" Width="1000" >
 
     <Grid Margin="0,0,0.2,-0.8" >
         <Grid.RowDefinitions>
             <RowDefinition Height="208*"/>
-            <RowDefinition Height="31*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300*"/>
-            <ColumnDefinition Width="350*"/>
             <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Select Station:" Grid.Row="0" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Height="25" Width="90"/>
@@ -52,7 +50,7 @@
             <TextBox x:Name="TextBoxLongitude" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="3,4,0,3"  Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="25" Width="150"/>
         </Grid>
         <Label Content="List of All following stations:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,102" Height="26" Width="220"/>
-        <DataGrid x:Name="DatatGridAllStations" HorizontalAlignment="Left" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Height="87" VerticalAlignment="Top" Margin="10,299,0,0" Width="354"  >
+        <DataGrid x:Name="DatatGridAllStations" HorizontalAlignment="Left" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Height="87" VerticalAlignment="Top" Margin="10,276,0,0" Width="354"  >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="AllCodeStationColumn" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="AllStationAddressColumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
@@ -62,7 +60,7 @@
             <DataGridTemplateColumn>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button x:Name="btUpdateTimeBetweenStations" Content="Update Time" Click="btUpdateTimeBetweenStationsButten_Click" ToolTip="Update time drive between station , for selected station"/>
+                        <Button x:Name="btUpdateTimeBetweenStations" Content="Update Time" Click="btUpdateTimeBetweenStationsButton_Click" ToolTip="Update time drive between station , for selected station"/>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -70,54 +68,22 @@
 
         <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,22,0,0" Height="26" Width="195" Grid.Column="1"/>
 
-        <DataGrid x:Name="DataGridBusLinesInStation" HorizontalAlignment="Left" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Height="144" VerticalAlignment="Top" Width="376" Margin="13.6,63,0,0" Grid.Column="1" >
-            <DataGrid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-0.691"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-1.424"/>
-                </TransformGroup>
-            </DataGrid.RenderTransform>
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="LineInStationNumber" Binding="{Binding BusLineNumber}" Header="Bus Line Number" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="LineInStationArea" Binding="{Binding Area}" Header="LineArea" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="FirstInStationStation" Binding="{Binding FirstStopNumber}" Header="First Station" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="LastInStationStation" Binding="{Binding LastStopNumber}" Header="Last Station" Width="SizeToHeader"/>
-
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button x:Name="btRemoveBusLine" Content="Remove" Click="btRemoverBusLineFronStation_Click" ToolTip="UnRegister selected student from selected course"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-            </DataGrid.Columns>
-        </DataGrid>
-
-
-        <Button Content="Changes on Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="10,3.8,0,0" Height="44" Grid.Row="1" Click="UpdateButten_Click" Grid.Column="0"/>
-        <Button Content="Add New Station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Grid.Column="2" Margin="20.8,317,0,0" Height="38" Click="AddStationButten_Click"/>
-        <Button Content="Delete Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Margin="238,10,0,0" Height="44" Grid.Row="1" Click="DeleteCurStationButten_Click"/>
-        <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Grid.Column="2" Margin="20.8,20.8,0,0"  RenderTransformOrigin="0.525,0.776" Height="31" Click="BackButten_Click" Grid.Row="1"/>
-        <Label Content="bus lines" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.2,209,0,0" Grid.Column="1" Height="27" Width="98"/>
-
-        <!--<DataGrid x:Name="busLinesDataGrid" AutoGenerateColumns="False" Grid.Column="1" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,241,128.2,19" RowDetailsVisibilityMode="VisibleWhenSelected" >
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="LineNumber" Binding="{Binding BusLineNumber}" Header="Bus Line Number" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="LineArea" Binding="{Binding Area}" Header="LineArea" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="FirstStation" Binding="{Binding FirstStopNumber}" Header="First Station" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="LastStation" Binding="{Binding LastStopNumber}" Header="Last Station" Width="SizeToHeader"/>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button x:Name="btBusLineAdd" Content="ADD" Click="btAddBusLineFromList_Click" ToolTip="Register Bus Line to selected station"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>-->
+        <ListView x:Name="list_lineInStation" ItemsSource="{Binding}" Background="AliceBlue" Margin="10,53,265.6,191" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Line Number" x:Name="lineNumber"  DisplayMemberBinding="{Binding BusLineNumber}"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="lineInfo_MouseDoubleClick" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <Button Content="Changes on Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="22,406,0,0" Height="44" Click="UpdateButton_Click" Grid.Column="0"/>
+        <Button Content="Add New Station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Grid.Column="1" Margin="21,325,0,0" Height="38" Click="AddNewStationButton_Click"/>
+        <Button Content="Delete Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Margin="208,406,0,0" Height="44" Click="DeleteCurStationButton_Click"/>
+        <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Margin="250,412,0,0"  RenderTransformOrigin="0.525,0.776" Height="31" Click="BackButton_Click" Grid.Column="1"/>
 
     </Grid>
 </Window>

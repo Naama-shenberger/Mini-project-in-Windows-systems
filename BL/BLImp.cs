@@ -289,6 +289,7 @@ namespace BL
             }
             return s.AverageTravelTime;
         }
+        
         /// <summary>
         /// A function that receives a DO type bus station object and returns a BO type bus station
         /// </summary>
@@ -296,6 +297,18 @@ namespace BL
         /// <returns></returns>
         public BO.BusStation BusStationDoBoAdapter(DO.BusStation stationDO)
         {
+            //BO.BusStation stationBO = new BusStation();
+            //List<DO.BusLineInStation> lines=from sis in dl.BusLineStations()
+            //                                from sic in dl.BusLineInStations()
+            //                                where sis.BusStationKey== stationDO.BusStationKey 
+            //                                where sic.BusLineNumber==
+            //                                let line = dl.GetBusLine(sis.ID)
+            //stationDO.CopyPropertiesTo(stationBO);
+            //stationBO.ListBusLinesInStation = from sic in dl.BusLineInStations()
+            //                                  where sic.BusLineNumber==dl.GetBusLineStation(sic.BusLineNumber).ID
+            //                                  let line = dl.GetBusLineInStation(dl.GetBusLine(sic.BusStationKey).ID)
+            //                                  select DeepCopyUtilities.CopyToLineInStation( line);
+            //return stationBO;
             BO.BusStation stationBO = new BusStation();
             stationDO.CopyPropertiesTo(stationBO);
             stationBO.ListBusLinesInStation = from sic in dl.BusLineInStations()
@@ -394,7 +407,7 @@ namespace BL
             }
             catch (DO.IdException)
             {
-                dl.AddBusStation(dl.GetBusStation(station.BusStationKey));
+                dl.AddBusStation(BusStationBoDoAdapter(station));
             }
 
         }

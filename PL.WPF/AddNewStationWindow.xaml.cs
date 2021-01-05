@@ -33,19 +33,6 @@ namespace PL.WPF
         {
             curBusStation = new BO.BusStation() { BusStationKey = int.Parse(Bus_Station_Key.Text), StationName = Station_Name.Text, StationAddress = Station_Address.Text, Latitude = float.Parse(Station_Latitude.Text), Longitude = float.Parse(Station_Longitude.Text) };
             this.Close();
-            //try
-            //{
-                
-            //    BO.BusStation temp = bl.GetBusStation(curBusStation.BusStationKey);
-            //    MessageBox.Show($"Bus station already exists", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-               
-            //}
-            //catch (FormatException F)
-            //{
-
-            //    bl.AddBusStation(curBusStation);
-                
-            //}
         }
     }
 }
