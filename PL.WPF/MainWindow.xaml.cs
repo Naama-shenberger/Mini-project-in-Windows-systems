@@ -40,10 +40,14 @@ namespace PL.WPF
                 new BusLineWindow(bl).Show();
                 Close();
             }
-            else
+            else if(rbStation.IsChecked==true)
             {
                 new StationWindow(bl).Show();
                 Close();
+            }
+            else
+            {
+                MessageBox.Show("Please select an option");
             }
         }
     }

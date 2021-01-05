@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PL.WPF.BusLineWindow"
         mc:Ignorable="d"
-        Title="BusLineWindow" Height="550" Width="900" KeyDown="OnKeyDownHandler">
+        Title="BusLineWindow" Height="550" Width="900">
     <Grid>
         <ComboBox Name="ComboBoxBusLineNumber" ItemsSource="{Binding}" Margin="40,22,734.6,469.8" SelectionChanged="cbBusBusLineNumber_SelectionChanged" />
         <Button x:Name="UpdateButton" Content="update" HorizontalAlignment="Left" Margin="22,417,0,0" VerticalAlignment="Top" Width="75" Click="UpdateButton_Click" />
         <Button x:Name="AddBusLineButton" Content="Add Bus Line" HorizontalAlignment="Left" Margin="22,463,0,0" VerticalAlignment="Top" Width="75" Click="AddBusLineButton_Click" Height="18"/>
         <Button x:Name="DeleteButon" Content="Delete" HorizontalAlignment="Left" Margin="22,370,0,0" VerticalAlignment="Top" Width="75" Click="DeleteButon_Click"/>
-        <Grid x:Name="gridOneBusLine"  HorizontalAlignment="Left" Margin="40,51,0,0" VerticalAlignment="Top" Height="209" Width="277">
+        <Grid x:Name="gridOneBusLine"  HorizontalAlignment="Left" Margin="40,84,0,0" VerticalAlignment="Top" Height="120" Width="277">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -29,14 +29,12 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Visibility="Hidden" Name="BusLineLabel" Content="Bus Line Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="4,3,0,3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox Visibility="Hidden" x:Name="BusLineNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3" Grid.Row="1" Text="{Binding BusLineNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120"/>
             <Label Name="LabelArea" Content="Area:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <ComboBox x:Name="AreaComboBox"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" SelectedItem="{Binding Area}" KeyDown="OnKeyDownHandler"  VerticalAlignment="Center" Width="120"/>
+            <ComboBox x:Name="AreaComboBox"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" SelectedItem="{Binding Area}" VerticalAlignment="Center" Width="120"/>
             <Label Name="FriststopLabel" Content="First stop:" Grid.Column="0" Grid.Row="3"  HorizontalAlignment="Left" Height="30" Margin="3,4.6,0,32.6" VerticalAlignment="Center" Width="94" Grid.RowSpan="2"/>
-            <TextBox x:Name="TextBoxFristStop" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="3,4,0,3"  Text="{Binding FirstStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120"/>
+            <ComboBox x:Name="FirstStopcb" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="3,4,0,3"  Text="{Binding FirstStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  SelectedItem="{Binding FirstStopNumber}" VerticalAlignment="Center" Height="25" Width="120"/>
             <Label Name="LastStopLabel" Content="Last stop:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Height="30" Margin="3,6.8,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="3"/>
-            <TextBox  x:Name="LastStopTextBox" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3"  Text="{Binding LastStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120"/>
+            <ComboBox x:Name="LastStopcb" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3" Text="{Binding LastStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedItem="{Binding LastStopNumber}" VerticalAlignment="Center" Height="25" Width="120"/>
         </Grid>
         <DataGrid x:Name="DataGrirdStationslines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="382,280,12.6,14.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5">
             <DataGrid.RenderTransform>
@@ -56,7 +54,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Button x:Name="btUpdateIndexInLine" Content="Update Number Station"  ToolTip="Update Number Station in the Line"/>
+                                <Button x:Name="btUpdateIndexInLine" Click="UpdateIndexInLine_Click" Content="Update Number Station"  ToolTip="Update Number Station in the Line"/>
                                 <Button x:Name="btRemoveStationLine" Content="Remove Station" Click="RemoveStation_Click" />
                             </StackPanel>
                         </DataTemplate>
@@ -87,5 +85,6 @@
         </DataGrid>
        
         <Button x:Name="AddBusLineStatoin" Content="Add Bus Line Station" HorizontalAlignment="Left" Margin="747,200,0,0" VerticalAlignment="Top" Width="122" Click="AddBusLineStatoin_Click" />
+        <Button x:Name="backbtn" Content="Back" HorizontalAlignment="Left" Margin="124,492,0,0" VerticalAlignment="Top" Width="75" Click="backbtn_Click"/>
     </Grid>
 </Window>

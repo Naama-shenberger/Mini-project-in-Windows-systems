@@ -650,16 +650,16 @@ namespace BL
                 DeleteFromLine.StationsInLine = from sin in DeleteFromLine.StationsInLine
                                                 where sin.BusStationKey != busLineStation.BusStationKey
                                                 select sin;
-                var IndexToDelete = DeleteFromLine.StationsInLine.ToList().FindIndex(d => d.BusStationKey == busLineStation.BusStationKey);
-                dl.GetConsecutiveStations(busLineStation.BusStationKey, DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey);
-                dl.GetConsecutiveStations(DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey, busLineStation.BusStationKey);
-                DO.ConsecutiveStations stations = new DO.ConsecutiveStations
-                {
-                    StationCodeOne = DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey,
-                    StationCodeTwo = busLineStation.BusStationKey
-                };
-                DeleteFromLine.StationsInLine.ToList().RemoveAt(IndexToDelete);
-                dl.DeleteConsecutiveStations(stations);
+                //var IndexToDelete = DeleteFromLine.StationsInLine.ToList().FindIndex(d => d.BusStationKey == busLineStation.BusStationKey);
+                //dl.GetConsecutiveStations(busLineStation.BusStationKey, DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey);
+                //dl.GetConsecutiveStations(DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey, busLineStation.BusStationKey);
+                //DO.ConsecutiveStations stations = new DO.ConsecutiveStations
+                //{
+                //    StationCodeOne = DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey,
+                //    StationCodeTwo = busLineStation.BusStationKey
+                //};
+                //DeleteFromLine.StationsInLine.ToList().RemoveAt(IndexToDelete);
+                //dl.DeleteConsecutiveStations(stations);
             }
             catch (DO.IdException ex)
             {
