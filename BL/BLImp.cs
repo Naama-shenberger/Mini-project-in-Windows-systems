@@ -225,15 +225,48 @@ namespace BL
 
         #endregion
         #region Bus Station
-
-        public void AddBusLine(BusStation busStation, BusLineInStation busLine)
+        public void AddBusLineToStation(BusStation busStation, BusLine busLine)
         {
-            throw new NotImplementedException();
+            //foreach (BusLine addToLine in GetAllBusLines())
+            //{
+            //    addToLine.StationsInLine = from line in GetAllBusLines()
+            //                               where from station in line.StationsInLine
+            //                                     where station.BusStationKey == busStation.BusStationKey
+            //                                     select station
+            //                               select station
+                                              
+            // }
+            foreach (BusLine line in GetAllBusLines())
+            {
+                if (line.BusLineNumber == busLine.BusLineNumber)
+                    foreach (BusLineStation station in line.StationsInLine)
+                        if (station.BusStationKey == busStation.BusStationKey)
+                        {
+                            busStation.ListBusLinesInStation.Append(new BusLineInStation() { BusLineNumber = line.BusLineNumber, Area = (int)line.Area, ID = line.ID });
+                            line.StationsInLine.Append(station);
+                            return;
+                        }
+            }
+            throw new BO.IdException("Line dosnt exists ");
         }
 
-        public void DeleteBusLine(BusStation busStation, BusLineInStation busLine)
+        public void DeleteBusLineFromStation(BusStation busStation, BusLineInStation busLine)
         {
-            throw new NotImplementedException();
+            try
+            {
+                busStation.ListBusLinesInStation = busStation.ListBusLinesInStation.Where(s => s.BusLineNumber != busLine.BusLineNumber);
+                foreach (BusLine DeleteFromLine in GetAllBusLines())
+                {
+                    DeleteFromLine.StationsInLine = from sin in DeleteFromLine.StationsInLine
+                                                    where sin.BusStationKey != busStation.BusStationKey
+                                                    select sin;
+                    //DeleteFromLine.StationsInLine.AsParallel().ForAll(a => { if (a.NumberStationInLine > busLineStation.NumberStationInLine) { a.NumberStationInLine = a.NumberStationInLine - 1; } });
+                }
+            }
+            catch (DO.IdException ex)
+            {
+                throw new BO.IdException(ex.ToString());
+            }
         }
 
         
@@ -359,7 +392,18 @@ namespace BL
                 throw new BO.IdException(ex.ToString());
             }
         }
-
+        public IEnumerable<object> LineDetails(IEnumerable<BusLineInStation> busLineInStations)
+        {
+            return from BusLine in dl.BusLines()
+                   from BusLineInStation in busLineInStations
+                   where BusLine.BusLineNumber == BusLineInStation.BusLineNumber
+                   select new
+                   {
+                       BusLineNumber = BusLineInStation.BusLineNumber,
+                       Area= BusLineInStation.Area,
+                       ID= BusLineInStation.ID,
+                   };
+        }
         #endregion
         #region Bus Line
         public void  DeleteBusLineStation(int id)

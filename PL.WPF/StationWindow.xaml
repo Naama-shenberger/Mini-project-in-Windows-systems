@@ -79,7 +79,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn x:Name="lineInStationNumber" Header="Line Number"   DisplayMemberBinding="{Binding BusLineNumber}"/>
-                    <!--<GridViewColumn x:Name="l" Header="Area" DisplayMemberBinding="{Binding Area}"/>-->
+                    <GridViewColumn x:Name="l" Header="Area" DisplayMemberBinding="{Binding Area}"/>
                     <!--<GridViewColumn Header="Name Station" DisplayMemberBinding="{Binding Number}"/>-->
                 </GridView>
             </ListView.View>
