@@ -144,6 +144,32 @@ namespace DS
                new BusLine{ID=18,Active=true,BusLineNumber = 117,FirstStopNumber = 857321,LastStopNumber=873401,Area=Zones.Zeev_hill},
                new BusLine{ID=19,Active=true,BusLineNumber = 115,FirstStopNumber = 857321,LastStopNumber=873401,Area=Zones.Galilee}
             };
+            LinesOutForARide = new List<LineRide>
+            {
+               new LineRide{ID=0, Active=true, BusDepartureNumber=30, TravelStartTime=new TimeSpan(9,0,0), TravelEndTime=new TimeSpan(12,30,0)},
+               new LineRide{ID=0, Active=true, BusDepartureNumber=10, TravelStartTime=new TimeSpan(19,0,0), TravelEndTime=new TimeSpan(22,30,0)},
+               new LineRide{ID=1, Active=true, BusDepartureNumber=12, TravelStartTime=new TimeSpan(7,0,0), TravelEndTime=new TimeSpan(11,30,0)},
+               new LineRide{ID=1, Active=true, BusDepartureNumber=3, TravelStartTime=new TimeSpan(19,0,0), TravelEndTime=new TimeSpan(22,30,0)},
+               new LineRide{ID=2, Active=true, BusDepartureNumber=3, TravelStartTime=new TimeSpan(8,0,0), TravelEndTime=new TimeSpan(13,30,0)},
+               new LineRide{ID=3, Active=true, BusDepartureNumber=4, TravelStartTime=new TimeSpan(23,0,0), TravelEndTime=new TimeSpan(1,30,0)},
+               new LineRide{ID=4, Active=true, BusDepartureNumber=30, TravelStartTime=new TimeSpan(14,0,0), TravelEndTime=new TimeSpan(16,30,0)},
+               new LineRide{ID=5, Active=true, BusDepartureNumber=5, TravelStartTime=new TimeSpan(22,0,0), TravelEndTime=new TimeSpan(1,30,0)},
+               new LineRide{ID=6, Active=true, BusDepartureNumber=8, TravelStartTime=new TimeSpan(20,0,0), TravelEndTime=new TimeSpan(22,30,0)},
+               new LineRide{ID=7, Active=true, BusDepartureNumber=3, TravelStartTime=new TimeSpan(10,0,0), TravelEndTime=new TimeSpan(13,30,0)},
+               new LineRide{ID=8, Active=true, BusDepartureNumber=9, TravelStartTime=new TimeSpan(19,0,0), TravelEndTime=new TimeSpan(20,30,0)},
+               new LineRide{ID=9, Active=true, BusDepartureNumber=6, TravelStartTime=new TimeSpan(9,0,0), TravelEndTime=new TimeSpan(16,30,0)},
+               new LineRide{ID=10,Active=true, BusDepartureNumber=10, TravelStartTime=new TimeSpan(5,0,0), TravelEndTime=new TimeSpan(12,30,0)},
+               new LineRide{ID=11, Active=true, BusDepartureNumber=4, TravelStartTime=new TimeSpan(20,0,0), TravelEndTime=new TimeSpan(1,30,0)},
+               new LineRide{ID=12, Active=true, BusDepartureNumber=12, TravelStartTime=new TimeSpan(22,0,0), TravelEndTime=new TimeSpan(2,30,0)},
+               new LineRide{ID=13, Active=true, BusDepartureNumber=22, TravelStartTime=new TimeSpan(8,35,0), TravelEndTime=new TimeSpan(10,30,0)},
+               new LineRide{ID=14, Active=true, BusDepartureNumber=14, TravelStartTime=new TimeSpan(10,0,0), TravelEndTime=new TimeSpan(14,30,0)},
+               new LineRide{ID=15, Active=true, BusDepartureNumber=40, TravelStartTime=new TimeSpan(10,0,0), TravelEndTime=new TimeSpan(11,30,0)},
+               new LineRide{ID=16, Active=true, BusDepartureNumber=9, TravelStartTime=new TimeSpan(12,0,0), TravelEndTime=new TimeSpan(14,30,0)},
+               new LineRide{ID=17, Active=true, BusDepartureNumber=40, TravelStartTime=new TimeSpan(11,0,0), TravelEndTime=new TimeSpan(15,40,0)},
+               new LineRide{ID=18, Active=true, BusDepartureNumber=15, TravelStartTime=new TimeSpan(17,0,0), TravelEndTime=new TimeSpan(19,30,0)},
+               new LineRide{ID=19, Active=true, BusDepartureNumber=4, TravelStartTime=new TimeSpan(23,0,0), TravelEndTime=new TimeSpan(1,30,0)},
+
+            };
             BusLineStations = new List<BusLineStation>
             {
                 new BusLineStation{Active=true,BusStationKey=857321,NumberStationInLine=1,ID=17},

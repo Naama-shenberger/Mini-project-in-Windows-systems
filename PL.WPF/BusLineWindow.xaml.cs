@@ -60,11 +60,47 @@ namespace PL.WPF
         {
             CurBusLine = (ComboBoxBusLineNumber.SelectedItem as BO.BusLine);
             gridOneBusLine.DataContext = CurBusLine;
-            //if (CurBusLine != null && CurBusLine.StationsInLine!=null) 
-            //       DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
+            if (CurBusLine != null && CurBusLine.StationsInLine!=null) 
+                   DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
             RefreshDataGrirdStationsline();
 
 
+        }
+        private void btDelBusLineStation_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            var save = int.Parse((btn).DataContext.ToString().Substring(18, 6));
+
+           bl.DeleteBusLineStation(bl.GetAllBusLineStations().FirstOrDefault(predicate => predicate.BusStationKey == save));
+            RefreshDataGrirdAllStationslines();
+        }
+        private void bthAddBusLineStation_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Index = CurBusLine.StationsInLine.Count() + 1;
+                BO.BusLineStation busLineStation = new BO.BusLineStation
+                {
+                    BusStationKey = int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)),
+                    NumberStationInLine = ++Index,
+                    Active = true
+                };
+                if (CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID) == null)
+                {
+                    CurBusLine.StationsInLine = CurBusLine.StationsInLine.Append(busLineStation);
+                    bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine);
+                }
+                else
+                    throw new ArgumentException("The line station is already on the line route");
+                RefreshDataGrirdStationsline();
+                MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+               
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                
+            }
         }
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
@@ -74,7 +110,7 @@ namespace PL.WPF
                 Index = CurBusLine.StationsInLine.Count();
             else
               if (save.NumberStationInLine > CurBusLine.StationsInLine.Count())
-                Index = Index - 1;
+                              Index = Index - 1;
             else
                 Index = save.NumberStationInLine - 1;
             CurBusLine.StationsInLine.AsParallel().ForAll(a => { if (a.NumberStationInLine > save.NumberStationInLine) { a.NumberStationInLine = a.NumberStationInLine - 1; } });
@@ -85,6 +121,8 @@ namespace PL.WPF
         {
             AddBusLineWindow addBusLineWindow = new AddBusLineWindow(bl);
             addBusLineWindow.ShowDialog();
+            var save = addBusLineWindow.BusLine;
+            bl.AddBusLine(save,save.StationsInLine);
             RefreshAllBusLinesComboBox();
             RefreshDataGrirdStationsline();
                 
@@ -164,15 +202,11 @@ namespace PL.WPF
 
         void RefreshDataGrirdStationsline()
         {
-            if (CurBusLine == null)
-                CurBusLine = Convert<BO.BusLine>(bl.GetAllBusLines()).ToList()[0];
-            else
-                if(CurBusLine.StationsInLine!=null)
-                DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine).Distinct());
-            if (CurBusLine.StationsInLine != null && CurBusLine.StationsInLine.Count() != 0)
+            //if (CurBusLine == null)
+            //    CurBusLine = Convert<BO.BusLine>(bl.GetAllBusLines()).ToList()[0];
+            if (CurBusLine!=null && CurBusLine.StationsInLine != null)
             {
                 DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine).Distinct());
-                MessageBox.Show($"{CurBusLine}", $"{CurBusLine.StationsInLine.ToList()[0]}");
             }
         }
 

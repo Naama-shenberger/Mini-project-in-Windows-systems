@@ -185,7 +185,7 @@ namespace PL.WPF
                 var row = sender as CheckBox;
                 var Object = row.DataContext as object;
                 var ID = int.Parse(Object.ToString().Substring(18, 6));
-                bl.DeleteBusLineStation(CurBusStation.BusStationKey, CurBusStation.ListBusLinesInStation.FirstOrDefault(i => i.BusLineNumber == ID).BusLineNumber);
+               // bl.DeleteBusLineStation(CurBusStation.BusStationKey, CurBusStation.ListBusLinesInStation.FirstOrDefault(i => i.BusLineNumber == ID).BusLineNumber);
                 RefreshAllStationsComboBox();
                 RefreshBusLinesInStation();
             }

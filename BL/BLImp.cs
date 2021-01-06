@@ -406,11 +406,12 @@ namespace BL
         }
         #endregion
         #region Bus Line
-        public void  DeleteBusLineStation(int id,int IDBusLine)
+        public void  DeleteBusLineStation(BusLineStation busLineStation)
         {
             try
             {
-                dl.DeleteBusLineStation(dl.GetBusLineStation(id,IDBusLine));
+                
+                dl.DeleteBusLineStation(BusLineStationBoDoAdapter(busLineStation));
             }
             catch (BO.IdException ex)
             {
@@ -487,6 +488,10 @@ namespace BL
                                        where sin.ID == busLineDO.ID
                                        let station = dl.GetBusLineStation(sin.BusStationKey,sin.ID)
                                        select DeepCopyUtilities.CopyToStationInLine(station);
+            busLineBO.lineRides = from sin in dl.LinesWayOut()
+                                  where sin.ID == busLineBO.ID
+                                  let lineRide = dl.GetLineWayOut(sin.ID)
+                                  select lineRide;
             return busLineBO;
         }
        
@@ -533,7 +538,7 @@ namespace BL
             {
                 //if(AddToLine.StationsInLine==busLineStation)
                 //    throw new 
-                //AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
+                AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
                 AddToLine.StationsInLine.AsParallel().ForAll(id => id.ID = AddToLine.ID);
             }
             catch(DO.IdException ex)

@@ -57,9 +57,6 @@ namespace PL.WPF
                     busLineStations.Add(FirstStopcb.SelectedItem as BO.BusLineStation);
                     busLineStations.Add(LastStopcb.SelectedItem as BO.BusLineStation);
                     CurBusLine.StationsInLine = busLineStations;
-                 
-                    bl.AddBusLine(CurBusLine, CurBusLine.StationsInLine);
-                   
                     MessageBox.Show("The bus was successfully added", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     
                     this.Close();

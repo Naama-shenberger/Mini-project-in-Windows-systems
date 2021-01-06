@@ -54,16 +54,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <!--<ComboBox>
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBox x:Name="update" Text="{Binding BusStationKey}"/>
-                                                <Rectangle Fill="{Binding BusStationKey}" Width="16" Height="16" Margin="0,2,5,2" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>-->
+
                                 <Button x:Name="btUpdateIndexInLine" Click="UpdateIndexInLine_Click" Content="Update Number Station"  ToolTip="Update Number Station in the Line"/>
                                 <Button x:Name="btRemoveStationLine" Content="Remove Station" Click="RemoveStation_Click" />
                             </StackPanel>
@@ -74,17 +65,19 @@
         </DataGrid>
 
         <DataGrid x:Name="DataGrirdAllStationslines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="468,8,9.6,338.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
-          
+
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="AllCodeStationColumn" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="AllStationAddressClumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="AllNameStationClumn" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader"/>
-                
+
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
+                                <Button x:Name="btDelBusLineStation" Content="del Station" Click="btDelBusLineStation_Click"/>
+                                <Button x:Name="bthAddBusLineStation" Content="Add Station" Click="bthAddBusLineStation_Click"/>
                                 <CheckBox  x:Name="CheckBoxBusLineStation" IsChecked="{Binding Selected}" Checked="BusLineStation_Checked" Content="Checke To Add" Margin="12,6,2,2" />
                                 <CheckBox x:Name="CheckdelBoxBusLineStation" IsChecked="{Binding Selected}" Checked="delBusLineStation_Checked" Content="Checke To del" Margin="12,3,5,2" />
                             </StackPanel>
@@ -92,9 +85,18 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-           
-        </DataGrid>
 
+        </DataGrid>
+        <ComboBox Name="cbStatio" Margin="481,225,229.6,264.8" ItemsSource="{Binding}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="update" Text="{Binding BusStationKey}"/>
+                        <Rectangle Fill="{Binding BusStationKey}" Width="16" Height="16" Margin="0,2,5,2" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <Button x:Name="AddBusLineStatoin" Content="Add Bus Line Station" HorizontalAlignment="Left" Margin="747,200,0,0" VerticalAlignment="Top" Width="122" Click="AddBusLineStatoin_Click" />
         <Button x:Name="backbtn" Content="Back" HorizontalAlignment="Left" Margin="230,481,0,0" VerticalAlignment="Top" Width="75" Click="backbtn_Click"/>
     </Grid>

@@ -12,7 +12,6 @@ namespace DO
         /// sets and gets
         /// </summary> 
         public bool Active { set; get; }// status of a bus line whether it is active or not
-        public static int IdentificationNumber { set; get; }//Identification number
         public TimeSpan TravelStartTime { set; get; }//Travel start time of the bus 
         public TimeSpan TravelEndTime { set; get; }//Travel end time
         public static int FrequencyOfExit { set; get; }//Frequency of exit for the line 

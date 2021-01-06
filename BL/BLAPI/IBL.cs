@@ -47,7 +47,7 @@ namespace BLAPI
         IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea();
         void UpdateBusLine(BusLine busLine);
         void UpdateBusLineStation(int id,int IDBusLine);
-        void DeleteBusLineStation(int id,int IDBusLine);
+        void DeleteBusLineStation(BusLineStation busLineStation);
         #endregion
         #region User
         BO.User UserDoBoAdapter(DO.User UserDO);
