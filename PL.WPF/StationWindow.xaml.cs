@@ -159,7 +159,7 @@ namespace PL.WPF
                 };
                 if (CurBusStation.ListBusLinesInStation.FirstOrDefault(id => id.BusLineNumber == busLineInStation.BusLineNumber) == null)
                 {
-                    AddLineFromStation(CurBusStation.ListBusLinesInStation)
+                    //AddLineFromStation(CurBusStation.ListBusLinesInStation)
                     //bl.AddBusLineToStation(CurBusStation, busLineInStation);
                 }
                 else

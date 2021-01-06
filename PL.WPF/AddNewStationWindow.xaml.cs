@@ -35,7 +35,7 @@ namespace PL.WPF
 
         private void AddingButton_Click(object sender, RoutedEventArgs e)
         {
-            newStation = new BO.BusStation() { BusStationKey = int.Parse(Bus_Station_Key.Text), StationName = Station_Name.Text, StationAddress = Station_Address.Text, Latitude = float.Parse(Station_Latitude.Text), Longitude = float.Parse(Station_Longitude.Text) };
+            newStation = new BO.BusStation() { BusStationKey = int.Parse(Bus_Station_Key.Text), StationName = Station_Name.Text, StationAddress = Station_Address.Text, Latitude = LatitudeValue.Value, Longitude = LongdeValue.Value };
 
             try
             {
