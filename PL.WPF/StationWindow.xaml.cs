@@ -159,6 +159,7 @@ namespace PL.WPF
                 };
                 if (CurBusStation.ListBusLinesInStation.FirstOrDefault(id => id.BusLineNumber == busLineInStation.BusLineNumber) == null)
                 {
+                    AddLineFromStation(CurBusStation.ListBusLinesInStation)
                     //bl.AddBusLineToStation(CurBusStation, busLineInStation);
                 }
                 else
@@ -195,35 +196,6 @@ namespace PL.WPF
             }
 
         }
-
-        //private void BusLine_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        Index = CurBusLine.StationsInLine.Count() + 1;
-        //        BO.BusLineStation busLineStation = new BO.BusLineStation
-        //        {
-        //            BusStationKey = int.Parse((sender as CheckBox).DataContext.ToString().Substring(18, 6)),
-        //            NumberStationInLine = ++Index,
-        //            Active = true
-        //        };
-        //        if (CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey) == null)
-        //        {
-        //            CurBusLine.StationsInLine = CurBusLine.StationsInLine.Append(busLineStation);
-        //            bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine);
-        //        }
-        //        else
-        //            throw new ArgumentException("The line station is already on the line route");
-        //        RefreshDataGrirdStationsline();
-        //        MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        (sender as CheckBox).Visibility = Visibility.Hidden;
-        //    }
-        //    catch (ArgumentException ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-        //        (sender as CheckBox).IsChecked = false;
-        //    }
-        //}
     }
  }
 
