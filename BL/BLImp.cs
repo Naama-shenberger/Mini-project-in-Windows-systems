@@ -406,23 +406,24 @@ namespace BL
         }
         #endregion
         #region Bus Line
-        public void  DeleteBusLineStation(int id)
+        public void  DeleteBusLineStation(int id,int IDBusLine)
         {
             try
             {
-                dl.DeleteBusLineStation(dl.GetBusLineStation(id));
+                dl.DeleteBusLineStation(dl.GetBusLineStation(id,IDBusLine));
             }
             catch (BO.IdException ex)
             {
                 throw new BO.IdException(ex.ToString());
             }
         }
-        public void UpdateBusLineStation(int id)
+        public void UpdateBusLineStation(int id,int IDBusLine)
         {
             try
             {
-                dl.UpdateBusLineStation(dl.GetBusLineStation(id));
-            }catch(BO.IdException ex)
+                dl.UpdateBusLineStation(dl.GetBusLineStation(id,IDBusLine));
+            }
+            catch(BO.IdException ex)
             {
                 throw new BO.IdException(ex.ToString());
             }
@@ -484,7 +485,7 @@ namespace BL
 
             busLineBO.StationsInLine = from sin in dl.BusLineStations()
                                        where sin.ID == busLineDO.ID
-                                       let station = dl.GetBusLineStation(sin.BusStationKey)
+                                       let station = dl.GetBusLineStation(sin.BusStationKey,sin.ID)
                                        select DeepCopyUtilities.CopyToStationInLine(station);
             return busLineBO;
         }
@@ -506,7 +507,10 @@ namespace BL
             }
             catch (DO.IdException)
             {
-                dl.AddBusLine(BusLineBoDoAdapter(busLine));
+                var RunNumber= dl.AddBusLine(BusLineBoDoAdapter(busLine));
+               
+                busLine.StationsInLine = busLine.StationsInLine.Concat(busLineStation).Distinct();
+                busLine.StationsInLine.AsParallel().ForAll(id => id.ID = RunNumber);
             }
             catch (BO.IdException)
             {
@@ -531,10 +535,9 @@ namespace BL
         {
             try
             {
-
+             
                 AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
-
-
+                AddToLine.StationsInLine.AsParallel().ForAll(id => id.ID = AddToLine.ID);
             }
             catch(DO.IdException ex)
             {

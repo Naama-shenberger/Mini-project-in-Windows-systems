@@ -44,7 +44,7 @@ namespace DLAPI
         #endregion
         #region BusLineStation
         IEnumerable<object> GetBusLineStationCode(Func<int, object> generate);
-        BusLineStation GetBusLineStation(int codeStation);
+        BusLineStation GetBusLineStation(int codeStation,int IDBusLine);
         IEnumerable<BusLineStation> BusLineStations();
         void AddBusLineStation(BusLineStation s);
         void UpdateBusLineStation(BusLineStation s);

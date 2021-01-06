@@ -51,6 +51,7 @@ namespace PL.WPF
             ComboBoxBusLineNumber.DataContext = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
             ComboBoxBusLineNumber.SelectedIndex = 0;
             CurBusLine = Convert<BO.BusLine>(bl.GetAllBusLines()).ToList()[0];
+          //  RefreshDataGrirdStationsline();
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
@@ -58,6 +59,7 @@ namespace PL.WPF
         }
         private void cbBusBusLineNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+           
             CurBusLine = (ComboBoxBusLineNumber.SelectedItem as BO.BusLine);
             gridOneBusLine.DataContext = CurBusLine;
             if (CurBusLine!=null && CurBusLine.StationsInLine != null)
@@ -79,14 +81,13 @@ namespace PL.WPF
                 Index = save.NumberStationInLine - 1;
             CurBusLine.StationsInLine.AsParallel().ForAll(a => { if (a.NumberStationInLine > save.NumberStationInLine) { a.NumberStationInLine = a.NumberStationInLine - 1; } });
             bl.DeleteBusLineStationFromeLine(CurBusLine,save);
-          //  RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
         }
         private void AddBusLineButton_Click(object sender, RoutedEventArgs e)
         {
             AddBusLineWindow addBusLineWindow = new AddBusLineWindow(bl);
             addBusLineWindow.ShowDialog();
-           // addBusLineWindow.BusLine;
+
             RefreshAllBusLinesComboBox();
         }
         private void DeleteButon_Click(object sender, RoutedEventArgs e)
@@ -113,8 +114,9 @@ namespace PL.WPF
         {
             var btn = sender as Button;
             var save = CurBusLine.StationsInLine.FirstOrDefault(c => c.BusStationKey == int.Parse((btn).DataContext.ToString().Substring(18, 6)));
-
-            bl.UpdateBusLineStation(save.BusStationKey);
+            Update update = new Update(bl,save,CurBusLine.StationsInLine.Count());
+            update.Show();
+           // bl.UpdateBusLineStation(save.BusStationKey,save.ID);
             RefreshDataGrirdStationsline();
         }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)

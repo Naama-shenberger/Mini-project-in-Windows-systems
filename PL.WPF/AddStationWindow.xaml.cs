@@ -23,7 +23,6 @@ namespace PL.WPF
     {
         IBL bL;
         BO.BusStation curBusStation;
-      //  BO.BusLineStation CurBusLineStation;
         static int Index;
         ObservableCollection<BO.BusLineStation> curBusLineStations = new ObservableCollection<BO.BusLineStation>();
         ObservableCollection<BO.BusLineStation> curAllBusLineStations = new ObservableCollection<BO.BusLineStation>();
@@ -35,8 +34,6 @@ namespace PL.WPF
         {
             InitializeComponent();
             bL = _bL;
-            //CurBusLine = busLine;
-            //BusLineTextBlock.Text = CurBusLine.BusLineNumber.ToString();
             curAllBusLineStations = Convert<BO.BusLineStation>(bL.GetAllBusLineStations());
             Index = curAllBusLineStations.Count();
             RefreshAllStationsComboBox();

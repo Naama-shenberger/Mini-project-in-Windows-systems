@@ -429,9 +429,9 @@ namespace DL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BusLineStation GetBusLineStation(int codeStation)
+        public BusLineStation GetBusLineStation(int codeStation,int IDBusLine)
         {
-            BusLineStation busLineStation = DataSource.BusLineStations.Find(s => s.BusStationKey == codeStation);
+            BusLineStation busLineStation = DataSource.BusLineStations.Find(s => s.BusStationKey == codeStation && s.ID==IDBusLine);
             if (busLineStation != null)
                 if (busLineStation.Active == true)
                 { 
