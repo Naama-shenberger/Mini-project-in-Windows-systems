@@ -36,7 +36,7 @@
             <Label Name="LastStopLabel" Content="Last stop:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Height="30" Margin="3,6.8,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="3"/>
             <ComboBox x:Name="LastStopcb" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3" Text="{Binding LastStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedItem="{Binding LastStopNumber}" VerticalAlignment="Center" Height="25" Width="120"/>
         </Grid>
-        <DataGrid x:Name="DataGrirdStationslines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="382,280,12.6,14.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5">
+        <DataGrid x:Name="DataGrirdStationslines" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="382,280,12.6,14.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5">
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -46,10 +46,10 @@
                 </TransformGroup>
             </DataGrid.RenderTransform>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="CodeStationColumn" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="CodeStationColumn"  Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="StationAddressClumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="NameStationClumn" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nuerInLineColumn" Binding="{Binding NumberStationInLine}" Header="Number Station In Line" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nuerInLineColumn" Binding="{Binding NumberStationInLine}" IsReadOnly="False" Header="Number Station In Line" Width="SizeToHeader"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -63,27 +63,29 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid x:Name="DataGrirdAllStationslines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="383,10,9.6,336.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
+        <DataGrid x:Name="DataGrirdAllStationslines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="383,8,9.6,338.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
+          
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="AllCodeStationColumn" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="AllnuerInLineColumn" Binding="{Binding NumberStationInLine}" Header="Number Station In Line" Width="SizeToHeader"/>
+                <!--<DataGridTextColumn x:Name="AllnuerInLineColumn" Binding="{Binding NumberStationInLine}" Header="Number Station In Line" Width="SizeToHeader"/>-->
                 <DataGridTextColumn x:Name="AllStationAddressClumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="AllNameStationClumn" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader"/>
-                <!--<DataGridTextColumn x:Name="AllLatitude" Binding="{Binding Latitude}" Header="Latitude" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="AllLongitude" Binding="{Binding Longitude}" Header="Longitude" Width="SizeToHeader"/>-->
-           
-            <DataGridTemplateColumn>
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
+                
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
                             <StackPanel>
-                                <CheckBox  x:Name="CheckBoxBusLineStaation" IsChecked="{Binding Selected}" Checked="BusLineStation_Checked" Content="Checke To Add" Margin="12,6,2,2" />
+                                <CheckBox  x:Name="CheckBoxBusLineStation" IsChecked="{Binding Selected}" Checked="BusLineStation_Checked" Content="Checke To Add" Margin="12,6,2,2" />
+                                <CheckBox x:Name="CheckdelBoxBusLineStation" IsChecked="{Binding Selected}" Checked="delBusLineStation_Checked" Content="Checke To del" Margin="12,3,5,2" />
                             </StackPanel>
                         </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
+           
         </DataGrid>
-       
+
         <Button x:Name="AddBusLineStatoin" Content="Add Bus Line Station" HorizontalAlignment="Left" Margin="747,200,0,0" VerticalAlignment="Top" Width="122" Click="AddBusLineStatoin_Click" />
         <Button x:Name="backbtn" Content="Back" HorizontalAlignment="Left" Margin="124,492,0,0" VerticalAlignment="Top" Width="75" Click="backbtn_Click"/>
     </Grid>

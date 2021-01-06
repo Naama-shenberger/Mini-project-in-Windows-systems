@@ -200,26 +200,7 @@ namespace BL
             return false;
 
         }
-        /// <summary>
-        /// A function that checks if the vehicle needs to fill oil or 
-        /// </summary>
-        /// <param name="bus"></param>
-        /// <returns></returns>
-        public bool BusCondition(Bus bus)
-        {
-            DO.Bus b_find;
-            try
-            {
-                b_find = dl.GetBus(bus.LicensePlate);
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException("Bus ID is illegal", ex);
-            }
-            if (b_find.OilCondition || b_find.AirTire > 75)
-                return true;
-            return false;
-        }
+       
         /// <summary>
         /// A function that returns all bus
         /// </summary>
@@ -239,56 +220,24 @@ namespace BL
                    group Bus by (TreatmentIsNeeded(Bus)) into groups
                    select groups;
         }
-        /// <summary>
-        /// a function that returns all License Plate
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<string> GetLicensePlateBuss()
-        {
-            return from item in dl.GetAllBuss()
-                   let bus = BusDoBoAdapter(item) as BO.Bus
-                   orderby bus.LicensePlate
-                   select bus.LicensePlate;
-        }
-        /// <summary>
-        /// lamda Function 
-        /// Accepts predicate-Which checks a condition and returns the buses that Sustainers the condition
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public IEnumerable<Bus> GetBusBy(Predicate<Bus> predicate) => from sic in dl.GetAllBuss()
-                                                                      let bus = BusDoBoAdapter(sic) as BO.Bus
-                                                                      where predicate(bus)
-                                                                      select bus;
+        
+       
 
         #endregion
         #region Bus Station
-        public void addTimeBetStation(BusStation s1, BusStation s2)
-        {
-            try
-            {
-                DO.ConsecutiveStations s = new DO.ConsecutiveStations() { StationCodeOne = s1.BusStationKey, StationCodeTwo = s2.BusStationKey };
-                dl.AddConsecutiveStations(s);
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.ToString());
-            }
 
-        }
-        public TimeSpan getTimeBetStation(BusStation s1, BusStation s2)
+        public void AddBusLine(BusStation busStation, BusLine busLine)
         {
-            DO.ConsecutiveStations s;
-            try
-            {
-                s = dl.GetConsecutiveStations(s1.BusStationKey, s2.BusStationKey);
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.ToString());
-            }
-            return s.AverageTravelTime;
+            throw new NotImplementedException();
         }
+
+        public void DeleteBusLine(BusStation busStation, BusLine busLine)
+        {
+            throw new NotImplementedException();
+        }
+
+        
+       
         
         /// <summary>
         /// A function that receives a DO type bus station object and returns a BO type bus station
@@ -311,9 +260,9 @@ namespace BL
             //return stationBO;
             BO.BusStation stationBO = new BusStation();
             stationDO.CopyPropertiesTo(stationBO);
-            stationBO.ListBusLinesInStation = from sic in dl.BusLineInStations()
-                                              let line = dl.GetBusLine(sic.BusLineNumber)
-                                              select line.CopyToLineInStation(sic);
+            //stationBO.ListBusLinesInStation = from sic in dl.BusLines()
+            //                                  let line = dl.GetBusLine(sic.BusLineNumber)
+            //                                  select line.CopyToLineInStation(sic);
             return stationBO;
         }
         /// <summary>
@@ -327,54 +276,8 @@ namespace BL
             busStationBO.CopyPropertiesTo(busStationDO);
             return busStationDO;
         }
-        /// <summary>
-        /// A function that receives a BO type bus line in station object and returns a DO type bus line in station
-        /// </summary>
-        /// <param name="busLineInStationBO"></param>
-        /// <returns></returns>
-        public DO.BusLineInStation BusLineInStationBoDoAdapter(BO.BusLineInStation busLineInStationBO)
-        {
-            DO.BusLineInStation busLineInStationDO = new DO.BusLineInStation();
-            busLineInStationBO.CopyPropertiesTo(busLineInStationDO);
-
-            return busLineInStationDO;
-        }
-        /// <summary>
-        /// adds a line to stations line list
-        /// </summary>
-        /// <param name="AddToStation"></param>
-        /// <param name="busLineInStation"></param>
-        public void AddBusLineToStation(BusStation AddToStation, BusLineInStation busLineInStation)
-        {
-            try
-            {
-
-                AddToStation.ListBusLinesInStation.ToList().Add(busLineInStation);
-                ///?  busLineStation.ToList().ForEach(i => AddToLine.StationsInLine.Append(i));
-                //number in line need to f
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.Message);
-            }
-        }
-        /// <summary>
-        /// deletes a bus line from stations list
-        /// </summary>
-        /// <param name="DeleteFromStation"></param>
-        /// <param name="busLineInStation"></param>
-        public void DeleteBusLineInStation(BusStation DeleteFromStation, BusLineInStation busLineInStation)
-        {
-            try
-            {
-                var IndexToDelete = DeleteFromStation.ListBusLinesInStation.ToList().FindIndex(d => d.BusLineNumber == busLineInStation.BusLineNumber);
-                DeleteFromStation.ListBusLinesInStation.ToList().RemoveAt(IndexToDelete);
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.ToString());
-            }
-        }
+       
+       
         /// <summary>
         /// A function that receives an ID number of a station and returns the corresponding station
         /// </summary>
@@ -440,16 +343,7 @@ namespace BL
                select BusStationDoBoAdapter(item);
         }
 
-        /// <summary>
-        /// a function that returns all bus lines thet passing through the station
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<BusLineInStation> GetAllBusLineInStation()
-        {
-            return from sic in dl.BusLineInStations()
-                   let line = dl.GetBusLine(sic.BusLineNumber)
-                   select line.CopyToLineInStation(sic);
-        }
+       
         /// <summary>
         /// The function receives a bus Station for updating
         /// </summary>
@@ -468,42 +362,45 @@ namespace BL
 
         #endregion
         #region Bus Line
+        public void  DeleteBusLineStation(int id)
+        {
+            try
+            {
+                dl.DeleteBusLineStation(dl.GetBusLineStation(id));
+            }
+            catch (BO.IdException ex)
+            {
+                throw new BO.IdException(ex.ToString());
+            }
+        }
+        public void UpdateBusLineStation(int id)
+        {
+            try
+            {
+                dl.UpdateBusLineStation(dl.GetBusLineStation(id));
+            }catch(BO.IdException ex)
+            {
+                throw new BO.IdException(ex.ToString());
+            }
+        }
         /// <summary>
         /// A function that receives tracking stations and updates the distance between them
         /// </summary>
         /// <param name="stations"></param>
         /// <param name="_distance"></param>
-        public void UpdateDistanceBetweenstations(DO.ConsecutiveStations stations, float _distance)
+        public void UpdateDistanceBetweenstations(int id1,int id2, float _distance)
         {
-            try
-            {
-                DO.ConsecutiveStations consecutiveStations = dl.GetConsecutiveStations(stations.StationCodeOne, stations.StationCodeTwo);
-                consecutiveStations.Distance = _distance;
-                dl.UpdateConsecutiveStations(consecutiveStations);
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.ToString());
-            }
+          
         }
         /// <summary>
         ///  A function that receives tracking stations and updates the Travel Time between them
         /// </summary>
         /// <param name="stations"></param>
         /// <param name="time"></param>
-        public void UpdateTravelTimeBetweenstations(BO.BusStation station1,BO.BusStation station2, TimeSpan time)
+        public void UpdateTravelTimeBetweenstations(int id1,int id2, TimeSpan time)
         {
             
-            try
-            {
-                DO.ConsecutiveStations consecutiveStations = dl.GetConsecutiveStations(station1.BusStationKey, station2.BusStationKey);
-                consecutiveStations.AverageTravelTime = time;
-                dl.UpdateConsecutiveStations(consecutiveStations);
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.ToString());
-            }
+            
         }
         /// <summary>
         /// The function receives a bus line for updating
@@ -561,23 +458,6 @@ namespace BL
                 if (busLineStation.ToList().Count<2)
                     throw new BO.IdException("You must add at least two stations to the line");
               
-                //DO.ConsecutiveStations stations = new DO.ConsecutiveStations
-                //{
-                //    StationCodeOne = stationInLineOne.BusStationKey,
-                //    StationCodeTwo = stationInLineTwo.BusStationKey,
-                //    Distance = (float)(random.NextDouble() * 1850 + 150),
-                //    Flage = true,
-                //    AverageTravelTime = new TimeSpan(random.Next(0, 4), random.Next(0, 60), random.Next(0, 60))
-                //};
-                //BusStation busLineInStation = new BusStation();
-                //stationInLineOne.CopyPropertiesTo(busLineInStation);
-                //BusLineInStation lineInStation = new BusLineInStation();
-                //busLine.CopyPropertiesTo(lineInStation);
-                //busLineInStation.ListBusLinesInStation.Append(lineInStation);
-                //stationInLineTwo.CopyPropertiesTo(busLineInStation);
-                //busLineInStation.ListBusLinesInStation.Append(lineInStation);
-
-                //dl.AddConsecutiveStations(stations);
                 dl.GetBusLine(busLine.ID);
             }
             catch (DO.IdException)
@@ -610,11 +490,6 @@ namespace BL
 
                 AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
 
-
-                ///?  busLineStation.ToList().ForEach(i => AddToLine.StationsInLine.Append(i));
-                //busLineStation.ToList().ForEach(i => dl.AddBusLineStation(BusLineStationBoDoAdapter(i)));
-                //בדיקה אם יש תחנות עוקבות
-                //number in line need to fix 
 
             }
             catch(DO.IdException ex)
@@ -650,16 +525,9 @@ namespace BL
                 DeleteFromLine.StationsInLine = from sin in DeleteFromLine.StationsInLine
                                                 where sin.BusStationKey != busLineStation.BusStationKey
                                                 select sin;
-                //var IndexToDelete = DeleteFromLine.StationsInLine.ToList().FindIndex(d => d.BusStationKey == busLineStation.BusStationKey);
-                //dl.GetConsecutiveStations(busLineStation.BusStationKey, DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey);
-                //dl.GetConsecutiveStations(DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey, busLineStation.BusStationKey);
-                //DO.ConsecutiveStations stations = new DO.ConsecutiveStations
-                //{
-                //    StationCodeOne = DeleteFromLine.StationsInLine.ToList()[IndexToDelete - 1].BusStationKey,
-                //    StationCodeTwo = busLineStation.BusStationKey
-                //};
-                //DeleteFromLine.StationsInLine.ToList().RemoveAt(IndexToDelete);
-                //dl.DeleteConsecutiveStations(stations);
+             
+                DeleteFromLine.StationsInLine.AsParallel().ForAll(a => { if (a.NumberStationInLine > busLineStation.NumberStationInLine) { a.NumberStationInLine = a.NumberStationInLine - 1; } });
+             
             }
             catch (DO.IdException ex)
             {
@@ -686,18 +554,7 @@ namespace BL
                    select groups;
         }
 
-        /// <summary>
-        /// A function that returns all bus lines
-        /// Are appointed according to their stations
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<BusLine> GetAllBusLinesSortByNumberOfStations()
-        {
-            return from item in dl.BusLines()
-                   let busLine = BusLineDoBoAdapter(item) as BO.BusLine
-                   orderby busLine.StationsInLine.Count()
-                   select busLine;
-        }
+       
         /// <summary>
         /// A function that receives an ID number and returns the corresponding bus line
         /// </summary>
@@ -714,98 +571,10 @@ namespace BL
                 throw new BO.IdException(ex.ToString());
             }
         }
-        /// <summary>
-        /// lamda Function 
-        /// Accepts predicate-Which checks a condition and returns the lines that Sustainers the condition
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public IEnumerable<BusLine> GetBusLineBy(Predicate<BusLine> predicate) => from sic in dl.BusLines()
-                                                                                  let busLine = BusLineDoBoAdapter(sic) as BO.BusLine
-                                                                                  where predicate(busLine)
-                                                                                  select busLine;
-        /// <summary>
-        /// A  Function that returns a Collection with all the bus lines number Sorting
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<int> GetNumberLines()
-        {
-            return from item in dl.BusLines()
-                   let busLine = BusLineDoBoAdapter(item) as BO.BusLine
-                   orderby busLine.BusLineNumber
-                   select busLine.BusLineNumber;
-        }
+        
+        
         #endregion
-        #region Bus Line In Station
-        /// <summary>
-        /// A function that receives a DO type bus line in statin object and returns a BO type bus bus line in statin
-        /// </summary>
-        /// <param name="lineDO"></param>
-        /// <returns></returns>
-        public BO.BusLineInStation LineInStationDoBoAdapter(DO.BusLineInStation lineDO)
-        {
-            BO.BusLineInStation lineBO = null;
-            lineDO.CopyPropertiesTo(lineBO);
-            return lineBO;
-
-        }
-        /// <summary>
-        /// A function that receives a BO type bus line in statin object and returns a DO type bus bus line in statin
-        /// </summary>
-        /// <param name="lineBO"></param>
-        /// <returns></returns>
-        public DO.BusLineInStation LineStationBoDoAdapter(BO.BusLineInStation lineBO)
-        {
-            DO.BusLineInStation lineDO = null;
-            lineBO.CopyPropertiesTo(lineDO);
-            return lineDO;
-        }
-        /// <summary>
-        /// A function that receives an ID number and returns the corresponding bus line in station 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public BusLineInStation GetLineInStation(int id)
-        {
-            DO.BusLineInStation lineInStationDO;
-            try
-            {
-                lineInStationDO = dl.GetBusLineInStation(id);
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException("Bus ID is illegal", ex);
-            }
-            return LineInStationDoBoAdapter(lineInStationDO);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<BusLineInStation> GetAllBusLineInStations()
-        {
-            return from BusLineInStation in dl.BusLineInStations()
-                   select LineInStationDoBoAdapter(BusLineInStation);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="busLineInStations"></param>
-        /// <returns></returns>
-        public IEnumerable<object> BusLineDetails(IEnumerable<BusLineInStation> busLineInStations)
-        {
-            return from BusLine in dl.BusLines()
-                   from BusLineInStation in busLineInStations
-                   where BusLine.BusLineNumber == BusLineInStation.BusLineNumber
-                   select new
-                   {
-                       BusLineNumber= BusLineInStation.BusLineNumber,
-                       Area= BusLine.Area,
-                       FirstStopNumber= BusLine.FirstStopNumber,
-                       LastStopNumber = BusLine.LastStopNumber,
-                   };
-        }
-        #endregion
+     
         #region  User
         /// <summary>
         /// The function receives a User for updating
@@ -1148,14 +917,8 @@ namespace BL
 
     }
 }
-//יכולים לכלול אוספים גנריים (<>IEnumerable)
-//יכולים לכלול תכונות מטיפוס של ישות BO אחרות
-//יכולים לרשת מישות BO אחרת (יש להיזהר מאד עם שימוש בירושה ב-BO!)
 //חובה לכלול לפחות 4 שאילתות LINQtoObject
 //חובה לכלול לפחות 4 ביטויי למבדה-------צריך עוד 3 
-//בשאילתות LINQ חובה להשתמש לפחות פעם אחת
-//ב-let ------we used
-//ב-select new
-//בקיבוץ(grouping)----יש
+
 //במיון----יש
 

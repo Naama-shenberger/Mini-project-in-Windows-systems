@@ -79,7 +79,7 @@ namespace PL.WPF
                 Index = save.NumberStationInLine - 1;
             CurBusLine.StationsInLine.AsParallel().ForAll(a => { if (a.NumberStationInLine > save.NumberStationInLine) { a.NumberStationInLine = a.NumberStationInLine - 1; } });
             bl.DeleteBusLineStationFromeLine(CurBusLine,save);
-            RefreshDataGrirdAllStationslines();
+          //  RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
         }
         private void AddBusLineButton_Click(object sender, RoutedEventArgs e)
@@ -113,6 +113,9 @@ namespace PL.WPF
         {
             var btn = sender as Button;
             var save = CurBusLine.StationsInLine.FirstOrDefault(c => c.BusStationKey == int.Parse((btn).DataContext.ToString().Substring(18, 6)));
+
+            bl.UpdateBusLineStation(save.BusStationKey);
+            RefreshDataGrirdStationsline();
         }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -193,5 +196,15 @@ namespace PL.WPF
             this.Close();
            
         }
+        private void delBusLineStation_Checked(object sender, RoutedEventArgs e)
+        {
+            var row = sender as CheckBox;
+            var Object = row.DataContext as object;
+            var ID = int.Parse(Object.ToString().Substring(18, 6));
+            bl.DeleteBusLineStationFromeLine(CurBusLine, CurBusLine.StationsInLine.FirstOrDefault(i=>i.BusStationKey==ID));
+            RefreshDataGrirdAllStationslines();
+            RefreshDataGrirdStationsline();
+        }
+        
     }
 }

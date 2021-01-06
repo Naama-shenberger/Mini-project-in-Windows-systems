@@ -11,16 +11,7 @@ namespace DLAPI
     /// </summary>
     public interface IDal
     {
-        #region BusLineInStation
-        BusLineInStation GetBusLineInStation(int id);
-        void AddBusLineInStation(BusLineInStation lineInStation);
-        void DeleteBusLineInStation(BusLineInStation lineInStation);
-        void UpdateBusLineInStation(BusLineInStation lineInStation);
-        IEnumerable<BusLineInStation> GetBusLineInStations(Predicate<BusLineInStation> predicate);
-        IEnumerable<BusLineInStation> BusLineInStations();
-        IEnumerable<object> GetBusLineInStationNumber(Func<int, object> generate);
-
-        #endregion
+       
         #region Bus
         IEnumerable<Bus> GetAllBuss();
         Bus GetBus(string id);

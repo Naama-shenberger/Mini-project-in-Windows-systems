@@ -16,7 +16,7 @@ namespace DS
         public static List<ConsecutiveStations> ListConsecutiveStations;
         public static List<User> Users;
         public static List<UserJourney> UsersJourney;
-        public static List<BusLineInStation> ListLineInStations;
+       
 
         static DataSource()
         {
@@ -27,10 +27,7 @@ namespace DS
         /// </summary>
         public static void InitAllLists()
         {
-            ListLineInStations = new List<BusLineInStation>
-            {
-                new BusLineInStation{Active=true,BusLineNumber=11,Area=Zones.Alon_Shvut}
-            };
+           
             ListBuses = new List<Bus>
             {
                

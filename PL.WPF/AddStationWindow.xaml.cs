@@ -23,7 +23,7 @@ namespace PL.WPF
     {
         IBL bL;
         BO.BusStation curBusStation;
-        BO.BusLineStation CurBusLineStation;
+      //  BO.BusLineStation CurBusLineStation;
         static int Index;
         ObservableCollection<BO.BusLineStation> curBusLineStations = new ObservableCollection<BO.BusLineStation>();
         ObservableCollection<BO.BusLineStation> curAllBusLineStations = new ObservableCollection<BO.BusLineStation>();
