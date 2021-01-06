@@ -502,20 +502,16 @@ namespace BL
             {
                 if (busLineStation.ToList().Count<2)
                     throw new BO.IdException("You must add at least two stations to the line");
-              
-                dl.GetBusLine(busLine.ID);
-            }
-            catch (DO.IdException)
-            {
-                var RunNumber= dl.AddBusLine(BusLineBoDoAdapter(busLine));
-               
+                var RunNumber = dl.AddBusLine(BusLineBoDoAdapter(busLine));
                 busLine.StationsInLine = busLine.StationsInLine.Concat(busLineStation).Distinct();
                 busLine.StationsInLine.AsParallel().ForAll(id => id.ID = RunNumber);
             }
-            catch (BO.IdException)
+            catch (DO.IdException)
             {
+               
                 throw new BO.IdException("Bus line ID is illegal");
             }
+           
         }
        
         public DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO)
@@ -535,8 +531,9 @@ namespace BL
         {
             try
             {
-             
-                AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
+                //if(AddToLine.StationsInLine==busLineStation)
+                //    throw new 
+                //AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
                 AddToLine.StationsInLine.AsParallel().ForAll(id => id.ID = AddToLine.ID);
             }
             catch(DO.IdException ex)

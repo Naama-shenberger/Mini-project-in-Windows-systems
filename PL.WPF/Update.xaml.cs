@@ -23,10 +23,13 @@ namespace PL.WPF
         int Index;
         IBL BL;
         BO.BusLineStation CurBusLineStation;
-        public Update(IBL _BL,BO.BusLineStation busLineStation,int _Index)
+        BO.BusLine BusLine;
+        public Update(IBL _BL,BO.BusLineStation busLineStation,BO.BusLine _busLine,int _Index)
         {
             InitializeComponent();
             Index = _Index;
+            BL = _BL;
+            BusLine = _busLine;
             CurBusLineStation = busLineStation;
             for (int i = 1; i <= Index + 1; i++)
             {
@@ -38,7 +41,7 @@ namespace PL.WPF
         private void Done_Click(object sender, RoutedEventArgs e)
         {
             CurBusLineStation.NumberStationInLine = int.Parse(cbNumberIndex.SelectedValue.ToString());
-            BL.UpdateBusLineStation(CurBusLineStation.BusStationKey,CurBusLineStation.ID);
+            BL.UpdateBusLineStation(CurBusLineStation.BusStationKey,BusLine.ID);
             this.Close();
         }
     }
