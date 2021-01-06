@@ -23,7 +23,7 @@ namespace BO
         /// <returns></returns>
         public override string ToString() => this.ToStringProperty();
         public IEnumerable<BusLineStation> StationsInLine { set; get; }//Collection of bus line station
-        public IEnumerable<LineRide> lineRides { set; get; }
+        public IEnumerable<LineRides> lineRides { set; get; }
 
     }
 }

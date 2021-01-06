@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+//using Syncfusion.Windows.Tools.Controls;
 
 namespace PL.WPF
 {
@@ -38,9 +39,10 @@ namespace PL.WPF
             RefreshAllBusLinesComboBox();
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
-           // CurBusLineStation =Convert<BO.BusLineStation>(CurBusLine.StationsInLine.Distinct());
+           
+            // CurBusLineStation =Convert<BO.BusLineStation>(CurBusLine.StationsInLine.Distinct());
             //Index = (ComboBoxBusLineNumber.DataContext as BO.BusLine).StationsInLine.Count();
-  
+
         }
         void RefreshDataGrirdAllStationslines()
         {
@@ -50,6 +52,7 @@ namespace PL.WPF
         {
             ComboBoxBusLineNumber.DataContext = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
             ComboBoxBusLineNumber.SelectedIndex = 0;
+
             ///CurBusLine = ComboBoxBusLineNumber.SelectedItem;
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
@@ -63,7 +66,7 @@ namespace PL.WPF
             if (CurBusLine != null && CurBusLine.StationsInLine!=null) 
                    DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
             RefreshDataGrirdStationsline();
-
+            HeaderLineSchedule.DataContext = CurBusLine.lineRides;
 
         }
         private void btDelBusLineStation_Click(object sender, RoutedEventArgs e)

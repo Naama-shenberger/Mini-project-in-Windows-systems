@@ -53,6 +53,12 @@ namespace BL
             BO.BusLineInStation result = (BO.BusLineInStation)busLine.CopyPropertiesToNew(typeof(BO.BusLineInStation));
             return result;
         }
+        public static BO.LineRides CopyToLineRide(DO.LineRide lineRide)
+        {
+            BO.LineRides result = (BO.LineRides)lineRide.CopyPropertiesToNew(typeof(BO.LineRides));
+
+            return result;
+        }
 
     }
 }

@@ -476,7 +476,7 @@ namespace BL
             busLineBO.lineRides = from sin in dl.LinesWayOut()
                                   where sin.ID == busLineBO.ID
                                   let lineRide = dl.GetLineWayOut(sin.ID)
-                                  select lineRide;
+                                  select DeepCopyUtilities.CopyToLineRide(lineRide);
             return busLineBO;
         }
        
