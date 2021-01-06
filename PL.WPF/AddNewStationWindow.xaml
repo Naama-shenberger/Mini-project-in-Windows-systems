@@ -24,7 +24,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label  Name="BusStationLabel" Content="Bus Line Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="4,3,0,3" Grid.Row="0" VerticalAlignment="Center"/>
+            <Label  Name="BusStationLabel" Content="Bus station code:" Grid.Column="0" HorizontalAlignment="Left" Margin="4,3,0,3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox  x:Name="Bus_Station_Key" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3" Grid.Row="0"  VerticalAlignment="Center" Height="25" Width="150"/>
             <Label Name="LabelStationName" Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
             <TextBox  x:Name="Station_Name"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2"    VerticalAlignment="Center" Width="150"/>
@@ -34,10 +34,11 @@
             <TextBox x:Name="Station_Latitude" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="3,4,0,3"   VerticalAlignment="Center" Height="25" Width="150"/>
             <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="5"  HorizontalAlignment="Left" Height="30" Margin="3,4.6,0,32.6" VerticalAlignment="Center" Width="94" Grid.RowSpan="2"/>
             <TextBox x:Name="Station_Longitude" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="3,4,0,3"  VerticalAlignment="Center" Height="25" Width="150"/>
+            <!--<Slider x:Name=" LatitudeValue" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="123" Grid.Column="1" Margin="10,2,0,0" Grid.Row="4" Minimum="32.519016" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" />-->
 
         </Grid>
         <Button Content="ADD" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="138,257,0,0" Click="AddingButton_Click"/>
-        
+
 
     </Grid>
 </Window>

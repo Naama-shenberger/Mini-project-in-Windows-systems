@@ -56,31 +56,29 @@
             <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="5"  HorizontalAlignment="Left" Height="30" Margin="3,4.6,0,32.6" VerticalAlignment="Center" Width="94" Grid.RowSpan="2"/>
             <TextBox x:Name="TextBoxLongitude" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="3,4,0,3"  Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="25" Width="150"/>
         </Grid>
-        <!--<Label Content="List of All following stations:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,102" Height="26" Width="220"/>
-        <DataGrid x:Name="DatatGridCutiveStations" HorizontalAlignment="Left" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Height="87" VerticalAlignment="Top" Margin="10,276,0,0" Width="396" Background="#FFE6F1E2"  >
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="stationKey" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="stationName" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="stationAddress" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="cStationsDistance" Binding="{Binding distance}" Header="distance" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="cStationsTime" Binding="{Binding Time}" Header="Time" Width="SizeToHeader"/>
-            </DataGrid.Columns>
-            <DataGridTemplateColumn>
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Button x:Name="btUpdateTimeBetweenStations" Content="Update Time" Click="btUpdateTimeBetweenStationsButton_Click" ToolTip="Update time drive between station , for selected station"/>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-        </DataGrid>-->
+        <!--<DataGrid x:Name="DataGrirdAllLines" Background="#FFE6F1E2"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="440,52,37.6,295" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
 
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="AllBusLine" Binding="{Binding BusLineNumber}" Header="Code Station" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="AllStationAddressClumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <CheckBox  x:Name="CheckBoxBusLineInStation" IsChecked="{Binding Selected}" Checked="BusLine_Checked" Content="Checke To Add" Margin="12,6,2,2" />
+                                <CheckBox x:Name="CheckdelBoxBusLineInStation" IsChecked="{Binding Selected}" Checked="delBusLine_Checked" Content="Checke To del" Margin="12,3,5,2" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>-->
+
+        <!--</DataGrid>-->
         <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="440,22,0,0" Height="27" Width="171"/>
-        <ListView x:Name="list_lineInStation" Background="#FFE6F1E2" Margin="440,70,42.6,258">
+        <ListView x:Name="List_lineInStation" Background="#FFE6F1E2" Margin="440,70,42.6,258">
             <ListView.View>
                 <GridView>
                     <GridViewColumn x:Name="lineInStationNumber" Header="Line Number"   DisplayMemberBinding="{Binding BusLineNumber}"/>
-                    <GridViewColumn x:Name="l" Header="Area" DisplayMemberBinding="{Binding Area}"/>
-                    <!--<GridViewColumn Header="Name Station" DisplayMemberBinding="{Binding Number}"/>-->
                 </GridView>
             </ListView.View>
             <ListView Height="100" Width="100">
@@ -97,7 +95,7 @@
         <Button Content="Add New Station" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Column="1" Margin="10.4,205,0,0"  Click="AddNewStationButton_Click" Width="155" Height="46" Background="#FFEAE2F4"/>
         <Button Content="Delete Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,70,0,0" Click="DeleteCurStationButton_Click" Grid.Column="1" Width="155" Height="46" Background="#FFEAE2F4"/>
         <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10.4,404,0,0"  RenderTransformOrigin="0.525,0.776" Click="BackButton_Click" Grid.Column="1" Width="155" Height="46" Background="#FFEAE2F4"/>
-        <ListView x:Name="listOfLines" Background="#FFE6F1E2" Margin="440,235,42.6,59" >
+        <ListView x:Name="ListOfLines" Background="#FFE6F1E2" Margin="440,235,42.6,59" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Line Number" x:Name="lineNumber"  DisplayMemberBinding="{Binding BusLineNumber}"/>

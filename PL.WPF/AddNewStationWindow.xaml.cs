@@ -39,8 +39,8 @@ namespace PL.WPF
 
             try
             {
-                if (int.Parse(Bus_Station_Key.Text)>99999 && int.Parse(Bus_Station_Key.Text)<1000000)
-                    MessageBox.Show("unvalid bus station code", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                    //if (int.Parse(Bus_Station_Key.Text) > 99999 && int.Parse(Bus_Station_Key.Text) < 1000000)
+                    //    MessageBox.Show("unvalid bus station code", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
                 bl.AddBusStation(newStation);
                 this.Close();
             }

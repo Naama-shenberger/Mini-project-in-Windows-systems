@@ -32,7 +32,7 @@ namespace PL.WPF
             ComboBoxBusStationKey.SelectedValuePath= "BusStationKey";
             ComboBoxBusStationKey.SelectedIndex = 0;
             RefreshAllStationsComboBox();
-            listOfLines.DataContext = bl.GetAllBusLines();
+            ListOfLines.DataContext = Convert < BO.BusLine >( bl.GetAllBusLines());
         }
         private void RefreshAllStationsComboBox()
         {
@@ -53,8 +53,7 @@ namespace PL.WPF
         }
         private void RefreshBusLinesInStation()
         {
-            if (CurBusStation.ListBusLinesInStation != null)
-                list_lineInStation.DataContext = bl.LineDetails(CurBusStation.ListBusLinesInStation);
+            List_lineInStation.DataContext = CurBusStation.ListBusLinesInStation;
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
@@ -109,35 +108,20 @@ namespace PL.WPF
 
         private void AddNewStationButton_Click(object sender, RoutedEventArgs e)
         {
-            AddNewStationWindow addStationWindow = new AddNewStationWindow(bl);
-            addStationWindow.ShowDialog();
-            //addNewStationWindow.addStation
-            RefreshAllStationsComboBox();
-            RefreshBusLinesInStation();
+            try
+            {
+                AddNewStationWindow addStationWindow = new AddNewStationWindow(bl);
+                addStationWindow.ShowDialog();
+                MessageBox.Show($"bus Line Station {addStationWindow.Bus_Station_Key} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                //addNewStationWindow.addStation
+                RefreshAllStationsComboBox();
+                RefreshBusLinesInStation();
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
-        //private void AddLineFromStationButton_Click(BO.BusLine busLine)
-        //{
-
-        //    try
-        //    {
-        //        if (CurBusStation.ListBusLinesInStation.FirstOrDefault(a => a.BusLineNumber == busLine.BusLineNumber) != null)
-        //            throw new ArgumentException("You already have that line in Station");
-        //        BO.BusLineInStation busLineStation = new BO.BusLineInStation
-        //        {
-        //            BusLineNumber = busLine.BusLineNumber,
-        //            ID = busLine.ID,
-        //            Area = (int)busLine.Area,
-        //        };
-        //        bl.AddBusLine(CurBusStation, busLineStation);
-        //        RefreshBusLinesInStation();
-        //        listOfLines.DataContext = Convert<object>(bl.BusLineDetails(CurBusStation.ListBusLinesInStation));
-        //    }
-        //    catch (ArgumentException ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //}
 
         private void DelLineFromStation(BO.BusLineInStation busLine)
         {
@@ -167,6 +151,28 @@ namespace PL.WPF
 
         private void AddLineFromStationButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                BO.BusLineInStation busLineInStation = new BO.BusLineInStation
+                {
+                    BusLineNumber = int.Parse((sender as CheckBox).DataContext.ToString().Substring(18, 6))
+                };
+                if (CurBusStation.ListBusLinesInStation.FirstOrDefault(id => id.BusLineNumber == busLineInStation.BusLineNumber) == null)
+                {
+                    //bl.AddBusLineToStation(CurBusStation, busLineInStation);
+                }
+                else
+                    throw new ArgumentException("The line is already passing in station ");
+
+                RefreshBusLinesInStation();
+                MessageBox.Show($"bus Line Station {busLineInStation.BusLineNumber} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                //(sender as CheckBox).Visibility = Visibility.Hidden;
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                //(sender as CheckBox).IsChecked = false;
+            }
             //var senderList = sender as ListViewItem;
             //bo = senderList.DataContext as BO.BusStation;
             //AddLineFromStation(curBusStation);
@@ -174,12 +180,51 @@ namespace PL.WPF
 
         private void DelLineFromStationButton_Click(object sender, RoutedEventArgs e)
         {
-            //var senderList = sender as ListViewItem;
-            //BO.BusLineInStation Object = senderList.DataContext ;
-            //DelLineFromStation(Object);
+            try
+            {
+                var row = sender as CheckBox;
+                var Object = row.DataContext as object;
+                var ID = int.Parse(Object.ToString().Substring(18, 6));
+                bl.DeleteBusLineStation(CurBusStation.BusStationKey, CurBusStation.ListBusLinesInStation.FirstOrDefault(i => i.BusLineNumber == ID).BusLineNumber);
+                RefreshAllStationsComboBox();
+                RefreshBusLinesInStation();
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
+        //private void BusLine_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        Index = CurBusLine.StationsInLine.Count() + 1;
+        //        BO.BusLineStation busLineStation = new BO.BusLineStation
+        //        {
+        //            BusStationKey = int.Parse((sender as CheckBox).DataContext.ToString().Substring(18, 6)),
+        //            NumberStationInLine = ++Index,
+        //            Active = true
+        //        };
+        //        if (CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey) == null)
+        //        {
+        //            CurBusLine.StationsInLine = CurBusLine.StationsInLine.Append(busLineStation);
+        //            bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine);
+        //        }
+        //        else
+        //            throw new ArgumentException("The line station is already on the line route");
+        //        RefreshDataGrirdStationsline();
+        //        MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        (sender as CheckBox).Visibility = Visibility.Hidden;
+        //    }
+        //    catch (ArgumentException ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        (sender as CheckBox).IsChecked = false;
+        //    }
+        //}
     }
-}
+ }
+
 
