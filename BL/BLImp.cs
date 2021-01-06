@@ -226,12 +226,12 @@ namespace BL
         #endregion
         #region Bus Station
 
-        public void AddBusLine(BusStation busStation, BusLine busLine)
+        public void AddBusLine(BusStation busStation, BusLineInStation busLine)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteBusLine(BusStation busStation, BusLine busLine)
+        public void DeleteBusLine(BusStation busStation, BusLineInStation busLine)
         {
             throw new NotImplementedException();
         }

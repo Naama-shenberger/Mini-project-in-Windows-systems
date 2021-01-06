@@ -267,6 +267,7 @@ namespace DL
                 }
                 else
                     throw new IdException(station.BusStationKey, $"The bus station {station.BusStationKey} already exist");
+
         }
         /// <summary>
         /// A function that receives a bus Station and updates its details
@@ -279,9 +280,8 @@ namespace DL
                 if (station.Active == true)
                     DataSource.ListStations[toUpdateIndex] = station.Clone();
                 else
-                    throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
-            else
-                throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
+                    throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} alredy exists");
+            DataSource.ListStations.Add(station.Clone());
 
         }
         /// <summary>

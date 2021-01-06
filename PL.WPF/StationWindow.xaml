@@ -14,13 +14,20 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300*"/>
-            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="70*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Select Station:" Grid.Row="0" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Height="25" Width="90"/>
         <ComboBox x:Name="ComboBoxBusStationKey" VerticalAlignment="Top" 
-                  Grid.Row="0" Height="25" Margin="100,15,54.8,0"
+                  Grid.Row="0" Height="25" Margin="100,15,399.6,0"
                   ItemsSource="{Binding}" 
-                  HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="ComboBoxBusStationKey_SelectionChanged"/>
+                  HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="ComboBoxBusStationKey_SelectionChanged" BorderBrush="#FFC6F3B8" >
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFC6F3B8" Offset="0"/>
+                    <GradientStop Color="#FFE6F1E2" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
         <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="22,57,0,0" VerticalAlignment="Top" Height="179" Width="307">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -49,13 +56,14 @@
             <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="5"  HorizontalAlignment="Left" Height="30" Margin="3,4.6,0,32.6" VerticalAlignment="Center" Width="94" Grid.RowSpan="2"/>
             <TextBox x:Name="TextBoxLongitude" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="3,4,0,3"  Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="25" Width="150"/>
         </Grid>
-        <Label Content="List of All following stations:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,102" Height="26" Width="220"/>
-        <DataGrid x:Name="DatatGridAllStations" HorizontalAlignment="Left" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Height="87" VerticalAlignment="Top" Margin="10,276,0,0" Width="354"  >
+        <!--<Label Content="List of All following stations:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,102" Height="26" Width="220"/>
+        <DataGrid x:Name="DatatGridCutiveStations" HorizontalAlignment="Left" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Height="87" VerticalAlignment="Top" Margin="10,276,0,0" Width="396" Background="#FFE6F1E2"  >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="AllCodeStationColumn" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="AllStationAddressColumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="AllnameStationColumn" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader"/>
-                <!--<DataGridTextColumn x:Name="AllTimeStationColumn" Binding="{Binding Time}" Header="Time" Width="SizeToHeader"/>-->
+                <DataGridTextColumn x:Name="stationKey" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="stationName" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="stationAddress" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="cStationsDistance" Binding="{Binding distance}" Header="distance" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="cStationsTime" Binding="{Binding Time}" Header="Time" Width="SizeToHeader"/>
             </DataGrid.Columns>
             <DataGridTemplateColumn>
                 <DataGridTemplateColumn.CellTemplate>
@@ -64,26 +72,47 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-        </DataGrid>
+        </DataGrid>-->
 
-        <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,22,0,0" Height="26" Width="195" Grid.Column="1"/>
-
-        <ListView x:Name="list_lineInStation" ItemsSource="{Binding}" Background="AliceBlue" Margin="10,53,265.6,191" Grid.Column="1">
+        <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="440,22,0,0" Height="27" Width="171"/>
+        <ListView x:Name="list_lineInStation" Background="#FFE6F1E2" Margin="440,70,42.6,258">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="lineInStationNumber" Header="Line Number"   DisplayMemberBinding="{Binding BusLineNumber}"/>
+                    <!--<GridViewColumn x:Name="l" Header="Area" DisplayMemberBinding="{Binding Area}"/>-->
+                    <!--<GridViewColumn Header="Name Station" DisplayMemberBinding="{Binding Number}"/>-->
+                </GridView>
+            </ListView.View>
+            <ListView Height="100" Width="100">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <Button x:Name="btDelLine" Content="delete" Click="DelLineFromStationButton_Click" ToolTip="Update time drive between station , for selected station"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ListView>
+        <Button Content="Changes on Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,142,0,0" Click="UpdateButton_Click" Grid.Column="1" Width="155" Height="46" Background="#FFEAE2F4"/>
+        <Button Content="Add New Station" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Column="1" Margin="10.4,205,0,0"  Click="AddNewStationButton_Click" Width="155" Height="46" Background="#FFEAE2F4"/>
+        <Button Content="Delete Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,70,0,0" Click="DeleteCurStationButton_Click" Grid.Column="1" Width="155" Height="46" Background="#FFEAE2F4"/>
+        <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10.4,404,0,0"  RenderTransformOrigin="0.525,0.776" Click="BackButton_Click" Grid.Column="1" Width="155" Height="46" Background="#FFEAE2F4"/>
+        <ListView x:Name="listOfLines" Background="#FFE6F1E2" Margin="440,235,42.6,59" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Line Number" x:Name="lineNumber"  DisplayMemberBinding="{Binding BusLineNumber}"/>
                 </GridView>
             </ListView.View>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <EventSetter Event="MouseDoubleClick" Handler="lineInfo_MouseDoubleClick" />
-                </Style>
-            </ListView.ItemContainerStyle>
+            <ListView Height="100" Width="100">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <Button x:Name="btAddLine" Content="add" Click="AddLineFromStationButton_Click" ToolTip="Update time drive between station , for selected station"/>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </ListView>
-        <Button Content="Changes on Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="22,406,0,0" Height="44" Click="UpdateButton_Click" Grid.Column="0"/>
-        <Button Content="Add New Station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Grid.Column="1" Margin="21,325,0,0" Height="38" Click="AddNewStationButton_Click"/>
-        <Button Content="Delete Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Margin="208,406,0,0" Height="44" Click="DeleteCurStationButton_Click"/>
-        <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Margin="250,412,0,0"  RenderTransformOrigin="0.525,0.776" Height="31" Click="BackButton_Click" Grid.Column="1"/>
 
     </Grid>
 </Window>

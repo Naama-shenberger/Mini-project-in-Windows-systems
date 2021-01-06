@@ -43,68 +43,61 @@ namespace PL.WPF
             gridOneBusStation.DataContext = CurBusStation;
             if (CurBusStation != null)
             {
-                
+                RefreshBusLinesInStation();
             }
 
         }
-         
-        private void RefreshTimeStatins()
+        private void RefreshBusLinesInStation()
         {
-
-            //List<BO.BusStation> listOfStations = bl.GetAllBusStation().Where(bl.GetBusStation(b1 => b1 != CurBusStation.BusStationKey));
-            DatatGridAllStations.DataContext =  bl.GetAllBusStation();
+            list_lineInStation.DataContext = Convert<object>(CurBusStation.ListBusLinesInStation);
         }
+        
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
-        private void btUpdateTimeBetweenStations_Click(object sender, RoutedEventArgs e)
-        {
-            //BO. scBO = ((sender as Button).DataContext as BO.StudentCourse);
-            //GradeWindow win = new GradeWindow(scBO);
-            //win.Closing += WinUpdateGrade_Closing;
-            //win.ShowDialog();
-        }
-        private void btAddBusLineFromList_Click(object sender, RoutedEventArgs e)
-        {
-            if (CurBusStation == null)
-            {
-                MessageBox.Show("You must select a station first", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            try
-            {
-                BO.BusLineInStation cBO = ((sender as Button).DataContext as BO.BusLineInStation);
-                bl.AddBusLineToStation(CurBusStation,cBO);
+       
+        //private void btAddBusLineFromList_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (CurBusStation == null)
+        //    {
+        //        MessageBox.Show("You must select a station first", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
+        //        return;
+        //    }
+        //    try
+        //    {
+        //        BO.BusLineInStation cBO = ((sender as Button).DataContext as BO.BusLineInStation);
+        //        bl.AddBusLineToStation(CurBusStation,cBO);
                 
-            }
-            catch (BO.IdException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+        //    }
+        //    catch (BO.IdException ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
 
-        private void btRemoverBusLineFronStation_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                BO.BusLineInStation scBO = ((sender as Button).DataContext as BO.BusLineInStation);
-                bl.DeleteBusLineInStation(CurBusStation,scBO);
+        //private void btRemoverBusLineFronStation_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        BO.BusLineInStation scBO = ((sender as Button).DataContext as BO.BusLineInStation);
+        //        bl.DeleteBusLineInStation(CurBusStation,scBO);
                 
-            }
-            catch (BO.IdException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
+        //    }
+        //    catch (BO.IdException ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (CurBusStation != null)
                     bl.UpdateBusStation(CurBusStation);
+                MessageBox.Show("The Station/s successfully updated", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 RefreshAllStationsComboBox();
+                RefreshBusLinesInStation();
 
             }
             catch (BO.IdException ex)
@@ -125,6 +118,7 @@ namespace PL.WPF
                 {
                     bl.DeleteBusStation(CurBusStation);
                     BO.BusStation BusStationToDel = CurBusStation;
+                    MessageBox.Show("The Station/s successfully deleted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     RefreshAllStationsComboBox();
                 }
             }
@@ -141,71 +135,75 @@ namespace PL.WPF
             m.Show();
         }
 
-        private void btUpdateTimeBetweenStationsButton_Click(object sender, RoutedEventArgs e)
-        {
-            BO.BusStation scBO = ((sender as Button).DataContext as BO.BusStation);
-            TimeSpan temp = bl.getTimeBetStation(CurBusStation, scBO);
-            TimeWindow win = new TimeWindow(CurBusStation,scBO ,temp);
-            win.Closing += TimeStationWindow_Closing;
-            win.ShowDialog();
-        }
-        private void TimeStationWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
+        //private void TimeStationWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
 
-            TimeSpan tBO = (sender as TimeWindow).timeBeforeUpdate;
-            BO.BusStation toStation = (sender as TimeWindow).timeStation;
-            MessageBoxResult res = MessageBox.Show("Update grade for selected student?", "Verification", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-            if (res == MessageBoxResult.No)
-            {
-                (sender as TimeWindow).cbTime.Text = (sender as TimeWindow).timeBeforeUpdate.ToString();
-            }
-            else if (res == MessageBoxResult.Cancel)
-            {
-                (sender as TimeWindow).cbTime.Text = (sender as TimeWindow).timeBeforeUpdate.ToString();
-                e.Cancel = true; //window stayed open. cancel closing event.
-            }
-            else
-            {
-                try
-                {
-                    bl.UpdateTravelTimeBetweenstations(CurBusStation, toStation, tBO);
-                }
-                catch (BO.IdException ex)
-                {
-                    MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+        //    TimeSpan tBO = (sender as TimeWindow).timeBeforeUpdate;
+        //    BO.BusStation toStation = (sender as TimeWindow).timeStation;
+        //    MessageBoxResult res = MessageBox.Show("Update grade for selected student?", "Verification", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+        //    if (res == MessageBoxResult.No)
+        //    {
+        //        (sender as TimeWindow).cbTime.Text = (sender as TimeWindow).timeBeforeUpdate.ToString();
+        //    }
+        //    else if (res == MessageBoxResult.Cancel)
+        //    {
+        //        (sender as TimeWindow).cbTime.Text = (sender as TimeWindow).timeBeforeUpdate.ToString();
+        //        e.Cancel = true; //window stayed open. cancel closing event.
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            bl.UpdateTravelTimeBetweenstations(CurBusStation., toStation, tBO);
+        //        }
+        //        catch (BO.IdException ex)
+        //        {
+        //            MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        }
+        //    }
 
 
 
 
-        }
+        //}
 
         private void AddNewStationButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                AddNewStationWindow addStationWindow = new AddNewStationWindow(bl);
-                addStationWindow.ShowDialog();
-                bl.AddBusStation(addStationWindow.curBusStation);
-                RefreshAllStationsComboBox();
-                MessageBox.Show("The Station/s successfully added", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (BO.IdException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            AddNewStationWindow addStationWindow = new AddNewStationWindow(bl);
+            addStationWindow.ShowDialog();
+            //addNewStationWindow.addStation
+            RefreshAllStationsComboBox();
         }
 
-        private void lineInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //private void AddLineFromStationButton_Click(BO.BusLine busLine)
+        //{
+
+        //    try
+        //    {
+        //        if (CurBusStation.ListBusLinesInStation.FirstOrDefault(a => a.BusLineNumber == busLine.BusLineNumber) != null)
+        //            throw new ArgumentException("You already have that line in Station");
+        //        BO.BusLineInStation busLineStation = new BO.BusLineInStation
+        //        {
+        //            BusLineNumber = busLine.BusLineNumber,
+        //            ID = busLine.ID,
+        //            Area = (int)busLine.Area,
+        //        };
+        //        bl.AddBusLine(CurBusStation, busLineStation);
+        //        RefreshBusLinesInStation();
+        //        listOfLines.DataContext = Convert<object>(bl.BusLineDetails(CurBusStation.ListBusLinesInStation));
+        //    }
+        //    catch (ArgumentException ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
+
+        private void DelLineFromStationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddLineFromStationButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

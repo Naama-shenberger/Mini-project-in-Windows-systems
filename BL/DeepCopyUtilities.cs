@@ -48,7 +48,7 @@ namespace BL
 
             return result;
         }
-        public static BO.BusLineInStation CopyToLineInStation(this DO.BusLine busLine, DO.BusLineInStation sic)
+        public static BO.BusLineInStation CopyToLineInStation(this DO.BusLine busLine, BO.BusLineInStation sic)
         {
             BO.BusLineInStation result = (BO.BusLineInStation)busLine.CopyPropertiesToNew(typeof(BO.BusLineInStation));
             return result;

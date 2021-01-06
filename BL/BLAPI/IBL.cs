@@ -29,8 +29,8 @@ namespace BLAPI
         void AddBusStation(BusStation station);
         void DeleteBusStation(BusStation station);
         void UpdateBusStation(BusStation busStation);
-        void AddBusLine(BusStation busStation, BusLine busLine);
-        void DeleteBusLine(BusStation busStation, BusLine busLine);     
+        void AddBusLine(BusStation busStation, BusLineInStation busLine);
+        void DeleteBusLine(BusStation busStation, BusLineInStation busLine);     
         #endregion
         #region Bus Line 
         void UpdateDistanceBetweenstations(int id1, int id2, float _distance);
