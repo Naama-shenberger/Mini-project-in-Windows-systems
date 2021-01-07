@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
         <Label Content="Select Station:" Grid.Row="0" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Height="25" Width="90"/>
         <ComboBox x:Name="ComboBoxBusStationKey" VerticalAlignment="Top" 
-                  Grid.Row="0" Height="25" Margin="100,15,399.6,0"
+                  Grid.Row="0" Height="25" Margin="100,15,453.6,0"
                   ItemsSource="{Binding}" 
                   HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="ComboBoxBusStationKey_SelectionChanged" BorderBrush="#FFC6F3B8" >
             <ComboBox.Background>
@@ -56,61 +56,41 @@
             <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="5"  HorizontalAlignment="Left" Height="30" Margin="3,4.6,0,32.6" VerticalAlignment="Center" Width="94" Grid.RowSpan="2"/>
             <TextBox x:Name="TextBoxLongitude" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="3,4,0,3"  Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="25" Width="150"/>
         </Grid>
-        <!--<DataGrid x:Name="DataGrirdAllLines" Background="#FFE6F1E2"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="440,52,37.6,295" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
-
+        <DataGrid x:Name="DataGrirdAllLinesInStation" Background="#FFE6F1E2"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="381,92,37.6,232" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="AllBusLine" Binding="{Binding BusLineNumber}" Header="Code Station" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="AllStationAddressClumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="BusLineNumber" Binding="{Binding BusLineNumber}" Header="Bus line number" Width="SizeToHeader"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <CheckBox  x:Name="CheckBoxBusLineInStation" IsChecked="{Binding Selected}" Checked="BusLine_Checked" Content="Checke To Add" Margin="12,6,2,2" />
-                                <CheckBox x:Name="CheckdelBoxBusLineInStation" IsChecked="{Binding Selected}" Checked="delBusLine_Checked" Content="Checke To del" Margin="12,3,5,2" />
+                                <Button x:Name="btDelLine" Content="delete" Click="DelLineFromStationButton_Click" ToolTip="Update time drive between station , for selected station"/>
+                                <!--<CheckBox  x:Name="CheckBoxBusLineInStation" IsChecked="{Binding Selected}" Checked="BusLine_Checked" Content="Checke To Add" Margin="12,6,2,2" />
+                                <CheckBox x:Name="CheckdelBoxBusLineInStation" IsChecked="{Binding Selected}" Checked="delBusLine_Checked" Content="Checke To del" Margin="12,3,5,2" />-->
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-            </DataGrid.Columns>-->
-
-        <!--</DataGrid>-->
-        <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="440,22,0,0" Height="27" Width="171"/>
-        <ListView x:Name="List_lineInStation" Background="#FFE6F1E2" Margin="440,70,42.6,258">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn x:Name="lineInStationNumber" Header="Line Number"   DisplayMemberBinding="{Binding BusLineNumber}"/>
-                </GridView>
-            </ListView.View>
-            <ListView Height="100" Width="100">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn>
-                            <Button x:Name="btDelLine" Content="delete" Click="DelLineFromStationButton_Click" ToolTip="Update time drive between station , for selected station"/>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </ListView>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="381,52,0,0" Height="27" Width="171"/>
         <Button Content="Changes on Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,142,0,0" Click="UpdateButton_Click" Grid.Column="1" Width="155" Height="46" Background="#FFEAE2F4"/>
         <Button Content="Add New Station" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Column="1" Margin="10.4,205,0,0"  Click="AddNewStationButton_Click" Width="155" Height="46" Background="#FFEAE2F4"/>
         <Button Content="Delete Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,70,0,0" Click="DeleteCurStationButton_Click" Grid.Column="1" Width="155" Height="46" Background="#FFEAE2F4"/>
         <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10.4,404,0,0"  RenderTransformOrigin="0.525,0.776" Click="BackButton_Click" Grid.Column="1" Width="155" Height="46" Background="#FFEAE2F4"/>
-        <ListView x:Name="ListOfLines" Background="#FFE6F1E2" Margin="440,235,42.6,59" >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Line Number" x:Name="lineNumber"  DisplayMemberBinding="{Binding BusLineNumber}"/>
-                </GridView>
-            </ListView.View>
-            <ListView Height="100" Width="100">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn>
-                            <Button x:Name="btAddLine" Content="add" Click="AddLineFromStationButton_Click" ToolTip="Update time drive between station , for selected station"/>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </ListView>
+        <DataGrid x:Name="DataGrirdAllLines" Background="#FFE6F1E2"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="381,233,37.6,66" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="AllBusLineNumber" Binding="{Binding BusLineNumber}" Header="Bus line number" Width="SizeToHeader"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Button x:Name="btAddLine" Content="add" Click="AddLineFromStationButton_Click" ToolTip="Update time drive between station , for selected station"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

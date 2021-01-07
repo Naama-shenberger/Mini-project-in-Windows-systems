@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,33 +22,35 @@ namespace PL.WPF
     public partial class AddNewStationWindow : Window
     {
         IBL bl;
-        public BO.BusStation newStation;
+        BO.BusStation newStation;
+        public BO.BusStation BusStation
+        {
+            get { return newStation; }
+        }
         public AddNewStationWindow(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
-
+            
         }
-        private void addNewStation()
-        {
-
-        }
-
         private void AddingButton_Click(object sender, RoutedEventArgs e)
         {
-            newStation = new BO.BusStation() { BusStationKey = int.Parse(Bus_Station_Key.Text), StationName = Station_Name.Text, StationAddress = Station_Address.Text, Latitude = LatitudeValue.Value, Longitude = LongdeValue.Value };
-
             try
             {
-                    //if (int.Parse(Bus_Station_Key.Text) > 99999 && int.Parse(Bus_Station_Key.Text) < 1000000)
-                    //    MessageBox.Show("unvalid bus station code", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-                bl.AddBusStation(newStation);
+                newStation = new BO.BusStation()
+                { BusStationKey = int.Parse(Bus_Station_Key.Text),
+                    StationName = Station_Name.Text, 
+                    StationAddress = Station_Address.Text,
+                    Latitude = LatitudeValue.Value, 
+                    Longitude = LongdeValue.Value 
+                };
                 this.Close();
             }
-            catch (ArgumentException ex)
+            catch (BO.IdException)
             {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
 }

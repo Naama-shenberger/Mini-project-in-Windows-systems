@@ -32,13 +32,29 @@ namespace PL.WPF
             ComboBoxBusStationKey.SelectedValuePath= "BusStationKey";
             ComboBoxBusStationKey.SelectedIndex = 0;
             RefreshAllStationsComboBox();
-            ListOfLines.DataContext = Convert < BO.BusLine >( bl.GetAllBusLines());
+            DataGrirdAllLines.IsReadOnly = true;
+            DataGrirdAllLinesInStation.IsReadOnly = true;
+
+
+        }
+        private void RefreshBusLines()
+        {
+            List<BO.BusLine> listOfUnRegisteredCourses = bl.GetAllBusLines().ToList();
+            DataGrirdAllLines.DataContext = listOfUnRegisteredCourses;
+        }
+        private void RefreshBusLinesInStation()
+        {
+            if (CurBusStation != null&& CurBusStation.ListBusLinesInStation!=null)
+            {
+                DataGrirdAllLinesInStation.DataContext = CurBusStation.ListBusLinesInStation;
+            }
         }
         private void RefreshAllStationsComboBox()
         {
-            ComboBoxBusStationKey.DataContext = Convert<BO.BusStation>( bl.GetAllBusStation()); //ObserListOfStations;
-            ComboBoxBusStationKey.SelectedIndex = 0;
-            CurBusStation = Convert<BO.BusStation>(bl.GetAllBusStation()).ToList()[0];
+            ComboBoxBusStationKey.DataContext = bl.GetAllBusStation().ToList(); //ObserListOfStudents;
+            //ComboBoxBusStationKey.DataContext = Convert<BO.BusStation>( bl.GetAllBusStation()); //ObserListOfStations;
+            //ComboBoxBusStationKey.SelectedIndex = 0;
+            //CurBusStation = Convert<BO.BusStation>(bl.GetAllBusStation()).ToList()[0];
         }
         private void ComboBoxBusStationKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -47,14 +63,11 @@ namespace PL.WPF
             if (CurBusStation != null)
             {
                 RefreshBusLinesInStation();
-                RefreshBusLinesInStation();
+                RefreshBusLines();
             }
 
         }
-        private void RefreshBusLinesInStation()
-        {
-            List_lineInStation.DataContext = CurBusStation.ListBusLinesInStation;
-        }
+
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
@@ -66,8 +79,6 @@ namespace PL.WPF
                 if (CurBusStation != null)
                     bl.UpdateBusStation(CurBusStation);
                 MessageBox.Show("The Station/s successfully updated", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                RefreshAllStationsComboBox();
-                RefreshBusLinesInStation();
 
             }
             catch (BO.IdException ex)
@@ -89,8 +100,11 @@ namespace PL.WPF
                     bl.DeleteBusStation(CurBusStation);
                     BO.BusStation BusStationToDel = CurBusStation;
                     MessageBox.Show("The Station/s successfully deleted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (CurBusStation.ListBusLinesInStation == null)
+                        MessageBox.Show($"No bus line contained at station {CurBusStation.BusStationKey} ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     RefreshAllStationsComboBox();
                     RefreshBusLinesInStation();
+                    RefreshBusLines();
                 }
             }
             catch (BO.IdException ex)
@@ -112,6 +126,7 @@ namespace PL.WPF
             {
                 AddNewStationWindow addStationWindow = new AddNewStationWindow(bl);
                 addStationWindow.ShowDialog();
+                bl.AddBusStation(addStationWindow.BusStation);
                 MessageBox.Show($"bus Line Station {addStationWindow.Bus_Station_Key} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 //addNewStationWindow.addStation
                 RefreshAllStationsComboBox();
@@ -123,76 +138,66 @@ namespace PL.WPF
             }
         }
 
-        private void DelLineFromStation(BO.BusLineInStation busLine)
-        {
-            try
-            {
-                bl.DeleteBusLineFromStation(CurBusStation, busLine);
-                RefreshBusLinesInStation();
-            }
-            catch (BO.IdException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        private void AddLineFromStation(BO.BusLine busLine)
-        {
+        //private void DelLineFromStation(BO.BusLineInStation busLine)
+        //{
+        //    try
+        //    {
+        //        bl.DeleteBusLineFromStation(CurBusStation, busLine);
+        //        RefreshBusLinesInStation();
+        //    }
+        //    catch (BO.IdException ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
+        //private void AddLineFromStation(BO.BusLine busLine)
+        //{
 
-            try
-            {
-                bl.AddBusLineToStation(CurBusStation, busLine);
-                RefreshBusLinesInStation();
-            }
-            catch (BO.IdException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+        //    try
+        //    {
+        //        bl.AddBusLineToStation(CurBusStation, busLine);
+        //        RefreshBusLinesInStation();
+        //    }
+        //    catch (BO.IdException ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
 
         private void AddLineFromStationButton_Click(object sender, RoutedEventArgs e)
         {
+            if (CurBusStation == null)
+            {
+                MessageBox.Show("You must select a student first", "Attention", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             try
             {
-                BO.BusLineInStation busLineInStation = new BO.BusLineInStation
-                {
-                    BusLineNumber = int.Parse((sender as CheckBox).DataContext.ToString().Substring(18, 6))
-                };
-                if (CurBusStation.ListBusLinesInStation.FirstOrDefault(id => id.BusLineNumber == busLineInStation.BusLineNumber) == null)
-                {
-                    //AddLineFromStation(CurBusStation.ListBusLinesInStation)
-                    //bl.AddBusLineToStation(CurBusStation, busLineInStation);
-                }
-                else
-                    throw new ArgumentException("The line is already passing in station ");
-
+                BO.BusLine blBO = ((sender as Button).DataContext as BO.BusLine);
+                bl.AddBusLineToStation(CurBusStation, blBO);
                 RefreshBusLinesInStation();
-                MessageBox.Show($"bus Line Station {busLineInStation.BusLineNumber} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                //(sender as CheckBox).Visibility = Visibility.Hidden;
+                RefreshBusLines();
             }
-            catch (ArgumentException ex)
+            catch (BO.IdException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-                //(sender as CheckBox).IsChecked = false;
             }
-            //var senderList = sender as ListViewItem;
-            //bo = senderList.DataContext as BO.BusStation;
-            //AddLineFromStation(curBusStation);
         }
 
         private void DelLineFromStationButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var row = sender as CheckBox;
-                var Object = row.DataContext as object;
-                var ID = int.Parse(Object.ToString().Substring(18, 6));
-               // bl.DeleteBusLineStation(CurBusStation.BusStationKey, CurBusStation.ListBusLinesInStation.FirstOrDefault(i => i.BusLineNumber == ID).BusLineNumber);
-                RefreshAllStationsComboBox();
+                BO.BusLineInStation blisBO = ((sender as Button).DataContext as BO.BusLineInStation);
+                bl.DeleteBusLineFromStation(CurBusStation, blisBO);
+                MessageBox.Show($"bus Line Station {blisBO.BusLineNumber} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 RefreshBusLinesInStation();
+                RefreshBusLines();
             }
-            catch (BO.IdException ex)
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                //(sender as CheckBox).IsChecked = false;
             }
 
         }

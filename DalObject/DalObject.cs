@@ -297,7 +297,9 @@ namespace DL
             var toDeleteIndex = DataSource.ListStations.FindIndex(s => s.BusStationKey == station.BusStationKey);
             if (toDeleteIndex != -1)
                 if (station.Active == true)
-                    DataSource.BusLineStations[toDeleteIndex].Active = false;
+                {
+                    DataSource.ListStations[toDeleteIndex].Active = false;
+                }
                 else
                     throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} is already deleted");
             else
