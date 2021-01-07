@@ -82,5 +82,8 @@ namespace BLAPI
         void AddBusLinesStation(IEnumerable<BusLineStation> busLineStations);
         DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO);
         #endregion
+        #region Line Ride
+        DO.LineRide LineRideStationDoBoAdapter(BO.LineRides lineRides);
+        #endregion 
     }
 }

@@ -172,16 +172,16 @@ namespace DS
             };
             BusLineStations = new List<BusLineStation>
             {
-                new BusLineStation{Active=true,BusStationKey=857321,NumberStationInLine=1,ID=17},
+                new BusLineStation{Active=true,BusStationKey=857321,NumberStationInLine=2,ID=17},
                 new BusLineStation{Active=true,BusStationKey=876015,NumberStationInLine=2,ID=16},
-                new BusLineStation{Active=true,BusStationKey=873401,NumberStationInLine=3,ID=19},
-                new BusLineStation{Active=true,BusStationKey=873702,NumberStationInLine=4,ID=13},
-                new BusLineStation{Active=true,BusStationKey=874104,NumberStationInLine=5,ID=11},
-                new BusLineStation{Active=true,BusStationKey=873401,NumberStationInLine=6,ID=5},
-                new BusLineStation{Active=true,BusStationKey=388614,NumberStationInLine=7,ID=16},
-                new BusLineStation{Active=true,BusStationKey=388624,NumberStationInLine=8,ID=11},
-                new BusLineStation{Active=true,BusStationKey=388634,NumberStationInLine=9,ID=7},
-                new BusLineStation{Active=true,BusStationKey=875612,NumberStationInLine=10,ID=0}
+                new BusLineStation{Active=true,BusStationKey=873401,NumberStationInLine=2,ID=19},
+                new BusLineStation{Active=true,BusStationKey=873702,NumberStationInLine=2,ID=13},
+                new BusLineStation{Active=true,BusStationKey=874104,NumberStationInLine=2,ID=11},
+                new BusLineStation{Active=true,BusStationKey=873401,NumberStationInLine=2,ID=5},
+                new BusLineStation{Active=true,BusStationKey=388614,NumberStationInLine=3,ID=16},
+                new BusLineStation{Active=true,BusStationKey=388624,NumberStationInLine=2,ID=11},
+                new BusLineStation{Active=true,BusStationKey=388634,NumberStationInLine=2,ID=7},
+                new BusLineStation{Active=true,BusStationKey=875612,NumberStationInLine=2,ID=0}
 
                 //new BusLineStation{Active=true,BusStationKey=388473,NumberStationInLine=11},
                 //new BusLineStation{Active=true,BusStationKey=388453,NumberStationInLine=12},

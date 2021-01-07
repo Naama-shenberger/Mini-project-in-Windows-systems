@@ -523,12 +523,12 @@ namespace DL
         /// <returns></returns>
         public LineRide GetLineWayOut(int id)
         {
-            LineRide busLine = DataSource.LinesOutForARide.Find(b => b.ID == id && b.Active==true);
+            LineRide busLine = DataSource.LinesOutForARide.Find(b => b.ID == id );
+           
             if (busLine != null)
                 if (busLine.Active == true)
-                {
-                    busLine.Active = false;
-                    return busLine.Clone();
+                { 
+                    return busLine.Clone(); 
                 }
             throw new IdException(id, $"No bus line have the id:{id}");
         }

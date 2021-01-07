@@ -11,9 +11,9 @@
         <Label Content="Welcome to our Bus system " HorizontalAlignment="Left" Margin="176,54,0,0" VerticalAlignment="Top" Height="41" Width="348" FontWeight="Bold" FontStyle="Italic" FontSize="20" Foreground="#FF1DBCD4"/>
         <GroupBox Header="Choose Option:" HorizontalAlignment="Left" Height="207" Margin="176,100,0,0" VerticalAlignment="Top" Width="399" FontSize="16" FontStyle="Italic" FontWeight="SemiBold">
             <StackPanel Margin="21,20,29,24">
-                <RadioButton x:Name="rbBusLine" Content="Bus line display" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="140" Height="43"/>
+                <RadioButton x:Name="rbBusLine" Content="Bus line display" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="140" Height="30"/>
                 <RadioButton x:Name="rbBus" Content="Bus display" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Width="140" Height="38"/>
-                <RadioButton x:Name="rbStation" Content="Station display" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Width="140" Height="41"/>
+                <RadioButton x:Name="rbStation" Content="Station display" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Width="154" Height="23"/>
             </StackPanel>
         </GroupBox>
         <Button x:Name="btnGO" Content="GO" HorizontalAlignment="Left" Height="42" Margin="288,342,0,0" VerticalAlignment="Top" Width="105" Background="#FF4496CF" FontSize="16" FontFamily="Kristen ITC" FontWeight="Bold" Click="btnGO_Click"/>

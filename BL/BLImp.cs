@@ -416,8 +416,9 @@ namespace BL
                 busLine.StationsInLine = from sin in busLine.StationsInLine
                                          where sin.BusStationKey != id
                                          select sin;
-
+                busLine.StationsInLine.AsParallel().ForAll(a => { if (a.NumberStationInLine <= busLineStation.NumberStationInLine) { a.NumberStationInLine = a.NumberStationInLine + 1; } });
                 busLine.StationsInLine = busLine.StationsInLine.Append(BusLineStationDoBoAdapter(save));
+               
             }
             catch(DO.IdException ex)
             {
@@ -489,13 +490,19 @@ namespace BL
                                        where sin.ID == busLineDO.ID
                                        let station = dl.GetBusLineStation(sin.BusStationKey,sin.ID)
                                        select DeepCopyUtilities.CopyToStationInLine(station);
-            busLineBO.lineRides = from sin in dl.LinesWayOut()
+           busLineBO.lineRides = from sin in dl.LinesWayOut()
                                   where sin.ID == busLineBO.ID
-                                  let lineRide = dl.GetLineWayOut(sin.ID)
-                                  select DeepCopyUtilities.CopyToLineRide(lineRide);
+                                  from sen in dl.LinesWayOut()
+                                  where sen.ID== busLineBO.ID
+                                  select DeepCopyUtilities.CopyToLineRide(sen);
             return busLineBO;
         }
-       
+        public DO.LineRide LineRideStationDoBoAdapter(BO.LineRides lineRides)
+        {
+            DO.LineRide lineRide = new DO.LineRide();
+            lineRides.CopyPropertiesTo(lineRide);
+            return lineRide;
+        }
         /// <summary>
         /// Add a line to the list of bus lines
         //  The function gets a bus line to add
@@ -511,6 +518,14 @@ namespace BL
                 var RunNumber = dl.AddBusLine(BusLineBoDoAdapter(busLine));
                 busLine.StationsInLine = busLine.StationsInLine.Concat(busLineStation).Distinct();
                 busLine.StationsInLine.AsParallel().ForAll(id => id.ID = RunNumber);
+                var One = from sin in busLineStation
+                          from sen in dl.ConsecutivesStations()
+                          where sen.StationCodeOne == sin.BusStationKey
+                          select sen;
+                var Two = from sin in busLineStation
+                          from sen in dl.ConsecutivesStations()
+                          where sen.StationCodeTwo == sin.BusStationKey
+                          select sen;
             }
             catch (DO.IdException)
             {
@@ -538,8 +553,8 @@ namespace BL
             try
             {
                 AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
-                // AddToLine.StationsInLine.ToList().ForEach(id => dl.AddBusLineStation(BusLineStationBoDoAdapter(id)));
                 AddToLine.StationsInLine.Update(id => id.ID = AddToLine.ID);
+                
             }
             catch (DO.IdException ex)
             {
