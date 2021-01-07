@@ -13,8 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-//using Syncfusion.Windows.Tools.Controls;
-
 namespace PL.WPF
 {
     /// <summary>
@@ -23,10 +21,9 @@ namespace PL.WPF
     public partial class BusLineWindow : Window
     {
         IBL bl;
-        static int Index = 0;
-        BO.BusLine CurBusLine = new BO.BusLine();
-        ObservableCollection<BO.BusLineStation> CurBusLineStation=new ObservableCollection<BO.BusLineStation>();
-        private ObservableCollection<BO.BusLine> BusLineList = new ObservableCollection<BO.BusLine>();
+        static int Index = 0;//Index update
+        BO.BusLine CurBusLine = new BO.BusLine();//current Bus Line
+        private ObservableCollection<BO.BusLine> BusLineList = new ObservableCollection<BO.BusLine>();//Bus Line List 
         public BusLineWindow(IBL _bl)
         {
             InitializeComponent();
@@ -39,43 +36,68 @@ namespace PL.WPF
             RefreshAllBusLinesComboBox();
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
-           
-
         }
+        /// <summary>
+        /// Refresh Data Grird
+        /// </summary>
         void RefreshDataGrirdAllStationslines()
         {
             DataGrirdAllStationslines.DataContext = Convert<object>(bl.StationDetails(bl.GetAllBusLineStations()));
         }
+        /// <summary>
+        /// Refresh Combo Box
+        /// </summary>
         void RefreshAllBusLinesComboBox()
         {
             ComboBoxBusLineNumber.DataContext= BusLineList = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
             ComboBoxBusLineNumber.SelectedIndex = 0;
-            //if (CurBusLine != null && CurBusLine.lineRides != null)
-            //    lvExpander.DataContext = CurBusLine.lineRides;
         }
+        /// <summary>
+        /// Collection Conversion Function to ObservableCollection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original"></param>
+        /// <returns></returns>
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
+        /// <summary>
+        /// Combo Box Bus Line Number SelectionChanged
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbBusBusLineNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CurBusLine = (ComboBoxBusLineNumber.SelectedItem as BO.BusLine);
             gridOneBusLine.DataContext = CurBusLine;
             if (CurBusLine != null && CurBusLine.StationsInLine != null)
                 DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
-               ///RefreshDataGrirdStationsline();
             if (CurBusLine != null && CurBusLine.lineRides != null)
                 lvExpander.DataContext = CurBusLine.lineRides;
         }
+        /// <summary>
+        /// Click event
+        /// Deleting a bus line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btDelBusLineStation_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             var save = int.Parse((btn).DataContext.ToString().Substring(18, 6));
-
-           bl.DeleteBusLineStation(bl.GetAllBusLineStations().FirstOrDefault(predicate => predicate.BusStationKey == save));
+            bl.DeleteBusLineStationFromeLine(CurBusLine, bl.GetAllBusLineStations().FirstOrDefault(predicate => predicate.BusStationKey == save));
+            bl.DeleteBusLineStation(bl.GetAllBusLineStations().FirstOrDefault(predicate => predicate.BusStationKey == save));
             RefreshDataGrirdAllStationslines();
+            RefreshDataGrirdStationsline();
         }
-        private void bthAddBusLineStation_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Click event
+        /// Add a station to the line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bthAddBusLineStationToLine_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -103,6 +125,12 @@ namespace PL.WPF
                 
             }
         }
+        /// <summary>
+        /// Click event
+        /// Deleting a bus stop from a line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
             var btn= sender as Button;
@@ -118,6 +146,12 @@ namespace PL.WPF
             bl.DeleteBusLineStationFromeLine(CurBusLine,save);
             RefreshDataGrirdStationsline();
         }
+        /// <summary>
+        /// Click event
+        /// Add Bus Line event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddBusLineButton_Click(object sender, RoutedEventArgs e)
         {
             AddBusLineWindow addBusLineWindow = new AddBusLineWindow(bl);
@@ -125,18 +159,18 @@ namespace PL.WPF
             var save = addBusLineWindow.BusLine;
             bl.AddBusLine(save,save.StationsInLine);
             BusLineList.Add(save);
-            //RefreshAllBusLinesComboBox();
-            //RefreshDataGrirdStationsline();
-            //RefreshDataGrirdAllStationslines();
-
-            //ComboBoxBusLineNumber.DataContext = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
         }
+        /// <summary>
+        /// Click event
+        /// Deleting a bus line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteButon_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult res = MessageBox.Show("Delete selected student?", "Verification", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (res == MessageBoxResult.No)
                 return;
-
             try
             {
                 if (CurBusLine != null)
@@ -155,15 +189,28 @@ namespace PL.WPF
         {
             var btn = sender as Button;
             var save = CurBusLine.StationsInLine.FirstOrDefault(c => c.BusStationKey == int.Parse((btn).DataContext.ToString().Substring(18, 6)));
-            Update update = new Update(bl,save,CurBusLine,CurBusLine.StationsInLine.Count());
+            var inex = from sin in CurBusLine.StationsInLine
+                       orderby sin.NumberStationInLine descending
+                       select sin;
+            Update update = new Update(bl, save, CurBusLine, inex.ToList()[0].NumberStationInLine);
             update.Closed += UpdateIndexInLine_Closed;
             update.ShowDialog();
-            //RefreshDataGrirdStationsline();
         }
+        /// <summary>
+        /// Closing event for UpdateIndexInLine_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateIndexInLine_Closed(object sender, EventArgs e)
         {
             RefreshDataGrirdStationsline();
         }
+        /// <summary>
+        /// Click event
+        /// The function updates a bus line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -178,46 +225,23 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void BusLineStation_Checked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Index = CurBusLine.StationsInLine.Count()+1;
-                BO.BusLineStation busLineStation = new BO.BusLineStation
-                {
-                    BusStationKey = int.Parse((sender as CheckBox).DataContext.ToString().Substring(18, 6)),
-                    NumberStationInLine =++Index,
-                    Active = true
-                };
-                if (CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID==id.ID) == null)
-                {
-                    CurBusLine.StationsInLine=CurBusLine.StationsInLine.Append(busLineStation);
-                    bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine);
-                }
-                else
-                    throw new ArgumentException("The line station is already on the line route");
-                RefreshDataGrirdStationsline();
-                MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                (sender as CheckBox).Visibility = Visibility.Hidden;
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-                (sender as CheckBox).IsChecked = false;
-            }
-        }
-       
-
+        /// <summary>
+        /// The function Refresh DataGrird -Stationsline
+        /// </summary>
         void RefreshDataGrirdStationsline()
-        {
-            //if (CurBusLine == null)
-            //    CurBusLine = Convert<BO.BusLine>(bl.GetAllBusLines()).ToList()[0];
+        { 
             if (CurBusLine!=null && CurBusLine.StationsInLine != null)
             {
                 DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine)).Distinct();
             }
         }
-
+        /// <summary>
+        /// Click event
+        /// Add a line/s station from a list of stations 
+        /// Using the window AddBusLineWindow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddBusLineStatoin_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -242,22 +266,21 @@ namespace PL.WPF
             }
 
         }
-
+        /// <summary>
+        /// Back button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backbtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
            
         }
-        private void delBusLineStation_Checked(object sender, RoutedEventArgs e)
-        {
-            var row = sender as CheckBox;
-            var Object = row.DataContext as object;
-            var ID = int.Parse(Object.ToString().Substring(18, 6));
-            bl.DeleteBusLineStationFromeLine(CurBusLine, CurBusLine.StationsInLine.FirstOrDefault(i=>i.BusStationKey==ID));
-            RefreshDataGrirdAllStationslines();
-            RefreshDataGrirdStationsline();
-        }
-
+        /// <summary>
+        /// Data Grird 'Stationslines'-SelectionChanged Function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGrirdStationslines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CurBusLine != null && CurBusLine.StationsInLine != null)

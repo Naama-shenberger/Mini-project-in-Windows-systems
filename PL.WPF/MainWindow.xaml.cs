@@ -33,17 +33,17 @@ namespace PL.WPF
             if (rbBus.IsChecked == true)
             {
                 new BusWindow(bl).Show();
-                Close();
+               
             }
             else if(rbBusLine.IsChecked==true)
             {
                 new BusLineWindow(bl).Show();
-                Close();
+             
             }
             else if(rbStation.IsChecked==true)
             {
                 new StationWindow(bl).Show();
-                Close();
+             
             }
             else
             {

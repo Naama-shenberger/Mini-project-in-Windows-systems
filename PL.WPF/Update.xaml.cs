@@ -31,7 +31,7 @@ namespace PL.WPF
             BL = _BL;
             BusLine = _busLine;
             CurBusLineStation = busLineStation;
-            for (int i = 1; i <= Index -1; i++)
+            for (int i = 1; i <= Index; i++)
             {
                 cbNumberIndex.Items.Add(i);
             }
@@ -39,10 +39,8 @@ namespace PL.WPF
         }
         
         private void Done_Click(object sender, RoutedEventArgs e)
-        {
-            //CurBusLineStation.NumberStationInLine = int.Parse(cbNumberIndex.SelectedValue.ToString());
+        { 
             BL.UpdateBusLineStation(CurBusLineStation.BusStationKey,BusLine.ID, BusLine, int.Parse(cbNumberIndex.SelectedValue.ToString()));
-           // BusLine.StationsInLine.AsParallel().ForAll(a => { if (a.BusStationKey == CurBusLineStation.BusStationKey) { a.NumberStationInLine= int.Parse(cbNumberIndex.SelectedValue.ToString()); } });
             this.Close();
         }
     }

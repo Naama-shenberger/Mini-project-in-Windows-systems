@@ -58,7 +58,6 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-
                                 <Button x:Name="btUpdateIndexInLine" Click="UpdateIndexInLine_Click" Content="Update Number Station"  ToolTip="Update Number Station in the Line"/>
                                 <Button x:Name="btRemoveStationLine" Content="Remove Station" Click="RemoveStation_Click" />
                             </StackPanel>
@@ -81,9 +80,7 @@
                         <DataTemplate>
                             <StackPanel>
                                 <Button x:Name="btDelBusLineStation" Content="del Station" Click="btDelBusLineStation_Click"/>
-                                <Button x:Name="bthAddBusLineStation" Content="Add Station" Click="bthAddBusLineStation_Click"/>
-                                <CheckBox  x:Name="CheckBoxBusLineStation" IsChecked="{Binding Selected}" Checked="BusLineStation_Checked" Content="Checke To Add" Margin="12,6,2,2" />
-                                <CheckBox x:Name="CheckdelBoxBusLineStation" IsChecked="{Binding Selected}" Checked="delBusLineStation_Checked" Content="Checke To del" Margin="12,3,5,2" />
+                                <Button x:Name="bthAddBusLineStationToLine" Content="Add Station" Click="bthAddBusLineStationToLine_Click"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
