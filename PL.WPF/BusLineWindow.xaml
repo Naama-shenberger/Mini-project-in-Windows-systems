@@ -136,6 +136,8 @@
                 </GroupStyle>
             </TreeView.GroupStyle>
         </TreeView>
+        <TextBox  x:Name="Ddistancetb" HorizontalAlignment="Left" Height="25" Margin="170,553,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="77"/>
+        <materialDesign:TimePicker Name="TimePickerDistance" HorizontalAlignment="Left" Margin="170,597,0,0" VerticalAlignment="Top"/>
 
 
 

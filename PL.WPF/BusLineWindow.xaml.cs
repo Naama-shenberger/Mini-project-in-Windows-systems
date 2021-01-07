@@ -113,7 +113,7 @@ namespace PL.WPF
                 if (CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID) == null)
                 {
                     CurBusLine.StationsInLine = CurBusLine.StationsInLine.Append(busLineStation);
-                    bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine);
+                  //  bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine);
                 }
                 else
                     throw new ArgumentException("The line station is already on the line route");
@@ -159,7 +159,7 @@ namespace PL.WPF
             AddBusLineWindow addBusLineWindow = new AddBusLineWindow(bl);
             addBusLineWindow.ShowDialog();
             var save = addBusLineWindow.BusLine;
-            bl.AddBusLine(save,save.StationsInLine);
+           // bl.AddBusLine(save,save.StationsInLine,Double.Parse(Ddistancetb.Text),);
             BusLineList.Add(save);
         }
         /// <summary>
