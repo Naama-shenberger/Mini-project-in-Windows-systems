@@ -296,12 +296,15 @@ namespace DL
         {
             var toDeleteIndex = DataSource.ListStations.FindIndex(s => s.BusStationKey == station.BusStationKey);
             if (toDeleteIndex != -1)
+            {
                 if (station.Active == true)
                     DataSource.ListStations[toDeleteIndex].Active = false;
                 else
                     throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} is already deleted");
+            }
             else
                 throw new IdException(station.BusStationKey, $"The bus Station {station.BusStationKey} does not exist");
+           
 
         }
         /// <summary>

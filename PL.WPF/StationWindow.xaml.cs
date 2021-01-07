@@ -35,11 +35,10 @@ namespace PL.WPF
             RefreshBusLines();
             DataGrirdAllLines.IsReadOnly = true;
             DataGrirdAllLinesInStation.IsReadOnly = true;
-
-
         }
         private void RefreshAllStationsComboBox()
         {
+            ComboBoxBusStationKey.SelectedIndex = 0;
             ComboBoxBusStationKey.DataContext = bl.GetAllBusStation().ToList(); //ObserListOfStudents;
 
         }
@@ -79,11 +78,13 @@ namespace PL.WPF
             try
             {
                 if (CurBusStation != null)
+                {
                     bl.UpdateBusStation(CurBusStation);
-                MessageBox.Show("The Station/s successfully updated", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                RefreshAllStationsComboBox();
-                RefreshBusLinesInStation();
-                RefreshBusLines();
+                    MessageBox.Show("The Station/s successfully updated", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    RefreshAllStationsComboBox();
+                }
+                else
+                    MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             catch (BO.IdException ex)
@@ -105,10 +106,14 @@ namespace PL.WPF
                     bl.DeleteBusStation(CurBusStation);
                     BO.BusStation BusStationToDel = CurBusStation;
                     MessageBox.Show("The Station/s successfully deleted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    if (CurBusStation.ListBusLinesInStation == null)
-                        MessageBox.Show($"No bus line contained at station {CurBusStation.BusStationKey} ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //if (CurBusStation.ListBusLinesInStation == null)
+                    //    MessageBox.Show($"No bus line contained at station {CurBusStation.BusStationKey} ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     RefreshAllStationsComboBox();
+                    RefreshBusLinesInStation();
+                    RefreshBusLines();
                 }
+                else
+                    MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (BO.IdException ex)
             {
@@ -128,7 +133,6 @@ namespace PL.WPF
         {
             try
             {
-
                 if (CurBusStation != null)
                 {
                     AddNewStationWindow addStationWindow = new AddNewStationWindow(bl);
@@ -137,9 +141,9 @@ namespace PL.WPF
                     MessageBox.Show($"bus Line Station {addStationWindow.Bus_Station_Key} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     //addNewStationWindow.addStation
                     RefreshAllStationsComboBox();
-                    RefreshBusLinesInStation();
-                    RefreshBusLines();
                 }
+                else
+                    MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (BO.IdException ex)
             {
@@ -166,6 +170,8 @@ namespace PL.WPF
                     RefreshBusLinesInStation();
                     RefreshBusLines();
                 }
+                else
+                    MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (BO.IdException ex)
             {
@@ -185,6 +191,9 @@ namespace PL.WPF
                     RefreshBusLinesInStation();
                     RefreshBusLines();
                 }
+                else
+                    MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
             catch (ArgumentException ex)
             {
