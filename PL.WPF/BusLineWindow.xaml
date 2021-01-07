@@ -30,8 +30,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-             
-             <!--<Label Content="Travel Start Time:" Grid.Row="6" Grid.Column="0"  HorizontalAlignment="Left" Margin="3,0.4,0,-3.8"  VerticalAlignment="Center" Height="29" Grid.RowSpan="4"/>
+
+            <!--<Label Content="Travel Start Time:" Grid.Row="6" Grid.Column="0"  HorizontalAlignment="Left" Margin="3,0.4,0,-3.8"  VerticalAlignment="Center" Height="29" Grid.RowSpan="4"/>
             <TextBox Text="{Binding TravelStartTime}" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Margin="2.8,4,0,0.4"  VerticalAlignment="Center" Width="120" Height="22"/>-->
             <Label Name="LabelArea" Content="Area:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
             <ComboBox x:Name="AreaComboBox"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" SelectedItem="{Binding Area}" VerticalAlignment="Center" Width="120"/>
@@ -94,16 +94,25 @@
 
         <Button x:Name="AddBusLineStatoin" Content="Add Bus Line Station" HorizontalAlignment="Left" Margin="747,200,0,0" VerticalAlignment="Top" Width="122" Click="AddBusLineStatoin_Click" />
         <Button x:Name="backbtn" Content="Back" HorizontalAlignment="Left" Margin="230,481,0,0" VerticalAlignment="Top" Width="75" Click="backbtn_Click"/>
-        <Expander x:Name="HeaderLineSchedule" Header="Line schedule" HorizontalAlignment="Left" Height="100" Margin="40,211,0,0" VerticalAlignment="Top" Width="100">
-            <Grid Background="#FFE5E5E5">
+
+        <Expander Header="Line schedule"  HorizontalAlignment="Left" Height="109" Margin="40,242,0,0" VerticalAlignment="Top" Width="200">
+            <Grid Background="#FFE5E5E5" Height="83" Margin="0,0,-1.4,0">
+                <ListView x:Name="lvExpander" ItemsSource="{Binding}"  Grid.ColumnSpan="4" Margin="0,0,-52,0" HorizontalAlignment="Left" Width="252">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Travel Start Time-" DisplayMemberBinding="{Binding TravelStartTime}"/>
+                            <GridViewColumn Header="Travel End Time-" DisplayMemberBinding="{Binding TravelEndTime}"/>
+                            <GridViewColumn Header="Exit Every-"  DisplayMemberBinding="{Binding BusDepartureNumber }"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="29*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="21*"/>
                 </Grid.ColumnDefinitions>
             </Grid>
         </Expander>
-        <!--<syncfusion:TimeSpanEdit x:Name="timeSpanEdit" 
-                                       Width="100" 
-                                       Height="25" />-->
     </Grid>
 </Window>

@@ -40,8 +40,6 @@ namespace PL.WPF
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
            
-            // CurBusLineStation =Convert<BO.BusLineStation>(CurBusLine.StationsInLine.Distinct());
-            //Index = (ComboBoxBusLineNumber.DataContext as BO.BusLine).StationsInLine.Count();
 
         }
         void RefreshDataGrirdAllStationslines()
@@ -66,8 +64,8 @@ namespace PL.WPF
             if (CurBusLine != null && CurBusLine.StationsInLine!=null) 
                    DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
             RefreshDataGrirdStationsline();
-            HeaderLineSchedule.DataContext = CurBusLine.lineRides;
-
+            if (CurBusLine!=null &&  CurBusLine.lineRides!=null)
+                 lvExpander.DataContext = CurBusLine.lineRides;
         }
         private void btDelBusLineStation_Click(object sender, RoutedEventArgs e)
         {
