@@ -227,15 +227,6 @@ namespace BL
         #region Bus Station
         public void AddBusLineToStation(BusStation busStation, BusLine busLine)
         {
-            //foreach (BusLine addToLine in GetAllBusLines())
-            //{
-            //    addToLine.StationsInLine = from line in GetAllBusLines()
-            //                               where from station in line.StationsInLine
-            //                                     where station.BusStationKey == busStation.BusStationKey
-            //                                     select station
-            //                               select station
-                                              
-            // }
             foreach (BusLine line in GetAllBusLines())
             {
                 if (line.BusLineNumber == busLine.BusLineNumber)
@@ -281,6 +272,8 @@ namespace BL
         {
             BO.BusStation stationBO = new BusStation();
             stationDO.CopyPropertiesTo(stationBO);
+            stationBO.ListBusLinesInStation = GetAllBusLines().SelectMany(line=> line.StationsInLine.Where(station => station.BusStationKey == stationDO.BusStationKey)
+                                                .Select(lineInStation => new BO.BusLineInStation() { BusLineNumber = line.BusLineNumber,Area=(int)line.Area,ID=line.ID }));
             return stationBO;
         }
         /// <summary>
