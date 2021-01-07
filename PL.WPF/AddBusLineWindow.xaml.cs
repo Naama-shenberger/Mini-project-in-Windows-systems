@@ -54,6 +54,13 @@ namespace PL.WPF
                         LastStopNumber=(LastStopcb.SelectedItem as BO.BusLineStation).BusStationKey
 
                     };
+                    BO.LineRides lineRides = new BO.LineRides
+                    {
+                        TravelStartTime = TimeSpan.Parse(StartTimePicker.SelectedTime.ToString()),
+                        TravelEndTime = TimeSpan.Parse(EndTimePicker.SelectedTime.ToString()),
+                        BusDepartureNumber = TimeSpan.Parse(ExitEvery.SelectedTime.ToString())
+                    };
+                    CurBusLine.lineRides.Append(lineRides);
                     busLineStations.Add(FirstStopcb.SelectedItem as BO.BusLineStation);
                     busLineStations.Add(LastStopcb.SelectedItem as BO.BusLineStation);
                     CurBusLine.StationsInLine = busLineStations;

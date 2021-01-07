@@ -31,6 +31,7 @@ namespace PL.WPF
             cbBusLicensePlate.DisplayMemberPath = "LicensePlate";
             cbBusLicensePlate.SelectedIndex = 0;
             RefreshAllBusesComboBox();
+            Treeview.ItemsSource = bl.GetAllBussGroupByTreatmentIsNeeded();
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {

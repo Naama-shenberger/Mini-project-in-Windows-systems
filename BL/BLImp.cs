@@ -351,6 +351,7 @@ namespace BL
         public IEnumerable<BusStation> GetAllBusStation()
         {
             return from item in dl.BusStations() 
+                where item.Active==true
                select BusStationDoBoAdapter(item);
         }
 
@@ -518,14 +519,16 @@ namespace BL
                 var RunNumber = dl.AddBusLine(BusLineBoDoAdapter(busLine));
                 busLine.StationsInLine = busLine.StationsInLine.Concat(busLineStation).Distinct();
                 busLine.StationsInLine.AsParallel().ForAll(id => id.ID = RunNumber);
+
                 var One = from sin in busLineStation
                           from sen in dl.ConsecutivesStations()
                           where sen.StationCodeOne == sin.BusStationKey
+                                sin.sen.StationCodeTwo
                           select sen;
-                var Two = from sin in busLineStation
-                          from sen in dl.ConsecutivesStations()
-                          where sen.StationCodeTwo == sin.BusStationKey
-                          select sen;
+                //var Two = from sin in busLineStation
+                //          from sen in dl.ConsecutivesStations()
+                //          where sen.StationCodeOne == sin.BusStationKey
+                //          select sen;
             }
             catch (DO.IdException)
             {

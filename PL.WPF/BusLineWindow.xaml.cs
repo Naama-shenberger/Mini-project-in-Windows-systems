@@ -36,6 +36,8 @@ namespace PL.WPF
             RefreshAllBusLinesComboBox();
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
+            Treeview.ItemsSource = bl.GetAllBusLinesGroupByArea();
+           
         }
         /// <summary>
         /// Refresh Data Grird

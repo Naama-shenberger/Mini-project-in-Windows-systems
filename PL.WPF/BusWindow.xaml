@@ -55,6 +55,38 @@
         </Grid>
         <Button Name="refuelButton" Click="refuel_Click" Content="refuel" HorizontalAlignment="Left" Margin="526,106,0,0" VerticalAlignment="Top" Width="123" Height="29"/>
         <Button Name="TreatmentButton" Content="Treatment" Click="Treatment_Click" HorizontalAlignment="Left" Margin="526,45,0,0" VerticalAlignment="Top" Width="123" Height="29"/>
+        <Expander Header="More details" HorizontalAlignment="Left" Height="44" Margin="315,20,0,0" VerticalAlignment="Top" Width="181">
+            <Grid Background="#FFE5E5E5" Height="44" Width="101" >
+                <TreeView x:Name="Treeview"  ItemsSource="{Binding Bus}" Background="AliceBlue"  Margin="40,552.1,40,-530" Grid.Row="1">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding}">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Key}"/>
+                                <TreeViewItem Header="{Binding  LicensePlate}"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                    <TreeView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type TreeViewItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                                                <Expander Header="{Binding  LicensePlate}" IsExpanded="True">
+                                                    <ItemsPresenter/>
+                                                </Expander>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </TreeView.GroupStyle>
+                </TreeView>
+
+            </Grid>
+        </Expander>
 
     </Grid>
 </Window>

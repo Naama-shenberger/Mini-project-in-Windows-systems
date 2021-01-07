@@ -43,8 +43,7 @@ namespace BO
             {
                 updator(item);
             }
-
-
         }
+      
     }
 }
