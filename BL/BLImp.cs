@@ -509,7 +509,7 @@ namespace BL
         //  The function gets a bus line to add
         /// </summary>
         /// <param name="busLine"></param>
-        public void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation)
+        public void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation,float _Distance, TimeSpan timeSpanTravel)
         {
 
             try
@@ -519,16 +519,25 @@ namespace BL
                 var RunNumber = dl.AddBusLine(BusLineBoDoAdapter(busLine));
                 busLine.StationsInLine = busLine.StationsInLine.Concat(busLineStation).Distinct();
                 busLine.StationsInLine.AsParallel().ForAll(id => id.ID = RunNumber);
-                //busLineStation.ToList()
-                //var One = from sin in busLineStation
-                //          from sen in dl.ConsecutivesStations()
-                //          where sen.StationCodeOne == sin.BusStationKey
-                //                sin.sen.StationCodeTwo
-                //          select sen;
-                //var Two = from sin in busLineStation
-                //          from sen in dl.ConsecutivesStations()
-                //          where sen.StationCodeOne == sin.BusStationKey
-                //          select sen;
+                for (int i = 0; i < busLine.StationsInLine.Count() - 1; i++)
+                {
+                    try
+                    {
+                        dl.GetConsecutiveStations(busLine.StationsInLine.ElementAt(i).BusStationKey, busLine.StationsInLine.ElementAt(i + 1).BusStationKey);
+                    }
+                    catch (DO.IdException ex)
+                    {
+                        DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+                        {
+                            StationCodeOne = busLine.StationsInLine.ElementAt(i).BusStationKey,
+                            StationCodeTwo = busLine.StationsInLine.ElementAt(i + 1).BusStationKey,
+                            Distance = _Distance,
+                            AverageTravelTime = timeSpanTravel,
+                            Flage = true
+                        };
+                        dl.AddConsecutiveStations(consecutiveStations);
+                    }
+                }
             }
             catch (DO.IdException)
             {
@@ -551,17 +560,29 @@ namespace BL
         /// </summary>
         /// <param name="AddToLine"></param>
         /// <param name="busLineStation"></param>
-        public void AddBusStationToLine(BusLine AddToLine,IEnumerable<BusLineStation> busLineStation)
+        public void AddBusStationToLine(BusLine AddToLine, IEnumerable<BusLineStation> busLineStations,float _Distance,TimeSpan timeSpanTravel)
         {
-            try
+
+            AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStations).Distinct();
+            AddToLine.StationsInLine.Update(id => id.ID = AddToLine.ID);
+            for (int i = 0; i < AddToLine.StationsInLine.Count() - 1; i++)
             {
-                AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
-                AddToLine.StationsInLine.Update(id => id.ID = AddToLine.ID);
-                
-            }
-            catch (DO.IdException ex)
-            {
-                throw new BO.IdException(ex.Message);
+                try
+                {
+                    dl.GetConsecutiveStations(AddToLine.StationsInLine.ElementAt(i).BusStationKey, AddToLine.StationsInLine.ElementAt(i + 1).BusStationKey);
+                }
+                catch (DO.IdException ex)
+                {
+                    DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+                    {
+                        StationCodeOne = AddToLine.StationsInLine.ElementAt(i).BusStationKey,
+                        StationCodeTwo = AddToLine.StationsInLine.ElementAt(i + 1).BusStationKey,
+                        Distance = _Distance,
+                        AverageTravelTime= timeSpanTravel,
+                        Flage=true
+                    };
+                    dl.AddConsecutiveStations(consecutiveStations);
+                }
             }
         }
         /// <summary>

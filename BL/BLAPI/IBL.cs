@@ -29,7 +29,7 @@ namespace BLAPI
         void AddBusStation(BusStation station);
         void DeleteBusStation(BusStation station);
         void UpdateBusStation(BusStation busStation);
-        void AddBusLineToStation(BusStation busStation, BusLine busLine);
+        void AddBusLineToStation(BusStation busStation,BusLine busLine);
         IEnumerable<object> LineDetails(IEnumerable<BusLineInStation> busLineInStations);
         void DeleteBusLineFromStation(BusStation busStation, BusLineInStation busLine);     
         #endregion
@@ -40,8 +40,8 @@ namespace BLAPI
         DO.BusLine BusLineBoDoAdapter(BO.BusLine busLineBO);
         BusLine GetBusLine(int id);
         IEnumerable<BusLine> GetAllBusLines();
-        void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation);
-        void AddBusStationToLine(BusLine AddToLine,IEnumerable<BusLineStation> busLineStation);
+        void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation, float _Distance, TimeSpan timeSpanTravel);
+        void AddBusStationToLine(BusLine AddToLine,IEnumerable<BusLineStation> busLineStation, float _Distance, TimeSpan timeSpanTravel);
         void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, BusLineStation busLineStation);
         void DeleteBusLine(BusLine busLine);
         IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea();
