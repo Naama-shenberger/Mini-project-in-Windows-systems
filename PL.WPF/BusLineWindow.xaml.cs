@@ -48,10 +48,10 @@ namespace PL.WPF
         }
         void RefreshAllBusLinesComboBox()
         {
-            ComboBoxBusLineNumber.DataContext = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
+            ComboBoxBusLineNumber.DataContext= BusLineList = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
             ComboBoxBusLineNumber.SelectedIndex = 0;
-
-            ///CurBusLine = ComboBoxBusLineNumber.SelectedItem;
+            //if (CurBusLine != null && CurBusLine.lineRides != null)
+            //    lvExpander.DataContext = CurBusLine.lineRides;
         }
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
@@ -61,11 +61,11 @@ namespace PL.WPF
         {
             CurBusLine = (ComboBoxBusLineNumber.SelectedItem as BO.BusLine);
             gridOneBusLine.DataContext = CurBusLine;
-            if (CurBusLine != null && CurBusLine.StationsInLine!=null) 
-                   DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
-            RefreshDataGrirdStationsline();
-            if (CurBusLine!=null &&  CurBusLine.lineRides!=null)
-                 lvExpander.DataContext = CurBusLine.lineRides;
+            if (CurBusLine != null && CurBusLine.StationsInLine != null)
+                DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
+               ///RefreshDataGrirdStationsline();
+            if (CurBusLine != null && CurBusLine.lineRides != null)
+                lvExpander.DataContext = CurBusLine.lineRides;
         }
         private void btDelBusLineStation_Click(object sender, RoutedEventArgs e)
         {
@@ -124,10 +124,12 @@ namespace PL.WPF
             addBusLineWindow.ShowDialog();
             var save = addBusLineWindow.BusLine;
             bl.AddBusLine(save,save.StationsInLine);
-            RefreshAllBusLinesComboBox();
-            RefreshDataGrirdStationsline();
-                
+            BusLineList.Add(save);
+            //RefreshAllBusLinesComboBox();
+            //RefreshDataGrirdStationsline();
+            //RefreshDataGrirdAllStationslines();
 
+            //ComboBoxBusLineNumber.DataContext = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
         }
         private void DeleteButon_Click(object sender, RoutedEventArgs e)
         {
@@ -154,7 +156,12 @@ namespace PL.WPF
             var btn = sender as Button;
             var save = CurBusLine.StationsInLine.FirstOrDefault(c => c.BusStationKey == int.Parse((btn).DataContext.ToString().Substring(18, 6)));
             Update update = new Update(bl,save,CurBusLine,CurBusLine.StationsInLine.Count());
-            update.Show();
+            update.Closed += UpdateIndexInLine_Closed;
+            update.ShowDialog();
+            //RefreshDataGrirdStationsline();
+        }
+        private void UpdateIndexInLine_Closed(object sender, EventArgs e)
+        {
             RefreshDataGrirdStationsline();
         }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
@@ -207,7 +214,7 @@ namespace PL.WPF
             //    CurBusLine = Convert<BO.BusLine>(bl.GetAllBusLines()).ToList()[0];
             if (CurBusLine!=null && CurBusLine.StationsInLine != null)
             {
-                DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine).Distinct());
+                DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine)).Distinct();
             }
         }
 
@@ -250,6 +257,13 @@ namespace PL.WPF
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
         }
-        
+
+        private void DataGrirdStationslines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CurBusLine != null && CurBusLine.StationsInLine != null)
+            {
+                DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine).Distinct());
+            }
+        }
     }
 }

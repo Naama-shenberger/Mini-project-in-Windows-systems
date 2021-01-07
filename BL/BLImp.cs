@@ -396,15 +396,38 @@ namespace BL
                 throw new BO.IdException(ex.ToString());
             }
         }
-        public void UpdateBusLineStation(int id,int IDBusLine)
+        public void UpdateBusLineStation(int id,int IDBusLine,BO.BusLine busLine,int index)
         {
             try
             {
-                dl.UpdateBusLineStation(dl.GetBusLineStation(id,IDBusLine));
+                BO.BusLineStation busLineStation = new BusLineStation
+                {
+                    ID = IDBusLine,
+                    BusStationKey = id,
+                    NumberStationInLine = index,
+                    Active = true
+
+                };
+
+                //  busLine.StationsInLine.AsParallel().ForAll(a => { if (a.BusStationKey == id) { dl.DeleteBusLineStation(BusLineStationBoDoAdapter(a)); } });
+                dl.AddBusLineStation(BusLineStationBoDoAdapter(busLineStation));
+                var save = dl.GetBusLineStation(id, IDBusLine);
+                dl.UpdateBusLineStation(save);
+                busLine.StationsInLine = from sin in busLine.StationsInLine
+                                         where sin.BusStationKey != id
+                                         select sin;
+                
+                busLine.StationsInLine = busLine.StationsInLine.Append(BusLineStationDoBoAdapter(save));
             }
-            catch(BO.IdException ex)
+            catch(DO.IdException ex)
             {
-                throw new BO.IdException(ex.ToString());
+                var save = dl.GetBusLineStation(id, IDBusLine);
+                dl.UpdateBusLineStation(save);
+                busLine.StationsInLine = from sin in busLine.StationsInLine
+                                         where sin.BusStationKey != id
+                                         select sin;
+
+                busLine.StationsInLine = busLine.StationsInLine.Append(BusLineStationDoBoAdapter(save));
             }
         }
         /// <summary>
@@ -513,11 +536,10 @@ namespace BL
         public void AddBusStationToLine(BusLine AddToLine,IEnumerable<BusLineStation> busLineStation)
         {
             try
-            {
-                //if(AddToLine.StationsInLine==busLineStation)
-                //    throw new 
+            { 
                 AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStation).Distinct();
-                AddToLine.StationsInLine.AsParallel().ForAll(id => id.ID = AddToLine.ID);
+               // AddToLine.StationsInLine.ToList().ForEach(id => dl.AddBusLineStation(BusLineStationBoDoAdapter(id)));
+                AddToLine.StationsInLine.Update(id => id.ID = AddToLine.ID);
             }
             catch(DO.IdException ex)
             {

@@ -37,6 +37,14 @@ namespace BO
 
             return Convert.ToDecimal(((Math.Acos(theDistance) * (180.0 / Math.PI)))) * 69.09M * 1.6093M;
         }
-       
+        public static void Update<TSource>(this IEnumerable<TSource> outer, Action<TSource> updator)
+        {
+            foreach (var item in outer)
+            {
+                updator(item);
+            }
+
+
+        }
     }
 }

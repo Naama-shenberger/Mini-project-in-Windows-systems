@@ -46,7 +46,7 @@ namespace BLAPI
         void DeleteBusLine(BusLine busLine);
         IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea();
         void UpdateBusLine(BusLine busLine);
-        void UpdateBusLineStation(int id,int IDBusLine);
+        void UpdateBusLineStation(int id,int IDBusLine,BO.BusLine busLine,int index);
         void DeleteBusLineStation(BusLineStation busLineStation);
         #endregion
         #region User

@@ -458,7 +458,7 @@ namespace DL
         /// <param name="station"></param>
         public void AddBusLineStation(BusLineStation station)
         {
-            var stationIndex = DataSource.BusLineStations.FindIndex(s => s.BusStationKey == station.BusStationKey);
+            var stationIndex = DataSource.BusLineStations.FindIndex(s => s.BusStationKey == station.BusStationKey && s.ID==station.ID);
             if (stationIndex != -1)
                 if (DataSource.BusLineStations[stationIndex].Active == false)
                 {
@@ -476,7 +476,7 @@ namespace DL
         /// <param name="station"></param>
         public void UpdateBusLineStation(BusLineStation station)
         {
-            var toUpdateIndex = DataSource.BusLineStations.FindIndex(s => s.BusStationKey == station.BusStationKey);
+            var toUpdateIndex = DataSource.BusLineStations.FindIndex(s => s.BusStationKey == station.BusStationKey && s.ID==station.ID);
             if (toUpdateIndex != -1)
                 if (station.Active == true)
                     DataSource.BusLineStations[toUpdateIndex] = station.Clone();
