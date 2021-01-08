@@ -100,11 +100,21 @@ namespace PL.WPF
         {
             try
             {
+
+                BO.BusStation newStation = new BO.BusStation()
+                {
+                    BusStationKey = int.Parse(BusStationKeyTextBox.Text),
+                    StationName = NameComboBox.Text,
+                    StationAddress = TextBoxAddress.Text,
+                    Latitude = float.Parse(TextBoxLatitude.Text),
+                    Longitude = float.Parse( TextBoxLongitude.Text),
+                    Active = true,
+                };
                 if (CurBusStation != null)
                 {
-                    bl.UpdateBusStation(CurBusStation);
+                    bl.UpdateBusStation(newStation);
                     MessageBox.Show("The Station/s successfully updated", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    RefreshAllStationsComboBox();
+                    //RefreshAllStationsComboBox();
                 }
                 else
                     MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -133,8 +143,6 @@ namespace PL.WPF
                     bl.DeleteBusStation(CurBusStation);
                     BO.BusStation BusStationToDel = CurBusStation;
                     MessageBox.Show("The Station/s successfully deleted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    //if (CurBusStation.ListBusLinesInStation == null)
-                    //    MessageBox.Show($"No bus line contained at station {CurBusStation.BusStationKey} ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     RefreshAllStationsComboBox();
                 }
                 else

@@ -225,20 +225,7 @@ namespace BL
 
         #endregion
         #region Bus Station
-        //public void AddBusLineToStation(BusStation busStation, BusLine busLine)
-        //{
-        //    DO.BusLineStation temp;
-        //    try
-        //    {
-        //        temp = dl.GetBusLineStation(busStation.BusStationKey, busLine.ID);
-        //    }
-        //    catch (DO.IdException )
-        //    {
-        //       GetBusStation( busStation.BusStationKey).ListBusLinesInStation.Append(new BusLineInStation() { BusLineNumber = busLine.BusLineNumber, ID = busLine.ID, Area =(int) busLine.Area });
-        //        BusLine bl = GetBusLine(busLine.ID);
-        //        bl.StationsInLine = bl.StationsInLine.Append(new BusLineStation() { BusStationKey = busStation.BusStationKey, ID = busLine.ID, Active = true });
-        //    }
-        //}
+
         /// <summary>
         /// deletes a line from stations lists of lines 
         /// </summary>
@@ -283,7 +270,6 @@ namespace BL
             }
 
         }
-
         /// <summary>
         /// A function that receives a DO type bus station object and returns a BO type bus station
         /// </summary>
@@ -308,8 +294,6 @@ namespace BL
             busStationBO.CopyPropertiesTo(busStationDO);
             return busStationDO;
         }
-       
-       
         /// <summary>
         /// A function that receives an ID number of a station and returns the corresponding station
         /// </summary>
@@ -354,14 +338,9 @@ namespace BL
         public void DeleteBusStation(BusStation station)
         {
             try
-            { 
-            //{
-            //    BusStation bs = BusDoBoAdapter(dl.GetBusStation(station.BusStationKey));
-            //    GetAllBusLines().Where(b=>dl.GetBusLine(id=>id==b.StationsInLine.Where(t=>t.ID==b.ID).First().ID)
-            //    GetBusLines().(id=> bs.ListBusLinesInStation.Where(c=>GetBusStation(te=>t))
-            //    if (station.ListBusLinesInStation!=null)
-            //        dl.DeleteBusLineStation(new DO.BusLineStation() { BusStationKey = station.BusStationKey, Active = true});
-                //dl.DeleteBusLineStation(new DO.BusLineStation() { BusStationKey = station.BusStationKey, Active = true,ID= station.ListBusLinesInStation});
+            {
+                dl.GetBusStation(station.BusStationKey);
+                dl.DeleteBusStation(BusStationBoDoAdapter(station));
             }
             catch (DO.IdException ex)
             {
@@ -378,8 +357,6 @@ namespace BL
                 where item.Active==true
                select BusStationDoBoAdapter(item);
         }
-
-       
         /// <summary>
         /// The function receives a bus Station for updating
         /// </summary>
@@ -388,7 +365,11 @@ namespace BL
         {
             try
             {
-                dl.UpdateBusStation(BusStationBoDoAdapter(GetBusStation(busStation.BusStationKey)));
+                BusStation b = GetBusStation(busStation.BusStationKey);
+                if (b.StationAddress != busStation.StationAddress || b.Longitude != busStation.Longitude || b.Latitude != busStation.Latitude)
+                    throw new BO.IdException("It does not make sense to change the location of a station\n You can only change the name of the station ");
+                else
+                    dl.UpdateBusStation(BusStationBoDoAdapter(GetBusStation(busStation.BusStationKey)));
             }
             catch (DO.IdException ex)
             {
