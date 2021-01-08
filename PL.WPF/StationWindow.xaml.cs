@@ -37,14 +37,6 @@ namespace PL.WPF
             DataGrirdAllLinesInStation.IsReadOnly = true;
         }
         /// <summary>
-        /// Refreshes the combo box
-        /// </summary>
-        private void RefreshAllStationsComboBox()
-        {
-            ComboBoxBusStationKey.DataContext = bl.GetAllBusStation().ToList(); //ObserListOfStudents;
-
-        }
-        /// <summary>
         /// When selecting a combobox this function brinds up to date the whole window
         /// </summary>
         /// <param name="sender"></param>
@@ -61,14 +53,25 @@ namespace PL.WPF
 
         }
         /// <summary>
+        /// Refreshes the combo box
+        /// </summary>
+        private void RefreshAllStationsComboBox()
+        {
+            ComboBoxBusStationKey.DataContext = StationList=Convert<BO.BusStation> (bl.GetAllBusStation()); //ObserListOfStudents;
+            ComboBoxBusStationKey.SelectedIndex = 0;
+
+        }
+
+        /// <summary>
         /// Refreshes the data grid that shows all the lines that pass through the cur station
         /// </summary>
         private void RefreshBusLinesInStation()
         {
-            if ( CurBusStation.ListBusLinesInStation != null)
+            if (CurBusStation.ListBusLinesInStation != null)
             {
                 DataGrirdAllLinesInStation.DataContext = CurBusStation.ListBusLinesInStation.ToList();
             }
+          
         }
         /// <summary>
         /// Refreshes the data grid that shows all the lines that don't pass through the cur station
@@ -100,21 +103,11 @@ namespace PL.WPF
         {
             try
             {
-
-                BO.BusStation newStation = new BO.BusStation()
-                {
-                    BusStationKey = int.Parse(BusStationKeyTextBox.Text),
-                    StationName = NameComboBox.Text,
-                    StationAddress = TextBoxAddress.Text,
-                    Latitude = float.Parse(TextBoxLatitude.Text),
-                    Longitude = float.Parse( TextBoxLongitude.Text),
-                    Active = true,
-                };
                 if (CurBusStation != null)
                 {
-                    bl.UpdateBusStation(newStation);
+                    bl.UpdateBusStation(CurBusStation);
                     MessageBox.Show("The Station/s successfully updated", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    //RefreshAllStationsComboBox();
+                    RefreshAllStationsComboBox();
                 }
                 else
                     MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -211,6 +204,7 @@ namespace PL.WPF
                     bl.AddBusLineToStation(CurBusStation, blBO);
                     RefreshBusLinesInStation();
                     RefreshBusLines();
+
                 }
                 else
                     MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -236,6 +230,7 @@ namespace PL.WPF
                     MessageBox.Show($"bus Line Station {blisBO.BusLineNumber} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     RefreshBusLinesInStation();
                     RefreshBusLines();
+
                 }
                 else
                     MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
