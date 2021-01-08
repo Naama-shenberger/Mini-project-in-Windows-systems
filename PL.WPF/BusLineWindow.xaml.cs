@@ -104,7 +104,7 @@ namespace PL.WPF
         {
             try
             {
-                Index = CurBusLine.StationsInLine.Count() ;
+                Index = CurBusLine.StationsInLine.Count();
                 BO.BusLineStation busLineStation = new BO.BusLineStation
                 {
                     BusStationKey = int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)),
@@ -121,25 +121,31 @@ namespace PL.WPF
                         if (TimePickerDistance.Text == null)
                             TimePickerDistance.Text = "0";
                         bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                        if(CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID) == null)
+                        {
+                            Ddistancetb.Visibility = Visibility.Visible;
+                            TimePickerDistance.Visibility = Visibility.Visible;
+                            bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                        }
                     }
                     catch (BO.IdException ex)
                     {
                         Ddistancetb.Visibility = Visibility.Visible;
                         TimePickerDistance.Visibility = Visibility.Visible;
-                        bl.AddBusLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                        bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
                     }
                 }
                 else
                     throw new ArgumentException("The line station is already on the line route");
                 RefreshDataGrirdStationsline();
                 MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-               
+
             }
-            
+
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-                
+
             }
         }
         /// <summary>
