@@ -122,13 +122,13 @@ namespace PL.WPF
                         if (TimePickerDistance.Text == null)
                             TimePickerDistance.Text = "0";
                         bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
-                        if(CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID && id.AverageTravelTime.TotalMinutes==0 && id.Distance==0 )!=null)
+                        if(CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID && id.AverageTravelTime.TotalMinutes==0 && id.Distance==-1 )!=null)
                         {
                             CurBusLine.StationsInLine = from sin in CurBusLine.StationsInLine
                                                         where sin.BusStationKey != busLineStation.BusStationKey
-                                                        where sin.Distance!=0 
+                                                        where sin.Distance!=-1
                                                         select sin;
-                            //MessageBox.Show($"{CurBusLine}");
+                          
                             Ddistancetb.Visibility = Visibility.Visible;
                             TimePickerDistance.Visibility = Visibility.Visible;
                             throw new ArithmeticException();

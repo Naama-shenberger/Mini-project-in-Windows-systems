@@ -65,7 +65,7 @@ namespace BL
             else
             {
                 result.AverageTravelTime = new TimeSpan(0,0,0);
-                result.Distance = 0;
+                result.Distance = -1;
             }
             return result;
         }
