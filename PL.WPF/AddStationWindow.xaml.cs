@@ -22,8 +22,11 @@ namespace PL.WPF
     public partial class AddStationWindow : Window
     {
         IBL bL;
-        BO.BusStation curBusStation;
+        BO.BusStation curBusStation;//current bus Station
         static int Index;
+        /// <summary>
+        ///  ObservableCollections
+        /// </summary>
         ObservableCollection<BO.BusLineStation> curBusLineStations = new ObservableCollection<BO.BusLineStation>();
         ObservableCollection<BO.BusLineStation> curAllBusLineStations = new ObservableCollection<BO.BusLineStation>();
         public ObservableCollection<BO.BusLineStation> BusLineStations
@@ -36,19 +39,32 @@ namespace PL.WPF
             bL = _bL;
             curAllBusLineStations = Convert<BO.BusLineStation>(bL.GetAllBusLineStations());
             Index = curAllBusLineStations.Count();
-            RefreshAllStationsComboBox();
+            RefreshAllStationslv();
         }
-
-        void RefreshAllStationsComboBox()
+        /// <summary>
+        /// The function returns void
+        /// The function Refresh Stations list view 
+        /// </summary>
+        void RefreshAllStationslv()
         {
 
             lvBusStations.DataContext = Convert<BO.BusStation>(bL.GetAllBusStation());
 
         }
+        /// <summary>
+        /// Collection Conversion Function to ObservableCollection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original"></param>
+        /// <returns></returns>
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="busStation"></param>
         private void AddBusLinesStations(BO.BusStation busStation)
         {
             try

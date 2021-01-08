@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 namespace PL.WPF
 {
     /// <summary>
@@ -112,8 +113,21 @@ namespace PL.WPF
                 };
                 if (CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID) == null)
                 {
-                    CurBusLine.StationsInLine = CurBusLine.StationsInLine.Append(busLineStation);
-                  //  bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine);
+                    try
+                    {
+                        CurBusLine.StationsInLine = CurBusLine.StationsInLine.Append(busLineStation);
+                        if (Ddistancetb.Text == "")
+                            Ddistancetb.Text = "0";
+                        if (TimePickerDistance.Text == null)
+                            TimePickerDistance.Text = "0";
+                        bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                    }
+                    catch (BO.IdException ex)
+                    {
+                        Ddistancetb.Visibility = Visibility.Visible;
+                        TimePickerDistance.Visibility = Visibility.Visible;
+                        bl.AddBusLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                    }
                 }
                 else
                     throw new ArgumentException("The line station is already on the line route");
@@ -121,6 +135,7 @@ namespace PL.WPF
                 MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                
             }
+            
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -159,8 +174,29 @@ namespace PL.WPF
             AddBusLineWindow addBusLineWindow = new AddBusLineWindow(bl);
             addBusLineWindow.ShowDialog();
             var save = addBusLineWindow.BusLine;
-           // bl.AddBusLine(save,save.StationsInLine,Double.Parse(Ddistancetb.Text),);
-            BusLineList.Add(save);
+            try
+            {
+               
+                if (Ddistancetb.Text == "")
+                    Ddistancetb.Text = "0";
+                if (TimePickerDistance.Text == null)
+                {
+                    TimePickerDistance = new MaterialDesignThemes.Wpf.TimePicker {Text="0" };
+                   // TimePickerDistance.Text = "0";
+                }
+                bl.AddBusLine(save, save.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                BusLineList.Add(save);
+            }
+            catch(BO.IdException ex)
+            {
+                Ddistancetb.Visibility = Visibility.Visible;
+                TimePickerDistance.Visibility = Visibility.Visible;
+                bl.AddBusLine(save, save.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("No typing details please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         /// <summary>
         /// Click event
@@ -187,6 +223,12 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// Click event
+        ///  updates station location
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateIndexInLine_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;

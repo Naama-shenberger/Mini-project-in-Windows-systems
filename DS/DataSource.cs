@@ -123,7 +123,7 @@ namespace DS
             };
 
             BusLines = new List<BusLine>
-            {  new BusLine{ID=0,Active=false,BusLineNumber = 134,FirstStopNumber =388624,LastStopNumber=875612,Area=Zones.General},
+            {  new BusLine{ID=20,Active=true,BusLineNumber = 134,FirstStopNumber =388624,LastStopNumber=875612,Area=Zones.General},
                new BusLine{ID=1,Active=true,BusLineNumber = 14,FirstStopNumber = 388624,LastStopNumber=875612,Area=Zones.Zefat},
                new BusLine{ID=2,Active=true,BusLineNumber = 112,FirstStopNumber =388624,LastStopNumber=875612,Area=Zones.Alon_Shvut},
                new BusLine{ID=3,Active=true,BusLineNumber = 9,FirstStopNumber = 873401,LastStopNumber=875612,Area=Zones.Beer_Sheva},
@@ -146,8 +146,8 @@ namespace DS
             };
             LinesOutForARide = new List<LineRide>
             {
-               new LineRide{ID=0, Active=true, BusDepartureNumber=new TimeSpan(30,0,0), TravelStartTime=new TimeSpan(9,0,0), TravelEndTime=new TimeSpan(12,30,0)},
-               new LineRide{ID=0, Active=true, BusDepartureNumber=new TimeSpan(10,0,0), TravelStartTime=new TimeSpan(19,0,0), TravelEndTime=new TimeSpan(22,30,0)},
+               new LineRide{ID=20, Active=true, BusDepartureNumber=new TimeSpan(30,0,0), TravelStartTime=new TimeSpan(9,0,0), TravelEndTime=new TimeSpan(12,30,0)},
+               new LineRide{ID=20, Active=true, BusDepartureNumber=new TimeSpan(10,0,0), TravelStartTime=new TimeSpan(19,0,0), TravelEndTime=new TimeSpan(22,30,0)},
                new LineRide{ID=1, Active=true, BusDepartureNumber=new TimeSpan(12,0,0), TravelStartTime=new TimeSpan(7,0,0), TravelEndTime=new TimeSpan(11,30,0)},
                new LineRide{ID=1, Active=true, BusDepartureNumber=new TimeSpan(3,0,0), TravelStartTime=new TimeSpan(19,0,0), TravelEndTime=new TimeSpan(22,30,0)},
                new LineRide{ID=2, Active=true, BusDepartureNumber=new TimeSpan(3,0,0), TravelStartTime=new TimeSpan(8,0,0), TravelEndTime=new TimeSpan(13,30,0)},
@@ -172,6 +172,7 @@ namespace DS
             };
             BusLineStations = new List<BusLineStation>
             {
+
                 new BusLineStation{Active=true,BusStationKey=857321,NumberStationInLine=2,ID=17},
                 new BusLineStation{Active=true,BusStationKey=876015,NumberStationInLine=2,ID=16},
                 new BusLineStation{Active=true,BusStationKey=873401,NumberStationInLine=2,ID=19},
@@ -181,8 +182,10 @@ namespace DS
                 new BusLineStation{Active=true,BusStationKey=388614,NumberStationInLine=3,ID=16},
                 new BusLineStation{Active=true,BusStationKey=388624,NumberStationInLine=2,ID=11},
                 new BusLineStation{Active=true,BusStationKey=388634,NumberStationInLine=2,ID=7},
-                new BusLineStation{Active=true,BusStationKey=875612,NumberStationInLine=2,ID=0}
 
+                new BusLineStation{Active=true,BusStationKey=875612,NumberStationInLine=2,ID=20},
+                new BusLineStation{Active=true,BusStationKey= 388624,NumberStationInLine=1,ID=20}
+               
                 //new BusLineStation{Active=true,BusStationKey=388473,NumberStationInLine=11},
                 //new BusLineStation{Active=true,BusStationKey=388453,NumberStationInLine=12},
                 //new BusLineStation{Active=true,BusStationKey=388483,NumberStationInLine=13},

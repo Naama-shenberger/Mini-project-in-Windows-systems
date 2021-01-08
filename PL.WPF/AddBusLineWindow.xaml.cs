@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,7 @@ namespace PL.WPF
     {
         IBL bl;
         BO.BusLine CurBusLine;
-        ObservableCollection<BO.BusLineStation> busLineStations= new ObservableCollection<BO.BusLineStation>();
+        ObservableCollection<BO.BusLineStation> busLineStations= new ObservableCollection<BO.BusLineStation>();//List of bus line station
         public BO.BusLine BusLine
         {
             get { return CurBusLine; }
@@ -39,6 +40,13 @@ namespace PL.WPF
             LastStopcb.SelectedIndex = 2;
             LastStopcb.DisplayMemberPath = FirstStopcb.DisplayMemberPath = "BusStationKey";
         }
+        /// <summary>
+        /// Enter
+        /// Takes all the data and initializes the relevant parameters 
+        /// goes to the window where it was sent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             try
@@ -56,22 +64,30 @@ namespace PL.WPF
                     };
                     BO.LineRides lineRides = new BO.LineRides
                     {
-                        TravelStartTime = TimeSpan.Parse(StartTimePicker.SelectedTime.ToString()),
-                        TravelEndTime = TimeSpan.Parse(EndTimePicker.SelectedTime.ToString()),
-                        BusDepartureNumber = TimeSpan.Parse(ExitEvery.SelectedTime.ToString())
+
+                        TravelStartTime = TimeSpan.Parse(Regex.Replace(StartTimePicker.Text, "[A-Za-z ]", "")),
+                        TravelEndTime = TimeSpan.Parse(Regex.Replace(EndTimePicker.Text, "[A-Za-z ]", "")),
+                        BusDepartureNumber = TimeSpan.Parse(Regex.Replace(ExitEvery.Text, "[A-Za-z ]", "")),
                     };
-                    CurBusLine.lineRides.Append(lineRides);
+                    CurBusLine.lineRides = new List<BO.LineRides>();
+                    CurBusLine.lineRides= CurBusLine.lineRides.Append(lineRides);
                     busLineStations.Add(FirstStopcb.SelectedItem as BO.BusLineStation);
-                    busLineStations.Add(LastStopcb.SelectedItem as BO.BusLineStation);
+                    var save = (LastStopcb.SelectedItem as BO.BusLineStation);
+                    save.NumberStationInLine = 3;
+                    busLineStations.Add(save);
                     CurBusLine.StationsInLine = busLineStations;
                     MessageBox.Show("The bus was successfully added", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     
                     this.Close();
                 }
             }
-            catch(BO.IdException)
+            catch (ArgumentNullException)
             {
-
+                MessageBox.Show("No typing details please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.IdException)
+            {
+                MessageBox.Show("id Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

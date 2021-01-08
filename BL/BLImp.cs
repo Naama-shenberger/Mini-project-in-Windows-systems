@@ -536,7 +536,9 @@ namespace BL
                 {
                     try
                     {
-                        dl.GetConsecutiveStations(busLine.StationsInLine.ElementAt(i).BusStationKey, busLine.StationsInLine.ElementAt(i + 1).BusStationKey);
+                        var save=dl.GetConsecutiveStations(busLine.StationsInLine.ElementAt(i).BusStationKey, busLine.StationsInLine.ElementAt(i + 1).BusStationKey);
+                        busLine.StationsInLine.ElementAt(i).AverageTravelTime = save.AverageTravelTime;
+                        busLine.StationsInLine.ElementAt(i).Distance = save.Distance;
                     }
                     catch (DO.IdException ex)
                     {
@@ -549,6 +551,8 @@ namespace BL
                             Flage = true
                         };
                         dl.AddConsecutiveStations(consecutiveStations);
+                        busLine.StationsInLine.ElementAt(i).AverageTravelTime = consecutiveStations.AverageTravelTime;
+                        busLine.StationsInLine.ElementAt(i).Distance = consecutiveStations.Distance;
                     }
                 }
             }
@@ -575,26 +579,32 @@ namespace BL
         /// <param name="busLineStation"></param>
         public void AddBusStationToLine(BusLine AddToLine, IEnumerable<BusLineStation> busLineStations,float _Distance,TimeSpan timeSpanTravel)
         {
+            if(_Distance!=0 && timeSpanTravel.TotalMinutes!=0)
 
             AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStations).Distinct();
             AddToLine.StationsInLine.Update(id => id.ID = AddToLine.ID);
-            for (int i = 0; i < AddToLine.StationsInLine.Count() - 1; i++)
+            for (int i = 0; i < AddToLine.StationsInLine.Count()-1; i++)
             {
                 try
                 {
-                    dl.GetConsecutiveStations(AddToLine.StationsInLine.ElementAt(i).BusStationKey, AddToLine.StationsInLine.ElementAt(i + 1).BusStationKey);
+                    var save= dl.GetConsecutiveStations(AddToLine.StationsInLine.ElementAt(i).BusStationKey, AddToLine.StationsInLine.ElementAt(i + 1).BusStationKey);
+                    AddToLine.StationsInLine.ElementAt(i).AverageTravelTime = save.AverageTravelTime;
+                    AddToLine.StationsInLine.ElementAt(i).Distance = save.Distance;
                 }
                 catch (DO.IdException ex)
                 {
+
                     DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
                     {
                         StationCodeOne = AddToLine.StationsInLine.ElementAt(i).BusStationKey,
                         StationCodeTwo = AddToLine.StationsInLine.ElementAt(i + 1).BusStationKey,
                         Distance = _Distance,
-                        AverageTravelTime= timeSpanTravel,
-                        Flage=true
+                        AverageTravelTime = timeSpanTravel,
+                        Flage = true
                     };
                     dl.AddConsecutiveStations(consecutiveStations);
+                    AddToLine.StationsInLine.ElementAt(i).AverageTravelTime = consecutiveStations.AverageTravelTime;
+                    AddToLine.StationsInLine.ElementAt(i).Distance = consecutiveStations.Distance;
                 }
             }
         }
@@ -1011,6 +1021,9 @@ namespace BL
                              StationAddress = BusStation.StationAddress,
                              Latitude=  BusStation.Latitude,
                              Longitude= BusStation.Longitude,
+                             Distance=BusLineStation.Distance,
+                             AverageTravelTime=BusLineStation.AverageTravelTime
+
                          }; 
         }
 
