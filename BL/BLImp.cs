@@ -514,7 +514,7 @@ namespace BL
             busLineBO.StationsInLine = from sin in dl.BusLineStations()
                                        where sin.ID == busLineDO.ID
                                        let station = dl.GetBusLineStation(sin.BusStationKey,sin.ID)
-                                       select DeepCopyUtilities.CopyToStationInLine(station);
+                                       select DeepCopyUtilities.CopyToStationInLine(station,dl);
            busLineBO.lineRides = from sin in dl.LinesWayOut()
                                   where sin.ID == busLineBO.ID
                                   from sen in dl.LinesWayOut()
@@ -536,45 +536,55 @@ namespace BL
         public void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation,float _Distance, TimeSpan timeSpanTravel)
         {
 
-            try
-            {
-                if (busLineStation.ToList().Count<2)
-                    throw new BO.IdException("You must add at least two stations to the line");
-                var RunNumber = dl.AddBusLine(BusLineBoDoAdapter(busLine));
-                busLine.StationsInLine = busLine.StationsInLine.Concat(busLineStation).Distinct();
-                busLine.StationsInLine.AsParallel().ForAll(id => id.ID = RunNumber);
-                for (int i = 0; i < busLine.StationsInLine.Count() - 1; i++)
+                try
                 {
-                    try
-                    {
-                        var save=dl.GetConsecutiveStations(busLine.StationsInLine.ElementAt(i).BusStationKey, busLine.StationsInLine.ElementAt(i + 1).BusStationKey);
-                        busLine.StationsInLine.ElementAt(i).AverageTravelTime = save.AverageTravelTime;
-                        busLine.StationsInLine.ElementAt(i).Distance = save.Distance;
-                    }
-                    catch (DO.IdException ex)
-                    {
-                        DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
-                        {
-                            StationCodeOne = busLine.StationsInLine.ElementAt(i).BusStationKey,
-                            StationCodeTwo = busLine.StationsInLine.ElementAt(i + 1).BusStationKey,
-                            Distance = _Distance,
-                            AverageTravelTime = timeSpanTravel,
-                            Flage = true
-                        };
-                        dl.AddConsecutiveStations(consecutiveStations);
-                        busLine.StationsInLine.ElementAt(i).AverageTravelTime = consecutiveStations.AverageTravelTime;
-                        busLine.StationsInLine.ElementAt(i).Distance = consecutiveStations.Distance;
-                    }
+                    if (busLineStation.ToList().Count < 2)
+                        throw new BO.IdException("You must add at least two stations to the line");
+                    var RunNumber = dl.AddBusLine(BusLineBoDoAdapter(busLine));
+                    busLine.StationsInLine = busLine.StationsInLine.Concat(busLineStation).Distinct();
+                    busLine.StationsInLine.AsParallel().ForAll(id => id.ID = RunNumber);
+                    busLine.StationsInLine = from sin in busLine.StationsInLine
+                                             select DeepCopyUtilities.CopyToStationInLine(BusLineStationBoDoAdapter(sin), dl);
                 }
-            }
-            catch (DO.IdException)
-            {
-               
-                throw new BO.IdException("Bus line ID is illegal");
-            }
-           
+                catch (NullReferenceException ex)
+                {
+                    throw new NullReferenceException();
+                }
+                //    for (int i = 0; i < busLine.StationsInLine.Count() - 1; i++)
+                //    {
+
+                //        //try
+                //        //{
+                //        //    var save=dl.GetConsecutiveStations(busLine.StationsInLine.ElementAt(i).BusStationKey, busLine.StationsInLine.ElementAt(i + 1).BusStationKey);
+                //        //    busLine.StationsInLine.ElementAt(i).AverageTravelTime = save.AverageTravelTime;
+                //        //    busLine.StationsInLine.ElementAt(i).Distance = save.Distance;
+                //        //}
+                //        //catch (DO.IdException ex)
+                //        //{
+                //        //    DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+                //        //    {
+                //        //        StationCodeOne = busLine.StationsInLine.ElementAt(i).BusStationKey,
+                //        //        StationCodeTwo = busLine.StationsInLine.ElementAt(i + 1).BusStationKey,
+                //        //        Distance = _Distance,
+                //        //        AverageTravelTime = timeSpanTravel,
+                //        //        Flage = true
+                //        //    };
+                //        //    dl.AddConsecutiveStations(consecutiveStations);
+                //        //    busLine.StationsInLine.ElementAt(i).AverageTravelTime = consecutiveStations.AverageTravelTime;
+                //        //    busLine.StationsInLine.ElementAt(i).Distance = consecutiveStations.Distance;
+                //        //}
+                //    }
+                //}
+                //catch (DO.IdException)
+                //{
+
+                //    throw new BO.IdException("Bus line ID is illegal");
+                //}
+
+
         }
-       
+
+
         public DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO)
         {
             DO.BusLineStation busLineStationDO = new DO.BusLineStation();
@@ -590,34 +600,44 @@ namespace BL
         /// <param name="busLineStation"></param>
         public void AddBusStationToLine(BusLine AddToLine, IEnumerable<BusLineStation> busLineStations,float _Distance,TimeSpan timeSpanTravel)
         {
-            if(_Distance!=0 && timeSpanTravel.TotalMinutes!=0)
-
-            AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStations).Distinct();
-            AddToLine.StationsInLine.Update(id => id.ID = AddToLine.ID);
-            for (int i = 0; i < AddToLine.StationsInLine.Count()-1; i++)
+            try
             {
-                try
-                {
-                    var save= dl.GetConsecutiveStations(AddToLine.StationsInLine.ElementAt(i).BusStationKey, AddToLine.StationsInLine.ElementAt(i + 1).BusStationKey);
-                    AddToLine.StationsInLine.ElementAt(i).AverageTravelTime = save.AverageTravelTime;
-                    AddToLine.StationsInLine.ElementAt(i).Distance = save.Distance;
-                }
-                catch (DO.IdException ex)
-                {
 
-                    DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
-                    {
-                        StationCodeOne = AddToLine.StationsInLine.ElementAt(i).BusStationKey,
-                        StationCodeTwo = AddToLine.StationsInLine.ElementAt(i + 1).BusStationKey,
-                        Distance = _Distance,
-                        AverageTravelTime = timeSpanTravel,
-                        Flage = true
-                    };
-                    dl.AddConsecutiveStations(consecutiveStations);
-                    AddToLine.StationsInLine.ElementAt(i).AverageTravelTime = consecutiveStations.AverageTravelTime;
-                    AddToLine.StationsInLine.ElementAt(i).Distance = consecutiveStations.Distance;
-                }
+                AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStations).Distinct();
+                AddToLine.StationsInLine.Update(id => id.ID = AddToLine.ID);
+                AddToLine.StationsInLine = from sin in AddToLine.StationsInLine
+                                           select DeepCopyUtilities.CopyToStationInLine(BusLineStationBoDoAdapter(sin), dl);
             }
+            catch (NullReferenceException)
+            {
+                throw new NullReferenceException();
+            }
+
+            //for (int i = 0; i < AddToLine.StationsInLine.Count()-1; i++)
+            //{
+            //    try
+            //    {
+            //        var save= dl.GetConsecutiveStations(AddToLine.StationsInLine.ElementAt(i).BusStationKey, AddToLine.StationsInLine.ElementAt(i + 1).BusStationKey);
+            //        AddToLine.StationsInLine.ElementAt(i).AverageTravelTime = save.AverageTravelTime;
+            //        AddToLine.StationsInLine.ElementAt(i).Distance = save.Distance;
+            //    }
+            //    catch (DO.IdException ex)
+            //    {
+
+            //        DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+            //        {
+            //            StationCodeOne = AddToLine.StationsInLine.ElementAt(i).BusStationKey,
+            //            StationCodeTwo = AddToLine.StationsInLine.ElementAt(i + 1).BusStationKey,
+            //            Distance = _Distance,
+            //            AverageTravelTime = timeSpanTravel,
+            //            Flage = true
+            //        };
+            //        dl.AddConsecutiveStations(consecutiveStations);
+            //        AddToLine.StationsInLine.ElementAt(i).AverageTravelTime = consecutiveStations.AverageTravelTime;
+            //        AddToLine.StationsInLine.ElementAt(i).Distance = consecutiveStations.Distance;
+            //    }
+
+        
         }
         /// <summary>
         /// The function receives a bus line for deletion

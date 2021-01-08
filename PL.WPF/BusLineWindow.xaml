@@ -41,7 +41,7 @@
             <Label x:Name="LastStopLabel" Content="Last stop:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Height="30" Margin="3,6.8,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="3"/>
             <ComboBox x:Name="LastStopcb" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3" Text="{Binding LastStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedItem="{Binding LastStopNumber}" VerticalAlignment="Center" Height="25" Width="120"/>
         </Grid>
-        <DataGrid x:Name="DataGrirdStationslines" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="302,454,13.6,15" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" SelectionChanged="DataGrirdStationslines_SelectionChanged">
+        <DataGrid x:Name="DataGrirdStationslines" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="291,454,13.6,15" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" SelectionChanged="DataGrirdStationslines_SelectionChanged">
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -55,8 +55,8 @@
                 <DataGridTextColumn x:Name="StationAddressClumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="NameStationClumn" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nuerInLineColumn" Binding="{Binding NumberStationInLine}" IsReadOnly="False" Header="Number Station In Line" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="BusStationKeyPrevious" Binding="{Binding AverageTravelTime}" Header="Time          " Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="NextStaionColunm" Binding="{Binding Distance}" Header="distance" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="BusStationKeyPrevious" Binding="{Binding AverageTravelTime}" Header="Time" Width="SizeToHeader"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

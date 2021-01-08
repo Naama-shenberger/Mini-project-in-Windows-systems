@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DLAPI;
 
 namespace BL
 {
@@ -42,10 +43,22 @@ namespace BL
             from.CopyPropertiesTo(to);
             return to;
         }
-        public static BO.BusLineStation CopyToStationInLine(DO.BusLineStation busStation)
+        public static BO.BusLineStation CopyToStationInLine(DO.BusLineStation busStation,IDal dal)
         {
             BO.BusLineStation result = (BO.BusLineStation)busStation.CopyPropertiesToNew(typeof(BO.BusLineStation));
-
+            var station = from sin in dal.ConsecutivesStations()
+                          where sin.StationCodeOne == busStation.BusStationKey || sin.StationCodeTwo == busStation.BusStationKey
+                          select sin;
+            if(busStation.NumberStationInLine==1)
+            {
+                result.AverageTravelTime = new TimeSpan(0, 0, 0);
+                result.Distance = 0;
+            }
+            else
+            {
+                result.AverageTravelTime = station.ToList()[0].AverageTravelTime;
+                result.Distance = station.ToList()[0].Distance;      
+            }
             return result;
         }
         public static BO.BusLineInStation CopyToLineInStation(this DO.BusLine busLine, BO.BusLineInStation sic)

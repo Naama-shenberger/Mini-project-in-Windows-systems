@@ -45,7 +45,7 @@ namespace PL.WPF
         /// </summary>
         void RefreshDataGrirdAllStationslines()
         {
-            DataGrirdAllStationslines.DataContext = Convert<object>(bl.StationDetails(bl.GetAllBusLineStations()));
+            DataGrirdAllStationslines.DataContext = Convert<object>(bl.StationDetails(bl.GetAllBusLineStations()).Distinct());
         }
         /// <summary>
         /// Refresh Combo Box
@@ -104,7 +104,7 @@ namespace PL.WPF
         {
             try
             {
-                Index = CurBusLine.StationsInLine.Count() + 1;
+                Index = CurBusLine.StationsInLine.Count() ;
                 BO.BusLineStation busLineStation = new BO.BusLineStation
                 {
                     BusStationKey = int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)),
