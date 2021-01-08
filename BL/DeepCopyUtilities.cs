@@ -49,16 +49,29 @@ namespace BL
             var station = from sin in dal.ConsecutivesStations()
                           where sin.StationCodeOne == busStation.BusStationKey || sin.StationCodeTwo == busStation.BusStationKey
                           select sin;
-            if(busStation.NumberStationInLine==1)
+            if (station.Count() != 0)
             {
-                result.AverageTravelTime = new TimeSpan(0, 0, 0);
-                result.Distance = 0;
+                if (busStation.NumberStationInLine == 1)
+                {
+                    result.AverageTravelTime = new TimeSpan(0, 0, 0);
+                    result.Distance = 0;
+                }
+                else
+                {
+                    result.AverageTravelTime = station.ToList()[0].AverageTravelTime;
+                    result.Distance = station.ToList()[0].Distance;
+                }
             }
             else
             {
-                result.AverageTravelTime = station.ToList()[0].AverageTravelTime;
-                result.Distance = station.ToList()[0].Distance;      
+                result.AverageTravelTime = new TimeSpan(0,0,0);
+                result.Distance = 0;
             }
+            return result;
+        }
+        public static BO.BusLineStation CopyToStationInLine(DO.BusLineStation busStation)
+        {
+            BO.BusLineStation result = (BO.BusLineStation)busStation.CopyPropertiesToNew(typeof(BO.BusLineStation));
             return result;
         }
         public static BO.BusLineInStation CopyToLineInStation(this DO.BusLine busLine, BO.BusLineInStation sic)

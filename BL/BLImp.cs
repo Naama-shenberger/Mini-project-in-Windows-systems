@@ -583,11 +583,28 @@ namespace BL
         {
             try
             {
-
+               
                 AddToLine.StationsInLine = AddToLine.StationsInLine.Concat(busLineStations).Distinct();
+
                 AddToLine.StationsInLine.Update(id => id.ID = AddToLine.ID);
                 AddToLine.StationsInLine = from sin in AddToLine.StationsInLine
+                                           orderby sin.NumberStationInLine
+                                           select sin;
+                if(_Distance!=0)
+                {
+                    DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+                    {
+                        Distance = _Distance,
+                        AverageTravelTime = timeSpanTravel,
+                        Flage = true,
+                        StationCodeTwo = AddToLine.StationsInLine.ToList()[AddToLine.StationsInLine.Count() - 1].BusStationKey,
+                        StationCodeOne = AddToLine.StationsInLine.ToList()[AddToLine.StationsInLine.Count() - 2].BusStationKey
+                    };
+                    dl.AddConsecutiveStations(consecutiveStations);
+                }
+                AddToLine.StationsInLine = from sin in AddToLine.StationsInLine
                                            select DeepCopyUtilities.CopyToStationInLine(BusLineStationBoDoAdapter(sin), dl);
+              
             }
             catch (NullReferenceException)
             {

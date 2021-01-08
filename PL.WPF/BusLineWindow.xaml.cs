@@ -78,6 +78,7 @@ namespace PL.WPF
                 DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
             if (CurBusLine != null && CurBusLine.lineRides != null)
                 lvExpander.DataContext = CurBusLine.lineRides;
+          
         }
         /// <summary>
         /// Click event
@@ -104,7 +105,7 @@ namespace PL.WPF
         {
             try
             {
-                Index = CurBusLine.StationsInLine.Count();
+                Index = CurBusLine.StationsInLine.Distinct().Count();
                 BO.BusLineStation busLineStation = new BO.BusLineStation
                 {
                     BusStationKey = int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)),
@@ -121,18 +122,23 @@ namespace PL.WPF
                         if (TimePickerDistance.Text == null)
                             TimePickerDistance.Text = "0";
                         bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
-                        if(CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID) == null)
+                        if(CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID && id.AverageTravelTime.TotalMinutes==0 && id.Distance==0 )!=null)
                         {
+                            CurBusLine.StationsInLine = from sin in CurBusLine.StationsInLine
+                                                        where sin.BusStationKey != busLineStation.BusStationKey
+                                                        where sin.Distance!=0 
+                                                        select sin;
+                            //MessageBox.Show($"{CurBusLine}");
                             Ddistancetb.Visibility = Visibility.Visible;
                             TimePickerDistance.Visibility = Visibility.Visible;
-                            bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                            throw new ArithmeticException();
                         }
                     }
                     catch (BO.IdException ex)
                     {
-                        Ddistancetb.Visibility = Visibility.Visible;
-                        TimePickerDistance.Visibility = Visibility.Visible;
-                        bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                        //Ddistancetb.Visibility = Visibility.Visible;
+                        //TimePickerDistance.Visibility = Visibility.Visible;
+                        //bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
                     }
                 }
                 else
@@ -141,7 +147,10 @@ namespace PL.WPF
                 MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
-
+            catch (ArithmeticException)
+            {
+                MessageBox.Show("The station has no consecutive stations, please type distance and time", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
