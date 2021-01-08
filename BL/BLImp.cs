@@ -246,34 +246,42 @@ namespace BL
         /// <param name="busLine"></param>
         public void DeleteBusLineFromStation(BusStation busStation, BusLineInStation busLine)
         {
+            DO.BusLineStation bls;
             try
             {
+                bls = dl.GetBusLineStation(busStation.BusStationKey, busLine.ID);
+                dl.DeleteBusLineStation(bls);
                 busStation.ListBusLinesInStation = busStation.ListBusLinesInStation.Where(s => s.BusLineNumber != busLine.BusLineNumber);
                 BusLine bl = GetBusLine(busLine.ID);
                 bl.StationsInLine = bl.StationsInLine.Where(c => c.BusStationKey != busStation.BusStationKey);
+               
             }
             catch (DO.IdException ex)
             {
                 throw new BO.IdException(ex.ToString());
             }
         }
+        /// <summary>
+        /// adds a line to station 
+        /// </summary>
+        /// <param name="busStation"></param>
+        /// <param name="busLine"></param>
         public void AddBusLineToStation(BusStation busStation, BusLine busLine)
         {
-            //busStation.ListBusLinesInStation = busStation.ListBusLinesInStation.ToList().Add(new BusLineInStation() { BusLineNumber = busLine.BusLineNumber, ID = busLine.ID, Area = busLine.Area });
-            //busLine.StationsInLine = busLine.StationsInLine.Where(c => c.BusStationKey == busStation.BusStationKey);
-            foreach (BusLine line in GetAllBusLines())
+            DO.BusLineStation bls;
+            try
             {
-                //busStation.ListBusLinesInStation = busStation.ListBusLinesInStation.Where(line => line.BusLineNumber == busLine.BusLineNumber).ToList();
-                if (line.BusLineNumber == busLine.BusLineNumber)
-                    foreach (BusLineStation station in line.StationsInLine)
-                        if (station.BusStationKey == busStation.BusStationKey)
-                        {
-                            busStation.ListBusLinesInStation.Append(new BusLineInStation() { BusLineNumber = line.BusLineNumber, Area = (int)line.Area, ID = line.ID });
-                            line.StationsInLine=line.StationsInLine.Append(station);
-                            return;
-                        }
+                bls = dl.GetBusLineStation(busStation.BusStationKey, busLine.ID);
             }
-            throw new BO.IdException("Line dosnt exists ");
+            catch (DO.IdException ex)
+            {
+
+                busStation.ListBusLinesInStation.ToList().Add(new BusLineInStation() { BusLineNumber = busLine.BusLineNumber, ID = busLine.ID, Area = (int)busLine.Area });
+                int count = busLine.StationsInLine.Count();
+                dl.AddBusLineStation(new DO.BusLineStation() { BusStationKey = busStation.BusStationKey, ID = busLine.ID, Active = true, NumberStationInLine = count });
+                busLine.StationsInLine.Append(new BusLineStation() { BusStationKey = busStation.BusStationKey, Active = true, ID = busLine.ID, NumberStationInLine = count });
+            }
+
         }
 
         /// <summary>
@@ -346,10 +354,13 @@ namespace BL
         public void DeleteBusStation(BusStation station)
         {
             try
-            {
-                //DO.BusStation s = dl.GetBusStation(station.BusStationKey);
-                //dl.DeleteBusStation(s);
-                //station.ListBusLinesInStation.Where(b=>b)
+            { 
+            //{
+            //    BusStation bs = BusDoBoAdapter(dl.GetBusStation(station.BusStationKey));
+            //    GetAllBusLines().Where(b=>dl.GetBusLine(id=>id==b.StationsInLine.Where(t=>t.ID==b.ID).First().ID)
+            //    GetBusLines().(id=> bs.ListBusLinesInStation.Where(c=>GetBusStation(te=>t))
+            //    if (station.ListBusLinesInStation!=null)
+            //        dl.DeleteBusLineStation(new DO.BusLineStation() { BusStationKey = station.BusStationKey, Active = true});
                 //dl.DeleteBusLineStation(new DO.BusLineStation() { BusStationKey = station.BusStationKey, Active = true,ID= station.ListBusLinesInStation});
             }
             catch (DO.IdException ex)

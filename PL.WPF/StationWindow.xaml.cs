@@ -36,12 +36,19 @@ namespace PL.WPF
             DataGrirdAllLines.IsReadOnly = true;
             DataGrirdAllLinesInStation.IsReadOnly = true;
         }
+        /// <summary>
+        /// Refreshes the combo box
+        /// </summary>
         private void RefreshAllStationsComboBox()
         {
-            ComboBoxBusStationKey.SelectedIndex = 0;
             ComboBoxBusStationKey.DataContext = bl.GetAllBusStation().ToList(); //ObserListOfStudents;
 
         }
+        /// <summary>
+        /// When selecting a combobox this function brinds up to date the whole window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComboBoxBusStationKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CurBusStation = (ComboBoxBusStationKey.SelectedItem as BO.BusStation);
@@ -53,6 +60,9 @@ namespace PL.WPF
             }
 
         }
+        /// <summary>
+        /// Refreshes the data grid that shows all the lines that pass through the cur station
+        /// </summary>
         private void RefreshBusLinesInStation()
         {
             if ( CurBusStation.ListBusLinesInStation != null)
@@ -60,6 +70,9 @@ namespace PL.WPF
                 DataGrirdAllLinesInStation.DataContext = CurBusStation.ListBusLinesInStation.ToList();
             }
         }
+        /// <summary>
+        /// Refreshes the data grid that shows all the lines that don't pass through the cur station
+        /// </summary>
         private void RefreshBusLines()
         {
             if (CurBusStation.ListBusLinesInStation != null)
@@ -68,11 +81,21 @@ namespace PL.WPF
                 DataGrirdAllLines.DataContext = listOfLines;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original"></param>
+        /// <returns></returns>
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
+        /// <summary>
+        /// A button that updates the cur station 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -92,7 +115,11 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        /// <summary>
+        /// A button that deletes th cur station 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteCurStationButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult res = MessageBox.Show("Delete selected Station?", "Verification", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -109,8 +136,6 @@ namespace PL.WPF
                     //if (CurBusStation.ListBusLinesInStation == null)
                     //    MessageBox.Show($"No bus line contained at station {CurBusStation.BusStationKey} ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     RefreshAllStationsComboBox();
-                    RefreshBusLinesInStation();
-                    RefreshBusLines();
                 }
                 else
                     MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -121,14 +146,21 @@ namespace PL.WPF
             }
 
         }
-
+        /// <summary>
+        /// A button that returns you to previous window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            MainWindow m = new MainWindow();
-            m.Show();
         }
-
+        /// <summary>
+        /// A button that adds a new station to data
+        /// referes you to a window you can enter new station info
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddNewStationButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -151,9 +183,11 @@ namespace PL.WPF
             }
 
         }
-
-
-
+        /// <summary>
+        /// A button that adds a line to cur station from list of lines
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddLineFromStationButton_Click(object sender, RoutedEventArgs e)
         {
             if (CurBusStation == null)
@@ -178,7 +212,11 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        /// <summary>
+        /// A button that deletes a line from the cur station list of line
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DelLineFromStationButton_Click(object sender, RoutedEventArgs e)
         {
             try

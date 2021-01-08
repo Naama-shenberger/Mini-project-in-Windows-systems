@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AddNewStationWindow" Height="350" Width="400" Background=" #FFE6F1E2 " >
     <Grid>
-        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Height="185" Width="364">
+        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="0,38,0,0" VerticalAlignment="Top" Height="184" Width="374">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="120" />
                 <ColumnDefinition Width="Auto" MinWidth="200" />
@@ -22,18 +22,18 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
-            <Label  Name="BusStationLabel" Content="Bus station code:" Grid.Column="0" HorizontalAlignment="Left" Margin="8,1,0,29.8" Grid.Row="0" VerticalAlignment="Center" Height="30" Width="110" FontWeight="Bold" Grid.RowSpan="2"/>
+            <Label  Name="BusStationLabel" Content="Bus station code:" Grid.Column="0" HorizontalAlignment="Left" Margin="8,3,0,27.8" Grid.Row="0" VerticalAlignment="Center" Height="30" Width="110" FontWeight="Bold" Grid.RowSpan="2"/>
             <TextBox  x:Name="Bus_Station_Key" Grid.Column="1" HorizontalAlignment="Left" Margin="3,2,0,27.8" Grid.Row="0"  VerticalAlignment="Center" Height="31" Width="241" Grid.RowSpan="2"/>
-            <Label Name="LabelStationName" Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center" Height="30" Width="45" FontWeight="Bold"/>
+            <Label Name="LabelStationName" Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="10,2.6,0,28.2" Grid.Row="1" VerticalAlignment="Center" Height="30" Width="45" FontWeight="Bold" Grid.RowSpan="2"/>
             <TextBox  x:Name="Station_Name"  Grid.Column="1" HorizontalAlignment="Left" Margin="3,2.6,0,2.8" Grid.Row="1"    VerticalAlignment="Center" Height="25" Width="241"/>
-            <Label Name="AddressLabel" Content="Address:" Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Left"  Margin="8,8,0,2.8" VerticalAlignment="Center" Height="30" Width="94" FontWeight="Bold"/>
-            <TextBox x:Name="Station_Address" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="3,2.2,0,0.2"    VerticalAlignment="Center" Height="28" Width="241"/>
-            <Label Name="Latitude_Label" Content="Latitude:" Grid.Column="0" Grid.Row="3"  HorizontalAlignment="Left"  Margin="3,4.2,0,11.2" VerticalAlignment="Center" Height="30" Width="91" FontWeight="Bold"/>
-            <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="4"  HorizontalAlignment="Left" Height="30" Margin="3,4.8,0,4.4" VerticalAlignment="Center" Width="94" FontWeight="Bold"/>
+            <Label Name="AddressLabel" Content="Address:" Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Left"  Margin="8,3.2,0,0.2" VerticalAlignment="Center" Height="27" Width="57" FontWeight="Bold"/>
+            <TextBox x:Name="Station_Address" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="3.2,0.2,0,2.2"    VerticalAlignment="Center" Height="28" Width="241"/>
+            <Label Name="Latitude_Label" Content="Latitude:" Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Left"  Margin="10,27.2,0,3.6" VerticalAlignment="Center" Height="30" Width="91" FontWeight="Bold" Grid.RowSpan="2"/>
+            <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="4"  HorizontalAlignment="Left" Height="30" Margin="10,0.4,0,0" VerticalAlignment="Center" Width="91" FontWeight="Bold"/>
             <Slider Name="LatitudeValue" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Grid.Column="1" Margin="3,27.2,0,0" Grid.Row="2" Height="30" Minimum="31" Maximum="33.3" TickPlacement="BottomRight" TickFrequency="0.0001" IsSnapToTickEnabled="True" Grid.RowSpan="2" Foreground="#FFBE9DE8" />
             <Slider Name="LongdeValue" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="183" Margin="3,0.4,0,0" Grid.Row="4" Minimum="34.3" Maximum="35.5" Height="30" TickPlacement="BottomRight" TickFrequency="0.0001" IsSnapToTickEnabled="True" Foreground="#FFBE9DE8" Grid.Column="1" />
             <TextBox Text="{Binding ElementName=LatitudeValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" Margin="199,30.2,0,2.6" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Width="45" Grid.RowSpan="2" FontWeight="Bold" FontStyle="Italic" />
-            <TextBox Text="{Binding ElementName=LongdeValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" Margin="199,2.4,7,0" Grid.Column="1" Grid.Row="4" FontWeight="Bold" FontStyle="Italic"/>
+            <TextBox Text="{Binding ElementName=LongdeValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" Margin="199.2,2.4,1.6,0" Grid.Column="1" Grid.Row="4" FontWeight="Bold" FontStyle="Italic"/>
 
         </Grid>
         <Button Content="ADD" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="163,255,0,0" Click="AddingButton_Click" BorderBrush="#FFBE9DE8" Background="#FFBE9DE8"/>

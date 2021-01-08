@@ -33,7 +33,12 @@ namespace PL.WPF
             bl = _bl;
 
         }
- 
+        /// <summary>
+        /// A button that absorb the new stations info and returns it to previous window 
+        /// and returns to previous window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddingButton_Click(object sender, RoutedEventArgs e)
         {
             try
