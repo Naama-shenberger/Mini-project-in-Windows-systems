@@ -189,7 +189,7 @@ namespace PL.WPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddLineFromStationButton_Click(object sender, RoutedEventArgs e)
+        private void AddLineToStationButton_Click(object sender, RoutedEventArgs e)
         {
             if (CurBusStation == null)
             {
@@ -198,17 +198,14 @@ namespace PL.WPF
             }
             try
             {
-                if (CurBusStation != null)
-                {
-                    BO.BusLine blBO = ((sender as Button).DataContext as BO.BusLine);
-                    //AddLineToStationWindow1xaml altsw = new AddLineToStationWindow1xaml(bl);
-                    //bl.AddBusLineToStation(CurBusStation, blBO);
-                    RefreshBusLinesInStation();
-                    RefreshBusLines();
-
-                }
-                else
-                    MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                BO.BusLine blBO = ((sender as Button).DataContext as BO.BusLine);
+                TimeAndDistanceWindow InfoWindow = new TimeAndDistanceWindow(bl);
+                InfoWindow.ShowDialog();
+                bl.AddBusLineToStation(CurBusStation, blBO, InfoWindow.Time, InfoWindow.Distance);
+                //IEnumerable<BO.BusLineStation>=new BO.BusLineStation() { }
+                //bl.AddBusStationToLine
+                RefreshBusLinesInStation();
+                RefreshBusLines();
             }
             catch (BO.IdException ex)
             {
