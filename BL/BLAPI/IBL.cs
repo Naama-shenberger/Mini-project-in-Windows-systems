@@ -29,7 +29,7 @@ namespace BLAPI
         void AddBusStation(BusStation station);
         void DeleteBusStation(BusStation station);
         void UpdateBusStation(BusStation busStation);
-        void AddBusLineToStation(BusStation busStation,BusLine busLine);
+        void AddBusLineToStation(BusStation busStation, BusLine busLine, TimeSpan Time, float Disten);
         IEnumerable<object> LineDetails(IEnumerable<BusLineInStation> busLineInStations);
         void DeleteBusLineFromStation(BusStation busStation, BusLineInStation busLine);     
         #endregion
