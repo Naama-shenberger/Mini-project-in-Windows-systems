@@ -73,7 +73,7 @@ namespace PL.WPF
                     CurBusLine.lineRides= CurBusLine.lineRides.Append(lineRides);
                     busLineStations.Add(FirstStopcb.SelectedItem as BO.BusLineStation);
                     var save = (LastStopcb.SelectedItem as BO.BusLineStation);
-                    save.NumberStationInLine = 3;
+                    save.NumberStationInLine = 2;
                     busLineStations.Add(save);
                     CurBusLine.StationsInLine = busLineStations;
                     MessageBox.Show("The bus was successfully added", "Information", MessageBoxButton.OK, MessageBoxImage.Information);

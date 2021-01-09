@@ -496,10 +496,17 @@ namespace DL
         /// <param name="station"></param>
         public void DeleteBusLineStation(BusLineStation station)
         {
-            var toDeleteIndex = DataSource.BusLineStations.FindIndex(s => s.BusStationKey == station.BusStationKey);
-            if (toDeleteIndex != -1)
+            var toDeleteIndex = DataSource.BusLineStations.FindAll(s => s.BusStationKey == station.BusStationKey);
+            if (toDeleteIndex != null)
                 if (station.Active == true)
-                    DataSource.BusLineStations[toDeleteIndex].Active = false;
+                    for(int i=0;i< DataSource.BusLineStations.Count();i++)
+                    {
+                        if(DataSource.BusLineStations[i].BusStationKey== station.BusStationKey)
+                        {
+                            DataSource.BusLineStations[i].Active = false;
+                        }
+                    }
+                  
                 else
                     throw new IdException(station.BusStationKey, $"The bus line Station {station.BusStationKey} is already deleted");
             else

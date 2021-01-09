@@ -38,7 +38,6 @@ namespace PL.WPF
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
             Treeview.ItemsSource = bl.GetAllBusLinesGroupByArea();
-           
         }
         /// <summary>
         /// Refresh Data Grird
@@ -89,9 +88,9 @@ namespace PL.WPF
         private void btDelBusLineStation_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
-            var save = int.Parse((btn).DataContext.ToString().Substring(18, 6));
-            bl.DeleteBusLineStationFromeLine(CurBusLine, bl.GetAllBusLineStations().FirstOrDefault(predicate => predicate.BusStationKey == save));
-            bl.DeleteBusLineStation(bl.GetAllBusLineStations().FirstOrDefault(predicate => predicate.BusStationKey == save));
+            var saveKey = int.Parse((btn).DataContext.ToString().Substring(18, 6));
+            bl.DeleteBusLineStationFromeLine(CurBusLine, bl.GetAllBusLineStations().FirstOrDefault(s => s.BusStationKey == saveKey));
+            bl.DeleteBusLineStation(bl.GetAllBusLineStations().Distinct().FirstOrDefault(s => s.BusStationKey == saveKey));
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
         }
@@ -128,11 +127,21 @@ namespace PL.WPF
                                                         where sin.BusStationKey != busLineStation.BusStationKey
                                                         where sin.Distance!=-1
                                                         select sin;
-                          
+                            var lists = CurBusLine.StationsInLine.ToList();
+                            for (int i=0;i < CurBusLine.StationsInLine.Count()-1;i++)
+                           {
+                                if(CurBusLine.StationsInLine.ElementAt(i).BusStationKey==CurBusLine.StationsInLine.ElementAt(i+1).BusStationKey)
+                                {
+                                    lists = CurBusLine.StationsInLine.ToList();
+                                    lists.RemoveAt(i + 1);
+                                    CurBusLine.StationsInLine = lists;
+                                }
+                           }
                             Ddistancetb.Visibility = Visibility.Visible;
                             TimePickerDistance.Visibility = Visibility.Visible;
                             throw new ArithmeticException();
                         }
+
                     }
                     catch (BO.IdException ex)
                     {
@@ -143,6 +152,16 @@ namespace PL.WPF
                 }
                 else
                     throw new ArgumentException("The line station is already on the line route");
+                var list = CurBusLine.StationsInLine.ToList();
+                for (int i = 0; i < CurBusLine.StationsInLine.Count() - 1; i++)
+                {
+                    if (CurBusLine.StationsInLine.ElementAt(i).BusStationKey == CurBusLine.StationsInLine.ElementAt(i + 1).BusStationKey)
+                    {
+                        list = CurBusLine.StationsInLine.ToList();
+                        list.RemoveAt(i + 1);
+                        CurBusLine.StationsInLine = list;
+                    }
+                }
                 RefreshDataGrirdStationsline();
                 MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -165,18 +184,27 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
-            var btn= sender as Button;
-            var save = CurBusLine.StationsInLine.FirstOrDefault(c => c.BusStationKey == int.Parse((btn).DataContext.ToString().Substring(18, 6)));
-            if (CurBusLine.StationsInLine.Count() == 1)
-                Index = CurBusLine.StationsInLine.Count();
-            else
-              if (save.NumberStationInLine > CurBusLine.StationsInLine.Count())
-                              Index = Index - 1;
-            else
-                Index = save.NumberStationInLine - 1;
-            CurBusLine.StationsInLine.AsParallel().ForAll(a => { if (a.NumberStationInLine > save.NumberStationInLine) { a.NumberStationInLine = a.NumberStationInLine - 1; } });
-            bl.DeleteBusLineStationFromeLine(CurBusLine,save);
-            RefreshDataGrirdStationsline();
+            try
+            {
+                if (CurBusLine.StationsInLine.Count() <= 2)
+                    throw new ArgumentException();
+                var btn = sender as Button;
+                var save = CurBusLine.StationsInLine.FirstOrDefault(c => c.BusStationKey == int.Parse((btn).DataContext.ToString().Substring(18, 6)));
+                if (CurBusLine.StationsInLine.Count() == 1)
+                    Index = CurBusLine.StationsInLine.Count();
+                else
+                  if (save.NumberStationInLine > CurBusLine.StationsInLine.Count())
+                    Index = Index - 1;
+                else
+                    Index = save.NumberStationInLine - 1;
+                CurBusLine.StationsInLine.AsParallel().ForAll(a => { if (a.NumberStationInLine > save.NumberStationInLine) { a.NumberStationInLine = a.NumberStationInLine - 1; } });
+                bl.DeleteBusLineStationFromeLine(CurBusLine, save);
+                RefreshDataGrirdStationsline();
+            }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show("The line should have at least 2 stations");
+            }
         }
         /// <summary>
         /// Click event
@@ -247,7 +275,9 @@ namespace PL.WPF
         private void UpdateIndexInLine_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
-            var save = CurBusLine.StationsInLine.FirstOrDefault(c => c.BusStationKey == int.Parse((btn).DataContext.ToString().Substring(18, 6)));
+            var s = btn as object;
+            var ss = btn.DataContext;
+            var save = CurBusLine.StationsInLine.FirstOrDefault(c => c.BusStationKey == int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)));
             var inex = from sin in CurBusLine.StationsInLine
                        orderby sin.NumberStationInLine descending
                        select sin;
@@ -276,8 +306,6 @@ namespace PL.WPF
             {
                 if (CurBusLine != null)
                     bl.UpdateBusLine(CurBusLine);
-
-
             }
             catch (BO.IdException ex)
             {
