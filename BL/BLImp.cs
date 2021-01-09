@@ -253,7 +253,7 @@ namespace BL
         /// </summary>
         /// <param name="busStation"></param>
         /// <param name="busLine"></param>
-        public void AddBusLineToStation(BusStation busStation, BusLine busLine)
+        public void AddBusLineToStation(BusStation busStation, BusLine busLine,TimeSpan Time,float Disten)
         {
             DO.BusLineStation bls;
             try
@@ -264,9 +264,9 @@ namespace BL
             {
 
                 busStation.ListBusLinesInStation.ToList().Add(new BusLineInStation() { BusLineNumber = busLine.BusLineNumber, ID = busLine.ID, Area = (int)busLine.Area });
-                int count = busLine.StationsInLine.Count();
+                int count = busLine.StationsInLine.Count()+1;
                 dl.AddBusLineStation(new DO.BusLineStation() { BusStationKey = busStation.BusStationKey, ID = busLine.ID, Active = true, NumberStationInLine = count });
-                busLine.StationsInLine.Append(new BusLineStation() { BusStationKey = busStation.BusStationKey, Active = true, ID = busLine.ID, NumberStationInLine = count });
+                busLine.StationsInLine.Append(new BusLineStation() { BusStationKey = busStation.BusStationKey, Active = true, ID = busLine.ID, NumberStationInLine = count,AverageTravelTime=Time,Distance=Disten });
             }
 
         }
@@ -365,17 +365,18 @@ namespace BL
         {
             try
             {
-                BusStation b = GetBusStation(busStation.BusStationKey);
-                if (b.StationAddress != busStation.StationAddress || b.Longitude != busStation.Longitude || b.Latitude != busStation.Latitude)
-                    throw new BO.IdException("It does not make sense to change the location of a station\n You can only change the name of the station ");
-                else
-                    dl.UpdateBusStation(BusStationBoDoAdapter(GetBusStation(busStation.BusStationKey)));
+                dl.UpdateBusStation(BusStationBoDoAdapter(GetBusStation(busStation.BusStationKey)));
             }
             catch (DO.IdException ex)
             {
                 throw new BO.IdException(ex.ToString());
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="busLineInStations"></param>
+        /// <returns></returns>
         public IEnumerable<object> LineDetails(IEnumerable<BusLineInStation> busLineInStations)
         {
             return from BusLine in dl.BusLines()

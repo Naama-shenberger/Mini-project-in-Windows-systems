@@ -201,7 +201,8 @@ namespace PL.WPF
                 if (CurBusStation != null)
                 {
                     BO.BusLine blBO = ((sender as Button).DataContext as BO.BusLine);
-                    bl.AddBusLineToStation(CurBusStation, blBO);
+                    //AddLineToStationWindow1xaml altsw = new AddLineToStationWindow1xaml(bl);
+                    //bl.AddBusLineToStation(CurBusStation, blBO);
                     RefreshBusLinesInStation();
                     RefreshBusLines();
 
