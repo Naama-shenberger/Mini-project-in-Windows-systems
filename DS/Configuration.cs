@@ -12,6 +12,6 @@ namespace DS
     {
         public static int IdentificationNumberBusLine { set; get; } = 20;//Identification number for bus line
         public static int IdentificationNumberBusDrive { set; get; } = 110;//Identification number for Bus Drive
-        public static int IdentificationNumberUser { set; get; } = 10000;//Identification number for Bus Drive
+        public static int IdentificationNumberUser { set; get; } = 10000;//Identification number for User
     }
 }

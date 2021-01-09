@@ -23,7 +23,7 @@ namespace DS
             InitAllLists();
         }
         /// <summary>
-        /// initialization function fo bus lines
+        /// initialization function fo the lists
         /// </summary>
         public static void InitAllLists()
         {
@@ -235,19 +235,16 @@ namespace DS
                };
             ListConsecutiveStations = new List<ConsecutiveStations>
             {
-                new ConsecutiveStations{Flage=true, StationCodeOne=873702,StationCodeTwo=388614,Distance=(float)6.9,AverageTravelTime=new TimeSpan(00,24,50)},//k
-                new ConsecutiveStations{Flage=true,StationCodeOne=873401,StationCodeTwo=388634,Distance=(float)7,AverageTravelTime=new TimeSpan(00,05,00)},//k
-                new ConsecutiveStations{Flage=true,StationCodeOne=857321,StationCodeTwo=873401,Distance=(float)1.12,AverageTravelTime=new TimeSpan(00,02,30)},//k
-                new ConsecutiveStations{Flage=true,StationCodeOne=876015,StationCodeTwo=388614,Distance=(float)3,AverageTravelTime=new TimeSpan(00,04,30)},//k
-               // new ConsecutiveStations{Flage=true,StationCodeOne=388523,StationCodeTwo=873702,Distance=(float)1,AverageTravelTime=new TimeSpan(00,02,00)},
-               // new ConsecutiveStations{Flage=true,StationCodeOne=873702,StationCodeTwo=874104,Distance=(float)7,AverageTravelTime=new TimeSpan(00,05,00)},
-                new ConsecutiveStations{Flage=true,StationCodeOne=874104,StationCodeTwo=388624,Distance=(float)2,AverageTravelTime=new TimeSpan(00,02,50)},//k
-                new ConsecutiveStations{Flage=true,StationCodeOne=873401,StationCodeTwo=875612,Distance=(float)4.67,AverageTravelTime=new TimeSpan(00,04,45)},//k
-                new ConsecutiveStations{Flage=true,StationCodeOne=388614,StationCodeTwo=388624,Distance=(float)5.3,AverageTravelTime=new TimeSpan(00,04,30)},//k
-                new ConsecutiveStations{Flage=true,StationCodeOne=388624,StationCodeTwo=875612,Distance=(float)6.98,AverageTravelTime=new TimeSpan(00,04,50)},//k
-             //   new ConsecutiveStations{Flage=true,StationCodeOne=388634,StationCodeTwo=875612,Distance=(float)2.4,AverageTravelTime=new TimeSpan(00,03,00)},
-                new ConsecutiveStations{Flage=true,StationCodeOne=388614,StationCodeTwo=388634,Distance=(float)9.9,AverageTravelTime=new TimeSpan(00,14,50)},//k
-                new ConsecutiveStations{Flage=true,StationCodeOne=873702,StationCodeTwo=388624,Distance=(float)9.9,AverageTravelTime=new TimeSpan(00,14,50)}//k
+                new ConsecutiveStations{Flage=true, StationCodeOne=873702,StationCodeTwo=388614,Distance=(float)6.9,AverageTravelTime=new TimeSpan(00,24,50)},
+                new ConsecutiveStations{Flage=true,StationCodeOne=873401,StationCodeTwo=388634,Distance=(float)7,AverageTravelTime=new TimeSpan(00,05,00)},
+                new ConsecutiveStations{Flage=true,StationCodeOne=857321,StationCodeTwo=873401,Distance=(float)1.12,AverageTravelTime=new TimeSpan(00,02,30)},
+                new ConsecutiveStations{Flage=true,StationCodeOne=876015,StationCodeTwo=388614,Distance=(float)3,AverageTravelTime=new TimeSpan(00,04,30)},
+                new ConsecutiveStations{Flage=true,StationCodeOne=874104,StationCodeTwo=388624,Distance=(float)2,AverageTravelTime=new TimeSpan(00,02,50)},
+                new ConsecutiveStations{Flage=true,StationCodeOne=873401,StationCodeTwo=875612,Distance=(float)4.67,AverageTravelTime=new TimeSpan(00,04,45)},
+                new ConsecutiveStations{Flage=true,StationCodeOne=388614,StationCodeTwo=388624,Distance=(float)5.3,AverageTravelTime=new TimeSpan(00,04,30)},
+                new ConsecutiveStations{Flage=true,StationCodeOne=388624,StationCodeTwo=875612,Distance=(float)6.98,AverageTravelTime=new TimeSpan(00,04,50)},
+                new ConsecutiveStations{Flage=true,StationCodeOne=388614,StationCodeTwo=388634,Distance=(float)9.9,AverageTravelTime=new TimeSpan(00,14,50)},
+                new ConsecutiveStations{Flage=true,StationCodeOne=873702,StationCodeTwo=388624,Distance=(float)9.9,AverageTravelTime=new TimeSpan(00,14,50)}
             };
 
         }

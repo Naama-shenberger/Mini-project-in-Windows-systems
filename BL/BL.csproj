@@ -53,17 +53,12 @@
     <Compile Include="BO\IdException.cs" />
     <Compile Include="BO\LineRides.cs" />
     <Compile Include="BO\Tools.cs" />
-    <Compile Include="BO\Travel.cs" />
     <Compile Include="BO\User.cs" />
     <Compile Include="BO\UserJourney.cs" />
     <Compile Include="DeepCopyUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DalObject\DalObject.csproj">
-      <Project>{c43b4437-6616-4be6-8255-c1aa59d2433b}</Project>
-      <Name>DalObject</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DLAPI\DLAPI.csproj">
       <Project>{80ee880b-348a-4cf1-9071-5feddf96ed2d}</Project>
       <Name>DLAPI</Name>

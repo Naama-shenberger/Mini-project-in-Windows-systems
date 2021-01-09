@@ -197,7 +197,6 @@ namespace PL.WPF
                     Index = Index - 1;
                 else
                     Index = save.NumberStationInLine - 1;
-                CurBusLine.StationsInLine.AsParallel().ForAll(a => { if (a.NumberStationInLine > save.NumberStationInLine) { a.NumberStationInLine = a.NumberStationInLine - 1; } });
                 bl.DeleteBusLineStationFromeLine(CurBusLine, save);
                 RefreshDataGrirdStationsline();
             }
@@ -293,6 +292,7 @@ namespace PL.WPF
         private void UpdateIndexInLine_Closed(object sender, EventArgs e)
         {
             RefreshDataGrirdStationsline();
+           
         }
         /// <summary>
         /// Click event

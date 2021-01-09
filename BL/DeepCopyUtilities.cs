@@ -43,6 +43,14 @@ namespace BL
             from.CopyPropertiesTo(to);
             return to;
         }
+        /// <summary>
+        /// Function that copies bus line station information
+        /// The function checks if the line station has a tracking station 
+        /// if the station has the Function enters the data otherwise enters that the time is zero and distance -1
+        /// </summary>
+        /// <param name="busStation"></param>
+        /// <param name="dal"></param>
+        /// <returns></returns>
         public static BO.BusLineStation CopyToStationInLine(DO.BusLineStation busStation,IDal dal)
         {
             BO.BusLineStation result = (BO.BusLineStation)busStation.CopyPropertiesToNew(typeof(BO.BusLineStation));
@@ -69,20 +77,35 @@ namespace BL
             }
             return result;
         }
+        /// <summary>
+        /// Function that copies bus line station information
+        /// </summary>
+        /// <param name="busStation"></param>
+        /// <returns></returns>
         public static BO.BusLineStation CopyToStationInLine(DO.BusLineStation busStation)
         {
             BO.BusLineStation result = (BO.BusLineStation)busStation.CopyPropertiesToNew(typeof(BO.BusLineStation));
             return result;
         }
+        /// <summary>
+        /// Function that copies bus line information
+        /// </summary>
+        /// <param name="busLine"></param>
+        /// <param name="sic"></param>
+        /// <returns></returns>
         public static BO.BusLineInStation CopyToLineInStation(this DO.BusLine busLine, BO.BusLineInStation sic)
         {
             BO.BusLineInStation result = (BO.BusLineInStation)busLine.CopyPropertiesToNew(typeof(BO.BusLineInStation));
             return result;
         }
+        /// <summary>
+        /// Function that copies Line Rides information
+        /// </summary>
+        /// <param name="lineRide"></param>
+        /// <returns></returns>
         public static BO.LineRides CopyToLineRide(DO.LineRide lineRide)
         {
             BO.LineRides result = (BO.LineRides)lineRide.CopyPropertiesToNew(typeof(BO.LineRides));
-
             return result;
         }
 
