@@ -13,6 +13,12 @@ namespace BL
     {
         IDal dl = DalFactory.GetDal();
         Random r = new Random();
+        #region singelton
+        static readonly BLImp instance = new BLImp();
+        static BLImp() { }//static ctor
+        BLImp() { }//default ctor
+        public static BLImp Instance { get => instance;}//The public Instance property to use
+        #endregion
         #region Bus
         /// <summary>
         /// The function receives a bus for updating

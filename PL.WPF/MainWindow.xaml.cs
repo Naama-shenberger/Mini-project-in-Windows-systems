@@ -22,7 +22,7 @@ namespace PL.WPF
     public partial class MainWindow : Window
     {
 
-        IBL bl = BLFactory.GetBL("1");
+        IBL bl = BLFactory.GetBL();
         public MainWindow()
         {
             InitializeComponent();
