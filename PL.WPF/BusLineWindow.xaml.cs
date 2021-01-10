@@ -33,7 +33,7 @@ namespace PL.WPF
             ComboBoxBusLineNumber.DisplayMemberPath = "BusLineNumber";
             ComboBoxBusLineNumber.SelectedIndex = 0;
             LastStopcb.ItemsSource = FirstStopcb.ItemsSource = bl.GetAllBusLineStations();
-            LastStopcb.DisplayMemberPath = FirstStopcb.DisplayMemberPath = "BusStationKey";
+            LastStopcb.DisplayMemberPath = FirstStopcb.DisplayMemberPath = "BusStationKey"; 
             RefreshAllBusLinesComboBox();
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
