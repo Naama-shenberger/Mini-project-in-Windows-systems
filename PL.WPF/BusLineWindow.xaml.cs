@@ -389,12 +389,16 @@ namespace PL.WPF
         {
             try
             {
-                //var btn = sender as Button;
-                //var itemIndex = CurBusLine.StationsInLine.ToList().FindIndex(s => s.BusStationKey == int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)));
-                //UpdateTimeTrip updateTime = new UpdateTimeTrip();
-                //updateTime.ShowDialog();
-                //bl.UpdateTravelTimeBetweenstations(CurBusLine.StationsInLine.ToList()[itemIndex].BusStationKey, CurBusLine.StationsInLine.ToList()[itemIndex+1].BusStationKey, updateTime.Timedrive);
-                //RefreshDataGrirdStationsline();
+                var btn = sender as Button;
+                var itemIndex = CurBusLine.StationsInLine.ToList().FindIndex(s => s.BusStationKey == int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)));
+                TimeUpdateWindow updateTime = new TimeUpdateWindow();
+                updateTime.ShowDialog();
+                bl.UpdateTravelTimeBetweenstations(CurBusLine.StationsInLine.ToList()[itemIndex-1].BusStationKey, CurBusLine.StationsInLine.ToList()[itemIndex].BusStationKey, updateTime.Timedrive);
+                var list = CurBusLine.StationsInLine.ToList();
+                list[itemIndex].AverageTravelTime = updateTime.Timedrive;
+                CurBusLine.StationsInLine = list;
+
+                RefreshDataGrirdStationsline();
             }
             catch(ArgumentOutOfRangeException)
             {
@@ -411,12 +415,15 @@ namespace PL.WPF
         {
             try
             {
-                //var btn = sender as Button;
-                //var itemIndex = CurBusLine.StationsInLine.ToList().FindIndex(s => s.BusStationKey == int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)));
-                //UpdateDistance updateDistance = new UpdateDistance();
-                //updateDistance.ShowDialog();
-                //bl.UpdateDistanceBetweenstations(CurBusLine.StationsInLine.ToList()[itemIndex].BusStationKey, CurBusLine.StationsInLine.ToList()[itemIndex + 1].BusStationKey, updateDistance.Distance);
-                //RefreshDataGrirdStationsline();
+                var btn = sender as Button;
+                var itemIndex = CurBusLine.StationsInLine.ToList().FindIndex(s => s.BusStationKey == int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)));
+                DistanceUpdateWindow updateDistance = new DistanceUpdateWindow();
+                updateDistance.ShowDialog();
+                bl.UpdateDistanceBetweenstations(CurBusLine.StationsInLine.ToList()[itemIndex-1].BusStationKey, CurBusLine.StationsInLine.ToList()[itemIndex].BusStationKey, updateDistance.Distance);
+                var list = CurBusLine.StationsInLine.ToList();
+                list[itemIndex].Distance = updateDistance.Distance;
+                CurBusLine.StationsInLine = list;
+                RefreshDataGrirdStationsline();
             }
             catch (ArgumentOutOfRangeException)
             {

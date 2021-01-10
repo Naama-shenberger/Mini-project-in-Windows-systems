@@ -421,6 +421,7 @@ namespace BL
         ///The line itself
         ///Index for updating-inedx
         ///The function handles a case update of a station line
+        ///The function handles a case of ConsecutiveStations
         /// </summary>
         /// <param name="id"></param>
         /// <param name="IDBusLine"></param>
@@ -445,31 +446,7 @@ namespace BL
                 for (int i = 0; i < busLine.StationsInLine.Count(); i++)
                 {
                     if (busLine.StationsInLine.ElementAt(i).NumberStationInLine >= busLineStation.NumberStationInLine)
-                    {
                         list[i].NumberStationInLine = busLine.StationsInLine.ElementAt(i).NumberStationInLine + 1;
-                        try
-                        {
-                            if (i != busLine.StationsInLine.Count() - 1)
-                            {
-                                list[i].Distance = dl.GetConsecutiveStations(list[i].BusStationKey, list[i + 1].BusStationKey).Distance;
-                                list[i].AverageTravelTime = dl.GetConsecutiveStations(list[i].BusStationKey, list[i + 1].BusStationKey).AverageTravelTime;
-                            }
-                        }
-                        catch(DO.IdException)
-                        {
-
-                            DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
-                            {
-                                StationCodeOne = list[i].BusStationKey,
-                                StationCodeTwo = list[i + 1].BusStationKey,
-                                Flage = true,
-
-                                Distance = (float)((dl.GetBusStation(list[i].BusStationKey).Latitude * dl.GetBusStation(list[i].BusStationKey).Longitude)*r.NextDouble()*1+0.5),
-
-                            };
-                        }
-                    }
-
                 }
                 busLine.StationsInLine = list;
                 busLine.StationsInLine = busLine.StationsInLine.Append(busLineStation);
@@ -480,7 +457,34 @@ namespace BL
                     if (busLine.StationsInLine.ElementAt(i).NumberStationInLine == busLineStation.NumberStationInLine && busLine.StationsInLine.ElementAt(i).BusStationKey != busLineStation.BusStationKey)
                         list[i].NumberStationInLine = busLine.StationsInLine.ElementAt(i).NumberStationInLine + 1;
                 }
+                for(int j=0;j<list.Count;j++)
+                {
+                    if(list[j].Distance==0 && list[j].NumberStationInLine!=1)
+                    {
+                        try
+                        {
+                            list[j].Distance = dl.GetConsecutiveStations(list[j].BusStationKey, list[j-1].BusStationKey).Distance;
+                            list[j].AverageTravelTime = dl.GetConsecutiveStations(list[j].BusStationKey, list[j-1].BusStationKey).AverageTravelTime;
+                        }
+                        catch (DO.IdException)
+                        {
+                            DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+                            {
+                                StationCodeOne = list[j-1].BusStationKey,
+                                StationCodeTwo = list[j].BusStationKey,
+                                Flage = true,
+                                AverageTravelTime = new TimeSpan((long)(((dl.GetBusStation(list[j].BusStationKey).Latitude * dl.GetBusStation(list[j - 1].BusStationKey).Latitude * dl.GetBusStation(list[j].BusStationKey).Longitude * dl.GetBusStation(list[j - 1].BusStationKey).Longitude) * r.NextDouble() * 1 + 0.5) / 66 * 100.0)),
+                                Distance = (float)((dl.GetBusStation(list[j].BusStationKey).Latitude * dl.GetBusStation(list[j - 1].BusStationKey).Latitude * dl.GetBusStation(list[j].BusStationKey).Longitude * dl.GetBusStation(list[j - 1].BusStationKey).Longitude) * r.NextDouble() * 1 + 0.5) / 66,
+
+                            };
+                            dl.AddConsecutiveStations(consecutiveStations);
+                            list[j].Distance = dl.GetConsecutiveStations(consecutiveStations.StationCodeOne, consecutiveStations.StationCodeTwo).Distance;
+                            list[j].AverageTravelTime = dl.GetConsecutiveStations(consecutiveStations.StationCodeOne, consecutiveStations.StationCodeTwo).AverageTravelTime;
+                        }
+                    }
+                }
                 busLine.StationsInLine = list;
+
             }
             catch(DO.IdException ex)
             {
@@ -508,6 +512,7 @@ namespace BL
             var UpdateItem = dl.GetConsecutiveStations(id1, id2);
             UpdateItem.AverageTravelTime =time;
             dl.UpdateConsecutiveStations(UpdateItem);
+           
 
         }
         /// <summary>
