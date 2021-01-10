@@ -6,16 +6,21 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PL.WPF.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"  Height="450" Width="800">
     <Grid>
-        <Label Content="Welcome to our Bus system " HorizontalAlignment="Left" Margin="176,54,0,0" VerticalAlignment="Top" Height="41" Width="348" FontWeight="Bold" FontStyle="Italic" FontSize="20" Foreground="#FF1DBCD4"/>
-        <GroupBox Header="Choose Option:" HorizontalAlignment="Left" Height="207" Margin="176,100,0,0" VerticalAlignment="Top" Width="399" FontSize="16" FontStyle="Italic" FontWeight="SemiBold">
-            <StackPanel Margin="21,20,29,24">
+        <Label Content="Welcome to our Bus system " HorizontalAlignment="Left" Margin="176,54,0,0" VerticalAlignment="Top" Height="41" Width="348" FontWeight="Bold" FontStyle="Italic" FontSize="20"  Foreground="Black"/>
+        <GroupBox Background="#FFE6F1E2"  HorizontalAlignment="Left" Height="207" Margin="176,100,0,0" VerticalAlignment="Top" Width="399" FontSize="16" FontStyle="Italic" FontWeight="SemiBold">
+            <GroupBox.Header>
+                <Border Background="#FFBE9DE8" Height="31" Margin="0,0,-7.4,0">
+                    <Label Content="Choose Option:" Margin="10,0,9.8,-0.2"></Label>
+                </Border>
+            </GroupBox.Header>
+            <StackPanel Margin="0,20,0,14.8" Width="347">
                 <RadioButton x:Name="rbBusLine" Content="Bus line display" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="140" Height="30"/>
                 <RadioButton x:Name="rbBus" Content="Bus display" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Width="140" Height="38"/>
                 <RadioButton x:Name="rbStation" Content="Station display" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Width="154" Height="23"/>
             </StackPanel>
         </GroupBox>
-        <Button x:Name="btnGO" Content="GO" HorizontalAlignment="Left" Height="42" Margin="288,342,0,0" VerticalAlignment="Top" Width="105" Background="#FF4496CF" FontSize="16" FontFamily="Kristen ITC" FontWeight="Bold" Click="btnGO_Click"/>
+        <Button BorderBrush="#FF673AB7" Background="#FFBE9DE8"  x:Name="btnGO" Content="GO" HorizontalAlignment="Left" Height="38" Margin="424,342,0,0" VerticalAlignment="Top" Width="151"  FontSize="16" FontFamily="Kristen ITC" FontWeight="Bold" Click="btnGO_Click"/>
     </Grid>
 </Window>

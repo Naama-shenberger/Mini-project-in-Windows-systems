@@ -30,7 +30,11 @@ namespace PL.WPF
         {
             get { return timedrive; }
         }
-
+        /// <summary>
+        ///event Done Click 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Done_Click(object sender, RoutedEventArgs e)
         {
             timedrive = TimeSpan.Parse(Regex.Replace(Timepicker.Text, "[A-Za-z ]", ""));

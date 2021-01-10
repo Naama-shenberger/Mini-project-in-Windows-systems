@@ -7,15 +7,15 @@
         mc:Ignorable="d"
         Title="AddStationWindow" Height="420" Width="600" >
     <Grid>
-        <ListView x:Name="lvBusStations" ItemsSource="{Binding}" Background="AliceBlue" Margin="0,0,226.6,231.4" SelectionChanged="lvBusStations_SelectionChanged">
+        <ListView x:Name="lvBusStations" Background="#FFE6F1E2" ItemsSource="{Binding}"  Margin="0,0,-0.4,204.4" SelectionChanged="lvBusStations_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Code Station" DisplayMemberBinding="{Binding BusStationKey}"/>
                     <GridViewColumn Header="Station Address" DisplayMemberBinding="{Binding StationAddress}"/>
                     <GridViewColumn Header="Name Station" DisplayMemberBinding="{Binding StationName}"/>
-                    
+
                 </GridView>
-               
+
             </ListView.View>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -24,13 +24,13 @@
             </ListView.ItemContainerStyle>
         </ListView>
 
-        <ListView x:Name="lvBusLineStation" ItemsSource="{Binding}" Background="AliceBlue" Margin="0,191,182.6,40.4">
+        <ListView x:Name="lvBusLineStation" ItemsSource="{Binding}" Background="#FFE6F1E2" Margin="0,178,9.6,47.4">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Code Station" x:Name="CodeStation"  DisplayMemberBinding="{Binding BusStationKey}"/>
                     <GridViewColumn Header="Station Address" DisplayMemberBinding="{Binding StationAddress}"/>
                     <GridViewColumn Header="Name Station" DisplayMemberBinding="{Binding StationName}"/>
-                    <GridViewColumn Header="Number Station In line" DisplayMemberBinding="{Binding NumberStationInLine}"/>
+                
 
                 </GridView>
             </ListView.View>
@@ -40,6 +40,6 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <Button Content="Finish adding" Name="FinishAddingBtn" HorizontalAlignment="Left" Margin="491,323,0,0" VerticalAlignment="Top" Width="75" Click="FinishAddingBtn_Click"/>
+        <Button Content="Finish adding" BorderBrush="#FF673AB7" Background="#FFBE9DE8"  Name="FinishAddingBtn" HorizontalAlignment="Left" Margin="453,348,0,0" VerticalAlignment="Top" Width="131" Click="FinishAddingBtn_Click"/>
     </Grid>
 </Window>

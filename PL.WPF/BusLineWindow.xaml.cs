@@ -38,6 +38,8 @@ namespace PL.WPF
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
             Treeview.ItemsSource = bl.GetAllBusLinesGroupByArea();
+            DataGrirdAllStationslines.IsReadOnly = true;
+            DataGrirdStationslines.IsReadOnly = true;
         }
         /// <summary>
         /// Refresh Data Grird
@@ -372,6 +374,12 @@ namespace PL.WPF
                 DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine).Distinct());
             }
         }
+        /// <summary>
+        /// event click
+        /// update time Between consecutive stations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateTime_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -388,6 +396,12 @@ namespace PL.WPF
                 MessageBox.Show("There is no follow-up station");
             }
         }
+        /// <summary>
+        /// event click 
+        /// update Distance Between consecutive stations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateDistance_Click(object sender, RoutedEventArgs e)
         {
             try

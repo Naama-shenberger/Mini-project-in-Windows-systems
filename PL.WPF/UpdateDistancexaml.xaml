@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.UpdateDistancexaml"
         mc:Ignorable="d"
-        Title="UpdateDistancexaml" Height="350" Width="600">
+        Title="UpdateDistancexaml" Height="250" Width="350">
     <Grid>
 
 
-        <materialDesign:Card Content="Select an update Distance" HorizontalAlignment="Left" Margin="57,78,0,0" VerticalAlignment="Top" Height="35" Width="182"/>
-        <TextBox x:Name="UpdateTimetb" KeyDown="OnKeyDownHandler"  HorizontalAlignment="Left" Height="35" Margin="312,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195"/>
+        <materialDesign:Card Content="Select an update Distance" Background="#FFE6F1E2"  HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Height="35" Width="152"/>
+        <TextBox x:Name="UpdateTimetb" KeyDown="OnKeyDownHandler" Background="#FFE6F1E2"  HorizontalAlignment="Left" Height="35" Margin="181,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="153"/>
+        <Label Content="Enter For approval"  Background="#FFE6F1E2" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Height="31" Width="228"/>
 
     </Grid>
 </Window>

@@ -201,5 +201,14 @@ namespace PL.WPF
                 cbBusLicensePlate.SelectedIndex = 0;
             }
         }
+        /// <summary>
+        /// Back click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

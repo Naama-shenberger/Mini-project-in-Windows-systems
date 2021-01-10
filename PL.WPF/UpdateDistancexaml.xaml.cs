@@ -56,6 +56,11 @@ namespace PL.WPF
             e.Handled = true;//ignore this key . make event as Handled will be routed to other controls
             return;
         }
+        /// <summary>
+        /// OnKeyDownHandler for typing distance
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
