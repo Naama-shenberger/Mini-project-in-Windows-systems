@@ -94,7 +94,7 @@ namespace PL.WPF
             var btn = sender as Button;
             var saveKey = int.Parse((btn).DataContext.ToString().Substring(18, 6));
             bl.DeleteBusLineStationFromeLine(CurBusLine, bl.GetAllBusLineStations().FirstOrDefault(s => s.BusStationKey == saveKey));
-            bl.DeleteBusLineStation(bl.GetAllBusLineStations().Distinct().FirstOrDefault(s => s.BusStationKey == saveKey));
+          
             RefreshDataGrirdAllStationslines();
             RefreshDataGrirdStationsline();
         }
@@ -138,12 +138,11 @@ namespace PL.WPF
                 {
                     try
                     {
-                        CurBusLine.StationsInLine = CurBusLine.StationsInLine.Append(busLineStation);
                         if (Ddistancetb.Text == "")
                             Ddistancetb.Text = "0";
                         if (TimePickerDistance.Text == null)
                             TimePickerDistance = new MaterialDesignThemes.Wpf.TimePicker { Text = "0" };
-                        bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                        bl.AddBusStationToLine(CurBusLine, busLineStation, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
                         if (CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID && id.AverageTravelTime.TotalMinutes == 0 && id.Distance == -1) != null)
                         {
                             CurBusLine.StationsInLine = from sin in CurBusLine.StationsInLine
