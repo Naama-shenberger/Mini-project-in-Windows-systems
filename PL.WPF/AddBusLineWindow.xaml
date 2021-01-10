@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.AddBusLineWindow"
         mc:Ignorable="d"
-        Title="AddBusLineWindow" Height="450" Width="600" KeyDown="OnKeyDownHandler">
+        Title="AddBusLineWindow" Height="450" Width="600" KeyDown="OnKeyDownHandler" >
     <Grid>
         <Label Content="Bus Line Number" HorizontalAlignment="Left" Margin="28,44,0,0" VerticalAlignment="Top" Height="31" Width="114"/>
         <Label Content="Select an area" HorizontalAlignment="Left" Margin="28,110,0,0" VerticalAlignment="Top" Height="32" Width="114"/>
@@ -15,9 +15,10 @@
         <ComboBox x:Name="Areacb"  HorizontalAlignment="Left" Margin="182,114,0,0" VerticalAlignment="Top" Width="108"/>
         <ComboBox x:Name="FirstStopcb"  HorizontalAlignment="Left" Margin="182,181,0,0" VerticalAlignment="Top" Width="108" Height="22"/>
         <ComboBox x:Name="LastStopcb" HorizontalAlignment="Left" Margin="182,243,0,0" VerticalAlignment="Top" Width="108" Height="22"/>
-        <TextBox x:Name="BusLineNumbertb" HorizontalAlignment="Left" Height="27" Margin="182,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
-        <materialDesign:TimePicker x:Name = "StartTimePicker" Text="Select bus start time"   Margin = "396,58,43.6,334" Height="28"/>
-        <materialDesign:TimePicker x:Name = "EndTimePicker" Text="Select bus End time"   Margin = "396,110,43.6,282" Height="28"/>
-        <materialDesign:TimePicker x:Name = "ExitEvery" Text="Exit Every"   Margin = "396,164,43.6,228" Height="28"/>
+        <TextBox x:Name="BusLineNumbertb" KeyDown="OnKeyDownHandler" HorizontalAlignment="Left" Height="27" Margin="182,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
+        <materialDesign:TimePicker x:Name = "StartTimePicker" KeyDown="OnKeyDownHandler" Text="Select bus start time"   Margin = "396,58,43.6,334" Height="28"/>
+        <materialDesign:TimePicker x:Name = "EndTimePicker" KeyDown="OnKeyDownHandler" Text="Select bus End time"   Margin = "396,110,43.6,282" Height="28"/>
+        <materialDesign:TimePicker x:Name = "ExitEvery" Text="Exit Every" KeyDown="OnKeyDownHandler"  Margin = "396,164,43.6,228" Height="28"/>
+        <Label Content="After typing a line number Press Enter"  Margin="63,325,85.6,0" VerticalAlignment="Top" Height="44"/>
     </Grid>
 </Window>

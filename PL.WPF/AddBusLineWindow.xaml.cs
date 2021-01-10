@@ -72,12 +72,13 @@ namespace PL.WPF
                     CurBusLine.lineRides = new List<BO.LineRides>();
                     CurBusLine.lineRides= CurBusLine.lineRides.Append(lineRides);
                     busLineStations.Add(FirstStopcb.SelectedItem as BO.BusLineStation);
-                    var save = (LastStopcb.SelectedItem as BO.BusLineStation);
-                    save.NumberStationInLine = 2;
-                    busLineStations.Add(save);
+                    var saveSelectedItem = (LastStopcb.SelectedItem as BO.BusLineStation);
+                    saveSelectedItem.NumberStationInLine = 2;
+                    busLineStations.Add(saveSelectedItem);
+                    if ((FirstStopcb.SelectedItem as BO.BusLineStation).BusStationKey == saveSelectedItem.BusStationKey)
+                        throw new BO.IdException("");
                     CurBusLine.StationsInLine = busLineStations;
                     MessageBox.Show("The bus was successfully added", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    
                     this.Close();
                 }
             }
@@ -87,7 +88,7 @@ namespace PL.WPF
             }
             catch (BO.IdException)
             {
-                MessageBox.Show("id Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("First stop and Last stop can not be the same to the stop", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

@@ -33,25 +33,35 @@ namespace PL.WPF
             RefreshAllBusesComboBox();
             Treeview.ItemsSource = bl.GetAllBussGroupByTreatmentIsNeeded();
         }
+        /// <summary>
+        ///  Collection Conversion Function to ObservableCollection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original"></param>
+        /// <returns></returns>
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);
         }
-
+        /// <summary>
+        /// Refresh All BusesComboBox
+        /// </summary>
         void RefreshAllBusesComboBox()
         {
-           
             cbBusLicensePlate.DataContext = Convert<BO.Bus>(bl.GetAllBus()); //ObserListOfStudents;
-            
         }
-      
         private void cbBusLicensePlate_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CurBus = (cbBusLicensePlate.SelectedItem as BO.Bus);
             gridOneBus.DataContext = CurBus;
             StatusLabel.Visibility = Visibility.Visible;
         }
-
+        /// <summary>
+        /// Click event 
+        /// Sending a bus for treatment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Treatment_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -68,6 +78,12 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        ///  Click event 
+        /// Sending a bus for refuel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void refuel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -84,7 +100,12 @@ namespace PL.WPF
             }
           
         }
-
+        /// <summary>
+        /// event click 
+        /// Update Bus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateBus_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -99,7 +120,12 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        /// <summary>
+        /// event click 
+        /// Deleting a bus 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteBus_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult res = MessageBox.Show("Delete selected student?", "Verification", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -121,6 +147,13 @@ namespace PL.WPF
             }
            
         }
+        /// <summary>
+        /// event click
+        /// Add bus click 
+        /// info in OnKeyDownHandler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddBus_Click(object sender, RoutedEventArgs e)
         {
             RefreshAllBusesComboBox();
@@ -128,6 +161,12 @@ namespace PL.WPF
             LicensePlateTextBox.Visibility = Visibility.Visible;
             StatusLabel.Visibility = Visibility.Hidden;
         }
+        /// <summary>
+        /// A function that adding a bus 
+        ///the functuon takes the details from box texts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             try

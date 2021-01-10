@@ -76,8 +76,10 @@ namespace PL.WPF
             if (CurBusLine != null && CurBusLine.StationsInLine != null)
                 DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
             if (CurBusLine != null && CurBusLine.lineRides != null)
-                lvExpander.DataContext = CurBusLine.lineRides;
-          
+            {
+                IEnumerable<BO.LineRides> lineRides = CurBusLine.lineRides.GroupBy(x => x.TravelStartTime).Select(x => x.FirstOrDefault()).ToList<BO.LineRides>();
+                lvExpander.DataContext = lineRides;
+            }
         }
         /// <summary>
         /// Click event
@@ -95,8 +97,27 @@ namespace PL.WPF
             RefreshDataGrirdStationsline();
         }
         /// <summary>
+        /// A function that receives a collection of bus line stations and the function deletes objects with the same station number
+        /// </summary>
+        /// <param name="busLineStations"></param>
+        private void DeleteDuplicates(IEnumerable<BO.BusLineStation> busLineStations)
+        {
+            var lists = busLineStations.ToList();
+            for (int i = 0; i < busLineStations.Count() - 1; i++)
+            {
+                if (busLineStations.ElementAt(i).BusStationKey == busLineStations.ElementAt(i + 1).BusStationKey)
+                {
+                    lists = busLineStations.ToList();
+                    lists.RemoveAt(i + 1);
+                }
+            }
+            busLineStations = lists;
+        }
+        /// <summary>
         /// Click event
         /// Add a station to the line
+        /// The function handles in case of consecutive stations in case there is no
+        /// the function will ask the user for details about time and distance between stations
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -119,24 +140,15 @@ namespace PL.WPF
                         if (Ddistancetb.Text == "")
                             Ddistancetb.Text = "0";
                         if (TimePickerDistance.Text == null)
-                            TimePickerDistance.Text = "0";
+                            TimePickerDistance = new MaterialDesignThemes.Wpf.TimePicker { Text = "0" };
                         bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
-                        if(CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID && id.AverageTravelTime.TotalMinutes==0 && id.Distance==-1 )!=null)
+                        if (CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID && id.AverageTravelTime.TotalMinutes == 0 && id.Distance == -1) != null)
                         {
                             CurBusLine.StationsInLine = from sin in CurBusLine.StationsInLine
                                                         where sin.BusStationKey != busLineStation.BusStationKey
-                                                        where sin.Distance!=-1
+                                                        where sin.Distance != -1
                                                         select sin;
-                            var lists = CurBusLine.StationsInLine.ToList();
-                            for (int i=0;i < CurBusLine.StationsInLine.Count()-1;i++)
-                           {
-                                if(CurBusLine.StationsInLine.ElementAt(i).BusStationKey==CurBusLine.StationsInLine.ElementAt(i+1).BusStationKey)
-                                {
-                                    lists = CurBusLine.StationsInLine.ToList();
-                                    lists.RemoveAt(i + 1);
-                                    CurBusLine.StationsInLine = lists;
-                                }
-                           }
+                            DeleteDuplicates(CurBusLine.StationsInLine);
                             Ddistancetb.Visibility = Visibility.Visible;
                             TimePickerDistance.Visibility = Visibility.Visible;
                             throw new ArithmeticException();
@@ -145,35 +157,19 @@ namespace PL.WPF
                     }
                     catch (BO.IdException ex)
                     {
-                        //Ddistancetb.Visibility = Visibility.Visible;
-                        //TimePickerDistance.Visibility = Visibility.Visible;
-                        //bl.AddBusStationToLine(CurBusLine, CurBusLine.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
+                        MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                     throw new ArgumentException("The line station is already on the line route");
-                var list = CurBusLine.StationsInLine.ToList();
-                for (int i = 0; i < CurBusLine.StationsInLine.Count() - 1; i++)
-                {
-                    if (CurBusLine.StationsInLine.ElementAt(i).BusStationKey == CurBusLine.StationsInLine.ElementAt(i + 1).BusStationKey)
-                    {
-                        list = CurBusLine.StationsInLine.ToList();
-                        list.RemoveAt(i + 1);
-                        CurBusLine.StationsInLine = list;
-                    }
-                }
+                DeleteDuplicates(CurBusLine.StationsInLine);
                 RefreshDataGrirdStationsline();
                 MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             catch (ArithmeticException)
             {
-                MessageBox.Show("The station has no consecutive stations, please type distance and time", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                MessageBox.Show("The station has no consecutive stations, please type distance and time and try to add again", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         /// <summary>
@@ -218,27 +214,28 @@ namespace PL.WPF
             var save = addBusLineWindow.BusLine;
             try
             {
-               
+                if (save == null)
+                    throw new InvalidOperationException("");
                 if (Ddistancetb.Text == "")
                     Ddistancetb.Text = "0";
                 if (TimePickerDistance.Text == null)
                 {
-                    TimePickerDistance = new MaterialDesignThemes.Wpf.TimePicker {Text="0" };
-                   // TimePickerDistance.Text = "0";
+                    TimePickerDistance = new MaterialDesignThemes.Wpf.TimePicker { Text = "0" };
                 }
                 bl.AddBusLine(save, save.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
                 BusLineList.Add(save);
             }
-            catch(BO.IdException ex)
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("No typing details please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.IdException ex)
             {
                 Ddistancetb.Visibility = Visibility.Visible;
                 TimePickerDistance.Visibility = Visibility.Visible;
                 bl.AddBusLine(save, save.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));
             }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("No typing details please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+
         }
         /// <summary>
         /// Click event
@@ -292,7 +289,7 @@ namespace PL.WPF
         private void UpdateIndexInLine_Closed(object sender, EventArgs e)
         {
             RefreshDataGrirdStationsline();
-           
+            gridOneBusLine.DataContext = CurBusLine;
         }
         /// <summary>
         /// Click event
@@ -375,5 +372,39 @@ namespace PL.WPF
                 DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine).Distinct());
             }
         }
+        private void UpdateTime_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var btn = sender as Button;
+                var itemIndex = CurBusLine.StationsInLine.ToList().FindIndex(s => s.BusStationKey == int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)));
+                UpdateTime updateTime = new UpdateTime();
+                updateTime.ShowDialog();
+                bl.UpdateTravelTimeBetweenstations(CurBusLine.StationsInLine.ToList()[itemIndex].BusStationKey, CurBusLine.StationsInLine.ToList()[itemIndex+1].BusStationKey, updateTime.Timedrive);
+                RefreshDataGrirdStationsline();
+            }
+            catch(ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("There is no follow-up station");
+            }
+        }
+        private void UpdateDistance_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var btn = sender as Button;
+                var itemIndex = CurBusLine.StationsInLine.ToList().FindIndex(s => s.BusStationKey == int.Parse((sender as Button).DataContext.ToString().Substring(18, 6)));
+                UpdateDistancexaml updateDistancexaml = new UpdateDistancexaml();
+                updateDistancexaml.ShowDialog();
+                bl.UpdateDistanceBetweenstations(CurBusLine.StationsInLine.ToList()[itemIndex].BusStationKey, CurBusLine.StationsInLine.ToList()[itemIndex + 1].BusStationKey, updateDistancexaml.Distance);
+                RefreshDataGrirdStationsline();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("There is no follow-up station");
+            }
+        }
     }
 }
+
+

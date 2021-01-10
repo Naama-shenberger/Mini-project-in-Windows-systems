@@ -23,7 +23,7 @@ namespace PL.WPF
         int Index;
         IBL BL;
         BO.BusLineStation CurBusLineStation;
-        BO.BusLine BusLine;
+        BO.BusLine BusLine;//Bus Line Get form a BusLineWindow
         public Update(IBL _BL,BO.BusLineStation busLineStation,BO.BusLine _busLine,int _Index)
         {
             InitializeComponent();
@@ -37,9 +37,18 @@ namespace PL.WPF
             }
             DataContext = cbNumberIndex;
         }
-        
+        /// <summary>
+        /// End of update
+        /// send to bl UpdateBusLineStation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Done_Click(object sender, RoutedEventArgs e)
-        { 
+        {
+            if (int.Parse(cbNumberIndex.SelectedValue.ToString()) == 1)
+                BusLine.FirstStopNumber = CurBusLineStation.BusStationKey;
+            if(int.Parse(cbNumberIndex.SelectedValue.ToString()) == Index)
+                BusLine.LastStopNumber = CurBusLineStation.BusStationKey;
             BL.UpdateBusLineStation(CurBusLineStation.BusStationKey,BusLine.ID, BusLine, int.Parse(cbNumberIndex.SelectedValue.ToString()));
             this.Close();
         }

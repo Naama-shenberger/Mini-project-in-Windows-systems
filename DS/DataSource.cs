@@ -146,7 +146,7 @@ namespace DS
             };
             LinesOutForARide = new List<LineRide>
             {
-               new LineRide{ID=20, Active=true, BusDepartureNumber=new TimeSpan(30,0,0), TravelStartTime=new TimeSpan(9,0,0), TravelEndTime=new TimeSpan(12,30,0)},
+               new LineRide{ID=20, Active=true, BusDepartureNumber=new TimeSpan(8,0,0), TravelStartTime=new TimeSpan(11,0,0), TravelEndTime=new TimeSpan(12,30,0)},
                new LineRide{ID=20, Active=true, BusDepartureNumber=new TimeSpan(10,0,0), TravelStartTime=new TimeSpan(19,0,0), TravelEndTime=new TimeSpan(22,30,0)},
                new LineRide{ID=1, Active=true, BusDepartureNumber=new TimeSpan(12,0,0), TravelStartTime=new TimeSpan(7,0,0), TravelEndTime=new TimeSpan(11,30,0)},
                new LineRide{ID=1, Active=true, BusDepartureNumber=new TimeSpan(3,0,0), TravelStartTime=new TimeSpan(19,0,0), TravelEndTime=new TimeSpan(22,30,0)},

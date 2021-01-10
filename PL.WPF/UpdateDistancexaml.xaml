@@ -1,0 +1,17 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.UpdateDistancexaml"
+        mc:Ignorable="d"
+        Title="UpdateDistancexaml" Height="350" Width="600">
+    <Grid>
+
+
+        <materialDesign:Card Content="Select an update Distance" HorizontalAlignment="Left" Margin="57,78,0,0" VerticalAlignment="Top" Height="35" Width="182"/>
+        <TextBox x:Name="UpdateTimetb" KeyDown="OnKeyDownHandler"  HorizontalAlignment="Left" Height="35" Margin="312,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195"/>
+
+    </Grid>
+</Window>
