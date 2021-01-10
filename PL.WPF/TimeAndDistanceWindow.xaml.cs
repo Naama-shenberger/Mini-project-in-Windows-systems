@@ -21,6 +21,7 @@ namespace PL.WPF
     /// </summary>
     public partial class TimeAndDistanceWindow : Window
     {
+        IBL bl;
         TimeSpan t;
         float d;
         public TimeSpan Time
@@ -35,12 +36,19 @@ namespace PL.WPF
         public TimeAndDistanceWindow(IBL _bl)
         {
             InitializeComponent();
+            
+            bl = _bl;
+
         }
 
         private void Done_Click(object sender, RoutedEventArgs e)
         {
-            t= TimeSpan.Parse(Time_pick.SelectedTime.ToString());
+            var hours = int.Parse(hourTextBox.Text.ToString());
+            var minutes = int.Parse(MinuteTextBox.Text.ToString());
+            var seconds = int.Parse(SeconTextBox.Text.ToString());
+            t = new TimeSpan(hours, minutes, seconds);
             d = float.Parse(distance.Text);
+
             this.Close();
 
 
