@@ -266,15 +266,31 @@ namespace BL
                 {
                     busStation.ListBusLinesInStation.Append(new BusLineInStation() { BusLineNumber = busLine.BusLineNumber, ID = busLine.ID, Area = (int)busLine.Area, Active = true });
                     int count = busLine.StationsInLine.Count() + 1;
-                    dl.AddBusLineStation(new DO.BusLineStation() { BusStationKey = busStation.BusStationKey, ID = busLine.ID, Active = true, NumberStationInLine = count });
-                    busLine.StationsInLine.Append(new BusLineStation() { BusStationKey = busStation.BusStationKey, Active = true, ID = busLine.ID, NumberStationInLine = count, AverageTravelTime = Time, Distance = _Distance });
+                    dl.AddBusLineStation(BusLineStationBoDoAdapter(new BO.BusLineStation() {
+                        BusStationKey = busStation.BusStationKey,
+                        Active = true,
+                        ID = busLine.ID,
+                        NumberStationInLine = count,
+                        AverageTravelTime = Time,
+                        Distance = _Distance
+                    }));
+                    busLine.StationsInLine.Append(
+                        new BusLineStation()
+                        {
+                            BusStationKey = busStation.BusStationKey, 
+                            Active = true, 
+                            ID = busLine.ID,
+                            NumberStationInLine = count,
+                            AverageTravelTime = Time,
+                            Distance = _Distance
+                        });
                     DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
                     {
                         Distance = _Distance,
                         AverageTravelTime = Time,
                         Flage = true,
-                        StationCodeTwo = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count() - 1].BusStationKey,
-                        StationCodeOne = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count() - 2].BusStationKey
+                        StationCodeTwo = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count()-1].BusStationKey,
+                        StationCodeOne = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count() -2].BusStationKey
                     };
                 }
                 else
