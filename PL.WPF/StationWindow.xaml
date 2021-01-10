@@ -76,7 +76,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Button x:Name="btAddLine" Content="add" Click="AddLineFromStationButton_Click" ToolTip="adds a line to selected station"/>
+                                <Button x:Name="btAddLine" Content="add" Click="AddLineToStationButton_Click" ToolTip="adds a line to selected station"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -78,9 +78,6 @@
     <Compile Include="TimeAndDistanceWindow.xaml.cs">
       <DependentUpon>TimeAndDistanceWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TimeWindow.xaml.cs">
-      <DependentUpon>TimeWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Update.xaml.cs">
       <DependentUpon>Update.xaml</DependentUpon>
     </Compile>
@@ -133,10 +130,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TimeAndDistanceWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TimeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

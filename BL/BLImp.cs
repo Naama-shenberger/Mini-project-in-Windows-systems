@@ -234,7 +234,8 @@ namespace BL
             {
                 bls = dl.GetBusLineStation(busStation.BusStationKey, busLine.ID);
                 dl.DeleteBusLineStation(bls);
-                busStation.ListBusLinesInStation = busStation.ListBusLinesInStation.Where(s => s.BusLineNumber != busLine.BusLineNumber);
+                busStation.ListBusLinesInStation.ToList().Remove(busLine);
+                //busStation.ListBusLinesInStation = busStation.ListBusLinesInStation.Where(s => s.BusLineNumber != busLine.BusLineNumber);
                 BusLine bl = GetBusLine(busLine.ID);
                 bl.StationsInLine = bl.StationsInLine.Where(c => c.BusStationKey != busStation.BusStationKey);
                
@@ -251,7 +252,7 @@ namespace BL
         /// </summary>
         /// <param name="busStation"></param>
         /// <param name="busLine"></param>
-        public void AddBusLineToStation(BusStation busStation, BusLine busLine,TimeSpan Time,float Disten)
+        public void AddBusLineToStation(BusStation busStation, BusLine busLine,TimeSpan Time,float _Distance)
         {
             DO.BusLineStation bls;
             try
@@ -260,11 +261,24 @@ namespace BL
             }
             catch (DO.IdException)
             {
-
-                busStation.ListBusLinesInStation.ToList().Add(new BusLineInStation() { BusLineNumber = busLine.BusLineNumber, ID = busLine.ID, Area = (int)busLine.Area });
-                int count = busLine.StationsInLine.Count()+1;
-                dl.AddBusLineStation(new DO.BusLineStation() { BusStationKey = busStation.BusStationKey, ID = busLine.ID, Active = true, NumberStationInLine = count });
-                busLine.StationsInLine.Append(new BusLineStation() { BusStationKey = busStation.BusStationKey, Active = true, ID = busLine.ID, NumberStationInLine = count,AverageTravelTime=Time,Distance=Disten });
+                var b = busStation.ListBusLinesInStation.ToList().FindIndex(s => s.ID == busLine.ID);
+                if (b == -1)
+                {
+                    busStation.ListBusLinesInStation.Append(new BusLineInStation() { BusLineNumber = busLine.BusLineNumber, ID = busLine.ID, Area = (int)busLine.Area, Active = true });
+                    int count = busLine.StationsInLine.Count() + 1;
+                    dl.AddBusLineStation(new DO.BusLineStation() { BusStationKey = busStation.BusStationKey, ID = busLine.ID, Active = true, NumberStationInLine = count });
+                    busLine.StationsInLine.Append(new BusLineStation() { BusStationKey = busStation.BusStationKey, Active = true, ID = busLine.ID, NumberStationInLine = count, AverageTravelTime = Time, Distance = _Distance });
+                    DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+                    {
+                        Distance = _Distance,
+                        AverageTravelTime = Time,
+                        Flage = true,
+                        StationCodeTwo = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count() - 1].BusStationKey,
+                        StationCodeOne = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count() - 2].BusStationKey
+                    };
+                }
+                else
+                    busStation.ListBusLinesInStation.ToList()[b].Active = true;
             }
 
         }
@@ -386,6 +400,7 @@ namespace BL
                        BusLineNumber = BusLineInStation.BusLineNumber,
                        Area= BusLineInStation.Area,
                        ID= BusLineInStation.ID,
+                       Active=true,
                    };
         }
         #endregion
