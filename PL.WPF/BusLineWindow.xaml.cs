@@ -104,16 +104,16 @@ namespace PL.WPF
         /// <param name="busLineStations"></param>
         private void DeleteDuplicates(IEnumerable<BO.BusLineStation> busLineStations)
         {
-            var lists = busLineStations.ToList();
-            for (int i = 0; i < busLineStations.Count() - 1; i++)
+            var lists = CurBusLine.StationsInLine.ToList();
+            for (int i = 0; i < CurBusLine.StationsInLine.Count() - 1; i++)
             {
-                if (busLineStations.ElementAt(i).BusStationKey == busLineStations.ElementAt(i + 1).BusStationKey)
+                if (CurBusLine.StationsInLine.ElementAt(i).BusStationKey == busLineStations.ElementAt(i + 1).BusStationKey)
                 {
                     lists = busLineStations.ToList();
                     lists.RemoveAt(i + 1);
                 }
             }
-            busLineStations = lists;
+            CurBusLine.StationsInLine = lists;
         }
         /// <summary>
         /// Click event
@@ -167,6 +167,10 @@ namespace PL.WPF
                 RefreshDataGrirdStationsline();
                 MessageBox.Show($"bus Line Station {busLineStation.BusStationKey} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             catch (ArithmeticException)
             {
@@ -232,6 +236,8 @@ namespace PL.WPF
             }
             catch (BO.IdException ex)
             {
+                labelDistance.Visibility = Visibility.Visible;
+                labelTime.Visibility = Visibility.Visible;
                 Ddistancetb.Visibility = Visibility.Visible;
                 TimePickerDistance.Visibility = Visibility.Visible;
                 bl.AddBusLine(save, save.StationsInLine, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));

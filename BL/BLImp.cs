@@ -12,6 +12,7 @@ namespace BL
     internal class BLImp : IBL
     {
         IDal dl = DalFactory.GetDal();
+        Random r = new Random();
         #region Bus
         /// <summary>
         /// The function receives a bus for updating
@@ -443,8 +444,32 @@ namespace BL
                 var list = busLine.StationsInLine.ToList();
                 for (int i = 0; i < busLine.StationsInLine.Count(); i++)
                 {
-                   if (busLine.StationsInLine.ElementAt(i).NumberStationInLine >= busLineStation.NumberStationInLine)
-                        list[i].NumberStationInLine = busLine.StationsInLine.ElementAt(i).NumberStationInLine - 1;
+                    if (busLine.StationsInLine.ElementAt(i).NumberStationInLine >= busLineStation.NumberStationInLine)
+                    {
+                        list[i].NumberStationInLine = busLine.StationsInLine.ElementAt(i).NumberStationInLine + 1;
+                        try
+                        {
+                            if (i != busLine.StationsInLine.Count() - 1)
+                            {
+                                list[i].Distance = dl.GetConsecutiveStations(list[i].BusStationKey, list[i + 1].BusStationKey).Distance;
+                                list[i].AverageTravelTime = dl.GetConsecutiveStations(list[i].BusStationKey, list[i + 1].BusStationKey).AverageTravelTime;
+                            }
+                        }
+                        catch(DO.IdException)
+                        {
+
+                            DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+                            {
+                                StationCodeOne = list[i].BusStationKey,
+                                StationCodeTwo = list[i + 1].BusStationKey,
+                                Flage = true,
+
+                                Distance = (float)((dl.GetBusStation(list[i].BusStationKey).Latitude * dl.GetBusStation(list[i].BusStationKey).Longitude)*r.NextDouble()*1+0.5),
+
+                            };
+                        }
+                    }
+
                 }
                 busLine.StationsInLine = list;
                 busLine.StationsInLine = busLine.StationsInLine.Append(busLineStation);
