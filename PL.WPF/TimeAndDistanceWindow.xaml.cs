@@ -38,7 +38,9 @@ namespace PL.WPF
             InitializeComponent();
             
             bl = _bl;
-
+            hourTextBox.Text=  "00";
+            MinuteTextBox.Text = "00";
+            SeconTextBox.Text = "00";
         }
 
         private void Done_Click(object sender, RoutedEventArgs e)
