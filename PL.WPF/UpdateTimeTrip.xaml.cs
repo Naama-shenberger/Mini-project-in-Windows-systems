@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,12 +16,12 @@ using System.Windows.Shapes;
 namespace PL.WPF
 {
     /// <summary>
-    /// Interaction logic for UpdateTime.xaml
+    /// Interaction logic for UpdateTimeTrip.xaml
     /// </summary>
-    public partial class UpdateTime : Window
+    public partial class UpdateTimeTrip : Window
     {
         TimeSpan timedrive;
-        public UpdateTime()
+        public UpdateTimeTrip()
         {
             InitializeComponent();
         }
@@ -30,17 +29,15 @@ namespace PL.WPF
         {
             get { return timedrive; }
         }
-        /// <summary>
-        ///event Done Click 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Done_Click(object sender, RoutedEventArgs e)
-        {
-            timedrive = TimeSpan.Parse(Regex.Replace(Timepicker.Text, "[A-Za-z ]", ""));
-            this.Close();
-        }
+        ///// <summary>
+        /////event Done Click 
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void Done_Click(object sender, RoutedEventArgs e)
+        //{
+        //    timedrive = TimeSpan.Parse(Regex.Replace(Timepicker.Text, "[A-Za-z ]", ""));
+        //    this.Close();
+        //}
     }
-   
-   
 }

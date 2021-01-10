@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace PL.WPF
 {
     /// <summary>
-    /// Interaction logic for UpdateDistancexaml.xaml
+    /// Interaction logic for UpdateDistance.xaml
     /// </summary>
-    public partial class UpdateDistancexaml : Window
+    public partial class UpdateDistance : Window
     {
-        public UpdateDistancexaml()
+        public UpdateDistance()
         {
             InitializeComponent();
         }
@@ -61,27 +61,31 @@ namespace PL.WPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnKeyDownHandler(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                try
-                {
-                    distance = float.Parse(UpdateTimetb.Text);
-                    this.Close();
-                }
-                catch (NullReferenceException Null)
-                {
-                    MessageBox.Show($"{Null.Message}", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-                    this.Close();
-                }
-                catch (InvalidOperationException exception)
-                {
-                    MessageBox.Show($"{exception.Message}", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-                    this.Close();
-                }
+        //    private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        //    {
+        //        if (e.Key == Key.Return)
+        //        {
+        //            try
+        //            {
+        //                distance = float.Parse(UpdateTimetb.Text);
+        //                this.Close();
+        //            }
+        //            catch (NullReferenceException Null)
+        //            {
+        //                MessageBox.Show($"{Null.Message}", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+        //                this.Close();
+        //            }
+        //            catch (InvalidOperationException exception)
+        //            {
+        //                MessageBox.Show($"{exception.Message}", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+        //                this.Close();
+        //            }
 
-            }
-        }
+        //        }
+        //    }
+        //}
     }
+
+
 }
+

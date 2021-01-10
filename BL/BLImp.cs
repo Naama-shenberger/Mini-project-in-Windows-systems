@@ -461,7 +461,6 @@ namespace BL
                     NumberStationInLine = index,
                     Active = true
                 };
-                dl.UpdateBusLineStation(BusLineStationBoDoAdapter(busLineStation));
                 busLine.StationsInLine = from sin in busLine.StationsInLine
                                          where sin.BusStationKey != idStation
                                          select sin;

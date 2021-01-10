@@ -40,7 +40,7 @@
                 <Label x:Name="LastStopLabel" Content="Last stop:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Height="30" Margin="3,6.8,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="3"/>
                 <ComboBox x:Name="LastStopcb" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3" Text="{Binding LastStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedItem="{Binding LastStopNumber}" VerticalAlignment="Center" Height="25" Width="120"/>
             </Grid>
-            <DataGrid x:Name="DataGrirdStationslines" ToolTip="All Bus Lines Stations of line" Background="#FFE6F1E2" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="313,17,1.6,573.8" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" SelectionChanged="DataGrirdStationslines_SelectionChanged">
+            <DataGrid x:Name="DataGrirdStationslines" ToolTip="All Bus Lines Stations of line" Background="#FFE6F1E2" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="313,17,1.6,546" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" SelectionChanged="DataGrirdStationslines_SelectionChanged">
                 <DataGrid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
