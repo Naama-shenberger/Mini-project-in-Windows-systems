@@ -1,0 +1,16 @@
+﻿<Window x:Class="PL.WPF.DistanceUpdateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:local="clr-namespace:PL.WPF"
+        mc:Ignorable="d"
+        Title="DistanceUpdateWindow" Height="200" Width="400">
+    <Grid Background="#FFE6F1E2">
+        <materialDesign:Card Content="Select an update Distance" Background="#FFE6F1E2"  HorizontalAlignment="Left" Margin="24,47,0,0" VerticalAlignment="Top" Height="35" Width="152" FontWeight="Bold"/>
+        <TextBox x:Name="UpdateTimetb" KeyDown="OnKeyDownHandler" Background="#FFE6F1E2"  HorizontalAlignment="Left" Height="35" Margin="201,47,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="153"/>
+        <Label Content="(Enter For approval)"  Background="#FFE6F1E2" HorizontalAlignment="Left" Margin="24,87,0,0" VerticalAlignment="Top" Height="27" Width="133" FontStyle="Italic" FontSize="11"/>
+
+    </Grid>
+</Window>
