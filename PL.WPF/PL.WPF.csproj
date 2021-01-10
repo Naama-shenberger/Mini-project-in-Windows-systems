@@ -81,12 +81,6 @@
     <Compile Include="Update.xaml.cs">
       <DependentUpon>Update.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateDistancexaml.xaml.cs">
-      <DependentUpon>UpdateDistancexaml.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UpdateTime.xaml.cs">
-      <DependentUpon>UpdateTime.xaml</DependentUpon>
-    </Compile>
     <Page Include="AddBusLineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -134,14 +128,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Update.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UpdateDistancexaml.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UpdateTime.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
