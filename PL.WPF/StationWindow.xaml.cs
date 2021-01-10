@@ -202,8 +202,6 @@ namespace PL.WPF
                 TimeAndDistanceWindow InfoWindow = new TimeAndDistanceWindow(bl);
                 InfoWindow.ShowDialog();
                 bl.AddBusLineToStation(CurBusStation, blBO, InfoWindow.Time, InfoWindow.Distance);
-                //IEnumerable<BO.BusLineStation>=new BO.BusLineStation() { }
-                //bl.AddBusStationToLine
                 RefreshBusLinesInStation();
                 RefreshBusLines();
             }

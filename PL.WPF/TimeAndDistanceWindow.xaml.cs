@@ -1,10 +1,8 @@
-﻿using BLAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
 
 namespace PL.WPF
 {
@@ -40,9 +39,11 @@ namespace PL.WPF
 
         private void Done_Click(object sender, RoutedEventArgs e)
         {
-            t = TimeSpan.Parse( Regex.Replace(Time_pick.Text, "[A-Za-z ]", ""));
+            t= TimeSpan.Parse(Time_pick.SelectedTime.ToString());
             d = float.Parse(distance.Text);
             this.Close();
+
+
         }
     }
 }

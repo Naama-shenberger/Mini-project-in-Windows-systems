@@ -12,6 +12,7 @@ namespace BO
         public int BusLineNumber { set; get; }//Bus line number 
         public int Area { set; get; }//Area of the bus line
         public int ID { get; set; }//Unique ID number
+        public bool Active { set; get; }
         /// <summary>
         /// override of ToString
         /// </summary>
