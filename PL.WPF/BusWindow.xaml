@@ -16,7 +16,7 @@
         <Button   BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Update Bus" Click="UpdateBus_Click" HorizontalAlignment="Left" Margin="526,163,0,0" VerticalAlignment="Top" Width="123" Height="31"/>
         <Button   BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Add Bus"  Click="AddBus_Click" HorizontalAlignment="Left" Margin="526,253,0,0" VerticalAlignment="Top" Width="123" Height="29"/>
         <Button   BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Delete Bus" Click="DeleteBus_Click" HorizontalAlignment="Left" Margin="526,208,0,0" VerticalAlignment="Top" Width="123" Height="30"/>
-        <Grid x:Name="gridOneBus"  Background="#FFE6F1E2"  HorizontalAlignment="Left" Margin="40,76,0,0" VerticalAlignment="Top" Height="326" Width="277">
+        <Grid x:Name="gridOneBus"  Background="#FFE6F1E2"   HorizontalAlignment="Left" Margin="40,76,0,0" VerticalAlignment="Top" Height="326" Width="277">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -33,30 +33,30 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="Date Activity:" Grid.Column="0" HorizontalAlignment="Left" Margin="4,3,0,3" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Content="Date Activity:"  FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left" Margin="4,3,0,3" Grid.Row="1" VerticalAlignment="Center"/>
             <DatePicker x:Name="DateActivityDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3,4,0,3" Grid.Row="1" SelectedDate="{Binding DateActivity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120"/>
-            <Label Content="Date Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label  FontWeight="Bold" Content="Date Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
             <DatePicker x:Name="DateTreatmentDatePicker"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" SelectedDate="{Binding DateTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Km Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="3" VerticalAlignment="Center" Width="88"/>
+            <Label  FontWeight="Bold" Content="Km Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="3" VerticalAlignment="Center" Width="88"/>
             <TextBox x:Name="KmTreatmentTextBox" Grid.Column="1"  HorizontalAlignment="Left" Height="23"  Text="{Binding KilometersTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  Margin="3" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
             <TextBox x:Name="LicensePlateTextBox" Visibility="Hidden" HorizontalAlignment="Left" Height="23" Grid.Row="0" Text="{Binding LicensePlate}" Margin="2.8,5,0,7.2" Width="124" Grid.Column="1"/>
-            <Label Name="LabelLicensePlate" Visibility="Hidden" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" Content="License Plate:" Margin="3" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Km Gas:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <Label   FontWeight="Bold" Name="LabelLicensePlate" Visibility="Hidden" Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" Content="License Plate:" Margin="3" VerticalAlignment="Center" Width="120"/>
+            <Label  FontWeight="Bold" Content="Km Gas:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBox x:Name="KmGasTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding KilometersGas, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Total km:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <Label   FontWeight="Bold" Content="Total km:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
             <TextBox x:Name="TotalkmTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding Totalkilometers, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" />
-            <Label Content="Air Tire:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+            <Label  FontWeight="Bold" Content="Air Tire:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
             <TextBox x:Name="AirTireTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="6" Text="{Binding AirTire, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Oil Condition:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+            <Label   FontWeight="Bold" Content="Oil Condition:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
             <TextBox x:Name="OilConditionTextBox"  KeyDown="OnKeyDownHandler" Grid.Column="1" Text="{Binding OilCondition, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="23"  Margin="3" Grid.Row="7" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Status" Name="StatusLabel" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
+            <Label  FontWeight="Bold" Content="Status" Name="StatusLabel" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
             <TextBlock x:Name="StatusTextBlock" Text="{Binding Status}" HorizontalAlignment="Left" Margin="127,9,0,0" Grid.Row="8" VerticalAlignment="Top" Width="119" Grid.ColumnSpan="2"/>
 
 
         </Grid>
         <Button   BorderBrush="#FF673AB7" Background="#FFBE9DE8" Name="refuelButton" Click="refuel_Click" Content="refuel" HorizontalAlignment="Left" Margin="526,120,0,0" VerticalAlignment="Top" Width="123" Height="29"/>
         <Button   BorderBrush="#FF673AB7" Background="#FFBE9DE8" Name="TreatmentButton" Content="Treatment" Click="Treatment_Click" HorizontalAlignment="Left" Margin="526,77,0,0" VerticalAlignment="Top" Width="123" Height="29"/>
-        <Expander  Background="#FFE6F1E2" Header="More details" HorizontalAlignment="Left" Height="44" Margin="315,20,0,0" VerticalAlignment="Top" Width="211">
+        <Expander   FontWeight="Bold" Background="#FFE6F1E2" Header="More details" HorizontalAlignment="Left" Height="44" Margin="315,20,0,0" VerticalAlignment="Top" Width="211">
             <Grid  >
                 <TreeView x:Name="Treeview"  ItemsSource="{Binding Bus}" Background="#FFE6F1E2"  Margin="-106,1,-104,-104" >
                     <TreeView.ItemTemplate>
@@ -88,7 +88,7 @@
             </Grid>
         </Expander>
         <Button Content="Back"  BorderBrush="#FF673AB7" Background="#FFBE9DE8" HorizontalAlignment="Left" Margin="551,366,0,0" VerticalAlignment="Top" Width="115" Height="36" Click="Button_Click"/>
-        <Label  Background="#FFE6F1E2" Content="Select a bus" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" Height="25" Width="119"/>
+        <Label   FontWeight="Bold" Background="#FFE6F1E2" Content="Select a bus" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" Height="25" Width="119"/>
 
     </Grid>
 </Window>
