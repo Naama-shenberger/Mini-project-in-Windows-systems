@@ -23,6 +23,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalObject", "DalObject\DalO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{E7A748B5-C603-4BF3-A3F9-7E9FFDA640B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{1B23E9EF-7876-44D2-863E-0A4BC01DFCD2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{5718ACB6-50B0-45E8-B055-24E4845CA3CA}"
+	ProjectSection(SolutionItems) = preProject
+		BusLine.xml = BusLine.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +76,10 @@ Global
 		{E7A748B5-C603-4BF3-A3F9-7E9FFDA640B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7A748B5-C603-4BF3-A3F9-7E9FFDA640B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A748B5-C603-4BF3-A3F9-7E9FFDA640B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B23E9EF-7876-44D2-863E-0A4BC01DFCD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B23E9EF-7876-44D2-863E-0A4BC01DFCD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B23E9EF-7876-44D2-863E-0A4BC01DFCD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B23E9EF-7876-44D2-863E-0A4BC01DFCD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
