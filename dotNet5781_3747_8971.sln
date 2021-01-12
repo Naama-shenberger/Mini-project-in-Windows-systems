@@ -28,6 +28,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{5718ACB6-50B0-45E8-B055-24E4845CA3CA}"
 	ProjectSection(SolutionItems) = preProject
 		BusLine.xml = BusLine.xml
+		BusLineStation.xml = BusLineStation.xml
 	EndProjectSection
 EndProject
 Global
