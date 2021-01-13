@@ -6,7 +6,7 @@
 	 <BusLineNumber>14</BusLineNumber>
 	 <FirstStopNumber>388624</FirstStopNumber>
 	 <LastStopNumber>875612</LastStopNumber>
-	 <Area>Zones.Zefat</Area>
+	 <Area>Zefat</Area>
  </BusLine>
  <BusLine>
 	 <ID>2</ID>
@@ -14,7 +14,7 @@
 	 <BusLineNumber>112</BusLineNumber>
 	 <FirstStopNumber>388624</FirstStopNumber>
 	 <LastStopNumber>875612</LastStopNumber>
-	 <Area>Zones.Alon_Shvut</Area>
+	 <Area>Alon_Shvut</Area>
  </BusLine>
  <BusLine>
 	 <ID>3</ID>
@@ -22,7 +22,7 @@
 	 <BusLineNumber>9</BusLineNumber>
 	 <FirstStopNumber>873401</FirstStopNumber>
 	 <LastStopNumber>875612</LastStopNumber>
-	 <Area>Zones.Beer_Sheva</Area>
+	 <Area>Beer_Sheva</Area>
  </BusLine>
  <BusLine>
 	<ID>4</ID>
@@ -30,7 +30,7 @@
 	<BusLineNumber>22</BusLineNumber>
 	<FirstStopNumber>873401</FirstStopNumber>
 	<LastStopNumber>875612</LastStopNumber>
-	<Area>Zones.Zeev_hill</Area>
+	<Area>Zeev_hill</Area>
  </BusLine>
  <BusLine>
 	<ID>5</ID>
@@ -38,7 +38,7 @@
 	<BusLineNumber>19</BusLineNumber>
 	<FirstStopNumber>873401</FirstStopNumber>
 	<LastStopNumber>388634</LastStopNumber>
-	<Area>Zones.Alon_Shvut</Area>
+	<Area>Alon_Shvut</Area>
  </BusLine>
  <BusLine>
 	<ID>6</ID>
@@ -46,7 +46,7 @@
 	<BusLineNumber>10</BusLineNumber>
 	<FirstStopNumber>388614</FirstStopNumber>
 	<LastStopNumber>388634</LastStopNumber>
-	<Area>Zones.Itamar</Area>
+	<Area>Itamar</Area>
  </BusLine>
  <BusLine>
 	<ID>7</ID>
@@ -54,7 +54,7 @@
 	<BusLineNumber>233</BusLineNumber>
 	<FirstStopNumber>388614</FirstStopNumber>
 	<LastStopNumber>388634</LastStopNumber>
-	<Area>Zones.Gush_Dan</Area>
+	<Area>Gush_Dan</Area>
  </BusLine>
  <BusLine>
 	<ID>8</ID>
@@ -62,7 +62,7 @@
 	<BusLineNumber>7</BusLineNumber>
 	<FirstStopNumber>388614</FirstStopNumber>
 	<LastStopNumber>388624</LastStopNumber>
-	<Area>Zones.Jerusalem_Corridor</Area>
+	<Area>Jerusalem_Corridor</Area>
  </BusLine>
  <BusLine>
 	<ID>9</ID>
@@ -70,7 +70,7 @@
 	<BusLineNumber>80</BusLineNumber>
 	<FirstStopNumber>874104</FirstStopNumber>
 	<LastStopNumber>388624</LastStopNumber>
-	<Area>Zones.General</Area>
+	<Area>General</Area>
  </BusLine>
  <BusLine>
 	<ID>10</ID>
@@ -78,7 +78,7 @@
 	<BusLineNumber>4</BusLineNumber>
 	<FirstStopNumber>874104</FirstStopNumber>
 	<LastStopNumber>388624</LastStopNumber>
-	<Area>Zones.Ramat_Gan</Area>
+	<Area>Ramat_Gan</Area>
  </BusLine>
  <BusLine>
 	<ID>11</ID>
@@ -86,7 +86,7 @@
 	<BusLineNumber>119</BusLineNumber>
 	<FirstStopNumber>874104</FirstStopNumber>
 	<LastStopNumber>388624</LastStopNumber>
-	<Area>Zones.Beer_Sheva</Area>
+	<Area>Beer_Sheva</Area>
  </BusLine>
  <BusLine>
 	<ID>12</ID>
@@ -94,7 +94,7 @@
 	<BusLineNumber>68</BusLineNumber>
 	<FirstStopNumber>873702</FirstStopNumber>
 	<LastStopNumber>388624</LastStopNumber>
-	<Area>Zones.Gush_Etzion</Area>
+	<Area>Gush_Etzion</Area>
  </BusLine>
  <BusLine>
 	<ID>13</ID>
@@ -102,7 +102,7 @@
 	<BusLineNumber>89</BusLineNumber>
 	<FirstStopNumber>873702</FirstStopNumber>
 	<LastStopNumber>388614</LastStopNumber>
-	<Area>Zones.Alon_Shvut</Area>
+	<Area>Alon_Shvut</Area>
  </BusLine>
  <BusLine>
 	<ID>14</ID>
@@ -110,7 +110,7 @@
 	<BusLineNumber>1</BusLineNumber>
 	<FirstStopNumber>876015</FirstStopNumber>
 	<LastStopNumber>388614</LastStopNumber>
-	<Area>Zones.Jerusalem_Corridor</Area>
+	<Area>Jerusalem_Corridor</Area>
  </BusLine>
  <BusLine>
 	<ID>15</ID>
@@ -118,7 +118,7 @@
 	<BusLineNumber>5</BusLineNumber>
 	<FirstStopNumber>876015</FirstStopNumber>
 	<LastStopNumber>388614</LastStopNumber>
-	<Area>Zones.General</Area>
+	<Area>General</Area>
  </BusLine>
  <BusLine>
 	<ID>16</ID>
@@ -126,7 +126,7 @@
 	<BusLineNumber>65</BusLineNumber>
 	<FirstStopNumber>876015</FirstStopNumber>
 	<LastStopNumber>388614</LastStopNumber>
-	<Area>Zones.Itamar</Area>
+	<Area>Itamar</Area>
  </BusLine>
  <BusLine>
 	<ID>17</ID>
@@ -134,7 +134,7 @@
 	<BusLineNumber>55</BusLineNumber>
 	<FirstStopNumber>857321</FirstStopNumber>
 	<LastStopNumber>873401</LastStopNumber>
-	<Area>Zones.Ramat_Gan</Area>
+	<Area>Ramat_Gan</Area>
  </BusLine>
  <BusLine>
 	<ID>18</ID>
@@ -142,7 +142,7 @@
 	<BusLineNumber>117</BusLineNumber>
 	<FirstStopNumber>857321</FirstStopNumber>
 	<LastStopNumber>873401</LastStopNumber>
-	<Area>Zones.Zeev_hill</Area>
+	<Area>Zeev_hill</Area>
  </BusLine>
  <BusLine>
 	<ID>19</ID>
@@ -150,7 +150,7 @@
 	<BusLineNumber>115</BusLineNumber>
 	<FirstStopNumber>857321</FirstStopNumber>
 	<LastStopNumber>873401</LastStopNumber>
-	<Area>Zones.Galilee</Area>
+	<Area>Galilee</Area>
  </BusLine>
  <BusLine>
 	<ID>20</ID>
@@ -158,6 +158,6 @@
 	<BusLineNumber>134</BusLineNumber>
 	<FirstStopNumber>388624</FirstStopNumber>
 	<LastStopNumber>875612</LastStopNumber>
-	<Area>Zones.General</Area>
+	<Area>General</Area>
  </BusLine>
 </ArrayOfBusLine>

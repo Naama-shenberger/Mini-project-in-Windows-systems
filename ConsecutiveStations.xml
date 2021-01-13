@@ -4,70 +4,70 @@
 		<StationCodeOne>873702</StationCodeOne>
 		<StationCodeTwo>388614</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)6.9</Distance>
+		<Distance>6.9</Distance>
 		<AverageTravelTime>TimeSpan(00,24,50)</AverageTravelTime>
 	</ConsecutiveStations>
 	<ConsecutiveStations>
 		<StationCodeOne>873401</StationCodeOne>
 		<StationCodeTwo>388634</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)7</Distance>
+		<Distance>7</Distance>
 		<AverageTravelTime>TimeSpan(00,05,00)</AverageTravelTime>
 	</ConsecutiveStations>
 	<ConsecutiveStations>
 		<StationCodeOne>857321</StationCodeOne>
 		<StationCodeTwo>873401</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)1.12</Distance>
+		<Distance>1.12</Distance>
 		<AverageTravelTime>TimeSpan(00,02,30)</AverageTravelTime>
 	</ConsecutiveStations>
 	<ConsecutiveStations>
 		<StationCodeOne>876015</StationCodeOne>
 		<StationCodeTwo>388614</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)3</Distance>
+		<Distance>3</Distance>
 		<AverageTravelTime>TimeSpan(00,04,30)</AverageTravelTime>
 	</ConsecutiveStations>
 	<ConsecutiveStations>
 		<StationCodeOne>874104</StationCodeOne>
 		<StationCodeTwo>388624</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)2</Distance>
+		<Distance>2</Distance>
 		<AverageTravelTime>TimeSpan(00,02,50)</AverageTravelTime>
 	</ConsecutiveStations>
 	<ConsecutiveStations>
 		<StationCodeOne>873401</StationCodeOne>
 		<StationCodeTwo>875612</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)4.67</Distance>
+		<Distance>4.67</Distance>
 		<AverageTravelTime>TimeSpan(00,04,45)</AverageTravelTime>
 	</ConsecutiveStations>
 	<ConsecutiveStations>
 		<StationCodeOne>388614</StationCodeOne>
 		<StationCodeTwo>388624</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)5.3</Distance>
+		<Distance>5.3</Distance>
 		<AverageTravelTime>TimeSpan(00,04,30)</AverageTravelTime>
 	</ConsecutiveStations>
 	<ConsecutiveStations>
 		<StationCodeOne>388624</StationCodeOne>
 		<StationCodeTwo>875612</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)6.98</Distance>
+		<Distance>6.98</Distance>
 		<AverageTravelTime>TimeSpan(00,04,50)</AverageTravelTime>
 	</ConsecutiveStations>
 	<ConsecutiveStations>
 		<StationCodeOne>388614</StationCodeOne>
 		<StationCodeTwo>388634</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)9.9</Distance>
+		<Distance>9.9</Distance>
 		<AverageTravelTime>TimeSpan(00,14,50)</AverageTravelTime>
 	</ConsecutiveStations>
 	<ConsecutiveStations>
 		<StationCodeOne>873702</StationCodeOne>
 		<StationCodeTwo>388624</StationCodeTwo>
 		<Flage>true</Flage>
-		<Distance>(float)9.9</Distance>
+		<Distance>9.9</Distance>
 		<AverageTravelTime>TimeSpan(00,14,50)</AverageTravelTime>
 	</ConsecutiveStations>
 </ArrayOfConsecutiveStations>
