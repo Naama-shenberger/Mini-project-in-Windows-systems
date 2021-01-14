@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.WPF"
         mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="User" Height="500" Width="350" ResizeMode="NoResize" >
+        Title="User" Height="500" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Rectangle Margin="0,0,-1,174.4" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>

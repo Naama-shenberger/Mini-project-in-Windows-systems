@@ -83,6 +83,7 @@ namespace BLAPI
         #endregion
         #region Line Ride
         DO.LineRide LineRideStationDoBoAdapter(BO.LineRides lineRides);
-        #endregion 
+        void DeleteLineRide(BO.LineRides line);
+        #endregion
     }
 }

@@ -37,7 +37,7 @@
                 <ComboBox x:Name="LastStopcb" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="2,27.6,-18,4.8" Text="{Binding LastStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedItem="{Binding LastStopNumber}" VerticalAlignment="Center" Height="30" Width="152" Grid.RowSpan="2"/>
             </Grid>
             <DataGrid x:Name="DataGrirdStationslines" ToolTip="All Bus Lines Stations of line" Background="#FFDCD7FA"  IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="506,34,13,266" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" SelectionChanged="DataGrirdStationslines_SelectionChanged" FontWeight="Bold">
-                
+
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn>
                     </materialDesign:DataGridTextColumn>
@@ -87,30 +87,47 @@
             <Button x:Name="AddBusLineStatoin" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Add Bus Line Station" HorizontalAlignment="Left" Margin="1151,375,0,0" VerticalAlignment="Top" Width="179" Click="AddBusLineStatoin_Click" Height="35" />
             <Button x:Name="backbtn" Content="Back"  BorderBrush="#FF2281D1" Background="#FF2281D1" HorizontalAlignment="Left" Margin="1175,558,0,0" VerticalAlignment="Top" Width="147" Click="backbtn_Click" Height="29"/>
             <Expander Header="Line schedule"  Background="#FFDCD7FA" HorizontalAlignment="Left" Height="51" Margin="18,219,0,0" VerticalAlignment="Top" Width="254" FontWeight="Bold">
-                <Grid Background="#FFE6F1E2">
+                <Grid Background="#FFE6F1E2" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="169*"/>
                         <ColumnDefinition Width="18*"/>
                     </Grid.ColumnDefinitions >
-                    <ListView x:Name="lvExpander"  IsSynchronizedWithCurrentItem="True" Background="Transparent" ItemsSource="{Binding}" Margin="1,8,-53.6,-87" Grid.ColumnSpan="2"  Width="227"  HorizontalAlignment="Center" >
+                    <ListView x:Name="lvExpander"  IsSynchronizedWithCurrentItem="True" Background="Transparent" ItemsSource="{Binding}" Margin="41,7.933,-264.6,-142.8" Grid.ColumnSpan="2"  Width="398"  HorizontalAlignment="Center" Grid.Row="1" >
+
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
                                 <Setter Property="Background" Value="Transparent" />
                             </Style>
+
                         </ListView.Resources>
                         <ListView.View >
                             <GridView materialDesign:ColorZoneAssist.Background="#FFE6F1E2"  >
                                 <GridViewColumn  Header="Start Time" DisplayMemberBinding="{Binding TravelStartTime}"/>
                                 <GridViewColumn Header="End Time" DisplayMemberBinding="{Binding TravelEndTime}"/>
                                 <GridViewColumn Header="Exit Every"  DisplayMemberBinding="{Binding BusDepartureNumber}"/>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button x:Name="delLineRide"  BorderBrush="#FF2281D1" Background="#FF2281D1" Click="delLineRide_Click" Content="delete" HorizontalAlignment="Left" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
-                        </ListView.View>
-                    </ListView>
 
+                        </ListView.View>
+
+                    </ListView>
+                    <Button x:Name="AddLineRide" Content="Add" HorizontalAlignment="Stretch"  BorderBrush="#FF2281D1" Background="#FF2281D1" Margin="143.4,103,-201.6,-128.8" Grid.RowSpan="2" Grid.Column="1" Height="Auto" Click="AddLineRide_Click" />
                 </Grid>
+
             </Expander>
             <Label Content="Choose a bus line" Background="White"  HorizontalAlignment="Left" Margin="18,16,0,0" VerticalAlignment="Top" Width="112" Height="26" FontWeight="Bold"/>
-            <Expander Header="More details"  Background="#FFDCD7FA"  Margin="18,355,1068,190" FontWeight="Bold">
+            <Expander Header="More details"  Background="#FFDCD7FA"  Margin="18,383,1068,162" FontWeight="Bold">
                 <Grid Background="#FF8576DC"   HorizontalAlignment="Center" >
                     <TreeView x:Name="Treeview" ItemsSource="{Binding BusLine}" Background="White" Margin="-112,9,-90,-233"  HorizontalAlignment="Center" Width="202" FontStyle="Italic">
                         <TreeView.ItemTemplate>

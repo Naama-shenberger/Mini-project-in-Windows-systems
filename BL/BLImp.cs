@@ -1090,6 +1090,17 @@ namespace BL
                          }; 
         }
         #endregion
+        public void DeleteLineRide(BO.LineRides line)
+        {
+            try
+            {
+                dl.DeleteLineWayOut(LineRideStationDoBoAdapter(line));
+            }
+            catch(DO.IdException ex)
+            {
+                throw new BO.IdException(ex.ToString());
+            }
+        }
     }
 }
 

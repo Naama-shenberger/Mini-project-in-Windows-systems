@@ -430,6 +430,30 @@ namespace PL.WPF
                 MessageBox.Show("There is no follow-up station");
             }
         }
+        private void AddLineRide_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delLineRide_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var btn = sender as Button;
+                bl.DeleteLineRide(btn.DataContext as BO.LineRides);
+                if (CurBusLine != null && CurBusLine.lineRides != null)
+                {
+                    IEnumerable<BO.LineRides> lineRides = CurBusLine.lineRides.GroupBy(x => x.TravelStartTime).Select(x => x.FirstOrDefault()).ToList<BO.LineRides>();
+                    lvExpander.DataContext = lineRides;
+                }
+                else
+                    lvExpander.DataContext = "";
+            }
+            catch(BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message,"Error",MessageBoxButton.OK);
+            }
+        }
     }
 }
 

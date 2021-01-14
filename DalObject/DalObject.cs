@@ -596,7 +596,7 @@ namespace DL
         /// <param name="toDeleteIndex"></param>
         public void DeleteLineWayOut(LineRide outLine)
         {
-            var toDeleteIndex = DataSource.LinesOutForARide.FindIndex(o => o.ID == outLine.ID);
+            var toDeleteIndex = DataSource.LinesOutForARide.FindIndex(o => o.ID == outLine.ID && o.Active==true);
             if (toDeleteIndex != -1)
                 if (outLine.Active == true)
                     DataSource.LinesOutForARide[toDeleteIndex].Active = false;
