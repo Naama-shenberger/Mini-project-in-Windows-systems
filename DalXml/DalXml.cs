@@ -11,7 +11,7 @@ using static DO.Enums;
 
 namespace DL
 {
-    sealed class DalXml : IDal
+    sealed class DalXml /*: IDal*/
     {
         #region singelton
         static readonly DalXml instance = new DalXml();
@@ -26,7 +26,7 @@ namespace DL
         string BusLineStationPath = @"BusLineStation.xml"; 
         string LineRidePath = @"LineRide.xml"; 
         string ConsecutiveStationsPath = @"ConsecutiveStations.xml"; 
-        //string studInCoursesPath = @"StudentInCoureseXml.xml"; //XMLSerializer
+        string serialsPath = @"serials.xml"; //XMLSerializer
         #endregion
         #region Bus
         public DO.Bus GetBus(string id)
@@ -288,15 +288,16 @@ namespace DL
         public int AddBusLine(DO.BusLine bus)
         {
             XElement BusLinesRootElem = XMLTools.LoadListFromXMLElement(BusLinePath);
-
+            XElement serialsRootElem = XMLTools.LoadListFromXMLElement(serialsPath);
             XElement bus1 = (from p in BusLinesRootElem.Elements()
                              where int.Parse(p.Element("ID").Value) == bus.ID
                              select p).FirstOrDefault();
 
             if (bus1 != null)
                 throw new DO.IdException(bus.ID, "Duplicate Bus Line ID");
-            Configuration.IdentificationNumberBusLine++;
-            bus.ID = Configuration.IdentificationNumberBusLine;
+            serialsRootElem.Element("dentificationNumberBusLine").Value = serialsRootElem.Element("dentificationNumberBusLine").Value + 1;
+            XMLTools.SaveListToXMLElement(serialsRootElem, serialsPath);
+            bus.ID = Int32.Parse(serialsRootElem.Element("dentificationNumberBusLine").Value);
             XElement BusLineElem = new XElement("BusLine",
                                    new XElement("ID", bus.ID),
                                    new XElement("BusLineNumber", bus.BusLineNumber),
@@ -513,8 +514,6 @@ namespace DL
 
             if (bus1 != null)
                 throw new DO.IdException(o.ID, "Duplicate Bus Line ID");
-            //Configuration.IdentificationNumberBusLine++;
-            //bus.ID = Configuration.IdentificationNumberBusLine;
             XElement BusLineElem = new XElement("LineRide",
                                    new XElement("ID", o.ID),
                                    new XElement("TravelStartTime", o.TravelStartTime),
