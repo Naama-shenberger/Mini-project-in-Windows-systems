@@ -27,8 +27,14 @@ namespace DL
         string LineRidePath = @"LineRide.xml"; 
         string ConsecutiveStationsPath = @"ConsecutiveStations.xml"; 
         string serialsPath = @"serials.xml"; //XMLSerializer
+        string busDrivePath= @"BusDrive.xml";
         #endregion
         #region Bus
+        /// <summary>
+        /// A function that receives an ID number and returns the corresponding Bus object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public DO.Bus GetBus(string id)
         {
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
@@ -54,6 +60,22 @@ namespace DL
 
             return p;
         }
+        /// <summary>
+        /// A function that uses Encapsulates a method 
+        /// accepts an integer and returns an object
+        /// integer-bus License Plate 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetBussLicenseNumber()
+        {
+            XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
+            return (from bus in busRootElem.Elements()
+                    select bus.Element("LicensePlate").Value);
+        }
+        /// <summary>
+        ///  A function that returns a list of bus that are active 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DO.Bus> GetAllBuss()
         {
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
@@ -74,6 +96,14 @@ namespace DL
                     }
                    );
         }
+        /// <summary>
+        /// A function that receives an bus  object and adds it to the xml array
+        /// There is a comparison between unique parameters of the bus to see if the bus exists
+        /// If the bus has the same bus id code is the same bus,
+        /// In case the bus is inactive we will make it active
+        /// In case it is active and exists in the system an exception will be thrown
+        /// </summary>
+        /// <param name="bus"></param>
         public void AddBus(DO.Bus bus)
         {
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
@@ -101,6 +131,10 @@ namespace DL
 
             XMLTools.SaveListToXMLElement(busRootElem, BusPath);
         }
+        /// <summary>
+        /// A function that receives a bus to deletes from bus xml list
+        /// </summary>
+        /// <param name="delBus"></param>
         public void DeleteBus(DO.Bus delBus)
         {
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
@@ -117,6 +151,10 @@ namespace DL
             else
                 throw new DO.IdException(delBus.LicensePlate, $"station with key {delBus.LicensePlate} dosn't exists ");
         }
+        /// <summary>
+        /// A function that receives a bus and updates its details
+        /// </summary>
+        /// <param name="bus"></param>
         public void UpdateBus(DO.Bus bus)
         {
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
@@ -144,13 +182,159 @@ namespace DL
                 throw new DO.IdException(bus.LicensePlate, $"station with key {bus.LicensePlate} dosn't exists ");
         }
         #endregion
+        #region BusDrive
+        /// <summary>
+        /// A function that receives an ID number and returns the corresponding Bus drive object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public DO.BusDrive GetBusDrive(int id)
+        {
+            XElement busDriveRootElem = XMLTools.LoadListFromXMLElement(busDrivePath);
+
+            DO.BusDrive d = (from bus in busDriveRootElem.Elements()
+                          where int.Parse( bus.Element("ID").Value) == id
+                     select new BusDrive()
+                     {
+                         Active = Boolean.Parse(bus.Element("Active").Value),
+                         ID=int.Parse(bus.Element("ID").Value),
+                         LicensePlate = bus.Element("LicensePlate").Value,
+                         ExitStart=TimeSpan.Parse(bus.Element("ExitStart").Value),
+                         TimeNextStop= TimeSpan.Parse(bus.Element("TimeNextStop").Value),
+                         TimeDrive = TimeSpan.Parse(bus.Element("TimeDrive").Value),
+                         LastStasion =int.Parse(bus.Element("LastStasion").Value),
+                         BusDriverFirstName= bus.Element("BusDriverFirstName").Value,
+                         BusDriverLastName= bus.Element("BusDriverLastName").Value,
+                         BusDriverId= bus.Element("BusDriverId").Value
+                     }).FirstOrDefault();
+
+            if (d == null)
+                throw new DO.IdException(id, $"there is no bus with the id: {id}");
+
+            return d;
+        }
+        /// <summary>
+        ///  A function that returns a list of bus drive that are active 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<DO.BusDrive> GetAllBusDrive()
+        {
+            XElement busDriveRootElem = XMLTools.LoadListFromXMLElement(busDrivePath);
+
+            return (from bus in busDriveRootElem.Elements()
+                    select new BusDrive()
+                    {
+                        Active = Boolean.Parse(bus.Element("Active").Value),
+                        ID = int.Parse(bus.Element("ID").Value),
+                        LicensePlate = bus.Element("LicensePlate").Value,
+                        ExitStart = TimeSpan.Parse(bus.Element("ExitStart").Value),
+                        TimeNextStop = TimeSpan.Parse(bus.Element("TimeNextStop").Value),
+                        TimeDrive = TimeSpan.Parse(bus.Element("TimeDrive").Value),
+                        LastStasion = int.Parse(bus.Element("LastStasion").Value),
+                        BusDriverFirstName = bus.Element("BusDriverFirstName").Value,
+                        BusDriverLastName = bus.Element("BusDriverLastName").Value,
+                        BusDriverId = bus.Element("BusDriverId").Value
+                    }
+                   );
+        }
+        /// <summary>
+        /// A function that receives an bus drive object and adds it to xml array list
+        /// In case the bus drive is inactive we will make it active
+        /// In case it is active and exists in the system an exception will be thrown 
+        /// </summary>
+        /// <param name="busd"></param>
+        public void AddBusDrive(DO.BusDrive busd)
+        {
+            XElement busDriveRootElem = XMLTools.LoadListFromXMLElement(busDrivePath);
+            XElement bus1 = (from b in busDriveRootElem.Elements()
+                             where int.Parse(b.Element("ID").Value) == busd.ID
+                             select b).FirstOrDefault();
+
+            if (bus1 != null)
+                throw new DO.IdException(busd.ID, "Duplicate bus drive id");
+
+            XElement busElem = new XElement("BusDrive",
+                                   new XElement("Active", busd.Active),
+                                   new XElement("LicensePlate", busd.LicensePlate),
+                                   new XElement("ID", busd.ID.ToString()),
+                                   new XElement("ExitStart", busd.ExitStart.ToString()),
+                                   new XElement("TimeNextStop", busd.TimeNextStop.ToString()),
+                                   new XElement("TimeDrive", busd.TimeDrive.ToString()),
+                                   new XElement("LastStasion", busd.LastStasion.ToString()),
+                                   new XElement("BusDriverFirstName", busd.BusDriverFirstName.ToString()),
+                                   new XElement("BusDriverLastName", busd.BusDriverLastName.ToString()),
+                                   new XElement("BusDriverId", busd.BusDriverId.ToString())
+                                   );
+            busDriveRootElem.Add(busElem);
+
+            XMLTools.SaveListToXMLElement(busDriveRootElem, busDrivePath);
+
+        }
+        /// <summary>
+        /// A function that receives a bus drive and updates its details
+        /// </summary>
+        /// <param name="bus"></param>
+        public void UpdateBusDrive(DO.BusDrive bus)
+        {
+            XElement busDriveRootElem = XMLTools.LoadListFromXMLElement(busDrivePath);
+
+            XElement bus1 = (from b in busDriveRootElem.Elements()
+                             where int.Parse(b.Element("ID").Value) == bus.ID
+                             select b).FirstOrDefault();
+
+            if (bus1 != null)
+            {
+                bus1.Element("Active").Value = bus.Active.ToString();
+                bus1.Element("ID").Value = bus.ID.ToString();
+                bus1.Element("LicensePlate").Value = bus.LicensePlate;
+                bus1.Element("ExitStart").Value = bus.ExitStart.ToString();
+                bus1.Element("TimeNextStop").Value = bus.TimeNextStop.ToString();
+                bus1.Element("TimeDrive").Value = bus.TimeDrive.ToString();
+                bus1.Element("LastStasion").Value = bus.LastStasion.ToString();
+                bus1.Element("BusDriverFirstName").Value = bus.BusDriverFirstName;
+                bus1.Element("BusDriverLastName").Value = bus.BusDriverLastName;
+                bus1.Element("BusDriverId").Value = bus.BusDriverId;
+
+                XMLTools.SaveListToXMLElement(busDriveRootElem, busDrivePath);
+            }
+            else
+                throw new DO.IdException(bus.ID, $"there is no bus with the id: {bus.ID}");
+        }
+        /// <summary>
+        /// The function gets an object to delete
+        /// in case we found the The object in the xml list will make its active field inactive
+        /// In case that the bus drive is already not active we will throw a message 
+        /// </summary>
+        /// <param name="busD"></param>
+        public void DeleteBusDrive(DO.BusDrive busD)
+        {
+            XElement busDriveRootElem = XMLTools.LoadListFromXMLElement(busDrivePath);
+
+            XElement bus = (from b in busDriveRootElem.Elements()
+                            where int.Parse(b.Element("ID").Value) == busD.ID
+                            select b).FirstOrDefault();
+
+            if (bus != null)
+            {
+                bus.Remove();
+                XMLTools.SaveListToXMLElement(busDriveRootElem, BusPath);
+            }
+            else
+                throw new DO.IdException(busD.ID, $"there is no bus with the id: {busD.ID}");
+        }
+        #endregion
         #region Bus Station
+        /// <summary>
+        /// A function that receives an ID number and returns the corresponding Bus station object
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public DO.BusStation GetBusStation(int key)
         {
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(busStationPath);
 
             BusStation p = (from station in stationRootElem.Elements()
-                            where int.Parse(station.Element("BusStationKey").Value) == key
+                            where int.Parse(station.Element("BusStationKey").Value) == key&& Boolean.Parse(station.Element("Active").Value)==true
                             select new BusStation()
                             {
                                 BusStationKey = Int32.Parse(station.Element("BusStationKey").Value),
@@ -167,11 +351,16 @@ namespace DL
 
             return p;
         }
+        /// <summary>
+        ///  A function that returns a list of bus stations that are active
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DO.BusStation> BusStations()
         {
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(busStationPath);
 
             return (from s in stationRootElem.Elements()
+                    where Boolean.Parse(s.Element("Active").Value) == true
                     select new BusStation()
                     {
                         BusStationKey = Int32.Parse(s.Element("BusStationKey").Value),
@@ -183,6 +372,14 @@ namespace DL
                     }
                    );
         }
+        /// <summary>
+        /// A function that receives an bus station object and adds it to the xml file 
+        /// There is a comparison between unique parameters of the bus to see if the bus station exists
+        /// If the bus has the same bus station number and the same name and address it is the same line,
+        /// because if it was the Reverse  line the stop codes would be reversed
+        /// In case it is active and exists in the system an exception will be thrown 
+        /// </summary>
+        /// <param name="station"></param>
         public void AddBusStation(DO.BusStation station)
         {
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(busStationPath);
@@ -192,7 +389,15 @@ namespace DL
                                  select s).FirstOrDefault();
 
             if (station1 != null)
-                throw new DO.IdException(station.BusStationKey, "Duplicate station key");
+            {
+                if (Boolean.Parse(station1.Element("Active").Value) == false)
+                {
+                    station1.Element("Active").Value = true.ToString();
+                    return;
+                }
+                else
+                    throw new DO.IdException(station.BusStationKey, "Duplicate station key");
+            }
 
             XElement stationElem = new XElement("BusStation",
                                    new XElement("BusStationKey", station.BusStationKey),
@@ -206,6 +411,11 @@ namespace DL
 
             XMLTools.SaveListToXMLElement(stationRootElem, busStationPath);
         }
+        /// <summary>
+        /// The function gets an object to delete
+        /// In case that the  bus station  is already not active we will throw a message
+        /// </summary>
+        /// <param name="delStation"></param>
         public void DeleteBusStation(DO.BusStation delStation)
         {
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(busStationPath);
@@ -222,6 +432,10 @@ namespace DL
             else
                 throw new DO.IdException(delStation.BusStationKey, $"station with key {delStation.BusStationKey} dosn't exists ");
         }
+        /// <summary>
+        /// A function that receives a bus Station and updates its details
+        /// </summary>
+        /// <param name="station"></param>
         public void UpdateBusStation(DO.BusStation station)
         {
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(busStationPath);
@@ -656,6 +870,28 @@ namespace DL
             else
                 throw new DO.IdException($"No consecutive Stations have the id`s:{c.StationCodeOne} {c.StationCodeTwo}");
         }
+        #endregion
+        #region UserJourney
+        //public DO.UserJourney GetUserJourney(string id)
+        //{
+            
+        //}
+        //public IEnumerable<DO.UserJourney> GetUsersJourney()
+        //{
+
+        //}
+        //public void AddUserJourney(DO.UserJourney user)
+        //{
+
+        //}
+        //public void UpdatUserJourney(DO.UserJourney user)
+        //{
+
+        //}
+        //public void DeleteUserJourney(DO.UserJourney user)
+        //{
+
+        //}
         #endregion
     }
 }  
