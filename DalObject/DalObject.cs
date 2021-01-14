@@ -687,7 +687,7 @@ namespace DL
         {
             var user = DataSource.Users.Find(u => u.UserName == id);
             if (user != null)
-                if (user.DelUser == true)
+                if (user.DelUser == false)
                     return user.Clone();
             throw new IdException($"No user have the name {id}");
         }
@@ -701,9 +701,9 @@ namespace DL
         {
             var userIndex = DataSource.Users.FindIndex(u => u.UserName == user.UserName);
             if (userIndex != -1)
-                if (DataSource.Users[userIndex].DelUser == false)
+                if (DataSource.Users[userIndex].DelUser == true)
                 {
-                    DataSource.Users[userIndex].DelUser = true;
+                    DataSource.Users[userIndex].DelUser = false;
                     return;
                 }
                 else
@@ -714,19 +714,19 @@ namespace DL
         {
             var toUpdateIndex = DataSource.Users.FindIndex(u => u.UserName == user.UserName);
             if (toUpdateIndex != -1)
-                if (DataSource.Users[toUpdateIndex].DelUser == true)
+                if (DataSource.Users[toUpdateIndex].DelUser == false)
                     DataSource.Users[toUpdateIndex] = user.Clone();
                 else
-                    throw new IdException(user.UserName, $"The user name {user.UserName} does not exist");
+                    throw new IdException(user.UserName, $"The user Name {user.UserName} does not exist");
             else
-                throw new IdException(user.UserName, $"The user name {user.UserName} does not exist");
+                throw new IdException(user.UserName, $"The user Name {user.UserName} does not exist");
         }
         public void DeleteUser(User user)
         {
             var toDeleteIndex = DataSource.Users.FindIndex(u => u.UserName == user.UserName);
             if (toDeleteIndex != -1)
-                if (DataSource.Users[toDeleteIndex].DelUser == true)
-                    DataSource.Users[toDeleteIndex].DelUser = false;
+                if (DataSource.Users[toDeleteIndex].DelUser == false)
+                    DataSource.Users[toDeleteIndex].DelUser = true;
                 else
                     throw new IdException(user.UserName, $"The user name {user.UserName} is already deleted");
             else

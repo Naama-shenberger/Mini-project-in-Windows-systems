@@ -26,7 +26,9 @@ namespace PL.WPF
         public MainWindow()
         {
             InitializeComponent();
-          
+            User user = new User(bl);
+            user.ShowDialog();
+           
         }
         private void btnGO_Click(object sender, RoutedEventArgs e)
         {

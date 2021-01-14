@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BO
@@ -42,6 +43,11 @@ namespace BO
                 updator(item);
             }
         }
-      
+        public static string hashPassword(string passwordWithSalt)
+        {
+            SHA512 shaM = new SHA512Managed();
+            return Convert.ToBase64String(shaM.ComputeHash(Encoding.UTF8.GetBytes(passwordWithSalt)));
+        }
+
     }
 }

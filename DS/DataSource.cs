@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using DO;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 using static DO.Enums;
 
 namespace DS
@@ -16,7 +22,7 @@ namespace DS
         public static List<ConsecutiveStations> ListConsecutiveStations;
         public static List<User> Users;
         public static List<UserJourney> UsersJourney;
-       
+        static Random rnd = new Random();
 
         static DataSource()
         {
@@ -27,7 +33,13 @@ namespace DS
         /// </summary>
         public static void InitAllLists()
         {
-           
+            
+            Users = new List<User>
+            {
+                new User{AllowingAccess=true,DelUser=false,UserName="Naama Shanberger",Salt=12122,HashedPassword= Tools.hashPassword(12122+"Na11ama")},
+                new User{AllowingAccess=true,DelUser=false,UserName="Ella",Salt=1234213,HashedPassword= Tools.hashPassword(1234213+"Ella121")},
+                new User{AllowingAccess=false,DelUser=false,UserName="a",Salt=12342,HashedPassword= Tools.hashPassword(12342+"a")}
+            };
             ListBuses = new List<Bus>
             {
                
