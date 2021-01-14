@@ -13,7 +13,6 @@ namespace DO
     /// </summary>
     public class BusDrive
     {
-        public int BusIdOnTheGo { get; set; }
         public string LicensePlate { get; set; }
         public TimeSpan ExitStart { get; set; }
         public int LastStasion { get; set; }
