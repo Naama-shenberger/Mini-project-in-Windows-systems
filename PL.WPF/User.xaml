@@ -4,24 +4,50 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.WPF"
-        mc:Ignorable="d"
-        Title="User" Height="450" Width="800">
+        mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="User" Height="500" Width="350" ResizeMode="NoResize" >
     <Grid>
+        <Rectangle Margin="0,0,-1,174.4" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.222"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.668"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+            <Rectangle.Fill>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
 
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0">
-            <TabItem Header="long-In" Margin="-2,-2,-84,0">
-                <Grid Background="#FFE6F1E2" Margin="0,0,-0.6,-7.4">
-                    <PasswordBox x:Name="PasswordUser" HorizontalAlignment="Left" Margin="222,104,0,0" VerticalAlignment="Top" Width="202" Height="28"/>
-                    <Label Content="Password:" HorizontalAlignment="Left" Margin="47,104,0,0" VerticalAlignment="Top" Height="28" Width="138"/>
-                    <Button  BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Long In" HorizontalAlignment="Left" Margin="608,305,0,0" VerticalAlignment="Top" Width="106" Click="Button_Click"/>
-                    <TextBox x:Name="UserName" HorizontalAlignment="Left" Height="27" Margin="222,51,0,0" TextWrapping="Wrap" Text="Type user name" VerticalAlignment="Top" Width="202"/>
-                    <Label Content="Enter User Name:" HorizontalAlignment="Left" Margin="47,51,0,0" VerticalAlignment="Top" Height="27" Width="138"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Sing In" Margin="84.6,-2,-168.2,-0.2">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
 
+        <Image Source="C:\Users\naamo\Downloads\icons8-bus-80.png" Margin="87,10,89,369.4" RenderTransformOrigin="0.597,0.522"/>
+        <Rectangle Height="229" Fill="White" VerticalAlignment="Bottom" Margin="36,0,32,121.4" RadiusY="28.27" RadiusX="28.27">
+            <Rectangle.Effect>
+                <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Grid Width="280" Height="250" VerticalAlignment="Bottom" Margin="32,0,32,100.4">
+
+            <TextBlock Text="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18"  Margin="5"/>
+            <PasswordBox FontWeight="Light" Background="Transparent"   x:Name="PasswordUser" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="250" Height="28">
+
+            </PasswordBox>
+
+            <Label  FontWeight="Bold" Content="Password:" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Height="28" Width="108"/>
+            <TextBox FontWeight="Light" Background="Transparent" x:Name="UserName" HorizontalAlignment="Left" Height="27" Margin="10,66,0,0" TextWrapping="Wrap" Text="Type user name" VerticalAlignment="Top" Width="250">
+
+            </TextBox>
+            <Label FontWeight="Bold" Content="Enter User Name:" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Height="27" Width="108"/>
+        </Grid>
+        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Log In" HorizontalAlignment="Left" Margin="116,327,0,0" VerticalAlignment="Top" Width="108"  Height="31" Name="LongIn" Click="LongIn_Click"/>
+        <Button x:Name="SingUp" FontWeight="Bold" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Sing Up" HorizontalAlignment="Left" Margin="220,414,0,0" VerticalAlignment="Top" Width="92" Height="27" Click="SingUp_Click" />
+        <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="247,187,0,0"/>
+        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="253,259,0,0" Height="16"/>
     </Grid>
 </Window>

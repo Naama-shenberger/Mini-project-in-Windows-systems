@@ -22,19 +22,22 @@ namespace PL.WPF
     public partial class User : Window
     {
         IBL iBL;
+        Random random = new Random();
         public User(IBL _iBL)
         {
             InitializeComponent();
             iBL = _iBL;
-          
+
+
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void LongIn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (iBL.GetUser(UserName.Text).HashedPassword==Tools.hashPassword(iBL.GetUser(UserName.Text).Salt+PasswordUser.Password))
+                if (iBL.GetUser(UserName.Text).HashedPassword == Tools.hashPassword(iBL.GetUser(UserName.Text).Salt + PasswordUser.Password))
                 {
-                    if(iBL.GetUser(UserName.Text).AllowingAccess!=true)
+                    if (iBL.GetUser(UserName.Text).AllowingAccess != true)
                     {
                         throw new ArgumentException();
                     }
@@ -43,21 +46,26 @@ namespace PL.WPF
                 }
                 else
                 {
-                    MessageBox.Show("wrong password","ERROR",MessageBoxButton.OKCancel);
+                    MessageBox.Show("wrong password", "ERROR", MessageBoxButton.OKCancel);
                 }
-              
+
             }
-            catch(ArgumentException)
+            catch (ArgumentException)
             {
                 MessageBox.Show("User doesn't have access", "ERROR", MessageBoxButton.OKCancel);
             }
-            catch(BO.IdException)
+            catch (BO.IdException)
             {
                 MessageBox.Show("wrong User Name", "ERROR", MessageBoxButton.OKCancel);
-               
+
             }
-           
         }
-       
+        private void SingUp_Click(object sender, RoutedEventArgs e)
+        {
+            SingUp s = new SingUp(iBL);
+            s.Show();
+        }
     }
 }
+    
+

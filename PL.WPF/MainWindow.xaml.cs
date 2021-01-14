@@ -26,31 +26,23 @@ namespace PL.WPF
         public MainWindow()
         {
             InitializeComponent();
-            User user = new User(bl);
-            user.ShowDialog();
+            access access = new access(bl);
+            access.ShowDialog();
            
         }
-        private void btnGO_Click(object sender, RoutedEventArgs e)
+        private void BusLine_Click(object sender, RoutedEventArgs e)
         {
-            if (rbBus.IsChecked == true)
-            {
-                new BusWindow(bl).Show();
-               
-            }
-            else if(rbBusLine.IsChecked==true)
-            {
-                new BusLineWindow(bl).Show();
-             
-            }
-            else if(rbStation.IsChecked==true)
-            {
-                new StationWindow(bl).Show();
-             
-            }
-            else
-            {
-                MessageBox.Show("Please select an option");
-            }
+            new BusLineWindow(bl).Show();
+
+        }
+        private void Bus_Click(object sender, RoutedEventArgs e)
+        {
+            new BusWindow(bl).Show();
+        }
+
+        private void Stations_Click(object sender, RoutedEventArgs e)
+        {
+            new StationWindow(bl).Show();
         }
     }
 }

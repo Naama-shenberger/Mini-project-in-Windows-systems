@@ -7,10 +7,10 @@
         xmlns:local="clr-namespace:PL.WPF"
         mc:Ignorable="d"
         Title="TimeUpdateWindow" Height="200" Width="400">
-    <Grid Background="#FFE6F1E2">
-        <materialDesign:Card Background="#FFE6F1E2" Content="Select an update Time" HorizontalAlignment="Left" Margin="35,56,0,0" VerticalAlignment="Top" Height="32" Width="133" FontWeight="Bold"/>
-        <materialDesign:TimePicker Background="#FFE6F1E2" Name="Timepicker" HorizontalAlignment="Left" Margin="200,56,0,0" VerticalAlignment="Top" Height="32" Width="149"/>
-        <Button  BorderBrush="#FF673AB7" Background="#FFBE9DE8"  Click="Done_Click" Content="Done" HorizontalAlignment="Left" Margin="158,128,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.133,0.553"/>
+    <Grid Background="#FFDCD7FA">
+        <materialDesign:Card Background="#FFDCD7FA" Content="Select an update Time" HorizontalAlignment="Left" Margin="35,56,0,0" VerticalAlignment="Top" Height="32" Width="133" FontWeight="Bold"/>
+        <materialDesign:TimePicker Background="#FFDCD7FA" Name="Timepicker" HorizontalAlignment="Left" Margin="200,56,0,0" VerticalAlignment="Top" Height="32" Width="149"/>
+        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Click="Done_Click" Content="Done" HorizontalAlignment="Left" Margin="158,128,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.133,0.553"/>
 
     </Grid>
 </Window>

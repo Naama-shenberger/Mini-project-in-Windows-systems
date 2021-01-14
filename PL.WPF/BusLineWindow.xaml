@@ -9,12 +9,12 @@
         Title="BusLineWindow"  Height="700" Width="1351.2" >
     <WrapPanel >
         <Grid Height="600" Width="1340">
-            <ComboBox x:Name="ComboBoxBusLineNumber"  ItemsSource="{Binding}" Margin="135,10,1068,550" SelectionChanged="cbBusBusLineNumber_SelectionChanged" Height="40" BorderBrush="Black" FontWeight="Bold" FontSize="13" Background="#FFE6F1E2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <Button x:Name="UpdateButton"  BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="update" HorizontalAlignment="Left" Margin="335,101,0,0" VerticalAlignment="Top" Width="147" Click="UpdateButton_Click" Height="31" />
-            <Button x:Name="AddBusLineButton"  BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Add Bus Line" HorizontalAlignment="Left" Margin="335,157,0,0" VerticalAlignment="Top" Width="147" Click="AddBusLineButton_Click" Height="32"/>
-            <Button x:Name="DeleteButon"  BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Delete" HorizontalAlignment="Left" Margin="335,47,0,0" VerticalAlignment="Top" Width="147" Click="DeleteButon_Click"/>
+            <ComboBox x:Name="ComboBoxBusLineNumber"  ItemsSource="{Binding}" Margin="135,10,1068,550" SelectionChanged="cbBusBusLineNumber_SelectionChanged" Height="40" BorderBrush="White" FontWeight="Bold" FontSize="13" Background="#FFDCD7FA" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="UpdateButton"  BorderBrush="#FF2281D1" Background="#FF2281D1" Content="update" HorizontalAlignment="Left" Margin="18,514,0,0" VerticalAlignment="Top" Width="147" Click="UpdateButton_Click" Height="31" />
+            <Button x:Name="AddBusLineButton"  BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Add Bus Line" HorizontalAlignment="Left" Margin="18,461,0,0" VerticalAlignment="Top" Width="147" Click="AddBusLineButton_Click" Height="32"/>
+            <Button x:Name="DeleteButon"  BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Delete" HorizontalAlignment="Left" Margin="18,561,0,0" VerticalAlignment="Top" Width="147" Click="DeleteButon_Click"/>
 
-            <Grid x:Name="gridOneBusLine" Background="#FFE6F1E2"  HorizontalAlignment="Left" Margin="18,47,0,0" VerticalAlignment="Top" Height="162" Width="254">
+            <Grid x:Name="gridOneBusLine" Background="#FFDCD7FA"  HorizontalAlignment="Left" Margin="18,47,0,0" VerticalAlignment="Top" Height="162" Width="254">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -36,15 +36,8 @@
                 <Label x:Name="LastStopLabel" Content="Last stop:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Height="30" Margin="5,1.4,0,0" VerticalAlignment="Top" Width="94" Grid.RowSpan="2" FontWeight="Bold"/>
                 <ComboBox x:Name="LastStopcb" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="2,27.6,-18,4.8" Text="{Binding LastStopNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedItem="{Binding LastStopNumber}" VerticalAlignment="Center" Height="30" Width="152" Grid.RowSpan="2"/>
             </Grid>
-            <DataGrid x:Name="DataGrirdStationslines" ToolTip="All Bus Lines Stations of line" Background="#FFE6F1E2" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="506,34,13,266" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" SelectionChanged="DataGrirdStationslines_SelectionChanged" FontWeight="Bold">
-                <DataGrid.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleX="-0.691" AngleY="-0.274"/>
-                        <RotateTransform/>
-                        <TranslateTransform X="-1.435" Y="0.917"/>
-                    </TransformGroup>
-                </DataGrid.RenderTransform>
+            <DataGrid x:Name="DataGrirdStationslines" ToolTip="All Bus Lines Stations of line" Background="#FFDCD7FA"  IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="506,34,13,266" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" SelectionChanged="DataGrirdStationslines_SelectionChanged" FontWeight="Bold">
+                
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn>
                     </materialDesign:DataGridTextColumn>
@@ -53,10 +46,10 @@
                             <DataTemplate>
                                 <Expander Header="Options">
                                     <StackPanel>
-                                        <Button x:Name="btUpdateIndexInLine" BorderBrush="#FF673AB7" Background="#FFBE9DE8" Click="UpdateIndexInLine_Click" Content="Update Number Station"  ToolTip="Update Number Station in the Line"/>
-                                        <Button x:Name="btRemoveStationLine" BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Remove Station" Click="RemoveStation_Click" />
-                                        <Button x:Name="btnUpdateTime" BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Update Time" Click="UpdateTime_Click" />
-                                        <Button x:Name="btnUpdateDistance" BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Update Distance" Click="UpdateDistance_Click"/>
+                                        <Button x:Name="btUpdateIndexInLine" BorderBrush="#FF2281D1" Background="#FF2281D1" Click="UpdateIndexInLine_Click" Content="Update Number Station"  ToolTip="Update Number Station in the Line"/>
+                                        <Button x:Name="btRemoveStationLine" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Remove Station" Click="RemoveStation_Click" />
+                                        <Button x:Name="btnUpdateTime" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Update Time" Click="UpdateTime_Click" />
+                                        <Button x:Name="btnUpdateDistance" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Update Distance" Click="UpdateDistance_Click"/>
                                     </StackPanel>
                                 </Expander>
                             </DataTemplate>
@@ -67,22 +60,22 @@
                     <DataGridTextColumn x:Name="NameStationClumn" Binding="{Binding StationName}" Header="       Name Station       " Width="SizeToHeader" TextBlock.TextAlignment="Center" />
                     <DataGridTextColumn x:Name="nuerInLineColumn" Binding="{Binding NumberStationInLine}" IsReadOnly="False" Header="Index Station" Width="SizeToHeader" TextBlock.TextAlignment="Center" />
                     <DataGridTextColumn x:Name="BusStationKeyPrevious" Binding="{Binding AverageTravelTime}" Header="     Time      " Width="SizeToHeader" TextBlock.TextAlignment="Center" />
-                    <DataGridTextColumn x:Name="NextStaionColunm" Binding="{Binding Distance}" Header="distance" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="NextStaionColunm"  Binding="{Binding Distance}" Header="distance" Width="SizeToHeader"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="DataGrirdAllStationslines" ToolTip="All Bus Lines Stations" Background="#FFE6F1E2"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="511,374,238,0" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" >
+            <DataGrid x:Name="DataGrirdAllStationslines" ToolTip="All Bus Lines Stations" Background="#FFDCD7FA" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="511,378,238,-4" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" >
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn>
                     </materialDesign:DataGridTextColumn>
                     <DataGridTextColumn x:Name="AllCodeStationColumn" Binding="{Binding BusStationKey}" Header="Code Station" Width="SizeToHeader" FontWeight="Bold"/>
                     <DataGridTextColumn x:Name="AllStationAddressClumn" Binding="{Binding StationAddress}" Header="Station Address" Width="SizeToHeader" FontWeight="Bold"/>
-                    <DataGridTextColumn x:Name="AllNameStationClumn" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader" FontWeight="Bold"/>
+                    <DataGridTextColumn x:Name="AllNameStationClumn" Binding="{Binding StationName}" Header="Name Station" Width="SizeToHeader" FontWeight="Light" />
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <Button x:Name="btDelBusLineStation" BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="del Station" Click="btDelBusLineStation_Click"/>
-                                    <Button x:Name="bthAddBusLineStationToLine" BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Add Station" Click="bthAddBusLineStationToLine_Click"/>
+                                    <Button x:Name="btDelBusLineStation" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="del Station" Click="btDelBusLineStation_Click"/>
+                                    <Button x:Name="bthAddBusLineStationToLine" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Add Station" Click="bthAddBusLineStationToLine_Click"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -91,9 +84,9 @@
 
             </DataGrid>
 
-            <Button x:Name="AddBusLineStatoin" BorderBrush="#FF673AB7" Background="#FFBE9DE8" Content="Add Bus Line Station" HorizontalAlignment="Left" Margin="1151,375,0,0" VerticalAlignment="Top" Width="179" Click="AddBusLineStatoin_Click" Height="35" />
-            <Button x:Name="backbtn" Content="Back"  BorderBrush="#FF673AB7" Background="#FFBE9DE8" HorizontalAlignment="Left" Margin="335,219,0,0" VerticalAlignment="Top" Width="147" Click="backbtn_Click" Height="29"/>
-            <Expander Header="Line schedule"  Background="#FFE6F1E2" HorizontalAlignment="Left" Height="51" Margin="18,219,0,0" VerticalAlignment="Top" Width="254" FontWeight="Bold">
+            <Button x:Name="AddBusLineStatoin" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Add Bus Line Station" HorizontalAlignment="Left" Margin="1151,375,0,0" VerticalAlignment="Top" Width="179" Click="AddBusLineStatoin_Click" Height="35" />
+            <Button x:Name="backbtn" Content="Back"  BorderBrush="#FF2281D1" Background="#FF2281D1" HorizontalAlignment="Left" Margin="1175,558,0,0" VerticalAlignment="Top" Width="147" Click="backbtn_Click" Height="29"/>
+            <Expander Header="Line schedule"  Background="#FFDCD7FA" HorizontalAlignment="Left" Height="51" Margin="18,219,0,0" VerticalAlignment="Top" Width="254" FontWeight="Bold">
                 <Grid Background="#FFE6F1E2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="169*"/>
@@ -117,8 +110,8 @@
                 </Grid>
             </Expander>
             <Label Content="Choose a bus line" Background="White"  HorizontalAlignment="Left" Margin="18,16,0,0" VerticalAlignment="Top" Width="112" Height="26" FontWeight="Bold"/>
-            <Expander Header="More details"  Background="#FFE6F1E2" Margin="18,355,1068,190" FontWeight="Bold">
-                <Grid Background="#FFE5E5E5"  HorizontalAlignment="Center" >
+            <Expander Header="More details"  Background="#FFDCD7FA"  Margin="18,355,1068,190" FontWeight="Bold">
+                <Grid Background="#FF8576DC"   HorizontalAlignment="Center" >
                     <TreeView x:Name="Treeview" ItemsSource="{Binding BusLine}" Background="White" Margin="-112,9,-90,-233"  HorizontalAlignment="Center" Width="202" FontStyle="Italic">
                         <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding}">
@@ -206,6 +199,9 @@
             <materialDesign:TimePicker  Visibility="Hidden" Background="#FFE6F1E2"  Name="TimePickerDistance" HorizontalAlignment="Left" Margin="446,561,0,0" VerticalAlignment="Top" Height="31" Width="98"/>
             <Label Name="labelDistance" Visibility="Hidden" Content="Distance between stations" HorizontalAlignment="Center" Margin="267,520,636.6,258" Width="174"/>
             <Label Name="labelTime"  Visibility="Hidden" Content="Time Distance between stations" HorizontalAlignment="Center" Margin="262,561,640.6,211" Width="175"/>
+            <materialDesign:PackIcon Kind="Location" Foreground="Black" Width="50" Margin="223,79,0,0" Height="20"/>
+            <materialDesign:PackIcon Kind="BusStop" Foreground="Black" Width="50" Margin="223,110,0,0" Height="20" RenderTransformOrigin="0.545,0.587"/>
+            <materialDesign:PackIcon Kind="BusStop" Foreground="Black" Width="50" Margin="223,142,0,0" Height="20" RenderTransformOrigin="0.545,0.587"/>
         </Grid>
     </WrapPanel>
 </Window>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BO
 {
-    public  class User
+    public class User
     {
         /// <summary>
         /// sets and gets
@@ -13,7 +13,7 @@ namespace BO
         public string HashedPassword { get; set; }
         public string UserName { get; set; }//users Name
         public bool AllowingAccess { get; set; }//User access
-        public bool FlageActive { set; get; }//A flage for Deletion
+        public bool DelUser { set; get; }//A flage for Deletion
         public string password { set; get; }
         public override string ToString() => this.ToStringProperty();
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.WPF"
         mc:Ignorable="d"
-        Title="AddNewStationWindow" Height="350" Width="400" Background=" #FFE6F1E2 " >
+        Title="AddNewStationWindow" Height="350" Width="400" Background="#FFDCD7FA" >
     <Grid>
         <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="0,38,0,0" VerticalAlignment="Top" Height="184" Width="374">
             <Grid.ColumnDefinitions>

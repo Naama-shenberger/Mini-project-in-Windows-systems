@@ -38,7 +38,7 @@ namespace DS
             {
                 new User{AllowingAccess=true,DelUser=false,UserName="Naama Shanberger",Salt=12122,HashedPassword= Tools.hashPassword(12122+"Na11ama")},
                 new User{AllowingAccess=true,DelUser=false,UserName="Ella",Salt=1234213,HashedPassword= Tools.hashPassword(1234213+"Ella121")},
-                new User{AllowingAccess=false,DelUser=false,UserName="a",Salt=12342,HashedPassword= Tools.hashPassword(12342+"a")}
+                new User{AllowingAccess=true,DelUser=false,UserName="a",Salt=12342,HashedPassword= Tools.hashPassword(12342+"a")}
             };
             ListBuses = new List<Bus>
             {

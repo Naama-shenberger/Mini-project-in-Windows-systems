@@ -775,7 +775,7 @@ namespace BL
         /// <returns></returns>
         public DO.User UserBoDoAdapter(BO.User UserBO)
         {
-            DO.User UserDO = dl.GetUser(UserBO.UserName);
+            DO.User UserDO = new DO.User();
             UserBO.CopyPropertiesTo(UserDO);
             return UserDO;
         }

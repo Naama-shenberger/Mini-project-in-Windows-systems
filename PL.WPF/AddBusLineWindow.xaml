@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="AddBusLineWindow" Height="450" Width="600" KeyDown="OnKeyDownHandler" >
     <Grid>
-        <Grid x:Name="gridOneBusLine" Background="#FFE6F1E2"  HorizontalAlignment="Left" Margin="18,47,0,0" VerticalAlignment="Top" Height="208" Width="354">
+        <Grid x:Name="gridOneBusLine" Background="#FFDCD7FA"  HorizontalAlignment="Left" Margin="18,47,0,0" VerticalAlignment="Top" Height="208" Width="354">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="Auto" MinWidth="36.8"/>

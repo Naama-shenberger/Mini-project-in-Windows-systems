@@ -24,7 +24,7 @@
             </ListView.ItemContainerStyle>
         </ListView>
 
-        <ListView x:Name="lvBusLineStation" ItemsSource="{Binding}" Background="#FFE6F1E2" Margin="0,178,9.6,47.4">
+        <ListView x:Name="lvBusLineStation" ItemsSource="{Binding}" Background="#FFDCD7FA" Margin="0,178,9.6,47.4">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Code Station" x:Name="CodeStation"  DisplayMemberBinding="{Binding BusStationKey}"/>
@@ -40,6 +40,6 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <Button Content="Finish adding" BorderBrush="#FF673AB7" Background="#FFBE9DE8"  Name="FinishAddingBtn" HorizontalAlignment="Left" Margin="453,348,0,0" VerticalAlignment="Top" Width="131" Click="FinishAddingBtn_Click"/>
+        <Button Content="Finish adding"  BorderBrush="#FF2281D1" Background="#FF2281D1"  Name="FinishAddingBtn" HorizontalAlignment="Left" Margin="453,348,0,0" VerticalAlignment="Top" Width="131" Click="FinishAddingBtn_Click"/>
     </Grid>
 </Window>
