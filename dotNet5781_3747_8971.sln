@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{5718ACB6-50B
 		ConsecutiveStations.xml = ConsecutiveStations.xml
 		LineRide.xml = LineRide.xml
 		serials.xml = serials.xml
+		User.xml = User.xml
+		UserJourney.xml = UserJourney.xml
 	EndProjectSection
 EndProject
 Global

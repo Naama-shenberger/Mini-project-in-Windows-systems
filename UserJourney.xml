@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUserJourney>
+	<UserJourney>
+		<UserName></UserName>
+		<BusLineJourney></BusLineJourney>
+		<BoardingStation></BoardingStation>
+		<DropStation></DropStation>
+		<StartJourneyTime></StartJourneyTime>
+		<FlageActive></FlageActive>
+	</UserJourney>
+</ArrayOfUserJourney>
