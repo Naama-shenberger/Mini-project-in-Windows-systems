@@ -16,5 +16,6 @@ namespace BO
         public TimeSpan TravelEndTime { set; get; }//Travel end time
         public TimeSpan BusDepartureNumber { set; get; }//Exit number of the line
         public int ID { set; get; }
+
     }
 }
