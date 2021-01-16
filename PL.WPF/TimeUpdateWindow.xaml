@@ -7,10 +7,32 @@
         xmlns:local="clr-namespace:PL.WPF"
         mc:Ignorable="d"
         Title="TimeUpdateWindow" Height="200" Width="400">
-    <Grid Background="#FFDCD7FA">
-        <materialDesign:Card Background="#FFDCD7FA" Content="Select an update Time" HorizontalAlignment="Left" Margin="35,56,0,0" VerticalAlignment="Top" Height="32" Width="133" FontWeight="Bold"/>
-        <materialDesign:TimePicker Background="#FFDCD7FA" Name="Timepicker" HorizontalAlignment="Left" Margin="200,56,0,0" VerticalAlignment="Top" Height="32" Width="149"/>
-        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Click="Done_Click" Content="Done" HorizontalAlignment="Left" Margin="158,128,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.133,0.553"/>
+    <Grid >
+        <Rectangle Margin="0,0,-1.4,83" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.222"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.668"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+            <Rectangle.Fill>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Height="132" Fill="White" VerticalAlignment="Bottom" Margin="20,0,18.6,28.4" RadiusY="28.27" RadiusX="28.27">
+            <Rectangle.Effect>
+                <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <materialDesign:Card Content="Select an update Time" HorizontalAlignment="Left" Margin="36,60,0,0" VerticalAlignment="Top" Height="32" Width="133" FontWeight="Bold" BorderBrush="#FF2281D1"/>
+        <materialDesign:TimePicker Name="Timepicker" HorizontalAlignment="Left" Margin="200,56,0,0" VerticalAlignment="Top" Height="32" Width="149" BorderBrush="#FF2281D1"/>
+        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Click="Done_Click" Content="Done" HorizontalAlignment="Left" Margin="151,128,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.133,0.553"/>
 
     </Grid>
 </Window>

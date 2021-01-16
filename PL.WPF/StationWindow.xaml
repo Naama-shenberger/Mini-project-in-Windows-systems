@@ -9,6 +9,28 @@
         Title="StationWindow" Height="488.489" Width="1000" >
 
     <Grid Margin="0,0,0.2,-0.8" >
+        <Rectangle Margin="0,0,1.6,401" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.222"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.668"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+            <Rectangle.Fill>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Height="183" Fill="White" VerticalAlignment="Bottom" Margin="10,0,453.6,166" RadiusY="28.27" RadiusX="28.27">
+            <Rectangle.Effect>
+                <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
+            </Rectangle.Effect>
+        </Rectangle>
         <Grid.RowDefinitions>
             <RowDefinition Height="208*"/>
         </Grid.RowDefinitions>
@@ -20,7 +42,7 @@
         <ComboBox x:Name="ComboBoxBusStationKey" VerticalAlignment="Top" 
                   Grid.Row="0" Height="37" Margin="118,15,429.6,0"
                   ItemsSource="{Binding}"  
-                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="ComboBoxBusStationKey_SelectionChanged"  BorderBrush="Black" FontWeight="Bold" FontSize="13" Background="#FF2281D1" Foreground="#FFF6F2F2" />
+                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="ComboBoxBusStationKey_SelectionChanged"  BorderBrush="Black" FontWeight="Bold" FontSize="13"  Foreground="#FFF6F2F2" />
         <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="22,57,0,0" VerticalAlignment="Top" Height="194" Width="354">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -46,11 +68,21 @@
             <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="5"  HorizontalAlignment="Center" Height="30" Margin="0,1,18.8,29.4" VerticalAlignment="Center" Width="94" Grid.RowSpan="2" FontWeight="Bold"/>
             <TextBox x:Name="TextBoxLongitude" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" Margin="11.6,28.4,4.8,2"  Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="30" Width="150" TextAlignment="Center" Grid.RowSpan="2" IsReadOnly="True" />
         </Grid>
+        <Rectangle Height="159" Fill="White" VerticalAlignment="Bottom" Margin="381,0,57.6,239" RadiusY="28.27" RadiusX="28.27">
+            <Rectangle.Effect>
+                <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Rectangle Height="200" Fill="White" VerticalAlignment="Bottom" Margin="381,0,57.6,10" RadiusY="28.27" RadiusX="28.27">
+            <Rectangle.Effect>
+                <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
+            </Rectangle.Effect>
+        </Rectangle>
         <Button Content="Update Station" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,142,0,0" Click="UpdateButton_Click" Grid.Column="1" Width="167" Height="41" BorderBrush="#FF2281D1" Background="#FF2281D1" />
         <Button Content="Add New Station" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Column="1" Margin="10.4,205,0,0"  Click="AddNewStationButton_Click" Width="167" Height="46" BorderBrush="#FF2281D1" Background="#FF2281D1" />
         <Button Content="Delete Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,70,0,0" Click="DeleteCurStationButton_Click" Grid.Column="1" Width="167" Height="46" BorderBrush="#FF2281D1" Background="#FF2281D1" />
         <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10.4,413,0,0"  RenderTransformOrigin="0.525,0.776" Click="BackButton_Click" Grid.Column="1" Width="167" Height="37" BorderBrush="#FF2281D1" Background="#FF2281D1" />
-        <DataGrid x:Name="DataGrirdAllLinesInStation" Background="#FF2281D1"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="400,92,140.6,244" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
+        <DataGrid x:Name="DataGrirdAllLinesInStation"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="389,87,78.6,244" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Background="White" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="BusLineNumber" Binding="{Binding BusLineNumber}" Header="Bus line number" Width="SizeToHeader"/>
                 <DataGridTemplateColumn>
@@ -64,12 +96,12 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,53,0,0" Height="27" Width="171" FontWeight="Bold"/>
+        <Label Content="List of lines in selected Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,60,0,0" Height="27" Width="171" FontWeight="Bold"/>
 
 
-        <Label Content="List of lines:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,221,0,0" Height="27" Width="171" FontWeight="Bold"/>
+        <Label Content="List of lines:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,250,0,0" Height="27" Width="171" FontWeight="Bold"/>
 
-        <DataGrid x:Name="DataGrirdAllLines" Background="#FF2281D1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="400,250,140.6,10" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
+        <DataGrid x:Name="DataGrirdAllLines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="400,277,57.6,10" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Background="White" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="AllBusLineNumber" Binding="{Binding BusLineNumber}" Header="Bus line number" Width="SizeToHeader"/>
                 <DataGridTemplateColumn>
