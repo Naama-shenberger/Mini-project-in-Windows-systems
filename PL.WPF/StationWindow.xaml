@@ -9,7 +9,14 @@
         Title="StationWindow" Height="488.489" Width="1000" >
 
     <Grid Margin="0,0,0.2,-0.8" >
-        <Rectangle Margin="0,0,1.6,401" RenderTransformOrigin="0.5,0.5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="208*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Margin="0,0,0.6,401" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -26,23 +33,16 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle Height="183" Fill="White" VerticalAlignment="Bottom" Margin="10,0,453.6,166" RadiusY="28.27" RadiusX="28.27">
+        <Label Content="Select Station:" Grid.Row="0" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Height="37" Width="127" FontWeight="Bold" FontSize="16"/>
+        <Rectangle Height="183" Fill="White" VerticalAlignment="Bottom" Margin="22,0,441.6,183" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="208*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300*"/>
-            <ColumnDefinition Width="70*"/>
-        </Grid.ColumnDefinitions>
-        <Label Content="Select Station:" Grid.Row="0" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Height="25" Width="90" FontWeight="Bold" FontSize="14"/>
         <ComboBox x:Name="ComboBoxBusStationKey" VerticalAlignment="Top" 
-                  Grid.Row="0" Height="37" Margin="118,15,429.6,0"
+                  Grid.Row="0" Height="37" Margin="142,10,405.6,0"
                   ItemsSource="{Binding}"  
-                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="ComboBoxBusStationKey_SelectionChanged"  BorderBrush="Black" FontWeight="Bold" FontSize="13"  Foreground="#FFF6F2F2" />
+                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="ComboBoxBusStationKey_SelectionChanged"  BorderBrush="Black" FontWeight="Bold" FontSize="13"  Foreground="Black" />
         <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="22,57,0,0" VerticalAlignment="Top" Height="194" Width="354">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -101,14 +101,14 @@
 
         <Label Content="List of lines:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,250,0,0" Height="27" Width="171" FontWeight="Bold"/>
 
-        <DataGrid x:Name="DataGrirdAllLines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="400,277,57.6,10" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Background="White" >
+        <DataGrid x:Name="DataGrirdAllLines"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="389,277,78.6,10" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" Background="White" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="AllBusLineNumber" Binding="{Binding BusLineNumber}" Header="Bus line number" Width="SizeToHeader"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Button x:Name="btAddLine" Content="add" Click="AddLineToStationButton_Click" ToolTip="adds a line to selected station"/>
+                                <Button x:Name="btAddLine" Content="add" Click="AddLineToStationButton_Click" ToolTip="adds a line to selected station" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
