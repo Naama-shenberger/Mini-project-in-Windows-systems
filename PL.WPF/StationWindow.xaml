@@ -20,7 +20,7 @@
         <ComboBox x:Name="ComboBoxBusStationKey" VerticalAlignment="Top" 
                   Grid.Row="0" Height="37" Margin="118,15,429.6,0"
                   ItemsSource="{Binding}"  
-                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="ComboBoxBusStationKey_SelectionChanged"  BorderBrush="Black" FontWeight="Bold" FontSize="13" Background="#FFDCD7FA" />
+                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="ComboBoxBusStationKey_SelectionChanged"  BorderBrush="Black" FontWeight="Bold" FontSize="13" Background="#FF2281D1" Foreground="#FFF6F2F2" />
         <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="22,57,0,0" VerticalAlignment="Top" Height="194" Width="354">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -50,7 +50,7 @@
         <Button Content="Add New Station" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Column="1" Margin="10.4,205,0,0"  Click="AddNewStationButton_Click" Width="167" Height="46" BorderBrush="#FF2281D1" Background="#FF2281D1" />
         <Button Content="Delete Current Station" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10.4,70,0,0" Click="DeleteCurStationButton_Click" Grid.Column="1" Width="167" Height="46" BorderBrush="#FF2281D1" Background="#FF2281D1" />
         <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10.4,413,0,0"  RenderTransformOrigin="0.525,0.776" Click="BackButton_Click" Grid.Column="1" Width="167" Height="37" BorderBrush="#FF2281D1" Background="#FF2281D1" />
-        <DataGrid x:Name="DataGrirdAllLinesInStation" Background="#FFDCD7FA"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="400,92,140.6,244" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
+        <DataGrid x:Name="DataGrirdAllLinesInStation" Background="#FF2281D1"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="400,92,140.6,244" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="BusLineNumber" Binding="{Binding BusLineNumber}" Header="Bus line number" Width="SizeToHeader"/>
                 <DataGridTemplateColumn>
@@ -69,7 +69,7 @@
 
         <Label Content="List of lines:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,221,0,0" Height="27" Width="171" FontWeight="Bold"/>
 
-        <DataGrid x:Name="DataGrirdAllLines" Background="#FFDCD7FA" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="400,250,140.6,10" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
+        <DataGrid x:Name="DataGrirdAllLines" Background="#FF2281D1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="400,250,140.6,10" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="AllBusLineNumber" Binding="{Binding BusLineNumber}" Header="Bus line number" Width="SizeToHeader"/>
                 <DataGridTemplateColumn>

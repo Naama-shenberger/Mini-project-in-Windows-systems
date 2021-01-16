@@ -9,14 +9,14 @@
         Title="BusWindow" Height="450" Width="700">
     <Grid>
 
-        <ComboBox  Background="#FFDCD7FA" x:Name="cbBusLicensePlate" HorizontalAlignment="Left"  VerticalAlignment="Top"
+        <ComboBox  Background="#FF2281D1" x:Name="cbBusLicensePlate" HorizontalAlignment="Left"  VerticalAlignment="Top"
                   Grid.Row="0" Height="25" Margin="164,20,0,0" Width="123"
                   ItemsSource="{Binding}" 
                   HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="cbBusLicensePlate_SelectionChanged" />
         <Button  BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Update Bus" Click="UpdateBus_Click" HorizontalAlignment="Left" Margin="526,163,0,0" VerticalAlignment="Top" Width="123" Height="31"/>
         <Button  BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Add Bus"  Click="AddBus_Click" HorizontalAlignment="Left" Margin="526,253,0,0" VerticalAlignment="Top" Width="123" Height="29"/>
         <Button   BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Delete Bus" Click="DeleteBus_Click" HorizontalAlignment="Left" Margin="526,208,0,0" VerticalAlignment="Top" Width="123" Height="30"/>
-        <Grid x:Name="gridOneBus"  Background="#FFDCD7FA"   HorizontalAlignment="Left" Margin="40,76,0,0" VerticalAlignment="Top" Height="326" Width="277">
+        <Grid x:Name="gridOneBus"  Background="#FF2281D1"   HorizontalAlignment="Left" Margin="40,76,0,0" VerticalAlignment="Top" Height="326" Width="277">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -56,9 +56,9 @@
         </Grid>
         <Button  BorderBrush="#FF2281D1" Background="#FF2281D1" Name="refuelButton" Click="refuel_Click" Content="refuel" HorizontalAlignment="Left" Margin="526,120,0,0" VerticalAlignment="Top" Width="123" Height="29"/>
         <Button  BorderBrush="#FF2281D1" Background="#FF2281D1" Name="TreatmentButton" Content="Treatment" Click="Treatment_Click" HorizontalAlignment="Left" Margin="526,77,0,0" VerticalAlignment="Top" Width="123" Height="29"/>
-        <Expander   FontWeight="Bold" Background="#FFDCD7FA" Header="More details" HorizontalAlignment="Left" Height="44" Margin="315,20,0,0" VerticalAlignment="Top" Width="211">
+        <Expander   FontWeight="Bold" Background="#FF2281D1" Header="More details" HorizontalAlignment="Left" Height="44" Margin="315,20,0,0" VerticalAlignment="Top" Width="211" Foreground="#FFF4F1F1">
             <Grid  >
-                <TreeView x:Name="Treeview"  ItemsSource="{Binding Bus}" Background="#FFDCD7FA" Margin="-106,1,-104,-104" >
+                <TreeView x:Name="Treeview"  ItemsSource="{Binding Bus}" Background="#FF2281D1" Margin="-106,1,-104,-104" >
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding}">
                             <StackPanel>
@@ -88,7 +88,7 @@
             </Grid>
         </Expander>
         <Button Content="Back"  BorderBrush="#FF2281D1" Background="#FF2281D1" HorizontalAlignment="Left" Margin="551,366,0,0" VerticalAlignment="Top" Width="115" Height="36" Click="Button_Click"/>
-        <Label   FontWeight="Bold" Background="#FFDCD7FA" Content="Select a bus" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" Height="25" Width="119"/>
+        <Label   FontWeight="Bold" Background="#FF2281D1" Content="Select a bus" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" Height="25" Width="119" Foreground="#DDF1E8E8"/>
 
     </Grid>
 </Window>
