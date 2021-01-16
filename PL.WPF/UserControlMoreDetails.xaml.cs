@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,16 @@ using System.Windows.Shapes;
 namespace PL.WPF
 {
     /// <summary>
-    /// Interaction logic for UserControlBusLines.xaml
+    /// Interaction logic for UserControlMoreDetails.xaml
     /// </summary>
-    public partial class UserControlBusLines : UserControl
+    public partial class UserControlMoreDetails : UserControl
     {
-        public UserControlBusLines()
+        IBL bl;
+        public UserControlMoreDetails(IBL _bl)
         {
             InitializeComponent();
+            bl = _bl;
+            Treeview.ItemsSource = bl.GetAllBusLinesGroupByArea();
         }
     }
 }

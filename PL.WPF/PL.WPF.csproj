@@ -99,11 +99,14 @@
     <Compile Include="User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlBusLines.xaml.cs">
-      <DependentUpon>UserControlBusLines.xaml</DependentUpon>
+    <Compile Include="UserControlBusLinesStations.xaml.cs">
+      <DependentUpon>UserControlBusLinesStations.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlBusLinexaml.xaml.cs">
       <DependentUpon>UserControlBusLinexaml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlMoreDetails.xaml.cs">
+      <DependentUpon>UserControlMoreDetails.xaml</DependentUpon>
     </Compile>
     <Page Include="access.xaml">
       <SubType>Designer</SubType>
@@ -175,11 +178,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControlBusLines.xaml">
+    <Page Include="UserControlBusLinesStations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlBusLinexaml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlMoreDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,9 +213,6 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="UserControlBus.Linesxaml">
-      <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
   <ItemGroup>

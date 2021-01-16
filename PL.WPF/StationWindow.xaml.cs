@@ -237,7 +237,7 @@ namespace PL.WPF
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-                //(sender as CheckBox).IsChecked = false;
+               
             }
 
         }

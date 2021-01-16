@@ -20,13 +20,13 @@ namespace DL
         public static DalXml Instance { get => instance; }// The public Instance property to use
         #endregion
         #region DS XML Files
-        string busStationPath = @"BusStation.xml"; //XElement
+        string busStationPath = @"BusStation.xml";
         string BusPath= @"BusFile.xml";
         string BusLinePath = @"BusLine.xml"; 
         string BusLineStationPath = @"BusLineStation.xml"; 
         string LineRidePath = @"LineRide.xml"; 
         string ConsecutiveStationsPath = @"ConsecutiveStations.xml"; 
-        string serialsPath = @"serials.xml"; //XMLSerializer
+        string serialsPath = @"serials.xml"; 
         string busDrivePath= @"BusDrive.xml";
         string useJouyrneyPath= @"UseJourney.xml";
         string userPath = @"User.xml";
@@ -120,6 +120,7 @@ namespace DL
                 if (Boolean.Parse(bus1.Element("Active").Value) == false)
                 {
                     bus1.Element("Active").Value = true.ToString();
+                    XMLTools.SaveListToXMLElement(busRootElem, BusPath);
                     return;
                 }
                 else
@@ -159,7 +160,7 @@ namespace DL
                 {
                     bus.Element("Active").Value = false.ToString();
                     XMLTools.SaveListToXMLElement(busRootElem, BusPath);
-                    //bus.Remove();
+                   
                 }
                 else
                     throw new DO.IdException(delBus.LicensePlate, $"station with key {delBus.LicensePlate} is already deleted ");
@@ -275,6 +276,7 @@ namespace DL
                 if (Boolean.Parse(bus1.Element("Active").Value) == false)
                 {
                     bus1.Element("Active").Value = true.ToString();
+                    XMLTools.SaveListToXMLElement(busDriveRootElem, busDrivePath);
                     return;
                 }
                 else
@@ -350,7 +352,6 @@ namespace DL
                 if (Boolean.Parse(bus.Element("Active").Value) == true)
                 {
                     bus.Element("Active").Value = false.ToString();
-                    //bus.Remove();
                     XMLTools.SaveListToXMLElement(busDriveRootElem, BusPath);
                 }
                 else
@@ -430,6 +431,7 @@ namespace DL
                 if (Boolean.Parse(station1.Element("Active").Value) == false)
                 {
                     station1.Element("Active").Value = true.ToString();
+                    XMLTools.SaveListToXMLElement(stationRootElem, busStationPath);
                     return;
                 }
                 else
@@ -466,7 +468,6 @@ namespace DL
                 if (Boolean.Parse(station.Element("Active").Value) == true)
                 {
                     station.Element("Active").Value = false.ToString();
-                    //station.Remove();
                     XMLTools.SaveListToXMLElement(stationRootElem, busStationPath);
                 }
                 else
@@ -573,9 +574,9 @@ namespace DL
 
             if (bus1 != null)
                 throw new DO.IdException(bus.ID, "Duplicate Bus Line ID");
-            serialsRootElem.Element("dentificationNumberBusLine").Value = serialsRootElem.Element("dentificationNumberBusLine").Value + 1;
+            serialsRootElem.Element("IdentificationNumberBusLine").Value = serialsRootElem.Element("IdentificationNumberBusLine").Value + 1;
             XMLTools.SaveListToXMLElement(serialsRootElem, serialsPath);
-            bus.ID = Int32.Parse(serialsRootElem.Element("dentificationNumberBusLine").Value);
+            bus.ID = Int32.Parse(serialsRootElem.Element("IdentificationNumberBusLine").Value);
             XElement BusLineElem = new XElement("BusLine",
                                    new XElement("ID", bus.ID),
                                    new XElement("BusLineNumber", bus.BusLineNumber),
@@ -1097,6 +1098,7 @@ namespace DL
                 if (Boolean.Parse(usej.Element("FlageActive").Value) == false)
                 {
                     usej.Element("FlageActive").Value = true.ToString();
+                    XMLTools.SaveListToXMLElement(UserJourneyRootElem, useJouyrneyPath);
                     return;
                 }
                 else
@@ -1236,6 +1238,8 @@ namespace DL
                 if (Boolean.Parse(user1.Element("DelUser").Value) == false)
                 {
                     user1.Element("DelUser").Value = false.ToString();
+                    XMLTools.SaveListToXMLElement(UserRootElem, userPath);
+
                     return;
                 }
                 else
