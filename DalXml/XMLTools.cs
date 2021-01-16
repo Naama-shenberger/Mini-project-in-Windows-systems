@@ -34,6 +34,7 @@ namespace DL
         {
             try
             {
+              //  "C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\bin\xml\User.xml"
                 if (File.Exists(dir + filePath))
                 {
                     return XElement.Load(dir + filePath);
@@ -49,6 +50,7 @@ namespace DL
             {
                 throw new  DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
             }
+            
         }
         #endregion
 

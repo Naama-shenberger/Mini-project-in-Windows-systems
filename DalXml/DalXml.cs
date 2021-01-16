@@ -52,7 +52,7 @@ namespace DL
                                 Totalkilometers=float.Parse(bus.Element("Totalkilometers").Value),
                                 KilometersGas= float.Parse(bus.Element("KilometersGas").Value),
                                 KilometersTreatment= float.Parse(bus.Element("KilometersTreatment").Value),
-                                //Status= (Status)Enum.Parse(typeof(Bus), bus.Element("PersonalStatus").Value),
+                                Status= (Status)Enum.Parse(typeof(Status), bus.Element("Status").Value),
                                 AirTire = float.Parse(bus.Element("AirTire").Value),
                                 OilCondition = Boolean.Parse(bus.Element("OilCondition").Value)
                             }).FirstOrDefault();
@@ -72,7 +72,7 @@ namespace DL
         {
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
             return (from bus in busRootElem.Elements()
-                    where (bus.Element("Active").Value) == true.ToString()
+                    where Boolean.Parse(bus.Element("Active").Value) == true
                     select bus.Element("LicensePlate").Value);
         }
         /// <summary>
@@ -84,7 +84,7 @@ namespace DL
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
 
             return (from bus in busRootElem.Elements()
-                    where (bus.Element("Active").Value) == true.ToString()
+                    where Boolean.Parse(bus.Element("Active").Value) == true
                     select new Bus()
                     {
                         Active = Boolean.Parse(bus.Element("Active").Value),
@@ -94,7 +94,7 @@ namespace DL
                         Totalkilometers = float.Parse(bus.Element("Totalkilometers").Value),
                         KilometersGas = float.Parse(bus.Element("KilometersGas").Value),
                         KilometersTreatment = float.Parse(bus.Element("KilometersTreatment").Value),
-                        //Status= (Status)Enum.Parse(typeof(Bus), bus.Element("PersonalStatus").Value),
+                        Status= (Status)Enum.Parse(typeof(Status), bus.Element("Status").Value),
                         AirTire = float.Parse(bus.Element("AirTire").Value),
                         OilCondition = Boolean.Parse(bus.Element("OilCondition").Value)
                     }
@@ -150,8 +150,8 @@ namespace DL
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
 
             XElement bus = (from b in busRootElem.Elements()
-                                where b.Element("LicensePlate").Value == delBus.LicensePlate
-                                select b).FirstOrDefault();
+                                where b.Element("LicensePlate").Value == delBus.LicensePlate && Boolean.Parse(b.Element("Active").Value) == true
+                            select b).FirstOrDefault();
 
             if (bus != null)
             {
@@ -176,7 +176,7 @@ namespace DL
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
 
             XElement bus1 = (from b in busRootElem.Elements()
-                          where b.Element("LicensePlate").Value ==bus.LicensePlate
+                          where b.Element("LicensePlate").Value ==bus.LicensePlate && Boolean.Parse(b.Element("Active").Value) == true
                           select b).FirstOrDefault();
 
             if (bus1 != null)
@@ -220,9 +220,9 @@ namespace DL
                          Active = Boolean.Parse(bus.Element("Active").Value),
                          ID=int.Parse(bus.Element("ID").Value),
                          LicensePlate = bus.Element("LicensePlate").Value,
-                         ExitStart=TimeSpan.Parse(bus.Element("ExitStart").Value),
-                         TimeNextStop= TimeSpan.Parse(bus.Element("TimeNextStop").Value),
-                         TimeDrive = TimeSpan.Parse(bus.Element("TimeDrive").Value),
+                         ExitStart = XmlConvert.ToTimeSpan(bus.Element("ExitStart").Value),
+                         TimeNextStop = XmlConvert.ToTimeSpan(bus.Element("TimeNextStop").Value),
+                         TimeDrive = XmlConvert.ToTimeSpan(bus.Element("TimeDrive").Value),
                          LastStasion =int.Parse(bus.Element("LastStasion").Value),
                          BusDriverFirstName= bus.Element("BusDriverFirstName").Value,
                          BusDriverLastName= bus.Element("BusDriverLastName").Value,
@@ -248,9 +248,9 @@ namespace DL
                         Active = Boolean.Parse(bus.Element("Active").Value),
                         ID = int.Parse(bus.Element("ID").Value),
                         LicensePlate = bus.Element("LicensePlate").Value,
-                        ExitStart = TimeSpan.Parse(bus.Element("ExitStart").Value),
-                        TimeNextStop = TimeSpan.Parse(bus.Element("TimeNextStop").Value),
-                        TimeDrive = TimeSpan.Parse(bus.Element("TimeDrive").Value),
+                        ExitStart = XmlConvert.ToTimeSpan(bus.Element("ExitStart").Value),
+                        TimeNextStop = XmlConvert.ToTimeSpan(bus.Element("TimeNextStop").Value),
+                        TimeDrive = XmlConvert.ToTimeSpan(bus.Element("TimeDrive").Value),
                         LastStasion = int.Parse(bus.Element("LastStasion").Value),
                         BusDriverFirstName = bus.Element("BusDriverFirstName").Value,
                         BusDriverLastName = bus.Element("BusDriverLastName").Value,
@@ -404,8 +404,8 @@ namespace DL
                         Active = Boolean.Parse(s.Element("Active").Value),
                         StationName = s.Element("StationName").Value,
                         StationAddress = s.Element("StationAddress").Value,
-                        Latitude = Int32.Parse(s.Element("Latitude").Value),
-                        Longitude = Int32.Parse(s.Element("Longitude").Value)
+                        Latitude = Double.Parse(s.Element("Latitude").Value),
+                        Longitude = Double.Parse(s.Element("Longitude").Value)
                     }
                    );
         }
@@ -422,7 +422,7 @@ namespace DL
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(busStationPath);
 
             XElement station1 = (from s in stationRootElem.Elements()
-                                 where int.Parse(s.Element("BusStationKey").Value) == station.BusStationKey
+                                 where int.Parse(s.Element("BusStationKey").Value) == station.BusStationKey && Boolean.Parse(s.Element("Active").Value) == true
                                  select s).FirstOrDefault();
 
             if (station1 != null)
@@ -520,7 +520,7 @@ namespace DL
             XElement BusLinesRootElem = XMLTools.LoadListFromXMLElement(BusLinePath);
 
             BusLine b = (from per in BusLinesRootElem.Elements()
-                         where int.Parse(per.Element("ID").Value) == id
+                         where int.Parse(per.Element("ID").Value) == id && Boolean.Parse(per.Element("Active").Value) == true
                          select new BusLine()
                          {
                              ID = Int32.Parse(per.Element("ID").Value),
@@ -546,6 +546,7 @@ namespace DL
             XElement BusLinesRootElem = XMLTools.LoadListFromXMLElement(BusLinePath);
 
             return (from p in BusLinesRootElem.Elements()
+                   where  Boolean.Parse(p.Element("Active").Value) == true
                     select new BusLine
                     {
                         ID = Int32.Parse(p.Element("ID").Value),
@@ -567,7 +568,7 @@ namespace DL
             XElement BusLinesRootElem = XMLTools.LoadListFromXMLElement(BusLinePath);
             XElement serialsRootElem = XMLTools.LoadListFromXMLElement(serialsPath);
             XElement bus1 = (from p in BusLinesRootElem.Elements()
-                             where int.Parse(p.Element("ID").Value) == bus.ID
+                             where int.Parse(p.Element("ID").Value) == bus.ID && Boolean.Parse(p.Element("Active").Value) == true
                              select p).FirstOrDefault();
 
             if (bus1 != null)
@@ -596,7 +597,7 @@ namespace DL
             XElement BusLinesRootElem = XMLTools.LoadListFromXMLElement(BusLinePath);
 
             XElement per = (from p in BusLinesRootElem.Elements()
-                            where int.Parse(p.Element("ID").Value) == bus.ID
+                            where int.Parse(p.Element("ID").Value) == bus.ID && Boolean.Parse(p.Element("Active").Value) == true
                             select p).FirstOrDefault();
 
             if (per != null)
@@ -616,7 +617,7 @@ namespace DL
             XElement BusLinesRootElem = XMLTools.LoadListFromXMLElement(BusLinePath);
 
             XElement per = (from p in BusLinesRootElem.Elements()
-                            where int.Parse(p.Element("ID").Value) == bus.ID
+                            where int.Parse(p.Element("ID").Value) == bus.ID && Boolean.Parse(p.Element("Active").Value) == true
                             select p).FirstOrDefault();
 
             if (per != null)
@@ -641,6 +642,7 @@ namespace DL
             List<BusLine> ListBusLineStation = XMLTools.LoadListFromXMLSerializer<BusLine>(BusLinePath);
 
             return from BusLine in ListBusLineStation
+                   where BusLine.Active== true
                    select BusLine.BusLineNumber;
         }
         #endregion
@@ -656,14 +658,14 @@ namespace DL
             XElement BusLineStationsRootElem = XMLTools.LoadListFromXMLElement(BusLineStationPath);
 
             BusLineStation s = (from per in BusLineStationsRootElem.Elements()
-                         where int.Parse(per.Element("ID").Value) == IDBusLine && int.Parse(per.Element("BusStationKey").Value)==codeStation
-                         select new BusLineStation()
-                         {
-                             ID = Int32.Parse(per.Element("ID").Value),
-                             Active = Boolean.Parse(per.Element("Active").Value),
-                             BusStationKey = Int32.Parse(per.Element("BusStationKey").Value),
-                             NumberStationInLine = Int32.Parse(per.Element("  NumberStationInLine").Value)
-                         }
+                                where int.Parse(per.Element("ID").Value) == IDBusLine && int.Parse(per.Element("BusStationKey").Value) == codeStation && Boolean.Parse(per.Element("Active").Value) == true
+                                select new BusLineStation()
+                                {
+                                    ID = Int32.Parse(per.Element("ID").Value),
+                                    Active = Boolean.Parse(per.Element("Active").Value),
+                                    BusStationKey = Int32.Parse(per.Element("BusStationKey").Value),
+                                    NumberStationInLine = Int32.Parse(per.Element("NumberStationInLine").Value)
+                                }
                         ).FirstOrDefault();
 
             if (s == null)
@@ -680,6 +682,7 @@ namespace DL
             XElement BusLineStationsRootElem = XMLTools.LoadListFromXMLElement(BusLineStationPath);
 
             return (from s in BusLineStationsRootElem.Elements()
+                    where Boolean.Parse(s.Element("Active").Value)==true
                     select new BusLineStation
                     {
                         ID = Int32.Parse(s.Element("ID").Value),
@@ -699,6 +702,7 @@ namespace DL
             XElement BusLineStationsRootElem = XMLTools.LoadListFromXMLElement(BusLineStationPath);
 
             return from s in BusLineStationsRootElem.Elements()
+                   where Boolean.Parse(s.Element("Active").Value)==true
                    let s1 = new BusLineStation()
                    {
                        ID = Int32.Parse(s.Element("ID").Value),
@@ -718,8 +722,8 @@ namespace DL
             XElement BusLineStationsRootElem = XMLTools.LoadListFromXMLElement(BusLineStationPath);
 
             XElement BusLineStation1 = (from p in BusLineStationsRootElem.Elements()
-                             where int.Parse(p.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(p.Element("BusStationKey").Value)
-                             select p).FirstOrDefault();
+                             where int.Parse(p.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(p.Element("BusStationKey").Value) && Boolean.Parse(p.Element("Active").Value)==true
+                                        select p).FirstOrDefault();
 
             if (BusLineStation1 != null)
                 throw new DO.IdException(station.BusStationKey, "Duplicate Bus Line ID");
@@ -741,8 +745,8 @@ namespace DL
             XElement BusLineStationsRootElem = XMLTools.LoadListFromXMLElement(BusLineStationPath);
 
             XElement busLineStation = (from b in BusLineStationsRootElem.Elements()
-                            where int.Parse(b.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(b.Element("BusStationKey").Value)
-                            select b).FirstOrDefault();
+                            where int.Parse(b.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(b.Element("BusStationKey").Value) && Boolean.Parse(b.Element("Active").Value) == true
+                                       select b).FirstOrDefault();
 
             if (busLineStation != null)
             {
@@ -764,8 +768,8 @@ namespace DL
             XElement BusLineStationsRootElem = XMLTools.LoadListFromXMLElement(BusLineStationPath);
 
             XElement s1 = (from s in BusLineStationsRootElem.Elements()
-                            where int.Parse(s.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(s.Element("BusStationKey").Value)
-                          select s).FirstOrDefault();
+                            where int.Parse(s.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(s.Element("BusStationKey").Value) && Boolean.Parse(s.Element("Active").Value) == true
+                           select s).FirstOrDefault();
 
             if (s1 != null)
             {
@@ -781,6 +785,7 @@ namespace DL
             List<BusLineStation> ListBusLineStation = XMLTools.LoadListFromXMLSerializer<BusLineStation>(BusLineStationPath);
 
             return from BusLineStation in ListBusLineStation
+                   where BusLineStation.Active==true
                    select generate(BusLineStation.BusStationKey);
         }
         #endregion
@@ -796,8 +801,8 @@ namespace DL
             XElement LineRidesRootElem = XMLTools.LoadListFromXMLElement(LineRidePath);
 
             LineRide b = (from per in LineRidesRootElem.Elements()
-                         where int.Parse(per.Element("ID").Value) == id
-                         select new LineRide()
+                         where int.Parse(per.Element("ID").Value) == id && Boolean.Parse(per.Element("Active").Value) == true
+                          select new LineRide()
                          {
                              ID = Int32.Parse(per.Element("ID").Value),
                              Active = Boolean.Parse(per.Element("Active").Value),
@@ -821,6 +826,7 @@ namespace DL
             XElement LineRidesRootElem = XMLTools.LoadListFromXMLElement(LineRidePath);
 
             return (from s in LineRidesRootElem.Elements()
+                    where Boolean.Parse(s.Element("Active").Value) == true
                     select new LineRide
                     {
                         ID = Int32.Parse(s.Element("ID").Value),
@@ -840,7 +846,7 @@ namespace DL
             XElement LineRidesRootElem = XMLTools.LoadListFromXMLElement(LineRidePath);
 
             XElement bus1 = (from p in LineRidesRootElem.Elements()
-                             where int.Parse(p.Element("ID").Value) == o.ID
+                             where int.Parse(p.Element("ID").Value) == o.ID && Boolean.Parse(p.Element("Active").Value) == true
                              select p).FirstOrDefault();
 
             if (bus1 != null)
@@ -865,8 +871,8 @@ namespace DL
             XElement LineRidesRootElem = XMLTools.LoadListFromXMLElement(LineRidePath);
 
             XElement ride = (from p in LineRidesRootElem.Elements()
-                            where int.Parse(p.Element("ID").Value) == outLine.ID
-                            select p).FirstOrDefault();
+                            where int.Parse(p.Element("ID").Value) == outLine.ID && Boolean.Parse(p.Element("Active").Value) == true
+                             select p).FirstOrDefault();
 
             if (ride != null)
             {
@@ -889,8 +895,8 @@ namespace DL
             XElement LineRidesRootElem = XMLTools.LoadListFromXMLElement(LineRidePath);
 
             XElement line = (from p in LineRidesRootElem.Elements()
-                            where int.Parse(p.Element("ID").Value) == outLine.ID
-                            select p).FirstOrDefault();
+                            where int.Parse(p.Element("ID").Value) == outLine.ID && Boolean.Parse(p.Element("Active").Value) == true
+                             select p).FirstOrDefault();
 
             if (line != null)
             {
@@ -914,12 +920,12 @@ namespace DL
             XElement ConsecutiveStationsRootElem = XMLTools.LoadListFromXMLElement(ConsecutiveStationsPath);
 
             ConsecutiveStations s = (from S in ConsecutiveStationsRootElem.Elements()
-                          where int.Parse(S.Element("StationCodeOne").Value) == id1 && id2== int.Parse(S.Element("StationCodeTwo").Value)
-                          select new ConsecutiveStations
+                          where int.Parse(S.Element("StationCodeOne").Value) == id1 && id2== int.Parse(S.Element("StationCodeTwo").Value) && Boolean.Parse(S.Element("Flage").Value) == true
+                                     select new ConsecutiveStations
                           {
                               StationCodeOne= Int32.Parse(S.Element("StationCodeOne").Value),
                               StationCodeTwo= Int32.Parse(S.Element("StationCodeTwo").Value),
-                              Flage = Boolean.Parse(S.Element("Active").Value),
+                              Flage = Boolean.Parse(S.Element("Flage").Value),
                               AverageTravelTime = XmlConvert.ToTimeSpan(S.Element("AverageTravelTime").Value),
                               Distance=float.Parse(S.Element("Distance").Value)
                           }
@@ -936,14 +942,16 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<ConsecutiveStations> ConsecutivesStations()
         {
-            XElement ConsecutiveStationsRootElem = XMLTools.LoadListFromXMLElement(ConsecutiveStationsPath);
+           
+                XElement ConsecutiveStationsRootElem = XMLTools.LoadListFromXMLElement(ConsecutiveStationsPath);
 
             return (from s in ConsecutiveStationsRootElem.Elements()
+                    where Boolean.Parse(s.Element("Flage").Value) == true
                     select new ConsecutiveStations
                     {
                         StationCodeOne = Int32.Parse(s.Element("StationCodeOne").Value),
                         StationCodeTwo = Int32.Parse(s.Element("StationCodeTwo").Value),
-                        Flage = Boolean.Parse(s.Element("Active").Value),
+                        Flage = Boolean.Parse(s.Element("Flage").Value),
                         AverageTravelTime = XmlConvert.ToTimeSpan(s.Element("AverageTravelTime").Value),
                         Distance = float.Parse(s.Element("Distance").Value)
                     }
@@ -959,10 +967,15 @@ namespace DL
 
             XElement Stations = (from st in ConsecutiveStationsRootElem.Elements()
                              where int.Parse(st.Element("StationCodeOne").Value) == s.StationCodeOne && s.StationCodeTwo== int.Parse(st.Element("StationCodeTwo").Value)
-                             select st).FirstOrDefault();
-
+                                 select st).FirstOrDefault();
             if (Stations != null) 
-                throw new DO.IdException($"Duplicate consecutive Stations:{s.StationCodeOne} {s.StationCodeTwo}");
+                if(Stations.Element("Flage").Value ==false.ToString())
+                {
+                    Stations.Element("Flage").Value = true.ToString();
+                    XMLTools.SaveListToXMLElement(ConsecutiveStationsRootElem, ConsecutiveStationsPath);
+                }
+                else
+                     throw new DO.IdException($"Duplicate consecutive Stations:{s.StationCodeOne} {s.StationCodeTwo}");
             XElement ConsecutiveStationsElem = new XElement("ConsecutiveStations",
                                    new XElement("StationCodeOne", s.StationCodeOne),
                                    new XElement("StationCodeTwo", s.StationCodeTwo),
@@ -983,7 +996,7 @@ namespace DL
             XElement ConsecutiveStationsRootElem = XMLTools.LoadListFromXMLElement(ConsecutiveStationsPath);
 
             XElement stations = (from s in ConsecutiveStationsRootElem.Elements()
-                             where int.Parse(s.Element("StationCodeOne").Value) == c.StationCodeOne && c.StationCodeTwo== int.Parse(s.Element("StationCodeTwo").Value)
+                             where int.Parse(s.Element("StationCodeOne").Value) == c.StationCodeOne && c.StationCodeTwo== int.Parse(s.Element("StationCodeTwo").Value) && Boolean.Parse(s.Element("Flage").Value) == true
                                  select s).FirstOrDefault();
 
             if (stations != null)
@@ -1007,7 +1020,7 @@ namespace DL
             XElement ConsecutiveStationsRootElem = XMLTools.LoadListFromXMLElement(ConsecutiveStationsPath);
 
             XElement stations = (from s in ConsecutiveStationsRootElem.Elements()
-                                 where int.Parse(s.Element("StationCodeOne").Value) == c.StationCodeOne && c.StationCodeTwo == int.Parse(s.Element("StationCodeTwo").Value)
+                                 where int.Parse(s.Element("StationCodeOne").Value) == c.StationCodeOne && c.StationCodeTwo == int.Parse(s.Element("StationCodeTwo").Value) && Boolean.Parse(s.Element("Flage").Value) == true
                                  select s).FirstOrDefault();
 
             if (stations != null)
@@ -1036,7 +1049,7 @@ namespace DL
                                       BusLineJourney=int.Parse(u.Element("BusLineJourney").Value),
                                       BoardingStation=u.Element("BoardingStation").Value,
                                       DropStation=u.Element("DropStation").Value,
-                                      StartJourneyTime=TimeSpan.Parse( u.Element("StartJourneyTime").Value),
+                                      StartJourneyTime = XmlConvert.ToTimeSpan( u.Element("StartJourneyTime").Value),
                                       FlageActive= Boolean.Parse(u.Element("FlageActive").Value)
                                   }
                        ).FirstOrDefault();
@@ -1062,7 +1075,7 @@ namespace DL
                         BusLineJourney = int.Parse(u.Element("BusLineJourney").Value),
                         BoardingStation = u.Element("BoardingStation").Value,
                         DropStation = u.Element("DropStation").Value,
-                        StartJourneyTime = TimeSpan.Parse(u.Element("StartJourneyTime").Value),
+                        StartJourneyTime = XmlConvert.ToTimeSpan(u.Element("StartJourneyTime").Value),
                         FlageActive = Boolean.Parse(u.Element("FlageActive").Value)
                     }
                    );
@@ -1167,12 +1180,12 @@ namespace DL
         {
             XElement UserRootElem = XMLTools.LoadListFromXMLElement(userPath);
             DO.User user = (from u in UserRootElem.Elements()
-                             where u.Element("UserName").Value == id
-                             select new User
+                             where u.Element("UserName").Value == id && Boolean.Parse(u.Element("DelUser").Value) == false
+                            select new User
                              {
                                       UserName = u.Element("UserName").Value,
                                       Salt= int.Parse(u.Element("Salt").Value),
-                                      HashedPassword= u.Element("HashedPassword").Value,
+                                      HashedPassword= Tools.hashPassword(u.Element("HashedPassword").Value),
                                       AllowingAccess= Boolean.Parse(u.Element("AllowingAccess").Value),
                                       password= u.Element("password").Value,
                                       DelUser= Boolean.Parse(u.Element("DelUser").Value)
@@ -1180,7 +1193,7 @@ namespace DL
            ).FirstOrDefault();
 
             if (user != null)
-                if (user.DelUser == true)
+                if (user.DelUser == false)
                     return user;
             throw new DO.IdException($"The user name {id} does not exist");
 
@@ -1194,7 +1207,7 @@ namespace DL
             XElement UserRootElem = XMLTools.LoadListFromXMLElement(userPath);
 
             return (from u in UserRootElem.Elements()
-                    where Boolean.Parse(u.Element("DelUser").Value) == true
+                    where Boolean.Parse(u.Element("DelUser").Value) == false
                     select new User
                     {
                         UserName = u.Element("UserName").Value,
@@ -1215,14 +1228,14 @@ namespace DL
         {
             XElement UserRootElem = XMLTools.LoadListFromXMLElement(userPath);
             XElement user1 = (from u in UserRootElem.Elements()
-                             where u.Element("UserName").Value == user.UserName
-                             select u).FirstOrDefault();
+                             where u.Element("UserName").Value == user.UserName && Boolean.Parse(u.Element("DelUser").Value) == false
+                              select u).FirstOrDefault();
 
             if (user1 != null)
             {
                 if (Boolean.Parse(user1.Element("DelUser").Value) == false)
                 {
-                    user1.Element("DelUser").Value = true.ToString();
+                    user1.Element("DelUser").Value = false.ToString();
                     return;
                 }
                 else
@@ -1255,7 +1268,7 @@ namespace DL
 
             if (user1 != null)
             {
-                if (Boolean.Parse(user1.Element("DelUser").Value) == true)
+                if (Boolean.Parse(user1.Element("DelUser").Value) == false)
                 {
                     user1.Element("UserName").Value = user.UserName;
                     user1.Element("Salt").Value = user.Salt.ToString();
@@ -1279,14 +1292,14 @@ namespace DL
         {
             XElement UserRootElem = XMLTools.LoadListFromXMLElement(userPath);
             XElement user1 = (from u in UserRootElem.Elements()
-                             where u.Element("UserName").Value == user.UserName
+                             where u.Element("UserName").Value == user.UserName && Boolean.Parse(u.Element("DelUser").Value) == false
                              select u).FirstOrDefault();
 
             if (user1 != null)
             {
-                if (Boolean.Parse(user1.Element("DelUser").Value) == true)
+                if (Boolean.Parse(user1.Element("DelUser").Value) == false)
                 {
-                    user1.Element("DelUser").Value = false.ToString();
+                    user1.Element("DelUser").Value = true.ToString();
                     XMLTools.SaveListToXMLElement(UserRootElem, useJouyrneyPath);
                 }
                 else

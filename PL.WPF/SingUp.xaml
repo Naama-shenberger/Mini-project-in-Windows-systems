@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="SingUp" Height="500" Width="350" WindowStartupLocation="CenterScreen">
+        Title="SingUp" Height="500" Width="750" WindowStartupLocation="CenterScreen">
     <Grid>
         <Rectangle Margin="0,0,-1,174.4" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
@@ -27,7 +27,7 @@
 
 
         <Image Source="C:\Users\naamo\Downloads\icons8-bus-80.png" Margin="91,10,85,369.4" RenderTransformOrigin="0.597,0.522"/>
-        <Rectangle Height="229" Fill="White" VerticalAlignment="Bottom" Margin="36,0,32,121.4" RadiusY="28.27" RadiusX="28.27">
+        <Rectangle Height="229" Fill="White" VerticalAlignment="Bottom" Margin="130,0,121,121.4" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
             </Rectangle.Effect>
@@ -41,9 +41,9 @@
             <PasswordBox x:Name="PasswordBoxConfirm" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="250" Height="29"/>
             <Label  FontWeight="Bold" Content="Confirm your password:" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="139" Height="29"/>
         </Grid>
-        <Button x:Name="Confrim" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Confirm" HorizontalAlignment="Left" Margin="117,331,0,0" VerticalAlignment="Top" Width="105" Click="Confrim_Click"/>
-        <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="249,189,0,0"/>
-        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="253,237,0,0" Height="16"/>
-        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="253,283,0,0" Height="16"/>
+        <Button x:Name="Confrim" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Confirm" HorizontalAlignment="Left" Margin="324,329,0,0" VerticalAlignment="Top" Width="105" Click="Confrim_Click"/>
+        <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="446,189,0,0"/>
+        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="452,237,0,0" Height="16"/>
+        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="452,286,0,0" Height="16"/>
     </Grid>
 </Window>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.WPF"
         mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="User" Height="500" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
+        Title="User" Height="500" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Rectangle Margin="0,0,-1,174.4" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
@@ -26,8 +26,8 @@
         </Rectangle>
 
 
-        <Image Source="C:\Users\naamo\Downloads\icons8-bus-80.png" Margin="87,10,89,369.4" RenderTransformOrigin="0.597,0.522"/>
-        <Rectangle Height="229" Fill="White" VerticalAlignment="Bottom" Margin="36,0,32,121.4" RadiusY="28.27" RadiusX="28.27">
+        <Image Source="C:\Users\naamo\Downloads\icons8-bus-80.png" Margin="85,10,91,369.4" RenderTransformOrigin="0.597,0.522"/>
+        <Rectangle Height="229" Fill="White" VerticalAlignment="Bottom" Margin="141,0,136,121.4" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
             </Rectangle.Effect>
@@ -45,9 +45,9 @@
             </TextBox>
             <Label FontWeight="Bold" Content="Enter User Name:" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Height="27" Width="108"/>
         </Grid>
-        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Log In" HorizontalAlignment="Left" Margin="116,327,0,0" VerticalAlignment="Top" Width="108"  Height="31" Name="LongIn" Click="LongIn_Click"/>
-        <Button x:Name="SingUp" FontWeight="Bold" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Sing Up" HorizontalAlignment="Left" Margin="220,414,0,0" VerticalAlignment="Top" Width="92" Height="27" Click="SingUp_Click" />
-        <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="247,187,0,0"/>
-        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="253,259,0,0" Height="16"/>
+        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Log In" HorizontalAlignment="Left" Margin="303,339,0,0" VerticalAlignment="Top" Width="108"  Height="31" Name="LongIn" Click="LongIn_Click"/>
+        <Button x:Name="SingUp" FontWeight="Bold" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Sing Up" HorizontalAlignment="Left" Margin="584,414,0,0" VerticalAlignment="Top" Width="92" Height="27" Click="SingUp_Click" />
+        <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="451,185,0,0"/>
+        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="451,259,0,0" Height="16"/>
     </Grid>
 </Window>

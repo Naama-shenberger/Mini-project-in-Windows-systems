@@ -559,8 +559,7 @@ namespace BL
 
             busLineBO.StationsInLine = from sin in dl.BusLineStations()
                                        where sin.ID == busLineDO.ID
-                                       let station = dl.GetBusLineStation(sin.BusStationKey,sin.ID)
-                                       select DeepCopyUtilities.CopyToStationInLine(station,dl);
+                                       select DeepCopyUtilities.CopyToStationInLine(sin,dl);
            busLineBO.lineRides = from sin in dl.LinesWayOut()
                                   where sin.ID == busLineBO.ID
                                   from sen in dl.LinesWayOut()

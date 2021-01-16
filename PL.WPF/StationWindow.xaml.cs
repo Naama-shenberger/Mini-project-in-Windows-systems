@@ -207,7 +207,9 @@ namespace PL.WPF
             }
             catch (BO.IdException ex)
             {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("There is a distance and time between the stations", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                RefreshBusLinesInStation();
+                RefreshBusLines();
             }
         }
         /// <summary>
