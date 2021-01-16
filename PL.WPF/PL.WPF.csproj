@@ -81,6 +81,9 @@
     <Compile Include="DistanceUpdateWindow.xaml.cs">
       <DependentUpon>DistanceUpdateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SimulateOneStationWindow.xaml.cs">
+      <DependentUpon>SimulateOneStationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SingUp.xaml.cs">
       <DependentUpon>SingUp.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SimulateOneStationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SingUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

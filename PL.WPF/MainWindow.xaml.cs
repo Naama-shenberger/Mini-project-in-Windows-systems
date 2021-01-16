@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BLAPI;
+using MaterialDesignThemes.Wpf;
 
 namespace PL.WPF
 {
@@ -28,7 +29,9 @@ namespace PL.WPF
             InitializeComponent();
             access access = new access(bl);
             access.ShowDialog();
-           
+            Time.DataContext = DateTime.Now;
+
+
         }
         private void BusLine_Click(object sender, RoutedEventArgs e)
         {
