@@ -16,10 +16,10 @@
             <ColumnDefinition Width="300*"/>
             <ColumnDefinition Width="70*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Margin="0,0,0.6,401" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+        <Rectangle Margin="-1,375,-2.4,-6" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <Rectangle.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
+                    <ScaleTransform ScaleY="-1"/>
                     <SkewTransform AngleY="-0.222"/>
                     <RotateTransform/>
                     <TranslateTransform Y="0.668"/>
@@ -39,10 +39,8 @@
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
             </Rectangle.Effect>
         </Rectangle>
-        <ComboBox x:Name="ComboBoxBusStationKey" VerticalAlignment="Top" 
-                   Height="37" Margin="142,10,405.6,0"
-                  ItemsSource="{Binding}"
-                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="ComboBoxBusStationKey_SelectionChanged"  BorderBrush="Black" FontWeight="Bold" FontSize="13"  Foreground="Black" />
+       <ComboBox x:Name="ComboBoxBusStationKey" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="142,15,0,0" VerticalAlignment="Top" Width="222" Height="37"  Foreground="Black" BorderBrush="#FF34268A" SelectionChanged="ComboBoxBusStationKey_SelectionChanged" FontWeight="Bold" FontSize="14"/>
+
         <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="30,96,0,0" VerticalAlignment="Top" Height="194" Width="354">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -57,7 +55,7 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Label  Name="BusStationLabel" Content="Bus Line Number:" Grid.Column="0" HorizontalAlignment="Center" Margin="4,7,7.2,0.2" Grid.Row="0" VerticalAlignment="Center" FontWeight="Bold"/>
-            <TextBox x:Name="BusStationKeyTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="16.8,-2,11.6,3.2" Grid.Row="0" Text="{Binding BusStationKey, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  VerticalAlignment="Center" Height="30" Width="150" IsReadOnly="True"/>
+            <TextBox x:Name="BusStationKeyTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="16.8,-2,11.6,3.2" Grid.Row="0" Text="{Binding BusStationKey, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  VerticalAlignment="Center" Height="30" Width="150" IsReadOnly="True" TextAlignment="Center"/>
             <Label Name="LabelStationName" Content="Name:" Grid.Column="0" HorizontalAlignment="Center" Margin="6,1.6,19.4,0" Grid.Row="1" VerticalAlignment="Top" Width="89" FontWeight="Bold"/>
             <TextBox  x:Name="NameComboBox"  Grid.Column="1" HorizontalAlignment="Center"  Margin="13.8,27,15.4,5.4" Text="{Binding StationName,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"   VerticalAlignment="Center" Height="30" Width="150" TextAlignment="Center" Grid.RowSpan="2"/>
             <Label Name="AddressLabel" Content="Address:" Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Center" Height="30" Margin="6,0.2,15.2,0.2" VerticalAlignment="Center" Width="94" FontWeight="Bold"/>
