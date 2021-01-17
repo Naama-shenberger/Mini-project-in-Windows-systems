@@ -29,7 +29,7 @@
                 <LinearGradientBrush>
                     <GradientStop Color="#FF2281D1"/>
                     <GradientStop Color="#FF34268A" Offset="1"/>
-                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
@@ -40,10 +40,10 @@
             </Rectangle.Effect>
         </Rectangle>
         <ComboBox x:Name="ComboBoxBusStationKey" VerticalAlignment="Top" 
-                  Grid.Row="0" Height="37" Margin="142,10,405.6,0"
-                  ItemsSource="{Binding}"  
+                   Height="37" Margin="142,10,405.6,0"
+                  ItemsSource="{Binding}"
                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="ComboBoxBusStationKey_SelectionChanged"  BorderBrush="Black" FontWeight="Bold" FontSize="13"  Foreground="Black" />
-        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="22,57,0,0" VerticalAlignment="Top" Height="194" Width="354">
+        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="30,96,0,0" VerticalAlignment="Top" Height="194" Width="354">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -55,18 +55,17 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
-            <Label Visibility="Hidden" Name="BusStationLabel" Content="Bus Line Number:" Grid.Column="0" HorizontalAlignment="Center" Margin="4,3,0,3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox Visibility="Hidden" x:Name="BusStationKeyTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="3,4,0,3" Grid.Row="0" Text="{Binding BusStationKey, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  VerticalAlignment="Center" Height="30" Width="150"/>
-            <Label Name="LabelStationName" Content="Name:" Grid.Column="0" HorizontalAlignment="Center" Margin="0,3.2,20.6,0" Grid.Row="2" VerticalAlignment="Top" Width="89" FontWeight="Bold"/>
-            <TextBox  x:Name="NameComboBox"  Grid.Column="1" HorizontalAlignment="Center"  Margin="8.6,25.6,3.8,5.2" Grid.Row="1" Text="{Binding StationName,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"   VerticalAlignment="Center" Height="30" Width="150" TextAlignment="Center" Grid.RowSpan="2"/>
-            <Label Name="AddressLabel" Content="Address:" Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Center" Height="30" Margin="1,30.2,16.2,0.6" VerticalAlignment="Center" Width="94" Grid.RowSpan="2" FontWeight="Bold"/>
-            <TextBox x:Name="TextBoxAddress" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Margin="5.6,27.2,3.6,3.2"  Text="{Binding StationAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="30" Width="150" TextAlignment="Center" Grid.RowSpan="2" IsReadOnly="True" />
-            <Label Name="LatitudeLabel" Content="Latitude:" Grid.Column="0" Grid.Row="4"  HorizontalAlignment="Center" Height="30" Margin="0,0.4,16.4,0" VerticalAlignment="Center" Width="94" FontWeight="Bold"/>
-            <TextBox x:Name="TextBoxLatitude" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Margin="11.6,26.8,7,4"  Text="{Binding Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="30" Width="151" TextAlignment="Center" Grid.RowSpan="2" IsReadOnly="True" />
-            <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="5"  HorizontalAlignment="Center" Height="30" Margin="0,1,18.8,29.4" VerticalAlignment="Center" Width="94" Grid.RowSpan="2" FontWeight="Bold"/>
-            <TextBox x:Name="TextBoxLongitude" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" Margin="11.6,28.4,4.8,2"  Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="30" Width="150" TextAlignment="Center" Grid.RowSpan="2" IsReadOnly="True" />
+            <Label  Name="BusStationLabel" Content="Bus Line Number:" Grid.Column="0" HorizontalAlignment="Center" Margin="4,7,7.2,0.2" Grid.Row="0" VerticalAlignment="Center" FontWeight="Bold"/>
+            <TextBox x:Name="BusStationKeyTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="16.8,-2,11.6,3.2" Grid.Row="0" Text="{Binding BusStationKey, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  VerticalAlignment="Center" Height="30" Width="150" IsReadOnly="True"/>
+            <Label Name="LabelStationName" Content="Name:" Grid.Column="0" HorizontalAlignment="Center" Margin="6,1.6,19.4,0" Grid.Row="1" VerticalAlignment="Top" Width="89" FontWeight="Bold"/>
+            <TextBox  x:Name="NameComboBox"  Grid.Column="1" HorizontalAlignment="Center"  Margin="13.8,27,15.4,5.4" Text="{Binding StationName,Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"   VerticalAlignment="Center" Height="30" Width="150" TextAlignment="Center" Grid.RowSpan="2"/>
+            <Label Name="AddressLabel" Content="Address:" Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Center" Height="30" Margin="6,0.2,15.2,0.2" VerticalAlignment="Center" Width="94" FontWeight="Bold"/>
+            <TextBox x:Name="TextBoxAddress" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="14.8,29.8,15.2,2.6"  Text="{Binding StationAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="30" Width="150" TextAlignment="Center" IsReadOnly="True" Grid.RowSpan="2" />
+            <Label Name="LatitudeLabel" Content="Latitude:" Grid.Column="0" Grid.Row="2"  HorizontalAlignment="Center" Height="30" Margin="2,30.2,20,0.6" VerticalAlignment="Center" Width="94" FontWeight="Bold" Grid.RowSpan="2"/>
+            <TextBox x:Name="TextBoxLatitude" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Margin="16.8,28.6,13.8,3.8"  Text="{Binding Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="30" Width="151" TextAlignment="Center" Grid.RowSpan="2" IsReadOnly="True" />
+            <Label Name="LongitudeLabel" Content="Longitude:" Grid.Column="0" Grid.Row="4"  HorizontalAlignment="Center" Height="30" Margin="3,0.4,20.6,0" VerticalAlignment="Center" Width="94" FontWeight="Bold"/>
+            <TextBox x:Name="TextBoxLongitude" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Margin="18.8,28.4,14.4,4"  Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"  VerticalAlignment="Center" Height="30" Width="150" TextAlignment="Center" IsReadOnly="True" Grid.RowSpan="2" />
         </Grid>
         <Rectangle Height="159" Fill="White" VerticalAlignment="Bottom" Margin="381,0,57.6,239" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>

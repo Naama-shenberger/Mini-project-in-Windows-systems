@@ -7,10 +7,27 @@
         xmlns:local="clr-namespace:PL.WPF"
         mc:Ignorable="d"
         Title="DistanceUpdateWindow" Height="200" Width="400">
-    <Grid Background="#FFDCD7FA">
-        <materialDesign:Card Content="Select an update Distance" Background="#FFDCD7FA"  HorizontalAlignment="Left" Margin="24,47,0,0" VerticalAlignment="Top" Height="35" Width="152" FontWeight="Bold"/>
-        <TextBox x:Name="UpdateTimetb" KeyDown="OnKeyDownHandler" Background="#FFDCD7FA"  HorizontalAlignment="Left" Height="35" Margin="201,47,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="153"/>
-        <Label Content="(Enter For approval)"  Background="#FFDCD7FA" HorizontalAlignment="Left" Margin="24,87,0,0" VerticalAlignment="Top" Height="27" Width="133" FontStyle="Italic" FontSize="11"/>
+    <Grid >
+        <Rectangle Margin="-1,-2,-3.4,85.4" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.222"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.668"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+            <Rectangle.Fill>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <materialDesign:Card Content="Select an update Distance"  HorizontalAlignment="Left" Margin="24,47,0,0" VerticalAlignment="Top" Height="35" Width="152" FontWeight="Bold" Background="{x:Null}"/>
+        <TextBox x:Name="UpdateTimetb" KeyDown="OnKeyDownHandler"   HorizontalAlignment="Left" Height="35" Margin="198,41,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="153" CaretBrush="Black"/>
+        <Label Content="(Enter For approval)"  HorizontalAlignment="Left" Margin="24,87,0,0" VerticalAlignment="Top" Height="27" Width="133" FontStyle="Italic" FontSize="11"/>
 
     </Grid>
 </Window>
