@@ -355,15 +355,9 @@
     <NumberStationInLine>5</NumberStationInLine>
   </BusLineStation>
   <BusLineStation>
-    <ID>20111</ID>
-    <BusStationKey>388624</BusStationKey>
+    <ID>2</ID>
+    <BusStationKey>876015</BusStationKey>
     <Active>true</Active>
-    <NumberStationInLine>1</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>20111</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>2</NumberStationInLine>
+    <NumberStationInLine>6</NumberStationInLine>
   </BusLineStation>
 </ArrayOfBusLineStation>
