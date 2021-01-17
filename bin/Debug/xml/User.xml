@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUsers>
+	<User>
+		<UserName>a</UserName>
+		<Salt>12342</Salt>
+		<HashedPassword>12342a</HashedPassword>
+		<AllowingAccess>true</AllowingAccess>
+		<password>a</password>
+		<DelUser>false</DelUser>
+	</User>	
+</ArrayOfUsers>
