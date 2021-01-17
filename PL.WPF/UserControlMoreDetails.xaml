@@ -9,8 +9,25 @@
     <Grid>
         <materialDesign:TransitioningContent x:Name="TransitionEffectContenSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}" Margin="10,10,0,-0.2">
             <Grid>
-                <Expander Header="More details"  Background="#FFDCD7FA" Width="700"   FontWeight="Bold" Margin="0,0,0.4,330">
-                    <Grid Background="#FF8576DC"   HorizontalAlignment="Center" >
+                <!--<Rectangle Margin="47,0,44.4,128"  >
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="-0.222"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="0.668"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF2281D1"/>
+                            <GradientStop Color="#FF34268A" Offset="1"/>
+                            <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>-->
+                <Expander Header="More details"  Width="700"   FontWeight="Bold" Margin="0,0,0.4,330">
+                    <Grid   HorizontalAlignment="Center" >
                         <TreeView x:Name="Treeview" ItemsSource="{Binding BusLine}" Background="White" Margin="-350,9,-349,-233"  HorizontalAlignment="Center" Width="699" FontStyle="Italic">
                             <TreeView.ItemTemplate>
                                 <HierarchicalDataTemplate ItemsSource="{Binding}">
