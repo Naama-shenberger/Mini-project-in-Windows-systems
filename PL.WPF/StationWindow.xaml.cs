@@ -201,9 +201,14 @@ namespace PL.WPF
                 BO.BusLine blBO = ((sender as Button).DataContext as BO.BusLine);
                 TimeAndDistanceWindow InfoWindow = new TimeAndDistanceWindow(bl);
                 InfoWindow.ShowDialog();
-                bl.AddBusLineToStation(CurBusStation, blBO, InfoWindow.Time, InfoWindow.Distance);
-                RefreshBusLinesInStation();
-                RefreshBusLines();
+                if (InfoWindow.Time == null || InfoWindow.Distance == 0)
+                    MessageBox.Show("You didnt fill in all the fields", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                {
+                    bl.AddBusLineToStation(CurBusStation, blBO, InfoWindow.Time, InfoWindow.Distance);
+                    RefreshBusLinesInStation();
+                    RefreshBusLines();
+                }
             }
             catch (BO.IdException ex)
             {

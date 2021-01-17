@@ -29,7 +29,7 @@
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="43,101,0,0" VerticalAlignment="Top" Height="184" Width="374">
+        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="26,101,0,0" VerticalAlignment="Top" Height="184" Width="391">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="120" />
                 <ColumnDefinition Width="Auto" MinWidth="200" />
@@ -58,7 +58,7 @@
             <TextBox Text="{Binding ElementName=LongdeValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" Margin="199.2,2.4,1.6,0" Grid.Column="1" Grid.Row="4" FontWeight="Bold" FontStyle="Italic"/>
 
         </Grid>
-        <Button Content="ADD" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="189,270,0,0" Click="AddingButton_Click" BorderBrush="#FFBE9DE8" Background="#FF2281D1"/>
+        <Button Content="ADD" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="183,270,0,0" Click="AddingButton_Click" BorderBrush="#FFBE9DE8" Background="#FF2281D1"/>
 
 
     </Grid>

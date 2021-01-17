@@ -41,6 +41,7 @@ namespace PL.WPF
             hourTextBox.Text=  "00";
             MinuteTextBox.Text = "00";
             SeconTextBox.Text = "00";
+            distance.Text = "0";
         }
 
         private void Done_Click(object sender, RoutedEventArgs e)

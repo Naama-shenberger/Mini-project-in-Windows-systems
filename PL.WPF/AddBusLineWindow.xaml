@@ -8,7 +8,12 @@
         mc:Ignorable="d"
         Title="AddBusLineWindow" Height="450" Width="600" KeyDown="OnKeyDownHandler" >
     <Grid>
-        <Grid x:Name="gridOneBusLine" Background="#FFDCD7FA"  HorizontalAlignment="Left" Margin="18,47,0,0" VerticalAlignment="Top" Height="208" Width="354">
+        <Rectangle Height="245" Fill="White" VerticalAlignment="Bottom" Margin="18,0,9.6,143" RadiusY="28.27" RadiusX="28.27">
+            <Rectangle.Effect>
+                <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Grid x:Name="gridOneBusLine"  HorizontalAlignment="Left" Margin="18,47,0,0" VerticalAlignment="Top" Height="208" Width="354">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="Auto" MinWidth="36.8"/>
@@ -25,15 +30,15 @@
             <Label Content="Select an area" HorizontalAlignment="Left" Margin="16,11.6,0,0" VerticalAlignment="Top" Height="27" Width="98" FontWeight="Bold" Grid.Row="1"/>
             <Label Content="Select First Station" HorizontalAlignment="Left" Margin="10,12.2,0,0" VerticalAlignment="Top" Height="26" Width="129" FontWeight="Bold" Grid.Row="2"/>
             <Label Content="Select Last Station " HorizontalAlignment="Left" Margin="10,9.6,0,0" VerticalAlignment="Top" Height="31" Width="129" FontWeight="Bold" Grid.Row="3"/>
-            <ComboBox x:Name="Areacb"  HorizontalAlignment="Left" Margin="10.2,9.6,-126.8,0" VerticalAlignment="Top" Width="175" Height="31" Grid.Column="1" Grid.Row="1"/>
-            <ComboBox x:Name="FirstStopcb"  HorizontalAlignment="Left" Margin="10.2,10.2,-128.4,0" VerticalAlignment="Top" Width="175" Height="33" Grid.Row="2" Grid.Column="1"/>
-            <ComboBox x:Name="LastStopcb" HorizontalAlignment="Left" Margin="10.2,9.6,-130,0" VerticalAlignment="Top" Width="175" Height="34" Grid.Row="3" Grid.Column="1"/>
-            <TextBox x:Name="BusLineNumbertb" KeyDown="OnKeyDownHandler" HorizontalAlignment="Left" Margin="10.2,17,-126,2.4" TextWrapping="Wrap" Width="175" Grid.Column="1"/>
+            <ComboBox x:Name="Areacb"  HorizontalAlignment="Left" Margin="10.2,9.6,-126.8,0" VerticalAlignment="Top" Width="175" Height="31" Grid.Column="1" Grid.Row="1" Foreground="Black" BorderBrush="#FF34268A"/>
+            <ComboBox x:Name="FirstStopcb"  HorizontalAlignment="Left" Margin="10.2,10.2,-128.4,0" VerticalAlignment="Top" Width="175" Height="33" Grid.Row="2" Grid.Column="1" Foreground="#FF010009" BorderBrush="#FF34268A"/>
+            <ComboBox x:Name="LastStopcb" HorizontalAlignment="Left" Margin="10.2,9.6,-130,0" VerticalAlignment="Top" Width="175" Height="34" Grid.Row="3" Grid.Column="1" Foreground="Black" BorderBrush="#FF34268A"/>
+            <TextBox x:Name="BusLineNumbertb" KeyDown="OnKeyDownHandler" HorizontalAlignment="Left" Margin="10.2,17,-126,2.4" TextWrapping="Wrap" Width="175" Grid.Column="1" Foreground="Black" BorderBrush="#FF34268A"/>
         </Grid>
 
-        <materialDesign:TimePicker x:Name = "StartTimePicker" KeyDown="OnKeyDownHandler" Text="Select bus start time"   Margin = "396,105,43.6,287" Height="28" FontWeight="Bold"  BorderBrush="#FF673AB7"/>
-        <materialDesign:TimePicker x:Name = "EndTimePicker" KeyDown="OnKeyDownHandler" Text="Select bus End time"   Margin = "396,160,43.6,232" Height="28" FontWeight="Bold"  BorderBrush="#FF673AB7"/>
-        <materialDesign:TimePicker x:Name = "ExitEvery" Text="Exit Every" KeyDown="OnKeyDownHandler"  Margin = "396,212,43.6,180" Height="28" FontWeight="Bold"  BorderBrush="#FF673AB7"/>
-        <Label Content="(After typing a line number Press Enter)"  Margin="18,314,352.6,0" VerticalAlignment="Top" Height="30" FontStyle="Italic"/>
+        <materialDesign:TimePicker x:Name = "StartTimePicker" KeyDown="OnKeyDownHandler" Text="Select bus start time"   Margin = "396,105,43.6,287" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A"/>
+        <materialDesign:TimePicker x:Name = "EndTimePicker" KeyDown="OnKeyDownHandler" Text="Select bus End time"   Margin = "396,160,43.6,232" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A"/>
+        <materialDesign:TimePicker x:Name = "ExitEvery" Text="Exit Every" KeyDown="OnKeyDownHandler"  Margin = "396,212,43.6,180" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A"/>
+        <Label Content="(After typing a line number Press Enter)"  Margin="18,314,352.6,0" VerticalAlignment="Top" Height="30" FontStyle="Italic" Foreground="#FF34268A"/>
     </Grid>
 </Window>
