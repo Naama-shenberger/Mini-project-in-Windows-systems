@@ -30,8 +30,12 @@ namespace PL.WPF
         Thread timerThread;
         string timerText;
         string simulaterRate;
-       
+        BO.BusStation CurBusStation;
+        Stopwatch Stopwatch;
 
+        BackgroundWorker timeWorker;
+        TimeSpan tsStartTime;
+       
         public string TimerText
         {
             get { return timerTextBlock.Text; }
@@ -40,63 +44,53 @@ namespace PL.WPF
         {
             get { return isTimerRun; }
         }
-        public SimulateOneStationWindow(IBL _BL)
+        public SimulateOneStationWindow(IBL _BL, BO.BusStation busStation)
         {
             InitializeComponent();
             BL = _BL;
-            simulater.Text = "60";
+            CurBusStation = busStation;
+            StaionNametb.Text = busStation.StationName;
+            CodeStaiontb.Text = busStation.BusStationKey.ToString();
             stopwatch = new Stopwatch();
-
-        }
-        void runTimer()
-        {
+            Stopwatch = new Stopwatch();
+            timeWorker = new BackgroundWorker();
+            timeWorker.DoWork += Worker_DoWork;
+            timeWorker.ProgressChanged += Worker_ProgressChanged;
+            timeWorker.WorkerReportsProgress = true;
+           // tsStartTime = new TimeSpan(long.Parse(simulateOneStationWindow.TimerText));
+            // tsStartTime = DateTime.Now.TimeOfDay;
+            Stopwatch.Restart();
+            isTimerRun = true;
+            timeWorker.RunWorkerAsync();
            
+        }
+        TimeSpan s = new TimeSpan(8, 0, 0);
+
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            TimeSpan tsCurentTime = tsStartTime + Stopwatch.Elapsed+s;
+            timerText = tsCurentTime.ToString().Substring(0, 8);
+            timerTextBlock.Text = timerText;
+            if (CurBusStation != null && CurBusStation.ListBusLinesInStation != null)
+                lineTimingDataGrid.DataContext = BL.GetLineTimingPerStation(CurBusStation, tsCurentTime);
+        }
+        void setTextInvok(string text)
+        {
+            this.timerTextBlock.Text = text;
+            //  Thread.Sleep(1000);
+        }
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
             while (isTimerRun)
             {
-                
-                timerText = stopwatch.Elapsed.ToString();
-                // 00:00:00.000000 ==> 00:00:00
-                timerText = timerText.Substring(0, 8);
-                // this.timerTextBlock.Text = timerText;
-
-                Action<string> action = setTextInvok;
-                timerTextBlock.Dispatcher.BeginInvoke(action, timerText);
+                timeWorker.ReportProgress(231);
                 Thread.Sleep(1000);
             }
         }
 
-        void setTextInvok(string text)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-            this.timerTextBlock.Text = text;
-         
+            this.Close();
         }
-
-        private void startTimerButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(startTimerButton.Content.ToString()=="Start")
-            {
-                startTimerButton.Content = "Stop";
-                if (!isTimerRun)
-                {
-                    stopwatch.Start();
-                    isTimerRun = true;
-                    timerThread = new Thread(runTimer);
-                    timerThread.Start();
-                }
-
-            }
-            else
-            {
-                startTimerButton.Content = "Start";
-                if (isTimerRun)
-                {
-                    stopwatch.Stop();
-                    isTimerRun = false;
-                }
-            }
-           
-        }
-
-
     }
 }

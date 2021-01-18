@@ -1134,7 +1134,7 @@ namespace BL
                    from Line in CurbusStation.ListBusLinesInStation
                    where LineRides.ID == Line.ID
                    let line=GetBusLine(LineRides.ID)
-                   where tsCurTime <= LineRides.TravelStartTime 
+                   where tsCurTime >= LineRides.TravelStartTime 
                    select new LineRides
                    {
                        BusDepartureNumber = LineRides.BusDepartureNumber,

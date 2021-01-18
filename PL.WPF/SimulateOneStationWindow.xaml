@@ -6,26 +6,29 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.SimulateOneStationWindow"
         mc:Ignorable="d"
-        Title="SimulateOneStationWindow" Height="350" Width="600">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="12*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
+        Title="SimulateOneStationWindow" Height="750" Width="700" WindowStartupLocation="CenterScreen">
+    <WrapPanel>
+        <Grid>
+            <DataGrid Margin="154,318,33.6,-690" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True"  Name="lineTimingDataGrid">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="Time" Header="Timing" Binding="{Binding timerText}" />
+                    <DataGridTextColumn Header="Started at" Binding="{Binding TravelStartTime}"/>
+                    <DataGridTextColumn Header="Number Line" Binding="{Binding BusLineNumber}"/>
+                    <DataGridTextColumn Header="Last Station" Binding="{Binding CodeLastStasion }"/>
+                    <DataGridTextColumn Header="Name Last Station" Binding="{Binding NameLastStasion  }"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Height="160" Width="462">
 
-        <Button x:Name="startTimerButton" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Start"                  
-                Margin="16,149,3.8,105.8" FontSize="42" Click="startTimerButton_Click" Height="Auto" Grid.RowSpan="2"/>
+            <TextBlock x:Name="timerTextBlock"  Text="08:00:00" FontSize="96" TextAlignment="Center" 
+                   Foreground="#FF2281D1"  Margin="0,14,10,-138" RenderTransformOrigin="0.497,0.669"/>
+            <Label Content="Code Staion" Height="33" Margin="12,171,357,-44"/>
+            <TextBlock x:Name="CodeStaiontb" Text="{Binding BusStationKey }" Height="33" Margin="186,171,91,-44"/>
+            <Label Content="Name Staion" Margin="12,204,276,-76"/>
+            <TextBlock x:Name="StaionNametb" Text="{Binding StationName}" Height="33" Margin="186,209,91,-82"/>
+        </Grid>
+        <Button x:Name="Back" Content="Back" Width="75" Click="Back_Click"/>
 
-
-
-        <TextBlock x:Name="timerTextBlock"  Text="08:00:00"                     
-                   Grid.ColumnSpan="2" FontSize="96" TextAlignment="Center" 
-                   Foreground="#FF2281D1"  Margin="0,0,-0.4,51.2"/>
-        <TextBox x:Name="simulater" Grid.Column="1" HorizontalAlignment="Left" Height="45" Margin="38.2,149,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
-        <Label Content="X" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="220.2,158,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="46" Background="#FFF1F1F1" FontWeight="Bold" FontSize="25"/>
-    </Grid>
+    </WrapPanel>
 </Window>

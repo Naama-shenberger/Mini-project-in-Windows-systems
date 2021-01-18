@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.WPF"
         mc:Ignorable="d"
-        Title="TravelerWindow" Height="450" Width="800">
+        Title="TravelerWindow" Height="450" Width="700">
     <Grid>
         <Grid >
-            <DataGrid x:Name="AlllinesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="203,10,434.6,129"  Background="#FF9CB7F4">
+            <DataGrid x:Name="AlllinesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="395,0,142.6,139"  Background="#FF9CB7F4">
 
 
                 <DataGrid.Columns>
@@ -17,24 +17,14 @@
             </DataGrid>
         </Grid>
         <Grid>
-            <DataGrid  ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" x:Name="AllBusStaionsDataGrid" Background="AliceBlue" Margin="10,4,596.6,34" SelectionChanged="AllBusStaionsDataGrid_SelectionChanged">
+            <DataGrid  ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" x:Name="AllBusStaionsDataGrid" Background="AliceBlue" Margin="10,4,496.6,34" SelectionChanged="AllBusStaionsDataGrid_SelectionChanged">
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Code" Binding="{Binding BusStationKey}"/>
                     <DataGridTextColumn Header="Name" Binding="{Binding StationName}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Simulate Station"  HorizontalAlignment="Left" Margin="202,378,0,0" VerticalAlignment="Top" Width="155" Click="Button_Click"/>
+            <Button  Content="Simulate Station"  HorizontalAlignment="Left" Margin="481,364,0,0" VerticalAlignment="Top" Width="155" Click="Button_Click"/>
         </Grid>
-        <Grid>
-            <DataGrid Margin="359,10,-0.4,28" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True"  Name="lineTimingDataGrid">
-                <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="Time" Header="Timing" Binding="{Binding timerText}" />
-                    <DataGridTextColumn Header="Started at" Binding="{Binding TravelStartTime}"/>
-                    <DataGridTextColumn Header="Number Line" Binding="{Binding BusLineNumber}"/>
-                    <DataGridTextColumn Header="Last Station" Binding="{Binding CodeLastStasion }"/>
-                    <DataGridTextColumn Header="Name Last Station" Binding="{Binding NameLastStasion  }"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+        
     </Grid>
 </Window>

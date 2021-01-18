@@ -25,22 +25,17 @@ namespace PL.WPF
     {
         IBL bL;
         BO.BusStation CurBusStation;
-        Stopwatch Stopwatch;
-        BackgroundWorker timeWorker;
-        TimeSpan tsStartTime;
-        bool isTimerRun;
-        string timerText;
+       
+        
         public TravelerWindow(IBL _bL)
         {
             InitializeComponent();
             bL = _bL;
+           
             AllBusStaionsDataGrid.DataContext = bL.GetAllBusStation();
             AllBusStaionsDataGrid.IsReadOnly = true;
             AlllinesDataGrid.IsReadOnly = true;
-            Stopwatch = new Stopwatch();
-            timeWorker = new BackgroundWorker();
-            timeWorker.DoWork += Worker_DoWork;
-            timeWorker.ProgressChanged += Worker_ProgressChanged;
+           
 
             //timeWorker.WorkerReportsProgress = true;
             //tsStartTime = DateTime.Now.TimeOfDay;
@@ -48,36 +43,14 @@ namespace PL.WPF
             //isTimerRun = true;
             //timeWorker.RunWorkerAsync();
         }
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            TimeSpan tsCurentTime = tsStartTime + Stopwatch.Elapsed;
-            timerText = tsCurentTime.ToString().Substring(0, 8);
-            if (CurBusStation != null && CurBusStation.ListBusLinesInStation != null)
-                lineTimingDataGrid.DataContext = bL.GetLineTimingPerStation(CurBusStation, tsCurentTime);
-        }
-
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            while (isTimerRun)
-            {
-                timeWorker.ReportProgress(231);
-                Thread.Sleep(1000);
-            }
-        }
-
+ 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SimulateOneStationWindow simulateOneStationWindow = new SimulateOneStationWindow(bL);
+            SimulateOneStationWindow simulateOneStationWindow = new SimulateOneStationWindow(bL,CurBusStation);
+
             simulateOneStationWindow.ShowDialog();
-            timerText =simulateOneStationWindow.TimerText;
-            if(simulateOneStationWindow.IsTimerRun==true)
-            {
-                timeWorker.WorkerReportsProgress = true;
-                tsStartTime = DateTime.Now.TimeOfDay;
-                Stopwatch.Restart();
-                isTimerRun = true;
-                timeWorker.RunWorkerAsync();
-            }
+
+
 
         }
         private void AllBusStaionsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

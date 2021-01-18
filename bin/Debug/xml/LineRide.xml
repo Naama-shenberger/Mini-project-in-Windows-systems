@@ -4,7 +4,7 @@
     <ID>1</ID>
     <Active>true</Active>
     <BusDepartureNumber>PT12H00M00S</BusDepartureNumber>
-    <TravelStartTime>PT07H00M00S</TravelStartTime>
+    <TravelStartTime>PT00H09M00S</TravelStartTime>
     <TravelEndTime>PT11H30M00S</TravelEndTime>
   </LineRide>
   <LineRide>
@@ -102,7 +102,7 @@
     <ID>14</ID>
     <Active>true</Active>
     <BusDepartureNumber>PT14H30M00S</BusDepartureNumber>
-    <TravelStartTime>PT10H00M00S</TravelStartTime>
+    <TravelStartTime>PT08H00M15S</TravelStartTime>
     <TravelEndTime>PT14H30M00S</TravelEndTime>
   </LineRide>
   <LineRide>
@@ -123,35 +123,35 @@
     <ID>17</ID>
     <Active>true</Active>
     <BusDepartureNumber>PT14H00M00S</BusDepartureNumber>
-    <TravelStartTime>PT11H00M00S</TravelStartTime>
+    <TravelStartTime>PT08H00M10S</TravelStartTime>
     <TravelEndTime>PT15H40M00S</TravelEndTime>
   </LineRide>
   <LineRide>
     <ID>18</ID>
     <Active>true</Active>
     <BusDepartureNumber>PT15H00M00S</BusDepartureNumber>
-    <TravelStartTime>PT17H00M00S</TravelStartTime>
+    <TravelStartTime>PT08H00M45S</TravelStartTime>
     <TravelEndTime>PT19H30M00S</TravelEndTime>
   </LineRide>
   <LineRide>
     <ID>19</ID>
     <Active>true</Active>
     <BusDepartureNumber>PT03M00S</BusDepartureNumber>
-    <TravelStartTime>PT23H00M00S</TravelStartTime>
+    <TravelStartTime>PT08H00M55S</TravelStartTime>
     <TravelEndTime>PT01H30M00S</TravelEndTime>
   </LineRide>
   <LineRide>
     <ID>20</ID>
     <Active>true</Active>
     <BusDepartureNumber>PT08H00M00S</BusDepartureNumber>
-    <TravelStartTime>PT11H00M00S</TravelStartTime>
-    <TravelEndTime>PT12H30M00S</TravelEndTime>
+    <TravelStartTime>PT08H20M45S</TravelStartTime>
+    <TravelEndTime>PT08H30M00S</TravelEndTime>
   </LineRide>
   <LineRide>
     <ID>20</ID>
     <Active>true</Active>
     <BusDepartureNumber>PT10H00M00S</BusDepartureNumber>
-    <TravelStartTime>PT19H30M00S</TravelStartTime>
-    <TravelEndTime>PT22H30M00S</TravelEndTime>
+    <TravelStartTime>PT08H30M00S</TravelStartTime>
+    <TravelEndTime>PT08H30M00S</TravelEndTime>
   </LineRide>
 </ArrayOfLineRide>
