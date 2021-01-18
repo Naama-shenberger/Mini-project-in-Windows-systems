@@ -141,7 +141,6 @@ namespace DL
         public IEnumerable<BusDrive> GetAllBusDrive()
         {
             return from busDrive in DataSource.ListBusDrives
-                   where busDrive.Active == true
                    select busDrive.Clone();
         }
         /// <summary>
@@ -153,7 +152,6 @@ namespace DL
         {
             BusDrive busDrive = DataSource.ListBusDrives.Find(b => b.ID == id);
             if (busDrive != null)
-                if (busDrive.Active == true)
                     return busDrive.Clone();
             throw new IdException(id, $"No bus have the id: {id}");
         }
@@ -164,7 +162,6 @@ namespace DL
         public IEnumerable<BusDrive> BussDrive()
         {
             return from BusDrive in DataSource.ListBusDrives
-                   where BusDrive.Active == true
                    select BusDrive.Clone();
         }
         /// <summary>
@@ -180,13 +177,7 @@ namespace DL
             bus.ID = Configuration.IdentificationNumberBusDrive;
             var busIndex = DataSource.ListBusDrives.FindIndex(b => b.ID == bus.ID);
             if (busIndex != -1)
-                if (DataSource.ListBusDrives[busIndex].Active == false)
-                {
-                    DataSource.ListBusDrives[busIndex].Active = true;
-                    return;
-                }
-                else
-                    throw new DO.IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} already exist");
+                    throw new DO.IdException(bus.ID, $"The bus in drive {bus.ID} already exist");
             DataSource.ListBusDrives.Add(bus.Clone());
         }
         /// <summary>
@@ -197,12 +188,9 @@ namespace DL
         {
             var toUpdateIndex = DataSource.ListBusDrives.FindIndex(b => b.ID == bus.ID);
             if (toUpdateIndex != -1)
-                if (bus.Active == true)
                     DataSource.ListBusDrives[toUpdateIndex] = bus.Clone();
-                else
-                    throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
             else
-                throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
+                throw new IdException(bus.ID, $"The bus in drive {bus.ID} does not exist");
         }
         /// <summary>
         /// The function gets an object to delete
@@ -213,13 +201,13 @@ namespace DL
         public void DeleteBusDrive(BusDrive bus)
         {
             var toDeleteIndex = DataSource.ListBusDrives.FindIndex(b => b.ID == bus.ID);
-            if (toDeleteIndex != -1)
-                if (bus.Active == true)
-                    DataSource.BusLines[toDeleteIndex].Active = false;
-                else
-                    throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} is already deleted");
-            else
-                throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
+            //if (toDeleteIndex != -1)
+            //    if (bus.Active == true)
+            //        DataSource.BusLines[toDeleteIndex].Active = false;
+            //    else
+            //        throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} is already deleted");
+            //else
+            //    throw new IdException(bus.LicensePlate, $"The bus in drive {bus.LicensePlate} does not exist");
         }
 
         #endregion

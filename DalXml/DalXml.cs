@@ -218,20 +218,15 @@ namespace DL
                           where int.Parse( bus.Element("ID").Value) == id
                      select new BusDrive()
                      {
-                         Active = Boolean.Parse(bus.Element("Active").Value),
                          ID=int.Parse(bus.Element("ID").Value),
-                         LicensePlate = bus.Element("LicensePlate").Value,
-                         ExitStart = XmlConvert.ToTimeSpan(bus.Element("ExitStart").Value),
-                         TimeNextStop = XmlConvert.ToTimeSpan(bus.Element("TimeNextStop").Value),
-                         TimeDrive = XmlConvert.ToTimeSpan(bus.Element("TimeDrive").Value),
-                         LastStasion =int.Parse(bus.Element("LastStasion").Value),
-                         BusDriverFirstName= bus.Element("BusDriverFirstName").Value,
-                         BusDriverLastName= bus.Element("BusDriverLastName").Value,
-                         BusDriverId= bus.Element("BusDriverId").Value
+                         CodeLastStasion = int.Parse(bus.Element("CodeLastStasion").Value),
+                         CurTimeStasion = XmlConvert.ToTimeSpan(bus.Element("CurTimeStasion").Value),
+                         TimeDriveExit = XmlConvert.ToTimeSpan(bus.Element("TimeDriveExit").Value),
+                         NameLastStasion= bus.Element("NameLastStasion").Value,
+                         BusLineNumber = int.Parse(bus.Element("BusLineNumber").Value)
                      }).FirstOrDefault();
 
             if (d != null)
-                if (d.Active == true)
                     return d;
             throw new DO.IdException(id, $"there is no bus with the id: {id}");
         }
@@ -246,16 +241,12 @@ namespace DL
             return (from bus in busDriveRootElem.Elements()
                     select new BusDrive()
                     {
-                        Active = Boolean.Parse(bus.Element("Active").Value),
+                        CurTimeStasion= XmlConvert.ToTimeSpan(bus.Element("CurTimeStasion").Value),
                         ID = int.Parse(bus.Element("ID").Value),
-                        LicensePlate = bus.Element("LicensePlate").Value,
-                        ExitStart = XmlConvert.ToTimeSpan(bus.Element("ExitStart").Value),
-                        TimeNextStop = XmlConvert.ToTimeSpan(bus.Element("TimeNextStop").Value),
-                        TimeDrive = XmlConvert.ToTimeSpan(bus.Element("TimeDrive").Value),
-                        LastStasion = int.Parse(bus.Element("LastStasion").Value),
-                        BusDriverFirstName = bus.Element("BusDriverFirstName").Value,
-                        BusDriverLastName = bus.Element("BusDriverLastName").Value,
-                        BusDriverId = bus.Element("BusDriverId").Value
+                        BusLineNumber = int.Parse(bus.Element("BusLineNumber").Value),
+                        NameLastStasion= bus.Element("NameLastStasion").Value,
+                        TimeDriveExit= XmlConvert.ToTimeSpan(bus.Element("TimeDriveExit").Value),
+                        CodeLastStasion= int.Parse(bus.Element("CodeLastStasion").Value)
                     }
                    );
         }
@@ -273,25 +264,14 @@ namespace DL
                              select b).FirstOrDefault();
 
             if (bus1 != null)
-                if (Boolean.Parse(bus1.Element("Active").Value) == false)
-                {
-                    bus1.Element("Active").Value = true.ToString();
-                    XMLTools.SaveListToXMLElement(busDriveRootElem, busDrivePath);
-                    return;
-                }
-                else
                     throw new DO.IdException(busd.ID, "Duplicate bus drive id");
             XElement busElem = new XElement("BusDrive",
-                                   new XElement("Active", busd.Active),
-                                   new XElement("LicensePlate", busd.LicensePlate),
-                                   new XElement("ID", busd.ID.ToString()),
-                                   new XElement("ExitStart", busd.ExitStart.ToString()),
-                                   new XElement("TimeNextStop", busd.TimeNextStop.ToString()),
-                                   new XElement("TimeDrive", busd.TimeDrive.ToString()),
-                                   new XElement("LastStasion", busd.LastStasion.ToString()),
-                                   new XElement("BusDriverFirstName", busd.BusDriverFirstName.ToString()),
-                                   new XElement("BusDriverLastName", busd.BusDriverLastName.ToString()),
-                                   new XElement("BusDriverId", busd.BusDriverId.ToString())
+                                   new XElement("ID", busd.ID),
+                                   new XElement("BusLineNumber", busd.BusLineNumber),
+                                   new XElement("CodeLastStasion", busd.CodeLastStasion),
+                                   new XElement("CurTimeStasion", busd.CurTimeStasion),
+                                   new XElement("NameLastStasion", busd.NameLastStasion),
+                                   new XElement("TimeDriveExit", busd.TimeDriveExit)
                                    );
             busDriveRootElem.Add(busElem);
 
@@ -312,23 +292,14 @@ namespace DL
 
             if (bus1 != null)
             {
-                if (Boolean.Parse(bus1.Element("Active").Value) == true)
-                {
-                    bus1.Element("Active").Value = bus.Active.ToString();
+                
                     bus1.Element("ID").Value = bus.ID.ToString();
-                    bus1.Element("LicensePlate").Value = bus.LicensePlate;
-                    bus1.Element("ExitStart").Value = bus.ExitStart.ToString();
-                    bus1.Element("TimeNextStop").Value = bus.TimeNextStop.ToString();
-                    bus1.Element("TimeDrive").Value = bus.TimeDrive.ToString();
-                    bus1.Element("LastStasion").Value = bus.LastStasion.ToString();
-                    bus1.Element("BusDriverFirstName").Value = bus.BusDriverFirstName;
-                    bus1.Element("BusDriverLastName").Value = bus.BusDriverLastName;
-                    bus1.Element("BusDriverId").Value = bus.BusDriverId;
-
+                    bus1.Element("BusLineNumber").Value = bus.BusLineNumber.ToString();
+                    bus1.Element("CodeLastStasion").Value = bus.CodeLastStasion.ToString();
+                    bus1.Element("CurTimeStasion").Value = bus.CurTimeStasion.ToString();
+                    bus1.Element("TimeDriveExit").Value = bus.TimeDriveExit.ToString();
+                    bus1.Element("NameLastStasion").Value = bus.NameLastStasion;
                     XMLTools.SaveListToXMLElement(busDriveRootElem, busDrivePath);
-                }
-                else
-                    throw new DO.IdException(bus.ID, $"there is no bus with the id: {bus.ID}");
             }
             else
                 throw new DO.IdException(bus.ID, $"there is no bus with the id: {bus.ID}");
@@ -372,15 +343,15 @@ namespace DL
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(busStationPath);
 
             BusStation s = (from station in stationRootElem.Elements()
-                            where int.Parse(station.Element("BusStationKey").Value) == key&& Boolean.Parse(station.Element("Active").Value)==true
+                            where int.Parse(station.Element("BusStationKey").Value) == key && Boolean.Parse(station.Element("Active").Value)==true
                             select new BusStation()
                             {
                                 BusStationKey = Int32.Parse(station.Element("BusStationKey").Value),
                                 Active = Boolean.Parse(station.Element("Active").Value),
-                                StationName = station.Element("Name").Value,
+                                StationName = station.Element("StationName").Value,
                                 StationAddress = station.Element("StationAddress").Value,
-                                Latitude = Int32.Parse(station.Element("Latitude").Value),
-                                Longitude = Int32.Parse(station.Element("Longitude").Value)
+                                Latitude = Double.Parse(station.Element("Latitude").Value),
+                                Longitude = Double.Parse(station.Element("Longitude").Value)
                             }
                         ).FirstOrDefault();
 

@@ -17,7 +17,7 @@ namespace BL
         static readonly BLImp instance = new BLImp();
         static BLImp() { }//static ctor
         BLImp() { }//default ctor
-        public static BLImp Instance { get => instance;}//The public Instance property to use
+        public static BLImp Instance { get => instance; }//The public Instance property to use
         #endregion
         #region Bus
         /// <summary>
@@ -99,7 +99,7 @@ namespace BL
                     throw new BO.IdException("Invalid license number input");
                 dl.AddBus(BusBoDoAdapter(bus));
             }
-            catch(BO.IdException)
+            catch (BO.IdException)
             {
                 throw new BO.IdException("Bus ID is illegal");
             }
@@ -131,10 +131,10 @@ namespace BL
         public void RefillingBus(Bus bus)
         {
             bus.KilometersGas = 0;
-            if(TreatmentIsNeeded(bus))
+            if (TreatmentIsNeeded(bus))
                 bus.Status = Enums.Status.Ready_to_go;
             dl.UpdateBus(BusBoDoAdapter(bus));
-            
+
         }
         /// <summary>
         /// Treatment function
@@ -203,7 +203,7 @@ namespace BL
             return false;
 
         }
-       
+
         /// <summary>
         /// A function that returns all bus
         /// </summary>
@@ -241,7 +241,7 @@ namespace BL
                 busStation.ListBusLinesInStation.ToList().Remove(busLine);
                 BusLine bl = GetBusLine(busLine.ID);
                 bl.StationsInLine = bl.StationsInLine.Where(c => c.BusStationKey != busStation.BusStationKey);
-               
+
             }
             catch (DO.IdException ex)
             {
@@ -255,7 +255,7 @@ namespace BL
         /// </summary>
         /// <param name="busStation"></param>
         /// <param name="busLine"></param>
-        public void AddBusLineToStation(BusStation busStation, BusLine busLine,TimeSpan Time,float _Distance)
+        public void AddBusLineToStation(BusStation busStation, BusLine busLine, TimeSpan Time, float _Distance)
         {
             BO.BusLineStation bls;
             try
@@ -304,8 +304,8 @@ namespace BL
         {
             BO.BusStation stationBO = new BusStation();
             stationDO.CopyPropertiesTo(stationBO);
-            stationBO.ListBusLinesInStation = GetAllBusLines().SelectMany(line=> line.StationsInLine.Where(station => station.BusStationKey == stationDO.BusStationKey)
-                                                .Select(lineInStation => new BO.BusLineInStation() { BusLineNumber = line.BusLineNumber,Area=(int)line.Area,ID=line.ID}));
+            stationBO.ListBusLinesInStation = GetAllBusLines().SelectMany(line => line.StationsInLine.Where(station => station.BusStationKey == stationDO.BusStationKey)
+                                                .Select(lineInStation => new BO.BusLineInStation() { BusLineNumber = line.BusLineNumber, Area = (int)line.Area, ID = line.ID }));
             return stationBO;
         }
         /// <summary>
@@ -356,7 +356,7 @@ namespace BL
             catch (DO.IdException ex)
             {
                 throw new BO.IdException(ex.ToString());
-               
+
             }
 
         }
@@ -382,9 +382,9 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<BusStation> GetAllBusStation()
         {
-            return from item in dl.BusStations() 
-                where item.Active==true
-               select BusStationDoBoAdapter(item);
+            return from item in dl.BusStations()
+                   where item.Active == true
+                   select BusStationDoBoAdapter(item);
         }
         /// <summary>
         /// The function receives a bus Station for updating
@@ -408,11 +408,11 @@ namespace BL
         /// The function sends to the deletion function of dal
         /// </summary>
         /// <param name="busLineStation"></param>
-        public void  DeleteBusLineStation(BusLineStation busLineStation)
+        public void DeleteBusLineStation(BusLineStation busLineStation)
         {
             try
             {
-                
+
                 dl.DeleteBusLineStation(BusLineStationBoDoAdapter(busLineStation));
             }
             catch (BO.IdException ex)
@@ -433,7 +433,7 @@ namespace BL
         /// <param name="IDBusLine"></param>
         /// <param name="busLine"></param>
         /// <param name="index"></param>
-        public void UpdateBusLineStation(int idStation, int IDBusLine,BO.BusLine busLine,int index)
+        public void UpdateBusLineStation(int idStation, int IDBusLine, BO.BusLine busLine, int index)
         {
             try
             {
@@ -447,7 +447,7 @@ namespace BL
                 busLine.StationsInLine = from sin in busLine.StationsInLine
                                          where sin.BusStationKey != idStation
                                          select sin;
-                dl.DeleteBusLineStation(dl.GetBusLineStation(idStation,IDBusLine));
+                dl.DeleteBusLineStation(dl.GetBusLineStation(idStation, IDBusLine));
                 var list = busLine.StationsInLine.ToList();
                 for (int i = 0; i < busLine.StationsInLine.Count(); i++)
                 {
@@ -463,20 +463,20 @@ namespace BL
                     if (busLine.StationsInLine.ElementAt(i).NumberStationInLine == busLineStation.NumberStationInLine && busLine.StationsInLine.ElementAt(i).BusStationKey != busLineStation.BusStationKey)
                         list[i].NumberStationInLine = busLine.StationsInLine.ElementAt(i).NumberStationInLine + 1;
                 }
-                for(int j=0;j<list.Count;j++)
+                for (int j = 0; j < list.Count; j++)
                 {
-                    if(list[j].Distance==0 && list[j].NumberStationInLine!=1)
+                    if (list[j].Distance == 0 && list[j].NumberStationInLine != 1)
                     {
                         try
                         {
-                            list[j].Distance = dl.GetConsecutiveStations(list[j].BusStationKey, list[j-1].BusStationKey).Distance;
-                            list[j].AverageTravelTime = dl.GetConsecutiveStations(list[j].BusStationKey, list[j-1].BusStationKey).AverageTravelTime;
+                            list[j].Distance = dl.GetConsecutiveStations(list[j].BusStationKey, list[j - 1].BusStationKey).Distance;
+                            list[j].AverageTravelTime = dl.GetConsecutiveStations(list[j].BusStationKey, list[j - 1].BusStationKey).AverageTravelTime;
                         }
                         catch (DO.IdException)
                         {
                             DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
                             {
-                                StationCodeOne = list[j-1].BusStationKey,
+                                StationCodeOne = list[j - 1].BusStationKey,
                                 StationCodeTwo = list[j].BusStationKey,
                                 Flage = true,
                                 AverageTravelTime = new TimeSpan((long)(((dl.GetBusStation(list[j].BusStationKey).Latitude * dl.GetBusStation(list[j - 1].BusStationKey).Latitude * dl.GetBusStation(list[j].BusStationKey).Longitude * dl.GetBusStation(list[j - 1].BusStationKey).Longitude) * r.NextDouble() * 1 + 0.5) / 66 * 100.0)),
@@ -492,9 +492,9 @@ namespace BL
                 busLine.StationsInLine = list;
 
             }
-            catch(DO.IdException ex)
+            catch (DO.IdException ex)
             {
-               throw new BO.IdException(ex.ToString());
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -502,7 +502,7 @@ namespace BL
         /// </summary>
         /// <param name="stations"></param>
         /// <param name="_distance"></param>
-        public void UpdateDistanceBetweenstations(int id1,int id2, float _distance)
+        public void UpdateDistanceBetweenstations(int id1, int id2, float _distance)
         {
             var UpdateItem = dl.GetConsecutiveStations(id1, id2);
             UpdateItem.Distance = _distance;
@@ -513,12 +513,12 @@ namespace BL
         /// </summary>
         /// <param name="stations"></param>
         /// <param name="time"></param>
-        public void UpdateTravelTimeBetweenstations(int id1,int id2, TimeSpan time)
+        public void UpdateTravelTimeBetweenstations(int id1, int id2, TimeSpan time)
         {
             var UpdateItem = dl.GetConsecutiveStations(id1, id2);
-            UpdateItem.AverageTravelTime =time;
+            UpdateItem.AverageTravelTime = time;
             dl.UpdateConsecutiveStations(UpdateItem);
-           
+
 
         }
         /// <summary>
@@ -559,11 +559,11 @@ namespace BL
 
             busLineBO.StationsInLine = from sin in dl.BusLineStations()
                                        where sin.ID == busLineDO.ID
-                                       select DeepCopyUtilities.CopyToStationInLine(sin,dl);
-           busLineBO.lineRides = from sin in dl.LinesWayOut()
+                                       select DeepCopyUtilities.CopyToStationInLine(sin, dl);
+            busLineBO.lineRides = from sin in dl.LinesWayOut()
                                   where sin.ID == busLineBO.ID
                                   from sen in dl.LinesWayOut()
-                                  where sen.ID== busLineBO.ID
+                                  where sen.ID == busLineBO.ID
                                   select DeepCopyUtilities.CopyToLineRide(sen);
             return busLineBO;
         }
@@ -578,7 +578,7 @@ namespace BL
         //  The function gets a bus line to add
         /// </summary>
         /// <param name="busLine"></param>
-        public void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation,float _Distance, TimeSpan timeSpanTravel)
+        public void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation, float _Distance, TimeSpan timeSpanTravel)
         {
             try
             {
@@ -627,18 +627,18 @@ namespace BL
         /// </summary>
         /// <param name="AddToLine"></param>
         /// <param name="busLineStation"></param>
-        public void AddBusStationToLine(BusLine AddToLine, BO.BusLineStation busLineStation,float _Distance,TimeSpan timeSpanTravel)
+        public void AddBusStationToLine(BusLine AddToLine, BO.BusLineStation busLineStation, float _Distance, TimeSpan timeSpanTravel)
         {
             try
             {
-               
+
                 AddToLine.StationsInLine = AddToLine.StationsInLine.Append(busLineStation);
                 busLineStation.ID = AddToLine.ID;
                 dl.AddBusLineStation(BusLineStationBoDoAdapter(busLineStation));
                 AddToLine.StationsInLine = from sin in AddToLine.StationsInLine
                                            orderby sin.NumberStationInLine
                                            select sin;
-                if(_Distance!=0)
+                if (_Distance != 0)
                 {
                     DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
                     {
@@ -652,7 +652,7 @@ namespace BL
                 }
                 AddToLine.StationsInLine = from sin in AddToLine.StationsInLine
                                            select DeepCopyUtilities.CopyToStationInLine(BusLineStationBoDoAdapter(sin), dl);
-              
+
             }
             catch (NullReferenceException)
             {
@@ -710,7 +710,7 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<BusLine> GetAllBusLines()
         {
-            return from BusLine in dl.BusLines() 
+            return from BusLine in dl.BusLines()
                    select BusLineDoBoAdapter(BusLine);
         }
         /// <summary>
@@ -1069,24 +1069,24 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<object> StationDetails(IEnumerable<BusLineStation> busLineStations)
         {
-            
-                 return  from BusStation in dl.BusStations()
-                         from BusLineStation in busLineStations
-                         where BusStation.BusStationKey == BusLineStation.BusStationKey
-                         orderby BusLineStation.NumberStationInLine
-                         select new
-                         {
-                             BusStationKey = BusLineStation.BusStationKey,
-                             NumberStationInLine = BusLineStation.NumberStationInLine,
-                             Active = BusLineStation.Active,
-                             StationName = BusStation.StationName,
-                             StationAddress = BusStation.StationAddress,
-                             Latitude=  BusStation.Latitude,
-                             Longitude= BusStation.Longitude,
-                             Distance=BusLineStation.Distance,
-                             AverageTravelTime=BusLineStation.AverageTravelTime
 
-                         }; 
+            return from BusStation in dl.BusStations()
+                   from BusLineStation in busLineStations
+                   where BusStation.BusStationKey == BusLineStation.BusStationKey
+                   orderby BusLineStation.NumberStationInLine
+                   select new
+                   {
+                       BusStationKey = BusLineStation.BusStationKey,
+                       NumberStationInLine = BusLineStation.NumberStationInLine,
+                       Active = BusLineStation.Active,
+                       StationName = BusStation.StationName,
+                       StationAddress = BusStation.StationAddress,
+                       Latitude = BusStation.Latitude,
+                       Longitude = BusStation.Longitude,
+                       Distance = BusLineStation.Distance,
+                       AverageTravelTime = BusLineStation.AverageTravelTime
+
+                   };
         }
         #endregion
         public void DeleteLineRide(BO.LineRides line)
@@ -1095,11 +1095,59 @@ namespace BL
             {
                 dl.DeleteLineWayOut(LineRideStationDoBoAdapter(line));
             }
-            catch(DO.IdException ex)
+            catch (DO.IdException ex)
             {
                 throw new BO.IdException(ex.ToString());
             }
         }
+        #region LineRide
+        public TimeSpan GetTimeDrive(int IdBusLine, int codeStation1, int codeStation2)
+        {
+            TimeSpan SaveTimeDrive = new TimeSpan(0, 0, 0);
+            for (int i = 0; i < GetBusLine(IdBusLine).StationsInLine.Count(); i++)
+            {
+                if (GetBusLine(IdBusLine).StationsInLine.ToList()[i].BusStationKey == codeStation1)
+                    while (GetBusLine(IdBusLine).StationsInLine.ToList()[i].BusStationKey != codeStation2 && i < GetBusLine(IdBusLine).StationsInLine.Count())
+                    {
+                        ++i;
+                        SaveTimeDrive += GetBusLine(IdBusLine).StationsInLine.ToList()[i].AverageTravelTime;
+
+                    }
+            }
+            return SaveTimeDrive;
+        }
+        public BO.BusDrive BusDriveDoBoAdapter(DO.BusDrive BusDriveDO)
+        {
+            BO.BusDrive busDriveBO = new BO.BusDrive();
+            BusDriveDO.CopyPropertiesTo(busDriveBO);
+            return busDriveBO;
+        }
+        public BO.LineRides LineRideStationBoDoAdapter(DO.LineRide lineRides)
+        {
+            BO.LineRides lineBO = new LineRides();
+            lineRides.CopyPropertiesTo(lineBO);
+            return lineBO;
+        }
+        public IEnumerable<LineRides> GetLineTimingPerStation(BusStation CurbusStation, TimeSpan tsCurTime)
+        {
+            return from LineRides in dl.LinesWayOut()
+                   from Line in CurbusStation.ListBusLinesInStation
+                   where LineRides.ID == Line.ID
+                   let line=GetBusLine(LineRides.ID)
+                   where tsCurTime <= LineRides.TravelStartTime 
+                   select new LineRides
+                   {
+                       BusDepartureNumber = LineRides.BusDepartureNumber,
+                       BusLineNumber = Line.BusLineNumber,
+                       Active = LineRides.Active,
+                       TravelStartTime = LineRides.TravelStartTime,
+                       TravelEndTime = LineRides.TravelEndTime,
+                       CodeLastStasion = line.StationsInLine.Last().BusStationKey,
+                       NameLastStasion = dl.GetBusStation(line.StationsInLine.Last().BusStationKey).StationName,
+
+                   };
+        } 
+        #endregion
     }
 }
 

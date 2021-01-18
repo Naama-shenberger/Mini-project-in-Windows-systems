@@ -37,7 +37,9 @@ namespace PL.WPF
 
         private void traveler_Click(object sender, RoutedEventArgs e)
         {
-
+            TravelerWindow travelerWindow = new TravelerWindow(BL);
+            travelerWindow.ShowDialog();
+            this.Close();
         }
     }
 }

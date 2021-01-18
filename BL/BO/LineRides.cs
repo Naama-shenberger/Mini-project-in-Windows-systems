@@ -15,6 +15,10 @@ namespace BO
         public TimeSpan TravelStartTime { set; get; }//Travel start time of the bus 
         public TimeSpan TravelEndTime { set; get; }//Travel end time
         public TimeSpan BusDepartureNumber { set; get; }//Exit number of the line
+        public  int BusLineNumber { get; set; }//bus line number
+        public int CodeLastStasion { get; set; }//code last stasion
+        public string NameLastStasion { get; set; }//Last Stasion name
+        public TimeSpan CurTimeStasion { get; set; }// current Time Drive
         public int ID { set; get; }
 
     }

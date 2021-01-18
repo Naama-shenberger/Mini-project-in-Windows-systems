@@ -2,7 +2,7 @@
 <ArrayOfLineRide>
   <LineRide>
     <ID>1</ID>
-    <Active>False</Active>
+    <Active>true</Active>
     <BusDepartureNumber>PT12H00M00S</BusDepartureNumber>
     <TravelStartTime>PT07H00M00S</TravelStartTime>
     <TravelEndTime>PT11H30M00S</TravelEndTime>
@@ -16,7 +16,7 @@
   </LineRide>
   <LineRide>
     <ID>2</ID>
-    <Active>False</Active>
+    <Active>true</Active>
     <BusDepartureNumber>PT03H00M00S</BusDepartureNumber>
     <TravelStartTime>PT08H00M00S</TravelStartTime>
     <TravelEndTime>PT13H30M00S</TravelEndTime>

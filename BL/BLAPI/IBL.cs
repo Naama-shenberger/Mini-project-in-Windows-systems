@@ -83,7 +83,13 @@ namespace BLAPI
         #endregion
         #region Line Ride
         DO.LineRide LineRideStationDoBoAdapter(BO.LineRides lineRides);
+        BO.LineRides LineRideStationBoDoAdapter(DO.LineRide lineRides);
         void DeleteLineRide(BO.LineRides line);
+        #endregion
+        #region Bus Drive
+        TimeSpan GetTimeDrive(int IdBusLine, int codeStation1, int codeStation2);
+        IEnumerable<LineRides> GetLineTimingPerStation(BusStation CurbusStation, TimeSpan tsCurTime);
+        BO.BusDrive BusDriveDoBoAdapter(DO.BusDrive BusDriveDO);
         #endregion
     }
 }

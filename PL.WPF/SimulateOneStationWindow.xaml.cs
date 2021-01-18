@@ -15,56 +15,88 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PL.WPF
 {
     /// <summary>
     /// Interaction logic for SimulateOneStationWindow.xaml
     /// </summary>
-    public partial class SimulateOneStationWindow : Window
+    public partial class SimulateOneStationWindow :Window
     {
         IBL BL;
-        BO.BusStation CurBusStation;
-        Stopwatch Stopwatch;
-        BackgroundWorker timeWorker;
-        TimeSpan tsStartTime;
-        bool isTimerRun;
-        public SimulateOneStationWindow(IBL _BL, BO.BusStation BusStation)
+        Stopwatch stopwatch;
+        bool isTimerRun = false;
+        Thread timerThread;
+        string timerText;
+        string simulaterRate;
+       
+
+        public string TimerText
+        {
+            get { return timerTextBlock.Text; }
+        }
+        public bool IsTimerRun
+        {
+            get { return isTimerRun; }
+        }
+        public SimulateOneStationWindow(IBL _BL)
         {
             InitializeComponent();
             BL = _BL;
-            CurBusStation = BusStation;
-            gridOneStation.DataContext = CurBusStation;
-            Stopwatch = new Stopwatch();
-            timeWorker = new BackgroundWorker();
-            timeWorker.DoWork += Worker_DoWork;
-            timeWorker.ProgressChanged += Worker_ProgressChanged;
-
-            timeWorker.WorkerReportsProgress = true;
-            tsStartTime = DateTime.Now.TimeOfDay;
-            Stopwatch.Restart();
-            isTimerRun= true;
-            timeWorker.RunWorkerAsync();
+            simulater.Text = "60";
+            stopwatch = new Stopwatch();
 
         }
-
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void runTimer()
         {
-            TimeSpan tsCurentTime = tsStartTime + Stopwatch.Elapsed;
-            string timerText = tsCurentTime.ToString().Substring(0, 8);
-            this.timerTextBlock.Text = timerText;
-            //  lineTimingDataGrid.DataContext=BL.GetLineTimingPerStation(CurBusStation,tsCurentTime);
-        }
-
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            while(isTimerRun)
+           
+            while (isTimerRun)
             {
-                timeWorker.ReportProgress(231);
+                
+                timerText = stopwatch.Elapsed.ToString();
+                // 00:00:00.000000 ==> 00:00:00
+                timerText = timerText.Substring(0, 8);
+                // this.timerTextBlock.Text = timerText;
+
+                Action<string> action = setTextInvok;
+                timerTextBlock.Dispatcher.BeginInvoke(action, timerText);
                 Thread.Sleep(1000);
             }
         }
 
-      
+        void setTextInvok(string text)
+        {
+            this.timerTextBlock.Text = text;
+         
+        }
+
+        private void startTimerButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(startTimerButton.Content.ToString()=="Start")
+            {
+                startTimerButton.Content = "Stop";
+                if (!isTimerRun)
+                {
+                    stopwatch.Start();
+                    isTimerRun = true;
+                    timerThread = new Thread(runTimer);
+                    timerThread.Start();
+                }
+
+            }
+            else
+            {
+                startTimerButton.Content = "Start";
+                if (isTimerRun)
+                {
+                    stopwatch.Stop();
+                    isTimerRun = false;
+                }
+            }
+           
+        }
+
+
     }
 }

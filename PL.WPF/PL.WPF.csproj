@@ -96,6 +96,9 @@
     <Compile Include="TimeUpdateWindow.xaml.cs">
       <DependentUpon>TimeUpdateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TravelerWindow.xaml.cs">
+      <DependentUpon>TravelerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Update.xaml.cs">
       <DependentUpon>Update.xaml</DependentUpon>
     </Compile>
@@ -174,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TimeUpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TravelerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

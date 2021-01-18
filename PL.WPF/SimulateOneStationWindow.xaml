@@ -6,26 +6,26 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.SimulateOneStationWindow"
         mc:Ignorable="d"
-        Title="SimulateOneStationWindow" Height="450" Width="800">
+        Title="SimulateOneStationWindow" Height="350" Width="600">
     <Grid>
-        <Grid x:Name="gridOneStation">
-            <TextBlock x:Name="timerTextBlock"/>
-        </Grid>
-        <Grid >
-            <DataGrid x:Name="lineTimingDataGrid" Margin="181,26,440.6,160"  Background="#FF9CB7F4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
 
-                <ListView x:Name="lineTiminglv">
-                    <ListView.ItemTemplate>
-                        <DataTemplate/>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <TextBlock Text="lines that pass through the station" Height="34" Width="269"/>
-            </DataGrid>
+        <Button x:Name="startTimerButton" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Start"                  
+                Margin="16,149,3.8,105.8" FontSize="42" Click="startTimerButton_Click" Height="Auto" Grid.RowSpan="2"/>
 
-            <materialDesign:TimePicker IsDropDownOpen="True" AllowDrop="True" HorizontalAlignment="Left" Margin="555,26,0,0" VerticalAlignment="Top" Width="139" Height="48"/>
-            
-           
- 
-        </Grid>
+
+
+        <TextBlock x:Name="timerTextBlock"  Text="08:00:00"                     
+                   Grid.ColumnSpan="2" FontSize="96" TextAlignment="Center" 
+                   Foreground="#FF2281D1"  Margin="0,0,-0.4,51.2"/>
+        <TextBox x:Name="simulater" Grid.Column="1" HorizontalAlignment="Left" Height="45" Margin="38.2,149,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
+        <Label Content="X" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="220.2,158,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="46" Background="#FFF1F1F1" FontWeight="Bold" FontSize="25"/>
     </Grid>
 </Window>
