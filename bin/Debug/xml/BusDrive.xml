@@ -1,147 +1,180 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfBusDrive>
+	
 	<BusDrive>
-		<Active>true</Active>
 		<ID>1</ID>
-		<LicensePlate>12345611</LicensePlate>
-		<ExitStart>TimeSpan(11,23,4)</ExitStart>
-		<TimeDrive>TimeSpan(1,662,33)</TimeDrive>
-		<TimeNextStop>TimeSpan(12,2,3)</TimeNextStop>
-		<LastStasion>388311</LastStasion>
-		<BusDriverFirstName>שלמה</BusDriverFirstName>
-		<BusDriverLastName>ארצי</BusDriverLastName>
-		<BusDriverId>017909169</BusDriverId>
+		<BusLineNumber>14</BusLineNumber>
+		<CodeLastStasion>875612</CodeLastStasion>
+		<TimeDriveExit>PT07H00M00S</TimeDriveExit>
+		<NameLastStasion >מרכז שטנר/כנפי נשרים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>2</ID>
-		<LicensePlate>12345612</LicensePlate>
-		<ExitStart>TimeSpan(06,11,2)</ExitStart>
-		<TimeDrive>TimeSpan(1,23,3)</TimeDrive>
-		<TimeNextStop>TimeSpan(1,2,33)</TimeNextStop>
-		<LastStasion>857321</LastStasion>
-		<BusDriverFirstName>דניאל</BusDriverFirstName>
-		<BusDriverLastName>כהן</BusDriverLastName>
-		<BusDriverId>017909168</BusDriverId>
+		<BusLineNumber>112</BusLineNumber>
+		<CodeLastStasion>388614</CodeLastStasion>
+		<TimeDriveExit>PT08H00M00S</TimeDriveExit>
+		<NameLastStasion >מתנ''ס/נחל דולב</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>3</ID>
-		<LicensePlate>32345678</LicensePlate>
-		<ExitStart>TimeSpan(20,24,3)</ExitStart>
-		<TimeDrive>TimeSpan(1,32,3)</TimeDrive>
-		<TimeNextStop>TimeSpan(1,2,34)</TimeNextStop>
-		<LastStasion>857321</LastStasion>
-		<BusDriverFirstName>חיים</BusDriverFirstName>
-		<BusDriverLastName>סבתו</BusDriverLastName>
-		<BusDriverId>212028961</BusDriverId>
+		<BusLineNumber>9</BusLineNumber>
+		<CodeLastStasion>875612</CodeLastStasion>
+		<TimeDriveExit>PT23H00M00S</TimeDriveExit>
+		<NameLastStasion >מרכז שטנר/כנפי נשרים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>4</ID>
-		<LicensePlate>42345678</LicensePlate>
-		<ExitStart>TimeSpan(33,4,5),</ExitStart>
-		<TimeDrive>TimeSpan(13,2,3)</TimeDrive>
-		<TimeNextStop>TimeSpan(1,2,83)</TimeNextStop>
-		<LastStasion>873371</LastStasion>
-		<BusDriverFirstName>דוד</BusDriverFirstName>
-		<BusDriverLastName>בן ישי</BusDriverLastName>
-		<BusDriverId>414048941</BusDriverId>
+		<BusLineNumber>22</BusLineNumber>
+		<CodeLastStasion>874104</CodeLastStasion>
+		<TimeDriveExit>PT14H00M00S</TimeDriveExit>
+		<NameLastStasion >שמואל הנביא/יקים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>5</ID>
-		<LicensePlate>8235678</LicensePlate>
-		<ExitStart>TimeSpan(33,4,5)</ExitStart>
-		<TimeDrive>TimeSpan(7,8,9)</TimeDrive>
-		<TimeNextStop>TimeSpan(13,2,3)</TimeNextStop>
-		<LastStasion>873371</LastStasion>
-		<BusDriverFirstName>שימשון</BusDriverFirstName>
-		<BusDriverLastName>הגיבור</BusDriverLastName>
-		<BusDriverId>456703421</BusDriverId>
+		<BusLineNumber>19</BusLineNumber>
+		<CodeLastStasion>873141</CodeLastStasion>
+		<TimeDriveExit>PT22H00M00S</TimeDriveExit>
+		<NameLastStasion >הרוזמרין/כביש המנהרות</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>6</ID>
-		<LicensePlate>7245678</LicensePlate>
-		<ExitStart>TimeSpan(13,2,3)</ExitStart>
-		<TimeDrive>TimeSpan(7,8,9)</TimeDrive>
-		<TimeNextStop>TimeSpan(19,2,3))</TimeNextStop>
-		<LastStasion>875812</LastStasion>
-		<BusDriverFirstName>שמואל</BusDriverFirstName>
-		<BusDriverLastName>הכהן</BusDriverLastName>
-		<BusDriverId>676390270</BusDriverId>
+		<BusLineNumber>10</BusLineNumber>
+		<CodeLastStasion>875711</CodeLastStasion>
+		<TimeDriveExit>PT20H00M00S</TimeDriveExit>
+		<NameLastStasion >בית ענבר/כנפי נשרים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>7</ID>
-		<LicensePlate>6234678</LicensePlate>
-		<ExitStart>TimeSpan(3,5,6)</ExitStart>
-		<TimeDrive>TimeSpan(1,2,33)</TimeDrive>
-		<TimeNextStop>TimeSpan(1,82,3)</TimeNextStop>
-		<LastStasion>855813</LastStasion>
-		<BusDriverFirstName>זאב</BusDriverFirstName>
-		<BusDriverLastName>הרצל</BusDriverLastName>
-		<BusDriverId>515058627</BusDriverId>
+		<BusLineNumber>233</BusLineNumber>
+		<CodeLastStasion>874104</CodeLastStasion>
+		<TimeDriveExit>PT10H00M00S</TimeDriveExit>
+		<NameLastStasion >שמואל הנביא/יקים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>8</ID>
-		<LicensePlate>52345678</LicensePlate>
-		<ExitStart>TimeSpan(3,5,6)</ExitStart>
-		<TimeDrive>TimeSpan(1,23,3)</TimeDrive>
-		<TimeNextStop>TimeSpan(15,34,3)</TimeNextStop>
-		<LastStasion>875812</LastStasion>
-		<BusDriverFirstName>דוד</BusDriverFirstName>
-		<BusDriverLastName>בן גוריון</BusDriverLastName>
-		<BusDriverId>7678926701</BusDriverId>
+		<BusLineNumber>7</BusLineNumber>
+		<CodeLastStasion>874104</CodeLastStasion>
+		<TimeDriveExit>PT19H00M00S</TimeDriveExit>
+		<NameLastStasion >שמואל הנביא/יקים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>9</ID>
-		<LicensePlate>9234678</LicensePlate>
-		<ExitStart>TimeSpan(3,5,6)</ExitStart>
-		<TimeDrive>TimeSpan(7,8,9)</TimeDrive>
-		<TimeNextStop>TimeSpan(7,7,0)</TimeNextStop>
-		<LastStasion>388342</LastStasion>
-		<BusDriverFirstName>משה</BusDriverFirstName>
-		<BusDriverLastName>דיין</BusDriverLastName>
-		<BusDriverId>565787898</BusDriverId>
+		<BusLineNumber>80</BusLineNumber>
+		<CodeLastStasion>874104</CodeLastStasion>
+		<TimeDriveExit>PT19H00M00S</TimeDriveExit>
+		<NameLastStasion >שמואל הנביא/יקים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>10</ID>
-		<LicensePlate></LicensePlate>
-		<ExitStart>TimeSpan(33,4,5)</ExitStart>
-		<TimeDrive>TimeSpan(7,3,3)</TimeDrive>
-		<TimeNextStop>TimeSpan(1,2,34)</TimeNextStop>
-		<LastStasion>388342</LastStasion>
-		<BusDriverFirstName>שמעון</BusDriverFirstName>
-		<BusDriverLastName>פרץ</BusDriverLastName>
-		<BusDriverId>345678200</BusDriverId>
+		<BusLineNumber>4</BusLineNumber>
+		<CodeLastStasion>388624</CodeLastStasion>
+		<TimeDriveExit>PT09H00M00S</TimeDriveExit>
+		<NameLastStasion >נחל שורק/נחל לכיש</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>11</ID>
-		<LicensePlate>0234567</LicensePlate>
-		<ExitStart>TimeSpan(11,2,34)</ExitStart>
-		<TimeDrive>TimeSpan(3,5,6)</TimeDrive>
-		<TimeNextStop>TimeSpan(7,8,9)</TimeNextStop>
-		<LastStasion>388473</LastStasion>
-		<BusDriverFirstName>מנחם</BusDriverFirstName>
-		<BusDriverLastName>בגין</BusDriverLastName>
-		<BusDriverId>770770775</BusDriverId>
+		<BusLineNumber>119</BusLineNumber>
+		<CodeLastStasion>388624</CodeLastStasion>
+		<TimeDriveExit>PT05H00M00S</TimeDriveExit>
+		<NameLastStasion >נחל שורק/נחל לכיש</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 	<BusDrive>
-		<Active>true</Active>
 		<ID>12</ID>
-		<LicensePlate>22345678</LicensePlate>
-		<ExitStart>TimeSpan(3,5,6)</ExitStart>
-		<TimeDrive>TimeSpan(3,2,34)</TimeDrive>
-		<TimeNextStop>TimeSpan(33,4,5)</TimeNextStop>
-		<LastStasion>388473</LastStasion>
-		<BusDriverFirstName>גולדה</BusDriverFirstName>
-		<BusDriverLastName>מאיר</BusDriverLastName>
-		<BusDriverId>343456572</BusDriverId>
+		<BusLineNumber>68</BusLineNumber>
+		<CodeLastStasion>874104</CodeLastStasion>
+		<TimeDriveExit>PT22H00M00S</TimeDriveExit>
+		<NameLastStasion >שמואל הנביא/יקים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>13</ID>
+		<BusLineNumber>89</BusLineNumber>
+		<CodeLastStasion>874104</CodeLastStasion>
+		<TimeDriveExit>PT08H35M00S</TimeDriveExit>
+		<NameLastStasion >שמואל הנביא/יקים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>14</ID>
+		<BusLineNumber>1</BusLineNumber>
+		<CodeLastStasion>388614</CodeLastStasion>
+		<TimeDriveExit>PT10H00M00S</TimeDriveExit>
+		<NameLastStasion >מתנ''ס/נחל דולב</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>15</ID>
+		<BusLineNumber>5</BusLineNumber>
+		<CodeLastStasion>388614</CodeLastStasion>
+		<TimeDriveExit>PT10H00M00S</TimeDriveExit>
+		<NameLastStasion >מתנ''ס/נחל דולב</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>16</ID>
+		<BusLineNumber>65</BusLineNumber>
+		<CodeLastStasion>388614</CodeLastStasion>
+		<TimeDriveExit>PT12H00M00S</TimeDriveExit>
+		<NameLastStasion >מתנ''ס/נחל דולב</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>17</ID>
+		<BusLineNumber>55</BusLineNumber>
+		<CodeLastStasion>873401</CodeLastStasion>
+		<TimeDriveExit>PT11H00M00S</TimeDriveExit>
+		<NameLastStasion >חניון הלאום</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>18</ID>
+		<BusLineNumber>117</BusLineNumber>
+		<CodeLastStasion>873401</CodeLastStasion>
+		<TimeDriveExit>PT17H00M00S</TimeDriveExit>
+		<NameLastStasion >חניון הלאום</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>19</ID>
+		<BusLineNumber>115</BusLineNumber>
+		<CodeLastStasion>873401</CodeLastStasion>
+		<TimeDriveExit>PT23H00M00S</TimeDriveExit>
+		<NameLastStasion >חניון הלאום</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>20</ID>
+		<BusLineNumber>134</BusLineNumber>
+		<CodeLastStasion>875612</CodeLastStasion>
+		<TimeDriveExit>PT19H30M00S</TimeDriveExit>
+		<NameLastStasion >כנפי נשרים 20</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>2011</ID>
+		<BusLineNumber>113</BusLineNumber>
+		<CodeLastStasion>388624</CodeLastStasion>
+		<TimeDriveExit>PT08H00M00S</TimeDriveExit>
+		<NameLastStasion >נחל שורק/נחל לכיש</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
+	</BusDrive>
+	<BusDrive>
+		<ID>20111</ID>
+		<BusLineNumber>419</BusLineNumber>
+		<CodeLastStasion>874104</CodeLastStasion>
+		<TimeDriveExit>PT08H00M00S</TimeDriveExit>
+		<NameLastStasion >שמואל הנביא/יקים</NameLastStasion>
+		<CurTimeStasion></CurTimeStasion>
 	</BusDrive>
 </ArrayOfBusDrive>
