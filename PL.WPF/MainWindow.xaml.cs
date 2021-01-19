@@ -30,7 +30,7 @@ namespace PL.WPF
             InitializeComponent();
             access access = new access(bl);
             access.ShowDialog();
-           
+
             //if (access.IsActive == false)
             //    this.Visibility = Visibility.Hidden;
 
@@ -73,10 +73,10 @@ namespace PL.WPF
 
         private void backbtn_Click(object sender, RoutedEventArgs e)
         {
-          
-            //access access = new access(bl);
-            //access.ShowDialog();
-            this.Close();
+
+            access access = new access(bl);
+            access.ShowDialog();
+           // this.Close();
 
         }
     }

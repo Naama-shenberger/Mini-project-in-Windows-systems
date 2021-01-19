@@ -27,6 +27,7 @@ namespace PL.WPF
         {
             InitializeComponent();
             iBL = _iBL;
+           
 
 
         }
@@ -42,7 +43,9 @@ namespace PL.WPF
                         throw new ArgumentException();
                     }
                     MessageBox.Show("congratulation, hello user ");
+                  
                     this.Close();
+               
                 }
                 else
                 {
@@ -69,8 +72,8 @@ namespace PL.WPF
         private void backbtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            MainWindow a = new MainWindow();
-            a.Visibility = Visibility.Hidden;
+            //MainWindow a = new MainWindow();
+            //a.Visibility = Visibility.Hidden;
         }
     }
 }

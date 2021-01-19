@@ -47,22 +47,23 @@ namespace PL.WPF
         public SimulateOneStationWindow(IBL _BL, BO.BusStation busStation)
         {
             InitializeComponent();
-            BL = _BL;
-            CurBusStation = busStation;
-            StaionNametb.Text = busStation.StationName;
-            CodeStaiontb.Text = busStation.BusStationKey.ToString();
-            stopwatch = new Stopwatch();
-            Stopwatch = new Stopwatch();
-            timeWorker = new BackgroundWorker();
-            timeWorker.DoWork += Worker_DoWork;
-            timeWorker.ProgressChanged += Worker_ProgressChanged;
-            timeWorker.WorkerReportsProgress = true;
-           // tsStartTime = new TimeSpan(long.Parse(simulateOneStationWindow.TimerText));
-            // tsStartTime = DateTime.Now.TimeOfDay;
-            Stopwatch.Restart();
-            isTimerRun = true;
-            timeWorker.RunWorkerAsync();
            
+                BL = _BL;
+                CurBusStation = busStation;
+                StaionNametb.Text = busStation.StationName;
+                CodeStaiontb.Text = busStation.BusStationKey.ToString();
+                stopwatch = new Stopwatch();
+                Stopwatch = new Stopwatch();
+                timeWorker = new BackgroundWorker();
+                timeWorker.DoWork += Worker_DoWork;
+                timeWorker.ProgressChanged += Worker_ProgressChanged;
+                timeWorker.WorkerReportsProgress = true;
+                Stopwatch.Restart();
+                isTimerRun = true;
+                timeWorker.RunWorkerAsync();
+            
+         
+
         }
         TimeSpan s = new TimeSpan(8, 0, 0);
 

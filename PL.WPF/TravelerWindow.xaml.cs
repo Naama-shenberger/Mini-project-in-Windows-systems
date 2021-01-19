@@ -48,12 +48,18 @@ namespace PL.WPF
  
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SimulateOneStationWindow simulateOneStationWindow = new SimulateOneStationWindow(bL,CurBusStation);
+            try
+            {
+                if (CurBusStation == null)
+                        throw new ArgumentNullException();
+                SimulateOneStationWindow simulateOneStationWindow = new SimulateOneStationWindow(bL, CurBusStation);
 
-            simulateOneStationWindow.ShowDialog();
-
-
-
+                simulateOneStationWindow.ShowDialog();
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("No station selected");
+            }
         }
         private void AllBusStaionsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
