@@ -25,77 +25,75 @@ namespace PL.WPF
     public partial class SimulateOneStationWindow :Window
     {
         IBL BL;
-        Stopwatch stopwatch;
-        bool isTimerRun = false;
-        Thread timerThread;
+        bool isTimerRun;
         string timerText;
-        string simulaterRate;
         BO.BusStation CurBusStation;
         Stopwatch Stopwatch;
-
         BackgroundWorker timeWorker;
-        TimeSpan tsStartTime;
-       
-        public string TimerText
-        {
-            get { return timerTextBlock.Text; }
-        }
-        public bool IsTimerRun
-        {
-            get { return isTimerRun; }
-        }
+        TimeSpan tsStartTime= new TimeSpan(8, 0, 0);
+        /// <summary>
+        /// constructor -
+        /// Receiving instance of ibl interface and the station pressed window travels
+        /// </summary>
+        /// <param name="_BL"></param>
+        /// <param name="busStation"></param>
         public SimulateOneStationWindow(IBL _BL, BO.BusStation busStation)
         {
             InitializeComponent();
-           
-                BL = _BL;
-                CurBusStation = busStation;
-                StaionNametb.Text = busStation.StationName;
-                CodeStaiontb.Text = busStation.BusStationKey.ToString();
-                stopwatch = new Stopwatch();
-                Stopwatch = new Stopwatch();
-                timeWorker = new BackgroundWorker();
-                timeWorker.DoWork += Worker_DoWork;
-                timeWorker.ProgressChanged += Worker_ProgressChanged;
-                timeWorker.WorkerReportsProgress = true;
-                Stopwatch.Restart();
-                isTimerRun = true;
-                timeWorker.RunWorkerAsync();
-            
-         
-
+            BL = _BL;
+            CurBusStation = busStation;
+            StaionNametb.Text = busStation.StationName;
+            CodeStaiontb.Text = busStation.BusStationKey.ToString();
+            Stopwatch = new Stopwatch();
+            timeWorker = new BackgroundWorker();
+            //Event registration
+            timeWorker.DoWork += Worker_DoWork;
+            timeWorker.ProgressChanged += Worker_ProgressChanged;
+            timeWorker.WorkerReportsProgress = true;
+            Stopwatch.Restart();
+            isTimerRun = true;
+            timeWorker.RunWorkerAsync();
         }
-        TimeSpan s = new TimeSpan(8, 0, 0);
-
+        /// <summary>
+        /// event ProgressChangedEventArgs 
+        /// Updating the time, and pulling out all buses that arrived to the station from bl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            TimeSpan tsCurentTime = tsStartTime + Stopwatch.Elapsed+s;
+            TimeSpan tsCurentTime = tsStartTime + Stopwatch.Elapsed;
             timerText = tsCurentTime.ToString().Substring(0, 8);
             timerTextBlock.Text = timerText;
             if (CurBusStation != null && CurBusStation.ListBusLinesInStation != null)
                 lineTimingDataGrid.DataContext = BL.GetLineTimingPerStation(CurBusStation, tsCurentTime);
         }
-        void setTextInvok(string text)
-        {
-            this.timerTextBlock.Text = text;
-            //  Thread.Sleep(1000);
-        }
+        /// <summary>
+        /// event DoWorkEventArgs 
+        /// Thread sleep
+        /// ReportProgress(1000)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             while (isTimerRun)
             {
-                timeWorker.ReportProgress(1000);
+                timeWorker.ReportProgress(231);
                 Thread.Sleep(1000);
             }
         }
-
-       
-
+        /// <summary>
+        /// event click
+        /// back btn 
+        /// is timer run false
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backbtn_Click(object sender, RoutedEventArgs e)
         {
 
             isTimerRun = false;
-
             this.Close();
         }
     }

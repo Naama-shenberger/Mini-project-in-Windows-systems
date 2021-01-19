@@ -24,7 +24,7 @@
                     <DataGridTextColumn Header="Name" Binding="{Binding StationName}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button  HorizontalAlignment="Left" Margin="516,415,0,0" VerticalAlignment="Top" Width="183" Click="Button_Click" Height="52">
+            <Button  HorizontalAlignment="Left" Margin="516,415,0,0" VerticalAlignment="Top" Width="183" Click="simulationButton_Click" Height="52">
                 <StackPanel>
                     <materialDesign:PackIcon Kind="TimelineClockOutline" Height="26" Width="56" Foreground="LightGray"/>
                     <TextBlock Text="Simulate One Station" Height="33" Width="188"/>
