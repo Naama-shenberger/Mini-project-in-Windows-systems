@@ -6,39 +6,54 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.TimeAndDistanceWindow"
         mc:Ignorable="d"
-        Title="TimeAndDistanceWindow" Height="250" Width="350">
+        Title="TimeAndDistanceWindow" Height="250" Width="400" WindowStyle="None">
     <Grid >
-        <Rectangle Margin="0,0,-1.4,83" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.222"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0.668"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-            <Rectangle.Fill>
+        <Grid Margin="0,0,-4.4,126.2" HorizontalAlignment="Right" Width="398">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="323*"/>
+                <ColumnDefinition Width="677*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="#FF2281D1"/>
                     <GradientStop Color="#FF34268A" Offset="1"/>
-                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
                 </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <Rectangle Height="157" Fill="White" VerticalAlignment="Bottom" Margin="26,0,19,24" RadiusY="28.27" RadiusX="28.27">
+            </Grid.Background>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="58" Margin="0,0,0,69">
+                <Button x:Name="backbtn" ToolTip="back" Click="BackButton_Click" Width="71" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0" Margin="-9,9,0,9" FontWeight="Bold" >
+                    <materialDesign:PackIcon Kind="ArrowLeft" FontWeight="Bold" FontSize="10" Height="30" Width="41" />
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Rectangle Height="157" Fill="White" VerticalAlignment="Bottom" Margin="26,0,18.6,44.2" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Label Content="Enter current station info relative to the last station of the line" HorizontalAlignment="Left" Margin="26,61,0,0" VerticalAlignment="Top" Height="27" Width="267"/>
-        <Label Content="Enter travel time:" HorizontalAlignment="Left" Margin="26,93,0,0" VerticalAlignment="Top" Height="23" Width="95"/>
-        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" x:Name="Done" Content="Done" HorizontalAlignment="Left" Margin="82,178,0,0" VerticalAlignment="Top" Width="75" Click="Done_Click"/>
-        <Button  Background="#FF2281D1" x:Name="cancel" Content="cancle" HorizontalAlignment="Left" Margin="203,178,0,0" VerticalAlignment="Top" Width="75" Click="Done_Click"/>
-        <Label Content="Enter Distance:" HorizontalAlignment="Left" Margin="26,123,0,0" VerticalAlignment="Top" Height="27" Width="95"/>
-        <TextBox x:Name="distance" HorizontalAlignment="Left" Height="27" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50" Margin="138,123,0,0"  materialDesign:TextFieldAssist.SuffixText="m"/>
-        <TextBox x:Name="hourTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50" Margin="138,95,0,0"  TextAlignment="Left" TextBlock.TextAlignment="Left" materialDesign:TextFieldAssist.SuffixText="hour"/>
-        <TextBox x:Name="MinuteTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50" Margin="203,95,0,0"  TextAlignment="Left" TextBlock.TextAlignment="Left" materialDesign:TextFieldAssist.SuffixText="min" />
-        <TextBox x:Name="SeconTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50" Margin="274,93,0,0"  TextAlignment="Left" TextBlock.TextAlignment="Left" materialDesign:TextFieldAssist.SuffixText="sec" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed" />
+        <Label Content="Enter current station info relative to the last line station" HorizontalAlignment="Left" Margin="22,54,0,0" VerticalAlignment="Top" Height="27" Width="365" FontWeight="Bold" FontSize="13"/>
+        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" x:Name="Done" Content="Done" HorizontalAlignment="Left" Margin="148,177,0,0" VerticalAlignment="Top" Width="91" Click="Done_Click" Height="36"/>
+        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="56,89,0,0" VerticalAlignment="Top" Height="146" Width="299">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="105" />
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
 
+            </Grid.RowDefinitions>
+            <Label Content="Enter travel time:" HorizontalAlignment="Left" Margin="0,-2,0,0" VerticalAlignment="Top" Height="28" Width="103"/>
+            <Label Content="Enter Distance:" HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top" Height="27" Width="95" Grid.RowSpan="2"/>
+            <TextBox x:Name="distance" HorizontalAlignment="Left" Height="27" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50" Margin="103,31,0,0"  materialDesign:TextFieldAssist.SuffixText="m" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="hourTextBox" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap"  VerticalAlignment="Top" Width="47" Margin="105,-2,0,0"  TextAlignment="Left" TextBlock.TextAlignment="Left" materialDesign:TextFieldAssist.SuffixText="hour" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="MinuteTextBox" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap"  VerticalAlignment="Top" Width="49" Margin="1,0,0,0"  TextAlignment="Left" TextBlock.TextAlignment="Left" materialDesign:TextFieldAssist.SuffixText="min" Grid.Column="2" />
+            <TextBox x:Name="SeconTextBox" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap"  VerticalAlignment="Top" Width="46" Margin="4.6,0,-0.2,0"  TextAlignment="Left" TextBlock.TextAlignment="Left" materialDesign:TextFieldAssist.SuffixText="sec" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed" Grid.Column="3" />
+
+        </Grid>
     </Grid>
 </Window>
