@@ -75,9 +75,6 @@
     <Compile Include="AddNewStationWindow.xaml.cs">
       <DependentUpon>AddNewStationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddStationWindow.xaml.cs">
-      <DependentUpon>AddStationWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DistanceUpdateWindow.xaml.cs">
       <DependentUpon>DistanceUpdateWindow.xaml</DependentUpon>
     </Compile>
@@ -125,10 +122,6 @@
     <Page Include="AddNewStationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="AddStationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BusLineWindow.xaml">
       <SubType>Designer</SubType>

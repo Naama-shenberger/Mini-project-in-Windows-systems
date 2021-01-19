@@ -121,7 +121,6 @@
                 </TreeView>
             </Grid>
         </Expander>
-        <Button Content="Back"  BorderBrush="#FF2281D1" Background="#FF2281D1" HorizontalAlignment="Left" Margin="551,366,0,0" VerticalAlignment="Top" Width="115" Height="36" Click="Button_Click"/>
         <Label   FontWeight="Bold" Content="Select a bus" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" Height="25" Width="119" Foreground="#DDF1E8E8"/>
 
     </Grid>

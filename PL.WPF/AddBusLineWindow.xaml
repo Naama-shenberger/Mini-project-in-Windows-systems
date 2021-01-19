@@ -33,7 +33,7 @@
             <ComboBox x:Name="Areacb"  HorizontalAlignment="Left" Margin="10.2,9.6,-126.8,0" VerticalAlignment="Top" Width="175" Height="31" Grid.Column="1" Grid.Row="1" Foreground="Black" BorderBrush="#FF34268A"/>
             <ComboBox x:Name="FirstStopcb"  HorizontalAlignment="Left" Margin="10.2,10.2,-128.4,0" VerticalAlignment="Top" Width="175" Height="33" Grid.Row="2" Grid.Column="1" Foreground="#FF010009" BorderBrush="#FF34268A"/>
             <ComboBox x:Name="LastStopcb" HorizontalAlignment="Left" Margin="10.2,9.6,-130,0" VerticalAlignment="Top" Width="175" Height="34" Grid.Row="3" Grid.Column="1" Foreground="Black" BorderBrush="#FF34268A"/>
-            <TextBox x:Name="BusLineNumbertb" KeyDown="OnKeyDownHandler" HorizontalAlignment="Left" Margin="10.2,17,-126,2.4" TextWrapping="Wrap" Width="175" Grid.Column="1" Foreground="Black" BorderBrush="#FF34268A"/>
+            <TextBox x:Name="BusLineNumbertb"  HorizontalAlignment="Left" Margin="10.2,17,-126,2.4" TextWrapping="Wrap" Width="175" Grid.Column="1" Foreground="Black" BorderBrush="#FF34268A"/>
         </Grid>
 
         <materialDesign:TimePicker x:Name = "StartTimePicker" KeyDown="OnKeyDownHandler" Text="Select bus start time"   Margin = "396,105,43.6,287" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A"/>

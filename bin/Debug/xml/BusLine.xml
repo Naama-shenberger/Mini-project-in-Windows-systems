@@ -168,4 +168,28 @@
     <Active>true</Active>
     <Area>Jerusalem_Corridor</Area>
   </BusLine>
+  <BusLine>
+    <ID>20111</ID>
+    <BusLineNumber>22</BusLineNumber>
+    <FirstStopNumber>875612</FirstStopNumber>
+    <LastStopNumber>388624</LastStopNumber>
+    <Active>true</Active>
+    <Area>Jerusalem_Corridor</Area>
+  </BusLine>
+  <BusLine>
+    <ID>201111</ID>
+    <BusLineNumber>333</BusLineNumber>
+    <FirstStopNumber>875612</FirstStopNumber>
+    <LastStopNumber>388624</LastStopNumber>
+    <Active>true</Active>
+    <Area>Jerusalem_Corridor</Area>
+  </BusLine>
+  <BusLine>
+    <ID>2011111</ID>
+    <BusLineNumber>22</BusLineNumber>
+    <FirstStopNumber>873401</FirstStopNumber>
+    <LastStopNumber>388624</LastStopNumber>
+    <Active>true</Active>
+    <Area>Jerusalem_Corridor</Area>
+  </BusLine>
 </ArrayOfBusLine>

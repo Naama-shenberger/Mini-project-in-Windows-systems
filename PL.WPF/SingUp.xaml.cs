@@ -28,6 +28,13 @@ namespace PL.WPF
             InitializeComponent();
             bL = _BL;
         }
+        /// <summary>
+        /// event click
+        /// confrim btn
+        /// Registration to the system, security password check and password confirmation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Confrim_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -70,7 +77,12 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OKCancel);
             }
         }
-
+        /// <summary>
+        /// event click
+        /// back btn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backbtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

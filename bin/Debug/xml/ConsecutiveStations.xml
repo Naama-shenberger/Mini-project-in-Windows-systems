@@ -119,4 +119,11 @@
     <AverageTravelTime>P2DT8H5M9S</AverageTravelTime>
     <Distance>2.89</Distance>
   </ConsecutiveStations>
+  <ConsecutiveStations>
+    <StationCodeOne>388443</StationCodeOne>
+    <StationCodeTwo>388815</StationCodeTwo>
+    <Flage>true</Flage>
+    <AverageTravelTime>PT0.0705487S</AverageTravelTime>
+    <Distance>17921.42</Distance>
+  </ConsecutiveStations>
 </ArrayOfConsecutiveStations>

@@ -578,7 +578,7 @@ namespace BL
         //  The function gets a bus line to add
         /// </summary>
         /// <param name="busLine"></param>
-        public void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation, float _Distance, TimeSpan timeSpanTravel)
+        public void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation)
         {
             try
             {
@@ -627,8 +627,8 @@ namespace BL
         /// </summary>
         /// <param name="AddToLine"></param>
         /// <param name="busLineStation"></param>
-        public void AddBusStationToLine(BusLine AddToLine, BO.BusLineStation busLineStation, float _Distance, TimeSpan timeSpanTravel)
-        {
+        public void AddBusStationToLine(BusLine AddToLine, BO.BusLineStation busLineStation)
+        { 
             try
             {
 
@@ -638,15 +638,21 @@ namespace BL
                 AddToLine.StationsInLine = from sin in AddToLine.StationsInLine
                                            orderby sin.NumberStationInLine
                                            select sin;
-                if (_Distance != 0)
+                int id1 = AddToLine.StationsInLine.ToList()[AddToLine.StationsInLine.Count() - 1].BusStationKey;
+                int id2 = AddToLine.StationsInLine.ToList()[AddToLine.StationsInLine.Count() - 2].BusStationKey;
+                try
+                {
+                    dl.GetConsecutiveStations(id1, id2);
+                }
+                catch (DO.IdException)
                 {
                     DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
                     {
-                        Distance = _Distance,
-                        AverageTravelTime = timeSpanTravel,
+                        AverageTravelTime = new TimeSpan((long)(((dl.GetBusStation(id1).Latitude * dl.GetBusStation(id2).Latitude * dl.GetBusStation(id1).Longitude * dl.GetBusStation(id2).Longitude) * r.NextDouble() * 1 + 0.5) / 66 * 100.0)),
+                        Distance = (float)((dl.GetBusStation(id1).Latitude * dl.GetBusStation(id2).Latitude * dl.GetBusStation(id1).Longitude * dl.GetBusStation(id2).Longitude) * r.NextDouble() * 1 + 0.5) / 66,
                         Flage = true,
-                        StationCodeTwo = AddToLine.StationsInLine.ToList()[AddToLine.StationsInLine.Count() - 1].BusStationKey,
-                        StationCodeOne = AddToLine.StationsInLine.ToList()[AddToLine.StationsInLine.Count() - 2].BusStationKey
+                        StationCodeTwo = id1,
+                        StationCodeOne = id2
                     };
                     dl.AddConsecutiveStations(consecutiveStations);
                 }
@@ -1004,16 +1010,6 @@ namespace BL
                    group UserJourney by UserJourney.BusLineJourney into groups
                    select groups;
         }
-        /// <summary>
-        /// The function retuns the Travel History of user
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IEnumerable<object> TravelHistory(string id)
-        {
-            return from sin in GetUserJourney(id).Drives
-                   select sin;
-        }
         public BusLine LineToGo(BusStation busStationCurrent, BusStation busStationtarget)
         {
             //var buses = from BusLineInStation in busStationCurrent.BusLinesInStation
@@ -1089,6 +1085,7 @@ namespace BL
                    };
         }
         #endregion
+        #region LineRide
         public void DeleteLineRide(BO.LineRides line)
         {
             try
@@ -1100,7 +1097,6 @@ namespace BL
                 throw new BO.IdException(ex.ToString());
             }
         }
-        #region LineRide
         public TimeSpan GetTimeDrive(int IdBusLine, int codeStation1, int codeStation2)
         {
             TimeSpan SaveTimeDrive = new TimeSpan(0, 0, 0);
@@ -1116,12 +1112,7 @@ namespace BL
             }
             return SaveTimeDrive;
         }
-        public BO.BusDrive BusDriveDoBoAdapter(DO.BusDrive BusDriveDO)
-        {
-            BO.BusDrive busDriveBO = new BO.BusDrive();
-            BusDriveDO.CopyPropertiesTo(busDriveBO);
-            return busDriveBO;
-        }
+      
         public BO.LineRides LineRideStationBoDoAdapter(DO.LineRide lineRides)
         {
             BO.LineRides lineBO = new LineRides();

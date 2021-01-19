@@ -20,13 +20,6 @@ namespace DLAPI
         void DeleteBus(Bus bus);
         IEnumerable<string> GetBussLicenseNumber();
         #endregion
-        #region BusDrive
-        BusDrive GetBusDrive(int id);
-        IEnumerable<BusDrive> GetAllBusDrive();
-        void AddBusDrive(BusDrive bus);
-        void UpdateBusDrive(BusDrive bus);
-        void DeleteBusDrive(BusDrive bus);
-        #endregion
         #region BusStation
         BusStation GetBusStation(int code);
         IEnumerable<BusStation> BusStations();

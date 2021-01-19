@@ -30,10 +30,21 @@ namespace PL.WPF
             InitializeComponent();
             bl = _bl;
         }
+        /// <summary>
+        /// event MouseButtonEventArgs 
+        /// grid  DragMove
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Grid_MouseDown(object sender,MouseButtonEventArgs e)
         {
             DragMove();
         }
+        /// <summary>
+        /// Opens another window with each click on the list view menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListViewMenu_SelectionChanged(object sender,SelectionChangedEventArgs e)
         {
             int index = ListViewMenu.SelectedIndex;
@@ -57,12 +68,21 @@ namespace PL.WPF
 
             }
         }
+        /// <summary>
+        /// move menu
+        /// </summary>
+        /// <param name="index"></param>
         private void MoveCursorMenu(int index)
         {
             TransitionEffectContenSlide.OnApplyTemplate();
             GridCursor.Margin = new Thickness(0, (100+(60 * index)), 0, 0);
         }
-
+        /// <summary>
+        /// event click
+        /// back btn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backbtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

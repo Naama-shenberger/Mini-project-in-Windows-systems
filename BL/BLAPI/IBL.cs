@@ -39,8 +39,8 @@ namespace BLAPI
         DO.BusLine BusLineBoDoAdapter(BO.BusLine busLineBO);
         BusLine GetBusLine(int id);
         IEnumerable<BusLine> GetAllBusLines();
-        void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation, float _Distance, TimeSpan timeSpanTravel);
-        void AddBusStationToLine(BusLine AddToLine, BO.BusLineStation busLineStation, float _Distance, TimeSpan timeSpanTravel);
+        void AddBusLine(BusLine busLine, IEnumerable<BusLineStation> busLineStation);
+        void AddBusStationToLine(BusLine AddToLine, BO.BusLineStation busLineStation);
         void DeleteBusLineStationFromeLine(BusLine DeleteFromLine, BusLineStation busLineStation);
         void DeleteBusLine(BusLine busLine);
         IEnumerable<IGrouping<string, BusLine>> GetAllBusLinesGroupByArea();
@@ -67,7 +67,6 @@ namespace BLAPI
         void AddUserJourney(UserJourney userJourney);
         void DeleteUserJourney(UserJourney userJourney);
         IEnumerable<UserJourney> GetUsersJourney();
-        IEnumerable<object> TravelHistory(string id);
         UserJourney GetUserJourney(string id);
         IEnumerable<IGrouping<string, UserJourney>> GetUsersJourneyGroupByBoardingStation();
         IEnumerable<User> GetUsersJourneyBy(Predicate<UserJourney> predicate);
@@ -85,11 +84,9 @@ namespace BLAPI
         DO.LineRide LineRideStationDoBoAdapter(BO.LineRides lineRides);
         BO.LineRides LineRideStationBoDoAdapter(DO.LineRide lineRides);
         void DeleteLineRide(BO.LineRides line);
-        #endregion
-        #region Bus Drive
         TimeSpan GetTimeDrive(int IdBusLine, int codeStation1, int codeStation2);
         IEnumerable<LineRides> GetLineTimingPerStation(BusStation CurbusStation, TimeSpan tsCurTime);
-        BO.BusDrive BusDriveDoBoAdapter(DO.BusDrive BusDriveDO);
+      
         #endregion
     }
 }

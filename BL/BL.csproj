@@ -45,7 +45,6 @@
     <Compile Include="BLAPI\IBL.cs" />
     <Compile Include="BLImp.cs" />
     <Compile Include="BO\Bus.cs" />
-    <Compile Include="BO\BusDrive.cs" />
     <Compile Include="BO\BusLine.cs" />
     <Compile Include="BO\BusLineInStation.cs" />
     <Compile Include="BO\BusLineStation.cs" />

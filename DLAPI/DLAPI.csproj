@@ -44,7 +44,6 @@
     <Compile Include="DalConfing.cs" />
     <Compile Include="DalFactory.cs" />
     <Compile Include="DO\Bus.cs" />
-    <Compile Include="DO\BusDrive.cs" />
     <Compile Include="DO\BusLine.cs" />
     <Compile Include="DO\BusLineStation.cs" />
     <Compile Include="DO\BusStation.cs" />

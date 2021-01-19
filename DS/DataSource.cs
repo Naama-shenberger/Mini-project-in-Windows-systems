@@ -16,7 +16,6 @@ namespace DS
         public static List<Bus> ListBuses;
         public static List<BusStation> ListStations;
         public static List<BusLine> BusLines;
-        public static List<BusDrive> ListBusDrives;
         public static List<BusLineStation> BusLineStations;
         public static List<LineRide> LinesOutForARide;
         public static List<ConsecutiveStations> ListConsecutiveStations;
@@ -117,23 +116,7 @@ namespace DS
                 new BusStation{Active=true, BusStationKey  = 388845, StationName  = "מנחם בגין/יצחק רבין", StationAddress = "שדרות מנחם בגין4 ",   Latitude = 31.799224,   Longitude = 34.782985   },
                 new BusStation{Active=true, BusStationKey  = 388855, StationName  = "חיים הרצוג/דולב",    StationAddress = " חיים הרצוג 12", Latitude = 31.800334,   Longitude = 34.785069   },
             };
-            //ListBusDrives = new List<BusDrive>
-            //{
-            //    new BusDrive{Active=true,LicensePlate="12345611",ExitStart=new TimeSpan(11,23,4),TimeDrive=new TimeSpan(1,662,33),TimeNextStop=new TimeSpan(12,2,3),LastStasion=06101,BusDriverFirstName="mark",BusDriverLastName="smith",BusDriverId="017909168"},
-            //    new BusDrive{Active=true,LicensePlate="12345612",ExitStart=new TimeSpan(06,11,2),TimeDrive=new TimeSpan(1,23,3),TimeNextStop=new TimeSpan(1,2,33),LastStasion=06101,BusDriverFirstName="james",BusDriverLastName="lay",BusDriverId="017909168"},
-            //    new BusDrive{Active=true,LicensePlate="12345613",ExitStart=new TimeSpan(20,24,3),TimeDrive=new TimeSpan(1,32,3),TimeNextStop=new TimeSpan(1,2,34),LastStasion=064101,BusDriverFirstName="jessi",BusDriverLastName="white",BusDriverId="01786543"},
-            //    new BusDrive{Active=true,LicensePlate="12345614",ExitStart=new TimeSpan(33,4,5),TimeDrive=new TimeSpan(13,2,3),TimeNextStop=new TimeSpan(1,2,83),LastStasion=0611601,BusDriverFirstName="joul",BusDriverLastName="night",BusDriverId="01790111"},
-            //    new BusDrive{Active=true,LicensePlate="12345615",ExitStart=new TimeSpan(7,8,9),TimeDrive=new TimeSpan(13,2,3),TimeNextStop=new TimeSpan(19,2,3),LastStasion=061107,BusDriverFirstName="ellen",BusDriverLastName="poal",BusDriverId="017900068"},
-            //    new BusDrive{Active=true,LicensePlate="12345616",ExitStart=new TimeSpan(3,5,6),TimeDrive=new TimeSpan(1,2,33),TimeNextStop=new TimeSpan(1,82,3),LastStasion=069101,BusDriverFirstName="jacson",BusDriverLastName="noal",BusDriverId="01999168"},
-            //    new BusDrive{Active=true,LicensePlate="12345876",ExitStart=new TimeSpan(3,5,6),TimeDrive=new TimeSpan(1,23,3),TimeNextStop=new TimeSpan(1,24,3),LastStasion=0687101,BusDriverFirstName="jacson",BusDriverLastName="wester",BusDriverId="033309168"},
-            //    new BusDrive{Active=true,LicensePlate="12345617",ExitStart=new TimeSpan(3,4,69),TimeDrive=new TimeSpan(1,2,34),TimeNextStop=new TimeSpan(1,21,3),LastStasion=066101,BusDriverFirstName="percy",BusDriverLastName="jacson",BusDriverId="07779168"},
-            //    new BusDrive{Active=true,LicensePlate="12345618",ExitStart=new TimeSpan(11,2,4),TimeDrive=new TimeSpan(2,3,45),TimeNextStop=new TimeSpan(1,2,23),LastStasion=057101,BusDriverFirstName="harry",BusDriverLastName="potter",BusDriverId="066609168"},
-            //    new BusDrive{Active=true,LicensePlate="12345619",ExitStart=new TimeSpan(13,2,2),TimeDrive=new TimeSpan(10,02,9),TimeNextStop=new TimeSpan(1,2,63),LastStasion=821101,BusDriverFirstName="ron",BusDriverLastName="wez",BusDriverId="017999998"},
-            //    new BusDrive{Active=true,LicensePlate="12345610",ExitStart=new TimeSpan(33,4,5),TimeDrive=new TimeSpan(11,0,21),TimeNextStop=new TimeSpan(1,2,36),LastStasion=901101,BusDriverFirstName="america",BusDriverLastName="singer",BusDriverId="04449168"},
-
-
-            //};
-
+           
             BusLines = new List<BusLine>
             {  new BusLine{ID=20,Active=true,BusLineNumber = 134,FirstStopNumber =388624,LastStopNumber=875612,Area=Zones.General},
                new BusLine{ID=1,Active=true,BusLineNumber = 14,FirstStopNumber = 388624,LastStopNumber=875612,Area=Zones.Zefat},

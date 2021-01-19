@@ -147,10 +147,10 @@
                 </Expander>
                 <Label Content="Choose a bus line"  Background="#FFDCD7FA" HorizontalAlignment="Left" Margin="66,36,0,0" VerticalAlignment="Top" Width="117" Height="42" FontWeight="Bold"/>
                
-                <TextBox   Visibility="Hidden" Background="#FFE6F1E2" x:Name="Ddistancetb" HorizontalAlignment="Left" Height="25" Margin="446,520,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98"/>
+                <!--<TextBox   Visibility="Hidden" Background="#FFE6F1E2" x:Name="Ddistancetb" HorizontalAlignment="Left" Height="25" Margin="446,520,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98"/>
                 <materialDesign:TimePicker  Visibility="Hidden" Background="#FFE6F1E2"  Name="TimePickerDistance" HorizontalAlignment="Left" Margin="446,561,0,0" VerticalAlignment="Top" Height="31" Width="98"/>
                 <Label Name="labelDistance" Visibility="Hidden" Content="Distance between stations" HorizontalAlignment="Center" Margin="267,520,636.6,258" Width="174"/>
-                <Label Name="labelTime"  Visibility="Hidden" Content="Time Distance between stations" HorizontalAlignment="Center" Margin="262,561,640.6,211" Width="175"/>
+                <Label Name="labelTime"  Visibility="Hidden" Content="Time Distance between stations" HorizontalAlignment="Center" Margin="262,561,640.6,211" Width="175"/>-->
                 <materialDesign:PackIcon Kind="Location" Foreground="Black" Width="50" Margin="270,116,0,0" Height="20"/>
                 <materialDesign:PackIcon Kind="BusStop" Foreground="Black" Width="50" Margin="270,141,0,0" Height="20" RenderTransformOrigin="0.545,0.587"/>
                 <materialDesign:PackIcon Kind="BusStop" Foreground="Black" Width="50" Margin="270,172,0,0" Height="20" RenderTransformOrigin="0.736,0.48"/>
