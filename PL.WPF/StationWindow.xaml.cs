@@ -28,29 +28,16 @@ namespace PL.WPF
         {
             InitializeComponent();
             bl = _bl;
+            ComboBoxBusStationKey.ItemsSource = bl.GetAllBusStation();
+            ComboBoxBusStationKey.SelectedValuePath = "BusStationKey";
             ComboBoxBusStationKey.DisplayMemberPath = "StationName";
-            ComboBoxBusStationKey.SelectedValuePath= "BusStationKey";
             ComboBoxBusStationKey.SelectedIndex = 0;
+
             RefreshAllStationsComboBox();
             RefreshBusLines();
+
             DataGrirdAllLines.IsReadOnly = true;
             DataGrirdAllLinesInStation.IsReadOnly = true;
-        }
-        /// <summary>
-        /// When selecting a combobox this function brinds up to date the whole window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComboBoxBusStationKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            CurBusStation = (ComboBoxBusStationKey.SelectedItem as BO.BusStation);
-            gridOneBusStation.DataContext = CurBusStation;
-            if (CurBusStation != null)
-            {
-                RefreshBusLinesInStation();
-                RefreshBusLines();
-            }
-
         }
         /// <summary>
         /// Refreshes the combo box
@@ -59,7 +46,6 @@ namespace PL.WPF
         {
             ComboBoxBusStationKey.DataContext = StationList=Convert<BO.BusStation> (bl.GetAllBusStation()); //ObserListOfStudents;
             ComboBoxBusStationKey.SelectedIndex = 0;
-
         }
 
         /// <summary>
@@ -83,6 +69,22 @@ namespace PL.WPF
                 List<BO.BusLine> listOfLines = bl.GetAllBusLines().Where(c1 => CurBusStation.ListBusLinesInStation.All(c2 => c2.BusLineNumber != c1.BusLineNumber)).ToList();
                 DataGrirdAllLines.DataContext = listOfLines;
             }
+        }
+        /// <summary>
+        /// When selecting a combobox this function brinds up to date the whole window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBoxBusStationKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurBusStation = (ComboBoxBusStationKey.SelectedItem as BO.BusStation);
+            gridOneBusStation.DataContext = CurBusStation;
+            if (CurBusStation != null)
+            {
+                RefreshBusLinesInStation();
+                RefreshBusLines();
+            }
+
         }
         /// <summary>
         /// 
@@ -212,7 +214,7 @@ namespace PL.WPF
             }
             catch (BO.IdException ex)
             {
-                MessageBox.Show("There is a distance and time between the stations", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
                 RefreshBusLinesInStation();
                 RefreshBusLines();
             }

@@ -1,36 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfStation>
 	<BusStation>
-	    <Active>true</Active>
-        <BusStationKey>874104</BusStationKey>
-		<StationName>שמואל הנביא/יקים</StationName>
-	    <StationAddress>שמואל הנביא 47</StationAddress>
-		<Latitude>31.791394</Latitude>
-		<Longitude>35.22416 </Longitude>
-	</BusStation>
-	<BusStation>
-	    <Active>true</Active>
-        <BusStationKey>388634</BusStationKey>
-		<StationName>ההרחבה</StationName>
-	    <StationAddress> רחוב:ההרחבהעיר:גאוליםרציף:קומה</StationAddress>
-		<Latitude>32.300264</Latitude>
-		<Longitude>34.939512</Longitude>
-	</BusStation>
-	<BusStation>
-	    <Active>true</Active>
-        <BusStationKey>876015</BusStationKey>
-		<StationName>קצנלבוגן/מעלות בוסטון</StationName>
-	    <StationAddress> הרב רפאל קצנלבוגן 16</StationAddress>
-		<Latitude>31.788077</Latitude>
-		<Longitude>35.173651</Longitude>
-	</BusStation>
-	<BusStation>
-	    <Active>true</Active>
-        <BusStationKey>875612</BusStationKey>
-		<StationName>כנפי נשרים 20</StationName>
-	    <StationAddress>מרכז שטנר/כנפי נשרים</StationAddress>
-		<Latitude>31.787703</Latitude>
-		<Longitude>35.188761</Longitude>
+		<BusStationKey>111888</BusStationKey>
+		<Active>True</Active>
+		<StationName>בית השנהב/בית הדפוס</StationName>
+		<StationAddress>בית הדפוס 9</StationAddress>
+		<Latitude>31.9254</Latitude>
+		<Longitude>35.2712</Longitude>
 	</BusStation>
 	<BusStation>
 		<Active>true</Active>
@@ -63,6 +39,30 @@
 		<StationAddress>הרוזמרין 57</StationAddress>
 		<Latitude>31.732231</Latitude>
 		<Longitude>35.202069</Longitude>
+	</BusStation>
+	<BusStation>
+		<Active>true</Active>
+		<BusStationKey>874104</BusStationKey>
+		<StationName>שמואל הנביא/יקים</StationName>
+		<StationAddress>שמואל הנביא 47</StationAddress>
+		<Latitude>31.791394</Latitude>
+		<Longitude>35.22416 </Longitude>
+	</BusStation>
+	<BusStation>
+		<Active>true</Active>
+		<BusStationKey>388634</BusStationKey>
+		<StationName>ההרחבה</StationName>
+		<StationAddress> רחוב:ההרחבהעיר:גאוליםרציף:קומה</StationAddress>
+		<Latitude>32.300264</Latitude>
+		<Longitude>34.939512</Longitude>
+	</BusStation>
+	<BusStation>
+		<Active>true</Active>
+		<BusStationKey>876015</BusStationKey>
+		<StationName>קצנלבוגן/מעלות בוסטון</StationName>
+		<StationAddress> הרב רפאל קצנלבוגן 16</StationAddress>
+		<Latitude>31.788077</Latitude>
+		<Longitude>35.173651</Longitude>
 	</BusStation>
 	<BusStation>
 		<Active>true</Active>
@@ -114,25 +114,9 @@
 	</BusStation>
 	<BusStation>
 		<Active>true</Active>
-		<BusStationKey>874405</BusStationKey>
-		<StationName>שמואל הנביא/יקים</StationName>
-		<StationAddress>שמואל הנביא 48</StationAddress>
-		<Latitude>31.791505</Latitude>
-		<Longitude>35.224204</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>874507</BusStationKey>
-		<StationName>שמואל הנביא/תדהר</StationName>
-		<StationAddress>שמואל הנביא 71</StationAddress>
-		<Latitude>31.792975</Latitude>
-		<Longitude>35.222797</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
 		<BusStationKey>874808</BusStationKey>
-		<StationName >ירמיהו/אלקנה</StationName>
-		<StationAddress >ירמיהו</StationAddress>
+		<StationName>ירמיהו/אלקנה</StationName>
+		<StationAddress>ירמיהו</StationAddress>
 		<Latitude>31.792925</Latitude>
 		<Longitude>35.213412</Longitude>
 	</BusStation>
@@ -154,27 +138,11 @@
 	</BusStation>
 	<BusStation>
 		<Active>true</Active>
-		<BusStationKey>875711</BusStationKey>
-		<StationName >בית ענבר/כנפי נשרים</StationName>
-		<StationAddress>כנפי נשרים</StationAddress>
-		<Latitude>31.787728</Latitude>
-		<Longitude>35.188761</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
 		<BusStationKey>875812</BusStationKey>
 		<StationName>רוזנטל/כנפי נשרים</StationName>
 		<StationAddress>הרב אברהם דוד רוזנטל</StationAddress>
 		<Latitude>31.787754</Latitude>
 		<Longitude>35.179644</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>876013</BusStationKey>
-		<StationName>קצנלבוגן/מעלות בוסטון</StationName>
-		<StationAddress>הרב רפאל קצנלבוגן 16</StationAddress>
-		<Latitude>31.788077</Latitude>
-		<Longitude>35.173651</Longitude>
 	</BusStation>
 	<BusStation>
 		<Active>true</Active>
@@ -203,7 +171,7 @@
 	<BusStation>
 		<Active>true</Active>
 		<BusStationKey>876517</BusStationKey>
-		<StationName >כפר שאול/קצנלבוגן</StationName>
+		<StationName>כפר שאול/קצנלבוגן</StationName>
 		<StationAddress>הרב רפאל קצנלבוגן 94</StationAddress>
 		<Latitude>31.785614</Latitude>
 		<Longitude>35.178884</Longitude>
@@ -256,228 +224,228 @@
 		<Latitude>31.713796</Latitude>
 		<Longitude>34.996277</Longitude>
 	</BusStation>
-		<BusStation>
-		<Active>true</Active>
-		<BusStationKey>878721</BusStationKey>
-		<StationName>דרך שכם/טובלר</StationName>
-		<StationAddress>דרך שכם 45</StationAddress>
-		<Latitude>31.792304</Latitude>
-		<Longitude>35.229086</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388332</BusStationKey>
-		<StationName>הנחשול/הדייגים</StationName>
-		<StationAddress>הנחשול 30 </StationAddress>
-		<Latitude>31.984553</Latitude>
-		<Longitude>34.782828</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388342</BusStationKey>
-		<StationName>פריד/ששת הימים</StationName>
-		<StationAddress>משה פריד 9</StationAddress>
-		<Latitude>31.88855</Latitude>
-		<Longitude>34.790904</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388372</BusStationKey>
-		<StationName>חנה אברך/וולקני</StationName>
-		<StationAddress>חנה אברך 9</StationAddress>
-		<Latitude>31.892166</Latitude>
-		<Longitude>34.796071</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388393</BusStationKey>
-		<StationName >הבנים/אלי כהן</StationName>
-		<StationAddress>הבנים 4</StationAddress>
-		<Latitude>31.862305</Latitude>
-		<Longitude>34.821857</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388403</BusStationKey>
-		<StationName>ויצמן/הבנים</StationName>
-		<StationAddress>וייצמן 11</StationAddress>
-		<Latitude>31.865085</Latitude>
-		<Longitude>34.822237</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388413</BusStationKey>
-		<StationName>האירוס/הכלנית</StationName>
-		<StationAddress>האירוס 13</StationAddress>
-		<Latitude>31.865222</Latitude>
-		<Longitude>34.818957</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388443</BusStationKey>
-		<StationName>אלי כהן/לוחמי הגטאות</StationName>
-		<StationAddress>אלי כהן 62</StationAddress>
-		<Latitude>31.86244</Latitude>
-		<Longitude>34.827023</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388453</BusStationKey>
-		<StationName>שבזי/שבת אחים</StationName>
-		<StationAddress>שבזי 51</StationAddress>
-		<Latitude>31.863501</Latitude>
-		<Longitude>34.828702</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388473</BusStationKey>
-		<StationName>חיים בר לב/שדרות יצחק רבין</StationName>
-		<StationAddress> 11 חיים בר לב</StationAddress>
-		<Latitude>31.977409</Latitude>
-		<Longitude>34.763896</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388483</BusStationKey>
-		<StationName>מרכז לבריאות הנפש לב השרון </StationName>
-		<StationAddress>צור משה 23</StationAddress>
-		<Latitude>32.300345</Latitude>
-		<Longitude>34.912708</Longitude>
-	</BusStation>
-		<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388493</BusStationKey>
-		<StationName>נחל דולב/קטלב</StationName>
-		<StationAddress>דולב 3</StationAddress>
-		<Latitude>31.715667</Latitude>
-		<Longitude>34.998752</Longitude>
-	</BusStation>
-		<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388523</BusStationKey>
-		<StationName>נחל דולב/נחל תמנע</StationName>
-		<StationAddress>דולב 76</StationAddress>
-		<Latitude>31.713339</Latitude>
-		<Longitude>34.999308</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388563</BusStationKey>
-		<StationName>הרותם/הדגניות</StationName>
-		<StationAddress>הרותם 3</StationAddress>
-		<Latitude>31.874963</Latitude>
-		<Longitude>34.81249</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388604</BusStationKey>
-		<StationName>מבוא הגפן/מורד התאנה</StationName>
-		<StationAddress>מבוא הגפן 33</StationAddress>
-		<Latitude>32.305234</Latitude>
-		<Longitude>34.948647</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388614</BusStationKey>
-		<StationName>מתנ''ס/נחל דולב</StationName>
-		<StationAddress>נחל דולב 18</StationAddress>
-		<Latitude>31.715221</Latitude>
-		<Longitude>34.996684</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388624</BusStationKey>
-		<StationName>נחל שורק/נחל לכיש</StationName>
-		<StationAddress>נחל שורק 6</StationAddress>
-		<Latitude>31.714054</Latitude>
-		<Longitude>34.995407</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388644</BusStationKey>
-		<StationName>ההרחבה/הותיקים</StationName>
-		<StationAddress>ההרחבה 23</StationAddress>
-		<Latitude>32.298171</Latitude>
-		<Longitude>34.938705</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388704</BusStationKey>
-		<StationName>הראשונים/כביש 5700</StationName>
-		<StationAddress>המגדל 13</StationAddress>
-		<Latitude>32.352953</Latitude>
-		<Longitude>34.899465</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388724</BusStationKey>
-		<StationName>נחל איילון/נחל הקישון</StationName>
-		<StationAddress>נחל איילון</StationAddress>
-		<Latitude>31.711476</Latitude>
-		<Longitude>34.991179</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388734</BusStationKey>
-		<StationName>עוקשי/לוי אשכול</StationName>
-		<StationAddress>ישראל עוקשי 4</StationAddress>
-		<Latitude>31.883941</Latitude>
-		<Longitude>34.807039</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388764</BusStationKey>
-		<StationName>גורודסקי/יחיאל פלדי</StationName>
-		<StationAddress>יהודה גורודיסקי 35</StationAddress>
-		<Latitude>31.898463</Latitude>
-		<Longitude>34.823461</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388774</BusStationKey>
-		<StationName>דרך מנחם בגין/יעקב חזן</StationName>
-		<StationAddress>דרך מנחם בגין 30</StationAddress>
-		<Latitude>32.076535</Latitude>
-		<Longitude>34.904907</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388795</BusStationKey>
-		<StationName>התאנה/הגפן</StationName>
-		<StationAddress>התאנה</StationAddress>
-		<Latitude>31.865457</Latitude>
-		<Longitude>34.859437</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388805</BusStationKey>
-		<StationName>בן צבי/רופין</StationName>
-		<StationAddress>שדרות בן צבי 39</StationAddress>
-		<Latitude>31.777844</Latitude>
-		<Longitude>35.20928</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388815</BusStationKey>
-		<StationName>דרך הפרחים/יסמין</StationName>
-		<StationAddress>דרך הפרחים 46</StationAddress>
-		<Latitude>31.809325</Latitude>
-		<Longitude>34.784347</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388845</BusStationKey>
-		<StationName>מנחם בגין/יצחק רבין</StationName>
-		<StationAddress>שדרות מנחם בגין</StationAddress>
-		<Latitude>31.799224</Latitude>
-		<Longitude>34.782985</Longitude>
-	</BusStation>
-	<BusStation>
-		<Active>true</Active>
-		<BusStationKey>388855</BusStationKey>
-		<StationName>חיים הרצוג/דולב</StationName>
-		<StationAddress>חיים הרצוג 12</StationAddress>
-		<Latitude>31.800334</Latitude>
-		<Longitude>34.785069</Longitude>
-	</BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388332</BusStationKey>
+    <StationName>הנחשול/הדייגים</StationName>
+    <StationAddress>הנחשול 30 </StationAddress>
+    <Latitude>31.984553</Latitude>
+    <Longitude>34.782828</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388342</BusStationKey>
+    <StationName>פריד/ששת הימים</StationName>
+    <StationAddress>משה פריד 9</StationAddress>
+    <Latitude>31.88855</Latitude>
+    <Longitude>34.790904</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388372</BusStationKey>
+    <StationName>חנה אברך/וולקני</StationName>
+    <StationAddress>חנה אברך 9</StationAddress>
+    <Latitude>31.892166</Latitude>
+    <Longitude>34.796071</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388393</BusStationKey>
+    <StationName>הבנים/אלי כהן</StationName>
+    <StationAddress>הבנים 4</StationAddress>
+    <Latitude>31.862305</Latitude>
+    <Longitude>34.821857</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388403</BusStationKey>
+    <StationName>ויצמן/הבנים</StationName>
+    <StationAddress>וייצמן 11</StationAddress>
+    <Latitude>31.865085</Latitude>
+    <Longitude>34.822237</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388413</BusStationKey>
+    <StationName>האירוס/הכלנית</StationName>
+    <StationAddress>האירוס 13</StationAddress>
+    <Latitude>31.865222</Latitude>
+    <Longitude>34.818957</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388443</BusStationKey>
+    <StationName>אלי כהן/לוחמי הגטאות</StationName>
+    <StationAddress>אלי כהן 62</StationAddress>
+    <Latitude>31.86244</Latitude>
+    <Longitude>34.827023</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388453</BusStationKey>
+    <StationName>שבזי/שבת אחים</StationName>
+    <StationAddress>שבזי 51</StationAddress>
+    <Latitude>31.863501</Latitude>
+    <Longitude>34.828702</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388473</BusStationKey>
+    <StationName>חיים בר לב/שדרות יצחק רבין</StationName>
+    <StationAddress> 11 חיים בר לב</StationAddress>
+    <Latitude>31.977409</Latitude>
+    <Longitude>34.763896</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388483</BusStationKey>
+    <StationName>מרכז לבריאות הנפש לב השרון </StationName>
+    <StationAddress>צור משה 23</StationAddress>
+    <Latitude>32.300345</Latitude>
+    <Longitude>34.912708</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388493</BusStationKey>
+    <StationName>נחל דולב/קטלב</StationName>
+    <StationAddress>דולב 3</StationAddress>
+    <Latitude>31.715667</Latitude>
+    <Longitude>34.998752</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388523</BusStationKey>
+    <StationName>נחל דולב/נחל תמנע</StationName>
+    <StationAddress>דולב 76</StationAddress>
+    <Latitude>31.713339</Latitude>
+    <Longitude>34.999308</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388563</BusStationKey>
+    <StationName>הרותם/הדגניות</StationName>
+    <StationAddress>הרותם 3</StationAddress>
+    <Latitude>31.874963</Latitude>
+    <Longitude>34.81249</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388604</BusStationKey>
+    <StationName>מבוא הגפן/מורד התאנה</StationName>
+    <StationAddress>מבוא הגפן 33</StationAddress>
+    <Latitude>32.305234</Latitude>
+    <Longitude>34.948647</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388614</BusStationKey>
+    <StationName>מתנ''ס/נחל דולב</StationName>
+    <StationAddress>נחל דולב 18</StationAddress>
+    <Latitude>31.715221</Latitude>
+    <Longitude>34.996684</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388624</BusStationKey>
+    <StationName>נחל שורק/נחל לכיש</StationName>
+    <StationAddress>נחל שורק 6</StationAddress>
+    <Latitude>31.714054</Latitude>
+    <Longitude>34.995407</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388644</BusStationKey>
+    <StationName>ההרחבה/הותיקים</StationName>
+    <StationAddress>ההרחבה 23</StationAddress>
+    <Latitude>32.298171</Latitude>
+    <Longitude>34.938705</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388704</BusStationKey>
+    <StationName>הראשונים/כביש 5700</StationName>
+    <StationAddress>המגדל 13</StationAddress>
+    <Latitude>32.352953</Latitude>
+    <Longitude>34.899465</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388724</BusStationKey>
+    <StationName>נחל איילון/נחל הקישון</StationName>
+    <StationAddress>נחל איילון</StationAddress>
+    <Latitude>31.711476</Latitude>
+    <Longitude>34.991179</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388734</BusStationKey>
+    <StationName>עוקשי/לוי אשכול</StationName>
+    <StationAddress>ישראל עוקשי 4</StationAddress>
+    <Latitude>31.883941</Latitude>
+    <Longitude>34.807039</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388764</BusStationKey>
+    <StationName>גורודסקי/יחיאל פלדי</StationName>
+    <StationAddress>יהודה גורודיסקי 35</StationAddress>
+    <Latitude>31.898463</Latitude>
+    <Longitude>34.823461</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388774</BusStationKey>
+    <StationName>דרך מנחם בגין/יעקב חזן</StationName>
+    <StationAddress>דרך מנחם בגין 30</StationAddress>
+    <Latitude>32.076535</Latitude>
+    <Longitude>34.904907</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388795</BusStationKey>
+    <StationName>התאנה/הגפן</StationName>
+    <StationAddress>התאנה</StationAddress>
+    <Latitude>31.865457</Latitude>
+    <Longitude>34.859437</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388805</BusStationKey>
+    <StationName>בן צבי/רופין</StationName>
+    <StationAddress>שדרות בן צבי 39</StationAddress>
+    <Latitude>31.777844</Latitude>
+    <Longitude>35.20928</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388815</BusStationKey>
+    <StationName>דרך הפרחים/יסמין</StationName>
+    <StationAddress>דרך הפרחים 46</StationAddress>
+    <Latitude>31.809325</Latitude>
+    <Longitude>34.784347</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388845</BusStationKey>
+    <StationName>מנחם בגין/יצחק רבין</StationName>
+    <StationAddress>שדרות מנחם בגין</StationAddress>
+    <Latitude>31.799224</Latitude>
+    <Longitude>34.782985</Longitude>
+  </BusStation>
+  <BusStation>
+    <Active>true</Active>
+    <BusStationKey>388855</BusStationKey>
+    <StationName>חיים הרצוג/דולב</StationName>
+    <StationAddress>חיים הרצוג 12</StationAddress>
+    <Latitude>31.800334</Latitude>
+    <Longitude>34.785069</Longitude>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>212121</BusStationKey>
+    <Active>True</Active>
+    <StationName>בית הדפוס/מרכז ספיר</StationName>
+    <StationAddress>בית הדפוס 26</StationAddress>
+    <Latitude>32.033</Latitude>
+    <Longitude>35.1758</Longitude>
+  </BusStation>
 </ArrayOfStation>

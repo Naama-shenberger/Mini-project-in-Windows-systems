@@ -3,33 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.WPF"
+        xmlns:local="clr-namespace:PL.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AddNewStationWindow" Height="350" Width="450" >
-    <Grid>
-        <Rectangle Margin="0,0,-1.4,83" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.222"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0.668"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-            <Rectangle.Fill>
+        Title="AddNewStationWindow" Height="350" Width="450" WindowStyle="None" >
+    <Grid Margin="10,0,0.2,254">
+        <Grid Margin="-10,0,-4,-180">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="323*"/>
+                <ColumnDefinition Width="677*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="#FF2281D1"/>
                     <GradientStop Color="#FF34268A" Offset="1"/>
-                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
                 </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <Rectangle Height="226" Fill="White" VerticalAlignment="Bottom" Margin="26,0,26.2,35.8" RadiusY="28.27" RadiusX="28.27">
+            </Grid.Background>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="149" Margin="0,0,0,226.6" Grid.ColumnSpan="2">
+                <Button x:Name="backbtn" ToolTip="back" Click="BackButton_Click" Width="71" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0" Margin="-9,9,0,9" FontWeight="Bold" >
+                    <materialDesign:PackIcon Kind="ArrowLeft" FontWeight="Bold" FontSize="16" Height="30" Width="71" />
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Rectangle Height="226" Fill="White" VerticalAlignment="Bottom" Margin="26,0,26,-180" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="26,101,0,0" VerticalAlignment="Top" Height="184" Width="391">
+        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="26,68,0,-162" VerticalAlignment="Top" Height="184" Width="391">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="120" />
                 <ColumnDefinition Width="Auto" MinWidth="200" />
@@ -58,7 +59,7 @@
             <TextBox Text="{Binding ElementName=LongdeValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" Margin="199.2,2.4,1.6,0" Grid.Column="1" Grid.Row="4" FontWeight="Bold" FontStyle="Italic"/>
 
         </Grid>
-        <Button Content="ADD" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="183,270,0,0" Click="AddingButton_Click" BorderBrush="#FFBE9DE8" Background="#FF2281D1"/>
+        <Button Content="ADD" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="179,257,0,-199" Click="AddingButton_Click" BorderBrush="#FFBE9DE8" Background="#FF2281D1"/>
 
 
     </Grid>

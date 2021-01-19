@@ -56,5 +56,14 @@ namespace PL.WPF
 
 
         }
+        /// <summary>
+        /// A button that returns you to previous window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
