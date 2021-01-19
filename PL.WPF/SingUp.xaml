@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="SingUp" Height="500" Width="750" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Rectangle Margin="0,0,-1,174.4" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Margin="-4,-4,3,178.4" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform AngleY="-0.222"/>
-                    <RotateTransform/>
+                    <RotateTransform Angle="0.164"/>
                     <TranslateTransform Y="0.668"/>
                 </TransformGroup>
             </Rectangle.RenderTransform>

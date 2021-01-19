@@ -173,7 +173,7 @@ namespace PL.WPF
                     AddNewStationWindow addStationWindow = new AddNewStationWindow(bl);
                     addStationWindow.ShowDialog();
                     bl.AddBusStation(addStationWindow.BusStation);
-                    MessageBox.Show($"bus Line Station {addStationWindow.Bus_Station_Key} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"bus Station {addStationWindow.Bus_Station_Key} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     //addNewStationWindow.addStation
                     RefreshAllStationsComboBox();
                 }
@@ -208,13 +208,14 @@ namespace PL.WPF
                 else
                 {
                     bl.AddBusLineToStation(CurBusStation, blBO, InfoWindow.Time, InfoWindow.Distance);
+                    MessageBox.Show($"bus Line Station {blBO.BusLineNumber} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     RefreshBusLinesInStation();
                     RefreshBusLines();
                 }
             }
             catch (BO.IdException ex)
             {
-                MessageBox.Show(ex.ToString(), "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Consecutive Stations already exists\n no need to add info" , "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Information);
                 RefreshBusLinesInStation();
                 RefreshBusLines();
             }

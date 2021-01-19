@@ -414,4 +414,10 @@
     <Active>true</Active>
     <NumberStationInLine>4</NumberStationInLine>
   </BusLineStation>
+  <BusLineStation>
+    <ID>16</ID>
+    <BusStationKey>855813</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>4</NumberStationInLine>
+  </BusLineStation>
 </ArrayOfBusLineStation>
