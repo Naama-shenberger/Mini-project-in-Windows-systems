@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.WPF"
+        xmlns:local="clr-namespace:PL.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="TravelerWindow" Height="450" Width="700">
+        WindowStyle="None"
+        Title="TravelerWindow"  Height="500" Width="750" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid >
             <DataGrid x:Name="AlllinesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="395,0,142.6,139"  Background="#FF9CB7F4">
@@ -23,8 +24,20 @@
                     <DataGridTextColumn Header="Name" Binding="{Binding StationName}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button  Content="Simulate Station"  HorizontalAlignment="Left" Margin="481,364,0,0" VerticalAlignment="Top" Width="155" Click="Button_Click"/>
+            <Button  HorizontalAlignment="Left" Margin="516,415,0,0" VerticalAlignment="Top" Width="183" Click="Button_Click" Height="52">
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="TimelineClockOutline" Height="26" Width="56" Foreground="LightGray"/>
+                    <TextBlock Text="Simulate One Station" Height="33" Width="188"/>
+                </StackPanel>
+            </Button>
         </Grid>
-        
+        <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
+
+                <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,8,10,0" VerticalAlignment="Top" Click="backbtn_Click" >
+                    <materialDesign:PackIcon Foreground="LightGray" Kind="ArrowBack" Height="32" Width="40"/>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

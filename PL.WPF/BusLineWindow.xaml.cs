@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
+
 namespace PL.WPF
 {
     /// <summary>
@@ -60,6 +62,12 @@ namespace PL.WPF
             TransitionEffectContenSlide.OnApplyTemplate();
             GridCursor.Margin = new Thickness(0, (100+(60 * index)), 0, 0);
         }
+
+        private void backbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }
 

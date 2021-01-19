@@ -10,30 +10,16 @@
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown" >
         <StackPanel VerticalAlignment="Top">
             <Grid Background="#FF0069C0" Height="10"/>
-            <Grid Margin="5">
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Text="Design WPF" VerticalAlignment="Center" FontSize="20" FontFamily="Corbel" Margin="20 10"  />
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0">
-                        <materialDesign:PackIcon Kind="Twitter"/>
-                    </Button>
-                    <Button x:Name="Facebookbtn"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0 0 10 0">
-                        <materialDesign:PackIcon Kind="Facebook"/>
-                    </Button>
-                    <Button x:Name="Git"   Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="-9 0 0 0" >
-                        <materialDesign:PackIcon Kind="Github"/>
-                    </Button>
-                </StackPanel>
+            <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0">
-                        <materialDesign:PackIcon Kind="BellOutline"/>
-                    </Button>
-                    <Button x:Name="backbtn"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0 0 10 0">
-                        <materialDesign:PackIcon Kind="Power"/>
+
+                    <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,10,10,0" VerticalAlignment="Top" Click="backbtn_Click">
+                        <materialDesign:PackIcon Kind="ArrowBack" Height="32" Width="40"/>
                     </Button>
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <Grid Margin="300,31,0,0">
+        <Grid Margin="300,10,0,10">
             <Grid  x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Rectangle Margin="0,2,1205,7" RenderTransformOrigin="0.5,0.5">

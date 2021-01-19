@@ -31,7 +31,9 @@ namespace PL.WPF
         {
             InitializeComponent();
             bL = _bL;
-           
+            User user = new User(bL);
+            user.ShowDialog();
+
             AllBusStaionsDataGrid.DataContext = bL.GetAllBusStation();
             AllBusStaionsDataGrid.IsReadOnly = true;
             AlllinesDataGrid.IsReadOnly = true;
@@ -58,6 +60,15 @@ namespace PL.WPF
             CurBusStation = AllBusStaionsDataGrid.SelectedItem as BO.BusStation;
 
             AlllinesDataGrid.DataContext = (CurBusStation).ListBusLinesInStation.ToList();
+        }
+
+        private void backbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+           // Application.Current.Shutdown();
+            access access = new access(bL);
+            access.ShowDialog();
+
         }
     }
 }

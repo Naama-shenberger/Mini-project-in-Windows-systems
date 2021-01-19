@@ -70,6 +70,11 @@ namespace PL.WPF
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OKCancel);
             }
         }
+
+        private void backbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
     

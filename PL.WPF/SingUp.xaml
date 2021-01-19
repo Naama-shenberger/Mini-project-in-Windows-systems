@@ -24,7 +24,12 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
 
+            <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,10,10,0" VerticalAlignment="Top" Click="backbtn_Click"  >
+                <materialDesign:PackIcon Kind="ArrowBack" Height="32" Width="40"/>
+            </Button>
+        </StackPanel>
 
         <!--<Image Source="C:\Users\naamo\Downloads\icons8-bus-80.png" Margin="91,10,85,369.4" RenderTransformOrigin="0.597,0.522"/>-->
         <Rectangle Height="229" Fill="White" VerticalAlignment="Bottom" Margin="130,0,121,121.4" RadiusY="28.27" RadiusX="28.27">

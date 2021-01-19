@@ -41,5 +41,11 @@ namespace PL.WPF
             travelerWindow.ShowDialog();
             this.Close();
         }
+
+        private void backbtn_Click(object sender, RoutedEventArgs e)
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
+        }
     }
 }

@@ -65,6 +65,13 @@ namespace PL.WPF
             SingUp s = new SingUp(iBL);
             s.Show();
         }
+
+        private void backbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            MainWindow a = new MainWindow();
+            a.Visibility = Visibility.Hidden;
+        }
     }
 }
     

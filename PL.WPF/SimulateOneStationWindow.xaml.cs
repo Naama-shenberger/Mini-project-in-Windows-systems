@@ -83,13 +83,18 @@ namespace PL.WPF
         {
             while (isTimerRun)
             {
-                timeWorker.ReportProgress(231);
+                timeWorker.ReportProgress(1000);
                 Thread.Sleep(1000);
             }
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+       
+
+        private void backbtn_Click(object sender, RoutedEventArgs e)
         {
+
+            isTimerRun = false;
+
             this.Close();
         }
     }

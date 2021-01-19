@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.SimulateOneStationWindow"
         mc:Ignorable="d"
-        Title="SimulateOneStationWindow" Height="750" Width="700" WindowStartupLocation="CenterScreen">
+        WindowStyle="None"
+        Title="SimulateOneStationWindow"  Height="500" Width="750" WindowStartupLocation="CenterScreen">
     <WrapPanel>
         <Grid>
-            <DataGrid Margin="154,318,33.6,-690" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True"  Name="lineTimingDataGrid">
+            <DataGrid Margin="236,152,31,-446" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True"  Name="lineTimingDataGrid">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="Time" Header="Timing" Binding="{Binding timerText}" />
                     <DataGridTextColumn Header="Started at" Binding="{Binding TravelStartTime}"/>
@@ -28,7 +29,16 @@
             <Label Content="Name Staion" Margin="12,204,276,-76"/>
             <TextBlock x:Name="StaionNametb" Text="{Binding StationName}" Height="33" Margin="186,209,91,-82"/>
         </Grid>
-        <Button x:Name="Back" Content="Back" Width="75" Click="Back_Click"/>
+        <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,-270,0" Width="62">
+
+                <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,8,10,0" VerticalAlignment="Top" Click="backbtn_Click" >
+                    <materialDesign:PackIcon Foreground="LightGray" Kind="ArrowBack" Height="32" Width="40"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+
 
     </WrapPanel>
 </Window>
