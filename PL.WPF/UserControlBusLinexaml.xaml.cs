@@ -141,23 +141,7 @@ namespace PL.WPF
                 {
                     try
                     {
-                        //if (Ddistancetb.Text == "")
-                        //    Ddistancetb.Text = "0";
-                        //if (TimePickerDistance.Text == null)
-                        //    TimePickerDistance = new MaterialDesignThemes.Wpf.TimePicker { Text = "0" };
                         bl.AddBusStationToLine(CurBusLine, busLineStation);
-                        //if (CurBusLine.StationsInLine.FirstOrDefault(id => id.BusStationKey == busLineStation.BusStationKey && CurBusLine.ID == id.ID && id.AverageTravelTime.TotalMinutes == 0 && id.Distance == -1) != null)
-                        //{
-                        //    CurBusLine.StationsInLine = from sin in CurBusLine.StationsInLine
-                        //                                where sin.BusStationKey != busLineStation.BusStationKey
-                        //                                where sin.Distance != -1
-                        //                                select sin;
-                        //    DeleteDuplicates(CurBusLine.StationsInLine);
-                        //    Ddistancetb.Visibility = Visibility.Visible;
-                        //    TimePickerDistance.Visibility = Visibility.Visible;
-                        //    throw new ArithmeticException();
-                        //}
-
                     }
                     catch (BO.IdException ex)
                     {
@@ -224,13 +208,7 @@ namespace PL.WPF
             {
                 if (save == null)
                     throw new InvalidOperationException("");
-                //if (Ddistancetb.Text == "")
-                //    Ddistancetb.Text = "0";
-                //if (TimePickerDistance.Text == null)
-                //{
-                //    TimePickerDistance = new MaterialDesignThemes.Wpf.TimePicker { Text = "0" };
-                //}
-                bl.AddBusLine(save, save.StationsInLine);/*, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));*/
+                bl.AddBusLine(save, save.StationsInLine);
                 BusLineList.Add(save);
             }
             catch (InvalidOperationException ex)
@@ -239,11 +217,7 @@ namespace PL.WPF
             }
             catch (BO.IdException ex)
             {
-                //labelDistance.Visibility = Visibility.Visible;
-                //labelTime.Visibility = Visibility.Visible;
-                //Ddistancetb.Visibility = Visibility.Visible;
-                //TimePickerDistance.Visibility = Visibility.Visible;
-                bl.AddBusLine(save, save.StationsInLine);/*, float.Parse(Ddistancetb.Text), TimeSpan.Parse(Regex.Replace(TimePickerDistance.Text, "[A-Za-z ]", "")));*/
+                bl.AddBusLine(save, save.StationsInLine);
             }
 
         }
@@ -403,7 +377,8 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void AddLineRide_Click(object sender, RoutedEventArgs e)
         {
-
+            AddLineRideWindow addLineRideWindow = new AddLineRideWindow(bl, CurBusLine.ID);
+            addLineRideWindow.Show();
         }
         /// <summary>
         /// event click 

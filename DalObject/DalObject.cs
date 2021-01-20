@@ -548,6 +548,11 @@ namespace DL
         }
         #endregion
         #region User
+        /// <summary>
+        ///  Receives user name and returns the appropriate object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public User GetUser(string id)
         {
             var user = DataSource.Users.Find(u => u.UserName == id);
@@ -556,12 +561,20 @@ namespace DL
                     return user.Clone();
             throw new IdException($"No user have the name {id}");
         }
+        /// <summary>
+        /// The function returns all users
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<User> GetUsers()
         {
             return from User in DataSource.Users
                    where User.DelUser == true
                    select User.Clone();
         }
+        /// <summary>
+        /// /The function receives an object user to add
+        /// </summary>
+        /// <param name="user"></param>
         public void AddUser(User user)
         {
             var userIndex = DataSource.Users.FindIndex(u => u.UserName == user.UserName);
@@ -575,6 +588,10 @@ namespace DL
                     throw new DO.IdException(user.UserName, $"The User Name {user.UserName} already exist");
             DataSource.Users.Add(user.Clone());
         }
+        /// <summary>
+        /// The method receives an object user to update
+        /// </summary>
+        /// <param name="user"></param>
         public void UpdatUser(User user)
         {
             var toUpdateIndex = DataSource.Users.FindIndex(u => u.UserName == user.UserName);
@@ -586,6 +603,10 @@ namespace DL
             else
                 throw new IdException(user.UserName, $"The user Name {user.UserName} does not exist");
         }
+        /// <summary>
+        /// The method gets an object user to delete
+        /// </summary>
+        /// <param name="user"></param>
         public void DeleteUser(User user)
         {
             var toDeleteIndex = DataSource.Users.FindIndex(u => u.UserName == user.UserName);

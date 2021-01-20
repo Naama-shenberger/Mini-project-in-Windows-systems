@@ -1,0 +1,28 @@
+﻿<Window x:Class="PL.WPF.AddLineRideWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="AddLineRideWindow" Height="350" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
+
+            <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,10,10,0" VerticalAlignment="Top" Click="backbtn_Click"  >
+                <materialDesign:PackIcon Kind="ArrowBack" Height="32" Width="40"/>
+            </Button>
+        </StackPanel>
+        <materialDesign:TimePicker x:Name = "StartTimePicker"  Text="Select bus start time"   Margin = "10,62,130.6,230.8" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A" RenderTransformOrigin="0.5,0.5">
+            
+        </materialDesign:TimePicker>
+        <materialDesign:TimePicker x:Name = "EndTimePicker"  Text="Select bus End time"   Margin = "10,116,130.6,176.8" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A" RenderTransformOrigin="0.5,0.5">
+        </materialDesign:TimePicker>
+        <materialDesign:TimePicker x:Name = "ExitEvery" Text="Exit Every"  Margin = "8,166,130.6,127.8" Height="27" FontWeight="Bold"  BorderBrush="#FF34268A" RenderTransformOrigin="0.5,0.5">
+
+        </materialDesign:TimePicker>
+        <Button x:Name="Addbtn" Content="Add" HorizontalAlignment="Left" Margin="276,251,0,0" VerticalAlignment="Top" Width="75" Click="Addbtn_Click">
+            
+        </Button>
+    </Grid>
+</Window>

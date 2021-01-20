@@ -42,28 +42,29 @@ namespace DL
         /// <returns></returns>
         public DO.Bus GetBus(string id)
         {
+            
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
-
             Bus b = (from bus in busRootElem.Elements()
-                            where bus.Element("LicensePlate").Value == id
-                            select new Bus()
-                            {
-                                Active = Boolean.Parse(bus.Element("Active").Value),
-                                LicensePlate = bus.Element("LicensePlate").Value,
-                                DateActivity= DateTime.Parse(bus.Element("DateActivity").Value),
-                                DateTreatment = DateTime.Parse(bus.Element("DateTreatment").Value),
-                                Totalkilometers=float.Parse(bus.Element("Totalkilometers").Value),
-                                KilometersGas= float.Parse(bus.Element("KilometersGas").Value),
-                                KilometersTreatment= float.Parse(bus.Element("KilometersTreatment").Value),
-                                Status= (Status)Enum.Parse(typeof(Status), bus.Element("Status").Value),
-                                AirTire = float.Parse(bus.Element("AirTire").Value),
-                                OilCondition = Boolean.Parse(bus.Element("OilCondition").Value)
-                            }).FirstOrDefault();
+                         where bus.Element("LicensePlate").Value == id
+                         select new Bus()
+                         {
+                             Active = Boolean.Parse(bus.Element("Active").Value),
+                             LicensePlate = bus.Element("LicensePlate").Value,
+                             DateActivity = DateTime.Parse(bus.Element("DateActivity").Value),
+                             DateTreatment = DateTime.Parse(bus.Element("DateTreatment").Value),
+                             Totalkilometers = float.Parse(bus.Element("Totalkilometers").Value),
+                             KilometersGas = float.Parse(bus.Element("KilometersGas").Value),
+                             KilometersTreatment = float.Parse(bus.Element("KilometersTreatment").Value),
+                             Status = (Status)Enum.Parse(typeof(Status), bus.Element("Status").Value),
+                             AirTire = float.Parse(bus.Element("AirTire").Value),
+                             OilCondition = Boolean.Parse(bus.Element("OilCondition").Value)
+                         }).FirstOrDefault();
 
-            if (b != null)
-                if (b.Active == true)
-                    return b;
-            throw new DO.IdException(id, $"there is no bus with the id: {id}");
+                if (b != null)
+                    if (b.Active == true)
+                        return b;
+                throw new DO.IdException(id, $"there is no bus with the id: {id}");
+           
         }
         /// <summary>
         ///  A function that returns a list of bus that are active 

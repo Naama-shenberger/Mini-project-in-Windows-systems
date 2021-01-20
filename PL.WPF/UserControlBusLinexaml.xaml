@@ -19,7 +19,7 @@
                             </InlineUIContainer><Run Text="Update Bus Line"/></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="AddBusLineButton"  BorderBrush="#FF2281D1" Background="#FF2281D1"  HorizontalAlignment="Left" Margin="66,490,0,0" VerticalAlignment="Top" Width="233" Click="AddBusLineButton_Click" Height="42">
+                <Button x:Name="AddBusLineButton"  BorderBrush="#FF2281D1" Background="#FF2281D1"  HorizontalAlignment="Left" Margin="66,486,0,0" VerticalAlignment="Top" Width="233" Click="AddBusLineButton_Click" Height="42">
                     <StackPanel Height="48" Width="242">
                         <TextBlock VerticalAlignment="Bottom"  HorizontalAlignment="Stretch" Margin="0,0,0.4,0" FontSize="20" Height="33"><InlineUIContainer>
                                 <materialDesign:PackIcon Kind="Add" Width="40" Height="26" />

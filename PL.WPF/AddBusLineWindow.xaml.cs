@@ -64,7 +64,7 @@ namespace PL.WPF
                     };
                     BO.LineRides lineRides = new BO.LineRides
                     {
-
+                        Active=true,
                         TravelStartTime = TimeSpan.Parse(Regex.Replace(StartTimePicker.Text, "[A-Za-z ]", "")),
                         TravelEndTime = TimeSpan.Parse(Regex.Replace(EndTimePicker.Text, "[A-Za-z ]", "")),
                         BusDepartureNumber = TimeSpan.Parse(Regex.Replace(ExitEvery.Text, "[A-Za-z ]", "")),
