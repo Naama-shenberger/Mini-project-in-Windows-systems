@@ -889,18 +889,16 @@ namespace BL
                 throw new BO.IdException(ex.ToString());
             }
         }
-        public TimeSpan GetTimeDrive(int IdBusLine, int codeStation1, int codeStation2)
+        public TimeSpan GetTimeDrive(int IdBusLine, int codeStation)
         {
             TimeSpan SaveTimeDrive = new TimeSpan(0, 0, 0);
             for (int i = 0; i < GetBusLine(IdBusLine).StationsInLine.Count(); i++)
             {
-                if (GetBusLine(IdBusLine).StationsInLine.ToList()[i].BusStationKey == codeStation1)
-                    while (GetBusLine(IdBusLine).StationsInLine.ToList()[i].BusStationKey != codeStation2 && i < GetBusLine(IdBusLine).StationsInLine.Count())
-                    {
-                        ++i;
-                        SaveTimeDrive += GetBusLine(IdBusLine).StationsInLine.ToList()[i].AverageTravelTime;
-
-                    }
+                if (GetBusLine(IdBusLine).StationsInLine.ToList()[i].BusStationKey != codeStation)
+                {
+                    SaveTimeDrive += GetBusLine(IdBusLine).StationsInLine.ToList()[i].AverageTravelTime;
+                }
+                else { break; }
             }
             return SaveTimeDrive;
         }
@@ -927,6 +925,7 @@ namespace BL
                        TravelEndTime = LineRides.TravelEndTime,
                        CodeLastStasion = line.StationsInLine.Last().BusStationKey,
                        NameLastStasion = dl.GetBusStation(line.StationsInLine.Last().BusStationKey).StationName,
+                       CurTimeStasion = GetTimeDrive(Line.ID, CurbusStation.BusStationKey)
 
                    };
         } 

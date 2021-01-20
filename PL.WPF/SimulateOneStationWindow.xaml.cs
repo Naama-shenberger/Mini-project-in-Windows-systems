@@ -1,21 +1,12 @@
-﻿using BLAPI;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+using BLAPI;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace PL.WPF
 {
@@ -42,8 +33,7 @@ namespace PL.WPF
             InitializeComponent();
             BL = _BL;
             CurBusStation = busStation;
-            StaionNametb.Text = busStation.StationName;
-            CodeStaiontb.Text = busStation.BusStationKey.ToString();
+            gridOneBusStation.DataContext = CurBusStation;
             Stopwatch = new Stopwatch();
             timeWorker = new BackgroundWorker();
             //Event registration
@@ -53,6 +43,9 @@ namespace PL.WPF
             Stopwatch.Restart();
             isTimerRun = true;
             timeWorker.RunWorkerAsync();
+           
+
+
         }
         /// <summary>
         /// event ProgressChangedEventArgs 
@@ -68,7 +61,6 @@ namespace PL.WPF
             if (CurBusStation != null && CurBusStation.ListBusLinesInStation != null)
             {
                 lineTimingDataGrid.DataContext = BL.GetLineTimingPerStation(CurBusStation, tsCurentTime);
-                //Time.Binding=BL.GetTimeDrive()
             }
         }
         /// <summary>
@@ -93,13 +85,6 @@ namespace PL.WPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void backbtn_Click(object sender, RoutedEventArgs e)
-        {
-
-            isTimerRun = false;
-            this.Close();
-        }
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

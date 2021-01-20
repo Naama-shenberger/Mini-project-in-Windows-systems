@@ -247,18 +247,6 @@
     <NumberStationInLine>3</NumberStationInLine>
   </BusLineStation>
   <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>857321</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>857321</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>2</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
     <ID>20111111</ID>
     <BusStationKey>875612</BusStationKey>
     <Active>true</Active>

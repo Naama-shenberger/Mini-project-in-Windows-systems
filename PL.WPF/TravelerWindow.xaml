@@ -8,7 +8,7 @@
         WindowStyle="None"
         Title="TravelerWindow"  Height="500" Width="750" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid>
-        <Grid Margin="0,0,0,415.6" HorizontalAlignment="Right" Width="744">
+        <Grid Margin="0,0,0.4,416" HorizontalAlignment="Right" Width="750">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="323*"/>
                 <ColumnDefinition Width="677*"/>
