@@ -24,9 +24,16 @@ namespace PL.WPF
         IBL bl;
         public UserControlMoreDetails(IBL _bl)
         {
-            InitializeComponent();
-            bl = _bl;
-            Treeview.ItemsSource = bl.GetAllBusLinesGroupByArea();
+            try
+            {
+                InitializeComponent();
+                bl = _bl;
+                Treeview.ItemsSource = bl.GetAllBusLinesGroupByArea();
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            }
         }
     }
 }

@@ -651,7 +651,7 @@ namespace DL
             XElement LineRidesRootElem = XMLTools.LoadListFromXMLElement(LineRidePath);
 
             XElement bus1 = (from p in LineRidesRootElem.Elements()
-                             where int.Parse(p.Element("ID").Value) == o.ID 
+                             where int.Parse(p.Element("ID").Value) == o.ID && XmlConvert.ToTimeSpan(p.Element("TravelStartTime").Value) == o.TravelStartTime
                              select p).FirstOrDefault();
 
             if (bus1 != null)
@@ -707,7 +707,7 @@ namespace DL
             XElement LineRidesRootElem = XMLTools.LoadListFromXMLElement(LineRidePath);
 
             XElement line = (from p in LineRidesRootElem.Elements()
-                            where int.Parse(p.Element("ID").Value) == outLine.ID 
+                            where int.Parse(p.Element("ID").Value) == outLine.ID && XmlConvert.ToTimeSpan(p.Element("TravelStartTime").Value) == outLine.TravelStartTime
                              select p).FirstOrDefault();
 
             if (line != null)

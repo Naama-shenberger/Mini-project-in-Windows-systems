@@ -44,7 +44,14 @@ namespace PL.WPF
         /// </summary>
         void RefreshAllStationslv()
         {
-            lvBusStations.DataContext = Convert<BO.BusStation>(bL.GetAllBusStation());
+            try
+            {
+                lvBusStations.DataContext = Convert<BO.BusStation>(bL.GetAllBusStation());
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            }
         }
         /// <summary>
         /// Collection Conversion Function to ObservableCollection

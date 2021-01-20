@@ -2,14 +2,14 @@
 <ArrayOfLineRide>
   <LineRide>
     <ID>1</ID>
-    <Active>true</Active>
+    <Active>False</Active>
     <BusDepartureNumber>PT12H00M00S</BusDepartureNumber>
     <TravelStartTime>PT00H09M00S</TravelStartTime>
     <TravelEndTime>PT11H30M00S</TravelEndTime>
   </LineRide>
   <LineRide>
     <ID>1</ID>
-    <Active>true</Active>
+    <Active>False</Active>
     <BusDepartureNumber>PT03H00M00S</BusDepartureNumber>
     <TravelStartTime>PT19H00M00S</TravelStartTime>
     <TravelEndTime>PT22H20M00S</TravelEndTime>
@@ -153,5 +153,54 @@
     <BusDepartureNumber>PT10H00M00S</BusDepartureNumber>
     <TravelStartTime>PT08H30M00S</TravelStartTime>
     <TravelEndTime>PT08H30M00S</TravelEndTime>
+  </LineRide>
+  <LineRide>
+    <ID>1</ID>
+    <TravelStartTime>PT11H56M</TravelStartTime>
+    <TravelEndTime>PT11H56M</TravelEndTime>
+    <BusDepartureNumber>PT1H5M</BusDepartureNumber>
+    <Active>False</Active>
+  </LineRide>
+  <LineRide>
+    <ID>1</ID>
+    <TravelStartTime>PT1H6M</TravelStartTime>
+    <TravelEndTime>PT2H9M</TravelEndTime>
+    <BusDepartureNumber>PT11H55M</BusDepartureNumber>
+    <Active>False</Active>
+  </LineRide>
+  <LineRide>
+    <ID>1</ID>
+    <TravelStartTime>PT4H20M</TravelStartTime>
+    <TravelEndTime>PT1H</TravelEndTime>
+    <BusDepartureNumber>PT1H5M</BusDepartureNumber>
+    <Active>False</Active>
+  </LineRide>
+  <LineRide>
+    <ID>1</ID>
+    <TravelStartTime>PT10H50M</TravelStartTime>
+    <TravelEndTime>PT2H10M</TravelEndTime>
+    <BusDepartureNumber>PT11H55M</BusDepartureNumber>
+    <Active>False</Active>
+  </LineRide>
+  <LineRide>
+    <ID>1</ID>
+    <TravelStartTime>PT12H</TravelStartTime>
+    <TravelEndTime>PT3H14M</TravelEndTime>
+    <BusDepartureNumber>PT1H5M</BusDepartureNumber>
+    <Active>False</Active>
+  </LineRide>
+  <LineRide>
+    <ID>1</ID>
+    <TravelStartTime>PT3H15M</TravelStartTime>
+    <TravelEndTime>PT12H</TravelEndTime>
+    <BusDepartureNumber>PT2H10M</BusDepartureNumber>
+    <Active>False</Active>
+  </LineRide>
+  <LineRide>
+    <ID>1</ID>
+    <TravelStartTime>PT3H13M</TravelStartTime>
+    <TravelEndTime>PT1H5M</TravelEndTime>
+    <BusDepartureNumber>PT1H6M</BusDepartureNumber>
+    <Active>False</Active>
   </LineRide>
 </ArrayOfLineRide>

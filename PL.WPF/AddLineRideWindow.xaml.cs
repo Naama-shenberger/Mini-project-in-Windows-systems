@@ -25,12 +25,12 @@ namespace PL.WPF
         /// Adding Line Ride
         /// </summary>
         IBL bL;
-        int runNumberOfBusLine;
-        public AddLineRideWindow(IBL _BL,int RunNumber)
+        BO.BusLine CurBusLine;
+        public AddLineRideWindow(IBL _BL,BO.BusLine busLine)
         {
             InitializeComponent();
             bL = _BL;
-            runNumberOfBusLine= RunNumber;
+            CurBusLine = busLine;
         }
 
         /// <summary>
@@ -41,15 +41,27 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void Addbtn_Click(object sender, RoutedEventArgs e)
         {
-            BO.LineRides lineRides = new BO.LineRides
+            try
             {
-                ID = runNumberOfBusLine,
-                Active =true,
-                TravelStartTime = TimeSpan.Parse(Regex.Replace(StartTimePicker.Text, "[A-Za-z ]", "")),
-                TravelEndTime = TimeSpan.Parse(Regex.Replace(EndTimePicker.Text, "[A-Za-z ]", "")),
-                BusDepartureNumber = TimeSpan.Parse(Regex.Replace(ExitEvery.Text, "[A-Za-z ]", "")),
-            };
-          //  bL.Add
+                BO.LineRides lineRides = new BO.LineRides
+                {
+                    BusLineNumber = CurBusLine.BusLineNumber,
+                    ID = CurBusLine.ID,
+                    CodeLastStasion = CurBusLine.LastStopNumber,
+                    NameLastStasion = bL.GetBusStation(CurBusLine.LastStopNumber).StationName,
+                    Active = true,
+                    TravelStartTime = TimeSpan.Parse(Regex.Replace(StartTimePicker.Text, "[A-Za-z ]", "")),
+                    TravelEndTime = TimeSpan.Parse(Regex.Replace(EndTimePicker.Text, "[A-Za-z ]", "")),
+                    BusDepartureNumber = TimeSpan.Parse(Regex.Replace(ExitEvery.Text, "[A-Za-z ]", "")),
+                };
+                CurBusLine.lineRides = CurBusLine.lineRides.Append(lineRides);
+                bL.AddLineRides(lineRides);
+                this.Close();
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            }
         }
 
         private void backbtn_Click(object sender, RoutedEventArgs e)

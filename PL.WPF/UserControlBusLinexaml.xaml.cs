@@ -49,15 +49,29 @@ namespace PL.WPF
         /// </summary>
         void RefreshDataGrirdAllStationslines()
         {
-            DataGrirdAllStationslines.DataContext = Convert<object>(bl.StationDetails(bl.GetAllBusLineStations()).Distinct());
+            try
+            {
+                DataGrirdAllStationslines.DataContext = Convert<object>(bl.StationDetails(bl.GetAllBusLineStations()).Distinct());
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            }
         }
         /// <summary>
         /// Refresh Combo Box
         /// </summary>
         void RefreshAllBusLinesComboBox()
         {
-            ComboBoxBusLineNumber.DataContext = BusLineList = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
-            ComboBoxBusLineNumber.SelectedIndex = 0;
+            try
+            {
+                ComboBoxBusLineNumber.DataContext = BusLineList = Convert<BO.BusLine>(bl.GetAllBusLines()); //ObserListOfStudents;
+                ComboBoxBusLineNumber.SelectedIndex = 0;
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            }
         }
         /// <summary>
         /// Collection Conversion Function to ObservableCollection
@@ -76,14 +90,21 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void cbBusBusLineNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CurBusLine = (ComboBoxBusLineNumber.SelectedItem as BO.BusLine);
-            gridOneBusLine.DataContext = CurBusLine;
-            if (CurBusLine != null && CurBusLine.StationsInLine != null)
-                DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
-            if (CurBusLine != null && CurBusLine.lineRides != null)
+            try
             {
-                IEnumerable<BO.LineRides> lineRides = CurBusLine.lineRides.GroupBy(x => x.TravelStartTime).Select(x => x.FirstOrDefault()).ToList<BO.LineRides>();
-                lvExpander.DataContext = lineRides;
+                CurBusLine = (ComboBoxBusLineNumber.SelectedItem as BO.BusLine);
+                gridOneBusLine.DataContext = CurBusLine;
+                if (CurBusLine != null && CurBusLine.StationsInLine != null)
+                    DataGrirdStationslines.DataContext = bl.StationDetails(CurBusLine.StationsInLine);
+                if (CurBusLine != null && CurBusLine.lineRides != null)
+                {
+                    IEnumerable<BO.LineRides> lineRides = CurBusLine.lineRides.GroupBy(x => x.TravelStartTime).Select(x => x.FirstOrDefault()).ToList<BO.LineRides>();
+                    lvExpander.DataContext = lineRides;
+                }
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
         }
         /// <summary>
@@ -94,12 +115,19 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void btDelBusLineStation_Click(object sender, RoutedEventArgs e)
         {
-            var btn = sender as Button;
-            var saveKey = int.Parse((btn).DataContext.ToString().Substring(18, 6));
-            bl.DeleteBusLineStationFromeLine(CurBusLine, bl.GetAllBusLineStations().FirstOrDefault(s => s.BusStationKey == saveKey));
+            try
+            {
+                var btn = sender as Button;
+                var saveKey = int.Parse((btn).DataContext.ToString().Substring(18, 6));
+                bl.DeleteBusLineStationFromeLine(CurBusLine, bl.GetAllBusLineStations().FirstOrDefault(s => s.BusStationKey == saveKey));
 
-            RefreshDataGrirdAllStationslines();
-            RefreshDataGrirdStationsline();
+                RefreshDataGrirdAllStationslines();
+                RefreshDataGrirdStationsline();
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            }
         }
         /// <summary>
         /// A function that receives a collection of bus line stations and the function deletes objects with the same station number
@@ -191,6 +219,10 @@ namespace PL.WPF
             catch (ArgumentException ex)
             {
                 MessageBox.Show("The line should have at least 2 stations");
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
         }
         /// <summary>
@@ -298,9 +330,16 @@ namespace PL.WPF
         /// </summary>
         void RefreshDataGrirdStationsline()
         {
-            if (CurBusLine != null && CurBusLine.StationsInLine != null)
+            try
             {
-                DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine)).Distinct();
+                if (CurBusLine != null && CurBusLine.StationsInLine != null)
+                {
+                    DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine)).Distinct();
+                }
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
         }
        
@@ -312,9 +351,16 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void DataGrirdStationslines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CurBusLine != null && CurBusLine.StationsInLine != null)
+            try
             {
-                DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine).Distinct());
+                if (CurBusLine != null && CurBusLine.StationsInLine != null)
+                {
+                    DataGrirdStationslines.DataContext = Convert<object>(bl.StationDetails(CurBusLine.StationsInLine).Distinct());
+                }
+            }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
         }
         /// <summary>
@@ -342,6 +388,10 @@ namespace PL.WPF
             {
                 MessageBox.Show("There is no follow-up station");
             }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            }
         }
         /// <summary>
         /// event click 
@@ -367,6 +417,10 @@ namespace PL.WPF
             {
                 MessageBox.Show("There is no follow-up station");
             }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            }
         }
 
         /// <summary>
@@ -377,8 +431,11 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void AddLineRide_Click(object sender, RoutedEventArgs e)
         {
-            AddLineRideWindow addLineRideWindow = new AddLineRideWindow(bl, CurBusLine.ID);
-            addLineRideWindow.Show();
+            AddLineRideWindow addLineRideWindow = new AddLineRideWindow(bl, CurBusLine);
+            addLineRideWindow.ShowDialog();
+            lvExpander.DataContext = CurBusLine.lineRides;
+
+
         }
         /// <summary>
         /// event click 
@@ -391,11 +448,12 @@ namespace PL.WPF
             try
             {
                 var btn = sender as Button;
-                bl.DeleteLineRide(btn.DataContext as BO.LineRides);
+                var lineRide = btn.DataContext as BO.LineRides;
+                bl.DeleteLineRide(lineRide);
                 if (CurBusLine != null && CurBusLine.lineRides != null)
                 {
-                    IEnumerable<BO.LineRides> lineRides = CurBusLine.lineRides.GroupBy(x => x.TravelStartTime).Select(x => x.FirstOrDefault()).ToList<BO.LineRides>();
-                    lvExpander.DataContext = lineRides;
+                    CurBusLine.lineRides = CurBusLine.lineRides.Where(x => x.TravelStartTime != (lineRide).TravelStartTime);
+                    lvExpander.DataContext = CurBusLine.lineRides;
                 }
                 else
                     lvExpander.DataContext = "";
