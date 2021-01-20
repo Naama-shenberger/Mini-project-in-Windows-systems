@@ -2,7 +2,7 @@
 <ArrayOfBusLine>
   <BusLine>
     <ID>1</ID>
-    <Active>False</Active>
+    <Active>true</Active>
     <BusLineNumber>14</BusLineNumber>
     <FirstStopNumber>388624</FirstStopNumber>
     <LastStopNumber>875612</LastStopNumber>
@@ -10,9 +10,9 @@
   </BusLine>
   <BusLine>
     <ID>2</ID>
-    <Active>True</Active>
+    <Active>true</Active>
     <BusLineNumber>112</BusLineNumber>
-    <FirstStopNumber>875612</FirstStopNumber>
+    <FirstStopNumber>388624</FirstStopNumber>
     <LastStopNumber>875612</LastStopNumber>
     <Area>Alon_Shvut</Area>
   </BusLine>
@@ -188,6 +188,14 @@
     <ID>2011111</ID>
     <BusLineNumber>22</BusLineNumber>
     <FirstStopNumber>873401</FirstStopNumber>
+    <LastStopNumber>388624</LastStopNumber>
+    <Active>true</Active>
+    <Area>Jerusalem_Corridor</Area>
+  </BusLine>
+  <BusLine>
+    <ID>20111111</ID>
+    <BusLineNumber>333</BusLineNumber>
+    <FirstStopNumber>875612</FirstStopNumber>
     <LastStopNumber>388624</LastStopNumber>
     <Active>true</Active>
     <Area>Jerusalem_Corridor</Area>

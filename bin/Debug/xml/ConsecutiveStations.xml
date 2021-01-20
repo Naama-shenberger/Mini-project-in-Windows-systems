@@ -126,4 +126,18 @@
     <AverageTravelTime>PT0.0705487S</AverageTravelTime>
     <Distance>17921.42</Distance>
   </ConsecutiveStations>
+  <ConsecutiveStations>
+    <StationCodeOne>875612</StationCodeOne>
+    <StationCodeTwo>857321</StationCodeTwo>
+    <Flage>true</Flage>
+    <AverageTravelTime>PT0.1244298S</AverageTravelTime>
+    <Distance>9081.899</Distance>
+  </ConsecutiveStations>
+  <ConsecutiveStations>
+    <StationCodeOne>857321</StationCodeOne>
+    <StationCodeTwo>875612</StationCodeTwo>
+    <Flage>true</Flage>
+    <AverageTravelTime>PT0.1218276S</AverageTravelTime>
+    <Distance>8464.818</Distance>
+  </ConsecutiveStations>
 </ArrayOfConsecutiveStations>

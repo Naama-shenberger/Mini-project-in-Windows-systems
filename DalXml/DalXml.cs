@@ -523,11 +523,18 @@ namespace DL
             XElement BusLineStationsRootElem = XMLTools.LoadListFromXMLElement(BusLineStationPath);
 
             XElement BusLineStation1 = (from p in BusLineStationsRootElem.Elements()
-                             where int.Parse(p.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(p.Element("BusStationKey").Value) && Boolean.Parse(p.Element("Active").Value)==true
+                             where int.Parse(p.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(p.Element("BusStationKey").Value) 
                                         select p).FirstOrDefault();
 
             if (BusLineStation1 != null)
-                throw new DO.IdException(station.BusStationKey, "Duplicate Bus Line ID");
+                if (Boolean.Parse(BusLineStation1.Element("Active").Value) == false)
+                {
+                    BusLineStation1.Element("Active").Value = true.ToString();
+                    XMLTools.SaveListToXMLElement(BusLineStationsRootElem, BusLineStationPath);
+                    return;
+                }
+               else
+                    throw new DO.IdException(station.BusStationKey, "Duplicate Bus Line ID");
             XElement BusLineStationElem = new XElement("BusLineStation",
                                    new XElement("ID", station.ID),
                                    new XElement("BusStationKey", station.BusStationKey),
@@ -569,13 +576,18 @@ namespace DL
             XElement BusLineStationsRootElem = XMLTools.LoadListFromXMLElement(BusLineStationPath);
 
             XElement s1 = (from s in BusLineStationsRootElem.Elements()
-                            where int.Parse(s.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(s.Element("BusStationKey").Value) && Boolean.Parse(s.Element("Active").Value) == true
+                            where int.Parse(s.Element("ID").Value) == station.ID && station.BusStationKey== int.Parse(s.Element("BusStationKey").Value) 
                            select s).FirstOrDefault();
 
             if (s1 != null)
             {
-                s1.Element("Active").Value = false.ToString();
-                XMLTools.SaveListToXMLElement(BusLineStationsRootElem, BusLineStationPath);
+                if (Boolean.Parse(s1.Element("Active").Value) == true)
+                {
+                    s1.Element("Active").Value = false.ToString();
+                    XMLTools.SaveListToXMLElement(BusLineStationsRootElem, BusLineStationPath);
+                }
+                else
+                    throw new DO.IdException(station.BusStationKey, $"bad Bus Line Station id: {station.ID}");
             }
             else
                 throw new DO.IdException(station.BusStationKey, $"bad Bus Line Station id: {station.ID}");
@@ -638,11 +650,18 @@ namespace DL
             XElement LineRidesRootElem = XMLTools.LoadListFromXMLElement(LineRidePath);
 
             XElement bus1 = (from p in LineRidesRootElem.Elements()
-                             where int.Parse(p.Element("ID").Value) == o.ID && Boolean.Parse(p.Element("Active").Value) == true
+                             where int.Parse(p.Element("ID").Value) == o.ID 
                              select p).FirstOrDefault();
 
             if (bus1 != null)
-                throw new DO.IdException(o.ID, "Duplicate Bus Line ID");
+                if(Boolean.Parse(bus1.Element("Active").Value) == false)
+                {
+                    bus1.Element("Active").Value = true.ToString();
+                    XMLTools.SaveListToXMLElement(LineRidesRootElem, LineRidePath);
+                    return;
+                }
+                else
+                     throw new DO.IdException(o.ID, "Duplicate Bus Line ID");
             XElement BusLineElem = new XElement("LineRide",
                                    new XElement("ID", o.ID),
                                    new XElement("TravelStartTime", o.TravelStartTime),
@@ -687,13 +706,18 @@ namespace DL
             XElement LineRidesRootElem = XMLTools.LoadListFromXMLElement(LineRidePath);
 
             XElement line = (from p in LineRidesRootElem.Elements()
-                            where int.Parse(p.Element("ID").Value) == outLine.ID && Boolean.Parse(p.Element("Active").Value) == true
+                            where int.Parse(p.Element("ID").Value) == outLine.ID 
                              select p).FirstOrDefault();
 
             if (line != null)
             {
-                line.Element("Active").Value =false.ToString();
-                XMLTools.SaveListToXMLElement(LineRidesRootElem, LineRidePath);
+                if (Boolean.Parse(line.Element("Active").Value) == true)
+                {
+                    line.Element("Active").Value = false.ToString();
+                    XMLTools.SaveListToXMLElement(LineRidesRootElem, LineRidePath);
+                }
+                else
+                    throw new DO.IdException(outLine.ID, $"bad  Line id: {outLine.ID}");
             }
             else
                 throw new DO.IdException(outLine.ID, $"bad  Line id: {outLine.ID}");
@@ -812,13 +836,18 @@ namespace DL
             XElement ConsecutiveStationsRootElem = XMLTools.LoadListFromXMLElement(ConsecutiveStationsPath);
 
             XElement stations = (from s in ConsecutiveStationsRootElem.Elements()
-                                 where int.Parse(s.Element("StationCodeOne").Value) == c.StationCodeOne && c.StationCodeTwo == int.Parse(s.Element("StationCodeTwo").Value) && Boolean.Parse(s.Element("Flage").Value) == true
+                                 where int.Parse(s.Element("StationCodeOne").Value) == c.StationCodeOne && c.StationCodeTwo == int.Parse(s.Element("StationCodeTwo").Value) 
                                  select s).FirstOrDefault();
 
             if (stations != null)
             {
-                stations.Element("Flage").Value = false.ToString();
-                XMLTools.SaveListToXMLElement(ConsecutiveStationsRootElem, ConsecutiveStationsPath);
+                if (Boolean.Parse(stations.Element("Flage").Value) == true)
+                {
+                    stations.Element("Flage").Value = false.ToString();
+                    XMLTools.SaveListToXMLElement(ConsecutiveStationsRootElem, ConsecutiveStationsPath);
+                }
+                else
+                    throw new DO.IdException($"No consecutive Stations have the id`s:{c.StationCodeOne} {c.StationCodeTwo}");
             }
             else
                 throw new DO.IdException($"No consecutive Stations have the id`s:{c.StationCodeOne} {c.StationCodeTwo}");
@@ -886,7 +915,7 @@ namespace DL
 
             if (user1 != null)
             {
-                if (Boolean.Parse(user1.Element("DelUser").Value) == false)
+                if (Boolean.Parse(user1.Element("DelUser").Value) == true)
                 {
                     user1.Element("DelUser").Value = false.ToString();
                     XMLTools.SaveListToXMLElement(UserRootElem, userPath);

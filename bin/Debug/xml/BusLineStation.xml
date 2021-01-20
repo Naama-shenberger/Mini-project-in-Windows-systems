@@ -241,249 +241,33 @@
     <NumberStationInLine>2</NumberStationInLine>
   </BusLineStation>
   <BusLineStation>
-    <ID>1</ID>
-    <BusStationKey>873141</BusStationKey>
-    <Active>true</Active>
+    <ID>2</ID>
+    <BusStationKey>857321</BusStationKey>
+    <Active>True</Active>
     <NumberStationInLine>3</NumberStationInLine>
   </BusLineStation>
   <BusLineStation>
-    <ID>3</ID>
-    <BusStationKey>873141</BusStationKey>
+    <ID>2</ID>
+    <BusStationKey>857321</BusStationKey>
     <Active>true</Active>
     <NumberStationInLine>3</NumberStationInLine>
   </BusLineStation>
   <BusLineStation>
     <ID>2</ID>
-    <BusStationKey>388311</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>4</ID>
-    <BusStationKey>873141</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>1</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>4</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>3</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>4</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>4</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>4</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>4</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>5</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>6</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>7</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>8</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>12</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>6</ID>
-    <BusStationKey>875711</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>4</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>13</ID>
-    <BusStationKey>874104</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>5</ID>
-    <BusStationKey>873141</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>4</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2011</ID>
-    <BusStationKey>873401</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>1</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2011</ID>
-    <BusStationKey>388624</BusStationKey>
+    <BusStationKey>857321</BusStationKey>
     <Active>true</Active>
     <NumberStationInLine>2</NumberStationInLine>
   </BusLineStation>
   <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>388614</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>5</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>876015</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>6</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>111888</BusStationKey>
-    <Active>False</Active>
-    <NumberStationInLine>7</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>16</ID>
-    <BusStationKey>111888</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>15</ID>
-    <BusStationKey>111888</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>857321</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>8</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>3</ID>
-    <BusStationKey>857321</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>5</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>18</ID>
-    <BusStationKey>873702</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>3</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>111888</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>8</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>8</ID>
-    <BusStationKey>111888</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>4</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>15</ID>
-    <BusStationKey>873031</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>4</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>16</ID>
-    <BusStationKey>855813</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>4</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>20111</ID>
-    <BusStationKey>388624</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>1</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>201111</ID>
+    <ID>20111111</ID>
     <BusStationKey>875612</BusStationKey>
     <Active>true</Active>
     <NumberStationInLine>2</NumberStationInLine>
   </BusLineStation>
   <BusLineStation>
-    <ID>201111</ID>
+    <ID>20111111</ID>
     <BusStationKey>388624</BusStationKey>
     <Active>true</Active>
     <NumberStationInLine>2</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2011111</ID>
-    <BusStationKey>873401</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>1</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2011111</ID>
-    <BusStationKey>388624</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>2</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>0</ID>
-    <BusStationKey>388795</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>75</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>388795</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>9</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>0</ID>
-    <BusStationKey>388443</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>77</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>388443</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>10</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>0</ID>
-    <BusStationKey>388815</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>79</NumberStationInLine>
-  </BusLineStation>
-  <BusLineStation>
-    <ID>2</ID>
-    <BusStationKey>388815</BusStationKey>
-    <Active>true</Active>
-    <NumberStationInLine>11</NumberStationInLine>
   </BusLineStation>
 </ArrayOfBusLineStation>

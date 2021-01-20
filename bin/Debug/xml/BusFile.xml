@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfBus>
   <Bus>
-    <Active>true</Active>
+    <Active>True</Active>
     <LicensePlate>22345678</LicensePlate>
-    <DateActivity>2018/11/3</DateActivity>
-    <DateTreatment>2019/11/3</DateTreatment>
+    <DateActivity>03/11/2018 00:00:00</DateActivity>
+    <DateTreatment>03/11/2019 00:00:00</DateTreatment>
     <Totalkilometers>112</Totalkilometers>
     <KilometersGas>339</KilometersGas>
     <KilometersTreatment>1131</KilometersTreatment>
     <AirTire>75</AirTire>
-    <OilCondition>true</OilCondition>
+    <OilCondition>True</OilCondition>
     <Status>Ready_to_go</Status>
   </Bus>
   <Bus>

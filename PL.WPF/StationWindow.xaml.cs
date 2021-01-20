@@ -174,7 +174,6 @@ namespace PL.WPF
                     addStationWindow.ShowDialog();
                     bl.AddBusStation(addStationWindow.BusStation);
                     MessageBox.Show($"bus Station {addStationWindow.Bus_Station_Key} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    //addNewStationWindow.addStation
                     RefreshAllStationsComboBox();
                 }
                 else
@@ -215,7 +214,7 @@ namespace PL.WPF
             }
             catch (BO.IdException ex)
             {
-                MessageBox.Show("Consecutive Stations already exists\n no need to add info" , "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"{ex.Message}" , "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Information);
                 RefreshBusLinesInStation();
                 RefreshBusLines();
             }

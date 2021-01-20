@@ -28,7 +28,7 @@ namespace BL
         {
             try
             {
-                dl.UpdateBus(BusBoDoAdapter(GetBus(bus.LicensePlate)));
+                dl.UpdateBus(BusBoDoAdapter(bus));
             }
             catch (DO.IdException ex)
             {
@@ -86,22 +86,12 @@ namespace BL
             {
                 if (NumberOflicensePlate(bus) == bus.LicensePlate.Length)
                     if (TreatmentIsNeeded(bus) || FuelCondition(bus))
-                    {
                         bus.Status = Enums.Status.Dangerous;
-                        bus.Active = false;
-                    }
                     else
-                    {
                         bus.Status = Enums.Status.Ready_to_go;
-                        bus.Active = true;
-                    }
                 else
                     throw new BO.IdException("Invalid license number input");
                 dl.AddBus(BusBoDoAdapter(bus));
-            }
-            catch (BO.IdException)
-            {
-                throw new BO.IdException("Bus ID is illegal");
             }
             catch (DO.IdException)
             {
@@ -117,7 +107,7 @@ namespace BL
 
             try
             {
-                dl.DeleteBus(dl.GetBus(bus.LicensePlate));
+                dl.DeleteBus(BusBoDoAdapter(bus));
             }
             catch (DO.IdException ex)
             {
@@ -131,7 +121,7 @@ namespace BL
         public void RefillingBus(Bus bus)
         {
             bus.KilometersGas = 0;
-            if (TreatmentIsNeeded(bus))
+            if (!TreatmentIsNeeded(bus))
                 bus.Status = Enums.Status.Ready_to_go;
             dl.UpdateBus(BusBoDoAdapter(bus));
 
@@ -193,12 +183,13 @@ namespace BL
         }
         /// <summary>
         /// A function that checks if a year has passed since the last treatment
+        /// returns true if Treatment Is Needed else returns false
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public bool TreatmentIsNeeded(Bus bus)
         {
-            if (!(bus.KilometersTreatment < 20000 && !DateCheck(bus)))
+            if ((bus.KilometersTreatment >= 20000 || DateCheck(bus)))
                 return true;
             return false;
 
@@ -238,8 +229,8 @@ namespace BL
                 bls = dl.GetBusLineStation(busStation.BusStationKey, busLine.ID);
                 dl.DeleteBusLineStation(bls);
                 busStation.ListBusLinesInStation.ToList().Remove(busLine);
-                BusLine bl = GetBusLine(busLine.ID);
-                bl.StationsInLine = bl.StationsInLine.Where(c => c.BusStationKey != busStation.BusStationKey);
+                BusLine busline = GetBusLine(busLine.ID);
+                busline.StationsInLine = busline.StationsInLine.Where(c => c.BusStationKey != busStation.BusStationKey);
 
             }
             catch (DO.IdException ex)
@@ -343,14 +334,9 @@ namespace BL
         {
             try
             {
-                if (station.BusStationKey > 999999)
+                if (station.BusStationKey.ToString().Length<6)
                     throw new BO.IdException("Bus station ID is illegal, needs at least 6 digits");
                 dl.AddBusStation(BusStationBoDoAdapter(station));
-            }
-            catch (BO.IdException ex)
-            {
-                throw new BO.IdException(ex.ToString());
-
             }
             catch (DO.IdException ex)
             {
@@ -411,10 +397,9 @@ namespace BL
         {
             try
             {
-
                 dl.DeleteBusLineStation(BusLineStationBoDoAdapter(busLineStation));
             }
-            catch (BO.IdException ex)
+            catch (DO.IdException ex)
             {
                 throw new BO.IdException(ex.ToString());
             }
@@ -457,11 +442,6 @@ namespace BL
                 busLine.StationsInLine = busLine.StationsInLine.Append(busLineStation);
                 dl.AddBusLineStation(BusLineStationBoDoAdapter(busLineStation));
                 list = busLine.StationsInLine.ToList();
-                for (int i = 0; i < busLine.StationsInLine.Count(); i++)
-                {
-                    if (busLine.StationsInLine.ElementAt(i).NumberStationInLine == busLineStation.NumberStationInLine && busLine.StationsInLine.ElementAt(i).BusStationKey != busLineStation.BusStationKey)
-                        list[i].NumberStationInLine = busLine.StationsInLine.ElementAt(i).NumberStationInLine + 1;
-                }
                 for (int j = 0; j < list.Count; j++)
                 {
                     if (list[j].Distance == 0 && list[j].NumberStationInLine != 1)
@@ -517,8 +497,6 @@ namespace BL
             var UpdateItem = dl.GetConsecutiveStations(id1, id2);
             UpdateItem.AverageTravelTime = time;
             dl.UpdateConsecutiveStations(UpdateItem);
-
-
         }
         /// <summary>
         /// The function receives a bus line for updating
@@ -561,9 +539,7 @@ namespace BL
                                        select DeepCopyUtilities.CopyToStationInLine(sin, dl);
             busLineBO.lineRides = from sin in dl.LinesWayOut()
                                   where sin.ID == busLineBO.ID
-                                  from sen in dl.LinesWayOut()
-                                  where sen.ID == busLineBO.ID
-                                  select DeepCopyUtilities.CopyToLineRide(sen);
+                                  select DeepCopyUtilities.CopyToLineRide(sin);
             return busLineBO;
         }
         public DO.LineRide LineRideStationDoBoAdapter(BO.LineRides lineRides)
@@ -590,9 +566,9 @@ namespace BL
                 busLine.StationsInLine = from sin in busLine.StationsInLine
                                          select DeepCopyUtilities.CopyToStationInLine(BusLineStationBoDoAdapter(sin), dl);
             }
-            catch (NullReferenceException ex)
+            catch (DO.IdException ex)
             {
-                throw new NullReferenceException();
+                throw new BO.IdException(ex.ToString());
             }
         }
         /// <summary>
@@ -650,8 +626,8 @@ namespace BL
                         AverageTravelTime = new TimeSpan((long)(((dl.GetBusStation(id1).Latitude * dl.GetBusStation(id2).Latitude * dl.GetBusStation(id1).Longitude * dl.GetBusStation(id2).Longitude) * r.NextDouble() * 1 + 0.5) / 66 * 100.0)),
                         Distance = (float)((dl.GetBusStation(id1).Latitude * dl.GetBusStation(id2).Latitude * dl.GetBusStation(id1).Longitude * dl.GetBusStation(id2).Longitude) * r.NextDouble() * 1 + 0.5) / 66,
                         Flage = true,
-                        StationCodeTwo = id1,
-                        StationCodeOne = id2
+                        StationCodeTwo = id2,
+                        StationCodeOne = id1
                     };
                     dl.AddConsecutiveStations(consecutiveStations);
                 }
