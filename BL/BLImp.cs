@@ -878,6 +878,25 @@ namespace BL
         }
         #endregion
         #region LineRide
+        /// <summary>
+        /// Add a line to the exit
+        /// </summary>
+        /// <param name="lineRides"></param>
+        public void AddLineRides(BO.LineRides lineRides)
+        {
+            try
+            {
+                dl.AddLineWayOut(LineRideStationDoBoAdapter(lineRides));
+            }
+            catch (DO.IdException ex)
+            {
+                throw new BO.IdException(ex.ToString());
+            }
+        }
+        /// <summary>
+        /// A function that accepts a line ride object for deletion
+        /// </summary>
+        /// <param name="line"></param>
         public void DeleteLineRide(BO.LineRides line)
         {
             try
@@ -889,6 +908,13 @@ namespace BL
                 throw new BO.IdException(ex.ToString());
             }
         }
+        /// <summary>
+        /// A function that receives a running number of the line and a station number 
+        /// returns the time from the next station
+        /// </summary>
+        /// <param name="IdBusLine"></param>
+        /// <param name="codeStation"></param>
+        /// <returns></returns>
         public TimeSpan GetTimeDrive(int IdBusLine, int codeStation)
         {
             TimeSpan SaveTimeDrive = new TimeSpan(0, 0, 0);
@@ -902,13 +928,25 @@ namespace BL
             }
             return SaveTimeDrive;
         }
-      
+        /// <summary>
+        /// A function that receives a DO type Line Ride object and returns a BO type Line Ride
+        /// </summary>
+        /// <param name="lineRides"></param>
+        /// <returns></returns>
         public BO.LineRides LineRideStationBoDoAdapter(DO.LineRide lineRides)
         {
             BO.LineRides lineBO = new LineRides();
             lineRides.CopyPropertiesTo(lineBO);
             return lineBO;
         }
+        /// <summary>
+        /// A function gets a current station and a current time
+        ///  The function returns a collection of all lines that Travel Start Time is the cur time or befor
+        /// </summary>
+        /// <param name="CurbusStation"></param>
+        /// <param name="tsCurTime"></param>
+        /// <returns></returns>
+
         public IEnumerable<LineRides> GetLineTimingPerStation(BusStation CurbusStation, TimeSpan tsCurTime)
         {
             return from LineRides in dl.LinesWayOut()

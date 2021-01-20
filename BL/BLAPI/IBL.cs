@@ -67,6 +67,7 @@ namespace BLAPI
         DO.BusLineStation BusLineStationBoDoAdapter(BO.BusLineStation busLineStationBO);
         #endregion
         #region Line Ride
+        void AddLineRides(BO.LineRides lineRides);
         DO.LineRide LineRideStationDoBoAdapter(BO.LineRides lineRides);
         BO.LineRides LineRideStationBoDoAdapter(DO.LineRide lineRides);
         void DeleteLineRide(BO.LineRides line);
