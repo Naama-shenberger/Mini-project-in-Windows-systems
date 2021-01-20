@@ -77,12 +77,17 @@ namespace PL.WPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        //private void backbtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Close();
+        //    access access = new access(bL);
+        //    access.ShowDialog();
+
+        //}
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            access access = new access(bL);
-            access.ShowDialog();
-
         }
     }
 }

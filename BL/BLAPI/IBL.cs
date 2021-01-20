@@ -70,7 +70,7 @@ namespace BLAPI
         DO.LineRide LineRideStationDoBoAdapter(BO.LineRides lineRides);
         BO.LineRides LineRideStationBoDoAdapter(DO.LineRide lineRides);
         void DeleteLineRide(BO.LineRides line);
-        TimeSpan GetTimeDrive(int IdBusLine, int codeStation1, int codeStation2);
+        TimeSpan GetTimeDrive(int IdBusLine, int codeStation);
         IEnumerable<LineRides> GetLineTimingPerStation(BusStation CurbusStation, TimeSpan tsCurTime);
       
         #endregion
