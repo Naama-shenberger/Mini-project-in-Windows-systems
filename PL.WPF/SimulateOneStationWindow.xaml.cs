@@ -68,7 +68,7 @@ namespace PL.WPF
             if (CurBusStation != null && CurBusStation.ListBusLinesInStation != null)
             {
                 lineTimingDataGrid.DataContext = BL.GetLineTimingPerStation(CurBusStation, tsCurentTime);
-                Time.Binding=BL.GetTimeDrive()
+                //Time.Binding=BL.GetTimeDrive()
             }
         }
         /// <summary>
