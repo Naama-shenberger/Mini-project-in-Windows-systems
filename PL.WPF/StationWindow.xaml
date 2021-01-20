@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:BO="clr-namespace:BO;assembly=BL" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.StationWindow"
         mc:Ignorable="d"
-        Title="StationWindow" Height="600" Width="1000" WindowStyle="None">
+        Title="StationWindow" Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" >
 
     <Grid Margin="0,0,3.6,-0.6" >
         <Grid.RowDefinitions>
@@ -17,7 +17,7 @@
             <ColumnDefinition Width="527*"/>
             <ColumnDefinition Width="463*"/>
         </Grid.ColumnDefinitions>
-        <Grid Margin="0,0,-3.6,0.2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="994">
+        <Grid Margin="0,0,-3.2,483.8" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="1000" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="323*"/>
                 <ColumnDefinition Width="677*"/>
@@ -30,7 +30,7 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="149" Margin="0,0,0,53">
-                <Button x:Name="backbtn" ToolTip="back" Click="BackButton_Click" Width="71" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0" Margin="-9,9,0,9" FontWeight="Bold" >
+                <Button x:Name="backbtn" ToolTip="back" Click="BackButton_Click" Width="71" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="-9,9,0,9" FontWeight="Bold" >
                     <materialDesign:PackIcon Kind="ArrowLeft" FontWeight="Bold" FontSize="16" Height="30" Width="71" />
                 </Button>
             </StackPanel>
