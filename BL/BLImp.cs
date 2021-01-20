@@ -266,15 +266,23 @@ namespace BL
                     };
                     dl.AddBusLineStation(BusLineStationBoDoAdapter(bls));
                     busLine.StationsInLine.Append(bls);
-                    DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+                    try
                     {
-                        Distance = _Distance,
-                        AverageTravelTime = Time,
-                        Flage = true,
-                        StationCodeTwo = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count() - 1].BusStationKey,
-                        StationCodeOne = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count() - 2].BusStationKey
-                    };
-                    dl.AddConsecutiveStations(consecutiveStations);
+                        DO.ConsecutiveStations consecutiveStations = new DO.ConsecutiveStations
+                        {
+                            Distance = _Distance,
+                            AverageTravelTime = Time,
+                            Flage = true,
+                            StationCodeTwo = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count() - 1].BusStationKey,
+                            StationCodeOne = busLine.StationsInLine.ToList()[busLine.StationsInLine.Count() - 2].BusStationKey
+                        };
+                        dl.AddConsecutiveStations(consecutiveStations);
+                    }
+                    catch (DO.IdException ex)
+                    {
+                        throw new BO.IdException("Consecutive Stations already exists");
+
+                    }
                 }
                 else
                     busStation.ListBusLinesInStation.ToList()[b].Active = true;

@@ -7,10 +7,11 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.SimulateOneStationWindow"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="SimulateOneStationWindow"  Height="500" Width="750" WindowStartupLocation="CenterScreen">
+        Title="SimulateOneStationWindow"  Height="500" Width="876.4" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"  >
     <WrapPanel>
+        
         <Grid>
-            <DataGrid Margin="236,152,31,-446" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True"  Name="lineTimingDataGrid">
+            <DataGrid Margin="357,245,-110.6,-445" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True"  Name="lineTimingDataGrid">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="Time" Header="Timing" Binding="{Binding timerText}" />
                     <DataGridTextColumn Header="Started at" Binding="{Binding TravelStartTime}"/>
@@ -20,25 +21,49 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Grid Height="160" Width="462">
-
-            <TextBlock x:Name="timerTextBlock"  Text="08:00:00" FontSize="96" TextAlignment="Center" 
-                   Foreground="#FF2281D1"  Margin="0,14,10,-138" RenderTransformOrigin="0.497,0.669"/>
-            <Label Content="Code Staion" Height="33" Margin="12,171,357,-44"/>
-            <TextBlock x:Name="CodeStaiontb" Text="{Binding BusStationKey }" Height="33" Margin="186,171,91,-44"/>
-            <Label Content="Name Staion" Margin="12,204,276,-76"/>
-            <TextBlock x:Name="StaionNametb" Text="{Binding StationName}" Height="33" Margin="186,209,91,-82"/>
-        </Grid>
-        <Grid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,-270,0" Width="62">
-
-                <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,8,10,0" VerticalAlignment="Top" Click="backbtn_Click" >
-                    <materialDesign:PackIcon Foreground="LightGray" Kind="ArrowBack" Height="32" Width="40"/>
+        <Grid Margin="0,0,-3.6,0.2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="869" Height="70">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="323*"/>
+                <ColumnDefinition Width="677*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="218" Margin="0,-1,0,-41" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <Button x:Name="backbtn" ToolTip="back" Click="BackButton_Click" Width="119" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="-9,41,0,10" FontWeight="Bold" >
+                    <materialDesign:PackIcon Kind="ArrowLeft" FontWeight="Bold" FontSize="16" Height="57" Width="111" />
                 </Button>
             </StackPanel>
         </Grid>
-
-
-
+        <Grid Height="160" Width="870">
+            <TextBlock x:Name="timerTextBlock"  Text="08:00:00" FontSize="96" TextAlignment="Center" 
+                   Foreground="#FF2281D1"  Margin="10,14,0,10" RenderTransformOrigin="0.497,0.669"/>
+        </Grid>
+        <Grid x:Name="gridOneBusStation" HorizontalAlignment="Left" Margin="34,44.8,0,0" VerticalAlignment="Top" Height="107" Width="315" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Label Content="Code Staion" Margin="0,1,9.8,0.2" Grid.Column="0" Height="30" FontWeight="Bold"  />
+            <TextBox x:Name="CodeStaiontb" Text="{Binding BusStationKey }" Margin="5.2,-3,-108.4,3.2" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Foreground="Black" Height="50" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" TextAlignment="Center" IsReadOnly="True"/>
+            <Label Content="Name Staion" Margin="0,9.8,9.8,-8.6" Grid.Column="0" Grid.Row="1" Height="30" FontWeight="Bold" />
+            <TextBox x:Name="StaionNametb" Text="{Binding StationName}"  Margin="0.2,1.6,-105.4,-1.2" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Height="50" Grid.Row="1" FontWeight="Bold" FontStyle="Italic"  TextAlignment="Center" IsReadOnly="True"/>
+        </Grid>
     </WrapPanel>
 </Window>

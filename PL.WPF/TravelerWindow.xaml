@@ -6,38 +6,57 @@
         xmlns:local="clr-namespace:PL.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="TravelerWindow"  Height="500" Width="750" WindowStartupLocation="CenterScreen">
+        Title="TravelerWindow"  Height="500" Width="750" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid>
+        <Grid Margin="0,0,0,415.6" HorizontalAlignment="Right" Width="744">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="323*"/>
+                <ColumnDefinition Width="677*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="218" Margin="0,-1,0,-41" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <Button x:Name="backbtn" ToolTip="back" Click="BackButton_Click" Width="119" Height="Auto" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="-9,41,0,10" FontWeight="Bold" >
+                    <materialDesign:PackIcon Kind="ArrowLeft" FontWeight="Bold" FontSize="16" Height="57" Width="111" />
+                </Button>
+            </StackPanel>
+            <Label HorizontalAlignment="Center"   Content="Station Traveling" Margin="360,0,0,0" VerticalAlignment="Top" Height="37" Width="144" FontStyle="Italic" FontSize="14" Grid.Column="1"/>
+
+        </Grid>
         <Grid >
-            <DataGrid x:Name="AlllinesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="395,0,142.6,139"  Background="#FF9CB7F4">
-
-
+            <DataGrid x:Name="AlllinesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="440,97,72,131.6"  Background="#FF9CB7F4">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Bus Line" Binding="{Binding  BusLineNumber}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <Grid>
-            <DataGrid  ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" x:Name="AllBusStaionsDataGrid" Background="AliceBlue" Margin="10,4,496.6,34" SelectionChanged="AllBusStaionsDataGrid_SelectionChanged">
+            <DataGrid IsReadOnly="True"  ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" x:Name="AllBusStaionsDataGrid" Background="AliceBlue" Margin="81,90,426,26.6" SelectionChanged="AllBusStaionsDataGrid_SelectionChanged">
                 <DataGrid.Columns >
-                    <DataGridTextColumn Header="Code" Binding="{Binding BusStationKey}"/>
+                    <DataGridTextColumn Header="    Code    " Binding="{Binding BusStationKey}" />
                     <DataGridTextColumn Header="Name" Binding="{Binding StationName}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button  HorizontalAlignment="Left" Margin="516,415,0,0" VerticalAlignment="Top" Width="183" Click="simulationButton_Click" Height="52">
+            <Button  HorizontalAlignment="Left" Margin="432,415,0,0" VerticalAlignment="Top" Width="183" Click="simulationButton_Click" Height="52">
                 <StackPanel>
                     <materialDesign:PackIcon Kind="TimelineClockOutline" Height="26" Width="56" Foreground="LightGray"/>
                     <TextBlock Text="Simulate One Station" Height="33" Width="188"/>
                 </StackPanel>
             </Button>
         </Grid>
-        <Grid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
 
-                <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,8,10,0" VerticalAlignment="Top" Click="backbtn_Click" >
-                    <materialDesign:PackIcon Foreground="LightGray" Kind="ArrowBack" Height="32" Width="40"/>
-                </Button>
-            </StackPanel>
-        </Grid>
     </Grid>
 </Window>

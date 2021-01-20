@@ -243,7 +243,7 @@ namespace PL.WPF
             }
             catch (ArgumentException ex)
             {
-                MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{ex.Message}", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
                
             }
 

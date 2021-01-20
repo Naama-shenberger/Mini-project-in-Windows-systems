@@ -66,7 +66,10 @@ namespace PL.WPF
             timerText = tsCurentTime.ToString().Substring(0, 8);
             timerTextBlock.Text = timerText;
             if (CurBusStation != null && CurBusStation.ListBusLinesInStation != null)
+            {
                 lineTimingDataGrid.DataContext = BL.GetLineTimingPerStation(CurBusStation, tsCurentTime);
+                Time.Binding=BL.GetTimeDrive()
+            }
         }
         /// <summary>
         /// event DoWorkEventArgs 
@@ -94,6 +97,11 @@ namespace PL.WPF
         {
 
             isTimerRun = false;
+            this.Close();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }
