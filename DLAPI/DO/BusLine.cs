@@ -6,10 +6,10 @@ namespace DO
 {
     /// <summary>
     /// Bus line class
+    /// This class constitutes a data contract of the dl layer
     /// </summary>
     public class BusLine
     {
-
         /// <summary>
         /// sets and gets 
         /// </summary> 
@@ -18,7 +18,7 @@ namespace DO
         public int FirstStopNumber { set; get; }//First stop number
         public int LastStopNumber { set; get; }//Last stop number
         public Zones Area { set; get; }//Area of the bus line
-        public int ID { set; get; }
-       
+        public int ID { set; get; }//A unique number of the class
+
     }
 }

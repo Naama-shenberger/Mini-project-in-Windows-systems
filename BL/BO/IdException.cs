@@ -4,6 +4,9 @@ using System.Text;
 
 namespace BO
 {
+    /// <summary>
+    /// id Exception class
+    /// </summary>
     [Serializable]
     public class IdException:Exception
     {

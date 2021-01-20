@@ -54,7 +54,6 @@
     <Compile Include="BO\LineRides.cs" />
     <Compile Include="BO\Tools.cs" />
     <Compile Include="BO\User.cs" />
-    <Compile Include="BO\UserJourney.cs" />
     <Compile Include="DeepCopyUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

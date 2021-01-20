@@ -5,6 +5,7 @@ namespace DO
 {
     /// <summary>
     /// Line OutFor A Ride class-Departure for a trip
+    /// This class constitutes a data contract of the dl layer
     /// </summary>
     public class LineRide
     {
@@ -15,7 +16,7 @@ namespace DO
         public TimeSpan TravelStartTime { set; get; }//Travel start time of the bus 
         public TimeSpan TravelEndTime { set; get; }//Travel end time
         public TimeSpan BusDepartureNumber { set; get; }//Exit number of the line
-        public int ID { set; get; }
+        public int ID { set; get; }//Id of the bus line,unique key
 
     }
 }

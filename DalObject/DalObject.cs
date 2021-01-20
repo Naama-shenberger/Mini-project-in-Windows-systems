@@ -35,18 +35,6 @@ namespace DL
         #endregion
         #region Bus Function
         /// <summary>
-        /// A function that uses Encapsulates a method 
-        /// accepts an integer and returns an object
-        /// integer-bus License Plate
-        /// </summary>
-        /// <param name="generate"></param>
-        /// <returns></returns>
-        public IEnumerable<string> GetBussLicenseNumber()
-        {
-            return from Bus in DataSource.ListBuses
-                   select Bus.LicensePlate;
-        }
-        /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus object
         /// </summary>
         /// <param name="id"></param>
@@ -235,18 +223,6 @@ namespace DL
         #endregion
         #region BusLine Functions
         /// <summary>
-        /// A function that uses Encapsulates a method 
-        /// accepts an integer and returns an object
-        /// integer-bus line number
-        /// </summary>
-        /// <param name="generate"></param>
-        /// <returns></returns>
-        public IEnumerable<int> GetBusLineNumbers()
-        {
-            return from BusLine in DataSource.BusLines
-                   select BusLine.BusLineNumber;
-        }
-        /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus line object
         /// </summary>
         /// <param name="id"></param>
@@ -329,18 +305,6 @@ namespace DL
         }
         #endregion
         #region BusLineStation Functions
-        /// <summary>
-        ///  A function that returns a collection of bus line stations 
-        ///  the function uses predicate
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public IEnumerable<BusLineStation> GetBusLineStations(Predicate<BusLineStation> predicate)
-        {
-            return from sin in DataSource.BusLineStations
-                   where predicate(sin)
-                   select sin.Clone();
-        }
         /// <summary>
         /// A function that receives an ID number and returns the corresponding Bus line station object
         /// </summary>
@@ -425,20 +389,8 @@ namespace DL
             else
                 throw new IdException(station.BusStationKey, $"The bus line Station {station.BusStationKey} does not exist");
         }
-        /// <summary>
-        /// A function that uses Encapsulates a method 
-        /// accepts an integer and returns an object
-        /// integer-bus line Code Station
-        /// </summary>
-        /// <param name="generate"></param>
-        /// <returns></returns>
-        public IEnumerable<object> GetBusLineStationCode(Func<int, object> generate)
-        {
-            return from BusLineStation in DataSource.BusLineStations
-                   select generate(BusLineStation.BusStationKey).Clone();
-        }
         #endregion
-        #region LineOutForARide
+        #region LineRide
         /// <summary>
         /// A function that receives an ID number and returns the object with that ID number
         /// </summary>
@@ -644,57 +596,6 @@ namespace DL
                     throw new IdException(user.UserName, $"The user name {user.UserName} is already deleted");
             else
                 throw new IdException(user.UserName, $"The user name {user.UserName} is already deleted");
-        }
-        #endregion
-        #region UserJourney
-        public UserJourney GetUserJourney(string id)
-        {
-            var userJourney = DataSource.UsersJourney.Find(u => u.UserName == id);
-            if (userJourney != null)
-                if (userJourney.FlageActive == true)
-                    return userJourney.Clone();
-            throw new IdException($"No user Journey have the name {id}");
-        }
-        public IEnumerable<UserJourney> GetUsersJourney()
-        {
-            return from UserJourney in DataSource.UsersJourney
-                   where UserJourney.FlageActive == true
-                   select UserJourney.Clone();
-        }
-        public void AddUserJourney(UserJourney userJourney)
-        {
-            var userJourneyIndex = DataSource.UsersJourney.FindIndex(u => u.UserName == userJourney.UserName);
-            if (userJourneyIndex != -1)
-                if (DataSource.UsersJourney[userJourneyIndex].FlageActive == false)
-                {
-                    DataSource.UsersJourney[userJourneyIndex].FlageActive = true;
-                    return;
-                }
-                else
-                    throw new DO.IdException(userJourney.UserName, $"The User Name {userJourney.UserName} already exist");
-            DataSource.UsersJourney.Add(userJourney.Clone());
-        }
-        public void UpdatUserJourney(UserJourney userJourney)
-        {
-            var toUpdateIndex = DataSource.UsersJourney.FindIndex(u => u.UserName == userJourney.UserName);
-            if (toUpdateIndex != -1)
-                if (DataSource.UsersJourney[toUpdateIndex].FlageActive == true)
-                    DataSource.UsersJourney[toUpdateIndex] = userJourney.Clone();
-                else
-                    throw new IdException(userJourney.UserName, $"The user name {userJourney.UserName} does not exist");
-            else
-                throw new IdException(userJourney.UserName, $"The user name {userJourney.UserName} does not exist");
-        }
-        public void DeleteUserJourney(UserJourney userJourney)
-        {
-            var toDeleteIndex = DataSource.UsersJourney.FindIndex(u => u.UserName == userJourney.UserName);
-            if (toDeleteIndex != -1)
-                if (DataSource.UsersJourney[toDeleteIndex].FlageActive == true)
-                    DataSource.UsersJourney[toDeleteIndex].FlageActive = false;
-                else
-                    throw new IdException(userJourney.UserName, $"The user name {userJourney.UserName} is already deleted");
-            else
-                throw new IdException(userJourney.UserName, $"The user name {userJourney.UserName} is already deleted");
         }
         #endregion
 

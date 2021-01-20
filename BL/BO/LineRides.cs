@@ -19,7 +19,12 @@ namespace BO
         public int CodeLastStasion { get; set; }//code last stasion
         public string NameLastStasion { get; set; }//Last Stasion name
         public TimeSpan CurTimeStasion { get; set; }// current Time Drive
-        public int ID { set; get; }
+        public int ID { set; get; }//id of bus line ride
+        /// <summary>
+        /// override of ToString
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => this.ToStringProperty();
 
     }
 }

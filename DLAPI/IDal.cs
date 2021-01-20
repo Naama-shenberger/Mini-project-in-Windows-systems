@@ -18,7 +18,6 @@ namespace DLAPI
         void AddBus(Bus bus);
         void UpdateBus(Bus bus);
         void DeleteBus(Bus bus);
-        IEnumerable<string> GetBussLicenseNumber();
         #endregion
         #region BusStation
         BusStation GetBusStation(int code);
@@ -33,18 +32,15 @@ namespace DLAPI
         int AddBusLine(BusLine b);
         void UpdateBusLine(BusLine b);
         void DeleteBusLine(BusLine b);
-        IEnumerable<int> GetBusLineNumbers();
         #endregion
         #region BusLineStation
-        IEnumerable<object> GetBusLineStationCode(Func<int, object> generate);
         BusLineStation GetBusLineStation(int codeStation,int IDBusLine);
         IEnumerable<BusLineStation> BusLineStations();
         void AddBusLineStation(BusLineStation s);
         void UpdateBusLineStation(BusLineStation s);
         void DeleteBusLineStation(BusLineStation s);
-        IEnumerable<BusLineStation> GetBusLineStations(Predicate<BusLineStation> predicate);
         #endregion
-        #region LineWayOut
+        #region LineRide
         LineRide GetLineWayOut(int id);
         IEnumerable<LineRide> LinesWayOut();
         void AddLineWayOut(LineRide o);
@@ -64,13 +60,6 @@ namespace DLAPI
         void AddUser(User user);
         void UpdatUser(User user);
         void DeleteUser(User user);
-        #endregion
-        #region UserJourney
-        UserJourney GetUserJourney(string id);
-        IEnumerable<UserJourney> GetUsersJourney();
-        void AddUserJourney(UserJourney user);
-        void UpdatUserJourney(UserJourney user);
-        void DeleteUserJourney(UserJourney user);
         #endregion
 
     }

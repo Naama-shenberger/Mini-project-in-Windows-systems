@@ -12,5 +12,10 @@ namespace BO
        public int ID { get; set; }
        public float Distance { set; get; }//Distance between stations 
        public TimeSpan AverageTravelTime { set; get; }//Average travel time between stations
+       /// <summary>
+       /// override of ToString
+       /// </summary>
+       /// <returns></returns>
+        public override string ToString() => this.ToStringProperty();
     }
 }

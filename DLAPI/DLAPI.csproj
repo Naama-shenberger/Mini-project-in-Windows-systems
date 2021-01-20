@@ -49,11 +49,10 @@
     <Compile Include="DO\BusStation.cs" />
     <Compile Include="DO\ConsecutiveStations.cs" />
     <Compile Include="DO\Enums.cs" />
-    <Compile Include="DO\IdException .cs" />
-    <Compile Include="DO\LineOutForARide.cs" />
+    <Compile Include="DO\Exceptions .cs" />
+    <Compile Include="DO\LineRide.cs" />
     <Compile Include="DO\Tools.cs" />
     <Compile Include="DO\User.cs" />
-    <Compile Include="DO\UserJourney.cs" />
     <Compile Include="IDal.cs" />
   </ItemGroup>
   <ItemGroup>

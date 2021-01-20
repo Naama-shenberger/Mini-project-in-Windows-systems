@@ -43,6 +43,12 @@ namespace BO
                 updator(item);
             }
         }
+        /// <summary>
+        /// The function gets a string which is the password and the salt
+        /// The hash is used as a unique value 
+        /// </summary>
+        /// <param name="passwordWithSalt"></param>
+        /// <returns></returns>
         public static string hashPassword(string passwordWithSalt)
         {
             SHA512 shaM = new SHA512Managed();

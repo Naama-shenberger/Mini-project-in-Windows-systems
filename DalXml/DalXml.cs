@@ -11,8 +11,13 @@ using static DO.Enums;
 
 namespace DL
 {
+    /// <summary>
+    /// class DalXml 
+    /// singelton
+    /// </summary>
     sealed class DalXml : IDal
     {
+       
         #region singelton
         static readonly DalXml instance = new DalXml();
         static DalXml() { }// static ctor to ensure instance init is done just before first usage
@@ -27,8 +32,6 @@ namespace DL
         string LineRidePath = @"LineRide.xml"; 
         string ConsecutiveStationsPath = @"ConsecutiveStations.xml"; 
         string serialsPath = @"serials.xml"; 
-        string busDrivePath= @"BusDrive.xml";
-        string useJouyrneyPath= @"UseJourney.xml";
         string userPath = @"User.xml";
         #endregion
         #region Bus
@@ -61,19 +64,6 @@ namespace DL
                 if (b.Active == true)
                     return b;
             throw new DO.IdException(id, $"there is no bus with the id: {id}");
-        }
-        /// <summary>
-        /// A function that uses Encapsulates a method 
-        /// accepts an integer and returns an object
-        /// integer-bus License Plate 
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<string> GetBussLicenseNumber()
-        {
-            XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
-            return (from bus in busRootElem.Elements()
-                    where Boolean.Parse(bus.Element("Active").Value) == true
-                    select bus.Element("LicensePlate").Value);
         }
         /// <summary>
         ///  A function that returns a list of bus that are active 
@@ -113,7 +103,7 @@ namespace DL
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
 
             XElement bus1 = (from b in busRootElem.Elements()
-                                 where b.Element("BusStationKey").Value == bus.LicensePlate
+                                 where b.Element("LicensePlate").Value == bus.LicensePlate
                                  select b).FirstOrDefault();
 
             if (bus1 != null)
@@ -151,7 +141,7 @@ namespace DL
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
 
             XElement bus = (from b in busRootElem.Elements()
-                                where b.Element("LicensePlate").Value == delBus.LicensePlate && Boolean.Parse(b.Element("Active").Value) == true
+                                where b.Element("LicensePlate").Value == delBus.LicensePlate 
                             select b).FirstOrDefault();
 
             if (bus != null)
@@ -163,10 +153,10 @@ namespace DL
                    
                 }
                 else
-                    throw new DO.IdException(delBus.LicensePlate, $"station with key {delBus.LicensePlate} is already deleted ");
+                    throw new DO.IdException(delBus.LicensePlate, $"bus license plate {delBus.LicensePlate} is already deleted ");
             }
             else
-                throw new DO.IdException(delBus.LicensePlate, $"station with key {delBus.LicensePlate} dosn't exists ");
+                throw new DO.IdException(delBus.LicensePlate, $"bus license plate  {delBus.LicensePlate} dosn't exists ");
         }
         /// <summary>
         /// A function that receives a bus and updates its details
@@ -177,7 +167,7 @@ namespace DL
             XElement busRootElem = XMLTools.LoadListFromXMLElement(BusPath);
 
             XElement bus1 = (from b in busRootElem.Elements()
-                          where b.Element("LicensePlate").Value ==bus.LicensePlate && Boolean.Parse(b.Element("Active").Value) == true
+                          where b.Element("LicensePlate").Value ==bus.LicensePlate 
                           select b).FirstOrDefault();
 
             if (bus1 != null)
@@ -198,10 +188,10 @@ namespace DL
                     XMLTools.SaveListToXMLElement(busRootElem, BusPath);
                 }
                 else
-                    throw new DO.IdException(bus.LicensePlate, $"station with key {bus.LicensePlate} dosn't exists ");
+                    throw new DO.IdException(bus.LicensePlate, $"bus License Plate {bus.LicensePlate} dosn't exists ");
             }
             else
-                throw new DO.IdException(bus.LicensePlate, $"station with key {bus.LicensePlate} dosn't exists ");
+                throw new DO.IdException(bus.LicensePlate, $"bus License Plate {bus.LicensePlate} dosn't exists ");
         }
         #endregion
         #region Bus Station
@@ -215,7 +205,7 @@ namespace DL
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(busStationPath);
 
             BusStation s = (from station in stationRootElem.Elements()
-                            where int.Parse(station.Element("BusStationKey").Value) == key && Boolean.Parse(station.Element("Active").Value)==true
+                            where int.Parse(station.Element("BusStationKey").Value) == key 
                             select new BusStation()
                             {
                                 BusStationKey = Int32.Parse(station.Element("BusStationKey").Value),
@@ -266,7 +256,7 @@ namespace DL
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(busStationPath);
 
             XElement station1 = (from s in stationRootElem.Elements()
-                                 where int.Parse(s.Element("BusStationKey").Value) == station.BusStationKey && Boolean.Parse(s.Element("Active").Value) == true
+                                 where int.Parse(s.Element("BusStationKey").Value) == station.BusStationKey 
                                  select s).FirstOrDefault();
 
             if (station1 != null)
@@ -477,18 +467,6 @@ namespace DL
             else
                 throw new DO.IdException(bus.ID, $"bad Bus Line id: {bus.ID}");
         }
-        /// <summary>
-        /// returns list of number of bus lines in the system 
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<int> GetBusLineNumbers()
-        {
-            List<BusLine> ListBusLineStation = XMLTools.LoadListFromXMLSerializer<BusLine>(BusLinePath);
-
-            return from BusLine in ListBusLineStation
-                   where BusLine.Active== true
-                   select BusLine.BusLineNumber;
-        }
         #endregion
         #region BusLineStation
         /// <summary>
@@ -535,27 +513,6 @@ namespace DL
                         NumberStationInLine=Int32.Parse(s.Element("NumberStationInLine").Value)
                     }
                    );
-        }
-        /// <summary>
-        /// returns list of all bus line station object in Predicate condition
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public IEnumerable<BusLineStation> GetBusLineStations(Predicate<BusLineStation> predicate)
-        {
-            XElement BusLineStationsRootElem = XMLTools.LoadListFromXMLElement(BusLineStationPath);
-
-            return from s in BusLineStationsRootElem.Elements()
-                   where Boolean.Parse(s.Element("Active").Value)==true
-                   let s1 = new BusLineStation()
-                   {
-                       ID = Int32.Parse(s.Element("ID").Value),
-                       Active = Boolean.Parse(s.Element("Active").Value),
-                       BusStationKey = Int32.Parse(s.Element("BusStationKey").Value),
-                       NumberStationInLine = Int32.Parse(s.Element("NumberStationInLine").Value)
-                   }
-                   where predicate(s1)
-                   select s1;
         }
         /// <summary>
         /// adds a bus line station to system
@@ -622,15 +579,6 @@ namespace DL
             }
             else
                 throw new DO.IdException(station.BusStationKey, $"bad Bus Line Station id: {station.ID}");
-        }
-
-        public IEnumerable<object> GetBusLineStationCode(Func<int, object> generate)
-        {
-            List<BusLineStation> ListBusLineStation = XMLTools.LoadListFromXMLSerializer<BusLineStation>(BusLineStationPath);
-
-            return from BusLineStation in ListBusLineStation
-                   where BusLineStation.Active==true
-                   select generate(BusLineStation.BusStationKey);
         }
         #endregion
         #region LineRide
@@ -876,145 +824,6 @@ namespace DL
                 throw new DO.IdException($"No consecutive Stations have the id`s:{c.StationCodeOne} {c.StationCodeTwo}");
         }
         #endregion
-        #region UserJourney
-        /// <summary>
-        /// returns a users journey with the same name(id)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public DO.UserJourney GetUserJourney(string id)
-        {
-            XElement UserJourneyRootElem = XMLTools.LoadListFromXMLElement(useJouyrneyPath);
-            DO.UserJourney use = (from u in UserJourneyRootElem.Elements()
-                                  where u.Element("UserName").Value == id
-                                  select new UserJourney
-                                  {
-                                      UserName=u.Element("UserName").Value,
-                                      BusLineJourney=int.Parse(u.Element("BusLineJourney").Value),
-                                      BoardingStation=u.Element("BoardingStation").Value,
-                                      DropStation=u.Element("DropStation").Value,
-                                      StartJourneyTime = XmlConvert.ToTimeSpan( u.Element("StartJourneyTime").Value),
-                                      FlageActive= Boolean.Parse(u.Element("FlageActive").Value)
-                                  }
-                       ).FirstOrDefault();
-
-            if (use != null)
-                if (use.FlageActive == true)
-                    return use;
-            throw new DO.IdException($"The user name {id} does not exist");
-        }
-        /// <summary>
-        /// returns a list of all cur users journeys
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<DO.UserJourney> GetUsersJourney()
-        {
-            XElement UserJourneyRootElem = XMLTools.LoadListFromXMLElement(useJouyrneyPath);
-
-            return (from u in UserJourneyRootElem.Elements()
-                    where Boolean.Parse(u.Element("FlageActive").Value)==true
-                    select new UserJourney
-                    {
-                        UserName = u.Element("UserName").Value,
-                        BusLineJourney = int.Parse(u.Element("BusLineJourney").Value),
-                        BoardingStation = u.Element("BoardingStation").Value,
-                        DropStation = u.Element("DropStation").Value,
-                        StartJourneyTime = XmlConvert.ToTimeSpan(u.Element("StartJourneyTime").Value),
-                        FlageActive = Boolean.Parse(u.Element("FlageActive").Value)
-                    }
-                   );
-        }
-        /// <summary>
-        /// adds a user journey
-        /// </summary>
-        /// <param name="user"></param>
-        public void AddUserJourney(DO.UserJourney user)
-        {
-            XElement UserJourneyRootElem = XMLTools.LoadListFromXMLElement(useJouyrneyPath);
-
-            XElement usej = (from uj in UserJourneyRootElem.Elements()
-                             where uj.Element("UserName").Value == user.UserName
-                                 select uj).FirstOrDefault();
-
-            if (usej != null)
-            {
-                if (Boolean.Parse(usej.Element("FlageActive").Value) == false)
-                {
-                    usej.Element("FlageActive").Value = true.ToString();
-                    XMLTools.SaveListToXMLElement(UserJourneyRootElem, useJouyrneyPath);
-                    return;
-                }
-                else
-                    throw new DO.IdException($"The user name {user.UserName} does not exist");
-            }
-            XElement UserJourneyElem = new XElement("UserJourney",
-                                   new XElement("UserName", user.UserName),
-                                   new XElement("BusLineJourney", user.BusLineJourney),
-                                   new XElement("BoardingStation", user.BoardingStation),
-                                   new XElement("DropStation", user.DropStation),
-                                   new XElement("StartJourneyTim", user.StartJourneyTime),
-                                   new XElement("FlageActive", user.FlageActive)
-                                   );
-
-            UserJourneyRootElem.Add(UserJourneyElem);
-            XMLTools.SaveListToXMLElement(UserJourneyRootElem, useJouyrneyPath);
-        }
-        /// <summary>
-        /// updates a users journey
-        /// </summary>
-        /// <param name="user"></param>
-        public void UpdatUserJourney(DO.UserJourney user)
-        {
-            XElement UserJourneyRootElem = XMLTools.LoadListFromXMLElement(useJouyrneyPath);
-            XElement usej = (from uj in UserJourneyRootElem.Elements()
-                             where uj.Element("UserName").Value == user.UserName
-                             select uj).FirstOrDefault();
-
-            if (usej != null)
-            {
-                if (Boolean.Parse(usej.Element("FlageActive").Value) == true)
-                {
-                    usej.Element("UserName").Value = user.UserName;
-                    usej.Element("BusLineJourney").Value = user.BusLineJourney.ToString();
-                    usej.Element("BoardingStation").Value = user.BoardingStation;
-                    usej.Element("DropStation").Value = user.DropStation;
-                    usej.Element("StartJourneyTime").Value = user.StartJourneyTime.ToString();
-                    usej.Element("FlageActive").Value = user.FlageActive.ToString();
-                    XMLTools.SaveListToXMLElement(UserJourneyRootElem, useJouyrneyPath);
-                }
-                else
-                    throw new DO.IdException($"The user name {user.UserName} does not exist");
-            }
-            else
-                throw new DO.IdException($"The user name {user.UserName} does not exist");
-
-
-        }
-        /// <summary>
-        /// deletes a users journey
-        /// </summary>
-        /// <param name="user"></param>
-        public void DeleteUserJourney(DO.UserJourney user)
-        {
-            XElement UserJourneyRootElem = XMLTools.LoadListFromXMLElement(useJouyrneyPath);
-            XElement usej = (from uj in UserJourneyRootElem.Elements()
-                             where uj.Element("UserName").Value == user.UserName
-                             select uj).FirstOrDefault();
-
-            if (usej != null)
-            {
-                if (Boolean.Parse(usej.Element("FlageActive").Value) == true)
-                {
-                    usej.Element("FlageActive").Value = false.ToString();
-                    XMLTools.SaveListToXMLElement(UserJourneyRootElem, useJouyrneyPath);
-                }
-                else
-                    throw new DO.IdException($"The user name {user.UserName} is already deleted");
-            }
-            else
-                throw new DO.IdException($"The user name {user.UserName} does not exist");
-        }
-        #endregion
         #region User
         /// <summary>
         /// returns a user with the name(id) that we are looking for
@@ -1038,7 +847,6 @@ namespace DL
            ).FirstOrDefault();
 
             if (user != null)
-                if (user.DelUser == false)
                     return user;
             throw new DO.IdException($"The user name {id} does not exist");
 
@@ -1073,7 +881,7 @@ namespace DL
         {
             XElement UserRootElem = XMLTools.LoadListFromXMLElement(userPath);
             XElement user1 = (from u in UserRootElem.Elements()
-                             where u.Element("UserName").Value == user.UserName && Boolean.Parse(u.Element("DelUser").Value) == false
+                             where u.Element("UserName").Value == user.UserName 
                               select u).FirstOrDefault();
 
             if (user1 != null)
@@ -1139,7 +947,7 @@ namespace DL
         {
             XElement UserRootElem = XMLTools.LoadListFromXMLElement(userPath);
             XElement user1 = (from u in UserRootElem.Elements()
-                             where u.Element("UserName").Value == user.UserName && Boolean.Parse(u.Element("DelUser").Value) == false
+                             where u.Element("UserName").Value == user.UserName 
                              select u).FirstOrDefault();
 
             if (user1 != null)
@@ -1147,7 +955,7 @@ namespace DL
                 if (Boolean.Parse(user1.Element("DelUser").Value) == false)
                 {
                     user1.Element("DelUser").Value = true.ToString();
-                    XMLTools.SaveListToXMLElement(UserRootElem, useJouyrneyPath);
+                    XMLTools.SaveListToXMLElement(UserRootElem, userPath);
                 }
                 else
                     throw new DO.IdException($"The user name {user.UserName} is already deleted");

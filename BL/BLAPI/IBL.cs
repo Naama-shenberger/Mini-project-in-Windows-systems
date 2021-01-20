@@ -30,11 +30,13 @@ namespace BLAPI
         void DeleteBusStation(BusStation station);
         void UpdateBusStation(BusStation busStation);
         void AddBusLineToStation(BusStation busStation, BusLine busLine, TimeSpan Time, float Disten);
-        void DeleteBusLineFromStation(BusStation busStation, BusLineInStation busLine);     
+        void DeleteBusLineFromStation(BusStation busStation, BusLineInStation busLine);
         #endregion
-        #region Bus Line 
+        #region stations
         void UpdateDistanceBetweenstations(int id1, int id2, float _distance);
         void UpdateTravelTimeBetweenstations(int id1, int id2, TimeSpan time);
+        #endregion
+        #region Bus Line 
         BO.BusLine BusLineDoBoAdapter(DO.BusLine busLineDO);
         DO.BusLine BusLineBoDoAdapter(BO.BusLine busLineBO);
         BusLine GetBusLine(int id);
@@ -55,23 +57,7 @@ namespace BLAPI
         void DeleteUser(User user);
         IEnumerable<User> GetUsers();
         User GetUser(string id);
-        IEnumerable<IGrouping<bool, User>> GetUsersGroupByAllowingAccess();
-        IEnumerable<User> GetUsersBy(Predicate<User> predicate);
-        IEnumerable<string> GetUsersNames();
         void UpdateUser(User user);
-        #endregion
-        #region UserJourney
-        void UpdateUserJourney(UserJourney UserJourney);
-        BO.UserJourney UserJourneyDoBoAdapter(DO.UserJourney UserJourneyDO);
-        DO.UserJourney UserJourneyBoDoAdapter(BO.UserJourney UserJourneyBO);
-        void AddUserJourney(UserJourney userJourney);
-        void DeleteUserJourney(UserJourney userJourney);
-        IEnumerable<UserJourney> GetUsersJourney();
-        UserJourney GetUserJourney(string id);
-        IEnumerable<IGrouping<string, UserJourney>> GetUsersJourneyGroupByBoardingStation();
-        IEnumerable<User> GetUsersJourneyBy(Predicate<UserJourney> predicate);
-        IEnumerable<IGrouping<int, UserJourney>> GetUsersJourneyGroupByBusLineJourney();
-        BusLine LineToGo(BusStation busStationCurrent, BusStation busStationtarget);
         #endregion
         #region Bus Line Station
         IEnumerable<BusLineStation> GetAllBusLineStations();

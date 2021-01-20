@@ -11,6 +11,11 @@ using static DO.Enums;
 
 namespace DS
 {
+    /// <summary>
+    /// We created a static class called DataSource
+    /// We uesed a Static class Because we do not want to create an object every time we access the class lists,
+    /// the use of the static class allows us to use a class without creating an object
+    /// </summary>
     public static class DataSource
     {
         public static List<Bus> ListBuses;
@@ -20,9 +25,6 @@ namespace DS
         public static List<LineRide> LinesOutForARide;
         public static List<ConsecutiveStations> ListConsecutiveStations;
         public static List<User> Users;
-        public static List<UserJourney> UsersJourney;
-        static Random rnd = new Random();
-
         static DataSource()
         {
             InitAllLists();

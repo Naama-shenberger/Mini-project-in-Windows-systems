@@ -7,7 +7,7 @@ using System.Xml.Linq;
 namespace DLAPI
 {
     /// <summary>
-    /// Class for processing config.xml file and getting from there
+    /// Class for processing confing.xml file and getting from there
     /// information which is relevant for initialization of DalApi
     /// </summary>
     static class DalConfing
