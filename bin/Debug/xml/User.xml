@@ -8,4 +8,20 @@
     <password>Naama12</password>
     <DelUser>false</DelUser>
   </User>
+  <User>
+    <UserName>Ella</UserName>
+    <Salt>868862878</Salt>
+    <HashedPassword>3yAnquVroIcmCKQIXsfkVhrNszWxvLVPZGZSAi6HrH1aw+vRz5NNmP5snW/fAPoaLEJB8EhFJe+Jy1NPlq/SgQ==</HashedPassword>
+    <AllowingAccess>true</AllowingAccess>
+    <password>Ella054</password>
+    <DelUser>false</DelUser>
+  </User>
+  <User>
+    <UserName>ADINA</UserName>
+    <Salt>582455988</Salt>
+    <HashedPassword>jjmKU2GjQ9fqlQKZc/46lVme5fDDmgo28vKLwyxBiOw7IwCmov3Cqvnm9ymAdPVpz5c1Ji4G52/h0GSGz7MoVg==</HashedPassword>
+    <AllowingAccess>true</AllowingAccess>
+    <password>Adina100</password>
+    <DelUser>false</DelUser>
+  </User>
 </ArrayOfUsers>
