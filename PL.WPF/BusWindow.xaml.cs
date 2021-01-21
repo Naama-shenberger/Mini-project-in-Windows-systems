@@ -195,7 +195,11 @@ namespace PL.WPF
                     cbBusLicensePlate.SelectedIndex = 0;
                 }
             }
-            catch(BO.IdException ex)
+            catch (FormatException)
+            {
+                MessageBox.Show("Unsuitable characters please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.IdException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
                 cbBusLicensePlate.SelectedIndex = 0;

@@ -82,6 +82,10 @@ namespace PL.WPF
                     this.Close();
                 }
             }
+            catch(FormatException)
+            {
+                MessageBox.Show("Unsuitable characters please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (ArgumentNullException)
             {
                 MessageBox.Show("No typing details please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

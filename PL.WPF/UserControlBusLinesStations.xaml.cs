@@ -85,6 +85,10 @@ namespace PL.WPF
                 curBusLineStations.Add(busLineStation);
                 lvBusLineStation.DataContext = Convert<object>(bL.StationDetails(curBusLineStations));
             }
+            catch (BO.IdException ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);

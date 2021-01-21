@@ -200,4 +200,12 @@
     <Active>true</Active>
     <Area>Jerusalem_Corridor</Area>
   </BusLine>
+  <BusLine>
+    <ID>201111111</ID>
+    <BusLineNumber>44</BusLineNumber>
+    <FirstStopNumber>875612</FirstStopNumber>
+    <LastStopNumber>388624</LastStopNumber>
+    <Active>true</Active>
+    <Area>Jerusalem_Corridor</Area>
+  </BusLine>
 </ArrayOfBusLine>

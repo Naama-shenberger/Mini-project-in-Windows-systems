@@ -54,10 +54,15 @@ namespace PL.WPF
                 BL.UpdateBusLineStation(CurBusLineStation.BusStationKey, BusLine.ID, BusLine, int.Parse(cbNumberIndex.SelectedValue.ToString()));
                 this.Close();
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("Unsuitable characters please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (BO.IdException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
+          
         }
     }
 }

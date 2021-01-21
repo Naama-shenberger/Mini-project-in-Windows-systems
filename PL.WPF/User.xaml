@@ -53,7 +53,7 @@
         </Grid>
         <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Log In" HorizontalAlignment="Left" Margin="303,339,0,0" VerticalAlignment="Top" Width="108"  Height="31" Name="LongIn" Click="LongIn_Click"/>
         <Button x:Name="SingUp" FontWeight="Bold" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Sing Up" HorizontalAlignment="Left" Margin="584,414,0,0" VerticalAlignment="Top" Width="92" Height="27" Click="SingUp_Click" />
-        <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="451,185,0,0"/>
-        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="451,259,0,0" Height="16"/>
+        <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="447,213,0,0"/>
+        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="451,285,0,0" Height="16"/>
     </Grid>
 </Window>

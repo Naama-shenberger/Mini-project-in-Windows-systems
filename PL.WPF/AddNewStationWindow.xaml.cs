@@ -54,10 +54,15 @@ namespace PL.WPF
                 };
                 this.Close();
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("Unsuitable characters please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (BO.IdException)
             {
                 MessageBox.Show("", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+           
 
         }
         /// <summary>

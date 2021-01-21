@@ -46,13 +46,20 @@ namespace PL.WPF
 
         private void Done_Click(object sender, RoutedEventArgs e)
         {
-            var hours = int.Parse(hourTextBox.Text.ToString());
-            var minutes = int.Parse(MinuteTextBox.Text.ToString());
-            var seconds = int.Parse(SeconTextBox.Text.ToString());
-            t = new TimeSpan(hours, minutes, seconds);
-            d = float.Parse(distance.Text);
+            try
+            {
+                var hours = int.Parse(hourTextBox.Text.ToString());
+                var minutes = int.Parse(MinuteTextBox.Text.ToString());
+                var seconds = int.Parse(SeconTextBox.Text.ToString());
+                t = new TimeSpan(hours, minutes, seconds);
+                d = float.Parse(distance.Text);
 
-            this.Close();
+                this.Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Unsuitable characters please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
 
         }
