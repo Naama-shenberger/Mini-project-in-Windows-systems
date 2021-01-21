@@ -194,7 +194,7 @@
   </BusLineStation>
   <BusLineStation>
     <ID>17</ID>
-    <Active>true</Active>
+    <Active>False</Active>
     <BusStationKey>857321</BusStationKey>
     <NumberStationInLine>1</NumberStationInLine>
   </BusLineStation>
@@ -206,7 +206,7 @@
   </BusLineStation>
   <BusLineStation>
     <ID>18</ID>
-    <Active>true</Active>
+    <Active>False</Active>
     <BusStationKey>857321</BusStationKey>
     <NumberStationInLine>1</NumberStationInLine>
   </BusLineStation>
@@ -218,7 +218,7 @@
   </BusLineStation>
   <BusLineStation>
     <ID>19</ID>
-    <Active>true</Active>
+    <Active>False</Active>
     <BusStationKey>857321</BusStationKey>
     <NumberStationInLine>1</NumberStationInLine>
   </BusLineStation>
@@ -243,7 +243,7 @@
   <BusLineStation>
     <ID>2</ID>
     <BusStationKey>857321</BusStationKey>
-    <Active>True</Active>
+    <Active>False</Active>
     <NumberStationInLine>3</NumberStationInLine>
   </BusLineStation>
   <BusLineStation>

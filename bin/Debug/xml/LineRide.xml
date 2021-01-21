@@ -180,7 +180,7 @@
     <TravelStartTime>PT10H50M</TravelStartTime>
     <TravelEndTime>PT2H10M</TravelEndTime>
     <BusDepartureNumber>PT11H55M</BusDepartureNumber>
-    <Active>False</Active>
+    <Active>True</Active>
   </LineRide>
   <LineRide>
     <ID>1</ID>
@@ -202,5 +202,12 @@
     <TravelEndTime>PT1H5M</TravelEndTime>
     <BusDepartureNumber>PT1H6M</BusDepartureNumber>
     <Active>False</Active>
+  </LineRide>
+  <LineRide>
+    <ID>1</ID>
+    <TravelStartTime>PT8H10M</TravelStartTime>
+    <TravelEndTime>PT11H55M</TravelEndTime>
+    <BusDepartureNumber>PT1H5M</BusDepartureNumber>
+    <Active>true</Active>
   </LineRide>
 </ArrayOfLineRide>

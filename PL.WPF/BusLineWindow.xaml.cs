@@ -31,16 +31,6 @@ namespace PL.WPF
             bl = _bl;
         }
         /// <summary>
-        /// event MouseButtonEventArgs 
-        /// grid  DragMove
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Grid_MouseDown(object sender,MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-        /// <summary>
         /// Opens another window with each click on the list view menu
         /// </summary>
         /// <param name="sender"></param>
