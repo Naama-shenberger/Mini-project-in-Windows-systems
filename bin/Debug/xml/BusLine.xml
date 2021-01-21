@@ -2,7 +2,7 @@
 <ArrayOfBusLine>
   <BusLine>
     <ID>1</ID>
-    <Active>true</Active>
+    <Active>False</Active>
     <BusLineNumber>14</BusLineNumber>
     <FirstStopNumber>388624</FirstStopNumber>
     <LastStopNumber>875612</LastStopNumber>
@@ -26,11 +26,11 @@
   </BusLine>
   <BusLine>
     <ID>4</ID>
-    <Active>true</Active>
+    <Active>True</Active>
     <BusLineNumber>22</BusLineNumber>
     <FirstStopNumber>873401</FirstStopNumber>
     <LastStopNumber>875612</LastStopNumber>
-    <Area>Zeev_hill</Area>
+    <Area>Gush_Etzion</Area>
   </BusLine>
   <BusLine>
     <ID>5</ID>
@@ -199,5 +199,13 @@
     <LastStopNumber>388624</LastStopNumber>
     <Active>true</Active>
     <Area>Gush_Etzion</Area>
+  </BusLine>
+  <BusLine>
+    <ID>22</ID>
+    <BusLineNumber>989</BusLineNumber>
+    <FirstStopNumber>873401</FirstStopNumber>
+    <LastStopNumber>875612</LastStopNumber>
+    <Active>true</Active>
+    <Area>Jerusalem_Corridor</Area>
   </BusLine>
 </ArrayOfBusLine>

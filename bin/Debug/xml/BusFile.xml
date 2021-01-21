@@ -25,28 +25,28 @@
     <Status>Ready_to_go</Status>
   </Bus>
   <Bus>
-    <Active>true</Active>
+    <Active>True</Active>
     <LicensePlate>32345678</LicensePlate>
-    <DateActivity>2018/12/3</DateActivity>
-    <DateTreatment>2019/10/3</DateTreatment>
-    <Totalkilometers>1113</Totalkilometers>
-    <KilometersGas>303</KilometersGas>
-    <KilometersTreatment>1141</KilometersTreatment>
+    <DateActivity>03/12/2018 00:00:00</DateActivity>
+    <DateTreatment>21/01/2021 22:41:17</DateTreatment>
+    <Totalkilometers>78</Totalkilometers>
+    <KilometersGas>0</KilometersGas>
+    <KilometersTreatment>0</KilometersTreatment>
     <AirTire>100</AirTire>
-    <OilCondition>true</OilCondition>
+    <OilCondition>True</OilCondition>
     <Status>Ready_to_go</Status>
   </Bus>
   <Bus>
-    <Active>true</Active>
+    <Active>True</Active>
     <LicensePlate>42345678</LicensePlate>
-    <DateActivity>2018/12/3</DateActivity>
-    <DateTreatment>2019/10/3</DateTreatment>
+    <DateActivity>03/12/2018 00:00:00</DateActivity>
+    <DateTreatment>03/10/2019 00:00:00</DateTreatment>
     <Totalkilometers>114</Totalkilometers>
-    <KilometersGas>333</KilometersGas>
+    <KilometersGas>0</KilometersGas>
     <KilometersTreatment>11115</KilometersTreatment>
     <AirTire>57</AirTire>
-    <OilCondition>true</OilCondition>
-    <Status>Dangerous</Status>
+    <OilCondition>True</OilCondition>
+    <Status>Ready_to_go</Status>
   </Bus>
   <Bus>
     <Active>true</Active>
@@ -61,7 +61,7 @@
     <Status>Dangerous</Status>
   </Bus>
   <Bus>
-    <Active>true</Active>
+    <Active>False</Active>
     <LicensePlate>6234678</LicensePlate>
     <DateActivity>2017/6/3</DateActivity>
     <DateTreatment>2017/12/23</DateTreatment>
@@ -73,7 +73,7 @@
     <Status>Dangerous</Status>
   </Bus>
   <Bus>
-    <Active>true</Active>
+    <Active>False</Active>
     <LicensePlate>7245678</LicensePlate>
     <DateActivity>2015/7/3</DateActivity>
     <DateTreatment>2019/12/29</DateTreatment>
@@ -119,5 +119,17 @@
     <AirTire>20</AirTire>
     <OilCondition>false</OilCondition>
     <Status>Ready_to_go</Status>
+  </Bus>
+  <Bus>
+    <Active>true</Active>
+    <LicensePlate>12345432</LicensePlate>
+    <DateActivity>13/11/2018 00:00:00</DateActivity>
+    <DateTreatment>04/11/2019 00:00:00</DateTreatment>
+    <Totalkilometers>1112</Totalkilometers>
+    <KilometersGas>88</KilometersGas>
+    <KilometersTreatment>988</KilometersTreatment>
+    <Status>Ready_to_go</Status>
+    <AirTire>90</AirTire>
+    <OilCondition>True</OilCondition>
   </Bus>
 </ArrayOfBus>

@@ -108,9 +108,9 @@
   <ConsecutiveStations>
     <StationCodeOne>388624</StationCodeOne>
     <StationCodeTwo>874104</StationCodeTwo>
-    <Flage>true</Flage>
-    <AverageTravelTime>PT7H8M9S</AverageTravelTime>
-    <Distance>1.6</Distance>
+    <Flage>True</Flage>
+    <AverageTravelTime>PT0H1M2S</AverageTravelTime>
+    <Distance>67</Distance>
   </ConsecutiveStations>
   <ConsecutiveStations>
     <StationCodeOne>388614</StationCodeOne>
@@ -139,5 +139,26 @@
     <Flage>true</Flage>
     <AverageTravelTime>PT0.1218276S</AverageTravelTime>
     <Distance>8464.818</Distance>
+  </ConsecutiveStations>
+  <ConsecutiveStations>
+    <StationCodeOne>874104</StationCodeOne>
+    <StationCodeTwo>388634</StationCodeTwo>
+    <Flage>true</Flage>
+    <AverageTravelTime>PT0.0508602S</AverageTravelTime>
+    <Distance>5578.889</Distance>
+  </ConsecutiveStations>
+  <ConsecutiveStations>
+    <StationCodeOne>876015</StationCodeOne>
+    <StationCodeTwo>874104</StationCodeTwo>
+    <Flage>true</Flage>
+    <AverageTravelTime>PT0.1314663S</AverageTravelTime>
+    <Distance>7716.00439</Distance>
+  </ConsecutiveStations>
+  <ConsecutiveStations>
+    <StationCodeOne>874104</StationCodeOne>
+    <StationCodeTwo>875612</StationCodeTwo>
+    <Flage>True</Flage>
+    <AverageTravelTime>PT0H1M2S</AverageTravelTime>
+    <Distance>10340.51</Distance>
   </ConsecutiveStations>
 </ArrayOfConsecutiveStations>

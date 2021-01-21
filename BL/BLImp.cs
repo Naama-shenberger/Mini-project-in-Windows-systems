@@ -144,7 +144,7 @@ namespace BL
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
-        public int NumberOflicensePlate(Bus b)
+        private int NumberOflicensePlate(Bus b)
         {
             int year;
             int.TryParse(b.DateActivity.Year.ToString(), out year);
@@ -156,7 +156,7 @@ namespace BL
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
-        public bool DateCheck(Bus b)
+        private bool DateCheck(Bus b)
         {
             int day;
             int month;
@@ -175,7 +175,7 @@ namespace BL
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
-        public bool FuelCondition(Bus bus)
+        private bool FuelCondition(Bus bus)
         {
             if (bus.KilometersGas > 1200)
                 return true;
@@ -187,7 +187,7 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool TreatmentIsNeeded(Bus bus)
+        private bool TreatmentIsNeeded(Bus bus)
         {
             if ((bus.KilometersTreatment >= 20000 || DateCheck(bus)))
                 return true;

@@ -46,7 +46,8 @@
         <Grid x:Name="gridOneBus"   HorizontalAlignment="Left" Margin="40,76,0,0" VerticalAlignment="Top" Height="326" Width="277">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="102.4"/>
-                <ColumnDefinition Width="348"/>
+                <ColumnDefinition Width="99"/>
+                <ColumnDefinition Width="249"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -60,38 +61,29 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="Date Activity:"  FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left" Margin="4,4.4,0,3.6" Grid.Row="1" VerticalAlignment="Center" Height="24" Width="84"/>
-            <DatePicker x:Name="DateActivityDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="1.6,4.4,0,2.6" Grid.Row="1" SelectedDate="{Binding DateActivity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120"/>
-            <Label  FontWeight="Bold" Content="Date Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.4,0,3" Grid.Row="2" VerticalAlignment="Center" Height="24" Width="99"/>
-            <DatePicker x:Name="DateTreatmentDatePicker"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="1.6,4.4,0,3" Grid.Row="2" SelectedDate="{Binding DateTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label  FontWeight="Bold" Content="Km Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,2.4" Grid.Row="3" VerticalAlignment="Center" Width="88" Height="24"/>
-            <TextBox x:Name="KmTreatmentTextBox" Grid.Column="1"  HorizontalAlignment="Left" Height="23"  Text="{Binding KilometersTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  Margin="1.6,4,0,3.4" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
-            <TextBox x:Name="LicensePlateTextBox" Visibility="Hidden" HorizontalAlignment="Left" Text="{Binding LicensePlate}" Margin="24.6,-2,0,1.2" Width="116" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
-                <TextBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBox.RenderTransform>
-            </TextBox>
+            <Label Content="Date Activity:"  FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left" Margin="4,4.8,0,4" Grid.Row="1" VerticalAlignment="Center" Height="24" Width="84"/>
+            <DatePicker x:Name="DateActivityDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="1.6,4.8,0,3" Grid.Row="1" SelectedDate="{Binding DateActivity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120" Grid.ColumnSpan="2"/>
+            <Label  FontWeight="Bold" Content="Date Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,3.2" Grid.Row="2" VerticalAlignment="Center" Height="24" Width="99"/>
+            <DatePicker x:Name="DateTreatmentDatePicker"  Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="1.6,5,0,3.2" Grid.Row="2" SelectedDate="{Binding DateTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <Label  FontWeight="Bold" Content="Km Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4.8,0,2.4" Grid.Row="3" VerticalAlignment="Center" Width="88" Height="24"/>
+            <TextBox x:Name="KmTreatmentTextBox" Grid.Column="1"  HorizontalAlignment="Left" Height="23"  Text="{Binding KilometersTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  Margin="1.6,4.8,0,3.4" Grid.Row="3" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="LicensePlateTextBox" Visibility="Hidden" HorizontalAlignment="Left" Text="{Binding LicensePlate}" Margin="1.6,-5,0,10.2" Width="116" Grid.Column="1" Grid.ColumnSpan="2" />
             <Label   FontWeight="Bold" Name="LabelLicensePlate" Visibility="Hidden"  Grid.Column="0" HorizontalAlignment="Left"  Grid.Row="0" Content="License Plate:" Margin="3,0,0,0.2" VerticalAlignment="Center" Width="99" Height="31"/>
-            <Label  FontWeight="Bold" Content="Km Gas:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.6,0,2.8" Grid.Row="4" VerticalAlignment="Center" Height="24" Width="54"/>
-            <TextBox x:Name="KmGasTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="1.6,3.6,0,2.8" Grid.Row="4" Text="{Binding KilometersGas, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label   FontWeight="Bold" Content="Total km:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.2,0,3.2" Grid.Row="5" VerticalAlignment="Center" Height="24" Width="60"/>
-            <TextBox x:Name="TotalkmTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="1.6,4.2,0,3.2" Grid.Row="5" Text="{Binding Totalkilometers, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" />
-            <Label  FontWeight="Bold" Content="Air Tire:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.8,0,2.6" Grid.Row="6" VerticalAlignment="Center" Height="24" Width="53"/>
-            <TextBox x:Name="AirTireTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="1.6,3.8,0,3.6" Grid.Row="6" Text="{Binding AirTire, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label   FontWeight="Bold" Content="Oil Condition:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.4,0,3" Grid.Row="7" VerticalAlignment="Center" Height="24" Width="86"/>
-            <TextBox x:Name="OilConditionTextBox"  KeyDown="OnKeyDownHandler" Grid.Column="1" Text="{Binding OilCondition, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="23"  Margin="1.6,4.4,0,3" Grid.Row="7" VerticalAlignment="Center" Width="120"/>
-            <Label  FontWeight="Bold" Content="Status" Name="StatusLabel" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,2.4" Grid.Row="8" VerticalAlignment="Center" Height="24" Width="42"/>
-            <TextBlock x:Name="StatusTextBlock" Text="{Binding Status}" HorizontalAlignment="Left" Margin="5.6,9,0,0" Grid.Row="8" VerticalAlignment="Top" Width="119" Height="16" Grid.Column="1"/>
-            <materialDesign:PackIcon Kind="Oil" Foreground="Black" Width="48" Margin="90.6,5.6,0,0" Height="23" Grid.Row="7" Grid.Column="1"/>
-            <materialDesign:PackIcon Kind="CarTireAlert" Foreground="Black" Width="50" Margin="88.6,3.8,0,0" Height="20" Grid.Row="6" Grid.Column="1"/>
-            <materialDesign:PackIcon Kind="GasPump" Foreground="Black" Width="50" Margin="88.6,4.2,0,0" Height="20" Grid.Column="1" Grid.Row="4"/>
-            <materialDesign:PackIcon Kind="Bus" Foreground="Black" Width="50" Margin="88.6,4.4,0,0" Height="20" Grid.Column="1" Grid.Row="3"/>
-            <materialDesign:PackIcon Kind="SignalDistanceVariant" Foreground="Black" Width="50" Margin="88.6,5,0,0" Height="20" Grid.Column="1" Grid.Row="5"/>
+            <Label  FontWeight="Bold" Content="Km Gas:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.6,0,3.6" Grid.Row="4" VerticalAlignment="Center" Height="24" Width="54"/>
+            <TextBox x:Name="KmGasTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="1.6,3.6,0,3.6" Grid.Row="4" Text="{Binding KilometersGas, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <Label   FontWeight="Bold" Content="Total km:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.4,0,3.8" Grid.Row="5" VerticalAlignment="Center" Height="24" Width="60"/>
+            <TextBox x:Name="TotalkmTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="1.6,4.4,0,3.8" Grid.Row="5" Text="{Binding Totalkilometers, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" />
+            <Label  FontWeight="Bold" Content="Air Tire:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4.2,0,3" Grid.Row="6" VerticalAlignment="Center" Height="24" Width="53"/>
+            <TextBox x:Name="AirTireTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="1.6,4.2,0,4" Grid.Row="6" Text="{Binding AirTire, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <Label   FontWeight="Bold" Content="Oil Condition:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,3.2" Grid.Row="7" VerticalAlignment="Center" Height="24" Width="86"/>
+            <TextBox x:Name="OilConditionTextBox"  KeyDown="OnKeyDownHandler" Grid.Column="1" Text="{Binding OilCondition, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="23"  Margin="1.6,5,0,3.2" Grid.Row="7" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <Label  FontWeight="Bold" Content="Status" Name="StatusLabel" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4.8,0,2.4" Grid.Row="8" VerticalAlignment="Center" Height="24" Width="42"/>
+            <TextBlock x:Name="StatusTextBlock" Text="{Binding Status}" HorizontalAlignment="Left" Margin="5.6,8.8,0,0" Grid.Row="8" VerticalAlignment="Top" Width="119" Height="16" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <materialDesign:PackIcon Kind="Oil" Foreground="Black" Width="48" Margin="90.6,6,0,0" Height="23" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <materialDesign:PackIcon Kind="CarTireAlert" Foreground="Black" Width="50" Margin="88.6,4.2,0,0" Height="20" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <materialDesign:PackIcon Kind="GasPump" Foreground="Black" Width="50" Margin="88.6,4.6,0,0" Height="20" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2"/>
+            <materialDesign:PackIcon Kind="Bus" Foreground="Black" Width="50" Margin="88.6,4.8,0,0" Height="20" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
+            <materialDesign:PackIcon Kind="SignalDistanceVariant" Foreground="Black" Width="50" Margin="88.6,5.4,0,0" Height="20" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2"/>
         </Grid>
         <Button  BorderBrush="#FF2281D1" Background="#FF2281D1" Name="refuelButton" Click="refuel_Click" Content="refuel" HorizontalAlignment="Left" Margin="345,120,0,0" VerticalAlignment="Top" Width="123" Height="29"/>
         <Button  BorderBrush="#FF2281D1" Background="#FF2281D1" Name="TreatmentButton" Content="Treatment" Click="Treatment_Click" HorizontalAlignment="Left" Margin="345,78,0,0" VerticalAlignment="Top" Width="123" Height="29"/>

@@ -8,7 +8,7 @@
   </BusLineStation>
   <BusLineStation>
     <ID>1</ID>
-    <Active>true</Active>
+    <Active>False</Active>
     <BusStationKey>875612</BusStationKey>
     <NumberStationInLine>2</NumberStationInLine>
   </BusLineStation>
@@ -293,5 +293,59 @@
     <BusStationKey>388624</BusStationKey>
     <Active>true</Active>
     <NumberStationInLine>2</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>6</ID>
+    <BusStationKey>874104</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>3</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>8</ID>
+    <BusStationKey>874104</BusStationKey>
+    <Active>False</Active>
+    <NumberStationInLine>3</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>8</ID>
+    <BusStationKey>876015</BusStationKey>
+    <Active>True</Active>
+    <NumberStationInLine>4</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>1</ID>
+    <BusStationKey>874104</BusStationKey>
+    <Active>True</Active>
+    <NumberStationInLine>3</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>1</ID>
+    <BusStationKey>876015</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>3</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>22</ID>
+    <BusStationKey>873401</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>1</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>22</ID>
+    <BusStationKey>875612</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>2</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>0</ID>
+    <BusStationKey>388563</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>51</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>0</ID>
+    <BusStationKey>388604</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>52</NumberStationInLine>
   </BusLineStation>
 </ArrayOfBusLineStation>

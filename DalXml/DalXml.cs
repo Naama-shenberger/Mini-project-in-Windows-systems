@@ -737,8 +737,8 @@ namespace DL
             XElement ConsecutiveStationsRootElem = XMLTools.LoadListFromXMLElement(ConsecutiveStationsPath);
 
             ConsecutiveStations s = (from S in ConsecutiveStationsRootElem.Elements()
-                          where int.Parse(S.Element("StationCodeOne").Value) == id1 && id2== int.Parse(S.Element("StationCodeTwo").Value) && Boolean.Parse(S.Element("Flage").Value) == true
-                                     select new ConsecutiveStations
+                          where (int.Parse(S.Element("StationCodeOne").Value) == id2 && id1 == int.Parse(S.Element("StationCodeTwo").Value)&& Boolean.Parse(S.Element("Flage").Value) == true) || (int.Parse(S.Element("StationCodeOne").Value) == id1 && id2== int.Parse(S.Element("StationCodeTwo").Value) && Boolean.Parse(S.Element("Flage").Value) == true)
+                          select new ConsecutiveStations
                           {
                               StationCodeOne= Int32.Parse(S.Element("StationCodeOne").Value),
                               StationCodeTwo= Int32.Parse(S.Element("StationCodeTwo").Value),
