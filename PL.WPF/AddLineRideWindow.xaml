@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AddLineRideWindow" Height="350" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="AddLineRideWindow" Height="350" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"  WindowStyle="None">
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
 
