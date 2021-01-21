@@ -408,7 +408,7 @@ namespace DL
 
             if (bus1 != null)
                 throw new DO.IdException(bus.ID, "Duplicate Bus Line ID");
-            serialsRootElem.Element("IdentificationNumberBusLine").Value = serialsRootElem.Element("IdentificationNumberBusLine").Value + 1;
+            serialsRootElem.Element("IdentificationNumberBusLine").Value = (Int32.Parse(serialsRootElem.Element("IdentificationNumberBusLine").Value) + 1).ToString();
             XMLTools.SaveListToXMLElement(serialsRootElem, serialsPath);
             bus.ID = Int32.Parse(serialsRootElem.Element("IdentificationNumberBusLine").Value);
             XElement BusLineElem = new XElement("BusLine",
@@ -820,9 +820,9 @@ namespace DL
             {
                 stations.Element("StationCodeOne").Value = c.StationCodeOne.ToString();
                 stations.Element("StationCodeTwo").Value = c.StationCodeTwo.ToString();
-                stations.Element("Flage").Value = c.Flage.ToString();
+                stations.Element("Flage").Value = c.Flage.ToString();  
                 stations.Element("Distance").Value = c.Distance.ToString();
-                stations.Element("AverageTravelTime").Value = c.AverageTravelTime.ToString();
+                stations.Element("AverageTravelTime").Value =string.Format($"PT{0}H{1}M{2}S",c.AverageTravelTime.TotalHours,c.AverageTravelTime.TotalMinutes,c.AverageTravelTime.TotalSeconds);
                 XMLTools.SaveListToXMLElement(ConsecutiveStationsRootElem, ConsecutiveStationsPath);
             }
             else

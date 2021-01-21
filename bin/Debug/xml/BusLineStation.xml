@@ -270,4 +270,28 @@
     <Active>true</Active>
     <NumberStationInLine>2</NumberStationInLine>
   </BusLineStation>
+  <BusLineStation>
+    <ID>2011111111</ID>
+    <BusStationKey>873401</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>1</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>2011111111</ID>
+    <BusStationKey>388624</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>2</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>21</ID>
+    <BusStationKey>873401</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>1</NumberStationInLine>
+  </BusLineStation>
+  <BusLineStation>
+    <ID>21</ID>
+    <BusStationKey>388624</BusStationKey>
+    <Active>true</Active>
+    <NumberStationInLine>2</NumberStationInLine>
+  </BusLineStation>
 </ArrayOfBusLineStation>

@@ -52,9 +52,9 @@
   <ConsecutiveStations>
     <StationCodeOne>388624</StationCodeOne>
     <StationCodeTwo>875612</StationCodeTwo>
-    <Flage>true</Flage>
+    <Flage>True</Flage>
     <Distance>6.98</Distance>
-    <AverageTravelTime>PT04M50S</AverageTravelTime>
+    <AverageTravelTime>PT0H1M2S</AverageTravelTime>
   </ConsecutiveStations>
   <ConsecutiveStations>
     <StationCodeOne>388614</StationCodeOne>

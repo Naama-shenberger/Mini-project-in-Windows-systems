@@ -34,7 +34,7 @@
   </BusLine>
   <BusLine>
     <ID>5</ID>
-    <Active>true</Active>
+    <Active>False</Active>
     <BusLineNumber>19</BusLineNumber>
     <FirstStopNumber>873401</FirstStopNumber>
     <LastStopNumber>388634</LastStopNumber>
@@ -185,7 +185,7 @@
     <Area>Jerusalem_Corridor</Area>
   </BusLine>
   <BusLine>
-    <ID>2011111</ID>
+    <ID>201112</ID>
     <BusLineNumber>22</BusLineNumber>
     <FirstStopNumber>873401</FirstStopNumber>
     <LastStopNumber>388624</LastStopNumber>
@@ -193,19 +193,11 @@
     <Area>Jerusalem_Corridor</Area>
   </BusLine>
   <BusLine>
-    <ID>20111111</ID>
-    <BusLineNumber>333</BusLineNumber>
-    <FirstStopNumber>875612</FirstStopNumber>
+    <ID>21</ID>
+    <BusLineNumber>23</BusLineNumber>
+    <FirstStopNumber>873401</FirstStopNumber>
     <LastStopNumber>388624</LastStopNumber>
     <Active>true</Active>
-    <Area>Jerusalem_Corridor</Area>
-  </BusLine>
-  <BusLine>
-    <ID>201111111</ID>
-    <BusLineNumber>44</BusLineNumber>
-    <FirstStopNumber>875612</FirstStopNumber>
-    <LastStopNumber>388624</LastStopNumber>
-    <Active>true</Active>
-    <Area>Jerusalem_Corridor</Area>
+    <Area>Gush_Etzion</Area>
   </BusLine>
 </ArrayOfBusLine>

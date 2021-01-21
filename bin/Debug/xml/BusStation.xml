@@ -448,4 +448,12 @@
     <Latitude>32.033</Latitude>
     <Longitude>35.1758</Longitude>
   </BusStation>
+  <BusStation>
+    <BusStationKey>123321</BusStationKey>
+    <Active>True</Active>
+    <StationName>hry</StationName>
+    <StationAddress>hry</StationAddress>
+    <Latitude>32.4742</Latitude>
+    <Longitude>34.3</Longitude>
+  </BusStation>
 </ArrayOfStation>

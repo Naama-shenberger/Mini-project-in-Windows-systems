@@ -20,7 +20,7 @@
     <Totalkilometers>111</Totalkilometers>
     <KilometersGas>0</KilometersGas>
     <KilometersTreatment>0</KilometersTreatment>
-    <AirTire>15</AirTire>
+    <AirTire>50</AirTire>
     <OilCondition>True</OilCondition>
     <Status>Ready_to_go</Status>
   </Bus>

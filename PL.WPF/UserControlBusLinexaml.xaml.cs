@@ -261,7 +261,7 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void DeleteButon_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult res = MessageBox.Show("Delete selected student?", "Verification", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult res = MessageBox.Show("Delete selected Bus Line?", "Verification", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (res == MessageBoxResult.No)
                 return;
             try
