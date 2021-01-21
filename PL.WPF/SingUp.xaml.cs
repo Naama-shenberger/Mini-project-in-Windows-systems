@@ -58,23 +58,23 @@ namespace PL.WPF
                                 HashedPassword = Tools.hashPassword(salt + PasswordUser.Password)
                             };
                             bL.AddUser(Newuser);
-                            MessageBox.Show("Registration passed successfully", "Registration", MessageBoxButton.OK);
+                            MessageBox.Show("Registration passed successfully", "Registration", MessageBoxButton.OK, MessageBoxImage.Information);
                             this.Close();
                         }
                         else
-                            MessageBox.Show("wrong Confirm password", "ERROR", MessageBoxButton.OKCancel);
+                            MessageBox.Show("wrong Confirm password", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                     }
                     else
-                        MessageBox.Show("Your password must Contains 6 At least characters,For your safety :)", "ERROR", MessageBoxButton.OKCancel);
+                        MessageBox.Show("Your password must Contains 6 At least characters,For your safety :)", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
 
                 }
                 else
-                    MessageBox.Show("Your password must Contains lowercase and uppercase letters and numbers,For your safety :)", "ERROR", MessageBoxButton.OKCancel);
+                    MessageBox.Show("Your password must Contains lowercase and uppercase letters and numbers,For your safety :)", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
 
             }
             catch (BO.IdException ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OKCancel);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
             }
         }
         /// <summary>
