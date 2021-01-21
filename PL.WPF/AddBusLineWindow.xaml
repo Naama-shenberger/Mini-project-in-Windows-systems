@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.WPF.AddBusLineWindow"
         mc:Ignorable="d"
-        Title="AddBusLineWindow" Height="450" Width="600" KeyDown="OnKeyDownHandler" >
+        Title="AddBusLineWindow" Height="450" Width="600" KeyDown="OnKeyDownHandler" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Rectangle Height="245" Fill="White" VerticalAlignment="Bottom" Margin="18,0,9.6,143" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>

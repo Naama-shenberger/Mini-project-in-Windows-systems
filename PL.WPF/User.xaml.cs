@@ -90,6 +90,8 @@ namespace PL.WPF
         private void backbtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            access access = new access(iBL);
+            access.ShowDialog();
         }
     }
 }

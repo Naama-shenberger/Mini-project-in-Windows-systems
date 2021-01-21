@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AddNewStationWindow" Height="350" Width="450" WindowStyle="None" >
+        Title="AddNewStationWindow" Height="350" Width="450" WindowStyle="None" WindowStartupLocation="CenterScreen" >
     <Grid Margin="10,0,0.2,254">
         <Grid Margin="-10,0,-4,-180">
             <Grid.ColumnDefinitions>

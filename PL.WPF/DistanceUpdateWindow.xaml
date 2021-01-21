@@ -6,7 +6,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:local="clr-namespace:PL.WPF"
         mc:Ignorable="d"
-        Title="DistanceUpdateWindow" Height="200" Width="400">
+        Title="DistanceUpdateWindow" Height="200" Width="400" WindowStartupLocation="CenterScreen">
     <Grid >
         <Rectangle Margin="-1,-2,-3.4,85.4" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
