@@ -28,7 +28,6 @@ namespace PL.WPF
         {
             InitializeComponent();
             bl = _bl;
-            ComboBoxBusStationKey.ItemsSource = bl.GetAllBusStation();
             ComboBoxBusStationKey.SelectedValuePath = "BusStationKey";
             ComboBoxBusStationKey.DisplayMemberPath = "StationName";
             ComboBoxBusStationKey.SelectedIndex = 0;
@@ -44,7 +43,7 @@ namespace PL.WPF
         /// </summary>
         private void RefreshAllStationsComboBox()
         {
-            ComboBoxBusStationKey.DataContext = StationList=Convert<BO.BusStation> (bl.GetAllBusStation()); //ObserListOfStudents;
+            ComboBoxBusStationKey.DataContext = StationList = Convert<BO.BusStation>(bl.GetAllBusStation()); //ObserListOfStudents;
             ComboBoxBusStationKey.SelectedIndex = 0;
         }
 
@@ -168,16 +167,14 @@ namespace PL.WPF
         {
             try
             {
-                if (CurBusStation != null)
+                AddNewStationWindow addStationWindow = new AddNewStationWindow(bl);
+                addStationWindow.ShowDialog();
+                if (addStationWindow.BusStation != null)
                 {
-                    AddNewStationWindow addStationWindow = new AddNewStationWindow(bl);
-                    addStationWindow.ShowDialog();
                     bl.AddBusStation(addStationWindow.BusStation);
                     MessageBox.Show($"bus Station {addStationWindow.Bus_Station_Key} successfully added ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     RefreshAllStationsComboBox();
                 }
-                else
-                    MessageBox.Show($"select a station first ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (BO.IdException ex)
             {

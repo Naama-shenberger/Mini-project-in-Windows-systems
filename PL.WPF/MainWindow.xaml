@@ -89,7 +89,7 @@
 
             </Grid>
             <TextBlock HorizontalAlignment="Left" Foreground="White" Margin="100,100,0,0" TextWrapping="Wrap" Text="Bus Lines" VerticalAlignment="Top" Height="41" Width="113" FontSize="24"/>
-            <TextBlock HorizontalAlignment="Left" Foreground="White" Margin="100,192,0,0" TextWrapping="Wrap" Text="Buss" VerticalAlignment="Top" FontSize="24" Width="134"/>
+            <TextBlock HorizontalAlignment="Left" Foreground="White" Margin="100,192,0,0" TextWrapping="Wrap" Text="Buses" VerticalAlignment="Top" FontSize="24" Width="134"/>
             <TextBlock HorizontalAlignment="Left" Foreground="White" Margin="100,278,0,0" TextWrapping="Wrap" Text="Stations" VerticalAlignment="Top" Height="39" Width="93" FontSize="24"/>
 
         </Grid>

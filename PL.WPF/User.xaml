@@ -45,7 +45,7 @@
             <Label FontWeight="Bold" Content="Enter User Name:" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Height="27" Width="108"/>
         </Grid>
         <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Log In" HorizontalAlignment="Left" Margin="316,357,0,0" VerticalAlignment="Top" Width="108"  Height="31" Name="LongIn" Click="LongIn_Click"/>
-        <Button x:Name="SingUp" FontWeight="Bold" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Sing Up" HorizontalAlignment="Left" Margin="543,432,0,0" VerticalAlignment="Top" Width="108" Height="27" Click="SingUp_Click" />
+        <Button x:Name="SingUp" FontWeight="Bold" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Sign Up" HorizontalAlignment="Left" Margin="543,432,0,0" VerticalAlignment="Top" Width="108" Height="27" Click="SingUp_Click" />
         <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="447,213,0,0"/>
         <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="451,285,0,0" Height="16"/>
     </Grid>

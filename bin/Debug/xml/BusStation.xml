@@ -449,11 +449,19 @@
     <Longitude>35.1758</Longitude>
   </BusStation>
   <BusStation>
-    <BusStationKey>123321</BusStationKey>
-    <Active>True</Active>
-    <StationName>hry</StationName>
-    <StationAddress>hry</StationAddress>
-    <Latitude>32.4742</Latitude>
-    <Longitude>34.3</Longitude>
+    <BusStationKey>198765</BusStationKey>
+    <Active>False</Active>
+    <StationName>hey there</StationName>
+    <StationAddress>world</StationAddress>
+    <Latitude>31.8608</Latitude>
+    <Longitude>34.5526</Longitude>
+  </BusStation>
+  <BusStation>
+    <BusStationKey>198762</BusStationKey>
+    <Active>False</Active>
+    <StationName>hey you</StationName>
+    <StationAddress>world</StationAddress>
+    <Latitude>31.538</Latitude>
+    <Longitude>34.7042</Longitude>
   </BusStation>
 </ArrayOfStation>

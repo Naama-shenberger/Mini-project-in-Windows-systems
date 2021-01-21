@@ -9,9 +9,9 @@
         WindowStyle="None"
         Title="SimulateOneStationWindow"  Height="500" Width="876.4" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"  >
     <WrapPanel>
-        
+
         <Grid>
-            <DataGrid Margin="357,245,-110.6,-445" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True"  Name="lineTimingDataGrid">
+            <DataGrid Margin="357,245,-110.4,-445" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True"  Name="lineTimingDataGrid" Grid.ColumnSpan="3">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="Time" Header="Timing" Binding="{Binding  CurTimeStasion}" />
                     <DataGridTextColumn Header="Started at" Binding="{Binding TravelStartTime}"/>
