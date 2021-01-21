@@ -869,7 +869,7 @@ namespace DL
                              {
                                       UserName = u.Element("UserName").Value,
                                       Salt= int.Parse(u.Element("Salt").Value),
-                                      HashedPassword= Tools.hashPassword(u.Element("HashedPassword").Value),
+                                      HashedPassword= u.Element("HashedPassword").Value,
                                       AllowingAccess= Boolean.Parse(u.Element("AllowingAccess").Value),
                                       password= u.Element("password").Value,
                                       DelUser= Boolean.Parse(u.Element("DelUser").Value)

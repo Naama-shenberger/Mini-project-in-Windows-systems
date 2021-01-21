@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUsers>
-  <UserJourney>
+  <User>
     <UserName>Naama</UserName>
-    <Salt>240693216</Salt>
-    <HashedPassword>AHaw0BtO3IosE3hmDp523hyqXmC1SgSVKdkplw/A0Kl9tKt44xjOIcWi7TiM/opBM0v9bKzdC/1H9RDqBqRnbg==</HashedPassword>
+    <Salt>1327960301</Salt>
+    <HashedPassword>ZEE6NUJzPV46K3KchoGPjY7EljowaaNov+V9uA3cDrV1qupkh7d6MEhcX1rs7tNAcH+o8Nja22SgzUQ2JHNajA==</HashedPassword>
     <AllowingAccess>true</AllowingAccess>
     <password>Naama12</password>
     <DelUser>false</DelUser>
-  </UserJourney>
+  </User>
 </ArrayOfUsers>
