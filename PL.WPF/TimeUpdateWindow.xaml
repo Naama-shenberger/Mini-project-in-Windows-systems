@@ -8,23 +8,15 @@
         mc:Ignorable="d"
         Title="TimeUpdateWindow" Height="200" Width="400" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid >
-        <Rectangle Margin="0,0,-1.4,83" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.222"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0.668"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-            <Rectangle.Fill>
+        <Grid Margin="0,0,-3.4,56.6" HorizontalAlignment="Right" Width="397">
+            <Grid.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="#FF2281D1"/>
                     <GradientStop Color="#FF34268A" Offset="1"/>
-                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
                 </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
+            </Grid.Background>
+        </Grid>
         <Rectangle Height="132" Fill="White" VerticalAlignment="Bottom" Margin="20,0,18.6,28.4" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>

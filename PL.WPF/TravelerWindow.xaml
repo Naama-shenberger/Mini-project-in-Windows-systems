@@ -37,7 +37,7 @@
 
         </Grid>
         <Grid >
-            <DataGrid x:Name="AlllinesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="440,97,72,131.6"  Background="#FF9CB7F4">
+            <DataGrid x:Name="AlllinesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="440,97,72,131.6"  Background="AliceBlue">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Bus Line" Binding="{Binding  BusLineNumber}"/>
                 </DataGrid.Columns>

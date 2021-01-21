@@ -7,29 +7,25 @@
         mc:Ignorable="d"
         Title="SingUp" Height="500" Width="750" WindowStartupLocation="CenterScreen"  WindowStyle="None">
     <Grid>
-        <Rectangle Margin="-4,-4,3,178.4" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.222"/>
-                    <RotateTransform Angle="0.164"/>
-                    <TranslateTransform Y="0.668"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-            <Rectangle.Fill>
+        <Grid Margin="0,0,-3,164.6" HorizontalAlignment="Right" Width="747">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="323*"/>
+                <ColumnDefinition Width="677*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="#FF2281D1"/>
                     <GradientStop Color="#FF34268A" Offset="1"/>
-                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
                 </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
+            </Grid.Background>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="149" Margin="0,0,0,53">
+                <Button x:Name="backbtn" ToolTip="back" Click="backbtn_Click" Width="71" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="-9,9,0,9" FontWeight="Bold" >
+                    <materialDesign:PackIcon Kind="ArrowLeft" FontWeight="Bold" FontSize="16" Height="30" Width="71" />
+                </Button>
+            </StackPanel>
+        </Grid>
 
-            <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,10,10,0" VerticalAlignment="Top" Click="backbtn_Click"  >
-                <materialDesign:PackIcon Kind="ArrowBack" Height="32" Width="40"/>
-            </Button>
-        </StackPanel>
 
         <!--<Image Source="C:\Users\naamo\Downloads\icons8-bus-80.png" Margin="91,10,85,369.4" RenderTransformOrigin="0.597,0.522"/>-->
         <Rectangle Height="229" Fill="White" VerticalAlignment="Bottom" Margin="130,0,121,121.4" RadiusY="28.27" RadiusX="28.27">

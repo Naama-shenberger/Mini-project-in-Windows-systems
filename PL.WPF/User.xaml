@@ -7,31 +7,24 @@
         mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="User" Height="500" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"  WindowStyle="None">
     <Grid>
-       
-        <Rectangle Margin="0,0,-1,174.4" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.222"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0.668"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-            <Rectangle.Fill>
+
+        <Grid Margin="0,0,-3.6,199" HorizontalAlignment="Right" Width="754">
+            <Grid.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="#FF2281D1"/>
                     <GradientStop Color="#FF34268A" Offset="1"/>
-                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
                 </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
+            </Grid.Background>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,636,192" Width="118">
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
+                <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,10,10,0" VerticalAlignment="Top" Click="backbtn_Click" >
+                    <materialDesign:PackIcon Kind="ArrowBack" Height="32" Width="40"/>
+                </Button>
+            </StackPanel>
+        </Grid>
 
-            <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,10,10,0" VerticalAlignment="Top" Click="backbtn_Click" >
-                <materialDesign:PackIcon Kind="ArrowBack" Height="32" Width="40"/>
-            </Button>
-        </StackPanel>
+
         <!--<Image Source="C:\Users\naamo\Downloads\icons8-bus-80.png" Margin="85,10,91,369.4" RenderTransformOrigin="0.597,0.522"/>-->
         <Rectangle Height="229" Fill="White" VerticalAlignment="Bottom" Margin="141,0,136,121.4" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
@@ -51,8 +44,8 @@
             </TextBox>
             <Label FontWeight="Bold" Content="Enter User Name:" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Height="27" Width="108"/>
         </Grid>
-        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Log In" HorizontalAlignment="Left" Margin="303,339,0,0" VerticalAlignment="Top" Width="108"  Height="31" Name="LongIn" Click="LongIn_Click"/>
-        <Button x:Name="SingUp" FontWeight="Bold" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Sing Up" HorizontalAlignment="Left" Margin="584,414,0,0" VerticalAlignment="Top" Width="92" Height="27" Click="SingUp_Click" />
+        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Log In" HorizontalAlignment="Left" Margin="316,357,0,0" VerticalAlignment="Top" Width="108"  Height="31" Name="LongIn" Click="LongIn_Click"/>
+        <Button x:Name="SingUp" FontWeight="Bold" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Sing Up" HorizontalAlignment="Left" Margin="316,463,0,0" VerticalAlignment="Top" Width="108" Height="27" Click="SingUp_Click" />
         <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="447,213,0,0"/>
         <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="451,285,0,0" Height="16"/>
     </Grid>

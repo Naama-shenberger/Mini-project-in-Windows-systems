@@ -7,22 +7,39 @@
         mc:Ignorable="d"
         Title="AddLineRideWindow" Height="350" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"  WindowStyle="None">
     <Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0">
+        <Grid Margin="0,0,-3,278.4" HorizontalAlignment="Right" Width="403">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="323*"/>
+                <ColumnDefinition Width="677*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="149" Margin="0,0,0,10" Grid.ColumnSpan="2">
+                <Button x:Name="backbtn" ToolTip="back" Click="backbtn_Click" Width="71" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="-9,9,0,9" FontWeight="Bold" >
+                    <materialDesign:PackIcon Kind="ArrowLeft" FontWeight="Bold" FontSize="16" Height="30" Width="71" />
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Rectangle Height="217" Fill="White" VerticalAlignment="Bottom" Margin="43,0,55,82.4" RadiusY="28.27" RadiusX="28.27">
+            <Rectangle.Effect>
+                <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <materialDesign:TimePicker x:Name = "StartTimePicker"  Text="Select bus start time"   Margin = "64,77,77,245.4" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A" RenderTransformOrigin="0.5,0.5">
 
-            <Button x:Name="backbtn"  Width="77" Height="49" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="0,10,10,0" VerticalAlignment="Top" Click="backbtn_Click"  >
-                <materialDesign:PackIcon Kind="ArrowBack" Height="32" Width="40"/>
-            </Button>
-        </StackPanel>
-        <materialDesign:TimePicker x:Name = "StartTimePicker"  Text="Select bus start time"   Margin = "10,62,130.6,230.8" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A" RenderTransformOrigin="0.5,0.5">
-            
         </materialDesign:TimePicker>
-        <materialDesign:TimePicker x:Name = "EndTimePicker"  Text="Select bus End time"   Margin = "10,116,130.6,176.8" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A" RenderTransformOrigin="0.5,0.5">
+        <materialDesign:TimePicker x:Name = "EndTimePicker"  Text="Select bus End time"   Margin = "64,138,77,184.4" Height="28" FontWeight="Bold"  BorderBrush="#FF34268A" RenderTransformOrigin="0.5,0.5">
         </materialDesign:TimePicker>
-        <materialDesign:TimePicker x:Name = "ExitEvery" Text="Exit Every"  Margin = "8,166,130.6,127.8" Height="27" FontWeight="Bold"  BorderBrush="#FF34268A" RenderTransformOrigin="0.5,0.5">
+        <materialDesign:TimePicker x:Name = "ExitEvery" Text="Exit Every"  Margin = "64,193,77,130.4" Height="27" FontWeight="Bold"  BorderBrush="#FF34268A" RenderTransformOrigin="0.5,0.5">
 
         </materialDesign:TimePicker>
-        <Button x:Name="Addbtn" Content="Add" HorizontalAlignment="Left" Margin="276,251,0,0" VerticalAlignment="Top" Width="75" Click="Addbtn_Click">
-            
+        <Button x:Name="Addbtn" Content="Add" HorizontalAlignment="Left" Margin="163,252,0,0" VerticalAlignment="Top" Width="75" Click="Addbtn_Click">
+
         </Button>
     </Grid>
 </Window>

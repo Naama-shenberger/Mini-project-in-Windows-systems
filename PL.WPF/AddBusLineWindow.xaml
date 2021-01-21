@@ -8,6 +8,15 @@
         mc:Ignorable="d"
         Title="AddBusLineWindow" Height="450" Width="600" KeyDown="OnKeyDownHandler" WindowStartupLocation="CenterScreen"  WindowStyle="None" >
     <Grid>
+        <Grid Margin="0,0,-3.4,224.2" HorizontalAlignment="Right" Width="597">
+            <Grid.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
         <Rectangle Height="245" Fill="White" VerticalAlignment="Bottom" Margin="18,0,9.6,143" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>

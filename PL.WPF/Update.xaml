@@ -7,31 +7,27 @@
         mc:Ignorable="d"
         Title="Update" Height="250" Width="400" WindowStartupLocation="CenterScreen"  WindowStyle="None">
     <Grid >
-        <Rectangle Margin="0,0,-1.4,83" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-0.222"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0.668"/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-            <Rectangle.Fill>
+        <Grid Margin="0,0,-3.4,74.2" HorizontalAlignment="Right" Width="397">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="323*"/>
+                <ColumnDefinition Width="677*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="#FF2281D1"/>
                     <GradientStop Color="#FF34268A" Offset="1"/>
-                    <GradientStop Color="#FF52A7F0" Offset="0.5"/>
+                    <GradientStop Color="#FF52A7F0" Offset="0.242"/>
                 </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
+            </Grid.Background>
+        </Grid>
         <Rectangle Height="132" Fill="White" VerticalAlignment="Bottom" Margin="20,0,18.6,49" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
             </Rectangle.Effect>
         </Rectangle>
-        <ComboBox Name="cbNumberIndex" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="233,69,0,0" VerticalAlignment="Top" Width="120" BorderBrush="Black" />
-        <Label Content="Select a station number on the route:" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top" Height="27" Width="208" FontWeight="Bold"/>
-        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" x:Name="Done" Content="Done" HorizontalAlignment="Left" Margin="153,158,0,0" VerticalAlignment="Top" Width="75" Click="Done_Click"/>
+        <ComboBox Name="cbNumberIndex" ItemsSource="{Binding}" HorizontalAlignment="Left" Margin="233,107,0,0" VerticalAlignment="Top" Width="120" BorderBrush="Black" />
+        <Label Content="Select a station number on the route:" HorizontalAlignment="Left" Margin="20,108,0,0" VerticalAlignment="Top" Height="27" Width="208" FontWeight="Bold"/>
+        <Button BorderBrush="#FF2281D1" Background="#FF2281D1" x:Name="Done" Content="Done" HorizontalAlignment="Left" Margin="153,174,0,0" VerticalAlignment="Top" Width="75" Click="Done_Click"/>
 
     </Grid>
 </Window>
