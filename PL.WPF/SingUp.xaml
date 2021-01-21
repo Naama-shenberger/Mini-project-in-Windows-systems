@@ -19,7 +19,7 @@
                     <GradientStop Color="#FF52A7F0" Offset="0.242"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="149" Margin="0,0,0,53">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="130" Margin="0,0,0,264">
                 <Button x:Name="backbtn" ToolTip="back" Click="backbtn_Click" Width="71" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Gray" Padding="0" Margin="-9,9,0,9" FontWeight="Bold" >
                     <materialDesign:PackIcon Kind="ArrowLeft" FontWeight="Bold" FontSize="16" Height="30" Width="71" />
                 </Button>
@@ -42,9 +42,9 @@
             <PasswordBox x:Name="PasswordBoxConfirm" HorizontalAlignment="Left" Margin="10,162,0,0" VerticalAlignment="Top" Width="250" Height="29"/>
             <Label  FontWeight="Bold" Content="Confirm your password:" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="139" Height="29"/>
         </Grid>
-        <Button x:Name="Confrim" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Confirm" HorizontalAlignment="Left" Margin="324,329,0,0" VerticalAlignment="Top" Width="105" Click="Confrim_Click"/>
-        <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="446,189,0,0"/>
-        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="452,237,0,0" Height="16"/>
-        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="452,286,0,0" Height="16"/>
+        <Button x:Name="Confrim" BorderBrush="#FF2281D1" Background="#FF2281D1" Content="Confirm" HorizontalAlignment="Left" Margin="324,349,0,0" VerticalAlignment="Top" Width="105" Click="Confrim_Click"/>
+        <materialDesign:PackIcon Kind="User" Foreground="Black" Width="44" Margin="448,211,0,0"/>
+        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="452,255,0,0" Height="16"/>
+        <materialDesign:PackIcon Kind="Lock" Foreground="Black" Width="38" Margin="452,306,0,0" Height="16"/>
     </Grid>
 </Window>

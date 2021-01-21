@@ -926,7 +926,7 @@ namespace DL
                 else
                     throw new DO.IdException($"The user name {user.UserName} does not exist");
             }
-            XElement UserJourneyElem = new XElement("UserJourney",
+            XElement UserElem = new XElement("User",
                                    new XElement("UserName", user.UserName),
                                    new XElement("Salt", user.Salt),
                                    new XElement("HashedPassword", user.HashedPassword),
@@ -936,7 +936,7 @@ namespace DL
                                    
                                    );
 
-            UserRootElem.Add(UserJourneyElem);
+            UserRootElem.Add(UserElem);
             XMLTools.SaveListToXMLElement(UserRootElem, userPath);
 
         }

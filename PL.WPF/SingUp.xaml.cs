@@ -65,7 +65,7 @@ namespace PL.WPF
                             MessageBox.Show("wrong Confirm password", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                     }
                     else
-                        MessageBox.Show("Your password must Contains 6 At least characters,For your safety :)", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                        MessageBox.Show("Your password must Contains  At least 6 characters,For your safety :)", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
 
                 }
                 else
