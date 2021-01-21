@@ -1,11 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUsers>
-	<User>
-		<UserName>a</UserName>
-		<Salt>12342</Salt>
-		<HashedPassword>12342a</HashedPassword>
-		<AllowingAccess>true</AllowingAccess>
-		<password>a</password>
-		<DelUser>false</DelUser>
-	</User>	
+  <UserJourney>
+    <UserName>ella</UserName>
+    <Salt>482273005</Salt>
+    <HashedPassword>IzVNLZyrMM4s6gKHDt4LmLSyU2XDblql8QvKJSlIRSifb9b7meML5ZvAYfFmAsWtq9KVZz36mA86S1qvFjKChQ==</HashedPassword>
+    <AllowingAccess>true</AllowingAccess>
+    <password>Ellahn054</password>
+    <DelUser>false</DelUser>
+  </UserJourney>
+  <UserJourney>
+    <UserName>ADINA</UserName>
+    <Salt>38923986</Salt>
+    <HashedPassword>AiddZgJhtBc+BeAe0WjSg74doWK2x8xvFUmC/nmBppn/mVP+eK8u3u3L/Mw2VvZ2QCied1eUIAX7gjrE8FpOcQ==</HashedPassword>
+    <AllowingAccess>true</AllowingAccess>
+    <password>Adina100</password>
+    <DelUser>false</DelUser>
+  </UserJourney>
 </ArrayOfUsers>
