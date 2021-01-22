@@ -199,7 +199,7 @@ namespace PL.WPF
                 BO.BusLine blBO = ((sender as Button).DataContext as BO.BusLine);
                 TimeAndDistanceWindow InfoWindow = new TimeAndDistanceWindow(bl);
                 InfoWindow.ShowDialog();
-                if (InfoWindow.Time == null || InfoWindow.Distance == 0)
+                if (InfoWindow.Time == null || InfoWindow.Distance == 0.00000)
                     MessageBox.Show("You didnt fill in all the fields", "Operation Failure", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
