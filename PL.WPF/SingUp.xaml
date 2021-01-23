@@ -27,7 +27,7 @@
         </Grid>
 
 
-        <!--<Image Source="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\icons8-bus-80.png" Margin="91,10,85,369.4" RenderTransformOrigin="0.597,0.522"/>-->
+        <Image Source="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\icons8-bus-80.png" Margin="91,10,85,369.4" RenderTransformOrigin="0.597,0.522"/>
         <Rectangle Height="229" Fill="White" VerticalAlignment="Bottom" Margin="130,0,121,121.4" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>

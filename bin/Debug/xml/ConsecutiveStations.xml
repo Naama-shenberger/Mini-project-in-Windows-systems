@@ -53,7 +53,7 @@
     <StationCodeOne>388624</StationCodeOne>
     <StationCodeTwo>875612</StationCodeTwo>
     <Flage>True</Flage>
-    <Distance>6.98</Distance>
+    <Distance>33</Distance>
     <AverageTravelTime>PT0H1M2S</AverageTravelTime>
   </ConsecutiveStations>
   <ConsecutiveStations>

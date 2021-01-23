@@ -210,4 +210,11 @@
     <BusDepartureNumber>PT1H5M</BusDepartureNumber>
     <Active>true</Active>
   </LineRide>
+  <LineRide>
+    <ID>2</ID>
+    <TravelStartTime>PT7H35M</TravelStartTime>
+    <TravelEndTime>PT10H50M</TravelEndTime>
+    <BusDepartureNumber>PT1H5M</BusDepartureNumber>
+    <Active>true</Active>
+  </LineRide>
 </ArrayOfLineRide>

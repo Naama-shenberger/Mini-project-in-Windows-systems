@@ -23,7 +23,7 @@
             </StackPanel>
         </Grid>
 
-        <!--<Image Source="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\icons8-bus-80.png" Margin="81,10,95,369.4" RenderTransformOrigin="0.597,0.522"/>-->
+        <Image Source="C:\Users\naamo\source\repos\Naama-shenberger\dotNet5781_3747_8971\icons8-bus-80.png" Margin="81,10,95,369.4" RenderTransformOrigin="0.597,0.522"/>
         <Rectangle Height="193" Fill="White" VerticalAlignment="Bottom" Margin="189,0,191,145.4" RadiusY="28.27" RadiusX="28.27">
             <Rectangle.Effect>
                 <DropShadowEffect Color="#FFBBBBBB" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
