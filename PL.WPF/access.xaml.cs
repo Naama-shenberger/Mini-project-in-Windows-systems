@@ -22,6 +22,7 @@ namespace PL.WPF
     public partial class access : Window
     {
         IBL BL;
+        TravelerWindow travelerWindow;
         public access(IBL _BL)
         {
             InitializeComponent();
@@ -48,7 +49,7 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void traveler_Click(object sender, RoutedEventArgs e)
         {
-            TravelerWindow travelerWindow = new TravelerWindow(BL);
+            travelerWindow = new TravelerWindow(BL);
             travelerWindow.ShowDialog();
             this.Close();
         }
@@ -60,8 +61,11 @@ namespace PL.WPF
         /// <param name="e"></param>
         private void backbtn_Click(object sender, RoutedEventArgs e)
         {
+            Application.Current.Shutdown();
             for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
-                App.Current.Windows[intCounter].Close();
+                if (App.Current.Windows[intCounter].Activate() == true)
+                    App.Current.Windows[intCounter].Close();
+
         }
     }
 }

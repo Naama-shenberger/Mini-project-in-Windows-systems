@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:PL.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="access" Height="500" Width="750" WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <Grid>
-        <Grid Margin="0,0,-3,186.6" HorizontalAlignment="Right" Width="747">
+    <WrapPanel>
+        <Grid>
+      
+            <Grid Margin="0,0,-3,186.6" HorizontalAlignment="Right" Width="747">
             <Grid.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="#FF2281D1"/>
@@ -37,5 +39,7 @@
         <Button x:Name="management" Content="management" BorderBrush="#FF2281D1" Background="#FF2281D1"  HorizontalAlignment="Left" Margin="409,223,0,0" VerticalAlignment="Top" Width="124" Click="management_Click"/>
         <materialDesign:PackIcon Kind="travel" Foreground="Black" Width="38" Margin="256,260,0,0" Height="19"/>
         <materialDesign:PackIcon Kind="Man" Foreground="Black" Width="36" Margin="454,260,0,0" Height="16"/>
+    
     </Grid>
+    </WrapPanel>
 </Window>

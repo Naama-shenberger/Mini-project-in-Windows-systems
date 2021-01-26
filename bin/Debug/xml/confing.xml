@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <confing>
-	<dal>xml</dal>
+	<dal>data</dal>
 	<dal-packages>
 		<data>DalObject</data>
-		<xml namespace="DL" class="DalXml">DalXml</xml>
-		<oracle namespace="DL_O" class="DLDbOracle">DLOracle</oracle>
+		<xml>DalXml</xml>
+		<oracle>DalOracle</oracle>
 	</dal-packages>
 </confing>
 
