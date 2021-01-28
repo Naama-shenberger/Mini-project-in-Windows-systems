@@ -242,6 +242,18 @@
       <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pic\icons8-bus-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pic\outline_departure_board_white_18dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pic\outline_directions_bus_white_18dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pic\outline_streetview_white_18dp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
